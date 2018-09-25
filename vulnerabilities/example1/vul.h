@@ -1,0 +1,3 @@
+
+
+void strTest(char *buff);
