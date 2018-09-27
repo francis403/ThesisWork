@@ -23,3 +23,14 @@ libFuzzTest:
     -o first_fuzzer
 libExecute:
 	./first_fuzzer corpus1
+
+
+#--------CLEANING---------
+
+clean: remExecutable remDir
+
+remExecutable:
+	rm -f a.out first_fuzzer harn
+
+remDir:
+	rm -f -r crash-* out* a.out
