@@ -35,6 +35,12 @@ int main (){
 	char buff[20];
 	int rc = getLine ("Enter string> ", buff, sizeof(buff));
 	if(rc == OK){
-		strTest(buff);
+		//stack_overflow(buff);
+		//heap_overflow(buff);
+		//buffer_overflow(buff);
 	}
+
+	int a;
+	scanf("%d", &a);
+	integer_overflow(a);
 }

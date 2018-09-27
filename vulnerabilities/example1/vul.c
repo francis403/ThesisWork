@@ -1,4 +1,4 @@
-// A C program to demonstrate buffer overflow
+// A C program to demonstrate sumple erros
 
 #include "vul.h"
 #include <stdio.h>
@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 
-void strTest(char *buff){
+void buffer_overflow(char *buff){
 	// Reserve 5 byte of buffer plus the terminating NULL. 
        // should allocate 8 bytes = 2 double words, 
        // To overflow, need more than 8 bytes... 
@@ -24,3 +24,22 @@ void strTest(char *buff){
        // you may want to try strcpy_s() 
        printf("strcpy() executed...\n"); 
 }
+
+void stack_overflow(const char *x)
+{
+    char y[3];
+    strcpy(y, x);
+}
+
+
+void heap_overflow(const char *x)
+{
+    char *y = malloc(strlen(x));
+    strcpy(y, x);
+}
+
+int integer_overflow(int a)
+{
+    return a * 10000;
+}
+
