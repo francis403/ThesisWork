@@ -32,7 +32,7 @@ int integer_overflow(int a)
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
 	char *val = (char *) data;
-	//tack_overflow(val);
+	//stack_overflow(val);
   	heap_overflow(val);
   	return 0;
 }

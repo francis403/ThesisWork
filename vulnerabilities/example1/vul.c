@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <limits.h>
 
 
 void buffer_overflow(char *buff){
@@ -34,12 +35,58 @@ void stack_overflow(const char *x)
 
 void heap_overflow(const char *x)
 {
+    if(strlen(x) == 1){
+	return;
+    }
     char *y = malloc(strlen(x));
     strcpy(y, x);
 }
 
 int integer_overflow(int a)
 {
-    return a * 10000;
+    printf("Gonna call integer_overflow\n");
+	if(a == 101){
+		return INT_MAX + 1;	
+	}
+    return a;
 }
+
+/**
+* Impossible to happen by chance
+**/
+int integer_underflow(int a)
+{
+    return a == 101 ? INT_MIN - 1 : a;
+}
+
+
+/**
+* Deleting an object from memory explicitly or by destroying
+* The stack frame on return does not alter associated pointers.
+* The pointer still points to the same location in memory even 
+* though it may now be used for other purposes
+**/
+void dangling_pointer(int a){
+
+	char *dp = NULL;
+	if( a == 10 ){
+		char c = 'c';
+		dp = &c;
+	}
+	/* c falls out of scope */
+	/*dp is now a dangling pointer*/
+	printf("%s\n",dp);
+}
+
+/**
+* Allocate some memory and delibery forgotten to free it
+**/
+void memory_leak(){
+	float *a = malloc(sizeof(float) * 45);
+	float b = 42;
+	a = &b;
+}
+
+
+
 

@@ -1,19 +1,26 @@
 #SIMPLE OVERFLOW PROVEN TO WORK BY THE FUZZER
 CC=afl-clang-fast
 FLAGS= -static
+EFLAGS= -fsanitize=address,signed-integer-overflow,alignment -fno-sanitize-recover=undefined
 EXE=harn
 
 main: harness afl
+
+persistent_afl: harness_p afl
 
 lib: libFuzzTest libExecute
 
 #-----------------------
 
 harness: 
-	$(CC) $(FLAGS) ./harness.c vul.c -o $(EXE) -w
+	$(CC) $(EFLAGS) ./harness.c vul.c -o $(EXE) -w
+
+harness_p: 
+	$(CC) $(EFLAGS) ./harness_persistent.c vul.c -o $(EXE) -w
 
 afl:
-	afl-fuzz -i in -o out ./$(EXE)
+	afl-fuzz -m none -i in -o out ./$(EXE)
+
 libFuzz:
 	clang++ -g -O1 -fsanitize=fuzzer,signed-integer-overflow -fsanitize-coverage=trace-pc-guard first_fuzzer.cc
 

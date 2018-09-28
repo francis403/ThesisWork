@@ -7,21 +7,27 @@ void buffer_overflow(char *buff);
 
 /**
 * Could potentially result in a stack_overflow
-* Not found by AFL
-* Found by libFuzzer
+* Found by libFuzzer, AFL
 **/
 void stack_overflow(const char *x);
 
 /**
 * Could potentially result in a heap_overflow
-* Not found by AFL
-* Found by libFuzzer
+* Found by libFuzzer, AFL
 **/
 void heap_overflow(const char *x);
 
 /**
 * Could potentially result in a integer_overflow
-* Not found by AFL
-* Found by libFuzzer
+* Found by libFuzzer, AFL
 **/
 int integer_overflow(int a);
+
+int integer_underflow(int a);
+
+/**
+* Could potentially result in dangling_pointer error
+**/
+void dangling_pointer(int a);
+
+void memory_leak();
