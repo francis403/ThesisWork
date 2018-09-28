@@ -30,4 +30,8 @@ int integer_underflow(int a);
 **/
 void dangling_pointer(int a);
 
-void memory_leak();
+float *memory_leak();
+
+void global_buffer_overflow(char *x);
+
+void use_after_free(int a);

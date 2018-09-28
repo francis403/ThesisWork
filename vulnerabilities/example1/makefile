@@ -1,7 +1,7 @@
 #SIMPLE OVERFLOW PROVEN TO WORK BY THE FUZZER
 CC=afl-clang-fast
 FLAGS= -static
-EFLAGS= -fsanitize=address,signed-integer-overflow,alignment -fno-sanitize-recover=undefined
+EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=undefined
 EXE=harn
 
 main: harness afl
@@ -23,6 +23,9 @@ harness_p:
 
 afl:
 	afl-fuzz -m none -i in -o out ./$(EXE)
+
+afl_mleak:
+	afl-fuzz -m none -i in -o out ./$(EXE) mleak
 
 #-----ONLY RUN IF YOU HAVE MORE THAN 1 CORE
 master:

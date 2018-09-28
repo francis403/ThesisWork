@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
+char global_buffer[20];
 
 void buffer_overflow(char *buff){
 	// Reserve 5 byte of buffer plus the terminating NULL. 
@@ -29,7 +30,7 @@ void buffer_overflow(char *buff){
 void stack_overflow(const char *x)
 {
     printf("Stack Overflow example\n");
-    char y[3];
+    char y[strlen(x)];
     strcpy(y, x);
     printf("%s\n",y);
 }
@@ -37,11 +38,19 @@ void stack_overflow(const char *x)
 
 void heap_overflow(const char *x)
 {
-    if(strlen(x) == 1){
+    if(strlen(x) <= 5){
 	return;
     }
     char *y = malloc(strlen(x));
     strcpy(y, x);
+}
+
+/**
+* If the string has more than 20 characters global buffer overflow
+**/
+void global_buffer_overflow(char *x){
+	strcpy(global_buffer, x);
+	printf("buffer = %s\n",global_buffer);
 }
 
 int integer_overflow(int a)
@@ -69,10 +78,14 @@ int integer_underflow(int a)
 * though it may now be used for other purposes
 **/
 void dangling_pointer(int a){
+	printf("entered dangling pointer\n");
+
+	if (a != 10)
+		return;
 
 	char *dp = NULL;
-	if( a == 10 ){
-		char c = 'c';
+	if( 1 ){
+		char c = 'b';
 		dp = &c;
 	}
 	/* c falls out of scope */
@@ -83,12 +96,19 @@ void dangling_pointer(int a){
 /**
 * Allocate some memory and delibery forgotten to free it
 **/
-void memory_leak(){
+float *memory_leak(){
 	float *a = malloc(sizeof(float) * 45);
 	float b = 42;
 	a = &b;
+	return a;
 }
 
+void use_after_free(int a){
+	if(a != 10){ return; }
+	char *buff = {0};
+	free(buff);
+	//printf("%s\n",buff);
+}
 
 
 
