@@ -6,6 +6,7 @@
 #define OK       0
 #define NO_INPUT 1
 #define TOO_LONG 2
+
 static int getLine (char *prmpt, char *buff, size_t sz) {
     int ch, extra;
 
@@ -33,19 +34,18 @@ static int getLine (char *prmpt, char *buff, size_t sz) {
 
 int main (){
 	char buff[20];
-	int rc = getLine ("Enter string> ", buff, sizeof(buff));
-	if(rc == OK){
+	//int rc = getLine ("Enter string> ", buff, sizeof(buff));
+	//if(rc == OK){
 		//stack_overflow(buff);
-		heap_overflow(buff);
+		//heap_overflow(buff);
 		//buffer_overflow(buff);
-	}
+	//}
 
 	int a;
-	//scanf("%d", &a);
+	scanf("%d", &a);
 	//printf("%d\n", integer_overflow(a));
-	//integer_underflow(a);
+	integer_underflow(a);
 	//dangling_pointer(a);
 	//memory_leak();
 	printf("did not crash\n");
-	
 }

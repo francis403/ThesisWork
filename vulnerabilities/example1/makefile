@@ -10,6 +10,9 @@ persistent_afl: harness_p afl
 
 lib: libFuzzTest libExecute
 
+aflTwoCore: harness master slave
+	
+
 #-----------------------
 
 harness: 
@@ -20,6 +23,12 @@ harness_p:
 
 afl:
 	afl-fuzz -m none -i in -o out ./$(EXE)
+
+#-----ONLY RUN IF YOU HAVE MORE THAN 1 CORE
+master:
+	afl-fuzz -i in -o out -M master ./$(EXE)
+slave:
+	afl-fuzz -i in -o out -S slave1 ./$(EXE)
 
 libFuzz:
 	clang++ -g -O1 -fsanitize=fuzzer,signed-integer-overflow -fsanitize-coverage=trace-pc-guard first_fuzzer.cc

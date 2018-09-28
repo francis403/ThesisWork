@@ -28,8 +28,10 @@ void buffer_overflow(char *buff){
 
 void stack_overflow(const char *x)
 {
+    printf("Stack Overflow example\n");
     char y[3];
     strcpy(y, x);
+    printf("%s\n",y);
 }
 
 
