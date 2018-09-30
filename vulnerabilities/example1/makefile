@@ -1,7 +1,7 @@
 #SIMPLE OVERFLOW PROVEN TO WORK BY THE FUZZER
 CC=afl-clang-fast
 FLAGS= -static
-EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=undefined
+EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=unsigned-integer-overflow,undefined
 EXE=harn
 
 main: harness afl

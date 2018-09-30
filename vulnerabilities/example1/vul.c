@@ -103,12 +103,31 @@ float *memory_leak(){
 	return a;
 }
 
+char *negative_memory_allocation(){
+	char *c;
+	c = 'c';
+	return c;
+}
+
 void use_after_free(int a){
 	if(a != 10){ return; }
 	char *buff = {0};
 	free(buff);
-	//printf("%s\n",buff);
+	printf("%s\n",buff);
 }
 
+void out_of_bounds(int a){
+	int array[20];
+	array[a] = 4;
+}
+
+int division_by_zero(int a){
+	return 2/a;
+}
+
+unsigned int unsigned_int(int a){
+	unsigned int b = a - 10;
+	return b;
+}
 
 

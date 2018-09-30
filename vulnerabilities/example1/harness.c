@@ -41,10 +41,14 @@ int main (int argc, char* argv[]){
 
 	int a;
 	scanf("%d", &a);
-	//printf("%d\n", integer_overflow(a));
-	//integer_underflow(a);
+	//printf("%d\n", integer_overflow(a)); //finds
+	//integer_underflow(a); //finds
 	//dangling_pointer(a);
-	use_after_free(a);
+	//use_after_free(a);
+	//negative_memory_allocation();
+	//out_of_bounds(a);
+	//division_by_zero(a); //finds
+	printf("%u\n",unsigned_int(a));
 	printf("did not crash\n");
 
 }
