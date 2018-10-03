@@ -96,11 +96,10 @@ void dangling_pointer(int a){
 /**
 * Allocate some memory and delibery forgotten to free it
 **/
-float *memory_leak(){
+void memory_leak(){
 	float *a = malloc(sizeof(float) * 45);
 	float b = 42;
 	a = &b;
-	return a;
 }
 
 char *negative_memory_allocation(){

@@ -43,12 +43,15 @@ int main (int argc, char* argv[]){
 	scanf("%d", &a);
 	//printf("%d\n", integer_overflow(a)); //finds
 	//integer_underflow(a); //finds
+	//memory_leak();
+	void *pointer = malloc(sizeof(void) * 45);
+	//free(pointer);
 	//dangling_pointer(a);
 	//use_after_free(a);
 	//negative_memory_allocation();
 	//out_of_bounds(a);
 	//division_by_zero(a); //finds
-	printf("%u\n",unsigned_int(a));
+	//printf("%u\n",unsigned_int(a));
 	printf("did not crash\n");
 
 }

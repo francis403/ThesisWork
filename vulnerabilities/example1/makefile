@@ -1,25 +1,31 @@
 #SIMPLE OVERFLOW PROVEN TO WORK BY THE FUZZER
 CC=afl-clang-fast
 FLAGS= -static
-EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=unsigned-integer-overflow,undefined
+EFLAGS= -fsanitize=address,undefined,leak -fno-sanitize-recover=unsigned-integer-overflow,undefined
 EXE=harn
 
-main: harness afl
+#main: harness afl
 
+main: harness afl
 persistent_afl: harness_p afl
 
 lib: libFuzzTest libExecute
 
 aflTwoCore: harness master slave
-	
 
 #-----------------------
 
 harness: 
-	$(CC) $(EFLAGS) ./harness.c vul.c -o $(EXE) -w
+	$(CC) $(EFLAGS) -ggdb ./harness.c vul.c -o $(EXE) -w
 
 harness_p: 
 	$(CC) $(EFLAGS) ./harness_persistent.c vul.c -o $(EXE) -w
+
+harness_gcc:
+	gcc -Wall -g ./harness.c vul.c -o $(EXE) -w
+
+valgrind: harness_gcc 
+	valgrind --leak-check=yes ./$(EXE)
 
 afl:
 	afl-fuzz -m none -i in -o out ./$(EXE)

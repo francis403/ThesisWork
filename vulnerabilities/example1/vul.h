@@ -36,7 +36,7 @@ unsigned int unsigned_int(int a);
 **/
 void dangling_pointer(int a);
 
-float *memory_leak();
+void memory_leak();
 
 void global_buffer_overflow(char *x);
 
@@ -59,3 +59,4 @@ void out_of_bounds(int a);
 * Found by AFL
 **/
 int division_by_zero(int a);
+
