@@ -6,7 +6,8 @@
 #include <stdlib.h>
 #include <limits.h>
 
-char global_buffer[20];
+
+char global_buffer[20] = {0}; //empty
 
 void buffer_overflow(char *buff){
 	// Reserve 5 byte of buffer plus the terminating NULL. 
@@ -55,10 +56,11 @@ void global_buffer_overflow(char *x){
 
 int integer_overflow(int a)
 {
-    printf("Gonna call integer_overflow\n");
+    printf("Gonna call integer_overflow now\n");
 	if(a == 101){
 		return INT_MAX + 1;	
 	}
+	
     return a;
 }
 
@@ -67,7 +69,7 @@ int integer_overflow(int a)
 **/
 int integer_underflow(int a)
 {
-    return a == 101 ? INT_MIN - 1 : a;
+    return a == 10002 ? INT_MIN - 1 : a;
 }
 
 
@@ -121,7 +123,7 @@ void out_of_bounds(int a){
 }
 
 int division_by_zero(int a){
-	return 2/a;
+	return 2/(100 - a);
 }
 
 unsigned int unsigned_int(int a){

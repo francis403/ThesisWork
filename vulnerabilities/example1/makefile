@@ -1,7 +1,9 @@
 #SIMPLE OVERFLOW PROVEN TO WORK BY THE FUZZER
 CC=afl-clang-fast
+#CC=afl-clang
 FLAGS= -static
-EFLAGS= -fsanitize=address,undefined,leak -fno-sanitize-recover=unsigned-integer-overflow,undefined
+EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=unsigned-integer-overflow,undefined -g -O0
+BASE_FLAGS= -fsanitize=address -g
 EXE=harn
 
 #main: harness afl
@@ -16,22 +18,24 @@ aflTwoCore: harness master slave
 #-----------------------
 
 harness: 
-	$(CC) $(EFLAGS) -ggdb ./harness.c vul.c -o $(EXE) -w
+	$(CC) $(EFLAGS) ./harness.c vul.c -o $(EXE) -w
 
 harness_p: 
 	$(CC) $(EFLAGS) ./harness_persistent.c vul.c -o $(EXE) -w
 
 harness_gcc:
-	gcc -Wall -g ./harness.c vul.c -o $(EXE) -w
+	gcc  -fsanitize=address -Wall -g ./harness.c vul.c -o $(EXE) -w
+
+harness_clang:
+	clang -fsanitize=address -Wall -g ./harness.c vul.c -o $(EXE) -w
 
 valgrind: harness_gcc 
-	valgrind --leak-check=yes ./$(EXE)
+	valgrind --leak-check=full ./$(EXE)
 
 afl:
 	afl-fuzz -m none -i in -o out ./$(EXE)
-
-afl_mleak:
-	afl-fuzz -m none -i in -o out ./$(EXE) mleak
+ASAN_OPT:
+	ASAN_OPTIONS='detect_leaks=1:abort_on_error=1:symbolize=0:allocator_may_return_null=1'
 
 #-----ONLY RUN IF YOU HAVE MORE THAN 1 CORE
 master:
@@ -39,6 +43,7 @@ master:
 slave:
 	afl-fuzz -i in -o out -S slave1 ./$(EXE)
 
+#---------------------------------------------#
 libFuzz:
 	clang++ -g -O1 -fsanitize=fuzzer,signed-integer-overflow -fsanitize-coverage=trace-pc-guard first_fuzzer.cc
 

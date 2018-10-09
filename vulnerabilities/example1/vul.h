@@ -38,6 +38,11 @@ void dangling_pointer(int a);
 
 void memory_leak();
 
+/**
+* Could potentially result in a global buffer overflow bug
+* Found by AFL
+* NOTE: array needs to be initialized 
+**/
 void global_buffer_overflow(char *x);
 
 /**
