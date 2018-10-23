@@ -61,14 +61,26 @@ void use_after_free(int a){
 	//printf("%s\n",buff);
 }
 
+void memory_leak(char *data){
+	//if(strcmp(data, "BUG!")){
+		//char *p = (char *) malloc(sizeof(data));
+		//p=data;
+		//free(p);
+	//}
+}
+
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
-	char *val = (char *) data;
+	char *val = (char *)malloc(sizeof(data) + 1);
+	val=(char *) data;
+	//if(val == NULL) return 0;
 	//stack_overflow(val);
   	//heap_overflow(val);
 	//dangling_pointer(10);
 	
 	//use_after_free(num);
+	memory_leak(val);
+	free(val);
   	return 0;
 }
 

@@ -75,7 +75,7 @@ int main (int argc, char* argv[]){
 		}
 	}
 	else{
-		
+		/**
 		char *line = NULL;
 		size_t len = 0;
 		ssize_t read;
@@ -85,7 +85,7 @@ int main (int argc, char* argv[]){
 		char buff[len];
 		strcpy(&buff, line);
 		free(line);
-		
+		**/
 
 		//if(rc == OK){
 		//stack_overflow(buff);
@@ -94,19 +94,27 @@ int main (int argc, char* argv[]){
 		//global_buffer_overflow(buff);
 
 		int a;
-		//scanf("%d", &a);
+		scanf("%d", &a);
 		//printf("value = %d\n", integer_overflow(a)); //finds
-		//integer_underflow(a); //finds
+		//printf("%d\n",integer_underflow(a)); //finds
 		//memory_leak();
+		/**
 		void *pointer = malloc(sizeof(void) * 45);
 		pointer=10;
 		printf("%d\n", pointer);
+		**/
 		//free(pointer);
 		//dangling_pointer(a);
 		//use_after_free(a);
 		//negative_memory_allocation();
 		//out_of_bounds(a);
 		//division_by_zero(a); //finds
+
+		//INT TESTING
+
+		//sign_conversion();
+		printf("value = %d\n",unsigned_overflow(a));
+		//truncating_unsigned(a);
 		//printf("%u\n",unsigned_int(a));
 	}
 	

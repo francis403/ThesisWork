@@ -6,8 +6,9 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#define MAGIC_NUMBER 0xFFFF7F8F
 
-char global_buffer[20] = {0}; //empty
+char global_buffer[20] = {0}; //empty //only detectable if initialized
 
 void buffer_overflow(char *buff){
 	// Reserve 5 byte of buffer plus the terminating NULL. 
@@ -65,7 +66,7 @@ int integer_overflow(int a)
 }
 
 /**
-* Impossible to happen by chance
+* almost Impossible to happen by chance
 **/
 int integer_underflow(int a)
 {
@@ -131,4 +132,25 @@ unsigned int unsigned_int(int a){
 	return b;
 }
 
+unsigned short unsigned_overflow(int b){
+	unsigned short a = 65000;
+	//unsigned short b = 560;
+	unsigned short c = 0;
+	c = a + b;
+	printf("Resukt is %hu + %hu = %hu\n", a, b, c);
+	return c;
+}
 
+void truncating_unsigned(int a){
+	unsigned int val = INT_MAX;
+	unsigned short ss = val;
+	printf("turning %d to %d\n", val, ss);
+}
+
+void sign_conversion(){
+	unsigned short us = 0x8080;
+	short ss = us;
+
+	printf("%6hu %6hd\n", us, us);
+
+}

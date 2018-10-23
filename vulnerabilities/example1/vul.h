@@ -65,3 +65,8 @@ void out_of_bounds(int a);
 **/
 int division_by_zero(int a);
 
+unsigned short unsigned_overflow(int b);
+
+void truncating_unsigned(int a);
+
+void sign_conversion();
