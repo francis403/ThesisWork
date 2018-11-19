@@ -1,7 +1,8 @@
 #SIMPLE OVERFLOW PROVEN TO WORK BY THE FUZZER
-CC=afl-clang-fast
-#CC=afl-clang
+#CC=afl-clang-fast
+CC=afl-gcc
 FLAGS= -static
+#EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=undefined,integer -g -O0
 EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=undefined -g -O0
 BASE_FLAGS= -fsanitize=address -g
 EXE=harn

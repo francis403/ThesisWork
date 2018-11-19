@@ -51,6 +51,8 @@ int main (int argc, char* argv[]){
 				integer_underflow(a); //found
 			}
 			else if(strcmp(argv[2],"div_by_zero") == 0){
+				int i = 4;
+				int b = i + 2;
 				division_by_zero(a); //found
 			}
 			else if(strcmp(argv[2],"use_after_free") == 0){
@@ -75,7 +77,8 @@ int main (int argc, char* argv[]){
 		}
 	}
 	else{
-		/**
+		
+		/*
 		char *line = NULL;
 		size_t len = 0;
 		ssize_t read;
@@ -85,7 +88,7 @@ int main (int argc, char* argv[]){
 		char buff[len];
 		strcpy(&buff, line);
 		free(line);
-		**/
+		*/
 
 		//if(rc == OK){
 		//stack_overflow(buff);
@@ -95,7 +98,9 @@ int main (int argc, char* argv[]){
 
 		int a;
 		scanf("%d", &a);
-		//printf("value = %d\n", integer_overflow(a)); //finds
+		printf("gonna call double_free\n");
+		//double_free(a);
+		printf("value = %d\n", integer_overflow(a)); //finds
 		//printf("%d\n",integer_underflow(a)); //finds
 		//memory_leak();
 		/**
@@ -113,7 +118,7 @@ int main (int argc, char* argv[]){
 		//INT TESTING
 
 		//sign_conversion();
-		printf("value = %d\n",unsigned_overflow(a));
+		//printf("value = %d\n",unsigned_overflow(a));
 		//truncating_unsigned(a);
 		//printf("%u\n",unsigned_int(a));
 	}

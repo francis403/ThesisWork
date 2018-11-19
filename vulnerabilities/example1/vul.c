@@ -57,7 +57,6 @@ void global_buffer_overflow(char *x){
 
 int integer_overflow(int a)
 {
-    printf("Gonna call integer_overflow now\n");
 	if(a == 101){
 		return INT_MAX + 1;	
 	}
@@ -153,4 +152,14 @@ void sign_conversion(){
 
 	printf("%6hu %6hd\n", us, us);
 
+}
+
+
+void double_free(int i){
+	char* ptr = (char*) malloc (sizeof(char) * 4 + 1);
+	//ptr = "love";
+	if(i == 101){
+		free(ptr);
+	}
+	free(ptr);
 }

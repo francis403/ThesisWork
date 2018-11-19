@@ -70,3 +70,5 @@ unsigned short unsigned_overflow(int b);
 void truncating_unsigned(int a);
 
 void sign_conversion();
+
+void double_free(int i);
