@@ -58,6 +58,10 @@ libExecute:
 	./first_fuzzer corpus1
 
 
+#------------------------ OTHER -------------------------#
+simple:
+	$(CC) $(EFLAGS) ./simple_program.c -o simple -w
+
 #--------CLEANING---------
 
 clean: remExecutable remDir
