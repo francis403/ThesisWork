@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#define MAGIC_NUMBER 0xFFFF7F8F
+
+char global_buffer[20] = {0}; //empty //only detectable if initialized
 
 void buffer_overflow(char *buff){
 	// Reserve 5 byte of buffer plus the terminating NULL. 
@@ -29,7 +32,7 @@ void buffer_overflow(char *buff){
 void stack_overflow(const char *x)
 {
     printf("Stack Overflow example\n");
-    char y[3];
+    char y[strlen(x)];
     strcpy(y, x);
     printf("%s\n",y);
 }
@@ -37,28 +40,36 @@ void stack_overflow(const char *x)
 
 void heap_overflow(const char *x)
 {
-    if(strlen(x) == 1){
+    if(strlen(x) <= 5){
 	return;
     }
     char *y = malloc(strlen(x));
     strcpy(y, x);
 }
 
+/**
+* If the string has more than 20 characters global buffer overflow
+**/
+void global_buffer_overflow(char *x){
+	strcpy(global_buffer, x);
+	printf("buffer = %s\n",global_buffer);
+}
+
 int integer_overflow(int a)
 {
-    printf("Gonna call integer_overflow\n");
 	if(a == 101){
 		return INT_MAX + 1;	
 	}
+	
     return a;
 }
 
 /**
-* Impossible to happen by chance
+* almost Impossible to happen by chance
 **/
 int integer_underflow(int a)
 {
-    return a == 101 ? INT_MIN - 1 : a;
+    return a == 10002 ? INT_MIN - 1 : a;
 }
 
 
@@ -69,10 +80,14 @@ int integer_underflow(int a)
 * though it may now be used for other purposes
 **/
 void dangling_pointer(int a){
+	printf("entered dangling pointer\n");
+
+	if (a != 10)
+		return;
 
 	char *dp = NULL;
-	if( a == 10 ){
-		char c = 'c';
+	if( 1 ){
+		char c = 'b';
 		dp = &c;
 	}
 	/* c falls out of scope */
@@ -89,6 +104,62 @@ void memory_leak(){
 	a = &b;
 }
 
+char *negative_memory_allocation(){
+	char *c;
+	c = 'c';
+	return c;
+}
+
+void use_after_free(int a){
+	if(a != 10){ return; }
+	char *buff = {0};
+	free(buff);
+	printf("%s\n",buff);
+}
+
+void out_of_bounds(int a){
+	int array[20];
+	array[a] = 4;
+}
+
+int division_by_zero(int a){
+	return 2/(100 - a);
+}
+
+unsigned int unsigned_int(int a){
+	unsigned int b = a - 10;
+	return b;
+}
+
+unsigned short unsigned_overflow(int b){
+	unsigned short a = 65000;
+	//unsigned short b = 560;
+	unsigned short c = 0;
+	c = a + b;
+	printf("Resukt is %hu + %hu = %hu\n", a, b, c);
+	return c;
+}
+
+void truncating_unsigned(int a){
+	unsigned int val = INT_MAX;
+	unsigned short ss = val;
+	printf("turning %d to %d\n", val, ss);
+}
+
+void sign_conversion(){
+	unsigned short us = 0x8080;
+	short ss = us;
+
+	printf("%6hu %6hd\n", us, us);
+
+}
 
 
-
+void double_free(int i){
+	char* ptr = (char*) malloc (sizeof(char) * 4 + 1);
+	//ptr = "love";
+	if(i == 101){
+		free(ptr);
+	}
+	free(ptr);
+}

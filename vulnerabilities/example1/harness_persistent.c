@@ -3,45 +3,24 @@
 #include <string.h>
 #include <stdio.h>
 
-#define OK       0
-#define NO_INPUT 1
-#define TOO_LONG 2
-static int getLine (char *prmpt, char *buff, size_t sz) {
-    int ch, extra;
 
-    // Get line with buffer overrun protection.
-    if (prmpt != NULL) {
-        printf ("%s", prmpt);
-        fflush (stdout);
-    }
-    if (fgets (buff, sz, stdin) == NULL)
-        return NO_INPUT;
-
-    // If it was too long, there'll be no newline. In that case, we flush
-    // to end of line so that excess doesn't affect the next call.
-    if (buff[strlen(buff)-1] != '\n') {
-        extra = 0;
-        while (((ch = getchar()) != '\n') && (ch != EOF))
-            extra = 1;
-        return (extra == 1) ? TOO_LONG : OK;
-    }
-
-    // Otherwise remove newline and give string back to caller.
-    buff[strlen(buff)-1] = '\0';
-    return OK;
-}
 
 int main (){
 	char buff[20];
 	while(__AFL_LOOP(1000)){ //AFL persistent mode (should be faster)
-		int rc = getLine ("Enter string> ", buff, sizeof(buff));
-		if(rc == OK){
-			//stack_overflow(buff);
-			heap_overflow(buff);
-			//buffer_overflow(buff);
-		}
-
+		char *line = NULL;
+		size_t len = 0;
+		ssize_t read;
+		if ( (read = getline(&line, &len, stdin)) != -1 ){
+			// do something
+ 		}
+		char buff[len];
+		strcpy(&buff, line);
+		free(line);
 		int a;
+
+		stack_overflow(buff);		
+
 		//scanf("%d", &a);
 		//printf("%d\n", integer_overflow(a));
 		//integer_underflow(a);

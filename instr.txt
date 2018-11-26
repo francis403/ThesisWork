@@ -1,0 +1,24 @@
+1 - 	pushq	%r13
+2 - 	jne	.L10
+1 - 	movq	%rbx, %rbp
+2 - 	jg	.L11
+1 - 	movl	$.LC5, %edi
+2 - 	jne	.L12
+1 - 	xorl	%eax, %eax
+2 - 	jne	.L13
+1 - 	movl	$.LC3, %edi
+1 - 	movq	%rsp, %rsi
+1 - 	call	__stack_chk_fail
+1 - 	movabsq	$-723401728380766731, %rdx
+1 - 	testb	$1, %dil
+2 - 	jne	.L21
+2 - 	jo	.L22
+1 - 	rep ret
+1 - 	pushq	%rax
+1 - 	testb	$1, %dil
+2 - 	jne	.L30
+2 - 	jo	.L31
+1 - 	rep ret
+1 - 	pushq	%rax
+1 - 	movl	$9, %esi
+1 - 	subq	$8, %rsp
