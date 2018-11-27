@@ -1,6 +1,6 @@
 #Idea, make a program that gives the percentage of same code using afl-gcc
 #CC=afl-clang-fast
-CC=afl-gcc
+CC=afl-instr/instr-gcc
 FLAGS= -static
 EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=undefined -g -O0
 BASE_FLAGS= -fsanitize=address -g

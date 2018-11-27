@@ -16,14 +16,17 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 
 		compiler
 		   |
+		(find-as)
+		   |
+	      (edit-params)
 		   |
 		   V
-		afl.as.c
-		   |
-         (add instrumentation)
-		   |
-		   V
-		afl.as.h
+		afl.as.c <------------- 
+		   |                   |
+         (add instrumentation)	       |
+		   |                   |
+		   V                   |
+		afl.as.h - - -> (get assembly code)
 
 
 - Important Notes:	
@@ -152,6 +155,22 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	  "  /* Check out if we have a global pointer on file. */\n"
 	  "\n"
 	```
+#What We change
+
+- How we choose the code to be instrumented:
+	- Taking into consideration what was mentioned before hand, we have to decide the initial assembly line and the final line.
+	  That block is the code block to be instrumented.
+	- The initial decision of the first line is simple, since most of the work is arleady done by afl-gcc, the first line is simply the line they decide
+          requires instrumentation, in other words, each branch decision and the two possible options from there on out. (it either does the jump or it doesn't)
+	- The hard part was deciding what determines the end line.
+	- To put it simply, there are three options:
+		1. Either we simply find a new interesting line (one of the branch case mention before)
+		2. We reach the end of the proc (.cfi_endproc), which symbolizes the end of the function, since the remaining lines are not code related
+		3. Or none of the abovem which means there's nothing we can do but despair. This case hasn't been found yet.
+	- This has yet to be tested to check if it covers 100% of the cases, but so far is enough for a good start
+
+
+
 
 
 

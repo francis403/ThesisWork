@@ -283,7 +283,7 @@ static void add_instrumentation(void) {
   int num_cols = 100, num_rows = 100;
   char list_of_block_lines[num_rows][num_cols];
 
-  while (fgets(line, MAX_LINE, inf)) { //TODO: -> check
+  while (fgets(line, MAX_LINE, inf)) { //pass through all the assembly line of code
 
     //SAYF("line = %s", line);
     fputs(line, instr_lines); //adds the line so we can see how the file was originally
@@ -330,6 +330,13 @@ static void add_instrumentation(void) {
     fputs(line, outf);
 
     fputs(line, instr_lines_after); // shows what happens after
+    
+    if (strstr(line, ".cfi_endproc")){
+         if(num_of_lines_in_block >= 0){
+            fputs("#----- END OF CODE TO BE HASHED ------#\n", instr_lines_after);
+            num_of_lines_in_block = -1; //no block no lines
+        }
+      }
 
     if (pass_thru) continue;
 
@@ -450,6 +457,7 @@ static void add_instrumentation(void) {
     } else {
       //list_of_block_lines[num_of_lines_in_block++] = line;
       fputs(line, instr_lines_after);
+
     }
 
 

@@ -30,6 +30,8 @@ static u8   be_quiet,               /* Quiet mode                        */
 
 static void find_as(u8* argv0) {
 
+   SAYF("\n\t-----find-as-------\n");
+
   u8 *afl_path = getenv("AFL_PATH");
   u8 *slash, *tmp;
 
@@ -83,6 +85,9 @@ static void find_as(u8* argv0) {
 /* Copy argv to cc_params, making the necessary edits. */
 
 static void edit_params(u32 argc, char** argv) {
+
+
+  SAYF("\n\t-----edit_params -------\n");
 
   u8 fortify_set = 0, asan_set = 0;
   u8 *name;
