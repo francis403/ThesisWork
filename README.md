@@ -72,6 +72,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 - In this section I'll present all the instrumentation code, along with its explanation
 
 - This is the Trampoline code, added to the begginging and end of each brach condition
+		```
 		"\n"
 		"/* --- AFL TRAMPOLINE (64-BIT) --- */\n"
 		"\n"
@@ -90,6 +91,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		"\n"
 		"/* --- END --- */\n"
 		"\n";
+		```
 - It calls __afl_maybe_log, available in the main_payload, to add and check if the region is arleady mapped.
 
 - This is the main_payload added at the end of the assembly code, since it's a very big piece of code, only the important parts will be added
