@@ -70,7 +70,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	- only want to instrument the .text section.
 	- Detects and skips ad-hoc __asm__ blocks, skipping them.
 
-#Instrumentation Code
+# Instrumentation Code
 
 - In this section I'll present all the instrumentation code, along with its explanation
 
@@ -101,61 +101,33 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 
 - This is the main_payload added at the end of the assembly code, since it's a very big piece of code, only the important parts will be added
 
-	```
-	"__afl_maybe_log:\n"
-	  "\n"
-	#if defined(__OpenBSD__)  || (defined(__FreeBSD__) && (__FreeBSD__ < 9))
-	  "  .byte 0x9f /* lahf */\n"
-	#else
-	  "  lahf\n"
-	#endif /* ^__OpenBSD__, etc */
-	  "  seto  %al\n"
-	  "\n"
-	  "  /* Check if SHM region is already mapped. */\n"
-	  "\n"
-	  "  movq  __afl_area_ptr(%rip), %rdx\n"
-	  "  testq %rdx, %rdx\n"
-	  "  je    __afl_setup\n"
-	  "\n"
-	  "__afl_store:\n"
-	  "\n"
-	  "  /* Calculate and store hit for the code location specified in rcx. */\n"
-	  "\n"
-	#ifndef COVERAGE_ONLY
-	  "  xorq __afl_prev_loc(%rip), %rcx\n"
-	  "  xorq %rcx, __afl_prev_loc(%rip)\n"
-	  "  shrq $1, __afl_prev_loc(%rip)\n"
-	#endif /* ^!COVERAGE_ONLY */
-	  "\n"
-	#ifdef SKIP_COUNTS
-	  "  orb  $1, (%rdx, %rcx, 1)\n"
-	#else
-	  "  incb (%rdx, %rcx, 1)\n"
-	#endif /* ^SKIP_COUNTS */
-	  "\n"
-	  "__afl_return:\n"
-	  "\n"
-	  "  addb $127, %al\n"
-	#if defined(__OpenBSD__)  || (defined(__FreeBSD__) && (__FreeBSD__ < 9))
-	  "  .byte 0x9e /* sahf */\n"
-	#else
-	  "  sahf\n"
-	#endif /* ^__OpenBSD__, etc */
-	  "  ret\n"
-	  "\n"
-	  ".align 8\n"
-	  "\n"
-	  "__afl_setup:\n"
-	  "\n"
-	  "  /* Do not retry setup if we had previous failures. */\n"
-	  "\n"
-	  "  cmpb $0, __afl_setup_failure(%rip)\n"
-	  "  jne __afl_return\n"
-	  "\n"
-	  "  /* Check out if we have a global pointer on file. */\n"
-	  "\n"
-	```
-#What We change
+	__afl_maybe_log:
+		#if defined(__OpenBSD__)  || (defined(__FreeBSD__) && (__FreeBSD__ < 9))
+		 .byte 0x9f /* lahf */
+		#else
+		 lahf
+		#endif /* ^__OpenBSD__, etc */
+		seto  %al
+		/* Check if SHM region is already mapped. */
+		movq  __afl_area_ptr(%rip), %rdx
+		testq %rdx, %rdx
+		je    __afl_setup
+	  
+
+- The variables are defined right at the end with 
+	
+	.AFL_VARS:
+	  	.lcomm   __afl_area_ptr, 8
+	  	.lcomm   __afl_prev_loc, 8
+	  	.lcomm   __afl_fork_pid, 4
+	  	.lcomm   __afl_temp, 4
+	  	.lcomm   __afl_setup_failure, 1
+	  	.comm    __afl_global_area_ptr, 8, 8
+
+- .lcomm -> defines a local uninitialized block of storage of a number of bytes
+- .comm -> allocates storage in the data secton. The storage is referenced by the identifier name. The first number is the size, the second is the alignment (optional).
+
+# What We change
 
 - How we choose the code to be instrumented:
 	- Taking into consideration what was mentioned before hand, we have to decide the initial assembly line and the final line.
@@ -166,11 +138,18 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	- To put it simply, there are three options:
 		1. Either we simply find a new interesting line (one of the branch case mention before)
 		2. We reach the end of the proc (.cfi_endproc), which symbolizes the end of the function, since the remaining lines are not code related
-		3. Or none of the abovem which means there's nothing we can do but despair. This case hasn't been found yet.
+		3. Or none of the abovem which means there's nothing we can do but despair. This case hasn't been found yet. (check for ret)
 	- This has yet to be tested to check if it covers 100% of the cases, but so far is enough for a good start
 
 
+# Ideas
+	- Check for function similarity without considering paths (perhaps only good for this iteration).
 
+# Future Work
+	- Better code to be hashed, there's still alot that can be done
+		- For example, can we skip '.loc' lines?
+	- Display the percentage of similiar code between the two in an efficient way.
+	- Most importantly we need to figure out how to write to the bitmap
 
 
 
