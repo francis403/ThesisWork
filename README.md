@@ -77,25 +77,25 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 - This is the Trampoline code, added to the begginging and end of each brach condition
 
 		```
-		"\n"
-		"/* --- AFL TRAMPOLINE (64-BIT) --- */\n"
-		"\n"
-		".align 4\n"
-		"\n"
-		"leaq -(128+24)(%%rsp), %%rsp\n"
-		"movq %%rdx,  0(%%rsp)\n"
-		"movq %%rcx,  8(%%rsp)\n"
-		"movq %%rax, 16(%%rsp)\n"
-		"movq $0x%08x, %%rcx\n"
-		"call __afl_maybe_log\n"
-		"movq 16(%%rsp), %%rax\n"
-		"movq  8(%%rsp), %%rcx\n"
-		"movq  0(%%rsp), %%rdx\n"
-		"leaq (128+24)(%%rsp), %%rsp\n"
-		"\n"
-		"/* --- END --- */\n"
-		"\n";
+		/* --- AFL TRAMPOLINE (64-BIT) --- */
+		
+		.align 4
+	
+		leaq -(128+24)(%%rsp), %%rsp ; double %% is only to name the registers;
+		movq %%rdx,  0(%%rsp) ; load rdx into the beggining of the stack
+		movq %%rcx,  8(%%rsp) ; move the rcx into the stack[1]
+		movq %%rax, 16(%%rsp) ; move rax into the stack[2]
+		movq $0x%08x, %%rcx ; maybe call the kernel?
+		call __afl_maybe_log ; call the first function in the main payload
+		movq 16(%%rsp), %%rax
+		movq  8(%%rsp), %%rcx
+		movq  0(%%rsp), %%rdx
+		leaq (128+24)(%%rsp), %%rsp
+		
+		/* --- END --- */
 		```
+
+-leaq (address expression), register -> compute the address expression and change the register value to that
 
 - It calls __afl_maybe_log, available in the main_payload, to add and check if the region is arleady mapped.
 
@@ -106,14 +106,126 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		#if defined(__OpenBSD__)  || (defined(__FreeBSD__) && (__FreeBSD__ < 9))
 		 .byte 0x9f /* lahf */
 		#else
-		 lahf
+		 lahf ;Load Flags into AH register
 		#endif /* ^__OpenBSD__, etc */
-		seto  %al
+		seto  %al ; sets the byte in the operand to 1 if the overflow Flag is set, else 0
 		/* Check if SHM region is already mapped. */
 		movq  __afl_area_ptr(%rip), %rdx
-		testq %rdx, %rdx   ; compare the two conditions
+		testq %rdx, %rdx   ; compare the two conditions, equivalent to cmp %rdx,0
 		je    __afl_setup  ; if the previous statement was true, we start setting up
 	  
+	```
+
+- right after this bit of code, comes this one: (adds it if its not the first time seing the block)
+
+	__afl_store:
+		/* Calculate and store hit for the code location specified in rcx. */
+		#ifndef COVERAGE_ONLY
+			xorq __afl_prev_loc(%rip), %rcx
+			xorq %rcx, __afl_prev_loc(%rip)
+			shrq $1, __afl_prev_loc(%rip)
+		#endif /* ^!COVERAGE_ONLY */
+		#ifdef SKIP_COUNTS
+			orb  $1, (%rdx, %rcx, 1)
+		#else
+			incb (%rdx, %rcx, 1)
+		#endif /* ^SKIP_COUNTS */
+
+- we only jump to __afl_setup if we never encountered the previous code block
+	- So in this code block we have to store the range of times we've been to this block (> 1)
+
+- This here block only happens if its the first time we've hit the block
+	
+	```
+	__afl_setup:
+		/* Do not retry setup if we had previous failures. */
+		cmpb $0, __afl_setup_failure(%rip)
+		jne __afl_return
+		/* Check out if we have a global pointer on file. */
+		#ifndef __APPLE__
+		  movq  __afl_global_area_ptr@GOTPCREL(%rip), %rdx ; copy the address of the global into rdx
+		  movq  (%rdx), %rdx
+		#else
+		  movq  __afl_global_area_ptr(%rip), %rdx
+		#endif /* !^__APPLE__ */
+		  testq %rdx, %rdx ; check if there's nothing in %rdx
+		  je    __afl_setup_first ; if there is nothing it's the first time
+		  movq %rdx, __afl_area_ptr(%rip)
+		  jmp  __afl_store	; jump to the previously defined segment
+	```
+	
+
+- The last important code block, and biggest, is:
+
+	```
+	"__afl_setup_first:\n"
+		  /* Save everything that is not yet saved and that may be touched by
+		  getenv() and several other libcalls we'll be relying on. */
+
+		  leaq -352(%rsp), %rsp
+		  movq %rax,   0(%rsp)
+		  movq %rcx,   8(%rsp)
+		  movq %rdi,  16(%rsp)
+		  movq %rsi,  32(%rsp)
+		  movq %r8,   40(%rsp)
+		  movq %r9,   48(%rsp)
+		  movq %r10,  56(%rsp)
+		  movq %r11,  64(%rsp)
+		  movq %xmm0,  96(%rsp)
+		  movq %xmm1,  112(%rsp)
+		  movq %xmm2,  128(%rsp)
+		  movq %xmm3,  144(%rsp)
+		  movq %xmm4,  160(%rsp)
+		  movq %xmm5,  176(%rsp)
+		  movq %xmm6,  192(%rsp)
+		  movq %xmm7,  208(%rsp)
+		  movq %xmm8,  224(%rsp)
+		  movq %xmm9,  240(%rsp)
+		  movq %xmm10, 256(%rsp)
+		  movq %xmm11, 272(%rsp)
+		  movq %xmm12, 288(%rsp)
+		  movq %xmm13, 304(%rsp)
+		  movq %xmm14, 320(%rsp)
+		  movq %xmm15, 336(%rsp)
+		  /*Map SHM, jumping to __afl_setup_abort if something goes wrong. */
+
+		  /* The 64-bit ABI requires 16-byte stack alignment. We'll keep the
+		  original stack ptr in the callee-saved r12. */
+
+		  pushq %r12
+		  movq  %rsp, %r12
+		  subq  $16, %rsp
+		  andq  $0xfffffffffffffff0, %rsp
+
+		  leaq .AFL_SHM_ENV(%rip), %rdi
+		  CALL_L64("getenv") ; defined in afl-as.h
+
+		  testq %rax, %rax
+		  je    __afl_setup_abort
+
+		  movq  %rax, %rdi
+		  CALL_L64("atoi")
+
+		  xorq %rdx, %rdx   /* shmat flags    */
+		  xorq %rsi, %rsi   /* requested addr */
+		  movq %rax, %rdi   /* SHM ID         */
+		  CALL_L64("shmat")
+
+		  cmpq $-1, %rax
+		  je   __afl_setup_abort
+
+		  /* Store the address of the SHM region. */
+
+		  movq %rax, %rdx
+		  movq %rax, __afl_area_ptr(%rip)
+
+		#ifdef __APPLE__
+		  movq %rax, __afl_global_area_ptr(%rip)
+		#else
+		  movq __afl_global_area_ptr@GOTPCREL(%rip), %rdx
+		  movq %rax, (%rdx)
+		#endif /* ^__APPLE__ */
+		  movq %rax, %rdx
 	```
 
 - The variables are defined right at the end with 
@@ -131,6 +243,9 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 - .lcomm -> defines a local uninitialized block of storage of a number of bytes
 - .comm -> allocates storage in the data secton. The storage is referenced by the identifier name. The first number is the size, the second is the alignment (optional).
 
+# Hypothesis not yet proven
+	- In the code the register rdx always points the area (it's the area ptr)
+
 # What We change
 
 - How we choose the code to be instrumented:
@@ -145,6 +260,8 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		3. Or none of the abovem which means there's nothing we can do but despair. This case hasn't been found yet. (check for ret)
 	- This has yet to be tested to check if it covers 100% of the cases, but so far is enough for a good start
 
+# Notes:
+	- General Purpose Registers: (RAX, RBX, RCX, RDX, RBP, RSP and R8-R15)
 
 # Ideas
 	- Check for function similarity without considering paths (perhaps only good for this iteration).
@@ -156,5 +273,10 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	- Most importantly we need to figure out how to write to the bitmap
 
 
+# Questions
+	- How does AFL identify the number of times it hit the code blocks?
+	- How does AFL add the code block to the bitmap
+	- Can we access it in any way?
+	- What exactly is in %%rdx, rcx, raz when we reach the code block?
 
 
