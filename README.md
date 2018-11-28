@@ -101,6 +101,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 
 - This is the main_payload added at the end of the assembly code, since it's a very big piece of code, only the important parts will be added
 
+	```
 	__afl_maybe_log:
 		#if defined(__OpenBSD__)  || (defined(__FreeBSD__) && (__FreeBSD__ < 9))
 		 .byte 0x9f /* lahf */
@@ -110,12 +111,14 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		seto  %al
 		/* Check if SHM region is already mapped. */
 		movq  __afl_area_ptr(%rip), %rdx
-		testq %rdx, %rdx
-		je    __afl_setup
+		testq %rdx, %rdx   ; compare the two conditions
+		je    __afl_setup  ; if the previous statement was true, we start setting up
 	  
+	```
 
 - The variables are defined right at the end with 
 	
+	```
 	.AFL_VARS:
 	  	.lcomm   __afl_area_ptr, 8
 	  	.lcomm   __afl_prev_loc, 8
@@ -123,6 +126,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	  	.lcomm   __afl_temp, 4
 	  	.lcomm   __afl_setup_failure, 1
 	  	.comm    __afl_global_area_ptr, 8, 8
+	```
 
 - .lcomm -> defines a local uninitialized block of storage of a number of bytes
 - .comm -> allocates storage in the data secton. The storage is referenced by the identifier name. The first number is the size, the second is the alignment (optional).
