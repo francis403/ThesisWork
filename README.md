@@ -118,9 +118,8 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 
 - right after this bit of code, comes this one: (adds it if its not the first time seing the block)
 
+	```
 	__afl_store: (after this is ran, we go to afl_return)
-
-		```
 		/* Calculate and store hit for the code location specified in rcx. */
 		#ifndef COVERAGE_ONLY
 			xorq __afl_prev_loc(%rip), %rcx
@@ -133,6 +132,18 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 			incb (%rdx, %rcx, 1)
 		#endif /* ^SKIP_COUNTS */
 		```
+- It's immediatly followed by afl_return
+
+	```
+	 __afl_return:
+		addb $127, %al   ; no idea what this is doing
+		#if defined(__OpenBSD__)  || (defined(__FreeBSD__) && (__FreeBSD__ < 9))
+			.byte 0x9e /* sahf */
+		#else
+			sahf
+		#endif /* ^__OpenBSD__, etc */
+			ret  ; return to the trampoline code
+	```
 
 - we only jump to __afl_setup if we never encountered the previous code block
 	- So in this code block we have to store the range of times we've been to this block (> 1)
@@ -146,14 +157,14 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		jne __afl_return
 		/* Check out if we have a global pointer on file. */
 		#ifndef __APPLE__
-		  movq  __afl_global_area_ptr@GOTPCREL(%rip), %rdx ; copy the address of the global into rdx
+		  movq  __afl_global_area_ptr@GOTPCREL(%rip), %rdx ;global adress to rdx
 		  movq  (%rdx), %rdx
 		#else
 		  movq  __afl_global_area_ptr(%rip), %rdx
 		#endif /* !^__APPLE__ */
 		  testq %rdx, %rdx ; check if there's nothing in %rdx
 		  je    __afl_setup_first ; if there is nothing it's the first time
-		  movq %rdx, __afl_area_ptr(%rip)
+		  movq %rdx, __afl_area_ptr(%rip) ; move to the area pointer
 		  jmp  __afl_store	; jump to the previously defined segment
 	```
 	
@@ -220,7 +231,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		  /* Store the address of the SHM region. */
 
 		  movq %rax, %rdx
-		  movq %rax, __afl_area_ptr(%rip)
+		  movq %rax, __afl_area_ptr(%rip) ; moves the value to the area ptr pointer
 
 		#ifdef __APPLE__
 		  movq %rax, __afl_global_area_ptr(%rip)
@@ -292,6 +303,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	- in afl-fuzz.c we have update_bitmap_score function, called whenver we bump into a new path
 		- they maintain a list top_rated[] entries for every byte in the bitmap.
 	- the calibrate_case function in afl-fuzz is the one that hashes nad checks if its a new path
+	- uses att syntax (.att_syntax)
 
 # Ideas
 	- Check for function similarity without considering paths (perhaps only good for this iteration).
@@ -310,5 +322,6 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	- What exactly is in %%rdx, rcx, raz when we reach the code block?
 	- How does the fuzzing take advantage of the instrumentation?
 	- How do we put the id of the block into the shared memory?
+	- Where is the random ID being generated?
 
 
