@@ -99,7 +99,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 
 - It calls __afl_maybe_log, available in the main_payload, to add and check if the region is arleady mapped.
 
-- This is the main_payload added at the end of the assembly code, since it's a very big piece of code, only the important parts will be added
+- This is the main_payload (64 bits) added at the end of the assembly code, since it's a very big piece of code, only the important parts will be added
 
 	```
 	__afl_maybe_log:
@@ -118,7 +118,9 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 
 - right after this bit of code, comes this one: (adds it if its not the first time seing the block)
 
-	__afl_store:
+	__afl_store: (after this is ran, we go to afl_return)
+
+		```
 		/* Calculate and store hit for the code location specified in rcx. */
 		#ifndef COVERAGE_ONLY
 			xorq __afl_prev_loc(%rip), %rcx
@@ -130,6 +132,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		#else
 			incb (%rdx, %rcx, 1)
 		#endif /* ^SKIP_COUNTS */
+		```
 
 - we only jump to __afl_setup if we never encountered the previous code block
 	- So in this code block we have to store the range of times we've been to this block (> 1)
@@ -260,8 +263,35 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		3. Or none of the abovem which means there's nothing we can do but despair. This case hasn't been found yet. (check for ret)
 	- This has yet to be tested to check if it covers 100% of the cases, but so far is enough for a good start
 
+
+# What we know about afl-fuzz.c
+
+	# Interesting Variables
+
+		```
+		EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap  */
+		EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
+			virgin_tmout[MAP_SIZE],    /* Bits we haven't seen in tmouts   */
+			virgin_crash[MAP_SIZE];    /* Bits we haven't seen in crashes  */
+		static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
+		static s32 shm_id;                    /* ID of the SHM region             */
+		```	
+
+	# Functions
+		- has_new_bits -> checks if the current execution path brings anything new to the 					table
+		- calibrate_case ->
+		- update_bitmap_score -> called whenever we bump into a new path
+		- calculate_score -> calculate case desirability
+		- cull_queue -> goes over the top_rated[] entries, and then sequentially grabs
+			 winners for previously_unseed bytes
+
 # Notes:
 	- General Purpose Registers: (RAX, RBX, RCX, RDX, RBP, RSP and R8-R15)
+	- In afl-fuzz.c, in the function cull_queue, they use a temp_v file to check against the 
+	bitmap for uncaptured parts (if yes and it was a top_rated[] contender, they use it)
+	- in afl-fuzz.c we have update_bitmap_score function, called whenver we bump into a new path
+		- they maintain a list top_rated[] entries for every byte in the bitmap.
+	- the calibrate_case function in afl-fuzz is the one that hashes nad checks if its a new path
 
 # Ideas
 	- Check for function similarity without considering paths (perhaps only good for this iteration).
@@ -278,5 +308,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	- How does AFL add the code block to the bitmap
 	- Can we access it in any way?
 	- What exactly is in %%rdx, rcx, raz when we reach the code block?
+	- How does the fuzzing take advantage of the instrumentation?
+	- How do we put the id of the block into the shared memory?
 
 
