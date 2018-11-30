@@ -2,13 +2,28 @@
 
 # How the random id is generated
 
--Notes:
-	- Done in afl.as.c in the main function
-	- Done before the add instrumentation function
-- TODO:
+- The random id generation and addage to the instrumentation is done in two files.
+- The function is defined in types.h as R(x)
 
 
+	```
+	#ifdef AFL_LLVM_PASS
+	#  define AFL_R(x) (random() % (x))
+	#else
+	#  define R(x) (random() % (x))
+	#endif /* ^AFL_LLVM_PASS */
+	```
 
+- It is then used in instr-as.c to add to the trampoline code, described further ahead.
+
+	```
+	fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
+              R(MAP_SIZE));
+	```
+- The trampoline variable as a %08x that will hold the randomly generated value displayed as a hex
+-  MAP_SIZE is defined in config.h
+	- MAP_SIZE = 2 ^ MAP_SIZE_POW2
+	- Where MAP_SIZE_POW2 is defines with a default of 16 in config.h
 
 srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a nonlinear additive feedback random number generator employing default table of size 31 long integers to return successive pseudo-random numbers in the range from 0 to RAND_MAX.
 
@@ -85,7 +100,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		movq %%rdx,  0(%%rsp) ; load rdx into the beggining of the stack
 		movq %%rcx,  8(%%rsp) ; move the rcx into the stack[1]
 		movq %%rax, 16(%%rsp) ; move rax into the stack[2]
-		movq $0x%08x, %%rcx ; maybe call the kernel?
+		movq $0x%08x, %%rcx ; adds the random id here
 		call __afl_maybe_log ; call the first function in the main payload
 		movq 16(%%rsp), %%rax
 		movq  8(%%rsp), %%rcx
@@ -313,6 +328,8 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 		- For example, can we skip '.loc' lines?
 	- Display the percentage of similiar code between the two in an efficient way.
 	- Most importantly we need to figure out how to write to the bitmap
+	- Add personalized ids and change the way AFL finds edges, this is, 
+	  we care more if the path is the same than the edge itself
 
 
 # Questions
@@ -321,7 +338,7 @@ srandom: The srandom(unsigned int seed), included in stdlib.h, function uses a n
 	- Can we access it in any way?
 	- What exactly is in %%rdx, rcx, raz when we reach the code block?
 	- How does the fuzzing take advantage of the instrumentation?
-	- How do we put the id of the block into the shared memory?
-	- Where is the random ID being generated?
+	- How do we put the id of the block into the shared memory? -done
+	- Where is the random ID being generated? - done
 
 
