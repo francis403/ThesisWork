@@ -239,6 +239,14 @@ void addToInstr( char **instr, char *line ){
   free(temp);
 }
 
+void addToOutFile(FILE *file, char *lines){
+  fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
+              R(MAP_SIZE)); //TODO: -> shows the added lines
+  fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", file);
+  fputs(lines, file);
+  fputs("#----- END OF CODE TO BE HASHED ------#\n", file);
+}
+
 /**
 * Quick hash just to see if it works
 **/
@@ -322,26 +330,18 @@ static void add_instrumentation(void) {
        mode, and if the line starts with a tab followed by a character, dump
        the trampoline now. */
 
-
-    /**
-    if(num_of_lines_recorded >= 0 && line[0] != '\t'){
-        fputs("#----- END OF CODE TO BE HASHED ------#\n", instr_lines_after);
-        num_of_lines_recorded = -1; //no block no lines
-    }
-    **/
-
     //ADDS THE TRAMPOLINE CODE
     if (!pass_thru && !skip_intel && !skip_app && !skip_csect && instr_ok &&
         instrument_next && line[0] == '\t' && isalpha(line[1])) {
 
       // if we found the new beggining of the next line to be instrumented and we're instrumenting the last one still, end it
       if(is_recording){
+
         is_recording = 0;
-        fputs("#----- END OF CODE TO BE HASHED1 ------#\n", instr_lines_after);
         num_of_lines_recorded = 0; //no block no lines
 
-        //TODO: add all the lines
-        printf("lines = %s\n", lines_to_instrument);
+        //add all the lines to the output file
+        addToOutFile(instr_lines_after, lines_to_instrument);
 
         // clean the value inside it
         clearInstr(&lines_to_instrument);
@@ -351,10 +351,14 @@ static void add_instrumentation(void) {
       fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               R(MAP_SIZE)); //ideia -> é aqui que estão a adicionar o id aleatorio!!!! e guarda no $0x%08x
 
+      // put it in the section above
+      
+      /*
       fprintf(instr_lines_after, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               R(MAP_SIZE)); //TODO: -> shows the added lines
 
       fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", instr_lines_after);
+      */
 
       is_recording = 1;
 
@@ -370,20 +374,22 @@ static void add_instrumentation(void) {
       addToInstr(&lines_to_instrument, line);
       num_of_lines_recorded ++;
     }
+    else { fputs(line, instr_lines_after);} 
 
-
-    fputs(line, instr_lines_after); // shows what happens after
+    //fputs(line, instr_lines_after); // shows what happens after
     
     if (strstr(line, ".cfi_endproc")){
          if(is_recording){
             is_recording = 0;
-            fputs("#----- END OF CODE TO BE HASHED2 ------#\n", instr_lines_after);
 
-            //TODO: add all the lines
-            printf("lines = %s\n", lines_to_instrument);
+            //add all the lines out
+            addToOutFile(instr_lines_after, lines_to_instrument);
+            //printf("lines = %s\n", lines_to_instrument);
+
+            // clear the line
+            clearInstr(&lines_to_instrument);
 
             num_of_lines_recorded = 0; //no block no lines
-            clearInstr(&lines_to_instrument);
         }
     }
 
@@ -486,34 +492,30 @@ static void add_instrumentation(void) {
         
         if(is_recording){
           is_recording = 0;
-          fputs("#----- END OF CODE TO BE HASHED3 ------#\n", instr_lines_after);
           num_of_lines_recorded = 0; //no block no lines
 
           //TODO: add all the lines
-          printf("lines = %s\n", lines_to_instrument);
-
-           clearInstr(&lines_to_instrument);
+          addToOutFile(instr_lines_after, lines_to_instrument);
+          
+          // clean the lines buffer
+          clearInstr(&lines_to_instrument);
         }
 		
         fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
                 R(MAP_SIZE));
-        //fputs((use_64bit ? trampoline_fmt_64 : trampoline_fmt_32), instr_lines_after);
 
+        /*
         fprintf(instr_lines_after, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
                 R(MAP_SIZE));
-
+        fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", instr_lines_after);
+        */
         ins_lines++;
 
         num_of_lines_recorded ++;
-        fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", instr_lines_after);
         is_recording = 1;
 
       }
       continue;
-    } else {
-      //list_of_block_lines[num_of_lines_recorded++] = line;
-      fputs(line, instr_lines_after);
-
     }
 
 
