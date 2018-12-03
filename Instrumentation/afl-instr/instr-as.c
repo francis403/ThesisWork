@@ -212,6 +212,40 @@ wrap_things_up:
 
 }
 
+/**
+* Added by FA
+* Concats two strings
+**/
+char *concat( char *s1, char *s2)
+{
+  char *result = malloc(strlen(s1) + strlen(s2) + 1);
+  strcpy(result, s1);
+  strcat(result, s2);
+  return result;
+}
+
+// clean the isntrumented pointer
+void clearInstr( char **instr ){
+  free(*instr);
+  *instr = calloc(0, sizeof(char));
+}
+
+// adds the line to be instrumented
+void addToInstr( char **instr, char *line ){
+  char *temp = concat(*instr, line);
+  //printf("%s\n", temp);
+  *instr = realloc(*instr, strlen(temp) * sizeof(char) + 1); //add the line to the lines
+  strcpy(*instr, temp);
+  free(temp);
+}
+
+/**
+* Quick hash just to see if it works
+**/
+int hashLines(char *lines){
+  int num_of_lines = 0;
+  return num_of_lines;
+}
 
 /* Process input file, generate modified_file. Insert instrumentation in all
    the appropriate places. */
@@ -224,25 +258,18 @@ static void add_instrumentation(void) {
   FILE *instr_lines, *instr_lines_after;
   char *fname =  "/home/francis/Documents/ThesisWork/instr_lines.txt";
   char *fname_after =  "/home/francis/Documents/ThesisWork/instr_lines_after.txt";
-  char *fname2 = "/home/francis/Documents/ThesisWork/instr_lines2.txt";
-  char *fname_after2 = "/home/francis/Documents/ThesisWork/instr_lines_after2.txt";
-  char *cname = "/home/francis/Documents/ThesisWork/outf.txt";
   //instr_lines = fopen("/home/francis/Documents/ThesisWork/instr_lines.txt","wb+");
 
   
-  if( access(fname, F_OK) != -1 && access(fname2, F_OK) != -1 ){
+  if( access(fname, F_OK) != -1  ){
     // if files arleady exist remove them
     remove(fname); remove(fname_after);
-    remove(fname2); remove(fname_after2);
   }
 
-  if ( access(fname, F_OK) != -1 ){
-    instr_lines = fopen(fname2,"wb+");
-    instr_lines_after = fopen(fname_after2,"wb+");
-  } else {
-    instr_lines = fopen(fname,"wb+");
-    instr_lines_after = fopen(fname_after,"wb+");
-  }
+ 
+  instr_lines = fopen(fname,"wb+");
+  instr_lines_after = fopen(fname_after,"wb+");
+  
 
 
   static u8 line[MAX_LINE];
@@ -278,11 +305,13 @@ static void add_instrumentation(void) {
 
   if (!outf) PFATAL("fdopen() failed");  
 
-  int num_of_lines_in_block = -1;
-  //char **list_of_block_lines = (char**) malloc(sizeof(char*));
-  int num_cols = 100, num_rows = 100;
-  char list_of_block_lines[num_rows][num_cols];
+  int num_of_lines_recorded = 0; //number of lines to be instrumented
+  int is_recording = 0; // are we recording the lines to be added?
+  
 
+  char *lines_to_instrument = calloc(0, sizeof(char));
+  
+  // TODO -> need to slightly change this loop to add the ability to add personalized ids
   while (fgets(line, MAX_LINE, inf)) { //pass through all the assembly line of code
 
     //SAYF("line = %s", line);
@@ -295,9 +324,9 @@ static void add_instrumentation(void) {
 
 
     /**
-    if(num_of_lines_in_block >= 0 && line[0] != '\t'){
+    if(num_of_lines_recorded >= 0 && line[0] != '\t'){
         fputs("#----- END OF CODE TO BE HASHED ------#\n", instr_lines_after);
-        num_of_lines_in_block = -1; //no block no lines
+        num_of_lines_recorded = -1; //no block no lines
     }
     **/
 
@@ -305,20 +334,29 @@ static void add_instrumentation(void) {
     if (!pass_thru && !skip_intel && !skip_app && !skip_csect && instr_ok &&
         instrument_next && line[0] == '\t' && isalpha(line[1])) {
 
-      
-      if(num_of_lines_in_block >= 0){
-            fputs("#----- END OF CODE TO BE HASHED ------#\n", instr_lines_after);
-            num_of_lines_in_block = -1; //no block no lines
+      // if we found the new beggining of the next line to be instrumented and we're instrumenting the last one still, end it
+      if(is_recording){
+        is_recording = 0;
+        fputs("#----- END OF CODE TO BE HASHED1 ------#\n", instr_lines_after);
+        num_of_lines_recorded = 0; //no block no lines
+
+        //TODO: add all the lines
+        printf("lines = %s\n", lines_to_instrument);
+
+        // clean the value inside it
+        clearInstr(&lines_to_instrument);
+
       }
 	
       fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-              R(MAP_SIZE));
+              R(MAP_SIZE)); //ideia -> é aqui que estão a adicionar o id aleatorio!!!! e guarda no $0x%08x
 
       fprintf(instr_lines_after, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               R(MAP_SIZE)); //TODO: -> shows the added lines
 
-      num_of_lines_in_block = 0;
       fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", instr_lines_after);
+
+      is_recording = 1;
 
       instrument_next = 0;
       ins_lines++;
@@ -328,15 +366,26 @@ static void add_instrumentation(void) {
     /* Output the actual line, call it a day in pass-thru mode. */
 
     fputs(line, outf);
+    if(is_recording){
+      addToInstr(&lines_to_instrument, line);
+      num_of_lines_recorded ++;
+    }
+
 
     fputs(line, instr_lines_after); // shows what happens after
     
     if (strstr(line, ".cfi_endproc")){
-         if(num_of_lines_in_block >= 0){
-            fputs("#----- END OF CODE TO BE HASHED ------#\n", instr_lines_after);
-            num_of_lines_in_block = -1; //no block no lines
+         if(is_recording){
+            is_recording = 0;
+            fputs("#----- END OF CODE TO BE HASHED2 ------#\n", instr_lines_after);
+
+            //TODO: add all the lines
+            printf("lines = %s\n", lines_to_instrument);
+
+            num_of_lines_recorded = 0; //no block no lines
+            clearInstr(&lines_to_instrument);
         }
-      }
+    }
 
     if (pass_thru) continue;
 
@@ -435,9 +484,15 @@ static void add_instrumentation(void) {
 
       if (line[1] == 'j' && line[2] != 'm' && R(100) < inst_ratio) {
         
-        if(num_of_lines_in_block >= 0){
-            fputs("#----- END OF CODE TO BE HASHED ------#\n", instr_lines_after);
-            num_of_lines_in_block = -1; //no block no lines
+        if(is_recording){
+          is_recording = 0;
+          fputs("#----- END OF CODE TO BE HASHED3 ------#\n", instr_lines_after);
+          num_of_lines_recorded = 0; //no block no lines
+
+          //TODO: add all the lines
+          printf("lines = %s\n", lines_to_instrument);
+
+           clearInstr(&lines_to_instrument);
         }
 		
         fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
@@ -449,13 +504,14 @@ static void add_instrumentation(void) {
 
         ins_lines++;
 
-        num_of_lines_in_block = 0;
+        num_of_lines_recorded ++;
         fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", instr_lines_after);
+        is_recording = 1;
 
       }
       continue;
     } else {
-      //list_of_block_lines[num_of_lines_in_block++] = line;
+      //list_of_block_lines[num_of_lines_recorded++] = line;
       fputs(line, instr_lines_after);
 
     }
@@ -528,12 +584,13 @@ static void add_instrumentation(void) {
 
   } //end of while
 
-  
-
+  //free(lines_to_instrument);
   if (ins_lines){
     fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
     fputs((use_64bit ? main_payload_64 : main_payload_32), instr_lines_after);
   }
+
+  free(lines_to_instrument);
 
   fclose(instr_lines);
   fclose(instr_lines_after); //end of added by Francisco Araujo
@@ -597,7 +654,7 @@ int main(int argc, char** argv) {
 
   rand_seed = tv.tv_sec ^ tv.tv_usec ^ getpid();
 
-  srandom(rand_seed);
+  srandom(rand_seed); // sets the random seed to generate the ids later
 
   edit_params(argc, argv);
 
