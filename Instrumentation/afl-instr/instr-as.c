@@ -224,35 +224,118 @@ char *concat( char *s1, char *s2)
   return result;
 }
 
+// adds the line to the destiny
+void concatInto( char **dest, char *line ){
+  char *temp = concat(*dest, line);
+  //printf("%s\n", temp);
+  *dest = realloc(*dest, strlen(temp) * sizeof(char) + 1); //add the line to the lines
+  strcpy(*dest, temp);
+  free(temp);
+}
+
+int hash_string(char *input){
+  int hash = 0;
+  int g = 3;
+  printf("gonna hash = %s\n", input);
+  for( int i = 0; i < strlen(input); i++ ){
+    hash += (i +1) * (input[i] - 1);
+  }
+  return hash;
+}
+
+/**
+* Quick hash just to see if it works
+* Returns a positive number
+* O(2n) -> consigo melhorar para O(n)
+* We take into consideration:
+*   - The number of actually important lines
+*   - 
+**/
+unsigned int blockIDGenerator(char *block){
+
+  unsigned int result = 1;
+   
+  char *string_to_hash = calloc(0, sizeof(char)); //string to eventually hash
+  char *copy = malloc ( sizeof(char) * strlen(block) + 1 );
+  strcpy(copy, block);
+
+  int num_of_lines = 0;
+  char *delim = "\n";
+  
+  printf("\n---BLOCK---\n\n");
+  printf("%s\n", block );
+  printf("\n---END OF BLOCK---\n\n");
+
+  char *line = strtok(copy, delim);
+
+  while(line != NULL){
+    //printf("line = %s\n", line);
+    
+    // there are some line we want to skip
+    if ( line[0] == '.'){
+      //printf("skipped = %s\n", line);
+      line = strtok(NULL, delim);
+      continue;
+    }
+    
+    char *rest = line;
+    char *command;
+    int  add_next_line = -1;
+    
+    while((command = strtok_r(rest, "\t", &rest))){
+      if(command[0] == '.' || command[1] == '.' ||command[0] == '%' || command[0] == '$' ) { continue; }
+
+
+      //SPECIAL CASES
+      if( strcmp(command, "call") ){
+        add_next_line = 1; 
+        concatInto(&string_to_hash, command);
+        continue;
+      }
+      else if( command[0] == '$' && command[1] != '.' ){
+        //another special case
+    
+        //concatInfo(&string_to_hash, var);
+        continue;
+      }
+      printf("%s\n", command);
+      concatInto(&string_to_hash, command);
+    }
+    free(command);    
+    //concatInto(string_to_hash, line[0]);
+    
+
+    //char *val = getStringToHashFromBlockLine(line);
+    //concatInto(&string_to_hash, getStringToHashFromBlockLine(line));
+    line = strtok(NULL, delim);
+  }
+
+  printf("\n RESULT = %s\n", string_to_hash);
+  int val = hash_string(string_to_hash) % MAP_SIZE;
+  printf("result = %d\n", val);
+  free(line);
+  free(copy);
+  free(string_to_hash);
+  return val% MAP_SIZE;
+}
+
 // clean the isntrumented pointer
 void clearInstr( char **instr ){
   free(*instr);
   *instr = calloc(0, sizeof(char));
 }
 
-// adds the line to be instrumented
-void addToInstr( char **instr, char *line ){
-  char *temp = concat(*instr, line);
-  //printf("%s\n", temp);
-  *instr = realloc(*instr, strlen(temp) * sizeof(char) + 1); //add the line to the lines
-  strcpy(*instr, temp);
-  free(temp);
-}
 
 void addToOutFile(FILE *file, char *lines){
+  // get the id to add to the block
+  int block_id = blockIDGenerator(lines);
+  //int block_id = R(MAP_SIZE);
   fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-              R(MAP_SIZE)); //TODO: -> shows the added lines
+              block_id); //TODO: -> shows the added lines
+  //printf("LINE ---\n %s\n", lines);
   fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", file);
   fputs(lines, file);
   fputs("#----- END OF CODE TO BE HASHED ------#\n", file);
-}
-
-/**
-* Quick hash just to see if it works
-**/
-int hashLines(char *lines){
-  int num_of_lines = 0;
-  return num_of_lines;
 }
 
 /* Process input file, generate modified_file. Insert instrumentation in all
@@ -371,7 +454,7 @@ static void add_instrumentation(void) {
 
     fputs(line, outf);
     if(is_recording){
-      addToInstr(&lines_to_instrument, line);
+      concatInto(&lines_to_instrument, line);
       num_of_lines_recorded ++;
     }
     else { fputs(line, instr_lines_after);} 
