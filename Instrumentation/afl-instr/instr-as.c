@@ -80,6 +80,7 @@ static u8   use_64bit = 0;
 
 #endif /* ^__x86_64__ */
 
+static char *test_directory = "/home/francis/Documents/ThesisWork/";
 
 /* Examine and modify parameters to pass to 'as'. Note that the file name
    is always the last parameter passed by GCC, so we exploit this property
@@ -196,13 +197,13 @@ static void edit_params(int argc, char** argv) {
        a format we may not understand. This works around an issue compiling
        NSS. */
 
-    if (strncmp(input_file, tmp_dir, strlen(tmp_dir)) &&
+    if (strncmp(input_file, test_directory, strlen(tmp_dir)) &&
         strncmp(input_file, "/var/tmp/", 9) &&
         strncmp(input_file, "/tmp/", 5)) pass_thru = 1;
 
   }
 
-  modified_file = alloc_printf("%s/.afl-%u-%u.s", tmp_dir, getpid(),
+  modified_file = alloc_printf("%s/.afl-%u-%u.s", test_directory, getpid(),
                                (u32)time(NULL));
 
 wrap_things_up:
@@ -236,11 +237,12 @@ void concatInto( char **dest, char *line ){
 int hash_string(char *input){
   int hash = 0;
   int g = 3;
-  printf("gonna hash = %s\n", input);
+  //printf("gonna hash = %s\n", input);
   for( int i = 0; i < strlen(input); i++ ){
     hash += (i +1) * (input[i] - 1);
   }
-  return hash;
+
+  return hash == 0 ? 1 : hash;
 }
 
 /**
@@ -262,9 +264,9 @@ unsigned int blockIDGenerator(char *block){
   int num_of_lines = 0;
   char *delim = "\n";
   
-  printf("\n---BLOCK---\n\n");
-  printf("%s\n", block );
-  printf("\n---END OF BLOCK---\n\n");
+  //printf("\n---BLOCK---\n\n");
+  //printf("%s\n", block );
+  //printf("\n---END OF BLOCK---\n\n");
 
   char *line = strtok(copy, delim);
 
@@ -298,7 +300,7 @@ unsigned int blockIDGenerator(char *block){
         //concatInfo(&string_to_hash, var);
         continue;
       }
-      printf("%s\n", command);
+      //printf("%s\n", command);
       concatInto(&string_to_hash, command);
     }
     free(command);    
@@ -310,9 +312,9 @@ unsigned int blockIDGenerator(char *block){
     line = strtok(NULL, delim);
   }
 
-  printf("\n RESULT = %s\n", string_to_hash);
+  //printf("\n RESULT = %s\n", string_to_hash);
   int val = hash_string(string_to_hash) % MAP_SIZE;
-  printf("result = %d\n", val);
+  //printf("result = %d\n", val);
   free(line);
   free(copy);
   free(string_to_hash);
@@ -325,6 +327,11 @@ void clearInstr( char **instr ){
   *instr = calloc(0, sizeof(char));
 }
 
+void copy(FILE *source, FILE *target){
+  char ch;
+  while ( (ch = fgetc(source)) != EOF )
+    fputc(ch, target);
+}
 
 void addToOutFile(FILE *file, char *lines){
   // get the id to add to the block
@@ -333,9 +340,9 @@ void addToOutFile(FILE *file, char *lines){
   fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               block_id); //TODO: -> shows the added lines
   //printf("LINE ---\n %s\n", lines);
-  fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", file);
+  //fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", file);
   fputs(lines, file);
-  fputs("#----- END OF CODE TO BE HASHED ------#\n", file);
+  //fputs("#----- END OF CODE TO BE HASHED ------#\n", file);
 }
 
 /* Process input file, generate modified_file. Insert instrumentation in all
@@ -365,6 +372,7 @@ static void add_instrumentation(void) {
 
   static u8 line[MAX_LINE];
 
+  //TODO -> ver o que estes ficheiros fazem e como o AFL usa-os
   FILE* inf;
   FILE* outf;
   s32 outfd;
@@ -379,11 +387,10 @@ static void add_instrumentation(void) {
 
 #endif /* __APPLE__ */
 
-  if (input_file) { //TODO: ver se isto guarda
+  if (input_file) {
 
-    //SAYF("input_file = %s\n",input_file);
-
-    inf = fopen(input_file, "r");
+    printf("input_file = %s\n",input_file);
+    inf = fopen(input_file, "r"); //change to read eventually
     if (!inf) PFATAL("Unable to read '%s'", input_file);
 
   } else inf = stdin;
@@ -393,7 +400,8 @@ static void add_instrumentation(void) {
   if (outfd < 0) PFATAL("Unable to write to '%s'", modified_file);
 
   outf = fdopen(outfd, "w"); // opens the file
-
+  printf("modified_file = %s\n", modified_file);
+  //printf("inf = %s\n", inf);
   if (!outf) PFATAL("fdopen() failed");  
 
   int num_of_lines_recorded = 0; //number of lines to be instrumented
@@ -449,15 +457,62 @@ static void add_instrumentation(void) {
       ins_lines++;
 
     }
-
+    //if(strstr(line, "\taddl\t$4, %eax"))  printf("%s\n", line);
     /* Output the actual line, call it a day in pass-thru mode. */
+    //added only to be able to show we can actually change the program
+    char *newLine = NULL;
+    char *change = NULL;
+    //if( strstr(line, "\taddl\t$4, %eax") ){
+    //  change = "\taddl\t$100, %eax\n";
+    //} 
+    if(strstr(line, "\t.string\t\"This always happens\"\n")){
+      change = "\t.string \"This, amazingly, always happens\"\n";
+      //char *change = line;
+    } 
+    /*else if(strstr(line, "\tmovl\t$4, %edx")){
+      change = "\tmovl\t$100, %edx\n";
+    }*/
+    /* 
+    else if(strstr(line, "\tmovl\t$15, %eax")){
+      //movl  $15, %eax
+      //printf("found\n" );
+      change = "\tmovl\t$100, %eax\n";
+    }
+    */
+    else if(strstr(line, "\tmovl\t$15, %edx")){
+      //movl  $15, %eax
+      //printf("found\n" );
+     change = "\tmovl\t$451, %edx\n";
+    } 
+    else if( strstr(line, "\taddl\t$4, %ecx") ){
+      change = "\taddl\t$100, %ecx\n";
+    }
+    //addl  $4, %ecx
+    else{
+      fputs(line, outf);
+    }
 
-    fputs(line, outf);
+    if(change != NULL){
+      newLine = malloc( sizeof(char) * strlen(change) + 1);
+      strcpy(newLine, change);
+      fputs(change, outf);
+    }
+
+    if(newLine == NULL){
+      newLine = malloc(sizeof(char) * strlen(line) + 1);
+      strcpy(newLine, line);
+    }
+
+
+    /*---END OF ADDED FOR PRESENTATION*/
+
     if(is_recording){
-      concatInto(&lines_to_instrument, line);
+      concatInto(&lines_to_instrument, newLine);
       num_of_lines_recorded ++;
     }
-    else { fputs(line, instr_lines_after);} 
+    else { 
+      fputs(newLine, instr_lines_after);
+    } 
 
     //fputs(line, instr_lines_after); // shows what happens after
     
@@ -476,7 +531,7 @@ static void add_instrumentation(void) {
         }
     }
 
-    if (pass_thru) continue;
+    //if (pass_thru) continue;
 
     /* All right, this is where the actual fun begins. For one, we only want to
        instrument the .text section. So, let's keep track of that in processed
@@ -668,12 +723,30 @@ static void add_instrumentation(void) {
     }
 
   } //end of while
-
+  //fputs("/*Teste do programa*/\n",inf);
   //free(lines_to_instrument);
   if (ins_lines){
     fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
     fputs((use_64bit ? main_payload_64 : main_payload_32), instr_lines_after);
   }
+
+  //rewind(inf);
+  FILE *original_changed = fopen(input_file, "wb+");
+  FILE *read_modified = fopen(fname_after, "r");
+  if(original_changed == NULL){
+    printf("Null file in original\n");
+  }
+  if (read_modified == NULL) {
+    printf("Null file in the read modified\n");
+  }
+  /*
+  while(fgets(line, MAX_LINE, read_modified)){
+    fputs(line, original_changed);
+  }
+  */
+  copy(read_modified, original_changed);
+  fclose(read_modified);
+  fclose(original_changed);
 
   free(lines_to_instrument);
 
@@ -765,6 +838,8 @@ int main(int argc, char** argv) {
   }
 
   if (!just_version) add_instrumentation();
+
+  //printf("as_params[0] = %s\n", as_params[0]);
 
   if (!(pid = fork())) {
 
