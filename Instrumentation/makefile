@@ -6,10 +6,11 @@ EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=undefined -g -O0
 BASE_FLAGS= -fsanitize=address -g
 EXE=simple
 
+main: clean simple
 
 #------------------------ OTHER -------------------------#
 simple:
-	$(CC) $(EFLAGS) ./simple_program.c -o $(EXE) -w
+	$(CC) $(EFLAGS) ./simple_program.c -save-temps -o $(EXE) -w
 
 #--------CLEANING---------
 
