@@ -125,8 +125,8 @@ static const u8* trampoline_fmt_64 =
   //"incl __afl_block_temp\n"
   //"movq %%rcx, __afl_block_temp(%rip)\n"
   //"movl $4, __afl_block_temp\n"
-  "movq $0x%08x, %%r13\n" //id of the block
-  //"movl $0x%08x, __afl_block_temp\n"
+  //"movq $0x%08x, %%r13\n" //id of the block
+  "movl $0x%08x, __afl_block_temp\n"
   //"movq $0x%08x, %%rcx\n"
   "call __afl_maybe_log\n"
   "movq 16(%%rsp), %%rax\n"
@@ -186,12 +186,13 @@ static const u8* main_payload_64 =
   "\n"
   "  /* Calculate and store hit for the code location specified in rcx. */\n"
   "\n"
-  //"  movq %rcx, __afl_block_temp(%rip)\n"
+  //"  movq %r13, __afl_block_temp(%rip)\n"
   //"  \n/* Write home and tell them the id of the block */\n"
-  //"  movq $4, %rax               /* length    */\n"
-  //"  leaq __afl_block_temp(%rip), %rsi\n"
+  //"  movq $4, %rdx               /* length    */\n"
+  //"  leaq __afl_block_temp, %rsi\n"
   //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
   //CALL_L64("write")
+  //"\n"
 #ifndef COVERAGE_ONLY
   "  xorq __afl_prev_loc(%rip), %rcx\n"
   "  xorq %rcx, __afl_prev_loc(%rip)\n"
@@ -203,6 +204,12 @@ static const u8* main_payload_64 =
 #else
   "  incb (%rdx, %rcx, 1)\n"
 #endif /* ^SKIP_COUNTS */
+   "  \n/* Write home and tell them the id of the block */\n"
+  "  movq $4, %rdx               /* length    */\n"
+  "  leaq __afl_block_temp, %rsi\n"
+  "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
+  CALL_L64("write")
+  "\n"
   "\n"
   "__afl_return:\n"
   "\n"
@@ -361,7 +368,7 @@ static const u8* main_payload_64 =
   "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi             /* file desc */\n"
   CALL_L64("write")
   "\n"
-  "  movq %r13, __afl_block_temp(%rip)\n"
+  //"  movq %r13, __afl_block_temp(%rip)\n"
   "  \n/* Write home and tell them the id of the block */\n"
   "  movq $4, %rdx               /* length    */\n"
   "  leaq __afl_block_temp, %rsi\n"
@@ -389,10 +396,10 @@ static const u8* main_payload_64 =
   "  /* In child process: close fds, resume execution. */\n"
   "\n"
   "  movq $" STRINGIFY(FORKSRV_FD) ", %rdi\n"
-  CALL_L64("close")
+  //CALL_L64("close")
   "\n"
   "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi\n"
-  CALL_L64("close")
+  //CALL_L64("close")
   "\n"
   "  popq %rdx\n"
   "  popq %rdx\n"

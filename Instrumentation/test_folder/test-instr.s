@@ -34,7 +34,7 @@ movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
 movq $0x0000a1d9, %rcx
-movq $0x0000a1d9, %r13
+movl $0x0000a1d9, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -81,7 +81,7 @@ movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
 movq $0x00000870, %rcx
-movq $0x00000870, %r13
+movl $0x00000870, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -103,7 +103,7 @@ movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
 movq $0x0000217a, %rcx
-movq $0x0000217a, %r13
+movl $0x0000217a, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -134,7 +134,7 @@ movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
 movq $0x000020c7, %rcx
-movq $0x000020c7, %r13
+movl $0x000020c7, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -160,7 +160,7 @@ movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
 movq $0x00003338, %rcx
-movq $0x00003338, %r13
+movl $0x00003338, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -189,7 +189,7 @@ movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
 movq $0x00007ea2, %rcx
-movq $0x00007ea2, %r13
+movl $0x00007ea2, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -1528,6 +1528,13 @@ __afl_store:
   shrq $1, __afl_prev_loc(%rip)
 
   incb (%rdx, %rcx, 1)
+  
+/* Write home and tell them the id of the block */
+  movq $4, %rdx               /* length    */
+  leaq __afl_block_temp, %rsi
+  movq $(198 + 1), %rdi       /* file desc */
+call write@PLT
+
 
 __afl_return:
 
@@ -1657,14 +1664,4 @@ call read@PLT
 
   /* Once woken up, create a clone of our process. This is an excellent use
      case for syscall(__NR_clone, 0, CLONE_PARENT), but glibc boneheadedly
-     caches getpid() results and offers no way to update the value, breaking
-     abort(), raise(), and a bunch of other things :-( */
-
-call fork@PLT
-  cmpq $0, %rax
-  jl   __afl_die
-  je   __afl_fork_resume
-
-  /* In parent process: write PID to pipe, then wait for child. */
-
-  movl %eax,
+     caches getpid() resu

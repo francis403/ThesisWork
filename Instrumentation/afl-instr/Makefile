@@ -24,7 +24,7 @@ MISC_PATH   = $(PREFIX)/share/afl
 
 # PROGS intentionally omit instr-as, which gets installed elsewhere.
 
-PROGS       = instr-gcc afl-showmap
+PROGS       = instr-gcc instr-fuzz-equ afl-showmap
 
 CFLAGS     ?= -O3 -funroll-loops
 CFLAGS     += -Wall -D_FORTIFY_SOURCE=2 -g -Wno-pointer-sign \
@@ -68,7 +68,7 @@ instr-as: instr-as.c instr-as.h $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 	ln -sf instr-as as
 
-afl-fuzz: afl-fuzz.c $(COMM_HDR) | test_x86
+instr-fuzz-equ: instr-fuzz-equ.c $(COMM_HDR) instr-fuzz-equ.h instr-essential.h | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 
 afl-showmap: afl-showmap.c $(COMM_HDR) | test_x86

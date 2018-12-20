@@ -80,7 +80,7 @@ static u8   use_64bit = 0;
 
 #endif /* ^__x86_64__ */
 
-static char *test_directory = "/home/francis/Documents/ThesisWork/";
+static char *test_directory = "/home/francis/Documents/ThesisWork";
 
 /* Examine and modify parameters to pass to 'as'. Note that the file name
    is always the last parameter passed by GCC, so we exploit this property
@@ -197,13 +197,13 @@ static void edit_params(int argc, char** argv) {
        a format we may not understand. This works around an issue compiling
        NSS. */
 
-    if (strncmp(input_file, test_directory, strlen(tmp_dir)) &&
+    if (strncmp(input_file, tmp_dir, strlen(tmp_dir)) &&
         strncmp(input_file, "/var/tmp/", 9) &&
-        strncmp(input_file, "/tmp/", 5)) pass_thru = 1;
+        strncmp(input_file, "/tmp/", 5)) pass_thru = -1;
 
   }
 
-  modified_file = alloc_printf("%s/.afl-%u-%u.s", test_directory, getpid(),
+  modified_file = alloc_printf("%s/.afl-%u-%u.s", tmp_dir, getpid(),
                                (u32)time(NULL));
 
 wrap_things_up:
@@ -236,7 +236,6 @@ void concatInto( char **dest, char *line ){
 
 int hash_string(char *input){
   int hash = 0;
-  int g = 3;
   //printf("gonna hash = %s\n", input);
   for( int i = 0; i < strlen(input); i++ ){
     hash += (i +1) * (input[i] - 1);
@@ -254,14 +253,11 @@ int hash_string(char *input){
 *   - 
 **/
 unsigned int blockIDGenerator(char *block){
-
-  unsigned int result = 1;
    
   char *string_to_hash = calloc(0, sizeof(char)); //string to eventually hash
   char *copy = malloc ( sizeof(char) * strlen(block) + 1 );
   strcpy(copy, block);
 
-  int num_of_lines = 0;
   char *delim = "\n";
   
   //printf("\n---BLOCK---\n\n");
@@ -282,7 +278,6 @@ unsigned int blockIDGenerator(char *block){
     
     char *rest = line;
     char *command;
-    int  add_next_line = -1;
     
     while((command = strtok_r(rest, "\t", &rest))){
       if(command[0] == '.' || command[1] == '.' ||command[0] == '%' || command[0] == '$' ) { continue; }
@@ -290,7 +285,6 @@ unsigned int blockIDGenerator(char *block){
 
       //SPECIAL CASES
       if( strcmp(command, "call") ){
-        add_next_line = 1; 
         concatInto(&string_to_hash, command);
         continue;
       }
@@ -457,9 +451,12 @@ static void add_instrumentation(void) {
       ins_lines++;
 
     }
-    //if(strstr(line, "\taddl\t$4, %eax"))  printf("%s\n", line);
+
     /* Output the actual line, call it a day in pass-thru mode. */
-    //added only to be able to show we can actually change the program
+   fputs(line, outf);
+
+    // added for the presentation
+   /*
     char *newLine = NULL;
     char *change = NULL;
     //if( strstr(line, "\taddl\t$4, %eax") ){
@@ -469,24 +466,6 @@ static void add_instrumentation(void) {
       change = "\t.string \"This, amazingly, always happens\"\n";
       //char *change = line;
     } 
-    /*else if(strstr(line, "\tmovl\t$4, %edx")){
-      change = "\tmovl\t$100, %edx\n";
-    }*/
-    /* 
-    else if(strstr(line, "\tmovl\t$15, %eax")){
-      //movl  $15, %eax
-      //printf("found\n" );
-      change = "\tmovl\t$100, %eax\n";
-    }
-    */
-    else if(strstr(line, "\tmovl\t$15, %edx")){
-      //movl  $15, %eax
-      //printf("found\n" );
-     change = "\tmovl\t$451, %edx\n";
-    } 
-    else if( strstr(line, "\taddl\t$4, %ecx") ){
-      change = "\taddl\t$100, %ecx\n";
-    }
     //addl  $4, %ecx
     else{
       fputs(line, outf);
@@ -502,16 +481,15 @@ static void add_instrumentation(void) {
       newLine = malloc(sizeof(char) * strlen(line) + 1);
       strcpy(newLine, line);
     }
-
-
+    */
     /*---END OF ADDED FOR PRESENTATION*/
 
     if(is_recording){
-      concatInto(&lines_to_instrument, newLine);
+      concatInto(&lines_to_instrument, line);
       num_of_lines_recorded ++;
     }
     else { 
-      fputs(newLine, instr_lines_after);
+      fputs(line, instr_lines_after);
     } 
 
     //fputs(line, instr_lines_after); // shows what happens after
@@ -729,7 +707,7 @@ static void add_instrumentation(void) {
     fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
     fputs((use_64bit ? main_payload_64 : main_payload_32), instr_lines_after);
   }
-
+  
   //rewind(inf);
   FILE *original_changed = fopen(input_file, "wb+");
   FILE *read_modified = fopen(fname_after, "r");
@@ -739,15 +717,11 @@ static void add_instrumentation(void) {
   if (read_modified == NULL) {
     printf("Null file in the read modified\n");
   }
-  /*
-  while(fgets(line, MAX_LINE, read_modified)){
-    fputs(line, original_changed);
-  }
-  */
+
   copy(read_modified, original_changed);
   fclose(read_modified);
   fclose(original_changed);
-
+  
   free(lines_to_instrument);
 
   fclose(instr_lines);

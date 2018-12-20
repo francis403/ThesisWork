@@ -405,6 +405,11 @@ static const u8* main_payload_64 =
   "  je    __afl_setup\n"
   "\n"
   "__afl_store:\n"
+  // "  /* Write home and tell them the id of the block */\n"
+  //"  movq $8, %rdx               /* length    */\n"
+  //"  leaq %rcx, %rsi /* data      */\n"
+  //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
+  CALL_L64("write")
   "\n"
   "  /* Calculate and store hit for the code location specified in rcx. */\n"
   "\n"
@@ -576,6 +581,11 @@ static const u8* main_payload_64 =
   "  leaq __afl_fork_pid(%rip), %rsi /* data      */\n"
   "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi             /* file desc */\n"
   CALL_L64("write")
+  "  \n/* Write home and tell them the id of the block */\n"
+  //"  movq $4, %rdx               /* length    */\n"
+  //"  leaq %rcx, %rsi /* data      */\n"
+  //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
+  // CALL_L64("write")
   "\n"
   "  movq $0, %rdx                   /* no flags  */\n"
   "  leaq __afl_temp(%rip), %rsi     /* status    */\n"
