@@ -33,8 +33,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x0000a1d9, %rcx
-movl $0x0000a1d9, __afl_block_temp
+movq $0x0000a1da, %rcx
+movl $0x0000a1da, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -80,8 +80,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x00000870, %rcx
-movl $0x00000870, __afl_block_temp
+movq $0x00000871, %rcx
+movl $0x00000871, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -102,8 +102,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x0000217a, %rcx
-movl $0x0000217a, __afl_block_temp
+movq $0x0000217b, %rcx
+movl $0x0000217b, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -133,8 +133,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x000020c7, %rcx
-movl $0x000020c7, __afl_block_temp
+movq $0x000020c8, %rcx
+movl $0x000020c8, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -159,8 +159,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x00003338, %rcx
-movl $0x00003338, __afl_block_temp
+movq $0x00003339, %rcx
+movl $0x00003339, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -188,8 +188,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x00007ea2, %rcx
-movl $0x00007ea2, __afl_block_temp
+movq $0x00007ea3, %rcx
+movl $0x00007ea3, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx

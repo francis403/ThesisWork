@@ -56,6 +56,9 @@
 #include <sys/ioctl.h>
 #include <sys/file.h>
 
+//added by me
+#include <poll.h>
+
 #if defined(__APPLE__) || defined(__FreeBSD__) || defined (__OpenBSD__)
 #  include <sys/sysctl.h>
 #endif /* __APPLE__ || __FreeBSD__ || __OpenBSD__ */
@@ -126,11 +129,16 @@ static s32 out_fd,                    /* Persistent fd for out_file       */
            dev_urandom_fd = -1,       /* Persistent fd for /dev/urandom   */
            dev_null_fd = -1,          /* Persistent fd for /dev/null      */
            fsrv_ctl_fd,               /* Fork server control pipe (write) */
-           fsrv_st_fd;                /* Fork server status pipe (read)   */
+           fsrv_st_fd,				  /* Fork server status pipe (read)   */ 
+           fsrv_ctl_fd2,              /* Fork server control pipe (write) */
+           fsrv_st_fd2;               /* Fork server status pipe (read)   */                /* Fork server status pipe (read)   */
 
 static s32 forksrv_pid,               /* PID of the fork server           */
+		   forksrv_pid2,			  /* PID of the second fork server    */
            child_pid = -1,            /* PID of the fuzzed program        */
            out_dir_fd = -1;           /* FD of the lock file              */
+
+pid_t block_pid;
 
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap  */
 
@@ -1236,7 +1244,7 @@ static void destroy_extras(void) {
    through a pipe. The other part of this logic is in afl-as.h. 
 
 	TODO -> requires different ways to write and read depending on the file under test
-
+	// s32
 */
 
 EXP_ST void init_forkserver(char** argv) {
@@ -1251,7 +1259,8 @@ EXP_ST void init_forkserver(char** argv) {
 	ACTF("Spinning up the fork server...");
 
 	if (pipe(st_pipe) || pipe(ctl_pipe)) PFATAL("pipe() failed");
-
+	//printf("\t----------is gonna stop me = %d\n",fcntl(st_pipe[1], F_SETFL, O_NONBLOCK));
+	//printf("\t----------is gonna stop me = %d\n",fcntl(ctl_pipe[1], F_SETFL, O_NONBLOCK));
 	forksrv_pid = fork();
 
 	if (forksrv_pid < 0) PFATAL("fork() failed");
@@ -1389,6 +1398,9 @@ close(st_pipe[1]);
 fsrv_ctl_fd = ctl_pipe[1];
 fsrv_st_fd  = st_pipe[0];
 
+//printf("\t----------is gonna stop me = %d\n",fcntl(fsrv_ctl_fd, F_SETFL, O_NONBLOCK));
+//printf("\t----------is gonna stop me = %d\n",fcntl(fsrv_st_fd, F_SETFL, O_NONBLOCK));
+
   /* Wait for the fork server to come up, but don't wait too long. */
 
 it.it_value.tv_sec = ((exec_tmout * FORK_WAIT_MULT) / 1000);
@@ -1396,6 +1408,7 @@ it.it_value.tv_usec = ((exec_tmout * FORK_WAIT_MULT) % 1000) * 1000;
 
 setitimer(ITIMER_REAL, &it, NULL);
 
+printf("before first readme\n");
 rlen = read(fsrv_st_fd, &status, 4);
 
 it.it_value.tv_sec = 0;
@@ -1534,12 +1547,301 @@ FATAL("Fork server handshake failed");
 }
 
 
+EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid, 
+								s32 *fsrv_ctl_fd,s32 *fsrv_st_fd) {
+
+	printf("\t-> init_forkserver\n");
+
+	static struct itimerval it;
+	int st_pipe[2], ctl_pipe[2];
+	int status;
+	s32 rlen;
+
+	ACTF("Spinning up the fork server...");
+
+	if (pipe(st_pipe) || pipe(ctl_pipe)) PFATAL("pipe() failed");
+	printf("\t----------is gonna stop me = %d\n",fcntl(st_pipe[1], F_SETFL, O_NONBLOCK));
+	fcntl(*fsrv_st_fd, F_SETFL, O_NONBLOCK);
+
+
+	*forksrv_pid = fork();
+
+	if (*forksrv_pid < 0) PFATAL("fork() failed");
+
+	if (!*forksrv_pid) {
+
+  	//enters here
+		printf("not forksrv_pid\n");
+
+
+		struct rlimit r;
+
+    /* Umpf. On OpenBSD, the default fd limit for root users is set to
+       soft 128. Let's try to fix that... */
+
+		if (!getrlimit(RLIMIT_NOFILE, &r) && r.rlim_cur < FORKSRV_FD + 2) {
+
+			r.rlim_cur = FORKSRV_FD + 2;
+      setrlimit(RLIMIT_NOFILE, &r); /* Ignore errors */
+
+		}
+
+		if (mem_limit) {
+
+			r.rlim_max = r.rlim_cur = ((rlim_t)mem_limit) << 20;
+
+#ifdef RLIMIT_AS
+
+      setrlimit(RLIMIT_AS, &r); /* Ignore errors */
+
+#else
+
+      /* This takes care of OpenBSD, which doesn't have RLIMIT_AS, but
+         according to reliable sources, RLIMIT_DATA covers anonymous
+         maps - so we should be getting good protection against OOM bugs. */
+
+      setrlimit(RLIMIT_DATA, &r); /* Ignore errors */
+
+#endif /* ^RLIMIT_AS */
+
+
+		}
+
+    /* Dumping cores is slow and can lead to anomalies if SIGKILL is delivered
+       before the dump is complete. */
+
+		r.rlim_max = r.rlim_cur = 0;
+
+    setrlimit(RLIMIT_CORE, &r); /* Ignore errors */
+
+    /* Isolate the process and configure standard descriptors. If out_file is
+       specified, stdin is /dev/null; otherwise, out_fd is cloned instead. */
+
+		setsid();
+
+		printf("before redirecting standard output\n");
+
+    dup2(dev_null_fd, 1); // redirect standard output to dev_null_fd
+    dup2(dev_null_fd, 2); // redirect the standard error to the dev_null_fd
+
+    //SAYF("after redirecting standard output\n");
+
+    if (out_file) {
+    	dup2(dev_null_fd, 0);
+
+    } else {
+      //enters here
+    	dup2(out_fd, 0);
+    	close(out_fd);
+
+    }
+
+    /* Set up control and status pipes, close the unneeded original fds. */
+
+    if (dup2(ctl_pipe[0], FORKSRV_FD) < 0) PFATAL("dup2() failed");
+    if (dup2(st_pipe[1], FORKSRV_FD + 1) < 0) PFATAL("dup2() failed");
+
+    close(ctl_pipe[0]);
+    close(ctl_pipe[1]);
+    close(st_pipe[0]);
+    close(st_pipe[1]);
+
+    close(out_dir_fd);
+    close(dev_null_fd);
+    close(dev_urandom_fd);
+    close(fileno(plot_file));
+
+    /* This should improve performance a bit, since it stops the linker from
+       doing extra work post-fork(). */
+
+    if (!getenv("LD_BIND_LAZY")) setenv("LD_BIND_NOW", "1", 0);
+
+    /* Set sane defaults for ASAN if nothing else specified. */
+
+    setenv("ASAN_OPTIONS", "abort_on_error=1:"
+                           "detect_leaks=1:" //changed this part here
+                           "symbolize=1:" //changed this part here
+                           "allocator_may_return_null=1", 0);
+
+    /* MSAN is tricky, because it doesn't support abort_on_error=1 at this
+       point. So, we do this in a very hacky way. */
+
+    setenv("MSAN_OPTIONS", "exit_code=" STRINGIFY(MSAN_ERROR) ":"
+    	"symbolize=0:"
+    	"abort_on_error=1:"
+    	"allocator_may_return_null=1:"
+    	"msan_track_origins=0", 0);
+
+    execv(*path, argv);
+
+    /* Use a distinctive bitmap signature to tell the parent about execv()
+       falling through. */
+
+    *(u32*)trace_bits = EXEC_FAIL_SIG; //TODO -> maybe differentiate trace_bits for every program?
+    exit(0);
+
+}
+
+  /* Close the unneeded endpoints. */
+
+close(ctl_pipe[0]);
+close(st_pipe[1]);
+
+*fsrv_ctl_fd = ctl_pipe[1];
+*fsrv_st_fd  = st_pipe[0];
+
+//fcntl(*fsrv_st_fd, F_GETFL, F_SETFL, O_NONBLOCK);
+  /* Wait for the fork server to come up, but don't wait too long. */
+
+it.it_value.tv_sec = ((exec_tmout * FORK_WAIT_MULT) / 1000);
+it.it_value.tv_usec = ((exec_tmout * FORK_WAIT_MULT) % 1000) * 1000;
+
+setitimer(ITIMER_REAL, &it, NULL);
+
+rlen = read(*fsrv_st_fd, &status, 4);
+
+it.it_value.tv_sec = 0;
+it.it_value.tv_usec = 0;
+
+setitimer(ITIMER_REAL, &it, NULL);
+
+  /* If we have a four-byte "hello" message from the server, we're all set.
+     Otherwise, try to figure out what went wrong. */
+
+if (rlen == 4) {
+	OKF("All right - fork server is up. For both files and working");
+
+	return;
+}
+
+if (child_timed_out)
+	FATAL("Timeout while initializing fork server (adjusting -t may help)");
+
+if (waitpid(*forksrv_pid, &status, 0) <= 0)
+	PFATAL("waitpid() failed");
+
+if (WIFSIGNALED(status)) {
+
+	if (mem_limit && mem_limit < 500 && uses_asan) {
+
+		SAYF("\n" cLRD "[-] " cRST
+			"Whoops, the target binary crashed suddenly, before receiving any input\n"
+			"    from the fuzzer! Since it seems to be built with ASAN and you have a\n"
+			"    restrictive memory limit configured, this is expected; please read\n"
+			"    %s/notes_for_asan.txt for help.\n", doc_path);
+
+	} else if (!mem_limit) {
+
+		SAYF("\n" cLRD "[-] " cRST
+			"Whoops, the target binary crashed suddenly, before receiving any input\n"
+			"    from the fuzzer! There are several probable explanations:\n\n"
+
+			"    - The binary is just buggy and explodes entirely on its own. If so, you\n"
+			"      need to fix the underlying problem or find a better replacement.\n\n"
+
+			"    - Less likely, there is a horrible bug in the fuzzer. If other options\n"
+			"      fail, poke <lcamtuf@coredump.cx> for troubleshooting tips.\n");
+
+	} else {
+
+		SAYF("\n" cLRD "[-] " cRST
+			"Whoops, the target binary crashed suddenly, before receiving any input\n"
+			"    from the fuzzer! There are several probable explanations:\n\n"
+
+			"    - The current memory limit (%s) is too restrictive, causing the\n"
+			"      target to hit an OOM condition in the dynamic linker. Try bumping up\n"
+			"      the limit with the -m setting in the command line. A simple way confirm\n"
+			"      this diagnosis would be:\n\n"
+
+#ifdef RLIMIT_AS
+			"      ( ulimit -Sv $[%llu << 10]; /path/to/fuzzed_app )\n\n"
+#else
+			"      ( ulimit -Sd $[%llu << 10]; /path/to/fuzzed_app )\n\n"
+#endif /* ^RLIMIT_AS */
+
+			"      Tip: you can use http://jwilk.net/software/recidivm to quickly\n"
+			"      estimate the required amount of virtual memory for the binary.\n\n"
+
+			"    - The binary is just buggy and explodes entirely on its own. If so, you\n"
+			"      need to fix the underlying problem or find a better replacement.\n\n"
+
+#ifdef __APPLE__
+
+			"    - On MacOS X, the semantics of fork() syscalls are non-standard and may\n"
+			"      break afl-fuzz performance optimizations when running platform-specific\n"
+			"      targets. To fix this, set AFL_NO_FORKSRV=1 in the environment.\n\n"
+
+#endif /* __APPLE__ */
+
+			"    - Less likely, there is a horrible bug in the fuzzer. If other options\n"
+			"      fail, poke <lcamtuf@coredump.cx> for troubleshooting tips.\n",
+			DMS(mem_limit << 20), mem_limit - 1);
+
+	}
+
+	FATAL("Fork server crashed with signal %d", WTERMSIG(status));
+
+}
+
+if (*(u32*)trace_bits == EXEC_FAIL_SIG)
+	FATAL("Unable to execute target application ('%s')", argv[0]);
+
+if (mem_limit && mem_limit < 500 && uses_asan) {
+
+	SAYF("\n" cLRD "[-] " cRST
+		"Hmm, looks like the target binary terminated before we could complete a\n"
+		"    handshake with the injected code. Since it seems to be built with ASAN and\n"
+		"    you have a restrictive memory limit configured, this is expected; please\n"
+		"    read %s/notes_for_asan.txt for help.\n", doc_path);
+
+} else if (!mem_limit) {
+
+	SAYF("\n" cLRD "[-] " cRST
+		"Hmm, looks like the target binary terminated before we could complete a\n"
+		"    handshake with the injected code. Perhaps there is a horrible bug in the\n"
+		"    fuzzer. Poke <lcamtuf@coredump.cx> for troubleshooting tips.\n");
+
+} else {
+
+	SAYF("\n" cLRD "[-] " cRST
+		"Hmm, looks like the target binary terminated before we could complete a\n"
+		"    handshake with the injected code. There are %s probable explanations:\n\n"
+
+		"%s"
+		"    - The current memory limit (%s) is too restrictive, causing an OOM\n"
+		"      fault in the dynamic linker. This can be fixed with the -m option. A\n"
+		"      simple way to confirm the diagnosis may be:\n\n"
+
+#ifdef RLIMIT_AS
+		"      ( ulimit -Sv $[%llu << 10]; /path/to/fuzzed_app )\n\n"
+#else
+		"      ( ulimit -Sd $[%llu << 10]; /path/to/fuzzed_app )\n\n"
+#endif /* ^RLIMIT_AS */
+
+		"      Tip: you can use http://jwilk.net/software/recidivm to quickly\n"
+		"      estimate the required amount of virtual memory for the binary.\n\n"
+
+		"    - Less likely, there is a horrible bug in the fuzzer. If other options\n"
+		"      fail, poke <lcamtuf@coredump.cx> for troubleshooting tips.\n",
+		getenv(DEFER_ENV_VAR) ? "three" : "two",
+		getenv(DEFER_ENV_VAR) ?
+		"    - You are using deferred forkserver, but __AFL_INIT() is never\n"
+		"      reached before the program terminates.\n\n" : "",
+		DMS(mem_limit << 20), mem_limit - 1);
+
+}
+
+FATAL("Fork server handshake failed");
+
+}
+
+
 /* Execute target application, monitoring for timeouts. Return status
    information. The called program will update trace_bits[]. */
 
 static u8 run_target(char** argv, u32 timeout, u8 **path) {
 
-  //printf("\t-> in run_target\n");
+  printf("\t-> in run_target\n");
 
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
@@ -1680,6 +1982,7 @@ static u8 run_target(char** argv, u32 timeout, u8 **path) {
     //printf("before = 0x%08x\n", block_id);
     //printf("before = %s\n", &block_id);
     //printf("before = 0x%08x\n", block_id);
+    /*
     if ((res = read(fsrv_st_fd, &block_id, 4)) != 4) { //-WRITE
     	printf("res = %d\n", res);
     	RPFATAL(res, "Unable to read block_id from fork server (OOM?)");
@@ -1689,7 +1992,7 @@ static u8 run_target(char** argv, u32 timeout, u8 **path) {
     	//printf("address = %d\n", &block_id);
     	printf("after = 0x%08x\n", block_id);
     }
-
+	*/
 	//end of the forkserver
 
     //printf("%d\n", child_pid);
@@ -1725,11 +2028,19 @@ if (dumb_mode == 1 || no_forkserver) {
 
 	}
 
-
+	
+	//printf("\t----------is gonna stop me = %d\n",fcntl(fsrv_st_fd, F_SETFL, O_NONBLOCK));
     //TODO -> read every block it passes through
+		
 	while(1){
 		unsigned int block_id = 0;
 	    //printf("before = 0x%08x\n", block_id);
+	    //struct pollfd poll;
+	   //printf("%d\n", poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 0));
+	    if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 1) == 1){
+	    	//printf("data to read\n");
+	    }else break;
+
 	    if ((res = read(fsrv_st_fd, &block_id, 4)) != 4) { //-WRITE
 	    	printf("res = %d\n", res);
 	    	RPFATAL(res, "Unable to read block_id from fork server (OOM?)");
@@ -1740,6 +2051,8 @@ if (dumb_mode == 1 || no_forkserver) {
 	    	if(block_id == 0) break; //todo -> not sure if correct
 	    	printf("after = 0x%08x\n", block_id);
 	    }
+	    
+	    //printf("1\n");
 	}
   } // still in run_target
 
@@ -1847,6 +2160,10 @@ static u8 cmp_programs(char** argv, u32 timeout, u8 **path, u8 **path2) {
 
 	}
 
+	if (child_pid <= 0) FATAL("Fork server is misbehaving (OOM?)");
+
+	printf("id of process = %d\n", child_pid);
+
 	unsigned int block_id = 0;
 	    //printf("before = 0x%08x\n", block_id);
 	    //printf("before = %s\n", &block_id);
@@ -1866,8 +2183,6 @@ static u8 cmp_programs(char** argv, u32 timeout, u8 **path, u8 **path2) {
 	    //printf("%d\n", child_pid);
 
 	    //TODO -> try to read something from it!
-
-	if (child_pid <= 0) FATAL("Fork server is misbehaving (OOM?)");
 
 
 	  /* Configure timeout, as requested by user, then wait for child to terminate. */
@@ -1889,16 +2204,43 @@ static u8 cmp_programs(char** argv, u32 timeout, u8 **path, u8 **path2) {
 
 	}
 
-
+	//block_id == 0;
 	    //TODO -> read every block it passes through
-	while((res = read(fsrv_st_fd, &block_id, 4)) != 4 && block_id != 0){
-		//printf("before = 0x%08x\n", block_id);
-			    	//printf("after = %d\n", block_id);
-		    	//printf("address = %d\n", &block_id);
-		    	//if(block_id == 0) break; //todo -> not sure if correct
-		printf("after = 0x%08x\n", block_id);
-		    
+	//TODO -> read every block it passes through
+
+	// receive blocks passed
+	while(1){
+		unsigned int block_id = 0;
+
+	    //printf("before = 0x%08x\n", block_id);
+	    //printf("%d\n", kill(child_pid, 0));
+	    /*
+	    if(stat(("/proc/%d",child_pid) , &sts) == -1 && errno == ENOENT){
+	    	printf("process does not exist\n");
+	    }
+	    else{printf("process exists\n");
 		}
+		*/
+	    //printf("process is %d\n", getpgid(child_pid));
+	   //printf("error is %d\n", (errno == EPERM || errno == ESRCH));
+	    //if(errno != EPERM)printf("process doesnt exist\n");
+	    
+		//if( getpgid(child_pid) <= 0 ) break;
+	    if ((res = read(fsrv_st_fd, &block_id, 4)) != 4) { //-WRITE
+	    	printf("res = %d\n", res);
+	    	RPFATAL(res, "Unable to read block_id from fork server (OOM?)");
+	    }
+	    else{ 
+	    	//printf("after = %d\n", block_id);
+	    	//printf("address = %d\n", &block_id);
+	    	//if(kill(child_pid, 0)){printf("process is still dead %d\n", kill(child_pid, 0));}
+	    	//printf("process is %d\n", kill(child_pid, 0));
+	    	//printf("process is %d\n", getpgid(child_pid));
+	    	//printf("error is %d\n", (errno == EPERM || errno == ESRCH));
+	    	printf("after = 0x%08x\n", block_id);
+	    	//if(block_id == -1) break; //todo -> not sure if correct
+	    }
+	}
 
 		if (!WIFSTOPPED(status)) child_pid = 0;
 
@@ -3641,7 +3983,7 @@ static void handle_skipreq(int sig) {
 static void handle_timeout(int sig) {
 
 	if (child_pid > 0) {
-
+		printf("child pid is gonna die\n");
 		child_timed_out = 1; 
 		kill(child_pid, SIGKILL);
 
@@ -3650,6 +3992,10 @@ static void handle_timeout(int sig) {
 		child_timed_out = 1; 
 		kill(forksrv_pid, SIGKILL);
 
+	}
+	if(block_pid > 0){
+		printf("block_pid is gonna die\n");
+		kill(block_pid, SIGKILL);
 	}
 
 }
@@ -4365,8 +4711,15 @@ int main(int argc, char** argv) {
   use_argv = argv + optind;
 
   init_forkserver(argv);
+  //init_forkserver_special(argv, &target_path, &forksrv_pid, &fsrv_ctl_fd, &fsrv_st_fd);
+  //init_forkserver_special(argv, &target_path2, &forksrv_pid, &fsrv_ctl_fd, &fsrv_st_fd);
   run_target(argv, exec_tmout, &target_path);
   //cmp_programs(argv, exec_tmout, &target_path, &target_path2);
+  //printf("running second program\n");
+  //cmp_programs(argv, exec_tmout, &target_path2, &target_path);
+  //printf("running first program again\n");
+  //run_target(argv, exec_tmout, &target_path);
+
   //perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
 
   //cull_queue(); // -> not needed, but very usefull and likely where i'll work the most

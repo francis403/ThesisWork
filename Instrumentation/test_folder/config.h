@@ -292,6 +292,11 @@
 
 #define FORKSRV_FD          198
 
+/* Designated file descriptors for second forkserver commands (the application will
+   use FORKSRV_FD2 and FORKSRV_FD2 + 1): */
+
+#define FORKSRV_FD2          200
+
 /* Fork server init timeout multiplier: we'll wait the user-selected
    timeout plus this much for the fork server to spin up. */
 

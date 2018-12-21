@@ -261,13 +261,8 @@ unsigned int blockIDGenerator(char *block){
   strcpy(copy, block);
 
   char *delim = "\n";
-  
-  //printf("\n---BLOCK---\n\n");
-  //printf("%s\n", block );
-  //printf("\n---END OF BLOCK---\n\n");
 
   char *line = strtok(copy, delim);
-
   while(line != NULL){
     //printf("line = %s\n", line);
     
@@ -278,6 +273,9 @@ unsigned int blockIDGenerator(char *block){
       continue;
     }
     
+    // now we actually beggin
+    //printf("%s\n", line);
+
     char *rest = line;
     char *command;
     
@@ -314,7 +312,7 @@ unsigned int blockIDGenerator(char *block){
   free(line);
   free(copy);
   free(string_to_hash);
-  return val% MAP_SIZE;
+  return val% MAP_SIZE + 1;
 }
 
 // clean the isntrumented pointer
@@ -330,7 +328,6 @@ void copy(FILE *source, FILE *target){
 }
 
 void addToOutFile(FILE *file, char *lines){
-  numbr_inst ++;
   // get the id to add to the block
   int block_id = blockIDGenerator(lines);
   //int block_id = R(MAP_SIZE);
@@ -411,6 +408,7 @@ static void add_instrumentation(void) {
 
   char *lines_to_instrument = calloc(0, sizeof(char));
   
+  short end_of_main = 0;
   // TODO -> need to slightly change this loop to add the ability to add personalized ids
   while (fgets(line, MAX_LINE, inf)) { //pass through all the assembly line of code
 
@@ -430,7 +428,7 @@ static void add_instrumentation(void) {
 
       // if we found the new beggining of the next line to be instrumented and we're instrumenting the last one still, end it
       if(is_recording){
-
+        numbr_inst ++;
         is_recording = 0;
         num_of_lines_recorded = 0; //no block no lines
 
@@ -493,21 +491,30 @@ static void add_instrumentation(void) {
     */
     /*---END OF ADDED FOR PRESENTATION*/
 
+    //if(strstr(line, "\tret")){printf("found the line -> %s\n", line);}
+
+
     if(is_recording){
+      // checks if we need to add the code that it ended, doubtfull its good enough
+      
       concatInto(&lines_to_instrument, line);
       num_of_lines_recorded ++;
+      
     }
     else { 
+
       fputs(line, instr_lines_after);
       fputs(line, outf);
     } 
 
     //fputs(line, instr_lines_after); // shows what happens after
     
+    // IDEA: check if its the main .cfi_endproc
+
     if (strstr(line, ".cfi_endproc")){
          if(is_recording){
             is_recording = 0;
-
+              numbr_inst ++;
             //add all the lines out
             addToOutFile(instr_lines_after, lines_to_instrument);
             addToOutFile(outf, lines_to_instrument);
@@ -527,6 +534,7 @@ static void add_instrumentation(void) {
        files - and let's set instr_ok accordingly. */
 
     if (line[0] == '\t' && line[1] == '.') {
+
 
       /* OpenBSD puts jump tables directly inline with the code, which is
          a bit annoying. They use a specific format of p2align directives
@@ -622,7 +630,7 @@ static void add_instrumentation(void) {
         if(is_recording){
           is_recording = 0;
           num_of_lines_recorded = 0; //no block no lines
-
+            numbr_inst ++;
           //TODO: add all the lines
           addToOutFile(instr_lines_after, lines_to_instrument);
           addToOutFile(outf, lines_to_instrument);

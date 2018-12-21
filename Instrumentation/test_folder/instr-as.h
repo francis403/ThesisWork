@@ -143,6 +143,7 @@ static const u8* main_payload_32 =
   "/* --- AFL MAIN PAYLOAD (32-BIT) --- */\n"
   "\n";
 
+
 /* The OpenBSD hack is due to lahf and sahf not being recognized by some
    versions of binutils: http://marc.info/?l=openbsd-cvs&m=141636589924400
 
@@ -156,6 +157,23 @@ static const u8* main_payload_32 =
 #else
 #  define CALL_L64(str)		"call " str "@PLT\n"
 #endif /* ^__APPLE__ */
+
+
+
+// not sure if needed
+static const u8 *end_of_program_64_todo = 
+
+"\n"
+ "/* --- WRITE HOME AND SAY THE PROGRAM IS DONE (64-BIT) --- */\n"
+ "  movl $-1, __afl_block_temp\n"
+ "  movq $4, %rdx               /* length    */\n"
+ "  leaq __afl_block_temp, %rsi\n"
+ "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
+CALL_L64("write")
+ "/* --- END --- */\n"
+"\n";
+
+
 
 static const u8* main_payload_64 = 
 
@@ -399,7 +417,7 @@ static const u8* main_payload_64 =
   //CALL_L64("close")
   "\n"
   "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi\n"
-  //CALL_L64("close")
+  //CALL_L64("close") //tenho que ver se isto da bug TODO
   "\n"
   "  popq %rdx\n"
   "  popq %rdx\n"
