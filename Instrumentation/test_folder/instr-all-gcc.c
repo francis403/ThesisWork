@@ -2,7 +2,8 @@
    Changed applied toamerican fuzzy lop - wrapper for GCC and clang 
    ----------------------------------------------
 	
-	The idea is to be able to save the instrumentation and compare two programs after they run
+	The idea is to instrumentalize more than one program at a time to then be tested
+  Adding the Forksrv_fd of the specific file
  
  */
 
@@ -19,11 +20,9 @@
 #include <string.h>
 
 static u8*  as_path;                /* Path to the AFL 'as' wrapper      */
-static u8** cc_params;              /* Parameters passed to the real CC  */
 static u32  cc_par_cnt = 1;         /* Param count, including argv0      */
 static u8   be_quiet,               /* Quiet mode                        */
             clang_mode;             /* Invoked as afl-clang*?            */
-
 
 /* Try to find our "fake" GNU assembler in AFL_PATH or at the location derived
    from argv[0]. If that fails, abort. */
@@ -81,13 +80,12 @@ static void find_as(u8* argv0) {
  
 }
 
-
 /* Copy argv to cc_params, making the necessary edits. */
+// can be improved by dividing the first bit of this function into another function
+static u8 **edit_params(u32 argc, char** argv) {
 
-static void edit_params(u32 argc, char** argv) {
 
-
-  SAYF("\n\t-----edit_params -------\n");
+  SAYF("\n\t-----edit_params ALL -------\n");
 
   u8 fortify_set = 0, asan_set = 0;
   u8 *name;
@@ -96,12 +94,13 @@ static void edit_params(u32 argc, char** argv) {
   u8 m32_set = 0;
 #endif
 
-  cc_params = ck_alloc((argc + 128) * sizeof(u8*));
+  u8** cc_params = ck_alloc((argc + 128) * sizeof(u8*));
+  cc_par_cnt = 1;
 
   name = strrchr(argv[0], '/');
-  printf("NAME = %s\n", name);
+ 
   if (!name) name = argv[0]; else name++;
-
+  
   if (!strncmp(name, "afl-clang", 9)) {
 
     clang_mode = 1;
@@ -118,7 +117,7 @@ static void edit_params(u32 argc, char** argv) {
 
   } else {
 
-    printf("its not in clang\n");
+   
 
     if (!strcmp(name, "afl-g++")) {
       u8* alt_cxx = getenv("AFL_CXX");
@@ -127,15 +126,15 @@ static void edit_params(u32 argc, char** argv) {
       u8* alt_cc = getenv("AFL_GCJ");
       cc_params[0] = alt_cc ? alt_cc : (u8*)"gcj";
     } else {
-      printf("in gcc\n");
       u8* alt_cc = getenv("AFL_CC");
       cc_params[0] = alt_cc ? alt_cc : (u8*)"gcc";
     }
 
   }
-
+    
+  //cc_params[0] = "gcc";
   while (--argc) {
-    u8* cur = *(++argv);
+    u8* cur = *(argv++);
 
     if (!strncmp(cur, "-B", 2)) {
 
@@ -251,20 +250,16 @@ static void edit_params(u32 argc, char** argv) {
 
   cc_params[cc_par_cnt] = NULL;
 
+  return cc_params;
+
 }
 
-
 /* Main entry point */
-
+// TODO -> improve code, can be greatly improved
 int main(int argc, char** argv) {
 
-  SAYF("\n\t-----instr-gcc -------\n");
+  SAYF("\n\t-----In instr-all-gcc -------\n");
 
-  if (isatty(2) && !getenv("AFL_QUIET")) {
-
-    SAYF(cCYA "afl-cc " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
-
-  } else be_quiet = 1;
 
   if (argc < 2) {
 
@@ -286,15 +281,76 @@ int main(int argc, char** argv) {
 
   find_as(argv[0]);
 
-  edit_params(argc, argv);
+  //edit_params(argc, argv);
+  short numbr_lines = 100;
+  short line_size = 200;
+  int index = 0, size = 0;
+  //char **tmp = malloc(sizeof(char*) * line_size * 100); // we want to save argv while removing the -p and divide it according to the programs
+  char **tmp = malloc(sizeof(char*) * numbr_lines);
+  short is_recording = 0;
+  short first = 1;
+  int numb_instr = 0;
 
-  printf("cc_params[0] = %s\n", cc_params[0]);
-  //printf("cc_params = %s\n", cc_params);
+  char snum[5];
 
-  execvp(cc_params[0], (char**)cc_params);
-  //execvp(cc_params[1], (char**)cc_params);
+  while( *argv ){
+    char *line = *argv++;
+    //printf("line = %s\n", line);
+    
+    if( first ){first = 0; continue;}
 
-  FATAL("Oops, failed to execute '%s' - check your PATH", cc_params[0]);
+    if( strcmp(line, "-p") == 0){
+       
+        if(is_recording){
+            
+            //printf("\t is gonna instrumentalize the program\n");
+            //if(cc_params == NULL)
+            u8** cc_params = edit_params(index, tmp);
+            int i = 0;
+            //while( *(cc_params + i) ) printf("%s\n", *(cc_params + i++));
+            index = 0;
+            tmp = malloc(sizeof(char*) * numbr_lines);
+            sprintf(snum, "%d", numb_instr);
+            numb_instr ++; //leave this here so we don't have race conditions
+            pid_t pid = fork();
+            if(pid){
+                setenv(FORKSRV_ENV, snum, 1);
+                execvp(cc_params[0], (char**)cc_params);
+            }
+        }
+        else is_recording = 1;
+
+        continue; 
+    }
+    
+    *(tmp + index) = line;
+    //printf("tmp = %s\n", *(tmp + index));
+    index++;
+    
+  }
+
+  if(is_recording){
+    //printf("\t is gonna instrumentalize the program\n");
+        //printf("CC_PARAMS IS null\n");
+    u8** cc_params = edit_params(index, tmp);
+    //printf("\tCC_PARAMS\n");
+    int i = 0;
+    //while( *(tmp + i) ) printf("%s\n", *(tmp + i++));
+    //while( *(cc_params + i) ) printf("%s\n", *(cc_params + i++));
+    sprintf(snum, "%d", numb_instr);
+    setenv(FORKSRV_ENV, snum, 1); // total number of instr
+    printf("even should be = %d\n", numb_instr);
+    numb_instr ++;
+    //setenv(FORKSRV_AMOUNT_ENV, snum, 1); //todo
+    execvp(cc_params[0], (char**)cc_params);
+  }
+  //free(*tmp);
+  //free(tmp);
+  //free(tmp);
+
+
+
+  FATAL("Oops, failed to execute");
 
   return 0;
 

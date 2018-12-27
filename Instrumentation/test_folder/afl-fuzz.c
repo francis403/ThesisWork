@@ -1570,7 +1570,6 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 	if (!*forksrv_pid) {
 
-  	//enters here
 		printf("not forksrv_pid\n");
 
 
@@ -1638,8 +1637,8 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
     /* Set up control and status pipes, close the unneeded original fds. */
 
-    if (dup2(ctl_pipe[0], FORKSRV_FD) < 0) PFATAL("dup2() failed");
-    if (dup2(st_pipe[1], FORKSRV_FD + 1) < 0) PFATAL("dup2() failed");
+    if (dup2(ctl_pipe[0], FORKSRV_FD) < 0) PFATAL("dup2() failed"); //need to change here
+    if (dup2(st_pipe[1], FORKSRV_FD + 1) < 0) PFATAL("dup2() failed"); //need to change here
 
     close(ctl_pipe[0]);
     close(ctl_pipe[1]);
@@ -1835,13 +1834,60 @@ FATAL("Fork server handshake failed");
 
 }
 
+/*
+* Helper function for cmp_programs
+* Returns the number of blocks hit by the current fuzzed program
+* Puts the blocks on the argument
+* This function should delay the actual fuzzing by a lot
+* 
+*/
+int blocks_hit(int *blocks){
 
-/* Execute target application, monitoring for timeouts. Return status
-   information. The called program will update trace_bits[]. */
+	printf("in blocks_hit %d\n", blocks == NULL);
 
-static u8 run_target(char** argv, u32 timeout, u8 **path) {
+	unsigned int size = 100, hit = 0;
+	blocks = malloc(sizeof(int) * size);
 
-  printf("\t-> in run_target\n");
+	unsigned int id = 0;
+
+	printf("before while\n");
+
+	while( 1 ){
+
+		// check if there are things to read
+		if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, -1) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
+		    break;
+
+		if (read(fsrv_st_fd, &id, 4) != 4) { //-WRITE
+		   	RPFATAL(-1, "Unable to read block_id from fork server (OOM?)");
+		}
+		
+		hit++;
+
+		//check if we have enough memory allocated for the array
+		if( hit >= size * 0.75 ){
+			size *= 2;
+			blocks = realloc(blocks, sizeof(int) * size );
+		}
+
+		//printf("before weird looking line\n");
+
+		*blocks = id;
+		printf("*block_hit = 0x%08x\n", *blocks);
+		//printf("after weird looking line\n");
+		blocks++;
+		//printf("after = 0x%08x\n", id);
+		
+		    	    //printf("1\n");
+	}
+
+	return hit;
+
+}
+
+// I think we need a **blocks
+int *run_forkserver_on_target(u32 timeout, int *hit){
+	printf("\t-> in run_forkserver_on_target\n");
 
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
@@ -1852,112 +1898,16 @@ static u8 run_target(char** argv, u32 timeout, u8 **path) {
 
 	child_timed_out = 0;
 
-  /* After this memset, trace_bits[] are effectively volatile, so we
-     must prevent any earlier operations from venturing into that
-     territory. */
+	  /* After this memset, trace_bits[] are effectively volatile, so we
+	     must prevent any earlier operations from venturing into that
+	     territory. */
 
 	memset(trace_bits, 0, MAP_SIZE);
 	MEM_BARRIER();
 
+//issue -> are both of the programs running?
 
-  /* If we're running in "dumb" mode, we can't rely on the fork server
-     logic compiled into the target program, so we will just keep calling
-     execve(). There is a bit of code duplication between here and 
-     init_forkserver(), but c'est la vie. */
-
-	if (dumb_mode == 1 || no_forkserver) {
-
-		child_pid = fork();
-
-		if (child_pid < 0) PFATAL("fork() failed");
-
-		if (!child_pid) {
-
-			struct rlimit r;
-
-			if (mem_limit) {
-
-				r.rlim_max = r.rlim_cur = ((rlim_t)mem_limit) << 20;
-
-#ifdef RLIMIT_AS
-
-        setrlimit(RLIMIT_AS, &r); /* Ignore errors */
-
-#else
-
-        setrlimit(RLIMIT_DATA, &r); /* Ignore errors */
-
-#endif /* ^RLIMIT_AS */
-
-			}
-
-			r.rlim_max = r.rlim_cur = 0;
-
-      setrlimit(RLIMIT_CORE, &r); /* Ignore errors */
-
-      /* Isolate the process and configure standard descriptors. If out_file is
-         specified, stdin is /dev/null; otherwise, out_fd is cloned instead. */
-
-			setsid();
-
-			dup2(dev_null_fd, 1);
-			dup2(dev_null_fd, 2);
-
-			if (out_file) {
-
-				dup2(dev_null_fd, 0);
-
-			} else {
-
-				dup2(out_fd, 0);
-				close(out_fd);
-
-			}
-
-      /* On Linux, would be faster to use O_CLOEXEC. Maybe TODO. */
-
-			close(dev_null_fd);
-			close(out_dir_fd);
-			close(dev_urandom_fd);
-			close(fileno(plot_file));
-
-      /* Set sane defaults for ASAN if nothing else specified. */
-
-			setenv("ASAN_OPTIONS", "abort_on_error=1:"
-				"detect_leaks=1:"
-				"symbolize=1:"
-				"allocator_may_return_null=1", 0);
-
-			setenv("MSAN_OPTIONS", "exit_code=" STRINGIFY(MSAN_ERROR) ":"
-				"symbolize=0:"
-				"msan_track_origins=0", 0);
-
-
-			execv(*path, argv);
-
-      /* Use a distinctive bitmap value to tell the parent about execv()
-         falling through. */
-
-			*(u32*)trace_bits = EXEC_FAIL_SIG;
-			exit(0);
-
-		}
-
-	} else {
-
-  	//issue -> are both of the programs running?
-
-  	//printf("gets here32\n");
-
-		s32 res;
-
-    /* In non-dumb mode, we have the fork server up and running, so simply
-       tell it to have at it, and then read back PID. */
-
-    //printf("gonna write\n");
-
-    //printf("before = %d\n", &prev_timed_out);
-
+	s32 res;
 
     //start of the forkserver
 
@@ -1978,46 +1928,14 @@ static u8 run_target(char** argv, u32 timeout, u8 **path) {
 
     }
 
-    unsigned int block_id = 0;
-    //printf("before = 0x%08x\n", block_id);
-    //printf("before = %s\n", &block_id);
-    //printf("before = 0x%08x\n", block_id);
-    /*
-    if ((res = read(fsrv_st_fd, &block_id, 4)) != 4) { //-WRITE
-    	printf("res = %d\n", res);
-    	RPFATAL(res, "Unable to read block_id from fork server (OOM?)");
-    }
-    else{ 
-    	//printf("after = %d\n", block_id);
-    	//printf("address = %d\n", &block_id);
-    	printf("after = 0x%08x\n", block_id);
-    }
-	*/
-	//end of the forkserver
-
-    //printf("%d\n", child_pid);
-
-    //TODO -> try to read something from it!
-
     if (child_pid <= 0) FATAL("Fork server is misbehaving (OOM?)");
 
-}
-  /* Configure timeout, as requested by user, then wait for child to terminate. */
+	 /* Configure timeout, as requested by user, then wait for child to terminate. */
 
-it.it_value.tv_sec = (timeout / 1000);
-it.it_value.tv_usec = (timeout % 1000) * 1000;
+	it.it_value.tv_sec = (timeout / 1000);
+	it.it_value.tv_usec = (timeout % 1000) * 1000;
 
-setitimer(ITIMER_REAL, &it, NULL);
-
-  /* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
-
-if (dumb_mode == 1 || no_forkserver) {
-
-	if (waitpid(child_pid, &status, 0) <= 0) PFATAL("waitpid() failed");
-
-} else {
-
-	s32 res;
+	setitimer(ITIMER_REAL, &it, NULL);
 
     // relays the wait status and then should leave
 
@@ -2028,33 +1946,59 @@ if (dumb_mode == 1 || no_forkserver) {
 
 	}
 
-	
-	//printf("\t----------is gonna stop me = %d\n",fcntl(fsrv_st_fd, F_SETFL, O_NONBLOCK));
-    //TODO -> read every block it passes through
-		
-	while(1){
-		unsigned int block_id = 0;
-	    //printf("before = 0x%08x\n", block_id);
-	    //struct pollfd poll;
-	   //printf("%d\n", poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 0));
-	    if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 1) == 1){
-	    	//printf("data to read\n");
-	    }else break;
+	/*
+	pid_t pid = fork();
+	// read all blocks
+	if( pid ){
 
-	    if ((res = read(fsrv_st_fd, &block_id, 4)) != 4) { //-WRITE
-	    	printf("res = %d\n", res);
-	    	RPFATAL(res, "Unable to read block_id from fork server (OOM?)");
-	    }
-	    else{ 
-	    	//printf("after = %d\n", block_id);
-	    	//printf("address = %d\n", &block_id);
-	    	if(block_id == 0) break; //todo -> not sure if correct
-	    	printf("after = 0x%08x\n", block_id);
-	    }
-	    
-	    //printf("1\n");
+		hits = blocks_hit(&blocks);
+
+		printf("first block should be = %d\n", *blocks);
 	}
-  } // still in run_target
+	*/
+
+	unsigned int size = 100;
+	*hit = 0;
+
+	int *blocks = malloc(sizeof(int) * size);
+
+	unsigned int id = 0, i = 0;
+
+	while( 1 ){
+
+		// check if there are things to read
+		if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, -1) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
+		    break;
+
+		if (read(fsrv_st_fd, &id, 4) != 4) { //-WRITE
+		   	RPFATAL(-1, "Unable to read block_id from fork server (OOM?)");
+		}
+		
+		*hit = *hit + 1;
+
+		//check if we have enough memory allocated for the array
+		if( *hit >= size * 0.75 ){
+			size *= 2;
+			blocks = realloc(blocks, sizeof(int) * size );
+		}
+
+		//printf("before weird looking line\n");
+
+		*(blocks + i) = id;
+		//printf("*block_hit = 0x%08x\n", *(blocks + i));
+		//printf("after weird looking line\n");
+		//blocks++;
+		i++;
+		//printf("after = 0x%08x\n", id);
+		
+		    	    //printf("1\n");
+	}
+
+
+	if(*blocks == NULL) printf("blocks is null\n");
+	//else printf("is not null\n");
+		//exit(0);
+	//}
 
   if (!WIFSTOPPED(status)) child_pid = 0;
 
@@ -2071,228 +2015,58 @@ if (dumb_mode == 1 || no_forkserver) {
 
   MEM_BARRIER();
 
-  tb4 = *(u32*)trace_bits;
-
-  //printf("%d\n", trace_bits);
-
-#ifdef __x86_64__
-  classify_counts((u64*)trace_bits);
-#else
-  classify_counts((u32*)trace_bits);
-#endif /* ^__x86_64__ */
-
-  prev_timed_out = child_timed_out;
-
-  /* Report outcome to caller. */
-
-  if (WIFSIGNALED(status) && !stop_soon) {
-
-  	kill_signal = WTERMSIG(status);
-
-  	if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
-
-  	return FAULT_CRASH;
-
-  }
-
-  /* A somewhat nasty hack for MSAN, which doesn't support abort_on_error and
-     must use a special exit code. */
-
-  if (uses_asan && WEXITSTATUS(status) == MSAN_ERROR) {
-  	kill_signal = 0;
-  	return FAULT_CRASH;
-  }
-
-  if ((dumb_mode == 1 || no_forkserver) && tb4 == EXEC_FAIL_SIG)
-  	return FAULT_ERROR;
-
-  return FAULT_NONE;
-
+  return blocks;
 }
 
-/* Execute target application, monitoring for timeouts. Return status
-   information. The called program will update trace_bits[]. */
 
-static u8 cmp_programs(char** argv, u32 timeout, u8 **path, u8 **path2) {
+/*This function was based on run_target in the original afl-fuzz.c 2.52*/
 
-	  //printf("\t-> in run_target\n");
+static void cmp_programs(char** argv, u32 timeout, u8 **path, u8 **path2) {
 
-	static struct itimerval it;
-	static u32 prev_timed_out = 0;
+	printf("in cmp_programs\n");
+	//TODO -> in the future change this to a global variable that changes
+	//according to the number of programs to test
+	int number_of_targets = 2;
 
+	int *blocks[number_of_targets];
+	//int *test_block;
+	int size[number_of_targets];
 
-	int status = 0;
-	u32 tb4;
-
-	child_timed_out = 0;
-
-	  /* After this memset, trace_bits[] are effectively volatile, so we
-	     must prevent any earlier operations from venturing into that
-	     territory. */
-
-	memset(trace_bits, 0, MAP_SIZE);
-	MEM_BARRIER();
-
-
-	  	//issue -> are both of the programs running?
-
-	  	//printf("gets here32\n");
-
-	s32 res;
-
-
-	//start of the forkserver
-
-	if ((res = write(fsrv_ctl_fd, &prev_timed_out, 4)) != 4) { //-WRITE
-
-
-		if (stop_soon) return 0;
-		RPFATAL(res, "Unable to request new process from fork server (OOM?)");
-
+	//TODO -> right now only comparing on the same program,
+	//change to be able to compare multiple programs
+	
+	for(int i = 0 ; i < number_of_targets; i++){
+		//blocks[i] = malloc( sizeof(int) );
+		blocks[i] = run_forkserver_on_target(timeout, &(size[i]));
 	}
-
-	    //printf("%d\n", &prev_timed_out);
-
-	if ((res = read(fsrv_st_fd, &child_pid, 4)) != 4) { //-READ
-
-		if (stop_soon) return 0;
-		RPFATAL(res, "Unable to request new process from fork server (OOM?)");
-
-	}
-
-	if (child_pid <= 0) FATAL("Fork server is misbehaving (OOM?)");
-
-	printf("id of process = %d\n", child_pid);
-
-	unsigned int block_id = 0;
-	    //printf("before = 0x%08x\n", block_id);
-	    //printf("before = %s\n", &block_id);
-	    //printf("before = 0x%08x\n", block_id);
-	if ((res = read(fsrv_st_fd, &block_id, 4)) != 4) { //-WRITE
-		printf("res = %d\n", res);
-		RPFATAL(res, "Unable to read block_id from fork server (OOM?)");
-	}
-	else{ 
-	    	//printf("after = %d\n", block_id);
-	    	//printf("address = %d\n", &block_id);
-		printf("after = 0x%08x\n", block_id);
-	}
-
-		//end of the forkserver
-
-	    //printf("%d\n", child_pid);
-
-	    //TODO -> try to read something from it!
-
-
-	  /* Configure timeout, as requested by user, then wait for child to terminate. */
-
-	it.it_value.tv_sec = (timeout / 1000);
-	it.it_value.tv_usec = (timeout % 1000) * 1000;
-
-	setitimer(ITIMER_REAL, &it, NULL);
-
-	  /* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
-
-
-	    // relays the wait status and then should leave
-
-	if ((res = read(fsrv_st_fd, &status, 4)) != 4) {
-
-		if (stop_soon) return 0;
-		RPFATAL(res, "Unable to communicate with fork server (OOM?)");
-
-	}
-
-	//block_id == 0;
-	    //TODO -> read every block it passes through
-	//TODO -> read every block it passes through
-
-	// receive blocks passed
-	while(1){
-		unsigned int block_id = 0;
-
-	    //printf("before = 0x%08x\n", block_id);
-	    //printf("%d\n", kill(child_pid, 0));
-	    /*
-	    if(stat(("/proc/%d",child_pid) , &sts) == -1 && errno == ENOENT){
-	    	printf("process does not exist\n");
-	    }
-	    else{printf("process exists\n");
+	
+	if(blocks[0] == NULL){
+		printf("First block is null\n");
+		for(int i = 0; i < number_of_targets; i++){
+			free(blocks[i]);
 		}
-		*/
-	    //printf("process is %d\n", getpgid(child_pid));
-	   //printf("error is %d\n", (errno == EPERM || errno == ESRCH));
-	    //if(errno != EPERM)printf("process doesnt exist\n");
-	    
-		//if( getpgid(child_pid) <= 0 ) break;
-	    if ((res = read(fsrv_st_fd, &block_id, 4)) != 4) { //-WRITE
-	    	printf("res = %d\n", res);
-	    	RPFATAL(res, "Unable to read block_id from fork server (OOM?)");
-	    }
-	    else{ 
-	    	//printf("after = %d\n", block_id);
-	    	//printf("address = %d\n", &block_id);
-	    	//if(kill(child_pid, 0)){printf("process is still dead %d\n", kill(child_pid, 0));}
-	    	//printf("process is %d\n", kill(child_pid, 0));
-	    	//printf("process is %d\n", getpgid(child_pid));
-	    	//printf("error is %d\n", (errno == EPERM || errno == ESRCH));
-	    	printf("after = 0x%08x\n", block_id);
-	    	//if(block_id == -1) break; //todo -> not sure if correct
-	    }
+		exit(0);
 	}
 
-		if (!WIFSTOPPED(status)) child_pid = 0;
+	int numbr_of_equal_blocks = 0;
+	int j = 0;
 
-		it.it_value.tv_sec = 0;
-		it.it_value.tv_usec = 0;
-
-		setitimer(ITIMER_REAL, &it, NULL);
-
-		total_execs++;
-
-	  /* Any subsequent operations on trace_bits must not be moved by the
-	     compiler below this point. Past this location, trace_bits[] behave
-	     very normally and do not have to be treated as volatile. */
-
-		MEM_BARRIER();
-
-		tb4 = *(u32*)trace_bits;
-
-	  //printf("%d\n", trace_bits);
-
-	#ifdef __x86_64__
-		classify_counts((u64*)trace_bits);
-	#else
-		classify_counts((u32*)trace_bits);
-	#endif /* ^__x86_64__ */
-
-		prev_timed_out = child_timed_out;
-
-	  /* Report outcome to caller. */
-
-		if (WIFSIGNALED(status) && !stop_soon) {
-
-			kill_signal = WTERMSIG(status);
-
-			if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
-
-			return FAULT_CRASH;
-
-		}
-
-	  /* A somewhat nasty hack for MSAN, which doesn't support abort_on_error and
-	     must use a special exit code. */
-
-		if (uses_asan && WEXITSTATUS(status) == MSAN_ERROR) {
-			kill_signal = 0;
-			return FAULT_CRASH;
-		}
-
-
-		return FAULT_NONE;
-
+	while ( j < size[0] && j < size[1] ){
+		if( *(blocks[0] + j) == *(blocks[1] + j))
+			numbr_of_equal_blocks++;
+		j++;
 	}
+	float percentage = numbr_of_equal_blocks / size[0];
+	printf("Programs share %.3f%% of blocks passed\n", (percentage * 100) );
+
+	//printf("0x%08x\n", *blocks[0]);
+	/*
+	for(int i = 0; i < size[0]; i++){
+		printf("block = 0x%08x\n", blocks[0][i]);
+	}
+	*/
+
+}
 
 /* Write modified data to file for testing. If out_file is set, the old file
    is unlinked and a new one is created. Otherwise, out_fd is rewound and
@@ -4638,7 +4412,6 @@ int main(int argc, char** argv) {
 				break;
 
 			}
-			printf("chegou aqui\n");
 			if (sscanf(optarg, "%llu%c", &mem_limit, &suffix) < 1 ||
 				optarg[0] == '-') FATAL("Bad syntax used for -m");
 
@@ -4710,11 +4483,14 @@ int main(int argc, char** argv) {
 
   use_argv = argv + optind;
 
-  init_forkserver(argv);
-  //init_forkserver_special(argv, &target_path, &forksrv_pid, &fsrv_ctl_fd, &fsrv_st_fd);
-  //init_forkserver_special(argv, &target_path2, &forksrv_pid, &fsrv_ctl_fd, &fsrv_st_fd);
-  run_target(argv, exec_tmout, &target_path);
+  //init_forkserver(argv);
+  init_forkserver_special(argv, &target_path, &forksrv_pid, &fsrv_ctl_fd, &fsrv_st_fd);
+  //init_forkserver_special(argv, &target_path2, &forksrv_pid2, &fsrv_ctl_fd2, &fsrv_st_fd2);
+  //run_target(argv, exec_tmout, &target_path);
+  cmp_programs(argv, exec_tmout, &target_path, &target_path);
+  //printf("\nRunning second program\n");
   //cmp_programs(argv, exec_tmout, &target_path, &target_path2);
+
   //printf("running second program\n");
   //cmp_programs(argv, exec_tmout, &target_path2, &target_path);
   //printf("running first program again\n");

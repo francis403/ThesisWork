@@ -1532,7 +1532,7 @@ __afl_store:
 /* Write home and tell them the id of the block */
   movq $4, %rdx               /* length    */
   leaq __afl_block_temp, %rsi
-  movq $(198 + 1), %rdi       /* file desc */
+  movq __fsrv_write, %rdi       /* file desc */
 call write@PLT
 
 
@@ -1638,6 +1638,9 @@ __afl_forkserver:
   pushq %rdx
   pushq %rdx
 
+/*   Save the important information first  */
+  movl $198, __fsrv_read
+  movl $199, __fsrv_write
   /* Phone home and tell the parent that we're OK. (Note that signals with
      no SA_RESTART will mess it up). If this fails, assume that the fd is
      closed because we were execve()d from an instrumented binary, or because
@@ -1645,7 +1648,7 @@ __afl_forkserver:
 
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
-  movq $(198 + 1), %rdi       /* file desc */
+  movq __fsrv_write, %rdi       /* file desc */
 call write@PLT
 
   cmpq $4, %rax
@@ -1657,11 +1660,9 @@ __afl_fork_wait_loop:
 
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
-  movq $198, %rdi             /* file desc */
+  movq __fsrv_read, %rdi       /* file desc */
 call read@PLT
   cmpq $4, %rax
   jne  __afl_die
 
-  /* Once woken up, create a clone of our process. This is an excellent use
-     case for syscall(__NR_clone, 0, CLONE_PARENT), but glibc boneheadedly
-     caches getpid() resu
+  /* Once woken up, create a clone of our process. This is an excellent us

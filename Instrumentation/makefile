@@ -8,25 +8,40 @@ EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=undefined -g -O0
 BASE_FLAGS= -fsanitize=address -g
 EXE=simple
 EXE2=simple2
+HARN=harn
+ALL=test_folder/instr-all-gcc
 
-main: clean simple fuzz
+main: clean simple simple2 harness fuzz
 
 #------------------------ OTHER -------------------------#
 simple:
 	$(CC) ./simple_program.c -save-temps -o $(EXE) -w
 
+simple2:
+	$(CC) ./simple_program2.c -save-temps -o $(EXE2) -w
+
+harness: 
+	$(CC) $(EFLAGS) ./harness.c vul.c -save-temps -o $(HARN) -w
+
 fuzz:
-	$(RUN) -m none -i input -o out ./simple ./simple
+	$(RUN) -m none -i input -o out ./harn ./simple2
+
+instr-all:
+	$(ALL) -p ./simple_program.c -save-temps -o $(EXE) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
+
+valgrind:
+	valgrind --leak-check=full ./$(ALL)
+
 
 #--------CLEANING---------
 
 clean: remExecutable remDir
 
 remExecutable:
-	rm -f a.out $(EXE)
+	rm -f a.out $(EXE) $(EXE2)
 
 remDir:
-	rm -f -r crash-* out* a.out
+	rm -f -r crash-* out* a.out *.i *.o *.s
 
 # ASAN_OPTIONS COMMANDS
 #export ASAN_OPTIONS="detect_leaks=0:abort_on_error=1:symbolize=0:allocator_may_return_null=1"

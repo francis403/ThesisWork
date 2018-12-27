@@ -1,10 +1,10 @@
-# 1 "./simple_program.c"
+# 1 "./simple_program2.c"
 # 1 "/home/francis/Documents/ThesisWork/Instrumentation//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
-# 1 "./simple_program.c"
+# 1 "./simple_program2.c"
 # 1 "/usr/include/stdlib.h" 1 3 4
 # 24 "/usr/include/stdlib.h" 3 4
 # 1 "/usr/include/features.h" 1 3 4
@@ -1437,7 +1437,7 @@ __attribute__ ((__nothrow__ , __leaf__)) wcstombs (char *__restrict __dst, const
 # 959 "/usr/include/stdlib.h" 2 3 4
 # 967 "/usr/include/stdlib.h" 3 4
 
-# 2 "./simple_program.c" 2
+# 2 "./simple_program2.c" 2
 # 1 "/usr/include/unistd.h" 1 3 4
 # 27 "/usr/include/unistd.h" 3 4
 
@@ -2916,7 +2916,7 @@ __attribute__ ((__nothrow__ , __leaf__)) getdomainname (char *__buf, size_t __bu
 
 
 
-# 3 "./simple_program.c" 2
+# 3 "./simple_program2.c" 2
 # 1 "/usr/include/string.h" 1 3 4
 # 27 "/usr/include/string.h" 3 4
 
@@ -3455,7 +3455,7 @@ __attribute__ ((__nothrow__ , __leaf__)) strncat (char *__restrict __dest, const
 # 636 "/usr/include/string.h" 2 3 4
 # 658 "/usr/include/string.h" 3 4
 
-# 4 "./simple_program.c" 2
+# 4 "./simple_program2.c" 2
 # 1 "/usr/include/stdio.h" 1 3 4
 # 29 "/usr/include/stdio.h" 3 4
 
@@ -4502,16 +4502,51 @@ fread_unlocked (void *__restrict __ptr, size_t __size, size_t __n,
 
 
 
-# 5 "./simple_program.c" 2
+# 5 "./simple_program2.c" 2
 
 
 
-# 7 "./simple_program.c"
+# 7 "./simple_program2.c"
 int MAX_LINE = 150;
+
+
+int add2(int val1, int val2){
+ val2 = val1;
+ return val1 + val2;
+}
 
 int main (int argc, char* argv[]){
 
+ int val;
+ time_t t;
 
-  return 0;
+ srand( (unsigned) time(&t) );
+
+ val = (rand() % 50) + 1;
+
+ printf("val = %d\n", val);
+
+ if(val < 10){
+  printf("val < 10 and %d\n", add2(val, 1 + val/2));
+  return;
+ }
+ if(val < 20){
+  printf("val < 20 and %d\n", add2(val, val/2));
+  return;
+ }
+ if(val < 30){
+  printf("val < 30 and %d\n", add2(val, val/2));
+  return;
+ }
+ if(val < 40){
+  printf("val < 40\n");
+  return;
+ }
+
+ printf("love is in the air\n");
+
+   return 0;
 
 }
+
+void teste(int i){printf("Hello, Dabe");}

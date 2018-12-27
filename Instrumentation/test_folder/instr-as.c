@@ -64,6 +64,10 @@ static u32  inst_ratio = 100,   /* Instrumentation probability (%)      */
 
 int numbr_inst = 0;
 
+/*Version of the program being instrumentalized
+     Affects what forksrv we are communicating*/
+int program_version;
+
 /* If we don't find --32 or --64 in the command line, default to 
    instrumentation for whichever mode we were compiled with. This is not
    perfect, but should do the trick for almost all use cases. */
@@ -724,9 +728,14 @@ static void add_instrumentation(void) {
   } //end of while
   //fputs("/*Teste do programa*/\n",inf);
   //free(lines_to_instrument);
+
+  //TODO -> add it here
   if (ins_lines){
-    fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
-    fputs((use_64bit ? main_payload_64 : main_payload_32), instr_lines_after);
+    //fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
+    //fprintf(outf, end_of_program_64_todo);
+    fprintf(outf, main_payload_64, FORKSRV_FD + (program_version * 2), FORKSRV_FD + (program_version * 2) + 1); //read - write
+    //fputs((use_64bit ? main_payload_64 : main_payload_32), instr_lines_after);
+    fprintf(instr_lines_after, (use_64bit ? main_payload_64 : main_payload_32), FORKSRV_FD + (program_version * 2),  FORKSRV_FD + (program_version * 2) + 1); //write 
   }
   
   //rewind(inf);
@@ -770,7 +779,12 @@ static void add_instrumentation(void) {
 
 int main(int argc, char** argv) {
 
+
   SAYF("\n\t-----Entry point to main point of instr-as.c-------\n");
+
+  program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
+
+  printf("env final = %d\n", program_version);
 
   s32 pid;
   u32 rand_seed;

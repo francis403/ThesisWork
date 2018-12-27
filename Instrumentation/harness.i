@@ -1,10 +1,87 @@
-# 1 "./simple_program.c"
+# 1 "./harness.c"
 # 1 "/home/francis/Documents/ThesisWork/Instrumentation//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
-# 1 "./simple_program.c"
+# 1 "./harness.c"
+# 1 "./vul.h" 1
+
+
+
+
+
+void buffer_overflow(char *buff);
+
+
+
+
+
+void stack_overflow(const char *x);
+
+
+
+
+
+void heap_overflow(const char *x);
+
+
+
+
+
+int integer_overflow(int a);
+
+int integer_underflow(int a);
+
+
+
+
+
+unsigned int unsigned_int(int a);
+
+
+
+
+void dangling_pointer(int a);
+
+void memory_leak();
+
+
+
+
+
+
+void global_buffer_overflow(char *x);
+
+
+
+
+
+void use_after_free(int a);
+
+char *negative_memory_allocation();
+
+
+
+
+
+void out_of_bounds(int a);
+
+
+
+
+
+int division_by_zero(int a);
+
+unsigned short unsigned_overflow(int b);
+
+void truncating_unsigned(int a);
+
+void sign_conversion();
+
+void double_free(int i);
+# 2 "./harness.c" 2
+
 # 1 "/usr/include/stdlib.h" 1 3 4
 # 24 "/usr/include/stdlib.h" 3 4
 # 1 "/usr/include/features.h" 1 3 4
@@ -1437,7 +1514,7 @@ __attribute__ ((__nothrow__ , __leaf__)) wcstombs (char *__restrict __dst, const
 # 959 "/usr/include/stdlib.h" 2 3 4
 # 967 "/usr/include/stdlib.h" 3 4
 
-# 2 "./simple_program.c" 2
+# 4 "./harness.c" 2
 # 1 "/usr/include/unistd.h" 1 3 4
 # 27 "/usr/include/unistd.h" 3 4
 
@@ -2916,7 +2993,7 @@ __attribute__ ((__nothrow__ , __leaf__)) getdomainname (char *__buf, size_t __bu
 
 
 
-# 3 "./simple_program.c" 2
+# 5 "./harness.c" 2
 # 1 "/usr/include/string.h" 1 3 4
 # 27 "/usr/include/string.h" 3 4
 
@@ -3455,7 +3532,7 @@ __attribute__ ((__nothrow__ , __leaf__)) strncat (char *__restrict __dest, const
 # 636 "/usr/include/string.h" 2 3 4
 # 658 "/usr/include/string.h" 3 4
 
-# 4 "./simple_program.c" 2
+# 6 "./harness.c" 2
 # 1 "/usr/include/stdio.h" 1 3 4
 # 29 "/usr/include/stdio.h" 3 4
 
@@ -4502,16 +4579,2090 @@ fread_unlocked (void *__restrict __ptr, size_t __size, size_t __n,
 
 
 
-# 5 "./simple_program.c" 2
+# 7 "./harness.c" 2
 
 
 
-# 7 "./simple_program.c"
-int MAX_LINE = 150;
-
+# 9 "./harness.c"
 int main (int argc, char* argv[]){
 
+ if(argc == 3){
+  if(
+# 12 "./harness.c" 3 4
+    __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) && __builtin_constant_p (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) && (__s1_len = __builtin_strlen (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ), __s2_len = __builtin_strlen (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ), (!((size_t)(const void *)((
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    , 
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) : (__builtin_constant_p (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) && ((size_t)(const void *)((
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) == 1) && (__s1_len = __builtin_strlen (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ), __s1_len < 4) ? (__builtin_constant_p (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) && ((size_t)(const void *)((
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) == 1) ? __builtin_strcmp (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    , 
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ); int __result = (((const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) && ((size_t)(const void *)((
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) == 1) && (__s2_len = __builtin_strlen (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ), __s2_len < 4) ? (__builtin_constant_p (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) && ((size_t)(const void *)((
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ) == 1) ? __builtin_strcmp (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    , 
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    ); int __result = (((const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 12 "./harness.c"
+    argv[1]
+# 12 "./harness.c" 3 4
+    , 
+# 12 "./harness.c"
+    "-s"
+# 12 "./harness.c" 3 4
+    )))); }) 
+# 12 "./harness.c"
+                         == 0){
 
-  return 0;
+   printf("input: ");
+
+   char *line = 
+# 16 "./harness.c" 3 4
+               ((void *)0)
+# 16 "./harness.c"
+                   ;
+   size_t len = 0;
+   ssize_t read;
+   if ( (read = getline(&line, &len, 
+# 19 "./harness.c" 3 4
+                                    stdin
+# 19 "./harness.c"
+                                         )) != -1 ){
+
+    }
+   char buff[len];
+   strcpy(&buff, line);
+   free(line);
+
+   if(
+# 26 "./harness.c" 3 4
+     __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) && __builtin_constant_p (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) && (__s1_len = __builtin_strlen (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ), __s2_len = __builtin_strlen (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ), (!((size_t)(const void *)((
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     , 
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) : (__builtin_constant_p (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) && ((size_t)(const void *)((
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) == 1) && (__s1_len = __builtin_strlen (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ), __s1_len < 4) ? (__builtin_constant_p (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) && ((size_t)(const void *)((
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) == 1) ? __builtin_strcmp (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     , 
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ); int __result = (((const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) && ((size_t)(const void *)((
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) == 1) && (__s2_len = __builtin_strlen (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ), __s2_len < 4) ? (__builtin_constant_p (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) && ((size_t)(const void *)((
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ) == 1) ? __builtin_strcmp (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     , 
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     ); int __result = (((const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 26 "./harness.c"
+     argv[2]
+# 26 "./harness.c" 3 4
+     , 
+# 26 "./harness.c"
+     "buff"
+# 26 "./harness.c" 3 4
+     )))); }) 
+# 26 "./harness.c"
+                            == 0){
+    buffer_overflow(buff);
+   }
+   else if(
+# 29 "./harness.c" 3 4
+          __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) && __builtin_constant_p (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) && (__s1_len = __builtin_strlen (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ), __s2_len = __builtin_strlen (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ), (!((size_t)(const void *)((
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          , 
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) : (__builtin_constant_p (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) == 1) && (__s1_len = __builtin_strlen (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ), __s1_len < 4) ? (__builtin_constant_p (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          , 
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) == 1) && (__s2_len = __builtin_strlen (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ), __s2_len < 4) ? (__builtin_constant_p (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          , 
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 29 "./harness.c"
+          argv[2]
+# 29 "./harness.c" 3 4
+          , 
+# 29 "./harness.c"
+          "stack"
+# 29 "./harness.c" 3 4
+          )))); }) 
+# 29 "./harness.c"
+                                  == 0){
+    stack_overflow(buff);
+   }
+   else if(
+# 32 "./harness.c" 3 4
+          __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) && __builtin_constant_p (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) && (__s1_len = __builtin_strlen (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ), __s2_len = __builtin_strlen (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ), (!((size_t)(const void *)((
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          , 
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) : (__builtin_constant_p (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) == 1) && (__s1_len = __builtin_strlen (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ), __s1_len < 4) ? (__builtin_constant_p (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          , 
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) == 1) && (__s2_len = __builtin_strlen (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ), __s2_len < 4) ? (__builtin_constant_p (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          , 
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 32 "./harness.c"
+          argv[2]
+# 32 "./harness.c" 3 4
+          , 
+# 32 "./harness.c"
+          "heap"
+# 32 "./harness.c" 3 4
+          )))); }) 
+# 32 "./harness.c"
+                                 == 0){
+    heap_overflow(buff);
+   }
+   else if(
+# 35 "./harness.c" 3 4
+          __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) && __builtin_constant_p (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) && (__s1_len = __builtin_strlen (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ), __s2_len = __builtin_strlen (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ), (!((size_t)(const void *)((
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          , 
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) : (__builtin_constant_p (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) == 1) && (__s1_len = __builtin_strlen (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ), __s1_len < 4) ? (__builtin_constant_p (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          , 
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) == 1) && (__s2_len = __builtin_strlen (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ), __s2_len < 4) ? (__builtin_constant_p (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          , 
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 35 "./harness.c"
+          argv[2]
+# 35 "./harness.c" 3 4
+          , 
+# 35 "./harness.c"
+          "global"
+# 35 "./harness.c" 3 4
+          )))); }) 
+# 35 "./harness.c"
+                                   == 0){
+    global_buffer_overflow(buff);
+   }
+   else{
+    printf("commands: -s <buff|stack|heap|global>\n");
+   }
+
+  }
+  else if(
+# 43 "./harness.c" 3 4
+         __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) && __builtin_constant_p (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) && (__s1_len = __builtin_strlen (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ), __s2_len = __builtin_strlen (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ), (!((size_t)(const void *)((
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) + 1) - (size_t)(const void *)(
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) + 1) - (size_t)(const void *)(
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         , 
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) : (__builtin_constant_p (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) && ((size_t)(const void *)((
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) + 1) - (size_t)(const void *)(
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) == 1) && (__s1_len = __builtin_strlen (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ), __s1_len < 4) ? (__builtin_constant_p (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) && ((size_t)(const void *)((
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) + 1) - (size_t)(const void *)(
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) == 1) ? __builtin_strcmp (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         , 
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ); int __result = (((const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) && ((size_t)(const void *)((
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) + 1) - (size_t)(const void *)(
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) == 1) && (__s2_len = __builtin_strlen (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ), __s2_len < 4) ? (__builtin_constant_p (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) && ((size_t)(const void *)((
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) + 1) - (size_t)(const void *)(
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ) == 1) ? __builtin_strcmp (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         , 
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         ); int __result = (((const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 43 "./harness.c"
+         argv[1]
+# 43 "./harness.c" 3 4
+         , 
+# 43 "./harness.c"
+         "-i"
+# 43 "./harness.c" 3 4
+         )))); }) 
+# 43 "./harness.c"
+                              == 0){
+   int a;
+   scanf("%d", &a);
+
+   if(
+# 47 "./harness.c" 3 4
+     __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) && __builtin_constant_p (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) && (__s1_len = __builtin_strlen (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ), __s2_len = __builtin_strlen (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ), (!((size_t)(const void *)((
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     , 
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) : (__builtin_constant_p (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) && ((size_t)(const void *)((
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) == 1) && (__s1_len = __builtin_strlen (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ), __s1_len < 4) ? (__builtin_constant_p (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) && ((size_t)(const void *)((
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) == 1) ? __builtin_strcmp (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     , 
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ); int __result = (((const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) && ((size_t)(const void *)((
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) == 1) && (__s2_len = __builtin_strlen (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ), __s2_len < 4) ? (__builtin_constant_p (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) && ((size_t)(const void *)((
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) + 1) - (size_t)(const void *)(
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ) == 1) ? __builtin_strcmp (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     , 
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     ); int __result = (((const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 47 "./harness.c"
+     argv[2]
+# 47 "./harness.c" 3 4
+     , 
+# 47 "./harness.c"
+     "int_over"
+# 47 "./harness.c" 3 4
+     )))); }) 
+# 47 "./harness.c"
+                                == 0){
+    printf("value = %d\n", integer_overflow(a));
+   }
+   else if(
+# 50 "./harness.c" 3 4
+          __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) && __builtin_constant_p (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) && (__s1_len = __builtin_strlen (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ), __s2_len = __builtin_strlen (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ), (!((size_t)(const void *)((
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          , 
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) : (__builtin_constant_p (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) == 1) && (__s1_len = __builtin_strlen (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ), __s1_len < 4) ? (__builtin_constant_p (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          , 
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) == 1) && (__s2_len = __builtin_strlen (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ), __s2_len < 4) ? (__builtin_constant_p (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          , 
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 50 "./harness.c"
+          argv[2]
+# 50 "./harness.c" 3 4
+          , 
+# 50 "./harness.c"
+          "int_under"
+# 50 "./harness.c" 3 4
+          )))); }) 
+# 50 "./harness.c"
+                                      == 0){
+    integer_underflow(a);
+   }
+   else if(
+# 53 "./harness.c" 3 4
+          __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) && __builtin_constant_p (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) && (__s1_len = __builtin_strlen (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ), __s2_len = __builtin_strlen (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ), (!((size_t)(const void *)((
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          , 
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) : (__builtin_constant_p (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) == 1) && (__s1_len = __builtin_strlen (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ), __s1_len < 4) ? (__builtin_constant_p (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          , 
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) == 1) && (__s2_len = __builtin_strlen (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ), __s2_len < 4) ? (__builtin_constant_p (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          , 
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 53 "./harness.c"
+          argv[2]
+# 53 "./harness.c" 3 4
+          , 
+# 53 "./harness.c"
+          "div_by_zero"
+# 53 "./harness.c" 3 4
+          )))); }) 
+# 53 "./harness.c"
+                                        == 0){
+    int i = 4;
+    int b = i + 2;
+    division_by_zero(a);
+   }
+   else if(
+# 58 "./harness.c" 3 4
+          __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) && __builtin_constant_p (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) && (__s1_len = __builtin_strlen (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ), __s2_len = __builtin_strlen (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ), (!((size_t)(const void *)((
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          , 
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) : (__builtin_constant_p (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) == 1) && (__s1_len = __builtin_strlen (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ), __s1_len < 4) ? (__builtin_constant_p (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          , 
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) == 1) && (__s2_len = __builtin_strlen (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ), __s2_len < 4) ? (__builtin_constant_p (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          , 
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 58 "./harness.c"
+          argv[2]
+# 58 "./harness.c" 3 4
+          , 
+# 58 "./harness.c"
+          "use_after_free"
+# 58 "./harness.c" 3 4
+          )))); }) 
+# 58 "./harness.c"
+                                           == 0){
+    use_after_free(a);
+   }
+   else if(
+# 61 "./harness.c" 3 4
+          __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) && __builtin_constant_p (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) && (__s1_len = __builtin_strlen (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ), __s2_len = __builtin_strlen (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ), (!((size_t)(const void *)((
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          , 
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) : (__builtin_constant_p (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) == 1) && (__s1_len = __builtin_strlen (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ), __s1_len < 4) ? (__builtin_constant_p (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          , 
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) == 1) && (__s2_len = __builtin_strlen (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ), __s2_len < 4) ? (__builtin_constant_p (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) && ((size_t)(const void *)((
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) + 1) - (size_t)(const void *)(
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ) == 1) ? __builtin_strcmp (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          , 
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          ); int __result = (((const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 61 "./harness.c"
+          argv[2]
+# 61 "./harness.c" 3 4
+          , 
+# 61 "./harness.c"
+          "out_of_bounds"
+# 61 "./harness.c" 3 4
+          )))); }) 
+# 61 "./harness.c"
+                                          == 0){
+    out_of_bounds(a);
+   }
+   else{
+    printf("commands: -i <int_over|int_under|div_by_zero|use_after_free|out_of_bounds>\n");
+   }
+
+  }
+  else{
+   printf("commands: < -i .. | -s ..>\n");
+  }
+ } else if(argc == 2){
+  if(
+# 73 "./harness.c" 3 4
+    __extension__ ({ size_t __s1_len, __s2_len; (__builtin_constant_p (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) && __builtin_constant_p (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) && (__s1_len = __builtin_strlen (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ), __s2_len = __builtin_strlen (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ), (!((size_t)(const void *)((
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) == 1) || __s1_len >= 4) && (!((size_t)(const void *)((
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) == 1) || __s2_len >= 4)) ? __builtin_strcmp (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    , 
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) : (__builtin_constant_p (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) && ((size_t)(const void *)((
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) == 1) && (__s1_len = __builtin_strlen (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ), __s1_len < 4) ? (__builtin_constant_p (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) && ((size_t)(const void *)((
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) == 1) ? __builtin_strcmp (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    , 
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) : (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ); int __result = (((const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ))[0] - __s2[0]); if (__s1_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ))[1] - __s2[1]); if (__s1_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ))[2] - __s2[2]); if (__s1_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ))[3] - __s2[3]); } } __result; }))) : (__builtin_constant_p (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) && ((size_t)(const void *)((
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) == 1) && (__s2_len = __builtin_strlen (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ), __s2_len < 4) ? (__builtin_constant_p (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) && ((size_t)(const void *)((
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) + 1) - (size_t)(const void *)(
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ) == 1) ? __builtin_strcmp (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    , 
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ) : (- (__extension__ ({ const unsigned char *__s2 = (const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    ); int __result = (((const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ))[0] - __s2[0]); if (__s2_len > 0 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ))[1] - __s2[1]); if (__s2_len > 1 && __result == 0) { __result = (((const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ))[2] - __s2[2]); if (__s2_len > 2 && __result == 0) __result = (((const unsigned char *) (const char *) (
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    ))[3] - __s2[3]); } } __result; })))) : __builtin_strcmp (
+# 73 "./harness.c"
+    argv[1]
+# 73 "./harness.c" 3 4
+    , 
+# 73 "./harness.c"
+    "mleak"
+# 73 "./harness.c" 3 4
+    )))); }) 
+# 73 "./harness.c"
+                            == 0){
+   printf("memory leak start\n");
+   void *pointer = malloc(sizeof(void) * 45);
+   pointer=0;
+  }
+ }
+ else{
+
+
+  char *line = 
+# 82 "./harness.c" 3 4
+              ((void *)0)
+# 82 "./harness.c"
+                  ;
+  size_t len = 0;
+  ssize_t read;
+  if ( (read = getline(&line, &len, 
+# 85 "./harness.c" 3 4
+                                   stdin
+# 85 "./harness.c"
+                                        )) != -1 ){
+
+  }
+  char buff[len];
+  strcpy(&buff, line);
+  free(line);
+
+
+
+
+
+  buffer_overflow(buff);
+
+
+  int a;
+# 124 "./harness.c"
+ }
+
+ printf("did not crash\n");
+ return 0;
 
 }

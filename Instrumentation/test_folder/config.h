@@ -287,15 +287,17 @@
 
 #define MSAN_ERROR          86
 
-/* Designated file descriptors for forkserver commands (the application will
+/* Version of the forkserver being instrumentalized*/
+#define FORKSRV_ENV	    "__FORKSRV_ENV_VAR"
+
+/*   Amount of forkservers needed, or number of programs under test	*/
+#define FORKSRV_AMOUNT_ENV "__FORKSRV_AMOUNT_ENV_VAR"
+
+/* Designated file descriptors base for forkserver commands (the application will
    use FORKSRV_FD and FORKSRV_FD + 1): */
 
 #define FORKSRV_FD          198
 
-/* Designated file descriptors for second forkserver commands (the application will
-   use FORKSRV_FD2 and FORKSRV_FD2 + 1): */
-
-#define FORKSRV_FD2          200
 
 /* Fork server init timeout multiplier: we'll wait the user-selected
    timeout plus this much for the fork server to spin up. */

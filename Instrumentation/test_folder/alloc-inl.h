@@ -94,6 +94,8 @@
     _tmp; \
   })
 
+#define GET_FORKSRV() (getenv(FORKSRV_ENV) == NULL ? "0" : getenv(FORKSRV_ENV))
+
 
 /* Allocate a buffer, explicitly not zeroing it. Returns NULL for zero-sized
    requests. */
