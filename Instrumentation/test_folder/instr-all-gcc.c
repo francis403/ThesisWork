@@ -24,6 +24,10 @@ static u32  cc_par_cnt = 1;         /* Param count, including argv0      */
 static u8   be_quiet,               /* Quiet mode                        */
             clang_mode;             /* Invoked as afl-clang*?            */
 
+char **instr_programs;
+int head_of_program = 0;
+int max_amount_of_programs = 100;
+
 /* Try to find our "fake" GNU assembler in AFL_PATH or at the location derived
    from argv[0]. If that fails, abort. */
 
@@ -80,6 +84,19 @@ static void find_as(u8* argv0) {
  
 }
 
+// returns 1 if value is present, 0 otherwise
+int has_value(char **array, char *value){
+    int index = 0;
+    printf("in has value\n");
+    //index++;
+    while(*(array + index++)){
+        if( strcmp(*(array + index), value) == 0){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 /* Copy argv to cc_params, making the necessary edits. */
 // can be improved by dividing the first bit of this function into another function
 static u8 **edit_params(u32 argc, char** argv) {
@@ -131,8 +148,18 @@ static u8 **edit_params(u32 argc, char** argv) {
     }
 
   }
-    
-  //cc_params[0] = "gcc";
+/*
+  if(has_value(instr_programs, argv[0])){
+      FATAL("instrumentation aborted, program %s is repeated at least twice, all most be different", 
+            argv[0]);
+      exit(0);
+  }
+  */
+  
+  *(instr_programs + head_of_program) = argv[0];
+  head_of_program ++;
+  
+    //cc_params[0] = "gcc";
   while (--argc) {
     u8* cur = *(argv++);
 
@@ -285,8 +312,11 @@ int main(int argc, char** argv) {
   short numbr_lines = 100;
   short line_size = 200;
   int index = 0, size = 0;
-  //char **tmp = malloc(sizeof(char*) * line_size * 100); // we want to save argv while removing the -p and divide it according to the programs
+
   char **tmp = malloc(sizeof(char*) * numbr_lines);
+  instr_programs = malloc(sizeof(char*) * max_amount_of_programs);
+
+
   short is_recording = 0;
   short first = 1;
   int numb_instr = 0;
@@ -303,15 +333,20 @@ int main(int argc, char** argv) {
        
         if(is_recording){
             
-            //printf("\t is gonna instrumentalize the program\n");
-            //if(cc_params == NULL)
+
             u8** cc_params = edit_params(index, tmp);
             int i = 0;
-            //while( *(cc_params + i) ) printf("%s\n", *(cc_params + i++));
             index = 0;
             tmp = malloc(sizeof(char*) * numbr_lines);
             sprintf(snum, "%d", numb_instr);
             numb_instr ++; //leave this here so we don't have race conditions
+
+            // in case we are runnign out of space create more
+            if( index >= 0.75 * numbr_lines){
+                numbr_lines *= 2;
+                tmp = realloc( tmp, sizeof(char*) * numbr_lines );
+            }
+
             pid_t pid = fork();
             if(pid){
                 setenv(FORKSRV_ENV, snum, 1);

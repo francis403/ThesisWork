@@ -293,6 +293,9 @@
 /*   Amount of forkservers needed, or number of programs under test	*/
 #define FORKSRV_AMOUNT_ENV "__FORKSRV_AMOUNT_ENV_VAR"
 
+/*Defines the maximum amount of programs that can be tested at once*/
+#define MAX_AMOUT_OF_PROGRAMS		100
+
 /* Designated file descriptors base for forkserver commands (the application will
    use FORKSRV_FD and FORKSRV_FD + 1): */
 
