@@ -14,10 +14,10 @@
 main:
 .LFB71:
 	.file 1 "./simple_program.c"
-	.loc 1 9 0
+	.loc 1 6 0
 	.cfi_startproc
 .LVL0:
-	.loc 1 14 0
+	.loc 1 12 0
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
 
@@ -46,13 +46,6 @@ leaq (128+24)(%rsp), %rsp
 .LCOLDE0:
 	.section	.text.startup
 .LHOTE0:
-	.globl	MAX_LINE
-	.data
-	.align 4
-	.type	MAX_LINE, @object
-	.size	MAX_LINE, 4
-MAX_LINE:
-	.long	150
 	.text
 .Letext0:
 	.section	.text.unlikely
@@ -63,15 +56,15 @@ MAX_LINE:
 	.file 5 "/usr/include/stdio.h"
 	.section	.debug_info,"",@progbits
 .Ldebug_info0:
-	.long	0x2f7
+	.long	0x2e2
 	.value	0x4
 	.long	.Ldebug_abbrev0
 	.byte	0x8
 	.uleb128 0x1
-	.long	.LASF53
+	.long	.LASF52
 	.byte	0xc
+	.long	.LASF53
 	.long	.LASF54
-	.long	.LASF55
 	.long	.Ldebug_ranges0+0
 	.quad	0
 	.long	.Ldebug_line0
@@ -325,7 +318,7 @@ MAX_LINE:
 	.byte	0xc4
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF56
+	.long	.LASF55
 	.byte	0x4
 	.byte	0x96
 	.uleb128 0x7
@@ -377,9 +370,9 @@ MAX_LINE:
 	.byte	0x13
 	.byte	0
 	.uleb128 0xd
-	.long	.LASF57
+	.long	.LASF56
 	.byte	0x1
-	.byte	0x9
+	.byte	0x6
 	.long	0x3b
 	.quad	.LFB71
 	.quad	.LFE71-.LFB71
@@ -389,14 +382,14 @@ MAX_LINE:
 	.uleb128 0xe
 	.long	.LASF48
 	.byte	0x1
-	.byte	0x9
+	.byte	0x6
 	.long	0x3b
 	.uleb128 0x1
 	.byte	0x55
 	.uleb128 0xe
 	.long	.LASF49
 	.byte	0x1
-	.byte	0x9
+	.byte	0x6
 	.long	0x2c9
 	.uleb128 0x1
 	.byte	0x54
@@ -414,14 +407,6 @@ MAX_LINE:
 	.byte	0x5
 	.byte	0xa9
 	.long	0x261
-	.uleb128 0x10
-	.long	.LASF52
-	.byte	0x1
-	.byte	0x7
-	.long	0x3b
-	.uleb128 0x9
-	.byte	0x3
-	.quad	MAX_LINE
 	.byte	0
 	.section	.debug_abbrev,"",@progbits
 .Ldebug_abbrev0:
@@ -628,23 +613,6 @@ MAX_LINE:
 	.uleb128 0x19
 	.byte	0
 	.byte	0
-	.uleb128 0x10
-	.uleb128 0x34
-	.byte	0
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x3f
-	.uleb128 0x19
-	.uleb128 0x2
-	.uleb128 0x18
-	.byte	0
-	.byte	0
 	.byte	0
 	.section	.debug_aranges,"",@progbits
 	.long	0x2c
@@ -669,7 +637,7 @@ MAX_LINE:
 	.section	.debug_str,"MS",@progbits,1
 .LASF17:
 	.string	"_IO_read_base"
-.LASF54:
+.LASF53:
 	.string	"./simple_program.c"
 .LASF4:
 	.string	"signed char"
@@ -685,7 +653,7 @@ MAX_LINE:
 	.string	"_IO_buf_end"
 .LASF19:
 	.string	"_IO_write_ptr"
-.LASF53:
+.LASF52:
 	.string	"GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -O3 -funroll-loops -fstack-protector-strong"
 .LASF51:
 	.string	"stdout"
@@ -715,11 +683,11 @@ MAX_LINE:
 	.string	"stdin"
 .LASF25:
 	.string	"_IO_save_end"
-.LASF56:
+.LASF55:
 	.string	"_IO_lock_t"
 .LASF26:
 	.string	"_markers"
-.LASF57:
+.LASF56:
 	.string	"main"
 .LASF29:
 	.string	"_flags2"
@@ -777,9 +745,7 @@ MAX_LINE:
 	.string	"_pos"
 .LASF8:
 	.string	"__off_t"
-.LASF52:
-	.string	"MAX_LINE"
-.LASF55:
+.LASF54:
 	.string	"/home/francis/Documents/ThesisWork/Instrumentation"
 .LASF33:
 	.string	"_shortbuf"
@@ -1015,4 +981,28 @@ __afl_fork_resume:
   movq 160(%rsp), %xmm4
   movq 176(%rsp), %xmm5
   movq 192(%rsp), %xmm6
-  m
+  movq 208(%rsp), %xmm7
+  movq 224(%rsp), %xmm8
+  movq 240(%rsp), %xmm9
+  movq 256(%rsp), %xmm10
+  movq 272(%rsp), %xmm11
+  movq 288(%rsp), %xmm12
+  movq 304(%rsp), %xmm13
+  movq 320(%rsp), %xmm14
+  movq 336(%rsp), %xmm15
+
+  leaq 352(%rsp), %rsp
+
+  jmp  __afl_store
+
+__afl_die:
+
+  xorq %rax, %rax
+call _exit@PLT
+
+__afl_setup_abort:
+
+  /* Record setup failure so that we don't keep calling
+     shmget() / shmat() over and over again. */
+
+  incb __afl_setup_failure(%ri

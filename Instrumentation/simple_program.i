@@ -4505,11 +4505,9 @@ fread_unlocked (void *__restrict __ptr, size_t __size, size_t __n,
 # 5 "./simple_program.c" 2
 
 
-
-# 7 "./simple_program.c"
-int MAX_LINE = 150;
-
+# 6 "./simple_program.c"
 int main (int argc, char* argv[]){
+
 
 
   return 0;

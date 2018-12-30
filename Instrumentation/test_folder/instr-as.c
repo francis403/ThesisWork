@@ -86,7 +86,6 @@ static u8   use_64bit = 0;
 
 #endif /* ^__x86_64__ */
 
-static char *test_directory = "/home/francis/Documents/ThesisWork";
 
 /* Examine and modify parameters to pass to 'as'. Note that the file name
    is always the last parameter passed by GCC, so we exploit this property
@@ -412,7 +411,6 @@ static void add_instrumentation(void) {
 
   char *lines_to_instrument = calloc(0, sizeof(char));
   
-  short end_of_main = 0;
   // TODO -> need to slightly change this loop to add the ability to add personalized ids
   while (fgets(line, MAX_LINE, inf)) { //pass through all the assembly line of code
 

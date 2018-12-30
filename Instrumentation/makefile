@@ -9,9 +9,12 @@ BASE_FLAGS= -fsanitize=address -g
 EXE=simple
 EXE2=simple2
 HARN=harn
+FACT=fact
 ALL=test_folder/instr-all-gcc
 
 main: clean simple simple2 harness fuzz
+
+cmp_progs: clean instr-all fuzz
 
 #------------------------ OTHER -------------------------#
 simple:
@@ -23,14 +26,24 @@ simple2:
 harness: 
 	$(CC) $(EFLAGS) ./harness.c vul.c -save-temps -o $(HARN) -w
 
+factorial:
+	$(CC) ./find_factorial.c -save-temps -o $(FACT) -w
 fuzz:
-	$(RUN) -m none -i input -o out ./harn ./simple2
+	$(RUN) -m none -i input -o out ./fact ./simple2
+	#$(RUN) -m none -i input -o out ./simple ./simple2
+	#$(RUN) -m none -i input -o out ./fact ./simple2
+
+cmp_progs: clean instr-all fuzz
 
 instr-all:
-	$(ALL) -p ./simple_program.c -save-temps -o $(EXE) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
+	$(ALL) -p ./find_factorial.c -save-temps -o $(FACT) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
+	#$(ALL) -p ./simple_program.c -save-temps -o $(EXE) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
+
 
 valgrind:
 	valgrind --leak-check=full ./$(ALL)
+test_memory:
+	valgrind --leak-check=full test_folder/afl-fuzz -m none -i input -o out ./fact ./simple2
 
 
 #--------CLEANING---------

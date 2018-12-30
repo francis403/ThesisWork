@@ -33,7 +33,7 @@ int max_amount_of_programs = 100;
 
 static void find_as(u8* argv0) {
 
-   SAYF("\n\t-----find-as-------\n");
+   //SAYF("\n\t-----find-as-------\n");
 
   u8 *afl_path = getenv("AFL_PATH");
   u8 *slash, *tmp;
@@ -87,7 +87,7 @@ static void find_as(u8* argv0) {
 // returns 1 if value is present, 0 otherwise
 int has_value(char **array, char *value){
     int index = 0;
-    printf("in has value\n");
+    //printf("in has value\n");
     //index++;
     while(*(array + index++)){
         if( strcmp(*(array + index), value) == 0){
@@ -102,7 +102,7 @@ int has_value(char **array, char *value){
 static u8 **edit_params(u32 argc, char** argv) {
 
 
-  SAYF("\n\t-----edit_params ALL -------\n");
+  //SAYF("\n\t-----edit_params ALL -------\n");
 
   u8 fortify_set = 0, asan_set = 0;
   u8 *name;
@@ -285,14 +285,14 @@ static u8 **edit_params(u32 argc, char** argv) {
 // TODO -> improve code, can be greatly improved
 int main(int argc, char** argv) {
 
-  SAYF("\n\t-----In instr-all-gcc -------\n");
+  //SAYF("\n\t-----In instr-all-gcc -------\n");
 
 
   if (argc < 2) {
 
     SAYF("\n"
-         "This is a helper application for afl-fuzz. It serves as a drop-in replacement\n"
-         "for gcc or clang, letting you recompile third-party code with the required\n"
+         "This is a helper application for instr-fuzz. It serves as a drop-in replacement\n"
+         "for gcc or clang, while instrumenting multiple programs, letting you recompile third-party code with the required\n"
          "runtime instrumentation. A common use pattern would be one of the following:\n\n"
 
          "  CC=%s/afl-gcc ./configure\n"
@@ -310,11 +310,10 @@ int main(int argc, char** argv) {
 
   //edit_params(argc, argv);
   short numbr_lines = 100;
-  short line_size = 200;
-  int index = 0, size = 0;
+  int index = 0;
 
   char **tmp = malloc(sizeof(char*) * numbr_lines);
-  instr_programs = malloc(sizeof(char*) * max_amount_of_programs);
+  instr_programs = malloc( sizeof(char*) * max_amount_of_programs);
 
 
   short is_recording = 0;
@@ -335,7 +334,6 @@ int main(int argc, char** argv) {
             
 
             u8** cc_params = edit_params(index, tmp);
-            int i = 0;
             index = 0;
             tmp = malloc(sizeof(char*) * numbr_lines);
             sprintf(snum, "%d", numb_instr);
@@ -369,7 +367,7 @@ int main(int argc, char** argv) {
         //printf("CC_PARAMS IS null\n");
     u8** cc_params = edit_params(index, tmp);
     //printf("\tCC_PARAMS\n");
-    int i = 0;
+    //int i = 0;
     //while( *(tmp + i) ) printf("%s\n", *(tmp + i++));
     //while( *(cc_params + i) ) printf("%s\n", *(cc_params + i++));
     sprintf(snum, "%d", numb_instr);

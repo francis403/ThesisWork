@@ -104,16 +104,6 @@
 
  */
 
-//talvez tenha que mudar isto
-//static int forksrv_vrs = getenv(FORKSRV_ENV) == NULL ? 0 : atoi(getenv(FORKSRV_ENV));
-
-#define FORKSRV_VRS (getenv(FORKSRV_ENV) == NULL ? 0 : atoi(getenv(FORKSRV_ENV)))
-//int val = getenv(FORKSRV_ENV) == NULL ? 0 : getenv(FORKSRV_ENV);
-
-static int getVar(){
-  return FORKSRV_FD;
-}
-
 
 static const u8* trampoline_fmt_32 =
 
@@ -171,18 +161,19 @@ static const u8* main_payload_32 =
 
 
 
-// not sure if needed
-static const u8 *end_of_program_64_todo = 
+// if we can find a common point, where all assembly programs end, this solution is quicker and cleaner to the current one
 
-"\n"
- "/* --- WRITE HOME AND SAY THE PROGRAM IS DONE (64-BIT) --- */\n"
- "  movl $-1, __afl_block_temp\n"
- "  movq $4, %rdx               /* length    */\n"
- "  leaq __afl_block_temp, %rsi\n"
- "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
-CALL_L64("write")
- "/* --- END --- */\n"
-"\n";
+//static const u8 *end_of_program_64_todo = 
+
+//"\n"
+//"/* --- WRITE HOME AND SAY THE PROGRAM IS DONE (64-BIT) --- */\n"
+// "  movl $-1, __afl_block_temp\n"
+// "  movq $4, %rdx               /* length    */\n"
+// "  leaq __afl_block_temp, %rsi\n"
+//) "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
+//CALL_L64("write")
+//"/* --- END --- */\n"
+//"\n";
 
 
 

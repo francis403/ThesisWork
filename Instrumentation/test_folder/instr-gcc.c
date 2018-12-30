@@ -30,7 +30,7 @@ static u8   be_quiet,               /* Quiet mode                        */
 
 static void find_as(u8* argv0) {
 
-   SAYF("\n\t-----find-as-------\n");
+   //SAYF("\n\t-----find-as-------\n");
 
   u8 *afl_path = getenv("AFL_PATH");
   u8 *slash, *tmp;
@@ -87,7 +87,7 @@ static void find_as(u8* argv0) {
 static void edit_params(u32 argc, char** argv) {
 
 
-  SAYF("\n\t-----edit_params -------\n");
+  //SAYF("\n\t-----edit_params -------\n");
 
   u8 fortify_set = 0, asan_set = 0;
   u8 *name;
@@ -258,7 +258,7 @@ static void edit_params(u32 argc, char** argv) {
 
 int main(int argc, char** argv) {
 
-  SAYF("\n\t-----instr-gcc -------\n");
+  //SAYF("\n\t-----instr-gcc -------\n");
 
   if (isatty(2) && !getenv("AFL_QUIET")) {
 
@@ -288,7 +288,7 @@ int main(int argc, char** argv) {
 
   edit_params(argc, argv);
 
-  printf("cc_params[0] = %s\n", cc_params[0]);
+  //printf("cc_params[0] = %s\n", cc_params[0]);
   //printf("cc_params = %s\n", cc_params);
 
   execvp(cc_params[0], (char**)cc_params);
