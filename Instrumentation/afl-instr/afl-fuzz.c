@@ -138,9 +138,10 @@ static s32 forksrv_pid[MAX_AMOUT_OF_PROGRAMS],               /* PID of the fork 
 
 pid_t block_pid;
 
+/* TODO probably will need an array of this things */
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap  */
 
-//EXP_ST u8* trace_bits2;                /* SHM with instrumentation bitmap  of the second file TODO*/
+
 
 EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
            virgin_tmout[MAP_SIZE],    /* Bits we haven't seen in tmouts   */
@@ -148,6 +149,7 @@ EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
 
 static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
 
+//TODO -> probably need an array here as well
 static s32 shm_id;                    /* ID of the SHM region             */
 static s32 shm_id2;                   /* ID of the second SHM region TODO */
 
@@ -1282,7 +1284,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     /* Use a distinctive bitmap signature to tell the parent about execv()
        falling through. */
 
-    *(u32*)trace_bits = EXEC_FAIL_SIG; //TODO -> maybe differentiate trace_bits for every program?
+    *(u32*)trace_bits = EXEC_FAIL_SIG;
     exit(0);
 
 }
@@ -1644,18 +1646,14 @@ int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st
 
 static void cmp_programs(char** argv, u32 timeout) {
 
-	printf("in cmp_programs\n");
-	//TODO -> in the future change this to a global variable that changes
-	//according to the number of programs to test
-	int max_number_of_blocks;
+	//printf("in cmp_programs\n");
+
 	int **blocks = malloc( sizeof( int* ) * numbr_of_progs_under_test ); //save about as many are needed
 	//int *blocks[number_of_targets];// = malloc( sizeof( int* ) * number_of_targets ); //save about as many are needed
 	//int *test_block;
 	int size[numbr_of_progs_under_test];
 
-	//TODO -> right now only comparing on the same program,
-	//change to be able to compare multiple programs
-	
+	// Get all the blocks of all programs under test	
 	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
 		//blocks[i] = malloc( sizeof(int) );
 		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), fsrv_ctl_fd[i], fsrv_st_fd[i]);
@@ -3744,7 +3742,7 @@ int main(int argc, char** argv) {
   check_crash_handling();
   check_cpu_governor();
 
-  setup_shm(); // -> needed
+  setup_shm(); // -> TODO -> need to add the specific ID that I want to set up
   init_count_class16(); //-> needed
 
   setup_dirs_fds(); // -> needed but not for the forkserer
@@ -3792,7 +3790,9 @@ int main(int argc, char** argv) {
   //printf("running first program again\n");
   //run_target(argv, exec_tmout, &target_path);
 
+
   //perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
+
 
   //cull_queue(); // -> not needed, but very usefull and likely where i'll work the most
 

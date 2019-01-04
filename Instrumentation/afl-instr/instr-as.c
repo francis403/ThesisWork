@@ -339,7 +339,6 @@ void addToOutFile(FILE *file, char *lines){
 
   //fprintf(stdout, trampoline_fmt_64, block_id, "10" );
 
-              //TODO: -> shows the added lines
   //printf("LINE ---\n %s\n", lines);
   //fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", file);
   fputs(lines, file);
@@ -373,7 +372,6 @@ static void add_instrumentation(void) {
 
   static u8 line[MAX_LINE];
 
-  //TODO -> ver o que estes ficheiros fazem e como o AFL usa-os
   FILE* inf;
   FILE* outf;
   s32 outfd;
@@ -411,7 +409,6 @@ static void add_instrumentation(void) {
 
   char *lines_to_instrument = calloc(0, sizeof(char));
   
-  // TODO -> need to slightly change this loop to add the ability to add personalized ids
   while (fgets(line, MAX_LINE, inf)) { //pass through all the assembly line of code
 
     //SAYF("line = %s", line);
@@ -449,7 +446,7 @@ static void add_instrumentation(void) {
       
       /*
       fprintf(instr_lines_after, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-              R(MAP_SIZE)); //TODO: -> shows the added lines
+              R(MAP_SIZE));
 
       fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", instr_lines_after);
       */
@@ -590,7 +587,6 @@ static void add_instrumentation(void) {
       if (strstr(line, "#NO_APP")) skip_app = 0;
 
     }
-    //todo -> check
 
     /* If we're in the right mood for instrumenting, check for function
        names or conditional labels. This is a bit messy, but in essence,
@@ -633,7 +629,8 @@ static void add_instrumentation(void) {
           is_recording = 0;
           num_of_lines_recorded = 0; //no block no lines
             numbr_inst ++;
-          //TODO: add all the lines
+          
+          //TODO -> we can remove the instr_lines_after its only here for testing purposes
           addToOutFile(instr_lines_after, lines_to_instrument);
           addToOutFile(outf, lines_to_instrument);
           // clean the lines buffer
@@ -726,8 +723,7 @@ static void add_instrumentation(void) {
   } //end of while
   //fputs("/*Teste do programa*/\n",inf);
   //free(lines_to_instrument);
-
-  //TODO -> add it here
+  
   if (ins_lines){
     //fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
     //fprintf(outf, end_of_program_64_todo);

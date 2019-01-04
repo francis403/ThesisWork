@@ -357,7 +357,7 @@ int main(int argc, char** argv) {
     }
     
     *(tmp + index) = line;
-    //printf("tmp = %s\n", *(tmp + index));
+    
     index++;
     
   }
@@ -366,20 +366,15 @@ int main(int argc, char** argv) {
     //printf("\t is gonna instrumentalize the program\n");
         //printf("CC_PARAMS IS null\n");
     u8** cc_params = edit_params(index, tmp);
-    //printf("\tCC_PARAMS\n");
-    //int i = 0;
-    //while( *(tmp + i) ) printf("%s\n", *(tmp + i++));
-    //while( *(cc_params + i) ) printf("%s\n", *(cc_params + i++));
+  
     sprintf(snum, "%d", numb_instr);
     setenv(FORKSRV_ENV, snum, 1); // total number of instr
     printf("even should be = %d\n", numb_instr);
     numb_instr ++;
-    //setenv(FORKSRV_AMOUNT_ENV, snum, 1); //todo
+    
     execvp(cc_params[0], (char**)cc_params);
   }
-  //free(*tmp);
-  //free(tmp);
-  //free(tmp);
+  
 
 
 
