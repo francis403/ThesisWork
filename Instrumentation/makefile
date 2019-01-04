@@ -1,8 +1,8 @@
 #Idea, make a program that gives the percentage of same code using afl-gcc
 #CC=afl-clang-fast
 #CC=afl-instr/instr-gcc
-CC=test_folder/instr-gcc
-RUN=test_folder/afl-fuzz
+CC=afl-instr/instr-gcc
+RUN=afl-instr/afl-fuzz
 FLAGS= -static
 EFLAGS= -fsanitize=address,undefined -fno-sanitize-recover=undefined -g -O0
 BASE_FLAGS= -fsanitize=address -g
@@ -10,7 +10,7 @@ EXE=simple
 EXE2=simple2
 HARN=harn
 FACT=fact
-ALL=test_folder/instr-all-gcc
+ALL=afl-instr/instr-all-gcc
 
 main: clean simple simple2 harness fuzz
 
@@ -29,15 +29,15 @@ harness:
 factorial:
 	$(CC) ./find_factorial.c -save-temps -o $(FACT) -w
 fuzz:
-	$(RUN) -m none -i input -o out ./fact ./simple2
-	#$(RUN) -m none -i input -o out ./simple ./simple2
+	#$(RUN) -m none -i input -o out ./fact ./simple2
+	$(RUN) -m none -i input -o out ./simple ./simple2
 	#$(RUN) -m none -i input -o out ./fact ./simple2
 
 cmp_progs: clean instr-all fuzz
 
 instr-all:
-	$(ALL) -p ./find_factorial.c -save-temps -o $(FACT) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
-	#$(ALL) -p ./simple_program.c -save-temps -o $(EXE) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
+	#$(ALL) -p ./find_factorial.c -save-temps -o $(FACT) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
+	$(ALL) -p ./simple_program.c -save-temps -o $(EXE) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
 
 
 valgrind:
@@ -51,7 +51,7 @@ test_memory:
 clean: remExecutable remDir
 
 remExecutable:
-	rm -f a.out $(EXE) $(EXE2)
+	rm -f a.out $(EXE) $(EXE2) $(FACT) $(HARN)
 
 remDir:
 	rm -f -r crash-* out* a.out *.i *.o *.s

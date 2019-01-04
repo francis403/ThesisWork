@@ -2,7 +2,8 @@
    Changed applied toamerican fuzzy lop - wrapper for GCC and clang 
    ----------------------------------------------
 	
-	The idea is to be able to save the instrumentation and compare two programs after they run
+	The idea is to instrumentalize more than one program at a time to then be tested
+  Adding the Forksrv_fd of the specific file
  
  */
 
@@ -19,11 +20,13 @@
 #include <string.h>
 
 static u8*  as_path;                /* Path to the AFL 'as' wrapper      */
-static u8** cc_params;              /* Parameters passed to the real CC  */
 static u32  cc_par_cnt = 1;         /* Param count, including argv0      */
 static u8   be_quiet,               /* Quiet mode                        */
             clang_mode;             /* Invoked as afl-clang*?            */
 
+char **instr_programs;
+int head_of_program = 0;
+int max_amount_of_programs = 100;
 
 /* Try to find our "fake" GNU assembler in AFL_PATH or at the location derived
    from argv[0]. If that fails, abort. */
@@ -81,13 +84,25 @@ static void find_as(u8* argv0) {
  
 }
 
+// returns 1 if value is present, 0 otherwise
+int has_value(char **array, char *value){
+    int index = 0;
+    //printf("in has value\n");
+    //index++;
+    while(*(array + index++)){
+        if( strcmp(*(array + index), value) == 0){
+            return 1;
+        }
+    }
+    return 0;
+}
 
 /* Copy argv to cc_params, making the necessary edits. */
+// can be improved by dividing the first bit of this function into another function
+static u8 **edit_params(u32 argc, char** argv) {
 
-static void edit_params(u32 argc, char** argv) {
 
-
-  //SAYF("\n\t-----edit_params -------\n");
+  //SAYF("\n\t-----edit_params ALL -------\n");
 
   u8 fortify_set = 0, asan_set = 0;
   u8 *name;
@@ -96,12 +111,13 @@ static void edit_params(u32 argc, char** argv) {
   u8 m32_set = 0;
 #endif
 
-  cc_params = ck_alloc((argc + 128) * sizeof(u8*));
+  u8** cc_params = ck_alloc((argc + 128) * sizeof(u8*));
+  cc_par_cnt = 1;
 
   name = strrchr(argv[0], '/');
-  printf("NAME = %s\n", name);
+ 
   if (!name) name = argv[0]; else name++;
-
+  
   if (!strncmp(name, "afl-clang", 9)) {
 
     clang_mode = 1;
@@ -118,7 +134,7 @@ static void edit_params(u32 argc, char** argv) {
 
   } else {
 
-    printf("its not in clang\n");
+   
 
     if (!strcmp(name, "afl-g++")) {
       u8* alt_cxx = getenv("AFL_CXX");
@@ -127,15 +143,25 @@ static void edit_params(u32 argc, char** argv) {
       u8* alt_cc = getenv("AFL_GCJ");
       cc_params[0] = alt_cc ? alt_cc : (u8*)"gcj";
     } else {
-      printf("in gcc\n");
       u8* alt_cc = getenv("AFL_CC");
       cc_params[0] = alt_cc ? alt_cc : (u8*)"gcc";
     }
 
   }
-
+/*
+  if(has_value(instr_programs, argv[0])){
+      FATAL("instrumentation aborted, program %s is repeated at least twice, all most be different", 
+            argv[0]);
+      exit(0);
+  }
+  */
+  
+  *(instr_programs + head_of_program) = argv[0];
+  head_of_program ++;
+  
+    //cc_params[0] = "gcc";
   while (--argc) {
-    u8* cur = *(++argv);
+    u8* cur = *(argv++);
 
     if (!strncmp(cur, "-B", 2)) {
 
@@ -251,26 +277,22 @@ static void edit_params(u32 argc, char** argv) {
 
   cc_params[cc_par_cnt] = NULL;
 
+  return cc_params;
+
 }
 
-
 /* Main entry point */
-
+// TODO -> improve code, can be greatly improved
 int main(int argc, char** argv) {
 
-  //SAYF("\n\t-----instr-gcc -------\n");
+  //SAYF("\n\t-----In instr-all-gcc -------\n");
 
-  if (isatty(2) && !getenv("AFL_QUIET")) {
-
-    SAYF(cCYA "afl-cc " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
-
-  } else be_quiet = 1;
 
   if (argc < 2) {
 
     SAYF("\n"
-         "This is a helper application for afl-fuzz. It serves as a drop-in replacement\n"
-         "for gcc or clang, letting you recompile third-party code with the required\n"
+         "This is a helper application for instr-fuzz. It serves as a drop-in replacement\n"
+         "for gcc or clang, while instrumenting multiple programs, letting you recompile third-party code with the required\n"
          "runtime instrumentation. A common use pattern would be one of the following:\n\n"
 
          "  CC=%s/afl-gcc ./configure\n"
@@ -286,15 +308,82 @@ int main(int argc, char** argv) {
 
   find_as(argv[0]);
 
-  edit_params(argc, argv);
+  //edit_params(argc, argv);
+  short numbr_lines = 100;
+  int index = 0;
 
-  //printf("cc_params[0] = %s\n", cc_params[0]);
-  //printf("cc_params = %s\n", cc_params);
+  char **tmp = malloc(sizeof(char*) * numbr_lines);
+  instr_programs = malloc( sizeof(char*) * max_amount_of_programs);
 
-  execvp(cc_params[0], (char**)cc_params);
-  //execvp(cc_params[1], (char**)cc_params);
 
-  FATAL("Oops, failed to execute '%s' - check your PATH", cc_params[0]);
+  short is_recording = 0;
+  short first = 1;
+  int numb_instr = 0;
+
+  char snum[5];
+
+  while( *argv ){
+    char *line = *argv++;
+    //printf("line = %s\n", line);
+    
+    if( first ){first = 0; continue;}
+
+    if( strcmp(line, "-p") == 0){
+       
+        if(is_recording){
+            
+
+            u8** cc_params = edit_params(index, tmp);
+            index = 0;
+            tmp = malloc(sizeof(char*) * numbr_lines);
+            sprintf(snum, "%d", numb_instr);
+            numb_instr ++; //leave this here so we don't have race conditions
+
+            // in case we are runnign out of space create more
+            if( index >= 0.75 * numbr_lines){
+                numbr_lines *= 2;
+                tmp = realloc( tmp, sizeof(char*) * numbr_lines );
+            }
+
+            pid_t pid = fork();
+            if(pid){
+                setenv(FORKSRV_ENV, snum, 1);
+                execvp(cc_params[0], (char**)cc_params);
+            }
+        }
+        else is_recording = 1;
+
+        continue; 
+    }
+    
+    *(tmp + index) = line;
+    //printf("tmp = %s\n", *(tmp + index));
+    index++;
+    
+  }
+
+  if(is_recording){
+    //printf("\t is gonna instrumentalize the program\n");
+        //printf("CC_PARAMS IS null\n");
+    u8** cc_params = edit_params(index, tmp);
+    //printf("\tCC_PARAMS\n");
+    //int i = 0;
+    //while( *(tmp + i) ) printf("%s\n", *(tmp + i++));
+    //while( *(cc_params + i) ) printf("%s\n", *(cc_params + i++));
+    sprintf(snum, "%d", numb_instr);
+    setenv(FORKSRV_ENV, snum, 1); // total number of instr
+    printf("even should be = %d\n", numb_instr);
+    numb_instr ++;
+    //setenv(FORKSRV_AMOUNT_ENV, snum, 1); //todo
+    execvp(cc_params[0], (char**)cc_params);
+  }
+  //free(*tmp);
+  //free(tmp);
+  //free(tmp);
+
+
+
+  FATAL("Oops, failed to execute");
 
   return 0;
 

@@ -265,6 +265,7 @@
 /* Environment variable used to pass SHM ID to the called program. */
 
 #define SHM_ENV_VAR         "__AFL_SHM_ID"
+#define SHM_ENV_VAR_SECOND  "__AFL_SHM_ID_2"
 
 /* Other less interesting, internal-only variables. */
 
@@ -286,10 +287,20 @@
 
 #define MSAN_ERROR          86
 
-/* Designated file descriptors for forkserver commands (the application will
+/* Version of the forkserver being instrumentalized*/
+#define FORKSRV_ENV	    "__FORKSRV_ENV_VAR"
+
+/*   Amount of forkservers needed, or number of programs under test	*/
+#define FORKSRV_AMOUNT_ENV "__FORKSRV_AMOUNT_ENV_VAR"
+
+/*Defines the maximum amount of programs that can be tested at once*/
+#define MAX_AMOUT_OF_PROGRAMS		100
+
+/* Designated file descriptors base for forkserver commands (the application will
    use FORKSRV_FD and FORKSRV_FD + 1): */
 
 #define FORKSRV_FD          198
+
 
 /* Fork server init timeout multiplier: we'll wait the user-selected
    timeout plus this much for the fork server to spin up. */

@@ -1,17 +1,3 @@
-#
-# american fuzzy lop - makefile
-# -----------------------------
-#
-# Written and maintained by Michal Zalewski <lcamtuf@google.com>
-# 
-# Copyright 2013, 2014, 2015, 2016, 2017 Google Inc. All rights reserved.
-# 
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at:
-# 
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
 
 PROGNAME    = afl
 VERSION     = $(shell grep '^\#define VERSION ' config.h | cut -d '"' -f2)
@@ -24,7 +10,7 @@ MISC_PATH   = $(PREFIX)/share/afl
 
 # PROGS intentionally omit instr-as, which gets installed elsewhere.
 
-PROGS       = instr-gcc instr-fuzz-equ afl-showmap
+PROGS       = instr-gcc instr-all-gcc afl-fuzz afl-showmap
 
 CFLAGS     ?= -O3 -funroll-loops
 CFLAGS     += -Wall -D_FORTIFY_SOURCE=2 -g -Wno-pointer-sign \
@@ -60,15 +46,21 @@ test_x86:
 
 endif
 
+
 instr-gcc: instr-gcc.c $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 	set -e; for i in afl-g++ afl-clang afl-clang++; do ln -sf instr-gcc $$i; done
+
+
+instr-all-gcc: instr-all-gcc $(COMM_HDR) | test_x86
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
+	
 
 instr-as: instr-as.c instr-as.h $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 	ln -sf instr-as as
 
-instr-fuzz-equ: instr-fuzz-equ.c $(COMM_HDR) instr-fuzz-equ.h instr-essential.h | test_x86
+afl-fuzz: afl-fuzz.c $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 
 afl-showmap: afl-showmap.c $(COMM_HDR) | test_x86
@@ -81,7 +73,7 @@ ifndef AFL_NO_X86
 
 test_build: instr-gcc instr-as afl-showmap
 	@echo "[*] Testing the CC wrapper and instrumentation output..."
-	unset AFL_USE_ASAN AFL_USE_MSAN; AFL_QUIET=1 AFL_INST_RATIO=100 AFL_PATH=. ./$(TEST_CC) $(CFLAGS) test-instr.c -o test-instr $(LDFLAGS)
+	unset AFL_USE_ASAN AFL_USE_MSAN; AFL_QUIET=1 AFL_INST_RATIO=100 AFL_PATH=. ./$(TEST_CC) $(CFLAGS) test-instr.c -o test-instr $(LDFLAGS) -save-temps
 	echo 0 | ./afl-showmap -m none -q -o .test-instr0 ./test-instr
 	echo 1 | ./afl-showmap -m none -q -o .test-instr1 ./test-instr
 	@rm -f test-instr

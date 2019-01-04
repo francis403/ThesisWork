@@ -62,6 +62,12 @@ static u8   be_quiet,           /* Quiet mode (no stderr output)        */
 static u32  inst_ratio = 100,   /* Instrumentation probability (%)      */
             as_par_cnt = 1;     /* Number of params to 'as'             */
 
+int numbr_inst = 0;
+
+/*Version of the program being instrumentalized
+     Affects what forksrv we are communicating*/
+int program_version;
+
 /* If we don't find --32 or --64 in the command line, default to 
    instrumentation for whichever mode we were compiled with. This is not
    perfect, but should do the trick for almost all use cases. */
@@ -80,7 +86,6 @@ static u8   use_64bit = 0;
 
 #endif /* ^__x86_64__ */
 
-static char *test_directory = "/home/francis/Documents/ThesisWork";
 
 /* Examine and modify parameters to pass to 'as'. Note that the file name
    is always the last parameter passed by GCC, so we exploit this property
@@ -199,7 +204,7 @@ static void edit_params(int argc, char** argv) {
 
     if (strncmp(input_file, tmp_dir, strlen(tmp_dir)) &&
         strncmp(input_file, "/var/tmp/", 9) &&
-        strncmp(input_file, "/tmp/", 5)) pass_thru = -1;
+        strncmp(input_file, "/tmp/", 5)) pass_thru = 1;
 
   }
 
@@ -259,13 +264,8 @@ unsigned int blockIDGenerator(char *block){
   strcpy(copy, block);
 
   char *delim = "\n";
-  
-  //printf("\n---BLOCK---\n\n");
-  //printf("%s\n", block );
-  //printf("\n---END OF BLOCK---\n\n");
 
   char *line = strtok(copy, delim);
-
   while(line != NULL){
     //printf("line = %s\n", line);
     
@@ -276,6 +276,9 @@ unsigned int blockIDGenerator(char *block){
       continue;
     }
     
+    // now we actually beggin
+    //printf("%s\n", line);
+
     char *rest = line;
     char *command;
     
@@ -312,7 +315,7 @@ unsigned int blockIDGenerator(char *block){
   free(line);
   free(copy);
   free(string_to_hash);
-  return val% MAP_SIZE;
+  return val% MAP_SIZE + 1;
 }
 
 // clean the isntrumented pointer
@@ -332,7 +335,11 @@ void addToOutFile(FILE *file, char *lines){
   int block_id = blockIDGenerator(lines);
   //int block_id = R(MAP_SIZE);
   fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-              block_id); //TODO: -> shows the added lines
+              block_id, block_id); 
+
+  //fprintf(stdout, trampoline_fmt_64, block_id, "10" );
+
+              //TODO: -> shows the added lines
   //printf("LINE ---\n %s\n", lines);
   //fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", file);
   fputs(lines, file);
@@ -416,25 +423,27 @@ static void add_instrumentation(void) {
        the trampoline now. */
 
     //ADDS THE TRAMPOLINE CODE
-    if (!pass_thru && !skip_intel && !skip_app && !skip_csect && instr_ok &&
+    if ( !skip_intel && !skip_app && !skip_csect && instr_ok &&
         instrument_next && line[0] == '\t' && isalpha(line[1])) {
+
+      //printf("\t\tenters in the first if\n");
 
       // if we found the new beggining of the next line to be instrumented and we're instrumenting the last one still, end it
       if(is_recording){
-
+        numbr_inst ++;
         is_recording = 0;
         num_of_lines_recorded = 0; //no block no lines
 
         //add all the lines to the output file
         addToOutFile(instr_lines_after, lines_to_instrument);
-
+        addToOutFile(outf, lines_to_instrument);
         // clean the value inside it
         clearInstr(&lines_to_instrument);
 
       }
 	
-      fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-              R(MAP_SIZE)); //ideia -> é aqui que estão a adicionar o id aleatorio!!!! e guarda no $0x%08x
+      //fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
+      //        R(MAP_SIZE)); //ideia -> é aqui que estão a adicionar o id aleatorio!!!! e guarda no $0x%08x
 
       // put it in the section above
       
@@ -453,7 +462,7 @@ static void add_instrumentation(void) {
     }
 
     /* Output the actual line, call it a day in pass-thru mode. */
-   fputs(line, outf);
+   //fputs(line, outf);
 
     // added for the presentation
    /*
@@ -484,22 +493,33 @@ static void add_instrumentation(void) {
     */
     /*---END OF ADDED FOR PRESENTATION*/
 
+    //if(strstr(line, "\tret")){printf("found the line -> %s\n", line);}
+
+
     if(is_recording){
+      // checks if we need to add the code that it ended, doubtfull its good enough
+      
       concatInto(&lines_to_instrument, line);
       num_of_lines_recorded ++;
+      
     }
     else { 
+
       fputs(line, instr_lines_after);
+      fputs(line, outf);
     } 
 
     //fputs(line, instr_lines_after); // shows what happens after
     
+    // IDEA: check if its the main .cfi_endproc
+
     if (strstr(line, ".cfi_endproc")){
          if(is_recording){
             is_recording = 0;
-
+              numbr_inst ++;
             //add all the lines out
             addToOutFile(instr_lines_after, lines_to_instrument);
+            addToOutFile(outf, lines_to_instrument);
             //printf("lines = %s\n", lines_to_instrument);
 
             // clear the line
@@ -516,6 +536,7 @@ static void add_instrumentation(void) {
        files - and let's set instr_ok accordingly. */
 
     if (line[0] == '\t' && line[1] == '.') {
+
 
       /* OpenBSD puts jump tables directly inline with the code, which is
          a bit annoying. They use a specific format of p2align directives
@@ -604,21 +625,23 @@ static void add_instrumentation(void) {
 
     if (line[0] == '\t') {
 
-      if (line[1] == 'j' && line[2] != 'm' && R(100) < inst_ratio) {
+      if (line[1] == 'j' && line[2] != 'm') {
         
+        // printf("\t\tenters in the second if\n");
+
         if(is_recording){
           is_recording = 0;
           num_of_lines_recorded = 0; //no block no lines
-
+            numbr_inst ++;
           //TODO: add all the lines
           addToOutFile(instr_lines_after, lines_to_instrument);
-          
+          addToOutFile(outf, lines_to_instrument);
           // clean the lines buffer
           clearInstr(&lines_to_instrument);
         }
 		
-        fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-                R(MAP_SIZE));
+        //fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
+        //        R(MAP_SIZE));
 
         /*
         fprintf(instr_lines_after, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
@@ -703,9 +726,14 @@ static void add_instrumentation(void) {
   } //end of while
   //fputs("/*Teste do programa*/\n",inf);
   //free(lines_to_instrument);
+
+  //TODO -> add it here
   if (ins_lines){
-    fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
-    fputs((use_64bit ? main_payload_64 : main_payload_32), instr_lines_after);
+    //fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
+    //fprintf(outf, end_of_program_64_todo);
+    fprintf(outf, main_payload_64, FORKSRV_FD + (program_version * 2), FORKSRV_FD + (program_version * 2) + 1); //read - write
+    //fputs((use_64bit ? main_payload_64 : main_payload_32), instr_lines_after);
+    fprintf(instr_lines_after, (use_64bit ? main_payload_64 : main_payload_32), FORKSRV_FD + (program_version * 2),  FORKSRV_FD + (program_version * 2) + 1); //write 
   }
   
   //rewind(inf);
@@ -749,7 +777,12 @@ static void add_instrumentation(void) {
 
 int main(int argc, char** argv) {
 
+
   SAYF("\n\t-----Entry point to main point of instr-as.c-------\n");
+
+  program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
+
+  printf("env final = %d\n", program_version);
 
   s32 pid;
   u32 rand_seed;
