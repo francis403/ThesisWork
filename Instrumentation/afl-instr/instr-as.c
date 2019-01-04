@@ -224,7 +224,8 @@ wrap_things_up:
 **/
 char *concat( char *s1, char *s2)
 {
-  char *result = malloc(strlen(s1) + strlen(s2) + 1);
+  char *result = malloc( strlen(s1) + strlen(s2) + 1 );
+  if(!result) FATAL("malloc failed in concat!");
   strcpy(result, s1);
   strcat(result, s2);
   return result;
@@ -260,7 +261,10 @@ int hash_string(char *input){
 unsigned int blockIDGenerator(char *block){
    
   char *string_to_hash = calloc(0, sizeof(char)); //string to eventually hash
+  
   char *copy = malloc ( sizeof(char) * strlen(block) + 1 );
+  if(!copy) FATAL("malloc failed generating block ID");
+
   strcpy(copy, block);
 
   char *delim = "\n";
@@ -723,7 +727,7 @@ static void add_instrumentation(void) {
   } //end of while
   //fputs("/*Teste do programa*/\n",inf);
   //free(lines_to_instrument);
-  
+
   if (ins_lines){
     //fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
     //fprintf(outf, end_of_program_64_todo);

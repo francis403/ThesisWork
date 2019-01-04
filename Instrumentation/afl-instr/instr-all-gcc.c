@@ -313,8 +313,14 @@ int main(int argc, char** argv) {
   int index = 0;
 
   char **tmp = malloc(sizeof(char*) * numbr_lines);
+
+  if( !tmp ){
+    FATAL("malloc failed in instrumentalizing all programs");
+  }
+
   instr_programs = malloc( sizeof(char*) * max_amount_of_programs);
 
+  if(!instr_programs) FATAL("malloc failed to work");
 
   short is_recording = 0;
   short first = 1;
@@ -335,7 +341,10 @@ int main(int argc, char** argv) {
 
             u8** cc_params = edit_params(index, tmp);
             index = 0;
-            tmp = malloc(sizeof(char*) * numbr_lines);
+            
+            tmp = malloc(sizeof(char*) * numbr_lines); //clear the pointer
+            if(!tmp) FATAL("malloc failed to work");
+
             sprintf(snum, "%d", numb_instr);
             numb_instr ++; //leave this here so we don't have race conditions
 
