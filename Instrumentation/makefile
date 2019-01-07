@@ -43,7 +43,7 @@ instr-all:
 valgrind:
 	valgrind --leak-check=full ./$(ALL)
 test_memory:
-	valgrind --leak-check=full test_folder/afl-fuzz -m none -i input -o out ./fact ./simple2
+	valgrind --leak-check=full afl-instr/afl-fuzz -m none -i input -o out ./fact ./simple2
 
 
 #--------CLEANING---------

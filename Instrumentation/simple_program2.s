@@ -2031,9 +2031,12 @@ __afl_store:
   movq $4, %rdx               /* length    */
   leaq __afl_block_temp, %rsi
   movq __fsrv_write, %rdi       /* file desc */
-call write@PLT
 
+  /* In child process: close fds, resume execution. */
 
+  movq __fsrv_write, %rdi       /* file desc */
+
+  movq __fsrv_read, %rdi       /* file desc */
 __afl_return:
 
   addb $127, %al
@@ -2200,14 +2203,4 @@ call write@PLT
 
 __afl_fork_resume:
 
-  /* In child process: close fds, resume execution. */
-
-  movq $198, %rdi
-
-  movq $(198 + 1), %rdi
-
-  popq %rdx
-  popq %rdx
-
-  movq %r12, %rsp
-  p
+  /* In ch

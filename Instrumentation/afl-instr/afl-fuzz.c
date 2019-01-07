@@ -104,7 +104,9 @@ EXP_ST u64 mem_limit  = MEM_LIMIT;    /* Memory cap for child (MB)        */
 static u32 stats_update_freq = 1;     /* Stats update frequency (execs)   */
 
 EXP_ST u8  skip_deterministic,        /* Skip deterministic stages?       */
+		   force_deterministic,       /* Force deterministic stages?      */
            dumb_mode,                 /* Run in non-instrumented mode?    */
+		   use_splicing,              /* Recombine input files?           */
            score_changed,             /* Scoring for favorites changed?   */
            kill_signal,               /* Signal that killed the child     */
            resuming_fuzz,             /* Resuming an older fuzzing job?   */
@@ -140,7 +142,7 @@ pid_t block_pid;
 
 /* TODO probably will need an array of this things */
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap  */
-
+EXP_ST u8* trace_bits_todo[MAX_AMOUT_OF_PROGRAMS]; /* SGM with instrumentation bitmap array */ //Todo -> tenho medo de ser demasiado espaco 
 
 
 EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
@@ -151,7 +153,7 @@ static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
 
 //TODO -> probably need an array here as well
 static s32 shm_id;                    /* ID of the SHM region             */
-static s32 shm_id2;                   /* ID of the second SHM region TODO */
+static s32 shm_id_todo[MAX_AMOUT_OF_PROGRAMS];			  /* Array of IDs of shared memory of all programs */
 
 static volatile u8 stop_soon,         /* Ctrl-C pressed?                  */
                    clear_screen = 1,  /* Window resized?                  */
@@ -269,6 +271,14 @@ static u32 extras_cnt;                /* Total number of tokens read      */
 static struct extra_data* a_extras;   /* Automatically selected extras    */
 static u32 a_extras_cnt;              /* Total number of tokens available */
 
+static u8* (*post_handler)(u8* buf, u32* len);
+
+
+/* Interesting values, as per config.h */
+
+static s8  interesting_8[]  = { INTERESTING_8 };
+static s16 interesting_16[] = { INTERESTING_8, INTERESTING_16 };
+static s32 interesting_32[] = { INTERESTING_8, INTERESTING_16, INTERESTING_32 };
 
 
 /* Fuzzing stages */
@@ -551,6 +561,63 @@ static void mark_as_det_done(struct queue_entry* q) {
 	ck_free(fn);
 
 	q->passed_det = 1;
+
+}
+
+/* Mark as variable. Create symlinks if possible to make it easier to examine
+   the files. */
+
+static void mark_as_variable(struct queue_entry* q) {
+
+  u8 *fn = strrchr(q->fname, '/') + 1, *ldest;
+
+  ldest = alloc_printf("../../%s", fn);
+  fn = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir, fn);
+
+  if (symlink(ldest, fn)) {
+
+    s32 fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    close(fd);
+
+  }
+
+  ck_free(ldest);
+  ck_free(fn);
+
+  q->var_behavior = 1;
+
+}
+
+
+/* Mark / unmark as redundant (edge-only). This is not used for restoring state,
+   but may be useful for post-processing datasets. */
+
+static void mark_as_redundant(struct queue_entry* q, u8 state) {
+
+  u8* fn;
+  s32 fd;
+
+  if (state == q->fs_redundant) return;
+
+  q->fs_redundant = state;
+
+  fn = strrchr(q->fname, '/');
+  fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
+
+  if (state) {
+
+    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    close(fd);
+
+  } else {
+
+    if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
+
+  }
+
+  ck_free(fn);
 
 }
 
@@ -1002,52 +1069,132 @@ static void update_bitmap_score(struct queue_entry* q) {
 
 }
 
-/* Configure shared memory and virgin_bits. This is called at startup. */
+/* The second part of the mechanism discussed above is a routine that
+   goes over top_rated[] entries, and then sequentially grabs winners for
+   previously-unseen bytes (temp_v) and marks them as favored, at least
+   until the next run. The favored entries are given more air time during
+   all fuzzing steps. */
 
-		EXP_ST void setup_shm(void) {
+static void cull_queue(void) {
 
-			u8* shm_str;
+  struct queue_entry* q;
+  static u8 temp_v[MAP_SIZE >> 3];
+  u32 i;
 
-			if (!in_bitmap) memset(virgin_bits, 255, MAP_SIZE);
+  if (dumb_mode || !score_changed) return;
 
-			memset(virgin_tmout, 255, MAP_SIZE);
-			memset(virgin_crash, 255, MAP_SIZE);
+  score_changed = 0;
 
-			shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
-  //printf("shm_id = %d\n", shm_id);
-			shm_id2 = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
-  //printf("shm_id2 = %d\n", shm_id2);
-			if(shm_id == shm_id2){ printf("\tsomething went wrong\n");}
-			else printf("\tsomething went right!\n");
+  memset(temp_v, 255, MAP_SIZE >> 3);
 
+  queued_favored  = 0;
+  pending_favored = 0;
 
-			if ( shm_id < 0 || shm_id2 < 0 ) PFATAL("shmget() failed");
+  q = queue;
 
-			atexit(remove_shm);
+  while (q) {
+    q->favored = 0;
+    q = q->next;
+  }
 
-			shm_str = alloc_printf("%d", shm_id);
-  //shm_str2 = alloc_printf("%d", shm_id2);
+  /* Let's see if anything in the bitmap isn't captured in temp_v.
+     If yes, and if it has a top_rated[] contender, let's use it. */
 
-  //printf("shm_str2 = %s\n", (shm_str2 == NULL));
+  for (i = 0; i < MAP_SIZE; i++)
+    if (top_rated[i] && (temp_v[i >> 3] & (1 << (i & 7)))) {
 
-  /* If somebody is asking us to fuzz instrumented binaries in dumb mode,
-     we don't want them to detect instrumentation, since we won't be sending
-     fork server commands. This should be replaced with better auto-detection
-     later on, perhaps? */
+      u32 j = MAP_SIZE >> 3;
 
-			if (!dumb_mode){ 
-				setenv(SHM_ENV_VAR, shm_str, 1);
-  	//setenv(SHM_ENV_VAR_SECOND, shm_str2, 1);
-			}
+      /* Remove all bits belonging to the current entry from temp_v. */
 
-			ck_free(shm_str);
+      while (j--) 
+        if (top_rated[i]->trace_mini[j])
+          temp_v[j] &= ~top_rated[i]->trace_mini[j];
 
-  trace_bits = shmat(shm_id, NULL, 0); //attach the shared memory address segment to trace_bits
-  
-  if (!trace_bits) PFATAL("shmat() failed");
+      top_rated[i]->favored = 1;
+      queued_favored++;
+
+      if (!top_rated[i]->was_fuzzed) pending_favored++;
+
+    } // end of if and for
+
+  q = queue;
+
+  while (q) {
+    mark_as_redundant(q, !q->favored);
+    q = q->next;
+  }
 
 }
 
+/* Configure shared memory and virgin_bits. This is called at startup. */
+// TODO -> add mulitple ids
+EXP_ST void setup_shm(void) {
+
+	u8* shm_str;
+
+	if (!in_bitmap) memset(virgin_bits, 255, MAP_SIZE);
+
+	memset(virgin_tmout, 255, MAP_SIZE);
+	memset(virgin_crash, 255, MAP_SIZE);
+
+	shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
+	//printf("shm_id = %d\n", shm_id);
+	//shm_id2 = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
+	//printf("shm_id2 = %d\n", shm_id2);
+		
+
+
+	if ( shm_id < 0 ) PFATAL("shmget() failed");
+
+	atexit(remove_shm);
+
+	shm_str = alloc_printf("%d", shm_id);
+	 
+
+	  /* If somebody is asking us to fuzz instrumented binaries in dumb mode,
+	     we don't want them to detect instrumentation, since we won't be sending
+	     fork server commands. This should be replaced with better auto-detection
+	     later on, perhaps? */
+
+	if (!dumb_mode){ 
+		setenv(SHM_ENV_VAR, shm_str, 1);
+	}
+
+	ck_free(shm_str);
+
+	trace_bits = shmat(shm_id, NULL, 0); //attach the shared memory address segment to trace_bits
+	  
+	if (!trace_bits) PFATAL("shmat() failed");
+
+}
+
+
+/* Load postprocessor, if available. */
+
+static void setup_post(void) {
+
+  void* dh;
+  u8* fn = getenv("AFL_POST_LIBRARY");
+  u32 tlen = 6;
+
+  if (!fn) return;
+
+  ACTF("Loading postprocessor from '%s'...", fn);
+
+  dh = dlopen(fn, RTLD_NOW);
+  if (!dh) FATAL("%s", dlerror());
+
+  post_handler = dlsym(dh, "afl_postprocess");
+  if (!post_handler) FATAL("Symbol 'afl_postprocess' not found.");
+
+  /* Do a quick test. It's better to segfault now than later =) */
+
+  post_handler("hello", &tlen);
+
+  OKF("Postprocessor installed successfully.");
+
+}
 
 /* Read all testcases from the input directory, then queue them for testing.
    Called at startup. */
@@ -1152,6 +1299,22 @@ static void read_testcases(void) {
 
 }
 
+/* Helper function for load_extras. */
+
+static int compare_extras_len(const void* p1, const void* p2) {
+  struct extra_data *e1 = (struct extra_data*)p1,
+                    *e2 = (struct extra_data*)p2;
+
+  return e1->len - e2->len;
+}
+
+static int compare_extras_use_d(const void* p1, const void* p2) {
+  struct extra_data *e1 = (struct extra_data*)p1,
+                    *e2 = (struct extra_data*)p2;
+
+  return e2->hit_cnt - e1->hit_cnt;
+}
+
 /* Helper function for maybe_add_auto() */
 
 static inline u8 memcmp_nocase(u8* m1, u8* m2, u32 len) {
@@ -1160,6 +1323,112 @@ static inline u8 memcmp_nocase(u8* m1, u8* m2, u32 len) {
 	return 0;
 
 }
+
+/* Maybe add automatic extra. */
+
+static void maybe_add_auto(u8* mem, u32 len) {
+
+  u32 i;
+
+  /* Allow users to specify that they don't want auto dictionaries. */
+
+  if (!MAX_AUTO_EXTRAS || !USE_AUTO_EXTRAS) return;
+
+  /* Skip runs of identical bytes. */
+
+  for (i = 1; i < len; i++)
+    if (mem[0] ^ mem[i]) break;
+
+  if (i == len) return;
+
+  /* Reject builtin interesting values. */
+
+  if (len == 2) {
+
+    i = sizeof(interesting_16) >> 1;
+
+    while (i--) 
+      if (*((u16*)mem) == interesting_16[i] ||
+          *((u16*)mem) == SWAP16(interesting_16[i])) return;
+
+  }
+
+  if (len == 4) {
+
+    i = sizeof(interesting_32) >> 2;
+
+    while (i--) 
+      if (*((u32*)mem) == interesting_32[i] ||
+          *((u32*)mem) == SWAP32(interesting_32[i])) return;
+
+  }
+
+  /* Reject anything that matches existing extras. Do a case-insensitive
+     match. We optimize by exploiting the fact that extras[] are sorted
+     by size. */
+
+  for (i = 0; i < extras_cnt; i++)
+    if (extras[i].len >= len) break;
+
+  for (; i < extras_cnt && extras[i].len == len; i++)
+    if (!memcmp_nocase(extras[i].data, mem, len)) return;
+
+  /* Last but not least, check a_extras[] for matches. There are no
+     guarantees of a particular sort order. */
+
+  auto_changed = 1;
+
+  for (i = 0; i < a_extras_cnt; i++) {
+
+    if (a_extras[i].len == len && !memcmp_nocase(a_extras[i].data, mem, len)) {
+
+      a_extras[i].hit_cnt++;
+      goto sort_a_extras;
+
+    }
+
+  }
+
+  /* At this point, looks like we're dealing with a new entry. So, let's
+     append it if we have room. Otherwise, let's randomly evict some other
+     entry from the bottom half of the list. */
+
+  if (a_extras_cnt < MAX_AUTO_EXTRAS) {
+
+    a_extras = ck_realloc_block(a_extras, (a_extras_cnt + 1) *
+                                sizeof(struct extra_data));
+
+    a_extras[a_extras_cnt].data = ck_memdup(mem, len);
+    a_extras[a_extras_cnt].len  = len;
+    a_extras_cnt++;
+
+  } else {
+
+    i = MAX_AUTO_EXTRAS / 2 +
+        UR((MAX_AUTO_EXTRAS + 1) / 2);
+
+    ck_free(a_extras[i].data);
+
+    a_extras[i].data    = ck_memdup(mem, len);
+    a_extras[i].len     = len;
+    a_extras[i].hit_cnt = 0;
+
+  }
+
+sort_a_extras:
+
+  /* First, sort all auto extras by use count, descending order. */
+
+  qsort(a_extras, a_extras_cnt, sizeof(struct extra_data),
+        compare_extras_use_d);
+
+  /* Then, sort the top USE_AUTO_EXTRAS entries by size. */
+
+  qsort(a_extras, MIN(USE_AUTO_EXTRAS, a_extras_cnt),
+        sizeof(struct extra_data), compare_extras_len);
+
+}
+
 
 /* Save automatically generated extras. */
 
@@ -1185,6 +1454,49 @@ static void save_auto(void) {
 		ck_free(fn);
 
 	}
+
+}
+
+
+/* Load automatically generated extras. */
+
+static void load_auto(void) {
+
+  u32 i;
+
+  for (i = 0; i < USE_AUTO_EXTRAS; i++) {
+
+    u8  tmp[MAX_AUTO_EXTRA + 1];
+    u8* fn = alloc_printf("%s/.state/auto_extras/auto_%06u", in_dir, i);
+    s32 fd, len;
+
+    fd = open(fn, O_RDONLY, 0600);
+
+    if (fd < 0) {
+
+      if (errno != ENOENT) PFATAL("Unable to open '%s'", fn);
+      ck_free(fn);
+      break;
+
+    }
+
+    /* We read one byte more to cheaply detect tokens that are too
+       long (and skip them). */
+
+    len = read(fd, tmp, MAX_AUTO_EXTRA + 1);
+
+    if (len < 0) PFATAL("Unable to read from '%s'", fn);
+
+    if (len >= MIN_AUTO_EXTRA && len <= MAX_AUTO_EXTRA)
+      maybe_add_auto(tmp, len);
+
+    close(fd);
+    ck_free(fn);
+
+  }
+
+  if (i) OKF("Loaded %u auto-discovered dictionary tokens.", i);
+  else OKF("No auto-generated dictionary tokens to reuse.");
 
 }
 
@@ -1222,8 +1534,8 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 	ACTF("Spinning up the fork server...");
 
 	if (pipe(st_pipe) || pipe(ctl_pipe)) PFATAL("pipe() failed");
-	printf("\t----------is gonna stop me = %d\n",fcntl(st_pipe[1], F_SETFL, O_NONBLOCK));
-	fcntl(*fsrv_st_fd, F_SETFL, O_NONBLOCK);
+	//printf("\t----------is gonna stop me = %d\n",fcntl(st_pipe[1], F_SETFL, O_NONBLOCK));
+	//fcntl(*fsrv_st_fd, F_SETFL, O_NONBLOCK);
 
 
 	*forksrv_pid = fork();
@@ -1496,6 +1808,7 @@ FATAL("Fork server handshake failed");
 
 }
 
+
 /*
 * Helper function for cmp_programs
 * Returns the number of blocks hit by the current fuzzed program
@@ -1550,15 +1863,215 @@ int blocks_hit(int *blocks){
 }
 */
 
-// This is our run_target (afl_fuzz)
-
-int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st_fd){
+/**
+*
+* RUNS specific forkserver specified in fsrv_ctl_fd and fsrv_st_fd
+* Stores the reason the program crashed in fault, if it does not crash FAULT_NONE
+* Stores the amount of blocks found in hit
+*
+**/
+int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st_fd, u8 *fault){
 	printf("\t-> in run_forkserver_on_target\n");
 
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
+	u32 tb4;
+
+	int status = 0;
+	//u32 tb4;
+
+	child_timed_out = 0;
+
+	  /* After this memset, trace_bits[] are effectively volatile, so we
+	     must prevent any earlier operations from venturing into that
+	     territory. */
+
+	memset(trace_bits, 0, MAP_SIZE);
+	MEM_BARRIER();
+
+//issue -> are both of the programs running?
+
+	s32 res;
+
+    //start of the forkserver
+
+    if ((res = write(fsrv_ctl_fd, &prev_timed_out, 4)) != 4) { //-WRITE
+
+    	if (stop_soon) return 0;
+    	RPFATAL(res, "Unable to request new process from fork server (OOM?)");
+
+    }
+
+    //printf("%d\n", &prev_timed_out);
+
+    if ((res = read(fsrv_st_fd, &child_pid, 4)) != 4) { //-READ
+
+    	  printf("res = %d\n", res);
+
+    	if (stop_soon) return 0;
+    	RPFATAL(res, "Unable to request new process from fork server (OOM?)");
+
+    }
+
+    if (child_pid <= 0) FATAL("Fork server is misbehaving (OOM?)");
+
+	 /* Configure timeout, as requested by user, then wait for child to terminate. */
+
+	it.it_value.tv_sec = (timeout / 1000);
+	it.it_value.tv_usec = (timeout % 1000) * 1000;
+
+	setitimer(ITIMER_REAL, &it, NULL); //check out
+
+    // relays the wait status and then should leave
+
+	/* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
+
+	if ((res = read(fsrv_st_fd, &status, 4)) != 4) { // TODO -> check it out a bit more 
+
+		if (stop_soon) return 0;
+		RPFATAL(res, "Unable to communicate with fork server (OOM?)");
+
+	}
+	printf("status = %d\n", status);
+	// try to understand what's going on
+	
+  	if (!WIFSTOPPED(status)) child_pid = 0;
+  	/*
+  	it.it_value.tv_sec = 0;
+  	it.it_value.tv_usec = 0;
+
+  	setitimer(ITIMER_REAL, &it, NULL);
+  	total_execs++;
+	*/
+
+	unsigned int size = 100;
+	*hit = 0;
+
+	int *blocks = malloc( sizeof(int) * size );
+
+	if(!blocks){
+		FATAL("malloc failed in run_forkserver_on_target");
+	}
+
+	unsigned int id = 0, i = 0;
+
+	// TODO: for some reason, the last block we read is typically garbage, try to figure out why
+	// for now, we simply ignore the last one when comparing
+	
+
+	while( 1 ){
+
+		//printf("poll\n");
+		if(WIFSTOPPED(status)){ printf("Has stopped\n");break;}
+		if(WIFEXITED(status)){ printf("Terminated normally\n");break;}
+		if(WIFSIGNALED(status)){ printf("received signal from\n"); break;}
+		// check if there are things to read
+		//if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 10) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
+		//	 break;
+
+		
+			//there's something to read
+			//printf("gonna try and read something\n");
+
+			//read it
+			if (read(fsrv_st_fd, &id, 4) != 4) { //-WRITE
+			   	RPFATAL(-1, "Unable to read block_id from fork server (OOM?)");
+			}
+			
+
+			*hit = *hit + 1;
+
+			//check if we have enough memory allocated for the array
+			if( *hit >= size * 0.75 ){
+				size *= 2;
+				blocks = realloc(blocks, sizeof(int) * size );
+
+				if(!blocks){
+					free( blocks );
+					RPFATAL(-1, "Something went wrong when increasing the size of the block");
+				}
+			}
+
+			*(blocks + i) = id;
+
+			printf("*block_hit = 0x%08x\n", *(blocks + i));
+			i++;	
+	}
+	
+	//printf("left while\n");
 
 
+	//if( blocks == NULL ) printf("blocks is null\n");
+	//else printf("is not null\n");
+		//exit(0);
+	//}
+
+  
+  //if (!WIFSTOPPED(status)) child_pid = 0;
+
+  it.it_value.tv_sec = 0;
+  it.it_value.tv_usec = 0;
+
+  setitimer(ITIMER_REAL, &it, NULL);
+  total_execs++;
+  
+
+  /* Any subsequent operations on trace_bits must not be moved by the
+     compiler below this point. Past this location, trace_bits[] behave
+     very normally and do not have to be treated as volatile. */
+
+  MEM_BARRIER();
+
+  tb4 = *(u32*)trace_bits;
+
+//TODO -> probably will need to change this
+#ifdef __x86_64__
+  classify_counts((u64*)trace_bits);
+#else
+  classify_counts((u32*)trace_bits);
+#endif /* ^__x86_64__ */
+
+
+
+  /* Report outcome to caller. */
+
+  if (WIFSIGNALED(status) && !stop_soon) {
+
+  	printf("status = %d\n", status);
+  	printf("signal status = %d\n", WIFSIGNALED(status) );
+
+  	printf("\treported outcome is a crash!\n");
+
+    kill_signal = WTERMSIG(status);
+
+    if (child_timed_out && kill_signal == SIGKILL) *fault = FAULT_TMOUT;
+
+    else *fault = FAULT_CRASH;
+  }
+
+  /* A somewhat nasty hack for MSAN, which doesn't support abort_on_error and
+     must use a special exit code. */
+
+  else if (uses_asan && WEXITSTATUS(status) == MSAN_ERROR) {
+    kill_signal = 0;
+    *fault = FAULT_CRASH;
+  }
+
+  else *fault = FAULT_NONE;
+
+  printf("\tfault = %d\n", *fault);
+
+  return blocks;
+}
+
+//TODO -> this is where We'll implement the real run_target, for now is just a templace
+// take the things here and put it in the run_forkserver
+static u8 run_target(char** argv, u32 timeout) {
+
+	static struct itimerval it;
+	static u32 prev_timed_out = 0;
+
+	int hit = 0;
 	int status = 0;
 	//u32 tb4;
 
@@ -1613,19 +2126,8 @@ int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st
 
 	}
 
-	/*
-	pid_t pid = fork();
-	// read all blocks
-	if( pid ){
-
-		hits = blocks_hit(&blocks);
-
-		printf("first block should be = %d\n", *blocks);
-	}
-	*/
-
 	unsigned int size = 100;
-	*hit = 0;
+	hit = 0;
 
 	int *blocks = malloc( sizeof(int) * size );
 
@@ -1648,10 +2150,10 @@ int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st
 		   	RPFATAL(-1, "Unable to read block_id from fork server (OOM?)");
 		}
 		
-		*hit = *hit + 1;
+		hit = hit + 1;
 
 		//check if we have enough memory allocated for the array
-		if( *hit >= size * 0.75 ){
+		if( hit >= size * 0.75 ){
 			size *= 2;
 			blocks = realloc(blocks, sizeof(int) * size );
 
@@ -1689,13 +2191,35 @@ int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st
 
   MEM_BARRIER();
 
+#ifdef __x86_64__
+  classify_counts((u64*)trace_bits);
+#else
+  classify_counts((u32*)trace_bits);
+#endif /* ^__x86_64__ */
 
-  return blocks;
-}
 
-//TODO -> this is where We'll implement the real run_target, for now is just a templace
-static u8 run_target(char** argv, u32 timeout) {
-	return NULL;
+
+  /* Report outcome to caller. */
+
+  if (WIFSIGNALED(status) && !stop_soon) {
+
+    kill_signal = WTERMSIG(status);
+
+    if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
+
+    return FAULT_CRASH;
+
+  }
+
+  /* A somewhat nasty hack for MSAN, which doesn't support abort_on_error and
+     must use a special exit code. */
+
+  if (uses_asan && WEXITSTATUS(status) == MSAN_ERROR) {
+    kill_signal = 0;
+    return FAULT_CRASH;
+  }
+
+	return FAULT_NONE;
 }
 
 /**
@@ -1704,6 +2228,7 @@ static u8 run_target(char** argv, u32 timeout) {
 * Used to check out if the instrumentation is correct in all programs
 *
 * Also sets in size the number of blocks in each program
+* TODO -> add an array of faults that it returns
 **/
 static int** run_programs_once(u32 timeout, int *size[] ){
 
@@ -1717,12 +2242,11 @@ static int** run_programs_once(u32 timeout, int *size[] ){
 	if(!blocks){
 		FATAL("malloc failed running all the programs!");
 	}
-
+	u8 fault;
 	// Get all the blocks of all programs under	test
 	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
 		//blocks[i] = malloc( sizeof(int) );
-		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), fsrv_ctl_fd[i], fsrv_st_fd[i]);
-		//*(blocks + i) = run_forkserver_on_target(timeout, &(size[i]), fsrv_ctl_fd[0], fsrv_st_fd[0]);
+		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), fsrv_ctl_fd[i], fsrv_st_fd[i], &fault);
 	}
 
 	return blocks;
@@ -1765,7 +2289,7 @@ static void cmp_program(char** argv, u32 timeout) {
 		if( j == size[index] ){	++index; j = 0;	break;} //try to make this better, we stop at the first one for now
 		//printf("**block = 0x%08x\n", *(*(blocks) + j) );
 		if(j + 1 == size[index]) break;
-		//printf("**block = 0x%08x\n", *(*(blocks + 1) + j) );
+		printf("**block = 0x%08x\n", *(*(blocks + 1) + j) );
 		if( *(*(blocks) + j) == *(*(blocks + 1) + j) ){ numbr_of_equal_blocks++;}
 
 		j++;
@@ -1819,8 +2343,14 @@ static void cmp_program(char** argv, u32 timeout) {
    to warn about flaky or otherwise problematic test cases early on; and when
    new paths are discovered to detect variable behavior and so on. */
 
+//TODO -> make this work here, since it was working for a single program, but we need with n
+//	-> probably gonna need to pass one more argument to add int
+//	-> IDEA: run the passed program once, check the fault, return it, simple as that
+
 static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
                          u32 handicap, u8 from_queue) {
+
+  printf("in calibrate case\n");
 
   static u8 first_trace[MAP_SIZE];
 
@@ -1848,9 +2378,13 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
   /* Make sure the forkserver is up before we do anything, and let's not
      count its spin-up time toward binary calibration. */
-
-  if (dumb_mode != 1 && !no_forkserver && !forksrv_pid)
-    init_forkserver(argv);
+  // initiate the specific forkserver or all of them? TODO
+  if( !forksrv_pid[0] ){
+  	//TODO _> init all forkservers
+  	//init_forkserver(argv);
+  	FATAL("Forkservers aren't up!");
+  	//init_all_forkservers(argv);
+  }
 
   if (q->exec_cksum) memcpy(first_trace, trace_bits, MAP_SIZE);
 
@@ -1862,14 +2396,27 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     if (!first_run && !(stage_cur % stats_update_freq)) show_stats();
 
-    write_to_testcase(use_mem, q->len);
+    write_to_testcase(use_mem, q->len); // its fine
 
-    fault = run_target(argv, use_tmout);
+    //fault = run_target(argv, use_tmout); // TODO -> change this
+
+    // TODO -> need to pass through every program here?
+    //		Or do we just want to pass the one being tested? and then change it over time?
+
+    // TODO -> change this so we have a circle array
+    //		-> keep changing the program under test under a specified condition
+    //	    -> probably the changing act will not be here but someplace else
+    int hit;
+    run_forkserver_on_target(use_tmout, &hit, fsrv_ctl_fd[0], fsrv_st_fd[0], &fault);
+
+    printf("\tfault = %d\n", fault);
 
     /* stop_soon is set by the handler for Ctrl+C. When it's pressed,
        we want to bail out quickly. */
 
     if (stop_soon || fault != crash_mode) goto abort_calibration;
+
+    printf("\tdid not go to abort_calibration\n");
 
     if (!dumb_mode && !stage_cur && !count_bytes(trace_bits)) {
       fault = FAULT_NOINST;
@@ -2643,17 +3190,20 @@ static void maybe_delete_out_dir(void) {
 
 static void perform_dry_run(char** argv) {
 
+  printf("In perform_dry_run\n");
+
   struct queue_entry* q = queue;
   u32 cal_failures = 0;
   u8* skip_crashes = getenv("AFL_SKIP_CRASHES");
 
   while (q) {
 
+  	printf("In while queue with file -> %s\n", q->fname);
+
     u8* use_mem;
     u8  res;
     s32 fd;
 
-    // TODO -> check what exactly is q->fname
     u8* fn = strrchr(q->fname, '/') + 1;
 
     ACTF("Attempting dry run with '%s'...", fn);
@@ -2668,7 +3218,8 @@ static void perform_dry_run(char** argv) {
 
     close(fd);
 
-    res = calibrate_case(argv, q, use_mem, 0, 1);
+   	res = calibrate_case(argv, q, use_mem, 0, 1); // TODO
+   	//res = FAULT_TMOUT;
     ck_free(use_mem);
 
     if (stop_soon) return;
@@ -2677,7 +3228,7 @@ static void perform_dry_run(char** argv) {
       SAYF(cGRA "    len = %u, map size = %u, exec speed = %llu us\n" cRST, 
            q->len, q->bitmap_size, q->exec_us);
 
-    switch (res) {
+  	switch (res) {
 
       case FAULT_NONE:
 
@@ -2817,6 +3368,7 @@ static void perform_dry_run(char** argv) {
         break;
 
     }
+
 
     if (q->var_behavior) WARNF("Instrumentation output varies across runs.");
 
@@ -3433,7 +3985,8 @@ static void handle_stop_sig(int sig) {
 	stop_soon = 1; 
 
 	if (child_pid > 0) kill(child_pid, SIGKILL);
-	if (forksrv_pid > 0) kill(forksrv_pid, SIGKILL);
+	//todo need to pass through all of them
+	if (forksrv_pid[0] > 0) kill(forksrv_pid[0], SIGKILL);
 
 }
 
@@ -3450,18 +4003,20 @@ static void handle_skipreq(int sig) {
 
 static void handle_timeout(int sig) {
 
+	printf("In handle timeout\n");
+
 	if (child_pid > 0) {
 		printf("child pid is gonna die\n");
 		child_timed_out = 1; 
 		kill(child_pid, SIGKILL);
 
-	} else if (child_pid == -1 && forksrv_pid > 0) {
+	} else if (child_pid == -1 && forksrv_pid[0] > 0) {
 
 		child_timed_out = 1; 
-		kill(forksrv_pid, SIGKILL);
+		kill(forksrv_pid[0], SIGKILL);
 
 	}
-	if(block_pid > 0){
+	if( block_pid > 0 ){
 		printf("block_pid is gonna die\n");
 		kill(block_pid, SIGKILL);
 	}
@@ -3600,6 +4155,23 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 
 }
 
+/**
+* Start all forkserver in the program and check their binary
+**/
+static void init_all_forkservers(char **argv){
+	int index = optind, prog = 0;
+
+	while (*(argv + index)){
+	  	printf("%s\n", (*(argv + index)));
+	  	check_binary(*(argv + index), &(target_path[prog])); // -> needed
+	 	
+	  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD + (prog * 2));
+	  	//init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD);
+	  	numbr_of_progs_under_test ++;
+	  	index ++;
+	  	prog ++;
+	}
+}
 
 /* Check terminal dimensions after resize. */
 
@@ -4006,6 +4578,47 @@ static void get_core_count(void) {
 
 }
 
+/* Validate and fix up out_dir and sync_dir when using -S. */
+
+static void fix_up_sync(void) {
+
+  u8* x = sync_id;
+
+  if (dumb_mode)
+    FATAL("-S / -M and -n are mutually exclusive");
+
+  if (skip_deterministic) {
+
+    if (force_deterministic)
+      FATAL("use -S instead of -M -d");
+    else
+      FATAL("-S already implies -d");
+
+  }
+
+  while (*x) {
+
+    if (!isalnum(*x) && *x != '_' && *x != '-')
+      FATAL("Non-alphanumeric fuzzer ID specified via -S or -M");
+
+    x++;
+
+  }
+
+  if (strlen(sync_id) > 32) FATAL("Fuzzer ID too long");
+
+  x = alloc_printf("%s/%s", out_dir, sync_id);
+
+  sync_dir = out_dir;
+  out_dir  = x;
+
+  if (!force_deterministic) {
+    skip_deterministic = 1;
+    use_splicing = 1;
+  }
+
+}
+
 
 /* Handle screen resize (SIGWINCH). */
 
@@ -4013,6 +4626,51 @@ static void handle_resize(int sig) {
 	clear_screen = 1;
 }
 
+/* Detect @@ in args. */
+// TODO -> will we allow this? If so we need to allow it for every file or only specific ones?
+EXP_ST void detect_file_args(char** argv) {
+
+  u32 i = 0;
+  u8* cwd = getcwd(NULL, 0);
+
+  if (!cwd) PFATAL("getcwd() failed");
+
+  while (argv[i]) {
+
+    u8* aa_loc = strstr(argv[i], "@@");
+
+    if (aa_loc) {
+
+      u8 *aa_subst, *n_arg;
+
+      /* If we don't have a file name chosen yet, use a safe default. */
+
+      if (!out_file)
+        out_file = alloc_printf("%s/.cur_input", out_dir);
+
+      /* Be sure that we're always using fully-qualified paths. */
+
+      if (out_file[0] == '/') aa_subst = out_file;
+      else aa_subst = alloc_printf("%s/%s", cwd, out_file);
+
+      /* Construct a replacement argv value. */
+
+      *aa_loc = 0;
+      n_arg = alloc_printf("%s%s%s", argv[i], aa_subst, aa_loc + 2);
+      argv[i] = n_arg;
+      *aa_loc = '@';
+
+      if (out_file[0] != '/') ck_free(aa_subst);
+
+    }
+
+    i++;
+
+  }
+
+  free(cwd); /* not tracked */
+
+}
 
 /* Set up signal handlers. More complicated that needs to be, because libc on
    Solaris doesn't resume interrupted reads(), sets SA_RESETHAND when you call
@@ -4057,6 +4715,34 @@ EXP_ST void setup_signal_handlers(void) {
 	sigaction(SIGPIPE, &sa, NULL);
 
 }
+
+/* Make a copy of the current command line. */
+
+static void save_cmdline(u32 argc, char** argv) {
+
+  u32 len = 1, i;
+  u8* buf;
+
+  for (i = 0; i < argc; i++)
+    len += strlen(argv[i]) + 1;
+  
+  buf = orig_cmdline = ck_alloc(len);
+
+  for (i = 0; i < argc; i++) {
+
+    u32 l = strlen(argv[i]);
+
+    memcpy(buf, argv[i], l);
+    buf += l;
+
+    if (i != argc - 1) *(buf++) = ' ';
+
+  }
+
+  *buf = 0;
+
+}
+
 
 
 #ifndef AFL_LIB
@@ -4144,8 +4830,8 @@ int main(int argc, char** argv) {
 	}
 
 
-  printf("optind = %d\n", optind);
-   printf("argc = %d\n", argc);
+  //printf("optind = %d\n", optind);
+  //printf("argc = %d\n", argc);
   if ( optind == argc || !in_dir || !out_dir ){ printf("here in this option of ours\n");usage(argv[0]);}
 
   //numbr_of_progs_under_test = getenv(FORKSRV_AMOUNT_ENV) == NULL ? 1 : getenv(FORKSRV_AMOUNT_ENV); // get number of programs under test
@@ -4153,9 +4839,9 @@ int main(int argc, char** argv) {
   setup_signal_handlers(); // not needed to execture the forkserver, but might as well have it
   //check_asan_opts(); // -> not needed
 
-  //if (sync_id) fix_up_sync();
+  if (sync_id) fix_up_sync();
 
-  //save_cmdline(argc, argv); // -> not needed
+  save_cmdline(argc, argv); // -> not needed
 
   //fix_up_banner(argv[optind]);
 
@@ -4164,12 +4850,13 @@ int main(int argc, char** argv) {
   check_crash_handling();
   check_cpu_governor();
 
+  setup_post();
   setup_shm(); // -> TODO -> need to add the specific ID that I want to set up
   init_count_class16(); //-> needed
 
   setup_dirs_fds(); // -> needed but not for the forkserer
   read_testcases();
-  //load_auto();
+  load_auto();
 
   pivot_inputs(); //not needed, but might as well have it
 
@@ -4184,29 +4871,32 @@ int main(int argc, char** argv) {
 
   start_time = get_cur_time();// -> not needed
 
-  //use_argv = argv + optind;
+  use_argv = argv + optind;
+  /*
   int index = optind, prog = 0;
 
   while (*(argv + index)){
   	printf("%s\n", (*(argv + index)));
   	check_binary(*(argv + index), &(target_path[prog])); // -> needed
-  //check_binary(argv[optind + 1], &target_path2); // -> needed
-
-  //init_forkserver(argv);
+ 	
   	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD + (prog * 2));
   	//init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD);
   	numbr_of_progs_under_test ++;
   	index ++;
   	prog ++;
   }
+  */
 
-  cmp_program(argv, exec_tmout);
-
+  /*we start forkservers here*/
+  init_all_forkservers(argv);
+  
+  //cmp_program(argv, exec_tmout);
   //TODO -> make it perform a dry runon every program
-  //perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
+
+  perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
 
 
-  //cull_queue(); // -> not needed, but very usefull and likely where i'll work the most
+  cull_queue(); // -> not needed, but very usefull and likely where i'll work the most
 
   show_init_stats(); //-> not needed but usefull
 

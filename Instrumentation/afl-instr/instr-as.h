@@ -225,14 +225,22 @@ static const u8* main_payload_64 =
 #else
   "  incb (%%rdx, %%rcx, 1)\n"
 #endif /* ^SKIP_COUNTS */
-   "  \n/* Write home and tell them the id of the block */\n"
+  "  \n/* Write home and tell them the id of the block */\n"
   "  movq $4, %%rdx               /* length    */\n"
   "  leaq __afl_block_temp, %%rsi\n"
   //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
   "  movq __fsrv_write, %%rdi       /* file desc */\n"
-  CALL_L64("write")
+  //CALL_L64("write") //resulting in the crash
+  //"  call write"
   "\n"
+  "  /* In child process: close fds, resume execution. */\n"
   "\n"
+  "  movq __fsrv_write, %%rdi       /* file desc */\n"
+  //CALL_L64("close")
+  "\n"
+  "  movq __fsrv_read, %%rdi       /* file desc */\n"
+  //CALL_L64("close") 
+  //"\n"
   "__afl_return:\n"
   "\n"
   "  addb $127, %%al\n"
@@ -421,7 +429,7 @@ static const u8* main_payload_64 =
   //CALL_L64("close")
   "\n"
   "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi\n"
-  //CALL_L64("close") //tenho que ver se isto da bug TODO
+  //CALL_L64("close") 
   "\n"
   "  popq %%rdx\n"
   "  popq %%rdx\n"

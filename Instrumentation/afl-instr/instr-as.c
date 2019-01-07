@@ -261,7 +261,7 @@ int hash_string(char *input){
 unsigned int blockIDGenerator(char *block){
    
   char *string_to_hash = calloc(0, sizeof(char)); //string to eventually hash
-  
+
   char *copy = malloc ( sizeof(char) * strlen(block) + 1 );
   if(!copy) FATAL("malloc failed generating block ID");
 
@@ -442,18 +442,6 @@ static void add_instrumentation(void) {
         clearInstr(&lines_to_instrument);
 
       }
-	
-      //fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-      //        R(MAP_SIZE)); //ideia -> é aqui que estão a adicionar o id aleatorio!!!! e guarda no $0x%08x
-
-      // put it in the section above
-      
-      /*
-      fprintf(instr_lines_after, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-              R(MAP_SIZE));
-
-      fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", instr_lines_after);
-      */
 
       is_recording = 1;
 
@@ -465,36 +453,6 @@ static void add_instrumentation(void) {
     /* Output the actual line, call it a day in pass-thru mode. */
    //fputs(line, outf);
 
-    // added for the presentation
-   /*
-    char *newLine = NULL;
-    char *change = NULL;
-    //if( strstr(line, "\taddl\t$4, %eax") ){
-    //  change = "\taddl\t$100, %eax\n";
-    //} 
-    if(strstr(line, "\t.string\t\"This always happens\"\n")){
-      change = "\t.string \"This, amazingly, always happens\"\n";
-      //char *change = line;
-    } 
-    //addl  $4, %ecx
-    else{
-      fputs(line, outf);
-    }
-
-    if(change != NULL){
-      newLine = malloc( sizeof(char) * strlen(change) + 1);
-      strcpy(newLine, change);
-      fputs(change, outf);
-    }
-
-    if(newLine == NULL){
-      newLine = malloc(sizeof(char) * strlen(line) + 1);
-      strcpy(newLine, line);
-    }
-    */
-    /*---END OF ADDED FOR PRESENTATION*/
-
-    //if(strstr(line, "\tret")){printf("found the line -> %s\n", line);}
 
 
     if(is_recording){
