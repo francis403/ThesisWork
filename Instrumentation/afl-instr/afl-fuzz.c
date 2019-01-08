@@ -5137,27 +5137,28 @@ int main(int argc, char** argv) {
   }
 
 
-  while (1) { //main fuzzing loop
+while (1) { //main fuzzing loop
     u8 skipped_fuzz;
 
-    //cull_queue();
+    cull_queue();
 
-    /*
+    
     if (!queue_cur) {
 
-      queue_cycle++;
+    	
+    	queue_cycle++;
       current_entry     = 0;
       cur_skipped_paths = 0;
-      queue_cur         = queue;
-
+      //queue_cur         = queue; _> results in segm fault
+      
       while (seek_to) {
         current_entry++;
         seek_to--;
-        queue_cur = queue_cur->next;
+        //queue_cur = queue_cur->next;
       }
 
-      show_stats();
-
+      //show_stats();
+      /*
       if (not_on_tty) {
         ACTF("Entering queue cycle %llu.", queue_cycle);
         fflush(stdout);
@@ -5181,19 +5182,19 @@ int main(int argc, char** argv) {
 
     if (!stop_soon && sync_id && !skipped_fuzz) {
       
-      if (!(sync_interval_cnt++ % SYNC_INTERVAL))
-        sync_fuzzers(use_argv);
-	
+     	if (!(sync_interval_cnt++ % SYNC_INTERVAL))
+        	sync_fuzzers(use_argv);
+	*/
     }
 	
-	/*
+
     if (!stop_soon && exit_1) stop_soon = 2;
 
     if (stop_soon) break;
 
-    queue_cur = queue_cur->next;
+    //queue_cur = queue_cur->next; //todo -> this here is resulting in a segmentation fault
     current_entry++;
-	*/
+	
   } //end of the main fuzzing loop
 
   if (queue_cur) show_stats();
