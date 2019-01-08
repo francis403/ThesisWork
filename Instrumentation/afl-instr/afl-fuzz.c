@@ -4974,7 +4974,8 @@ int main(int argc, char** argv) {
 	s32 opt;
 	u8  mem_limit_given = 0;
 	u64 prev_queued = 0;
-  	u32 sync_interval_cnt = 0, seek_to;		
+  	u32 sync_interval_cnt = 0, seek_to;
+  	u8  exit_1 = !!getenv("AFL_BENCH_JUST_ONE");
 	char** use_argv;
 
 	int path_index = 0;
@@ -5134,6 +5135,66 @@ int main(int argc, char** argv) {
     start_time += 4000;
     if (stop_soon) goto stop_fuzzing;
   }
+
+
+  while (1) { //main fuzzing loop
+    u8 skipped_fuzz;
+
+    //cull_queue();
+
+    /*
+    if (!queue_cur) {
+
+      queue_cycle++;
+      current_entry     = 0;
+      cur_skipped_paths = 0;
+      queue_cur         = queue;
+
+      while (seek_to) {
+        current_entry++;
+        seek_to--;
+        queue_cur = queue_cur->next;
+      }
+
+      show_stats();
+
+      if (not_on_tty) {
+        ACTF("Entering queue cycle %llu.", queue_cycle);
+        fflush(stdout);
+      }
+
+      
+      if (queued_paths == prev_queued) {
+
+        if (use_splicing) cycles_wo_finds++; else use_splicing = 1;
+
+      } else cycles_wo_finds = 0;
+
+      prev_queued = queued_paths;
+
+      if (sync_id && queue_cycle == 1 && getenv("AFL_IMPORT_FIRST"))
+        sync_fuzzers(use_argv);
+
+    }
+
+    skipped_fuzz = fuzz_one(use_argv);
+
+    if (!stop_soon && sync_id && !skipped_fuzz) {
+      
+      if (!(sync_interval_cnt++ % SYNC_INTERVAL))
+        sync_fuzzers(use_argv);
+	
+    }
+	
+	/*
+    if (!stop_soon && exit_1) stop_soon = 2;
+
+    if (stop_soon) break;
+
+    queue_cur = queue_cur->next;
+    current_entry++;
+	*/
+  } //end of the main fuzzing loop
 
   if (queue_cur) show_stats();
 
