@@ -2653,9 +2653,227 @@ abort_calibration:
 }
 
 
+
+/* Check if the result of an execve() during routine fuzzing is interesting,
+   save or queue the input test case for further analysis if so. Returns 1 if
+   entry is saved, 0 otherwise. */
+
+static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
+
+  u8  *fn = "";
+  u8  hnb;
+  s32 fd;
+  u8  keeping = 0, res;
+
+  if (fault == crash_mode) {
+
+    /* Keep only if there are new bits in the map, add to queue for
+       future fuzzing, etc. */
+
+    if (!(hnb = has_new_bits(virgin_bits))) {
+      if (crash_mode) total_crashes++;
+      return 0;
+    }    
+
 #ifndef SIMPLE_FILES
 
-#endif /* !SIMPLE_FILES */
+    fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths,
+                      describe_op(hnb));
+
+#else
+
+    fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths);
+
+#endif /* ^!SIMPLE_FILES */
+
+    add_to_queue(fn, len, 0);
+
+    if (hnb == 2) {
+      queue_top->has_new_cov = 1;
+      queued_with_cov++;
+    }
+
+    queue_top->exec_cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
+
+    /* Try to calibrate inline; this also calls update_bitmap_score() when
+       successful. */
+
+    res = calibrate_case(argv, queue_top, mem, queue_cycle - 1, 0);
+
+    if (res == FAULT_ERROR)
+      FATAL("Unable to execute target application");
+
+    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    ck_write(fd, mem, len, fn);
+    close(fd);
+
+    keeping = 1;
+
+  }
+
+  switch (fault) {
+
+    case FAULT_TMOUT:
+
+      /* Timeouts are not very interesting, but we're still obliged to keep
+         a handful of samples. We use the presence of new bits in the
+         hang-specific bitmap as a signal of uniqueness. In "dumb" mode, we
+         just keep everything. */
+
+      total_tmouts++;
+
+      if (unique_hangs >= KEEP_UNIQUE_HANG) return keeping;
+
+      if (!dumb_mode) {
+
+#ifdef __x86_64__
+        simplify_trace((u64*)trace_bits);
+#else
+        simplify_trace((u32*)trace_bits);
+#endif /* ^__x86_64__ */
+
+        if (!has_new_bits(virgin_tmout)) return keeping;
+
+      }
+
+      unique_tmouts++;
+
+      /* Before saving, we make sure that it's a genuine hang by re-running
+         the target with a more generous timeout (unless the default timeout
+         is already generous). */
+
+      if (exec_tmout < hang_tmout) {
+
+        u8 new_fault;
+        write_to_testcase(mem, len);
+        new_fault = run_target(argv, hang_tmout);
+
+        /* A corner case that one user reported bumping into: increasing the
+           timeout actually uncovers a crash. Make sure we don't discard it if
+           so. */
+
+        if (!stop_soon && new_fault == FAULT_CRASH) goto keep_as_crash;
+
+        if (stop_soon || new_fault != FAULT_TMOUT) return keeping;
+
+      }
+
+#ifndef SIMPLE_FILES
+
+      fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
+                        unique_hangs, describe_op(0));
+
+#else
+
+      fn = alloc_printf("%s/hangs/id_%06llu", out_dir,
+                        unique_hangs);
+
+#endif /* ^!SIMPLE_FILES */
+
+      unique_hangs++;
+
+      last_hang_time = get_cur_time();
+
+      break;
+
+    case FAULT_CRASH:
+
+keep_as_crash:
+
+      /* This is handled in a manner roughly similar to timeouts,
+         except for slightly different limits and no need to re-run test
+         cases. */
+
+      total_crashes++;
+
+      if (unique_crashes >= KEEP_UNIQUE_CRASH) return keeping;
+
+      if (!dumb_mode) {
+
+#ifdef __x86_64__
+        simplify_trace((u64*)trace_bits);
+#else
+        simplify_trace((u32*)trace_bits);
+#endif /* ^__x86_64__ */
+
+        if (!has_new_bits(virgin_crash)) return keeping;
+
+      }
+
+      if (!unique_crashes) write_crash_readme();
+
+#ifndef SIMPLE_FILES
+
+      fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
+                        unique_crashes, kill_signal, describe_op(0));
+
+#else
+
+      fn = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir, unique_crashes,
+                        kill_signal);
+
+#endif /* ^!SIMPLE_FILES */
+
+      unique_crashes++;
+
+      last_crash_time = get_cur_time();
+      last_crash_execs = total_execs;
+
+      break;
+
+    case FAULT_ERROR: FATAL("Unable to execute target application");
+
+    default: return keeping;
+
+  }
+
+  /* If we're here, we apparently want to save the crash or hang
+     test case, too. */
+
+  fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+  if (fd < 0) PFATAL("Unable to create '%s'", fn);
+  ck_write(fd, mem, len, fn);
+  close(fd);
+
+  ck_free(fn);
+
+  return keeping;
+
+}
+
+/* When resuming, try to find the queue position to start from. This makes sense
+   only when resuming, and when we can find the original fuzzer_stats. */
+
+static u32 find_start_position(void) {
+
+  static u8 tmp[4096]; /* Ought to be enough for anybody. */
+
+  u8  *fn, *off;
+  s32 fd, i;
+  u32 ret;
+
+  if (!resuming_fuzz) return 0;
+
+  if (in_place_resume) fn = alloc_printf("%s/fuzzer_stats", out_dir);
+  else fn = alloc_printf("%s/../fuzzer_stats", in_dir);
+
+  fd = open(fn, O_RDONLY);
+  ck_free(fn);
+
+  if (fd < 0) return 0;
+
+  i = read(fd, tmp, sizeof(tmp) - 1); (void)i; /* Ignore errors */
+  close(fd);
+
+  off = strstr(tmp, "cur_path          : ");
+  if (!off) return 0;
+
+  ret = atoi(off + 20);
+  if (ret >= queued_paths) ret = 0;
+  return ret;
+
+}
 
 /* The same, but for timeouts. The idea is that when resuming sessions without
    -t given, we don't want to keep auto-scaling the timeout over and over
@@ -4755,6 +4973,8 @@ int main(int argc, char** argv) {
 
 	s32 opt;
 	u8  mem_limit_given = 0;
+	u64 prev_queued = 0;
+  	u32 sync_interval_cnt = 0, seek_to;		
 	char** use_argv;
 
 	int path_index = 0;
@@ -4900,31 +5120,32 @@ int main(int argc, char** argv) {
 
   show_init_stats(); //-> not needed but usefull
 
-  //seek_to = find_start_position();
+  seek_to = find_start_position();
 
-  //write_stats_file(0, 0, 0); //-> not needed, but important
-  //save_auto(); //-> not needed, but important
+  write_stats_file(0, 0, 0); //-> not needed, but important
+  save_auto(); //-> not needed, but important
 
   if (stop_soon) goto stop_fuzzing;
 
   /* Woop woop woop */
-  /*
+  
   if (!not_on_tty) {
     sleep(4);
     start_time += 4000;
     if (stop_soon) goto stop_fuzzing;
   }
-	*/
+
   if (queue_cur) show_stats();
 
-  //write_bitmap();
-  //write_stats_file(0, 0, 0);
-  //save_auto();
+  write_bitmap();
+  write_stats_file(0, 0, 0);
+  save_auto();
 
   stop_fuzzing:
-
+  	SAYF(CURSOR_SHOW cLRD "\n\n+++ Testing aborted %s +++\n" cRST,
+       stop_soon == 2 ? "programmatically" : "by user");
   /* Running for more than 30 minutes but still doing first cycle? */
-  /*
+  
   if (queue_cycle == 1 && get_cur_time() - start_time > 30 * 60 * 1000) {
 
     SAYF("\n" cYEL "[!] " cRST
@@ -4932,7 +5153,7 @@ int main(int argc, char** argv) {
            "    (For info on resuming, see %s/README.)\n", doc_path);
 
   }
-  */
+  
   fclose(plot_file);
   destroy_queue();
   destroy_extras();
