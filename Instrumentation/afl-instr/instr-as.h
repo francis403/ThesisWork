@@ -225,17 +225,18 @@ static const u8* main_payload_64 =
 #else
   "  incb (%%rdx, %%rcx, 1)\n"
 #endif /* ^SKIP_COUNTS */
+  "\n"
   "  \n/* Write home and tell them the id of the block */\n"
   "  movq $4, %%rdx               /* length    */\n"
-  "  leaq __afl_block_temp, %%rsi\n"
+  "  leaq __afl_block_temp(%%rip), %%rsi\n"
   //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
   "  movq __fsrv_write, %%rdi       /* file desc */\n"
-  //CALL_L64("write") //resulting in the crash
-  //"  call write"
+  CALL_L64("write") //a write that is not catched results in a crash
   "\n"
   "  /* In child process: close fds, resume execution. */\n"
   "\n"
-  "  movq __fsrv_write, %%rdi       /* file desc */\n"
+  "  movq __afl_block_temp, %%rdi       /* file desc */\n"
+  //CALL_L64("printf")
   //CALL_L64("close")
   "\n"
   "  movq __fsrv_read, %%rdi       /* file desc */\n"
@@ -411,6 +412,13 @@ static const u8* main_payload_64 =
   "  cmpq $0, %%rax\n"
   "  jle  __afl_die\n"
   "\n"
+  "  movq $-100, __fsrv_message               /* length    */\n"
+  "  movq $4, %%rdx               /* length    */\n"
+  "  leaq __fsrv_message(%%rip), %%rsi\n"
+  //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
+  "  movq __fsrv_write, %%rdi       /* file desc */\n"
+  CALL_L64("write")
+  "\n"
   "  /* Relay wait status to pipe, then loop back. */\n"
   "\n"
   "  movq $4, %%rdx               /* length    */\n"
@@ -419,16 +427,23 @@ static const u8* main_payload_64 =
   "  movq __fsrv_write, %%rdi       /* file desc */\n"
   CALL_L64("write")
   "\n"
+  //"  \n/* Write home and tell them the id of the block TESTE (check if write needs read)-> it does*/\n"
+  //"  movq $4, %%rdx               /* length    */\n"
+  //"  leaq __afl_block_temp, %%rsi\n"
+  //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
+  //"  movq __fsrv_write, %%rdi       /* file desc */\n"
+  //CALL_L64("write") //resulting in the crash
+  "\n"
   "  jmp  __afl_fork_wait_loop\n"
   "\n"
   "__afl_fork_resume:\n"
   "\n"
-  "  /* In child process: close fds, resume execution. */\n"
-  "\n"
-  "  movq $" STRINGIFY(FORKSRV_FD) ", %%rdi\n"
+  //"  /* In child process: close fds, resume execution. */\n"
+  //"\n"
+  //"  movq $" STRINGIFY(FORKSRV_FD) ", %%rdi\n"
   //CALL_L64("close")
   "\n"
-  "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi\n"
+  //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi\n"
   //CALL_L64("close") 
   "\n"
   "  popq %%rdx\n"
@@ -468,6 +483,14 @@ static const u8* main_payload_64 =
   "  jmp  __afl_store\n"
   "\n"
   "__afl_die:\n"
+  "\n"
+  //"  \n/* Tell parent we're telling him the id of the block, otherwise we're done and sending the status */\n"
+  //"  movq $0, __fsrv_message               /* length    */\n"
+  //"  movq $4, %%rdx               /* length    */\n"
+  //"  leaq __fsrv_message(%%rip), %%rsi\n"
+  //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
+  //"  movq __fsrv_write, %%rdi       /* file desc */\n"
+  //CALL_L64("write") //a write that is not catched results in a crash
   "\n"
   "  xorq %%rax, %%rax\n"
   CALL_L64("_exit")
@@ -539,6 +562,7 @@ static const u8* main_payload_64 =
   "  .lcomm   __afl_block_temp, 4\n"
   "  .lcomm   __fsrv_read, 4\n"
   "  .lcomm   __fsrv_write, 4\n"
+  "  .lcomm   __fsrv_message, 4\n"
   "  .comm    __afl_global_area_ptr, 8, 8\n"
   "\n"
   ".AFL_SHM_ENV:\n"

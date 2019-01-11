@@ -91,7 +91,7 @@ EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
           *use_banner,                /* Display banner                   */
           *in_bitmap,                 /* Input bitmap                     */
           *doc_path,                  /* Path to documentation dir        */
-		  *target_path[MAX_AMOUT_OF_PROGRAMS],
+		      *target_path[MAX_AMOUT_OF_PROGRAMS],
           //*target_path[MAX_AMOUT_OF_PROGRAMS],               /* Path to target binary            */
 		  //*target_path,
           *orig_cmdline;              /* Original command line            */
@@ -132,7 +132,9 @@ EXP_ST u8  skip_deterministic,        /* Skip deterministic stages?       */
 static s32 out_fd,                    /* Persistent fd for out_file       */
            dev_urandom_fd = -1,       /* Persistent fd for /dev/urandom   */
            dev_null_fd = -1,          /* Persistent fd for /dev/null      */
-           fsrv_ctl_fd[MAX_AMOUT_OF_PROGRAMS],               /* Fork server control pipe (write) */
+           fsrv_write_blocks[MAX_AMOUT_OF_PROGRAMS],        /* Fork server control pipe (write) */
+           fsrv_read_blocks[MAX_AMOUT_OF_PROGRAMS],        /* Fork server control pipe (write) */
+           fsrv_ctl_fd[MAX_AMOUT_OF_PROGRAMS],        /* Fork server control pipe (write) */
            fsrv_st_fd[MAX_AMOUT_OF_PROGRAMS];				  /* Fork server status pipe (read)   */ 
 
 static s32 forksrv_pid[MAX_AMOUT_OF_PROGRAMS],               /* PID of the fork server           */
@@ -1628,14 +1630,22 @@ static void destroy_extras(void) {
 }
 
 
-//FORKSRV_FD
+/*
+*
+* Inits specific program forkserver
+* Inits the program in path, returns the forkserver pid to forksrv_pid,
+*   the pipe to fsrv_ctl_fd (write), and another pipe to fsrv_st_fd (read)
+* Puts the initial ID as fork_srv
+*
+*/
 EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid, 
-								s32 *fsrv_ctl_fd,s32 *fsrv_st_fd, int fork_srv) {
+								int prog_index, int fork_srv) {
 
 	printf("\t-> init_forkserver\n");
 
 	static struct itimerval it;
-	int st_pipe[2], ctl_pipe[2];
+	//int st_pipe[2], ctl_pipe[2];
+  int st_pipe[4], ctl_pipe[4];
 	int status;
 	s32 rlen;
 
@@ -1660,9 +1670,9 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     /* Umpf. On OpenBSD, the default fd limit for root users is set to
        soft 128. Let's try to fix that... */
 
-		if (!getrlimit(RLIMIT_NOFILE, &r) && r.rlim_cur < fork_srv + 2) {
+		if (!getrlimit(RLIMIT_NOFILE, &r) && r.rlim_cur < fork_srv + 4) {
 
-			r.rlim_cur = fork_srv + 2;
+			r.rlim_cur = fork_srv + 4;
       setrlimit(RLIMIT_NOFILE, &r); /* Ignore errors */
 
 		}
@@ -1717,15 +1727,25 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
     }
 
+    // end points
     /* Set up control and status pipes, close the unneeded original fds. */
 
     if (dup2(ctl_pipe[0], fork_srv) < 0) PFATAL("dup2() failed"); //need to change here
     if (dup2(st_pipe[1], fork_srv + 1) < 0) PFATAL("dup2() failed"); //need to change here
 
+    // set the id for the pipe that reads/writes the blocks
+    //if (dup2(ctl_pipe[2], fork_srv + 2) < 0) PFATAL("dup2() failed"); //need to change here
+    //if (dup2(st_pipe[3], fork_srv + 3) < 0) PFATAL("dup2() failed"); //need to change here
+
     close(ctl_pipe[0]);
     close(ctl_pipe[1]);
+    //close(ctl_pipe[2]);
+    //close(ctl_pipe[3]);
+
     close(st_pipe[0]);
     close(st_pipe[1]);
+    //close(st_pipe[2]);
+    //close(st_pipe[3]);
 
     close(out_dir_fd);
     close(dev_null_fd);
@@ -1763,13 +1783,19 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 }
 
-  /* Close the unneeded endpoints. */
+  /* Close the unneeded endpoints on the prog. */
 
 close(ctl_pipe[0]);
 close(st_pipe[1]);
 
-*fsrv_ctl_fd = ctl_pipe[1];
-*fsrv_st_fd  = st_pipe[0];
+close(ctl_pipe[2]);
+close(st_pipe[3]);
+
+//close(ctl_pipe[2]);
+//close(st_pipe[3]);
+
+fsrv_ctl_fd[prog_index] = ctl_pipe[1];
+fsrv_st_fd[prog_index]  = st_pipe[0];
 
 //fcntl(*fsrv_st_fd, F_GETFL, F_SETFL, O_NONBLOCK);
   /* Wait for the fork server to come up, but don't wait too long. */
@@ -1779,7 +1805,7 @@ it.it_value.tv_usec = ((exec_tmout * FORK_WAIT_MULT) % 1000) * 1000;
 
 setitimer(ITIMER_REAL, &it, NULL);
 
-rlen = read(*fsrv_st_fd, &status, 4);
+rlen = read(fsrv_st_fd[prog_index], &status, 4);
 
 it.it_value.tv_sec = 0;
 it.it_value.tv_usec = 0;
@@ -1976,9 +2002,9 @@ int blocks_hit(int *blocks){
 * RUNS specific forkserver specified in fsrv_ctl_fd and fsrv_st_fd
 * Stores the reason the program crashed in fault, if it does not crash FAULT_NONE
 * Stores the amount of blocks found in hit
-*
-**/
-int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st_fd, u8 *fault){
+* IDEA -> might just pass the index of the program and get everything from there -> s32 fsrv_ctl_fd,s32 fsrv_st_fd
+**/ 
+int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 	//printf("\t-> in run_forkserver_on_target\n");
 
 	static struct itimerval it;
@@ -1997,22 +2023,41 @@ int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st
 	memset(trace_bits, 0, MAP_SIZE);
 	MEM_BARRIER();
 
-//issue -> are both of the programs running?
-
 	s32 res;
 
-    //start of the forkserver
+  //start of the forkserver
 
-    if ((res = write(fsrv_ctl_fd, &prev_timed_out, 4)) != 4) { //-WRITE
+  if ((res = write(fsrv_ctl_fd[prog_index], &prev_timed_out, 4)) != 4) { //-WRITE
 
-    	if (stop_soon) return 0;
-    	RPFATAL(res, "Unable to request new process from fork server (OOM?)");
+    if (stop_soon) return 0;
+    RPFATAL(res, "Unable to request new process from fork server (OOM?)");
 
-    }
+  }
 
     //printf("%d\n", &prev_timed_out);
 
-    if ((res = read(fsrv_st_fd, &child_pid, 4)) != 4) { //-READ
+    // theory of what happens
+    // What happens -> depois de comecarmos o forkserver, vamos ter dois processos, um deles vai escrever o que está aqui à frente, o outro vai buscar os blocos
+    // TODO -> maybe change the assembly to first pass through all of this and then run? (bit slow but nothing special)
+    // TODO -> maybe when AFL_RESUME starts, receive a specific message from the assembly, write back for confirmation (check if we've received everything) and then start receiving the blocks
+    //      -> But how do we receive the first message
+    // TODO -> maybe simply have a different forkserver to receive/write the blocks, that would be smart
+    //      -> fork here and wait for a read in that one
+    //      -> and put a while
+    // TODO -> fazemos um write que é lido apenas no afl_resume, no outro lado esperam com um readme, que é desbloqueado quando recebermos o status e a partir dai sabemos que são só blocos
+    // TODO -> escrevemos com 5 o bloco, e com 4 o normal
+    //      se for 4 fazemos o que temos de fazer, se for 5 guardamos o bloco
+
+    /*
+    int block_pid = fork();
+
+    if(block_pid){
+      while()
+      exit(0);
+    }
+    */
+
+    if ((res = read(fsrv_st_fd[prog_index], &child_pid, 4)) != 4) { //-READ
 
     	  //printf("res = %d\n", res);
 
@@ -2021,7 +2066,12 @@ int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st
 
     }
 
-    if (child_pid <= 0) FATAL("Fork server is misbehaving (OOM?)");
+    //printf("child pid = 0x%08x\n", child_pid);
+
+    if (child_pid <= 0){
+      printf("child pid = %d\n", child_pid);
+      FATAL("Fork server is misbehaving (OOM?)");
+    }
 
 	 /* Configure timeout, as requested by user, then wait for child to terminate. */
 
@@ -2030,20 +2080,77 @@ int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st
 
 	setitimer(ITIMER_REAL, &it, NULL); //check out
 
-    // relays the wait status and then should leave
+  // relays the wait status and then should leave
+  //read blocks
+  unsigned int id = 0, i = 0;
+  unsigned int size = 100;
+  *hit = 0;
+
+  int *blocks = malloc( sizeof(int) * size );
+
+  if(!blocks){
+    FATAL("malloc failed in run_forkserver_on_target");
+  }
+  
+  int message = 0;
+
+  while( 1 ){
+
+    message = 0;
+    //printf("poll\n");
+    // check if there are things to read
+    //if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 10) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
+    //   break;
+
+    
+      //there's something to read
+      //printf("gonna try and read something\n");
+
+      if (read(fsrv_st_fd[prog_index], &id, 4) != 4) { 
+          RPFATAL(-1, "Unable to read block_id from fork server (OOM?)");
+      }
+
+      // code that we're getting the status next
+      if( id == -100 ) {break;}
+
+      *hit = *hit + 1;
+
+      //check if we have enough memory allocated for the array
+      if( *hit >= size * 0.75 ){
+        size *= 2;
+        blocks = realloc(blocks, sizeof(int) * size );
+
+        if(!blocks){
+          free( blocks );
+          RPFATAL(-1, "Something went wrong when increasing the size of the block");
+        }
+      }
+
+      *(blocks + i) = id;
+
+      //printf("*block_hit = 0x%08x\n", *(blocks + i));
+      i++;  
+
+  }
+
+  //status = message;
 
 	/* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
-
-	if ((res = read(fsrv_st_fd, &status, 4)) != 4) { // TODO -> check it out a bit more 
+  
+	if ((res = read(fsrv_st_fd[prog_index], &status, 4)) != 4) { // TODO -> check it out a bit more 
 
 		if (stop_soon) return 0;
 		RPFATAL(res, "Unable to communicate with fork server (OOM?)");
 
 	}
+  
+  //printf("status = %d\n", status);
+
+
 	//printf("status = %d\n", status);
 	// try to understand what's going on
 	
-  	if (!WIFSTOPPED(status)) child_pid = 0;
+  if (!WIFSTOPPED(status)) child_pid = 0;
   	/*
   	it.it_value.tv_sec = 0;
   	it.it_value.tv_usec = 0;
@@ -2052,60 +2159,21 @@ int *run_forkserver_on_target(u32 timeout, int *hit, s32 fsrv_ctl_fd,s32 fsrv_st
   	total_execs++;
 	*/
 
-	unsigned int size = 100;
-	*hit = 0;
+  //start running the blocks
+  /*
+  if ((res = write(fsrv_ctl_fd, &prev_timed_out, 4)) != 4) { //-WRITE
 
-	int *blocks = malloc( sizeof(int) * size );
+    if (stop_soon) return 0;
+    RPFATAL(res, "Unable to request new process from fork server (OOM?)");
 
-	if(!blocks){
-		FATAL("malloc failed in run_forkserver_on_target");
-	}
+  }
+  */
 
-	unsigned int id = 0, i = 0;
-
-	// TODO: for some reason, the last block we read is typically garbage, try to figure out why
-	// for now, we simply ignore the last one when comparing
+      //if(WIFSTOPPED(status)){ break;}
+  //if(WIFEXITED(status)){ printf("WIFEXITED\n");/*break;*/}
+  //if(WIFSIGNALED(status)){  printf("WIFSIGNALED\n"); /*break;*/}
 	
 
-	while( 1 ){
-
-		//printf("poll\n");
-		if(WIFSTOPPED(status)){ break;}
-		if(WIFEXITED(status)){ break;}
-		if(WIFSIGNALED(status)){  break;}
-		// check if there are things to read
-		//if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 10) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
-		//	 break;
-
-		
-			//there's something to read
-			//printf("gonna try and read something\n");
-
-			//read it
-			if (read(fsrv_st_fd, &id, 4) != 4) { //-WRITE
-			   	RPFATAL(-1, "Unable to read block_id from fork server (OOM?)");
-			}
-			
-
-			*hit = *hit + 1;
-
-			//check if we have enough memory allocated for the array
-			if( *hit >= size * 0.75 ){
-				size *= 2;
-				blocks = realloc(blocks, sizeof(int) * size );
-
-				if(!blocks){
-					free( blocks );
-					RPFATAL(-1, "Something went wrong when increasing the size of the block");
-				}
-			}
-
-			*(blocks + i) = id;
-
-			printf("*block_hit = 0x%08x\n", *(blocks + i));
-			i++;	
-	}
-	
 	//printf("left while\n");
 
 
@@ -2177,7 +2245,7 @@ static u8 run_target(char** argv, u32 timeout) {
 
 	u8 fault;
   int hit;
-  run_forkserver_on_target(timeout, &hit, fsrv_ctl_fd[MAIN_PROG], fsrv_st_fd[MAIN_PROG], &fault);
+  run_forkserver_on_target(timeout, &hit, MAIN_PROG, &fault);
   return fault;
 
 }
@@ -2206,7 +2274,7 @@ static int** run_programs_once(u32 timeout, int *size[] ){
 	// Get all the blocks of all programs under	test
 	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
 		//blocks[i] = malloc( sizeof(int) );
-		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), fsrv_ctl_fd[i], fsrv_st_fd[i], &fault);
+		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), i, &fault);
 	}
 
 	return blocks;
@@ -2226,7 +2294,7 @@ static void cmp_program(char** argv, u32 timeout) {
 
 	int size[numbr_of_progs_under_test];
 
-	blocks = run_programs_once( timeout, size );
+	blocks = run_programs_once( timeout, &size );
 
 	if(*blocks == NULL){
 		printf("First block is null\n");
@@ -2341,7 +2409,7 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
 static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
                          u32 handicap, u8 from_queue) {
 
-  printf("in calibrate case\n");
+  //printf("in calibrate case\n");
 
   static u8 first_trace[MAP_SIZE];
 
@@ -2398,16 +2466,16 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
     //		-> keep changing the program under test under a specified condition
     //	    -> probably the changing act will not be here but someplace else
     int hit;
-    run_forkserver_on_target(use_tmout, &hit, fsrv_ctl_fd[0], fsrv_st_fd[0], &fault);
+    run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault);
 
-    printf("\tfault = %d\n", fault);
+    //printf("\tfault = %d\n", fault);
 
     /* stop_soon is set by the handler for Ctrl+C. When it's pressed,
        we want to bail out quickly. */
 
     if (stop_soon || fault != crash_mode) goto abort_calibration;
 
-    printf("\tdid not go to abort_calibration\n");
+    //printf("\tdid not go to abort_calibration\n");
 
     if (!dumb_mode && !stage_cur && !count_bytes(trace_bits)) {
       fault = FAULT_NOINST;
@@ -4777,7 +4845,6 @@ static u8 could_be_interest(u32 old_val, u32 new_val, u8 blen, u8 check_le) {
 /* Take the current entry from the queue, fuzz it for a while. This
    function is a tad too long... returns 0 if fuzzed successfully, 1 if
    skipped or bailed out. */
-//TODO
 static u8 fuzz_one(char** argv) {
 
   s32 len, fd, temp_len, i, j;
@@ -6486,15 +6553,14 @@ static void handle_skipreq(int sig) {
 
 static void handle_timeout(int sig) {
 
-	printf("In handle timeout\n");
+	//printf("In handle timeout\n");
 
 	if (child_pid > 0) {
-		printf("child pid is gonna die\n");
+		//printf("child pid is gonna die\n");
 		child_timed_out = 1; 
 		kill(child_pid, SIGKILL);
 
 	} else if (child_pid == -1 && forksrv_pid[0] > 0) {
-
 		child_timed_out = 1; 
 		kill(forksrv_pid[0], SIGKILL);
 
@@ -6644,7 +6710,7 @@ static void init_all_forkservers(char **argv){
 	  	printf("%s\n", (*(argv + index)));
 	  	check_binary(*(argv + index), &(target_path[prog])); // -> needed
 	 	
-	  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD + (prog * 2));
+	  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], prog, FORKSRV_FD + (prog * 2));
 	  	//init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD);
 	  	numbr_of_progs_under_test ++;
 	  	index ++;
