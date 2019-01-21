@@ -145,7 +145,7 @@ static s32 forksrv_pid[MAX_AMOUT_OF_PROGRAMS],               /* PID of the fork 
 /*Program corrently under test*/
 int MAIN_PROG = 0;
 
-static int switch_program_timer = 1000 * 60 * 1; /* Time each program should be given before switching to the next one      */
+static int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
 
 /* TODO probably will need an array of this things */
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
@@ -2251,7 +2251,14 @@ static u8 run_target(char** argv, u32 timeout) {
 
 	u8 fault;
   int hit;
-  run_forkserver_on_target(timeout, &hit, MAIN_PROG, &fault);
+  int *blocks = run_forkserver_on_target(timeout, &hit, MAIN_PROG, &fault);
+
+  free (blocks);
+
+  /*
+  int i = 0;
+  while( (*blocks + i) ){}
+  */
   return fault;
 
 }
@@ -2468,11 +2475,13 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
     // TODO -> need to pass through every program here?
     //		Or do we just want to pass the one being tested? and then change it over time?
 
-    // TODO -> change this so we have a circle array
-    //		-> keep changing the program under test under a specified condition
-    //	    -> probably the changing act will not be here but someplace else
+
     int hit;
-    run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault);
+    int* blocks = run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault);
+
+    // TODO -> do something with the blocks before freeing them
+
+    free(blocks);
 
     //printf("\tfault = %d\n", fault);
 
@@ -7345,30 +7354,32 @@ int main(int argc, char** argv) {
 
 	doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
 
-	while ((opt = getopt(argc, argv, "+i:o:p:m:")) > 0){
+  printf("after accessing docs\n");
+
+	while ((opt = getopt(argc, argv, "+i:o:q:m:")) > 0){
 
 		switch (opt) {
 
       case 'i': /* input dir */
+  			if (in_dir) FATAL("Multiple -i options not supported");
+  			in_dir = optarg;
+          //if (!strcmp(in_dir, "-")) in_place_resume = 1;
 
-			if (in_dir) FATAL("Multiple -i options not supported");
-			in_dir = optarg;
-        //if (!strcmp(in_dir, "-")) in_place_resume = 1;
-
-			break;
+  			break;
 
       case 'o': /* output dir */
 
-			if (out_dir) FATAL("Multiple -o options not supported");
-			out_dir = optarg;
-			break;
-	  case 'p':
-	 		// remove
-	    	//check_binary(optarg, &(target_path[path_index])); // -> needed
-	    	//init_forkserver_special(argv, &target_path[path_index], &forksrv_pid[path_index], &fsrv_ctl_fd[path_index], &fsrv_st_fd[path_index], FORKSRV_FD);
-	  		path_index ++;
-	  		break;
-      case 'm': { /* mem limit */
+  			if (out_dir) FATAL("Multiple -o options not supported");
+  			out_dir = optarg;
+  			break;
+
+    case 'q': 
+      //printf("received value = %s\n", optarg);
+      // receive the value in minutes
+      switch_program_timer = 1000 * 60 * atoi(optarg);
+      break;
+	 
+    case 'm': { /* mem limit */
 
 			u8 suffix = 'M';
 
@@ -7404,15 +7415,11 @@ int main(int argc, char** argv) {
 
 			break;
 
-
 			default:
-			printf("in default\n");
-			usage(argv[0]);
+			 usage(argv[0]);
 
 		}
 	}
-
-
   //printf("optind = %d\n", optind);
   //printf("argc = %d\n", argc);
   if ( optind == argc || !in_dir || !out_dir ){ printf("here in this option of ours\n");usage(argv[0]);}
@@ -7424,7 +7431,7 @@ int main(int argc, char** argv) {
 
   if (sync_id) fix_up_sync();
 
-  save_cmdline(argc, argv); // -> not needed
+  //save_cmdline(argc, argv); // -> not needed
 
   fix_up_banner(argv[optind]);
 
