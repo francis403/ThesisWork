@@ -145,21 +145,27 @@ static s32 forksrv_pid[MAX_AMOUT_OF_PROGRAMS],               /* PID of the fork 
 /*Program corrently under test*/
 int MAIN_PROG = 0;
 
+static int switch_program_timer = 1000 * 60 * 1; /* Time each program should be given before switching to the next one      */
 
 /* TODO probably will need an array of this things */
-EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap  */
-EXP_ST u8* trace_bits_todo[MAX_AMOUT_OF_PROGRAMS]; /* SGM with instrumentation bitmap array */ //Todo -> tenho medo de ser demasiado espaco 
+EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
 
 
 EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
            virgin_tmout[MAP_SIZE],    /* Bits we haven't seen in tmouts   */
            virgin_crash[MAP_SIZE];    /* Bits we haven't seen in crashes  */
 
+
+// TODO -> switch to main to have better control of memory
+// TO THINK -> Maybe we only need one? This will hold all the edges, if two programs have the same edge it's probably because It's the same two blocks
+//EXP_ST u8  virgin_bits[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE],     /* Regions yet untouched by fuzzing */
+//           virgin_tmout[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE],    /* Bits we haven't seen in tmouts   */
+//           virgin_crash[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE];    /* Bits we haven't seen in crashes  */
+
 static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
 
 //TODO -> probably need an array here as well
 static s32 shm_id;                    /* ID of the SHM region             */
-static s32 shm_id_todo[MAX_AMOUT_OF_PROGRAMS];			  /* Array of IDs of shared memory of all programs */
 
 static volatile u8 stop_soon,         /* Ctrl-C pressed?                  */
                    clear_screen = 1,  /* Window resized?                  */
@@ -4935,7 +4941,7 @@ static u8 fuzz_one(char** argv) {
 
     if (queue_cur->cal_failed < CAL_CHANCES) {
 
-      res = calibrate_case(argv, queue_cur, in_buf, queue_cycle - 1, 0);
+      res = calibrate_case(argv, queue_cur, in_buf, queue_cycle - 1, 0); // Here we actually run the program
 
       if (res == FAULT_ERROR)
         FATAL("Unable to execute target application");
@@ -7335,7 +7341,7 @@ int main(int argc, char** argv) {
 	char** use_argv;
 
 	int path_index = 0;
-	SAYF(cCYA "afl-fuzz " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
+	//SAYF(cCYA "afl-fuzz " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
 
 	doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
 
@@ -7484,6 +7490,7 @@ int main(int argc, char** argv) {
 
   if (stop_soon) goto stop_fuzzing;
 
+
   /* Woop woop woop */
   
   if (!not_on_tty) {
@@ -7492,20 +7499,30 @@ int main(int argc, char** argv) {
     if (stop_soon) goto stop_fuzzing;
   }
 
+u64 init_time = get_cur_time(), end_t;
 
-while (1) { //main fuzzing loop
+
+while (1) { //main fuzzing loop //FUZZ
 
     u8 skipped_fuzz;
 
     cull_queue();
+    end_t = get_cur_time();
 
-    
+    // Shoulw we switch programs?
+    if( (end_t - init_time) >= switch_program_timer ){
+      printf("Gonna switch programs\n");
+      init_time = get_cur_time();
+      // TODO -> switch the program.
+      MAIN_PROG = (MAIN_PROG + 1) % numbr_of_progs_under_test; 
+      printf("Main_prog = %d\n", MAIN_PROG);
+    }
     if (!queue_cur) {
 
     	queue_cycle++;
       current_entry     = 0;
       cur_skipped_paths = 0;
-      queue_cur         = queue; //-> results in segm fault
+      queue_cur         = queue;
     
 
       while (seek_to) {
@@ -7536,7 +7553,7 @@ while (1) { //main fuzzing loop
     }
 
     
-    skipped_fuzz = fuzz_one(use_argv);
+    skipped_fuzz = fuzz_one(use_argv); // this is where the work will be done //TODO
 
     if (!stop_soon && sync_id && !skipped_fuzz) {
       
@@ -7549,14 +7566,14 @@ while (1) { //main fuzzing loop
 
     if (stop_soon) break;
 
-    queue_cur = queue_cur->next; //todo -> this here is resulting in a segmentation fault
+    queue_cur = queue_cur->next;
     current_entry++;
     
 	
   } //end of the main fuzzing loop
 
 
-  if (queue_cur) show_stats();
+  //if (queue_cur) show_stats();
 
 
   write_bitmap();
