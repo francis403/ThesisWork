@@ -3783,6 +3783,7 @@ static void check_term_size(void);
 
 /* A spiffy retro stats screen! This is called every stats_update_freq
    execve() calls, plus in several other circumstances. */
+// TODO -> add the information missing (what program is being fuzzed, how much time that program has been fuzzed, found blocks that are shared, edge's found in the specific program (not influenced with the other programs))
 
 static void show_stats(void) {
 
@@ -7205,6 +7206,36 @@ static void handle_resize(int sig) {
 	clear_screen = 1;
 }
 
+/* Check ASAN options. */
+
+static void check_asan_opts(void) {
+  u8* x = getenv("ASAN_OPTIONS");
+
+  if (x) {
+
+    if (!strstr(x, "abort_on_error=1"))
+      FATAL("Custom ASAN_OPTIONS set without abort_on_error=1 - please fix!");
+
+    if (!strstr(x, "symbolize=0"))
+      FATAL("Custom ASAN_OPTIONS set without symbolize=0 - please fix!");
+
+  }
+
+  x = getenv("MSAN_OPTIONS");
+
+  if (x) {
+
+    if (!strstr(x, "exit_code=" STRINGIFY(MSAN_ERROR)))
+      FATAL("Custom MSAN_OPTIONS set without exit_code="
+            STRINGIFY(MSAN_ERROR) " - please fix!");
+
+    if (!strstr(x, "symbolize=0"))
+      FATAL("Custom MSAN_OPTIONS set without symbolize=0 - please fix!");
+
+  }
+
+} 
+
 /* Detect @@ in args. */
 // TODO -> will we allow this? If so we need to allow it for every file or only specific ones?
 EXP_ST void detect_file_args(char** argv) {
@@ -7344,7 +7375,6 @@ int main(int argc, char** argv) {
 
 	doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
 
-  printf("after accessing docs\n");
 
 	while ((opt = getopt(argc, argv, "+i:o:q:m:")) > 0){
 
@@ -7417,11 +7447,11 @@ int main(int argc, char** argv) {
   //numbr_of_progs_under_test = getenv(FORKSRV_AMOUNT_ENV) == NULL ? 1 : getenv(FORKSRV_AMOUNT_ENV); // get number of programs under test
 
   setup_signal_handlers(); // not needed to execture the forkserver, but might as well have it
-  //check_asan_opts(); // -> not needed
+  check_asan_opts();
 
   if (sync_id) fix_up_sync();
 
-  //save_cmdline(argc, argv); // -> not needed
+  save_cmdline(argc, argv); // -> not needed
 
   fix_up_banner(argv[optind]);
 
