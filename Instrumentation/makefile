@@ -12,7 +12,7 @@ HARN=harn
 FACT=fact
 ALL=afl-instr/instr-all-gcc
 
-main: clean simple simple2 harness fuzz
+main: clean simple simple2 fuzz
 
 cmp_progs: clean instr-all fuzz
 
@@ -30,20 +30,26 @@ factorial:
 	$(CC) ./find_factorial.c -save-temps -o $(FACT) -w
 fuzz:
 	#$(RUN) -m none -i input -o out ./fact ./simple2
-	$(RUN) -m none -i input -o out ./simple ./simple2
+	$(RUN) -m none -i input -o out -q 2 ./simple ./simple2
 	#$(RUN) -m none -i input -o out ./fact ./simple2
+	#$(RUN) -m none -i input -o out ./simple
+	#$(RUN) -m none -i input -o out ./fact
+	#$(RUN) -m none -i input -o out ./is_prime
 
 cmp_progs: clean instr-all fuzz
 
-instr-all:
+instr-all: clean
 	#$(ALL) -p ./find_factorial.c -save-temps -o $(FACT) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
 	$(ALL) -p ./simple_program.c -save-temps -o $(EXE) -w -p ./simple_program2.c -save-temps -o $(EXE2) -w
+	#$(ALL) -p ./simple_program.c -save-temps -o $(EXE) -w
+	#$(ALL) -p ./find_factorial.c -save-temps -o $(FACT) -w
+	#$(ALL) -p ./is_prime.c -save-temps -o is_prime -w
 
 
 valgrind:
 	valgrind --leak-check=full ./$(ALL)
 test_memory:
-	valgrind --leak-check=full afl-instr/afl-fuzz -m none -i input -o out ./fact ./simple2
+	valgrind --leak-check=full -v afl-instr/afl-fuzz -m none -i input -o out ./is_prime
 
 
 #--------CLEANING---------

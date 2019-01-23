@@ -94,7 +94,10 @@ EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
 		      *target_path[MAX_AMOUT_OF_PROGRAMS],
           //*target_path[MAX_AMOUT_OF_PROGRAMS],               /* Path to target binary            */
 		  //*target_path,
+          *cur_prog;                  /* Current Program being fuzzed     */
           *orig_cmdline;              /* Original command line            */
+
+static short init_prog_args;
 
 EXP_ST u32 exec_tmout = EXEC_TIMEOUT; /* Configurable exec timeout (ms)   */
 static u32 hang_tmout = EXEC_TIMEOUT; /* Timeout used for hang det (ms)   */
@@ -151,16 +154,16 @@ static int switch_program_timer = 1000 * 60 * 5; /* Time each program should be 
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
 
 
-EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
-           virgin_tmout[MAP_SIZE],    /* Bits we haven't seen in tmouts   */
-           virgin_crash[MAP_SIZE];    /* Bits we haven't seen in crashes  */
+//EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
+//           virgin_tmout[MAP_SIZE],    /* Bits we haven't seen in tmouts   */
+//           virgin_crash[MAP_SIZE];    /* Bits we haven't seen in crashes  */
 
 
 // TODO -> switch to main to have better control of memory
 // TO THINK -> Maybe we only need one? This will hold all the edges, if two programs have the same edge it's probably because It's the same two blocks
-//EXP_ST u8  virgin_bits[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE],     /* Regions yet untouched by fuzzing */
-//           virgin_tmout[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE],    /* Bits we haven't seen in tmouts   */
-//           virgin_crash[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE];    /* Bits we haven't seen in crashes  */
+EXP_ST u8  virgin_bits[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE],     /* Regions yet untouched by fuzzing */
+           virgin_tmout[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE],    /* Bits we haven't seen in tmouts   */
+           virgin_crash[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE];    /* Bits we haven't seen in crashes  */
 
 static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
 
@@ -195,6 +198,7 @@ EXP_ST u64 total_crashes,             /* Total number of crashes          */
            unique_hangs,              /* Hangs with unique signatures     */
            total_execs,               /* Total execve() calls             */
            start_time,                /* Unix start time (ms)             */
+           prog_start_time,           /* Unix start time (ms) for cur prog*/
            last_path_time,            /* Time for most recent path (ms)   */
            last_crash_time,           /* Time for most recent crash (ms)  */
            last_hang_time,            /* Time for most recent hang (ms)   */
@@ -751,7 +755,7 @@ EXP_ST void write_bitmap(void) {
 
 	if (fd < 0) PFATAL("Unable to open '%s'", fname);
 
-	ck_write(fd, virgin_bits, MAP_SIZE, fname);
+	ck_write(fd, virgin_bits[MAIN_PROG], MAP_SIZE, fname);
 
 	close(fd);
 	ck_free(fname);
@@ -836,7 +840,7 @@ static inline u8 has_new_bits(u8* virgin_map) {
 
   } // end of while
 
-  if (ret && virgin_map == virgin_bits) bitmap_changed = 1;
+  if (ret && virgin_map == virgin_bits[MAIN_PROG]) bitmap_changed = 1;
 
   return ret;
 
@@ -1244,15 +1248,20 @@ static void cull_queue(void) {
 }
 
 /* Configure shared memory and virgin_bits. This is called at startup. */
-// TODO -> add mulitple ids
+// TODO -> add mulitple ids -> should we treat all programs as a big program? 
 EXP_ST void setup_shm(void) {
 
 	u8* shm_str;
 
-	if (!in_bitmap) memset(virgin_bits, 255, MAP_SIZE);
+	if (!in_bitmap){ 
+    for(int i = 0; i < numbr_of_progs_under_test; i++)
+     memset(virgin_bits[i], 255, MAP_SIZE);
+  }
 
-	memset(virgin_tmout, 255, MAP_SIZE);
-	memset(virgin_crash, 255, MAP_SIZE);
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+	 memset(virgin_tmout[i], 255, MAP_SIZE);
+	 memset(virgin_crash[i], 255, MAP_SIZE);
+  }
 
 	shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
 	//printf("shm_id = %d\n", shm_id);
@@ -2008,10 +2017,9 @@ int blocks_hit(int *blocks){
 * RUNS specific forkserver specified in fsrv_ctl_fd and fsrv_st_fd
 * Stores the reason the program crashed in fault, if it does not crash FAULT_NONE
 * Stores the amount of blocks found in hit
-* IDEA -> might just pass the index of the program and get everything from there -> s32 fsrv_ctl_fd,s32 fsrv_st_fd
+// TODO -> pensar em mudar para u8 em vez de int, visto que ocupa menos
 **/ 
 int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
-	//printf("\t-> in run_forkserver_on_target\n");
 
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
@@ -2039,29 +2047,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
     RPFATAL(res, "Unable to request new process from fork server (OOM?)");
 
   }
-
-    //printf("%d\n", &prev_timed_out);
-
-    // theory of what happens
-    // What happens -> depois de comecarmos o forkserver, vamos ter dois processos, um deles vai escrever o que está aqui à frente, o outro vai buscar os blocos
-    // TODO -> maybe change the assembly to first pass through all of this and then run? (bit slow but nothing special)
-    // TODO -> maybe when AFL_RESUME starts, receive a specific message from the assembly, write back for confirmation (check if we've received everything) and then start receiving the blocks
-    //      -> But how do we receive the first message
-    // TODO -> maybe simply have a different forkserver to receive/write the blocks, that would be smart
-    //      -> fork here and wait for a read in that one
-    //      -> and put a while
-    // TODO -> fazemos um write que é lido apenas no afl_resume, no outro lado esperam com um readme, que é desbloqueado quando recebermos o status e a partir dai sabemos que são só blocos
-    // TODO -> escrevemos com 5 o bloco, e com 4 o normal
-    //      se for 4 fazemos o que temos de fazer, se for 5 guardamos o bloco
-
-    /*
-    int block_pid = fork();
-
-    if(block_pid){
-      while()
-      exit(0);
-    }
-    */
 
     if ((res = read(fsrv_st_fd[prog_index], &child_pid, 4)) != 4) { //-READ
 
@@ -2501,7 +2486,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     if (q->exec_cksum != cksum) {
 
-      u8 hnb = has_new_bits(virgin_bits);
+      u8 hnb = has_new_bits(virgin_bits[MAIN_PROG]);
       if (hnb > new_bits) new_bits = hnb;
 
       if (q->exec_cksum) {
@@ -2834,7 +2819,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     /* Keep only if there are new bits in the map, add to queue for
        future fuzzing, etc. */
 
-    if (!(hnb = has_new_bits(virgin_bits))) {
+    if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG]))) {
       if (crash_mode) total_crashes++;
       return 0;
     }    
@@ -2897,7 +2882,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
         simplify_trace((u32*)trace_bits);
 #endif /* ^__x86_64__ */
 
-        if (!has_new_bits(virgin_tmout)) return keeping;
+        if (!has_new_bits(virgin_tmout[MAIN_PROG])) return keeping;
 
       }
 
@@ -2961,7 +2946,7 @@ keep_as_crash:
         simplify_trace((u32*)trace_bits);
 #endif /* ^__x86_64__ */
 
-        if (!has_new_bits(virgin_crash)) return keeping;
+        if (!has_new_bits(virgin_crash[MAIN_PROG])) return keeping;
 
       }
 
@@ -3784,7 +3769,7 @@ static void check_term_size(void);
 /* A spiffy retro stats screen! This is called every stats_update_freq
    execve() calls, plus in several other circumstances. */
 // TODO -> add the information missing (what program is being fuzzed, how much time that program has been fuzzed, found blocks that are shared, edge's found in the specific program (not influenced with the other programs))
-
+//TODO_NOW
 static void show_stats(void) {
 
   static u64 last_stats_ms, last_plot_ms, last_ms, last_execs;
@@ -3839,7 +3824,7 @@ static void show_stats(void) {
 
   /* Do some bitmap stats. */
 
-  t_bytes = count_non_255_bytes(virgin_bits);
+  t_bytes = count_non_255_bytes(virgin_bits[MAIN_PROG]);
   t_byte_ratio = ((double)t_bytes * 100) / MAP_SIZE;
 
   if (t_bytes) 
@@ -3880,7 +3865,7 @@ static void show_stats(void) {
 
   /* Compute some mildly useful bitmap stats. */
 
-  t_bits = (MAP_SIZE << 3) - count_bits(virgin_bits);
+  t_bits = (MAP_SIZE << 3) - count_bits(virgin_bits[MAIN_PROG]);
 
   /* Now, for the visuals... */
 
@@ -3960,6 +3945,12 @@ static void show_stats(void) {
        "  cycles done : %s%-5s  " bSTG bV "\n",
        DTD(cur_ms, start_time), tmp, DI(queue_cycle - 1));
 
+   SAYF(bV bSTOP "    cur run time : " cRST "%-34s " bSTG bV bSTOP
+       "  cur prog : %s  " bSTG bV "\n",
+       DTD(cur_ms, prog_start_time), cur_prog );
+
+  //SAYF(bV bSTOP "   current program : " cRST  "%-34s\n" bSTG bV bSTOP, cur_prog);
+
   /* We want to warn people about not seeing new paths after a full cycle,
      except when resuming fuzzing or running in non-instrumented mode. */
 
@@ -4003,6 +3994,9 @@ static void show_stats(void) {
   SAYF(bV bSTOP "  last uniq hang : " cRST "%-34s " bSTG bV bSTOP 
        "   uniq hangs : " cRST "%-6s " bSTG bV "\n",
        DTD(cur_ms, last_hang_time), tmp);
+
+
+  // new box
 
   SAYF(bVR bH bSTOP cCYA " cycle progress " bSTG bH20 bHB bH bSTOP cCYA
        " map coverage " bSTG bH bHT bH20 bH2 bH bVL "\n");
@@ -6718,7 +6712,6 @@ static void init_all_forkservers(char **argv){
 	 	
 	  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], prog, FORKSRV_FD + (prog * 2));
 	  	//init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD);
-	  	numbr_of_progs_under_test ++;
 	  	index ++;
 	  	prog ++;
 	}
@@ -7444,6 +7437,8 @@ int main(int argc, char** argv) {
   //printf("argc = %d\n", argc);
   if ( optind == argc || !in_dir || !out_dir ){ printf("here in this option of ours\n");usage(argv[0]);}
 
+  numbr_of_progs_under_test = argc - optind;
+
   //numbr_of_progs_under_test = getenv(FORKSRV_AMOUNT_ENV) == NULL ? 1 : getenv(FORKSRV_AMOUNT_ENV); // get number of programs under test
 
   setup_signal_handlers(); // not needed to execture the forkserver, but might as well have it
@@ -7476,26 +7471,16 @@ int main(int argc, char** argv) {
 
   //detect_file_args(argv + optind + 1);
 
-  if (!out_file) setup_stdio_file(); // -> needed!
+  if (!out_file) setup_stdio_file();
   //printf("%s\n", tmp_test);
 
-  start_time = get_cur_time();// -> not needed
+  start_time = get_cur_time();
+  prog_start_time = start_time;
 
   use_argv = argv + optind;
-  /*
-  int index = optind, prog = 0;
+  init_prog_args = optind;
 
-  while (*(argv + index)){
-  	printf("%s\n", (*(argv + index)));
-  	check_binary(*(argv + index), &(target_path[prog])); // -> needed
- 	
-  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD + (prog * 2));
-  	//init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD);
-  	numbr_of_progs_under_test ++;
-  	index ++;
-  	prog ++;
-  }
-  */
+  cur_prog = argv[init_prog_args];
 
   /*we start forkservers here*/
   init_all_forkservers(argv);
@@ -7523,6 +7508,7 @@ int main(int argc, char** argv) {
   if (!not_on_tty) {
     sleep(4);
     start_time += 4000;
+    prog_start_time += 4000;
     if (stop_soon) goto stop_fuzzing;
   }
 
@@ -7538,11 +7524,13 @@ while (1) { //main fuzzing loop //FUZZ
 
     // Shoulw we switch programs?
     if( (end_t - init_time) >= switch_program_timer ){
-      printf("Gonna switch programs\n");
+      //printf("Gonna switch programs\n");
       init_time = get_cur_time();
       // TODO -> switch the program.
       MAIN_PROG = (MAIN_PROG + 1) % numbr_of_progs_under_test; 
       printf("Main_prog = %d\n", MAIN_PROG);
+      cur_prog = argv[init_prog_args + MAIN_PROG];
+      prog_start_time = get_cur_time();
     }
     if (!queue_cur) {
 
