@@ -79,6 +79,8 @@
 #  define EXP_ST static
 #endif /* ^AFL_LIB */
 
+static unsigned short BLOCKS_FOUND[MAP_SIZE]; /* Stores all values found*/
+
 /* Lots of globals, but mostly for the status UI and other things where it
    really makes no sense to haul them around as function parameters. */
 
@@ -91,7 +93,7 @@ EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
           *use_banner,                /* Display banner                   */
           *in_bitmap,                 /* Input bitmap                     */
           *doc_path,                  /* Path to documentation dir        */
-		      *target_path[MAX_AMOUT_OF_PROGRAMS],
+		  *target_path[MAX_AMOUT_OF_PROGRAMS],
           //*target_path[MAX_AMOUT_OF_PROGRAMS],               /* Path to target binary            */
 		  //*target_path,
           *cur_prog;                  /* Current Program being fuzzed     */
@@ -2019,7 +2021,7 @@ int blocks_hit(int *blocks){
 * Stores the amount of blocks found in hit
 // TODO -> pensar em mudar para u8 em vez de int, visto que ocupa menos
 **/ 
-int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
+int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault, int *nbr_in_common){
 
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
@@ -2085,6 +2087,11 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   
   int message = 0;
 
+  // tells us which blocks where found
+  unsigned short blocks_found_in_common[MAP_SIZE]; 
+  if(nbr_in_common != NULL)
+  	*nbr_in_common = 0;
+
   while( 1 ){
 
     message = 0;
@@ -2119,6 +2126,15 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
       *(blocks + i) = id;
 
+      // has it been seen before and not on this run?
+      if( nbr_in_common != NULL && BLOCKS_FOUND[id] != 0 && blocks_found_in_common[id] == 0 ){
+      	// add it to the in common
+      	*nbr_in_common += 1;
+      	blocks_found_in_common[id] ++; // mark it has seen
+      	//printf("*block_hit = 0x%08x has been seen before\n", id);
+      }
+
+      BLOCKS_FOUND[id] ++;
       //printf("*block_hit = 0x%08x\n", *(blocks + i));
       i++;  
 
@@ -2232,11 +2248,12 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 }
 
 /*Runs the current target and returns its fault*/
-static u8 run_target(char** argv, u32 timeout) {
+static u8 run_target(u32 timeout) {
 
-	u8 fault;
+  u8 fault;
   int hit;
-  int *blocks = run_forkserver_on_target(timeout, &hit, MAIN_PROG, &fault);
+  int number_in_common;
+  int *blocks = run_forkserver_on_target(timeout, &hit, MAIN_PROG, &fault, &number_in_common);
 
   free (blocks);
 
@@ -2272,7 +2289,7 @@ static int** run_programs_once(u32 timeout, int *size[] ){
 	// Get all the blocks of all programs under	test
 	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
 		//blocks[i] = malloc( sizeof(int) );
-		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), i, &fault);
+		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), i, &fault, NULL);
 	}
 
 	return blocks;
@@ -2462,7 +2479,8 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
 
     int hit;
-    int* blocks = run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault);
+    int shared_blocks;
+    int* blocks = run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault, &shared_blocks);
 
     // TODO -> do something with the blocks before freeing them
 
@@ -2896,7 +2914,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
         u8 new_fault;
         write_to_testcase(mem, len);
-        new_fault = run_target(argv, hang_tmout); //todo -> change
+        new_fault = run_target(hang_tmout); //todo -> change
 
         /* A corner case that one user reported bumping into: increasing the
            timeout actually uncovers a crash. Make sure we don't discard it if
@@ -4414,7 +4432,7 @@ static u8 trim_case(char** argv, struct queue_entry* q, u8* in_buf) {
 
       write_with_gap(in_buf, q->len, remove_pos, trim_avail);
 
-      fault = run_target(argv, exec_tmout); //todo -> change
+      fault = run_target(exec_tmout); //todo -> change
       trim_execs++;
 
       if (stop_soon || fault == FAULT_ERROR) goto abort_trimming;
@@ -4506,7 +4524,7 @@ EXP_ST u8 common_fuzz_stuff(char** argv, u8* out_buf, u32 len) {
 
   write_to_testcase(out_buf, len);
 
-  fault = run_target(argv, exec_tmout); //todo -> change
+  fault = run_target(exec_tmout); //todo -> change
 
   if (stop_soon) return 1;
 
@@ -7514,6 +7532,10 @@ int main(int argc, char** argv) {
 
 u64 init_time = get_cur_time(), end_t;
 
+int hit;
+u8 fault;
+int shared_blocks;
+
 
 while (1) { //main fuzzing loop //FUZZ
 
@@ -7588,7 +7610,7 @@ while (1) { //main fuzzing loop //FUZZ
   } //end of the main fuzzing loop
 
 
-  //if (queue_cur) show_stats();
+ if (queue_cur) show_stats();
 
 
   write_bitmap();
