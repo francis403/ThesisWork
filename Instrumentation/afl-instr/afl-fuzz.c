@@ -79,7 +79,6 @@
 #  define EXP_ST static
 #endif /* ^AFL_LIB */
 
-static unsigned short BLOCKS_FOUND[MAP_SIZE]; /* Stores all values found*/
 
 /* Lots of globals, but mostly for the status UI and other things where it
    really makes no sense to haul them around as function parameters. */
@@ -149,8 +148,14 @@ static s32 forksrv_pid[MAX_AMOUT_OF_PROGRAMS],               /* PID of the fork 
 
 /*Program corrently under test*/
 int MAIN_PROG = 0;
-
 static int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
+
+static unsigned short BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
+
+// TODO -> Maybe will have to change, since it seems they count the score at the end of multiple runs
+int shared_blocks_in_runs; /* Stores the number of shared blocks between current run and last run */
+		/*Idea: store it in the queue struct!!!*/
+	// think I'll need to have it store per input */
 
 /* TODO probably will need an array of this things */
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
@@ -274,6 +279,9 @@ struct queue_entry {
   u64 exec_us,                        /* Execution time (us)              */
       handicap,                       /* Number of queue cycles behind    */
       depth;                          /* Path depth                       */
+
+  int shared_blocks;			  	  /* Number of the shared blocks found*/
+  int total_blocks;					  /* total blocks passed 			  */
 
   u8* trace_mini;                     /* Trace bytes, if kept             */
   u32 tc_ref;                         /* Trace bytes ref count            */
@@ -2021,7 +2029,7 @@ int blocks_hit(int *blocks){
 * Stores the amount of blocks found in hit
 // TODO -> pensar em mudar para u8 em vez de int, visto que ocupa menos
 **/ 
-int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault, int *nbr_in_common){
+int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
@@ -2088,9 +2096,9 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault, 
   int message = 0;
 
   // tells us which blocks where found
-  unsigned short blocks_found_in_common[MAP_SIZE]; 
-  if(nbr_in_common != NULL)
-  	*nbr_in_common = 0;
+  short blocks_from_run[MAP_SIZE] = {};
+
+  shared_blocks_in_runs = 0;
 
   while( 1 ){
 
@@ -2127,17 +2135,30 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault, 
       *(blocks + i) = id;
 
       // has it been seen before and not on this run?
-      if( nbr_in_common != NULL && BLOCKS_FOUND[id] != 0 && blocks_found_in_common[id] == 0 ){
+      /*
+      if(  BLOCKS_FOUND[id] && !blocks_from_run[id]){
       	// add it to the in common
-      	*nbr_in_common += 1;
-      	blocks_found_in_common[id] ++; // mark it has seen
+
+      	//(*nbr_in_common) = (*nbr_in_common) + 1;
+      	//count ++;
       	//printf("*block_hit = 0x%08x has been seen before\n", id);
       }
+     */
 
+      shared_blocks_in_runs =  BLOCKS_FOUND[id] && !blocks_from_run[id] ? 
+      	shared_blocks_in_runs + 1 : shared_blocks_in_runs;
+
+      blocks_from_run[id] = 1; // mark it has seen
       BLOCKS_FOUND[id] ++;
+
       //printf("*block_hit = 0x%08x\n", *(blocks + i));
       i++;  
 
+  }
+
+  if( queue_cur != NULL ){ 
+  	queue_cur->shared_blocks = shared_blocks_in_runs; 
+  	queue_cur ->total_blocks = *hit;
   }
 
   //status = message;
@@ -2252,8 +2273,7 @@ static u8 run_target(u32 timeout) {
 
   u8 fault;
   int hit;
-  int number_in_common;
-  int *blocks = run_forkserver_on_target(timeout, &hit, MAIN_PROG, &fault, &number_in_common);
+  int *blocks = run_forkserver_on_target(timeout, &hit, MAIN_PROG, &fault);
 
   free (blocks);
 
@@ -2289,7 +2309,7 @@ static int** run_programs_once(u32 timeout, int *size[] ){
 	// Get all the blocks of all programs under	test
 	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
 		//blocks[i] = malloc( sizeof(int) );
-		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), i, &fault, NULL);
+		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), i, &fault);
 	}
 
 	return blocks;
@@ -2417,10 +2437,6 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
    to warn about flaky or otherwise problematic test cases early on; and when
    new paths are discovered to detect variable behavior and so on. */
 
-//TODO -> make this work here, since it was working for a single program, but we need with n
-//	-> probably gonna need to pass one more argument to add int
-//	-> IDEA: run the passed program once, check the fault, return it, simple as that
-
 static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
                          u32 handicap, u8 from_queue) {
 
@@ -2479,8 +2495,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
 
     int hit;
-    int shared_blocks;
-    int* blocks = run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault, &shared_blocks);
+    int* blocks = run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault);
 
     // TODO -> do something with the blocks before freeing them
 
@@ -3583,7 +3598,7 @@ static void perform_dry_run(char** argv) {
 
   while (q) {
 
-  	printf("In while queue with file -> %s\n", q->fname);
+  	//printf("In while queue with file -> %s\n", q->fname);
 
     u8* use_mem;
     u8  res;
@@ -4607,6 +4622,8 @@ static u32 choose_block_len(u32 limit) {
    A helper function for fuzz_one(). Maybe some of these constants should
    go into config.h. */
 
+// TODO -> set the number of equal blocks seen in the queue struct for the specific input
+
 static u32 calculate_score(struct queue_entry* q) {
 
   u32 avg_exec_us = total_cal_us / total_cal_cycles;
@@ -4650,6 +4667,18 @@ static u32 calculate_score(struct queue_entry* q) {
     q->handicap--;
 
   }
+
+  // added by fc45701
+  /* Adjust score based on number of known blocks found when compared with total number of blocks*/
+  if(queue_cur->shared_blocks == 0){
+  	// performance score should be best
+  }
+  else {
+  	double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->total_blocks;
+  	printf("score_mult = %f\n", score_mult);
+  }
+  //perf_score *= (double)queue_cur->total_blocks/(double)queue_cur->shared_blocks; 
+
 
   /* Final adjustment based on input depth, under the assumption that fuzzing
      deeper test cases is more likely to reveal stuff that can't be
@@ -4953,7 +4982,7 @@ static u8 fuzz_one(char** argv) {
 
     if (queue_cur->cal_failed < CAL_CHANCES) {
 
-      res = calibrate_case(argv, queue_cur, in_buf, queue_cycle - 1, 0); // Here we actually run the program
+      res = calibrate_case(argv, queue_cur, in_buf, queue_cycle - 1, 0);
 
       if (res == FAULT_ERROR)
         FATAL("Unable to execute target application");
@@ -7503,7 +7532,6 @@ int main(int argc, char** argv) {
   /*we start forkservers here*/
   init_all_forkservers(argv);
   
-  //cmp_program(argv, exec_tmout);
   //TODO -> make it perform a dry runon every program
 
   perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
@@ -7534,7 +7562,6 @@ u64 init_time = get_cur_time(), end_t;
 
 int hit;
 u8 fault;
-int shared_blocks;
 
 
 while (1) { //main fuzzing loop //FUZZ
@@ -7550,7 +7577,6 @@ while (1) { //main fuzzing loop //FUZZ
       init_time = get_cur_time();
       // TODO -> switch the program.
       MAIN_PROG = (MAIN_PROG + 1) % numbr_of_progs_under_test; 
-      printf("Main_prog = %d\n", MAIN_PROG);
       cur_prog = argv[init_prog_args + MAIN_PROG];
       prog_start_time = get_cur_time();
     }

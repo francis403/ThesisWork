@@ -49,7 +49,7 @@ instr-all: clean
 valgrind:
 	valgrind --leak-check=full ./$(ALL)
 test_memory:
-	valgrind --leak-check=full -v afl-instr/afl-fuzz -m none -i input -o out ./is_prime
+	valgrind --leak-check=full --track-origins=yes -v afl-instr/afl-fuzz -m none -i input -o out ./simple
 
 
 #--------CLEANING---------
