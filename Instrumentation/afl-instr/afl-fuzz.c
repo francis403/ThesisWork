@@ -259,6 +259,8 @@ static FILE* plot_file;               /* Gnuplot output file              */
 
 static int numbr_of_progs_under_test = 0;
 
+// TODO -> we need to keep our best estimation (maybe worst too) maybe?
+
 struct queue_entry {
 
   u8* fname;                          /* File name for the test case      */
@@ -2100,6 +2102,10 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   shared_blocks_in_runs = 0;
 
+  unsigned int unique_blocks = 0;
+
+  //printf("run_forkserver_on_target\n");
+
   while( 1 ){
 
     message = 0;
@@ -2145,10 +2151,14 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       }
      */
 
+      // something is not working here
       shared_blocks_in_runs =  BLOCKS_FOUND[id] && !blocks_from_run[id] ? 
       	shared_blocks_in_runs + 1 : shared_blocks_in_runs;
 
-      blocks_from_run[id] = 1; // mark it has seen
+      if( !blocks_from_run[id] ){
+      	blocks_from_run[id] = 1; // mark it has seen
+      	unique_blocks ++;
+      }
       BLOCKS_FOUND[id] ++;
 
       //printf("*block_hit = 0x%08x\n", *(blocks + i));
@@ -2158,7 +2168,8 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   if( queue_cur != NULL ){ 
   	queue_cur->shared_blocks = shared_blocks_in_runs; 
-  	queue_cur ->total_blocks = *hit;
+  	// TODO -> the thing is we don't need total blocks but unique blocks!
+  	queue_cur ->total_blocks = unique_blocks;
   }
 
   //status = message;
@@ -4670,12 +4681,29 @@ static u32 calculate_score(struct queue_entry* q) {
 
   // added by fc45701
   /* Adjust score based on number of known blocks found when compared with total number of blocks*/
-  if(queue_cur->shared_blocks == 0){
+  // TODO -> tenho que melhorar estes valores
+  double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->total_blocks;
+  score_mult *= 100;
+  if( score_mult <= 10.0 ){
   	// performance score should be best
+  	perf_score *= 3;
+  }
+  else if (score_mult <= 33.3){
+  	perf_score *= 2;
+  }
+  else if(score_mult <= 66.6){
+  	perf_score *= 1;
+  }
+  else if(score_mult <= 95.0){
+  	perf_score *= 0.5;
   }
   else {
-  	double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->total_blocks;
-  	printf("score_mult = %f\n", score_mult);
+  	perf_score *= 0.25;
+  	//double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->total_blocks;
+  	//printf("fname = %s\n", queue_cur->fname);
+  	//printf("total blocks = %d\n", queue_cur->total_blocks);
+  	//printf("shared blocks = %d\n", queue_cur->shared_blocks);
+  	//printf("score_mult = %f\n", score_mult);
   }
   //perf_score *= (double)queue_cur->total_blocks/(double)queue_cur->shared_blocks; 
 
