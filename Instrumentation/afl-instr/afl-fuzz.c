@@ -152,10 +152,12 @@ static int switch_program_timer = 1000 * 60 * 5; /* Time each program should be 
 
 static unsigned short BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
 
-// TODO -> Maybe will have to change, since it seems they count the score at the end of multiple runs
-int shared_blocks_in_runs; /* Stores the number of shared blocks between current run and last run */
-		/*Idea: store it in the queue struct!!!*/
-	// think I'll need to have it store per input */
+/*The following data is important between runs so we can check if it should be saved
+* It can't go to the queue since if it went there we would be evaluating the queue input it self and not the mutation applied to it.
+*/
+
+unsigned short shared_blocks_in_runs; /* Stores the number of shared blocks between current run and last run */
+unsigned short total_unique_blocks; /*Stores the total unique blocks between runs*/
 
 /* TODO probably will need an array of this things */
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
@@ -283,7 +285,7 @@ struct queue_entry {
       depth;                          /* Path depth                       */
 
   int shared_blocks;			  	  /* Number of the shared blocks found*/
-  int total_blocks;					  /* total blocks passed 			  */
+  int uni_blcks;					  /* total blocks passed 			  */
 
   u8* trace_mini;                     /* Trace bytes, if kept             */
   u32 tc_ref;                         /* Trace bytes ref count            */
@@ -1260,7 +1262,6 @@ static void cull_queue(void) {
 }
 
 /* Configure shared memory and virgin_bits. This is called at startup. */
-// TODO -> add mulitple ids -> should we treat all programs as a big program? 
 EXP_ST void setup_shm(void) {
 
 	u8* shm_str;
@@ -2029,7 +2030,6 @@ int blocks_hit(int *blocks){
 * RUNS specific forkserver specified in fsrv_ctl_fd and fsrv_st_fd
 * Stores the reason the program crashed in fault, if it does not crash FAULT_NONE
 * Stores the amount of blocks found in hit
-// TODO -> pensar em mudar para u8 em vez de int, visto que ocupa menos
 **/ 
 int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
@@ -2166,17 +2166,18 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   }
 
+  /* TODO -> this can't be here, once we set that it passes through new blocks it cannot be changed */
+  /* will go on two places calibrate_case (so it treats the first ones) and save_if_interesting (to check the new ones) */
   if( queue_cur != NULL ){ 
   	queue_cur->shared_blocks = shared_blocks_in_runs; 
-  	// TODO -> the thing is we don't need total blocks but unique blocks!
-  	queue_cur ->total_blocks = unique_blocks;
+  	queue_cur ->uni_blcks = unique_blocks;
   }
 
   //status = message;
 
 	/* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
   
-	if ((res = read(fsrv_st_fd[prog_index], &status, 4)) != 4) { // TODO -> check it out a bit more 
+	if ((res = read(fsrv_st_fd[prog_index], &status, 4)) != 4) {
 
 		if (stop_soon) return 0;
 		RPFATAL(res, "Unable to communicate with fork server (OOM?)");
@@ -2239,7 +2240,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   tb4 = *(u32*)trace_bits;
 
-//TODO -> probably will need to change this
 #ifdef __x86_64__
   classify_counts((u64*)trace_bits);
 #else
@@ -2302,7 +2302,6 @@ static u8 run_target(u32 timeout) {
 * Used to check out if the instrumentation is correct in all programs
 *
 * Also sets in size the number of blocks in each program
-* TODO -> add an array of faults that it returns
 **/
 static int** run_programs_once(u32 timeout, int *size[] ){
 
@@ -2324,61 +2323,6 @@ static int** run_programs_once(u32 timeout, int *size[] ){
 	}
 
 	return blocks;
-}
-
-/*This function was based on cmp_program in the original afl-fuzz.c 2.52*/
-
-static void cmp_program(char** argv, u32 timeout) {
-
-	//printf("in cmp_programs\n");
-
-	int **blocks = malloc( sizeof( int* ) * numbr_of_progs_under_test ); 
-
-	if( !blocks ){
-		FATAL("malloc failed when comparing programs!");
-	}
-
-	int size[numbr_of_progs_under_test];
-
-	blocks = run_programs_once( timeout, &size );
-
-	if(*blocks == NULL){
-		printf("First block is null\n");
-		for(int i = 0; i < numbr_of_progs_under_test; i++){
-			free( (blocks + i) );
-		}
-		exit(0);
-	}
-
-	int numbr_of_equal_blocks = 0;
-	int j = 0;
-
-	printf("gonna pass through all the values\n");
-
-	
-	//enquanto existir um ponteiro para o resultado dos blocks todos e um proximo
-	//TODO -> only allows two programs for now
-	int index = 0;
-	while( *(blocks + index) ){
-		if( j == size[index] ){	++index; j = 0;	break;} //try to make this better, we stop at the first one for now
-		//printf("**block = 0x%08x\n", *(*(blocks) + j) );
-		if(j + 1 == size[index]) break;
-		printf("**block = 0x%08x\n", *(*(blocks + 1) + j) );
-		if( *(*(blocks) + j) == *(*(blocks + 1) + j) ){ numbr_of_equal_blocks++;}
-
-		j++;
-	}
-
-	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
-		free(blocks[i]);
-	}
-	free(blocks);
-	
-	//printf("number of equal blocks = %d\n", numbr_of_equal_blocks);
-	double percentage = (double )numbr_of_equal_blocks / (double) size[0];
-	printf("Programs share %.3f%% of blocks passed in the same order\n", (percentage * 100) );
-
-
 }
 
 /* Write modified data to file for testing. If out_file is set, the old file
@@ -2479,7 +2423,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
   /* Make sure the forkserver is up before we do anything, and let's not
      count its spin-up time toward binary calibration. */
-  // initiate the specific forkserver or all of them? TODO
+  // TODO -> Need to check all of them
   if( !forksrv_pid[0] ){
   	//TODO _> init all forkservers
   	//init_forkserver(argv);
@@ -2497,7 +2441,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     if (!first_run && !(stage_cur % stats_update_freq)) show_stats();
 
-    write_to_testcase(use_mem, q->len); // its fine
+    write_to_testcase(use_mem, q->len);
 
     //fault = run_target(argv, use_tmout); // TODO -> change this
 
@@ -2507,8 +2451,6 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     int hit;
     int* blocks = run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault);
-
-    // TODO -> do something with the blocks before freeing them
 
     free(blocks);
 
@@ -2851,6 +2793,11 @@ static void write_crash_readme(void) {
    save or queue the input test case for further analysis if so. Returns 1 if
    entry is saved, 0 otherwise. */
 
+/*
+*	TODO -> add to check if it found new blocks
+*
+*/
+
 static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
   u8  *fn = "";
@@ -2859,6 +2806,8 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
   u8  keeping = 0, res;
 
   if (fault == crash_mode) {
+
+  	// TODO -> need to add a bit like this using shared blocks, shared_blocks_in_runs (keep if blocks_shared is bigger than a given percentage)
 
     /* Keep only if there are new bits in the map, add to queue for
        future fuzzing, etc. */
@@ -2940,7 +2889,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
         u8 new_fault;
         write_to_testcase(mem, len);
-        new_fault = run_target(hang_tmout); //todo -> change
+        new_fault = run_target(hang_tmout);
 
         /* A corner case that one user reported bumping into: increasing the
            timeout actually uncovers a crash. Make sure we don't discard it if
@@ -3629,7 +3578,7 @@ static void perform_dry_run(char** argv) {
 
     close(fd);
 
-   	res = calibrate_case(argv, q, use_mem, 0, 1); // TODO
+   	res = calibrate_case(argv, q, use_mem, 0, 1);
    	//res = FAULT_TMOUT;
     ck_free(use_mem);
 
@@ -3812,8 +3761,7 @@ static void check_term_size(void);
 
 /* A spiffy retro stats screen! This is called every stats_update_freq
    execve() calls, plus in several other circumstances. */
-// TODO -> add the information missing (what program is being fuzzed, how much time that program has been fuzzed, found blocks that are shared, edge's found in the specific program (not influenced with the other programs))
-//TODO_NOW
+//TODO -> improve interface further for more main program information
 static void show_stats(void) {
 
   static u64 last_stats_ms, last_plot_ms, last_ms, last_execs;
@@ -4458,7 +4406,7 @@ static u8 trim_case(char** argv, struct queue_entry* q, u8* in_buf) {
 
       write_with_gap(in_buf, q->len, remove_pos, trim_avail);
 
-      fault = run_target(exec_tmout); //todo -> change
+      fault = run_target(exec_tmout);
       trim_execs++;
 
       if (stop_soon || fault == FAULT_ERROR) goto abort_trimming;
@@ -4550,7 +4498,7 @@ EXP_ST u8 common_fuzz_stuff(char** argv, u8* out_buf, u32 len) {
 
   write_to_testcase(out_buf, len);
 
-  fault = run_target(exec_tmout); //todo -> change
+  fault = run_target(exec_tmout);
 
   if (stop_soon) return 1;
 
@@ -4633,8 +4581,6 @@ static u32 choose_block_len(u32 limit) {
    A helper function for fuzz_one(). Maybe some of these constants should
    go into config.h. */
 
-// TODO -> set the number of equal blocks seen in the queue struct for the specific input
-
 static u32 calculate_score(struct queue_entry* q) {
 
   u32 avg_exec_us = total_cal_us / total_cal_cycles;
@@ -4682,7 +4628,7 @@ static u32 calculate_score(struct queue_entry* q) {
   // added by fc45701
   /* Adjust score based on number of known blocks found when compared with total number of blocks*/
   // TODO -> tenho que melhorar estes valores
-  double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->total_blocks;
+  double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->uni_blcks; // TODO -> meter isto na struct queue maybe?
   score_mult *= 100;
   if( score_mult <= 10.0 ){
   	// performance score should be best
@@ -4699,13 +4645,13 @@ static u32 calculate_score(struct queue_entry* q) {
   }
   else {
   	perf_score *= 0.25;
-  	//double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->total_blocks;
+  	//double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->uni_blcks;
   	//printf("fname = %s\n", queue_cur->fname);
-  	//printf("total blocks = %d\n", queue_cur->total_blocks);
+  	//printf("total blocks = %d\n", queue_cur->uni_blcks);
   	//printf("shared blocks = %d\n", queue_cur->shared_blocks);
   	//printf("score_mult = %f\n", score_mult);
   }
-  //perf_score *= (double)queue_cur->total_blocks/(double)queue_cur->shared_blocks; 
+  //perf_score *= (double)queue_cur->uni_blcks/(double)queue_cur->shared_blocks; 
 
 
   /* Final adjustment based on input depth, under the assumption that fuzzing
@@ -6611,7 +6557,9 @@ static void handle_stop_sig(int sig) {
 
 	if (child_pid > 0) kill(child_pid, SIGKILL);
 	//todo need to pass through all of them
-	if (forksrv_pid[0] > 0) kill(forksrv_pid[0], SIGKILL);
+	for( int i = 0; i < numbr_of_progs_under_test; i++){
+		if (forksrv_pid[i] > 0) kill(forksrv_pid[i], SIGKILL);
+	}
 
 }
 
@@ -6637,8 +6585,9 @@ static void handle_timeout(int sig) {
 
 	} else if (child_pid == -1 && forksrv_pid[0] > 0) {
 		child_timed_out = 1; 
-		kill(forksrv_pid[0], SIGKILL);
-
+		for( int i = 0; i < numbr_of_progs_under_test; i++){
+			if (forksrv_pid[i] > 0) kill(forksrv_pid[i], SIGKILL);
+		}
 	}
 
 }
@@ -7693,7 +7642,7 @@ while (1) { //main fuzzing loop //FUZZ
 
   alloc_report();
 
-  OKF("We're done here. Have a nice day! Or not, not like I care\n");
+  OKF("We're done here. Have a nice day!\n");
 
   exit(0);
 

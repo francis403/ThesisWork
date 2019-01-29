@@ -49,21 +49,23 @@ leaq (128+24)(%rsp), %rsp
 .LHOTE0:
 	.section	.rodata.str1.1,"aMS",@progbits,1
 .LC1:
-	.string	"val = %d\n"
+	.string	"%d"
 .LC2:
-	.string	"val < 10 and %d\n"
+	.string	"val = %d\n"
 .LC3:
-	.string	"val < 20 and %d\n"
+	.string	"val < 10 and %d\n"
 .LC4:
-	.string	"val < 30 and %d\n"
+	.string	"val < 20 and %d\n"
 .LC5:
-	.string	"val < 40"
+	.string	"val < 30 and %d\n"
 .LC6:
+	.string	"val < 40"
+.LC7:
 	.string	"love is in the air"
 	.section	.text.unlikely
-.LCOLDB7:
+.LCOLDB8:
 	.section	.text.startup,"ax",@progbits
-.LHOTB7:
+.LHOTB8:
 	.p2align 4,,15
 	.globl	main
 	.type	main, @function
@@ -81,8 +83,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x00003f68, %rcx
-movl $0x00003f68, __afl_block_temp
+movq $0x000016bf, %rcx
+movl $0x000016bf, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -91,77 +93,35 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-	pushq	%rbx
-	.cfi_def_cfa_offset 16
-	.cfi_offset 3, -16
+	subq	$24, %rsp
+	.cfi_def_cfa_offset 32
 	.loc 1 19 0
-	call	rand
+	movl	$.LC1, %edi
 .LVL2:
-	movl	$1374389535, %edx
-	movl	%eax, %ebx
+	.loc 1 15 0
+	movq	%fs:40, %rax
+	movq	%rax, 8(%rsp)
+	xorl	%eax, %eax
+	.loc 1 19 0
+	leaq	4(%rsp), %rsi
+.LVL3:
+	call	__isoc99_scanf
+.LVL4:
 .LBB34:
 .LBB35:
 	.file 2 "/usr/include/x86_64-linux-gnu/bits/stdio2.h"
 	.loc 2 104 0
-	movl	$.LC1, %esi
+	movl	4(%rsp), %edx
+	xorl	%eax, %eax
+	movl	$.LC2, %esi
+	movl	$1, %edi
+	call	__printf_chk
+.LVL5:
 .LBE35:
 .LBE34:
-	.loc 1 19 0
-	imull	%edx
-	movl	%ebx, %eax
-.LBB39:
-.LBB36:
-	.loc 2 104 0
-	movl	$1, %edi
-.LBE36:
-.LBE39:
-	.loc 1 19 0
-	sarl	$31, %eax
-	sarl	$4, %edx
-	subl	%eax, %edx
-.LBB40:
-.LBB37:
-	.loc 2 104 0
-	xorl	%eax, %eax
-.LBE37:
-.LBE40:
-	.loc 1 19 0
-	imull	$50, %edx, %ecx
-	subl	%ecx, %ebx
-	addl	$1, %ebx
-.LVL3:
-.LBB41:
-.LBB38:
-	.loc 2 104 0
-	movl	%ebx, %edx
-	call	__printf_chk
-.LVL4:
-.LBE38:
-.LBE41:
 	.loc 1 23 0
-	cmpl	$9, %ebx
-	jle	.L10
-
-/* --- AFL TRAMPOLINE (64-BIT) --- */
-
-.align 4
-
-leaq -(128+24)(%rsp), %rsp
-movq %rdx,  0(%rsp)
-movq %rcx,  8(%rsp)
-movq %rax, 16(%rsp)
-movq $0x00000b7f, %rcx
-movl $0x00000b7f, __afl_block_temp
-call __afl_maybe_log
-movq 16(%rsp), %rax
-movq  8(%rsp), %rcx
-movq  0(%rsp), %rdx
-leaq (128+24)(%rsp), %rsp
-
-/* --- END --- */
-
-	.loc 1 27 0
-	cmpl	$19, %ebx
+	movl	4(%rsp), %edx
+	cmpl	$9, %edx
 	jle	.L11
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
@@ -182,8 +142,8 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-	.loc 1 31 0
-	cmpl	$29, %ebx
+	.loc 1 27 0
+	cmpl	$19, %edx
 	jle	.L12
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
@@ -204,9 +164,31 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-	.loc 1 35 0
-	cmpl	$39, %ebx
+	.loc 1 31 0
+	cmpl	$29, %edx
 	jle	.L13
+
+/* --- AFL TRAMPOLINE (64-BIT) --- */
+
+.align 4
+
+leaq -(128+24)(%rsp), %rsp
+movq %rdx,  0(%rsp)
+movq %rcx,  8(%rsp)
+movq %rax, 16(%rsp)
+movq $0x00000b7f, %rcx
+movl $0x00000b7f, __afl_block_temp
+call __afl_maybe_log
+movq 16(%rsp), %rax
+movq  8(%rsp), %rcx
+movq  0(%rsp), %rdx
+leaq (128+24)(%rsp), %rsp
+
+/* --- END --- */
+
+	.loc 1 35 0
+	cmpl	$39, %edx
+	jle	.L14
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
 
@@ -226,16 +208,16 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-.LVL5:
-.LBB42:
-.LBB43:
-	.loc 2 104 0
-	movl	$.LC6, %edi
-	call	puts
 .LVL6:
+.LBB36:
+.LBB37:
+	.loc 2 104 0
+	movl	$.LC7, %edi
+	call	puts
+.LVL7:
 .L4:
-.LBE43:
-.LBE42:
+.LBE37:
+.LBE36:
 	.loc 1 44 0
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
@@ -246,8 +228,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x00001c6d, %rcx
-movl $0x00001c6d, __afl_block_temp
+movq $0x00009409, %rcx
+movl $0x00009409, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -257,16 +239,37 @@ leaq (128+24)(%rsp), %rsp
 /* --- END --- */
 
 	xorl	%eax, %eax
-	popq	%rbx
+	movq	8(%rsp), %rcx
+	xorq	%fs:40, %rcx
+	jne	.L15
+
+/* --- AFL TRAMPOLINE (64-BIT) --- */
+
+.align 4
+
+leaq -(128+24)(%rsp), %rsp
+movq %rdx,  0(%rsp)
+movq %rcx,  8(%rsp)
+movq %rax, 16(%rsp)
+movq $0x00000bc2, %rcx
+movl $0x00000bc2, __afl_block_temp
+call __afl_maybe_log
+movq 16(%rsp), %rax
+movq  8(%rsp), %rcx
+movq  0(%rsp), %rdx
+leaq (128+24)(%rsp), %rsp
+
+/* --- END --- */
+
+	addq	$24, %rsp
 	.cfi_remember_state
 	.cfi_def_cfa_offset 8
-.LVL7:
 	ret
-.LVL8:
-.L10:
+.L11:
 	.cfi_restore_state
-.LBB44:
-.LBB45:
+.LVL8:
+.LBB38:
+.LBB39:
 	.loc 2 104 0
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
@@ -277,8 +280,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x000021f9, %rcx
-movl $0x000021f9, __afl_block_temp
+movq $0x000003f2, %rcx
+movl $0x000003f2, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -287,20 +290,20 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-	leal	(%rbx,%rbx), %edx
-	movl	$.LC2, %esi
+	addl	%edx, %edx
+	movl	$.LC3, %esi
 	movl	$1, %edi
 	xorl	%eax, %eax
 	call	__printf_chk
 .LVL9:
-.LBE45:
-.LBE44:
+.LBE39:
+.LBE38:
 	.loc 1 25 0
 	jmp	.L4
-.L12:
+.L13:
 .LVL10:
-.LBB46:
-.LBB47:
+.LBB40:
+.LBB41:
 	.loc 2 104 0
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
@@ -311,8 +314,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x000021f9, %rcx
-movl $0x000021f9, __afl_block_temp
+movq $0x000003f2, %rcx
+movl $0x000003f2, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -321,20 +324,20 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-	leal	(%rbx,%rbx), %edx
-	movl	$.LC4, %esi
+	addl	%edx, %edx
+	movl	$.LC5, %esi
 	movl	$1, %edi
 	xorl	%eax, %eax
 	call	__printf_chk
 .LVL11:
-.LBE47:
-.LBE46:
+.LBE41:
+.LBE40:
 	.loc 1 33 0
 	jmp	.L4
-.L13:
+.L14:
 .LVL12:
-.LBB48:
-.LBB49:
+.LBB42:
+.LBB43:
 	.loc 2 104 0
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
@@ -355,17 +358,17 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-	movl	$.LC5, %edi
+	movl	$.LC6, %edi
 	call	puts
 .LVL13:
-.LBE49:
-.LBE48:
+.LBE43:
+.LBE42:
 	.loc 1 37 0
 	jmp	.L4
-.L11:
+.L12:
 .LVL14:
-.LBB50:
-.LBB51:
+.LBB44:
+.LBB45:
 	.loc 2 104 0
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
@@ -376,8 +379,8 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x000021f9, %rcx
-movl $0x000021f9, __afl_block_temp
+movq $0x000003f2, %rcx
+movl $0x000003f2, __afl_block_temp
 call __afl_maybe_log
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
@@ -386,30 +389,53 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-	leal	(%rbx,%rbx), %edx
-	movl	$.LC3, %esi
+	addl	%edx, %edx
+	movl	$.LC4, %esi
 	movl	$1, %edi
 	xorl	%eax, %eax
 	call	__printf_chk
 .LVL15:
-.LBE51:
-.LBE50:
+.LBE45:
+.LBE44:
 	.loc 1 29 0
 	jmp	.L4
+.L15:
+	.loc 1 44 0
+
+/* --- AFL TRAMPOLINE (64-BIT) --- */
+
+.align 4
+
+leaq -(128+24)(%rsp), %rsp
+movq %rdx,  0(%rsp)
+movq %rcx,  8(%rsp)
+movq %rax, 16(%rsp)
+movq $0x00005335, %rcx
+movl $0x00005335, __afl_block_temp
+call __afl_maybe_log
+movq 16(%rsp), %rax
+movq  8(%rsp), %rcx
+movq  0(%rsp), %rdx
+leaq (128+24)(%rsp), %rsp
+
+/* --- END --- */
+
+	call	__stack_chk_fail
+.LVL16:
 	.cfi_endproc
 .LFE72:
 	.size	main, .-main
 	.section	.text.unlikely
-.LCOLDE7:
+.LCOLDE8:
 	.section	.text.startup
-.LHOTE7:
+.LHOTE8:
 	.section	.rodata.str1.1
-.LC8:
+.LC9:
 	.string	"Hello, Dabe"
 	.section	.text.unlikely
-.LCOLDB9:
+.LCOLDB10:
 	.text
-.LHOTB9:
+.LHOTB10:
 	.p2align 4,,15
 	.globl	teste
 	.type	teste, @function
@@ -417,9 +443,9 @@ teste:
 .LFB73:
 	.loc 1 46 0
 	.cfi_startproc
-.LVL16:
-.LBB52:
-.LBB53:
+.LVL17:
+.LBB46:
+.LBB47:
 	.loc 2 104 0
 
 /* --- AFL TRAMPOLINE (64-BIT) --- */
@@ -440,21 +466,21 @@ leaq (128+24)(%rsp), %rsp
 
 /* --- END --- */
 
-	movl	$.LC8, %esi
+	movl	$.LC9, %esi
 	movl	$1, %edi
-.LVL17:
+.LVL18:
 	xorl	%eax, %eax
 	jmp	__printf_chk
-.LVL18:
-.LBE53:
-.LBE52:
+.LVL19:
+.LBE47:
+.LBE46:
 	.cfi_endproc
 .LFE73:
 	.size	teste, .-teste
 	.section	.text.unlikely
-.LCOLDE9:
+.LCOLDE10:
 	.text
-.LHOTE9:
+.LHOTE10:
 	.globl	MAX_LINE
 	.data
 	.align 4
@@ -470,20 +496,19 @@ MAX_LINE:
 	.file 4 "/usr/include/x86_64-linux-gnu/bits/types.h"
 	.file 5 "/usr/include/libio.h"
 	.file 6 "/usr/include/stdio.h"
-	.file 7 "/usr/include/stdlib.h"
-	.file 8 "<built-in>"
+	.file 7 "<built-in>"
 	.section	.debug_info,"",@progbits
 .Ldebug_info0:
-	.long	0x604
+	.long	0x61b
 	.value	0x4
 	.long	.Ldebug_abbrev0
 	.byte	0x8
 	.uleb128 0x1
-	.long	.LASF58
-	.byte	0xc
-	.long	.LASF59
 	.long	.LASF60
-	.long	.Ldebug_ranges0+0x50
+	.byte	0xc
+	.long	.LASF61
+	.long	.LASF62
+	.long	.Ldebug_ranges0+0
 	.quad	0
 	.long	.Ldebug_line0
 	.uleb128 0x2
@@ -741,7 +766,7 @@ MAX_LINE:
 	.byte	0xc4
 	.byte	0
 	.uleb128 0xb
-	.long	.LASF61
+	.long	.LASF63
 	.byte	0x5
 	.byte	0x96
 	.uleb128 0x8
@@ -793,7 +818,7 @@ MAX_LINE:
 	.byte	0x13
 	.byte	0
 	.uleb128 0xe
-	.long	.LASF62
+	.long	.LASF64
 	.byte	0x2
 	.byte	0x66
 	.long	0x3b
@@ -809,7 +834,7 @@ MAX_LINE:
 	.uleb128 0x11
 	.long	0xa6
 	.uleb128 0x12
-	.long	.LASF63
+	.long	.LASF65
 	.byte	0x1
 	.byte	0xa
 	.long	0x3b
@@ -842,7 +867,7 @@ MAX_LINE:
 	.long	.LLST0
 	.byte	0
 	.uleb128 0x16
-	.long	.LASF64
+	.long	.LASF66
 	.byte	0x1
 	.byte	0xf
 	.long	0x3b
@@ -850,7 +875,7 @@ MAX_LINE:
 	.quad	.LFE72-.LFB72
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x517
+	.long	0x521
 	.uleb128 0x17
 	.long	.LASF51
 	.byte	0x1
@@ -861,80 +886,29 @@ MAX_LINE:
 	.long	.LASF52
 	.byte	0x1
 	.byte	0xf
-	.long	0x517
+	.long	0x521
 	.long	.LLST2
 	.uleb128 0x18
 	.string	"val"
 	.byte	0x1
 	.byte	0x11
 	.long	0x3b
-	.long	.LLST3
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -28
 	.uleb128 0x19
 	.long	0x298
 	.quad	.LBB34
-	.long	.Ldebug_ranges0+0
+	.quad	.LBE34-.LBB34
 	.byte	0x1
 	.byte	0x15
-	.long	0x3a2
+	.long	0x39f
 	.uleb128 0x15
 	.long	0x2a8
-	.long	.LLST4
+	.long	.LLST3
 	.uleb128 0x1a
-	.quad	.LVL4
-	.long	0x5bb
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x55
-	.uleb128 0x1
-	.byte	0x31
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x54
-	.uleb128 0x9
-	.byte	0x3
-	.quad	.LC1
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x51
-	.uleb128 0x2
-	.byte	0x73
-	.sleb128 0
-	.byte	0
-	.byte	0
-	.uleb128 0x1c
-	.long	0x298
-	.quad	.LBB42
-	.quad	.LBE42-.LBB42
-	.byte	0x1
-	.byte	0x28
-	.long	0x3e2
-	.uleb128 0x15
-	.long	0x2a8
-	.long	.LLST5
-	.uleb128 0x1a
-	.quad	.LVL6
-	.long	0x5de
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x55
-	.uleb128 0x9
-	.byte	0x3
-	.quad	.LC6
-	.byte	0
-	.byte	0
-	.uleb128 0x1c
-	.long	0x298
-	.quad	.LBB44
-	.quad	.LBE44-.LBB44
-	.byte	0x1
-	.byte	0x18
-	.long	0x42f
-	.uleb128 0x15
-	.long	0x2a8
-	.long	.LLST6
-	.uleb128 0x1a
-	.quad	.LVL9
-	.long	0x5bb
+	.quad	.LVL5
+	.long	0x5c5
 	.uleb128 0x1b
 	.uleb128 0x1
 	.byte	0x55
@@ -946,84 +920,42 @@ MAX_LINE:
 	.uleb128 0x9
 	.byte	0x3
 	.quad	.LC2
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x51
-	.uleb128 0x4
-	.byte	0x73
-	.sleb128 0
-	.byte	0x31
-	.byte	0x24
 	.byte	0
 	.byte	0
-	.uleb128 0x1c
+	.uleb128 0x19
 	.long	0x298
-	.quad	.LBB46
-	.quad	.LBE46-.LBB46
+	.quad	.LBB36
+	.quad	.LBE36-.LBB36
 	.byte	0x1
-	.byte	0x20
-	.long	0x47c
+	.byte	0x28
+	.long	0x3df
 	.uleb128 0x15
 	.long	0x2a8
-	.long	.LLST7
+	.long	.LLST4
 	.uleb128 0x1a
-	.quad	.LVL11
-	.long	0x5bb
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x55
-	.uleb128 0x1
-	.byte	0x31
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x54
-	.uleb128 0x9
-	.byte	0x3
-	.quad	.LC4
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x51
-	.uleb128 0x4
-	.byte	0x73
-	.sleb128 0
-	.byte	0x31
-	.byte	0x24
-	.byte	0
-	.byte	0
-	.uleb128 0x1c
-	.long	0x298
-	.quad	.LBB48
-	.quad	.LBE48-.LBB48
-	.byte	0x1
-	.byte	0x24
-	.long	0x4bc
-	.uleb128 0x15
-	.long	0x2a8
-	.long	.LLST8
-	.uleb128 0x1a
-	.quad	.LVL13
-	.long	0x5de
+	.quad	.LVL7
+	.long	0x5e8
 	.uleb128 0x1b
 	.uleb128 0x1
 	.byte	0x55
 	.uleb128 0x9
 	.byte	0x3
-	.quad	.LC5
+	.quad	.LC7
 	.byte	0
 	.byte	0
-	.uleb128 0x1c
+	.uleb128 0x19
 	.long	0x298
-	.quad	.LBB50
-	.quad	.LBE50-.LBB50
+	.quad	.LBB38
+	.quad	.LBE38-.LBB38
 	.byte	0x1
-	.byte	0x1c
-	.long	0x509
+	.byte	0x18
+	.long	0x424
 	.uleb128 0x15
 	.long	0x2a8
-	.long	.LLST9
+	.long	.LLST5
 	.uleb128 0x1a
-	.quad	.LVL15
-	.long	0x5bb
+	.quad	.LVL9
+	.long	0x5c5
 	.uleb128 0x1b
 	.uleb128 0x1
 	.byte	0x55
@@ -1035,53 +967,21 @@ MAX_LINE:
 	.uleb128 0x9
 	.byte	0x3
 	.quad	.LC3
-	.uleb128 0x1b
-	.uleb128 0x1
-	.byte	0x51
-	.uleb128 0x4
-	.byte	0x73
-	.sleb128 0
-	.byte	0x31
-	.byte	0x24
 	.byte	0
 	.byte	0
-	.uleb128 0x1d
-	.quad	.LVL2
-	.long	0x5fb
-	.byte	0
-	.uleb128 0x6
-	.byte	0x8
-	.long	0x8b
-	.uleb128 0x1e
-	.long	.LASF65
-	.byte	0x1
-	.byte	0x2e
-	.quad	.LFB73
-	.quad	.LFE73-.LFB73
-	.uleb128 0x1
-	.byte	0x9c
-	.long	0x590
-	.uleb128 0x1f
-	.string	"i"
-	.byte	0x1
-	.byte	0x2e
-	.long	0x3b
-	.long	.LLST10
-	.uleb128 0x20
+	.uleb128 0x19
 	.long	0x298
-	.quad	.LBB52
-	.quad	.LBE52-.LBB52
+	.quad	.LBB40
+	.quad	.LBE40-.LBB40
 	.byte	0x1
-	.byte	0x2e
-	.uleb128 0x14
+	.byte	0x20
+	.long	0x469
+	.uleb128 0x15
 	.long	0x2a8
-	.uleb128 0xa
-	.byte	0x3
-	.quad	.LC8
-	.byte	0x9f
-	.uleb128 0x21
-	.quad	.LVL18
-	.long	0x5bb
+	.long	.LLST6
+	.uleb128 0x1a
+	.quad	.LVL11
+	.long	0x5c5
 	.uleb128 0x1b
 	.uleb128 0x1
 	.byte	0x55
@@ -1092,7 +992,121 @@ MAX_LINE:
 	.byte	0x54
 	.uleb128 0x9
 	.byte	0x3
-	.quad	.LC8
+	.quad	.LC5
+	.byte	0
+	.byte	0
+	.uleb128 0x19
+	.long	0x298
+	.quad	.LBB42
+	.quad	.LBE42-.LBB42
+	.byte	0x1
+	.byte	0x24
+	.long	0x4a9
+	.uleb128 0x15
+	.long	0x2a8
+	.long	.LLST7
+	.uleb128 0x1a
+	.quad	.LVL13
+	.long	0x5e8
+	.uleb128 0x1b
+	.uleb128 0x1
+	.byte	0x55
+	.uleb128 0x9
+	.byte	0x3
+	.quad	.LC6
+	.byte	0
+	.byte	0
+	.uleb128 0x19
+	.long	0x298
+	.quad	.LBB44
+	.quad	.LBE44-.LBB44
+	.byte	0x1
+	.byte	0x1c
+	.long	0x4ee
+	.uleb128 0x15
+	.long	0x2a8
+	.long	.LLST8
+	.uleb128 0x1a
+	.quad	.LVL15
+	.long	0x5c5
+	.uleb128 0x1b
+	.uleb128 0x1
+	.byte	0x55
+	.uleb128 0x1
+	.byte	0x31
+	.uleb128 0x1b
+	.uleb128 0x1
+	.byte	0x54
+	.uleb128 0x9
+	.byte	0x3
+	.quad	.LC4
+	.byte	0
+	.byte	0
+	.uleb128 0x1c
+	.quad	.LVL4
+	.long	0x605
+	.long	0x513
+	.uleb128 0x1b
+	.uleb128 0x1
+	.byte	0x55
+	.uleb128 0x9
+	.byte	0x3
+	.quad	.LC1
+	.uleb128 0x1b
+	.uleb128 0x1
+	.byte	0x54
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -28
+	.byte	0
+	.uleb128 0x1d
+	.quad	.LVL16
+	.long	0x615
+	.byte	0
+	.uleb128 0x6
+	.byte	0x8
+	.long	0x8b
+	.uleb128 0x1e
+	.long	.LASF67
+	.byte	0x1
+	.byte	0x2e
+	.quad	.LFB73
+	.quad	.LFE73-.LFB73
+	.uleb128 0x1
+	.byte	0x9c
+	.long	0x59a
+	.uleb128 0x1f
+	.string	"i"
+	.byte	0x1
+	.byte	0x2e
+	.long	0x3b
+	.long	.LLST9
+	.uleb128 0x20
+	.long	0x298
+	.quad	.LBB46
+	.quad	.LBE46-.LBB46
+	.byte	0x1
+	.byte	0x2e
+	.uleb128 0x14
+	.long	0x2a8
+	.uleb128 0xa
+	.byte	0x3
+	.quad	.LC9
+	.byte	0x9f
+	.uleb128 0x21
+	.quad	.LVL19
+	.long	0x5c5
+	.uleb128 0x1b
+	.uleb128 0x1
+	.byte	0x55
+	.uleb128 0x1
+	.byte	0x31
+	.uleb128 0x1b
+	.uleb128 0x1
+	.byte	0x54
+	.uleb128 0x9
+	.byte	0x3
+	.quad	.LC9
 	.byte	0
 	.byte	0
 	.byte	0
@@ -1115,8 +1129,8 @@ MAX_LINE:
 	.byte	0x3
 	.quad	MAX_LINE
 	.uleb128 0x24
-	.long	.LASF56
-	.long	.LASF56
+	.long	.LASF68
+	.long	.LASF68
 	.byte	0x2
 	.byte	0x57
 	.uleb128 0x25
@@ -1144,11 +1158,11 @@ MAX_LINE:
 	.byte	0xa
 	.byte	0
 	.uleb128 0x26
-	.long	.LASF66
-	.long	.LASF67
-	.byte	0x8
+	.long	.LASF56
+	.long	.LASF58
+	.byte	0x7
 	.byte	0
-	.long	.LASF66
+	.long	.LASF56
 	.uleb128 0x25
 	.uleb128 0xc
 	.byte	0x9e
@@ -1165,9 +1179,13 @@ MAX_LINE:
 	.byte	0
 	.uleb128 0x27
 	.long	.LASF57
+	.long	.LASF59
+	.byte	0x6
+	.value	0x1be
 	.long	.LASF57
-	.byte	0x7
-	.value	0x176
+	.uleb128 0x28
+	.long	.LASF69
+	.long	.LASF69
 	.byte	0
 	.section	.debug_abbrev,"",@progbits
 .Ldebug_abbrev0:
@@ -1480,7 +1498,7 @@ MAX_LINE:
 	.uleb128 0x49
 	.uleb128 0x13
 	.uleb128 0x2
-	.uleb128 0x17
+	.uleb128 0x18
 	.byte	0
 	.byte	0
 	.uleb128 0x19
@@ -1488,10 +1506,10 @@ MAX_LINE:
 	.byte	0x1
 	.uleb128 0x31
 	.uleb128 0x13
-	.uleb128 0x52
+	.uleb128 0x11
 	.uleb128 0x1
-	.uleb128 0x55
-	.uleb128 0x17
+	.uleb128 0x12
+	.uleb128 0x7
 	.uleb128 0x58
 	.uleb128 0xb
 	.uleb128 0x59
@@ -1519,18 +1537,12 @@ MAX_LINE:
 	.byte	0
 	.byte	0
 	.uleb128 0x1c
-	.uleb128 0x1d
+	.uleb128 0x4109
 	.byte	0x1
-	.uleb128 0x31
-	.uleb128 0x13
 	.uleb128 0x11
 	.uleb128 0x1
-	.uleb128 0x12
-	.uleb128 0x7
-	.uleb128 0x58
-	.uleb128 0xb
-	.uleb128 0x59
-	.uleb128 0xb
+	.uleb128 0x31
+	.uleb128 0x13
 	.uleb128 0x1
 	.uleb128 0x13
 	.byte	0
@@ -1702,6 +1714,21 @@ MAX_LINE:
 	.uleb128 0xb
 	.uleb128 0x3b
 	.uleb128 0x5
+	.uleb128 0x6e
+	.uleb128 0xe
+	.byte	0
+	.byte	0
+	.uleb128 0x28
+	.uleb128 0x2e
+	.byte	0
+	.uleb128 0x3f
+	.uleb128 0x19
+	.uleb128 0x3c
+	.uleb128 0x19
+	.uleb128 0x6e
+	.uleb128 0xe
+	.uleb128 0x3
+	.uleb128 0xe
 	.byte	0
 	.byte	0
 	.byte	0
@@ -1720,10 +1747,10 @@ MAX_LINE:
 	.quad	0
 .LLST1:
 	.quad	.LVL1
-	.quad	.LVL2-1
+	.quad	.LVL2
 	.value	0x1
 	.byte	0x55
-	.quad	.LVL2-1
+	.quad	.LVL2
 	.quad	.LFE72
 	.value	0x4
 	.byte	0xf3
@@ -1734,10 +1761,10 @@ MAX_LINE:
 	.quad	0
 .LLST2:
 	.quad	.LVL1
-	.quad	.LVL2-1
+	.quad	.LVL3
 	.value	0x1
 	.byte	0x54
-	.quad	.LVL2-1
+	.quad	.LVL3
 	.quad	.LFE72
 	.value	0x4
 	.byte	0xf3
@@ -1747,76 +1774,65 @@ MAX_LINE:
 	.quad	0
 	.quad	0
 .LLST3:
-	.quad	.LVL3
-	.quad	.LVL7
-	.value	0x1
-	.byte	0x53
-	.quad	.LVL8
-	.quad	.LFE72
-	.value	0x1
-	.byte	0x53
-	.quad	0
-	.quad	0
-.LLST4:
-	.quad	.LVL3
 	.quad	.LVL4
-	.value	0xa
-	.byte	0x3
-	.quad	.LC1
-	.byte	0x9f
-	.quad	0
-	.quad	0
-.LLST5:
 	.quad	.LVL5
-	.quad	.LVL6
-	.value	0x6
-	.byte	0xf2
-	.long	.Ldebug_info0+1478
-	.sleb128 0
-	.quad	0
-	.quad	0
-.LLST6:
-	.quad	.LVL8
-	.quad	.LVL9
 	.value	0xa
 	.byte	0x3
 	.quad	.LC2
 	.byte	0x9f
 	.quad	0
 	.quad	0
-.LLST7:
-	.quad	.LVL10
-	.quad	.LVL11
-	.value	0xa
-	.byte	0x3
-	.quad	.LC4
-	.byte	0x9f
-	.quad	0
-	.quad	0
-.LLST8:
-	.quad	.LVL12
-	.quad	.LVL13
+.LLST4:
+	.quad	.LVL6
+	.quad	.LVL7
 	.value	0x6
 	.byte	0xf2
-	.long	.Ldebug_info0+1517
+	.long	.Ldebug_info0+1488
 	.sleb128 0
 	.quad	0
 	.quad	0
-.LLST9:
-	.quad	.LVL14
-	.quad	.LVL15
+.LLST5:
+	.quad	.LVL8
+	.quad	.LVL9
 	.value	0xa
 	.byte	0x3
 	.quad	.LC3
 	.byte	0x9f
 	.quad	0
 	.quad	0
-.LLST10:
-	.quad	.LVL16
+.LLST6:
+	.quad	.LVL10
+	.quad	.LVL11
+	.value	0xa
+	.byte	0x3
+	.quad	.LC5
+	.byte	0x9f
+	.quad	0
+	.quad	0
+.LLST7:
+	.quad	.LVL12
+	.quad	.LVL13
+	.value	0x6
+	.byte	0xf2
+	.long	.Ldebug_info0+1527
+	.sleb128 0
+	.quad	0
+	.quad	0
+.LLST8:
+	.quad	.LVL14
+	.quad	.LVL15
+	.value	0xa
+	.byte	0x3
+	.quad	.LC4
+	.byte	0x9f
+	.quad	0
+	.quad	0
+.LLST9:
 	.quad	.LVL17
+	.quad	.LVL18
 	.value	0x1
 	.byte	0x55
-	.quad	.LVL17
+	.quad	.LVL18
 	.quad	.LFE73
 	.value	0x4
 	.byte	0xf3
@@ -1841,16 +1857,6 @@ MAX_LINE:
 	.quad	0
 	.section	.debug_ranges,"",@progbits
 .Ldebug_ranges0:
-	.quad	.LBB34
-	.quad	.LBE34
-	.quad	.LBB39
-	.quad	.LBE39
-	.quad	.LBB40
-	.quad	.LBE40
-	.quad	.LBB41
-	.quad	.LBE41
-	.quad	0
-	.quad	0
 	.quad	.Ltext0
 	.quad	.Letext0
 	.quad	.LFB72
@@ -1860,12 +1866,14 @@ MAX_LINE:
 	.section	.debug_line,"",@progbits
 .Ldebug_line0:
 	.section	.debug_str,"MS",@progbits,1
-.LASF67:
+.LASF58:
 	.string	"__builtin_puts"
-.LASF56:
+.LASF68:
 	.string	"__printf_chk"
 .LASF43:
 	.string	"_IO_FILE"
+.LASF59:
+	.string	"scanf"
 .LASF25:
 	.string	"_IO_save_end"
 .LASF5:
@@ -1874,9 +1882,11 @@ MAX_LINE:
 	.string	"size_t"
 .LASF10:
 	.string	"sizetype"
+.LASF57:
+	.string	"__isoc99_scanf"
 .LASF35:
 	.string	"_offset"
-.LASF63:
+.LASF65:
 	.string	"add2"
 .LASF19:
 	.string	"_IO_write_ptr"
@@ -1888,21 +1898,19 @@ MAX_LINE:
 	.string	"_markers"
 .LASF16:
 	.string	"_IO_read_end"
-.LASF59:
+.LASF61:
 	.string	"./simple_program.c"
-.LASF57:
-	.string	"rand"
 .LASF44:
 	.string	"_IO_marker"
 .LASF12:
 	.string	"long long int"
-.LASF58:
+.LASF60:
 	.string	"GNU C11 5.4.0 20160609 -mtune=generic -march=x86-64 -g -O3 -funroll-loops -fstack-protector-strong"
 .LASF34:
 	.string	"_lock"
 .LASF6:
 	.string	"long int"
-.LASF62:
+.LASF64:
 	.string	"printf"
 .LASF31:
 	.string	"_cur_column"
@@ -1914,7 +1922,7 @@ MAX_LINE:
 	.string	"_sbuf"
 .LASF30:
 	.string	"_old_offset"
-.LASF65:
+.LASF67:
 	.string	"teste"
 .LASF2:
 	.string	"unsigned char"
@@ -1930,13 +1938,13 @@ MAX_LINE:
 	.string	"val1"
 .LASF33:
 	.string	"_shortbuf"
-.LASF66:
+.LASF56:
 	.string	"puts"
 .LASF18:
 	.string	"_IO_write_base"
 .LASF42:
 	.string	"_unused2"
-.LASF60:
+.LASF62:
 	.string	"/home/francis/Documents/ThesisWork/Instrumentation"
 .LASF15:
 	.string	"_IO_read_ptr"
@@ -1944,7 +1952,7 @@ MAX_LINE:
 	.string	"_IO_buf_end"
 .LASF11:
 	.string	"char"
-.LASF64:
+.LASF66:
 	.string	"main"
 .LASF45:
 	.string	"_next"
@@ -1988,13 +1996,15 @@ MAX_LINE:
 	.string	"_vtable_offset"
 .LASF23:
 	.string	"_IO_save_base"
+.LASF69:
+	.string	"__stack_chk_fail"
 .LASF50:
 	.string	"val2"
 .LASF55:
 	.string	"MAX_LINE"
 .LASF54:
 	.string	"stdout"
-.LASF61:
+.LASF63:
 	.string	"_IO_lock_t"
 	.ident	"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.10) 5.4.0 20160609"
 	.section	.note.GNU-stack,"",@progbits
@@ -2026,15 +2036,17 @@ __afl_store:
   shrq $1, __afl_prev_loc(%rip)
 
   incb (%rdx, %rcx, 1)
+
   
 /* Write home and tell them the id of the block */
   movq $4, %rdx               /* length    */
-  leaq __afl_block_temp, %rsi
+  leaq __afl_block_temp(%rip), %rsi
   movq __fsrv_write, %rdi       /* file desc */
+call write@PLT
 
   /* In child process: close fds, resume execution. */
 
-  movq __fsrv_write, %rdi       /* file desc */
+  movq __afl_block_temp, %rdi       /* file desc */
 
   movq __fsrv_read, %rdi       /* file desc */
 __afl_return:
@@ -2187,20 +2199,4 @@ call write@PLT
 
   movq $0, %rdx                   /* no flags  */
   leaq __afl_temp(%rip), %rsi     /* status    */
-  movq __afl_fork_pid(%rip), %rdi /* PID       */
-call waitpid@PLT
-  cmpq $0, %rax
-  jle  __afl_die
-
-  /* Relay wait status to pipe, then loop back. */
-
-  movq $4, %rdx               /* length    */
-  leaq __afl_temp(%rip), %rsi /* data      */
-  movq __fsrv_write, %rdi       /* file desc */
-call write@PLT
-
-  jmp  __afl_fork_wait_loop
-
-__afl_fork_resume:
-
-  /* In child
+  m

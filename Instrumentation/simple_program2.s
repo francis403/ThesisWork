@@ -2026,15 +2026,17 @@ __afl_store:
   shrq $1, __afl_prev_loc(%rip)
 
   incb (%rdx, %rcx, 1)
+
   
 /* Write home and tell them the id of the block */
   movq $4, %rdx               /* length    */
-  leaq __afl_block_temp, %rsi
+  leaq __afl_block_temp(%rip), %rsi
   movq __fsrv_write, %rdi       /* file desc */
+call write@PLT
 
   /* In child process: close fds, resume execution. */
 
-  movq __fsrv_write, %rdi       /* file desc */
+  movq __afl_block_temp, %rdi       /* file desc */
 
   movq __fsrv_read, %rdi       /* file desc */
 __afl_return:
@@ -2192,15 +2194,10 @@ call waitpid@PLT
   cmpq $0, %rax
   jle  __afl_die
 
-  /* Relay wait status to pipe, then loop back. */
-
+  movq $-100, __fsrv_message               /* length    */
   movq $4, %rdx               /* length    */
-  leaq __afl_temp(%rip), %rsi /* data      */
+  leaq __fsrv_message(%rip), %rsi
   movq __fsrv_write, %rdi       /* file desc */
 call write@PLT
 
-  jmp  __afl_fork_wait_loop
-
-__afl_fork_resume:
-
-  /* In ch
+  /* Relay wait status to pipe, then l
