@@ -2828,7 +2828,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
        future fuzzing, etc. */
 
     //if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG])) || !(has_new_blocks()) ) {
-  	if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG]))) {
+  	if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG])) && !(has_new_blocks())) {
       if (crash_mode) total_crashes++;
       return 0;
     }    
