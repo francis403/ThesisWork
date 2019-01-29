@@ -2827,7 +2827,8 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     /* Keep only if there are new bits in the map, add to queue for
        future fuzzing, etc. */
 
-    if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG]))) {
+    //if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG])) || !(has_new_blocks()) ) {
+  	if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG]))) {
       if (crash_mode) total_crashes++;
       return 0;
     }    
@@ -2845,7 +2846,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
     add_to_queue(fn, len, 0);
 
-    if (hnb == 2) {
+    if (hnb == 2 || has_new_blocks()) {
       queue_top->has_new_cov = 1;
       queued_with_cov++;
     }

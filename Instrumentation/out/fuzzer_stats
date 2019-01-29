@@ -1,15 +1,15 @@
-start_time        : 1548772772
-last_update       : 1548772936
-fuzzer_pid        : 14118
-cycles_done       : 415
-execs_done        : 145934
-execs_per_sec     : 891.46
-paths_total       : 5
-paths_favored     : 4
-paths_found       : 4
+start_time        : 1548776477
+last_update       : 1548777499
+fuzzer_pid        : 29834
+cycles_done       : 8496
+execs_done        : 4128105
+execs_per_sec     : 4204.05
+paths_total       : 6
+paths_favored     : 5
+paths_found       : 5
 paths_imported    : 0
-max_depth         : 3
-cur_path          : 1
+max_depth         : 4
+cur_path          : 5
 pending_favs      : 0
 pending_total     : 0
 variable_paths    : 0
@@ -17,12 +17,12 @@ stability         : 100.00%
 bitmap_cvg        : 0.02%
 unique_crashes    : 0
 unique_hangs      : 0
-last_path         : 1548772773
+last_path         : 1548776597
 last_crash        : 0
 last_hang         : 0
-execs_since_crash : 145934
-exec_timeout      : 40
+execs_since_crash : 4128105
+exec_timeout      : 20
 afl_banner        : simple
 afl_version       : 2.52b
 target_mode       : default
-command_line      : afl-instr/afl-fuzz -m none -i input -o out ./simple
+command_line      : afl-instr/afl-fuzz -m none -i input -o out -q 2 ./simple ./simple2
