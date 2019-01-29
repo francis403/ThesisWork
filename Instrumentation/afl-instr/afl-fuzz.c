@@ -152,14 +152,15 @@ static int switch_program_timer = 1000 * 60 * 5; /* Time each program should be 
 
 static unsigned short BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
 
+
 /*The following data is important between runs so we can check if it should be saved
-* It can't go to the queue since if it went there we would be evaluating the queue input it self and not the mutation applied to it.
-*/
+* It can't go to the queue since if it went there we would be evaluating the queue input it self and not the mutation applied to it.*/
+
+/*TODO -> it might be smart to get the average of this thing?*/
 
 unsigned short shared_blocks_in_runs; /* Stores the number of shared blocks between current run and last run */
-unsigned short total_unique_blocks; /*Stores the total unique blocks between runs*/
+unsigned short unique_blocks; 		  /*Stores the total unique blocks between runs*/
 
-/* TODO probably will need an array of this things */
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
 
 
@@ -776,6 +777,11 @@ EXP_ST void write_bitmap(void) {
 
 }
 
+
+/* Checks if the current execution path passes through any new block */
+static u8 has_new_blocks(){
+	return shared_blocks_in_runs < unique_blocks;
+}
 
 /* Check if the current execution path brings anything new to the table.
    Update virgin bits to reflect the finds. Returns 1 if the only change is
@@ -2097,12 +2103,11 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   
   int message = 0;
 
-  // tells us which blocks where found
+  // tells us which blocks have been found
   short blocks_from_run[MAP_SIZE] = {};
 
   shared_blocks_in_runs = 0;
-
-  unsigned int unique_blocks = 0;
+  unique_blocks = 0;
 
   //printf("run_forkserver_on_target\n");
 
@@ -2159,6 +2164,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	blocks_from_run[id] = 1; // mark it has seen
       	unique_blocks ++;
       }
+
       BLOCKS_FOUND[id] ++;
 
       //printf("*block_hit = 0x%08x\n", *(blocks + i));
@@ -2168,10 +2174,12 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   /* TODO -> this can't be here, once we set that it passes through new blocks it cannot be changed */
   /* will go on two places calibrate_case (so it treats the first ones) and save_if_interesting (to check the new ones) */
+  /*
   if( queue_cur != NULL ){ 
   	queue_cur->shared_blocks = shared_blocks_in_runs; 
   	queue_cur ->uni_blcks = unique_blocks;
   }
+  */
 
   //status = message;
 
@@ -2392,6 +2400,8 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
    to warn about flaky or otherwise problematic test cases early on; and when
    new paths are discovered to detect variable behavior and so on. */
 
+// TODO -> the thins in the queue entry that change must be changed here
+
 static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
                          u32 handicap, u8 from_queue) {
 
@@ -2515,6 +2525,11 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   q->bitmap_size = count_bytes(trace_bits);
   q->handicap    = handicap;
   q->cal_failed  = 0;
+
+  /*Added by fc45701*/
+  q->shared_blocks = shared_blocks_in_runs; 
+  q->uni_blcks = unique_blocks;
+  
 
   total_bitmap_size += q->bitmap_size;
   total_bitmap_entries++;
@@ -4630,6 +4645,12 @@ static u32 calculate_score(struct queue_entry* q) {
   // TODO -> tenho que melhorar estes valores
   double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->uni_blcks; // TODO -> meter isto na struct queue maybe?
   score_mult *= 100;
+
+  //printf("fname = %s\n", queue_cur->fname);
+  //printf("total blocks = %d\n", queue_cur->uni_blcks);
+  //printf("shared blocks = %d\n", queue_cur->shared_blocks);
+  //printf("score_mult = %f\n", score_mult);
+
   if( score_mult <= 10.0 ){
   	// performance score should be best
   	perf_score *= 3;
@@ -4646,10 +4667,6 @@ static u32 calculate_score(struct queue_entry* q) {
   else {
   	perf_score *= 0.25;
   	//double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->uni_blcks;
-  	//printf("fname = %s\n", queue_cur->fname);
-  	//printf("total blocks = %d\n", queue_cur->uni_blcks);
-  	//printf("shared blocks = %d\n", queue_cur->shared_blocks);
-  	//printf("score_mult = %f\n", score_mult);
   }
   //perf_score *= (double)queue_cur->uni_blcks/(double)queue_cur->shared_blocks; 
 
