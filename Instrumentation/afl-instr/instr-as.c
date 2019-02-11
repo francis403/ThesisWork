@@ -351,7 +351,7 @@ void addToOutFile(FILE *file, char *lines){
   //int block_id = R(MAP_SIZE);
   if(!blocks_hit[block_id]){
     blocks_hit[block_id] = 1;
-    fprintf(fblocks, "0x%08x ", block_id);
+    fprintf(fblocks, " %d", block_id);
   }
   fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               block_id, block_id); 

@@ -154,7 +154,7 @@ static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program s
 static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
 
 /*Stores all the blocks of a specific programs*/
-static u8 blocks_per_program[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE]; /*TODO -> try and use less memory here*/
+u8 PROG_BLOCKS[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
 
 /*The following data is important between runs so we can check if it should be saved
@@ -2129,6 +2129,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   unique_blocks = 0;
 
   //printf("run_forkserver_on_target\n");
+  if(queue_cur) memset(queue_cur->blocks_hit, 0, sizeof(queue_cur->blocks_hit)); // clear array
 
   while( 1 ){
 
@@ -2181,7 +2182,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
       if( !blocks_from_run[id] ){
       	blocks_from_run[id] = 1; // mark it has seen
-      	//queue_cur->blocks_hit[id] = 1; // mark the block as hit
+      	if(queue_cur != NULL )	queue_cur->blocks_hit[id] = 1; // mark the block as hit
 
       	unique_blocks ++;
       }
@@ -6780,10 +6781,10 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 *TODO
 **/
 
-void getProgsBlockList(){
+static void getProgsBlockList(){
 
-	//short blocks_per_program[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
-	char *line = NULL, *block = NULL;
+	//short PROG_BLOCKS[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
+	char *line = NULL, copy = NULL, *block = NULL;
 	size_t len = 0;
 	int prog = 0;
 	FILE *fblocks;
@@ -6793,12 +6794,14 @@ void getProgsBlockList(){
 		// no list of blocks
 		FATAL("No blocks list found");
 	}
-	while (getline(&line, &len, fblocks) != -1){
+	while ( getline(&line, &len, fblocks) != -1 ){
 		block = strtok(line," ");
-		while (block != NULL){
 
-			int block_id = atoi(block);
-			blocks_per_program[prog][block_id] = 1;
+		// Get the blocks from the file
+		while ( block != NULL ){
+			unsigned short block_id = atoi(block);
+			//printf("block = %s\n", block);
+			PROG_BLOCKS[prog][block_id] = 1;
 			block = strtok(NULL," ");
 		}
 
@@ -7592,9 +7595,8 @@ int main(int argc, char** argv) {
 
   /*we start forkservers here*/
   init_all_forkservers(argv);
-  
-  //TODO -> make it perform a dry runon every program
 
+  //TODO -> make it perform a dry runon every program
   perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
 
 
