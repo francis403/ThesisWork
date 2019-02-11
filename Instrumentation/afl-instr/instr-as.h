@@ -207,13 +207,6 @@ static const u8* main_payload_64 =
   "\n"
   "  /* Calculate and store hit for the code location specified in rcx. */\n"
   "\n"
-  //"  movq %r13, __afl_block_temp(%rip)\n"
-  //"  \n/* Write home and tell them the id of the block */\n"
-  //"  movq $4, %rdx               /* length    */\n"
-  //"  leaq __afl_block_temp, %rsi\n"
-  //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
-  //CALL_L64("write")
-  //"\n"
 #ifndef COVERAGE_ONLY
   "  xorq __afl_prev_loc(%rip), %%rcx\n"
   "  xorq %%rcx, __afl_prev_loc(%rip)\n"
@@ -221,7 +214,7 @@ static const u8* main_payload_64 =
 #endif /* ^!COVERAGE_ONLY */
   "\n"
 #ifdef SKIP_COUNTS
-  "  orb  $1, (%rdx, %%rcx, 1)\n"
+  "  orb  $1, (%%rdx, %%rcx, 1)\n"
 #else
   "  incb (%%rdx, %%rcx, 1)\n"
 #endif /* ^SKIP_COUNTS */

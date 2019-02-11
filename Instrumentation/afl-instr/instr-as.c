@@ -26,6 +26,9 @@
    allow clang users to make things work even with hand-crafted assembly. Just
    note that there is no equivalent for GCC.
 
+  TODO -> we need to add all the blocks to a (file/shared memory) and allow the fuzzer to know what program
+  has which blocks
+
  */
 
 #define AFL_MAIN
@@ -67,6 +70,11 @@ int numbr_inst = 0;
 /*Version of the program being instrumentalized
      Affects what forksrv we are communicating*/
 int program_version;
+
+/*File of prog blocks*/
+FILE *fblocks;
+
+int blocks_hit[MAP_SIZE];
 
 /* If we don't find --32 or --64 in the command line, default to 
    instrumentation for whichever mode we were compiled with. This is not
@@ -334,10 +342,17 @@ void copy(FILE *source, FILE *target){
     fputc(ch, target);
 }
 
+
+/*Adds the lines to file*/
+/*TODO-> neewd to make it write the blocks which it has found to a file?*/
 void addToOutFile(FILE *file, char *lines){
   // get the id to add to the block
   int block_id = blockIDGenerator(lines);
   //int block_id = R(MAP_SIZE);
+  if(!blocks_hit[block_id]){
+    blocks_hit[block_id] = 1;
+    fprintf(fblocks, "0x%08x ", block_id);
+  }
   fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               block_id, block_id); 
 
@@ -735,12 +750,13 @@ static void add_instrumentation(void) {
 
 int main(int argc, char** argv) {
 
-
-  SAYF("\n\t-----Entry point to main point of instr-as.c-------\n");
+  // Open file to save blocks
+  fblocks = fopen("./progs_blocks.txt","a");
 
   program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
+  //fprintf(fblocks, "%d\n", program_version);
 
-  printf("env final = %d\n", program_version);
+  //printf("env final = %d\n", program_version);
 
   s32 pid;
   u32 rand_seed;
@@ -804,6 +820,9 @@ int main(int argc, char** argv) {
 
   if (!just_version) add_instrumentation();
 
+  fprintf(fblocks, "\n");
+
+  if(fblocks) fclose(fblocks);
   //printf("as_params[0] = %s\n", as_params[0]);
 
   if (!(pid = fork())) {

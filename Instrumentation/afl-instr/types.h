@@ -20,6 +20,10 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+typedef struct bool{
+  unsigned int val:1
+} bool;
+
 typedef uint8_t  u8;
 typedef uint16_t u16;
 typedef uint32_t u32;

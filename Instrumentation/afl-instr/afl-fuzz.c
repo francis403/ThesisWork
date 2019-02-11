@@ -147,10 +147,14 @@ static s32 forksrv_pid[MAX_AMOUT_OF_PROGRAMS],               /* PID of the fork 
 
 
 /*Program corrently under test*/
-int MAIN_PROG = 0;
-static int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
+int CUR_PROG = 0;
 
-static unsigned short BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
+static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
+
+static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
+
+/*Stores all the blocks of a specific programs*/
+static u8 blocks_per_program[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
 
 /*The following data is important between runs so we can check if it should be saved
@@ -271,12 +275,12 @@ struct queue_entry {
 
   u8  cal_failed,                     /* Calibration failed?              */
       trim_done,                      /* Trimmed?                         */
-      was_fuzzed,                     /* Had any fuzzing done yet?        */
+      was_fuzzed,                     /* Had any fuzzing done yet?        */ // TODO -> add information about specific program
       passed_det,                     /* Deterministic stages passed?     */
       has_new_cov,                    /* Triggers new coverage?           */
       var_behavior,                   /* Variable behavior?               */
       favored,                        /* Currently favored?               */
-      fs_redundant;                   /* Marked as redundant in the fs?   */
+      fs_redundant;                   /* Marked as redundant in the fs?   */ // TODO -> maybe add information about specific program
 
   u32 bitmap_size,                    /* Number of bits set in bitmap     */
       exec_cksum;                     /* Checksum of the execution trace  */
@@ -287,6 +291,11 @@ struct queue_entry {
 
   int shared_blocks;			  	  /* Number of the shared blocks found*/
   int uni_blcks;					  /* total blocks passed 			  */
+
+  u8 blocks_hit[MAP_SIZE];	      /*Mark blocks hit in the last run   */
+  // to reset memset(blocks_hit, 0, sizeof(blocks_hit))
+
+  // TODO -> blocks passed
 
   u8* trace_mini;                     /* Trace bytes, if kept             */
   u32 tc_ref;                         /* Trace bytes ref count            */
@@ -770,7 +779,7 @@ EXP_ST void write_bitmap(void) {
 
 	if (fd < 0) PFATAL("Unable to open '%s'", fname);
 
-	ck_write(fd, virgin_bits[MAIN_PROG], MAP_SIZE, fname);
+	ck_write(fd, virgin_bits[CUR_PROG], MAP_SIZE, fname);
 
 	close(fd);
 	ck_free(fname);
@@ -779,7 +788,9 @@ EXP_ST void write_bitmap(void) {
 
 
 /* Checks if the current execution path passes through any new block */
+/* Not sure if working */
 static u8 has_new_blocks(){
+	// blocks shared not all the blocks passed implies there are new blocks
 	return shared_blocks_in_runs < unique_blocks;
 }
 
@@ -790,6 +801,11 @@ static u8 has_new_blocks(){
 
    This function is called after every exec() on a fairly large buffer, so
    it needs to be fast. We do this in 32-bit and 64-bit flavors. */
+
+// TODO -> we need to check every virgin map right?
+//		-> maybe its not in this function but in the function that calls it?
+//		-> This might be a bit expensive, maybe just check the ones that have changed and check 
+//		 the other virgin_maps for the specific bits.
 
 static inline u8 has_new_bits(u8* virgin_map) {
 
@@ -860,7 +876,7 @@ static inline u8 has_new_bits(u8* virgin_map) {
 
   } // end of while
 
-  if (ret && virgin_map == virgin_bits[MAIN_PROG]) bitmap_changed = 1;
+  if (ret && virgin_map == virgin_bits[CUR_PROG]) bitmap_changed = 1;
 
   return ret;
 
@@ -1214,6 +1230,9 @@ static void update_bitmap_score(struct queue_entry* q) {
    previously-unseen bytes (temp_v) and marks them as favored, at least
    until the next run. The favored entries are given more air time during
    all fuzzing steps. */
+
+// TODO -> check out where it passes through all in queued and takes the favored away.
+// TODO -> probably gonna need to change the double for a bit
 
 static void cull_queue(void) {
 
@@ -2162,8 +2181,11 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
       if( !blocks_from_run[id] ){
       	blocks_from_run[id] = 1; // mark it has seen
+      	//queue_cur->blocks_hit[id] = 1; // mark the block as hit
+
       	unique_blocks ++;
       }
+
 
       BLOCKS_FOUND[id] ++;
 
@@ -2292,7 +2314,7 @@ static u8 run_target(u32 timeout) {
 
   u8 fault;
   int hit;
-  int *blocks = run_forkserver_on_target(timeout, &hit, MAIN_PROG, &fault);
+  int *blocks = run_forkserver_on_target(timeout, &hit, CUR_PROG, &fault);
 
   free (blocks);
 
@@ -2460,7 +2482,9 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
 
     int hit;
-    int* blocks = run_forkserver_on_target(use_tmout, &hit, MAIN_PROG, &fault);
+    // TODO -> add the queue entry to the method so we can add the blocks that were hit
+    int* blocks = run_forkserver_on_target(use_tmout, &hit, CUR_PROG, &fault);
+
 
     free(blocks);
 
@@ -2482,7 +2506,8 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     if (q->exec_cksum != cksum) {
 
-      u8 hnb = has_new_bits(virgin_bits[MAIN_PROG]);
+      // todo -> need to check all of the virgin_bits?
+      u8 hnb = has_new_bits(virgin_bits[CUR_PROG]);
       if (hnb > new_bits) new_bits = hnb;
 
       if (q->exec_cksum) {
@@ -2822,13 +2847,14 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
   if (fault == crash_mode) {
 
-  	// TODO -> need to add a bit like this using shared blocks, shared_blocks_in_runs (keep if blocks_shared is bigger than a given percentage)
+  	// TODO -> I feel like it still does not work properly
 
     /* Keep only if there are new bits in the map, add to queue for
        future fuzzing, etc. */
 
-    //if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG])) || !(has_new_blocks()) ) {
-  	if (!(hnb = has_new_bits(virgin_bits[MAIN_PROG])) && !(has_new_blocks())) {
+    //if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) || !(has_new_blocks()) ) {
+  	// TODO -> we need to check every virgin_bits and if it has new coverage there its good
+  	if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) && !(has_new_blocks())) {
       if (crash_mode) total_crashes++;
       return 0;
     }    
@@ -2891,7 +2917,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
         simplify_trace((u32*)trace_bits);
 #endif /* ^__x86_64__ */
 
-        if (!has_new_bits(virgin_tmout[MAIN_PROG])) return keeping;
+        if (!has_new_bits(virgin_tmout[CUR_PROG])) return keeping;
 
       }
 
@@ -2955,7 +2981,7 @@ keep_as_crash:
         simplify_trace((u32*)trace_bits);
 #endif /* ^__x86_64__ */
 
-        if (!has_new_bits(virgin_crash[MAIN_PROG])) return keeping;
+        if (!has_new_bits(virgin_crash[CUR_PROG])) return keeping;
 
       }
 
@@ -3832,7 +3858,7 @@ static void show_stats(void) {
 
   /* Do some bitmap stats. */
 
-  t_bytes = count_non_255_bytes(virgin_bits[MAIN_PROG]);
+  t_bytes = count_non_255_bytes(virgin_bits[CUR_PROG]);
   t_byte_ratio = ((double)t_bytes * 100) / MAP_SIZE;
 
   if (t_bytes) 
@@ -3873,7 +3899,7 @@ static void show_stats(void) {
 
   /* Compute some mildly useful bitmap stats. */
 
-  t_bits = (MAP_SIZE << 3) - count_bits(virgin_bits[MAIN_PROG]);
+  t_bits = (MAP_SIZE << 3) - count_bits(virgin_bits[CUR_PROG]);
 
   /* Now, for the visuals... */
 
@@ -4597,6 +4623,8 @@ static u32 choose_block_len(u32 limit) {
    A helper function for fuzz_one(). Maybe some of these constants should
    go into config.h. */
 
+// PerformanceScore
+
 static u32 calculate_score(struct queue_entry* q) {
 
   u32 avg_exec_us = total_cal_us / total_cal_cycles;
@@ -4905,6 +4933,8 @@ static u8 fuzz_one(char** argv) {
 
 #else
 
+  // isWorthFuzzing
+
   if (pending_favored) {
 
     /* If we have any favored, non-fuzzed new arrivals in the queue,
@@ -5035,6 +5065,8 @@ static u8 fuzz_one(char** argv) {
 
   doing_det = 1;
 
+  // Deterministic
+
   /*********************************************
    * SIMPLE BITFLIP (+dictionary construction) *
    *********************************************/
@@ -5134,7 +5166,7 @@ static u8 fuzz_one(char** argv) {
 
     }
 
-  }
+  } // end of single bit bit_flip
 
   new_hit_cnt = queued_paths + unique_crashes;
 
@@ -5670,9 +5702,9 @@ skip_arith:
       out_buf[i] = orig;
       stage_cur++;
 
-    }
+    } // end of for interesting_8
 
-  }
+  } // end of for len
 
   new_hit_cnt = queued_paths + unique_crashes;
 
@@ -6410,7 +6442,7 @@ havoc_stage:
 
       }
 
-    }
+    } // end of random mutations
 
     if (common_fuzz_stuff(argv, out_buf, temp_len))
       goto abandon_entry;
@@ -6743,6 +6775,42 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 }
 
 /**
+* Get the list of blocks for all programs
+* Used once in the beginning
+*TODO
+**/
+
+void getProgsBlockList(){
+
+	//short blocks_per_program[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
+	char *line = NULL, *block = NULL;
+	size_t len = 0;
+	int prog = 0;
+	FILE *fblocks;
+	fblocks = fopen("./progs_blocks.txt","r");
+
+	if( fblocks == NULL ){
+		// no list of blocks
+		FATAL("No blocks list found");
+	}
+	while (getline(&line, &len, fblocks) != -1){
+		block = strtok(line," ");
+		while (block != NULL){
+
+			int block_id = atoi(block);
+			blocks_per_program[prog][block_id] = 1;
+			block = strtok(NULL," ");
+		}
+
+		prog ++;
+	}
+
+	if( line ) free(line);
+
+	fclose(fblocks);
+}
+
+/**
 * Start all forkserver in the program and check their binary
 **/
 static void init_all_forkservers(char **argv){
@@ -6750,13 +6818,13 @@ static void init_all_forkservers(char **argv){
 
 	while (*(argv + index)){
 	  	printf("%s\n", (*(argv + index)));
-	  	check_binary(*(argv + index), &(target_path[prog])); // -> needed
+	  	check_binary(*(argv + index), &(target_path[prog]));
 	 	
 	  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], prog, FORKSRV_FD + (prog * 2));
-	  	//init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], &fsrv_ctl_fd[prog], &fsrv_st_fd[prog], FORKSRV_FD);
 	  	index ++;
 	  	prog ++;
 	}
+	getProgsBlockList();
 }
 
 /* Trim and possibly create a banner for the run. */
@@ -7388,8 +7456,6 @@ static void save_cmdline(u32 argc, char** argv) {
 
 }
 
-
-
 #ifndef AFL_LIB
 
 /* Main entry point */
@@ -7570,14 +7636,15 @@ while (1) { //main fuzzing loop //FUZZ
     if( (end_t - init_time) >= switch_program_timer ){
       //printf("Gonna switch programs\n");
       init_time = get_cur_time();
-      // TODO -> switch the program.
-      MAIN_PROG = (MAIN_PROG + 1) % numbr_of_progs_under_test; 
-      cur_prog = argv[init_prog_args + MAIN_PROG];
+      
+      CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test; 
+      cur_prog = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
     }
+
     if (!queue_cur) {
 
-    	queue_cycle++;
+      queue_cycle++;
       current_entry     = 0;
       cur_skipped_paths = 0;
       queue_cur         = queue;
