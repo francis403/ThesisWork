@@ -95,7 +95,7 @@ EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
 		  *target_path[MAX_AMOUT_OF_PROGRAMS],
           //*target_path[MAX_AMOUT_OF_PROGRAMS],               /* Path to target binary            */
 		  //*target_path,
-          *cur_prog;                  /* Current Program being fuzzed     */
+          *cur_prog_title;                  /* Current Program being fuzzed     */
           *orig_cmdline;              /* Original command line            */
 
 static short init_prog_args;
@@ -154,7 +154,7 @@ static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program s
 static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
 
 /*Stores all the blocks of a specific programs*/
-u8 PROG_BLOCKS[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE]; /*TODO -> try and use less memory here*/
+static u8 PROG_BLOCKS[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
 
 /*The following data is important between runs so we can check if it should be saved
@@ -275,7 +275,7 @@ struct queue_entry {
 
   u8  cal_failed,                     /* Calibration failed?              */
       trim_done,                      /* Trimmed?                         */
-      was_fuzzed,                     /* Had any fuzzing done yet?        */ // TODO -> add information about specific program
+      was_fuzzed[MAX_AMOUT_OF_PROGRAMS], /* Had any fuzzing done yet?        */ // TODO -> add information about specific program
       passed_det,                     /* Deterministic stages passed?     */
       has_new_cov,                    /* Triggers new coverage?           */
       var_behavior,                   /* Variable behavior?               */
@@ -292,7 +292,7 @@ struct queue_entry {
   int shared_blocks;			  	  /* Number of the shared blocks found*/
   int uni_blcks;					  /* total blocks passed 			  */
 
-  u8 blocks_hit[MAP_SIZE];	      /*Mark blocks hit in the last run   */
+  u8 blocks_hit[MAP_SIZE];
   // to reset memset(blocks_hit, 0, sizeof(blocks_hit))
 
   // TODO -> blocks passed
@@ -754,6 +754,7 @@ EXP_ST void destroy_queue(void) {
 		n = q->next;
 		ck_free(q->fname);
 		ck_free(q->trace_mini);
+		//free(q->blocks_hit);
 		ck_free(q);
 		q = n;
 
@@ -1230,15 +1231,13 @@ static void update_bitmap_score(struct queue_entry* q) {
    previously-unseen bytes (temp_v) and marks them as favored, at least
    until the next run. The favored entries are given more air time during
    all fuzzing steps. */
-
-// TODO -> check out where it passes through all in queued and takes the favored away.
-// TODO -> probably gonna need to change the double for a bit
+// TODO -> this function is important, probably best ot write about it
 
 static void cull_queue(void) {
 
   struct queue_entry* q;
   static u8 temp_v[MAP_SIZE >> 3];
-  u32 i;
+  u32 i;\
 
   if (dumb_mode || !score_changed) return;
 
@@ -1273,7 +1272,7 @@ static void cull_queue(void) {
       top_rated[i]->favored = 1;
       queued_favored++;
 
-      if (!top_rated[i]->was_fuzzed) pending_favored++;
+      if (!top_rated[i]->was_fuzzed[CUR_PROG]) pending_favored++;
 
     } // end of if and for
 
@@ -1995,61 +1994,6 @@ FATAL("Fork server handshake failed");
 
 }
 
-
-/*
-* Helper function for cmp_programs
-* Returns the number of blocks hit by the current fuzzed program
-* Puts the blocks on the argument
-* This function should delay the actual fuzzing by a lot
-* Not working for some reason
-* 
-*/
-/*
-int blocks_hit(int *blocks){
-
-	printf("in blocks_hit %d\n", blocks == NULL);
-
-	unsigned int size = 100, hit = 0;
-	blocks = malloc(sizeof(int) * size);
-
-	unsigned int id = 0;
-
-	printf("before while\n");
-
-	while( 1 ){
-
-		// check if there are things to read
-		if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, -1) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
-		    break;
-
-		if (read(fsrv_st_fd, &id, 4) != 4) { //-WRITE
-		   	RPFATAL(-1, "Unable to read block_id from fork server (OOM?)");
-		}
-		
-		hit++;
-
-		//check if we have enough memory allocated for the array
-		if( hit >= size * 0.75 ){
-			size *= 2;
-			blocks = realloc(blocks, sizeof(int) * size );
-		}
-
-		//printf("before weird looking line\n");
-
-		*blocks = id;
-		printf("*block_hit = 0x%08x\n", *blocks);
-		//printf("after weird looking line\n");
-		blocks++;
-		//printf("after = 0x%08x\n", id);
-		
-		    	    //printf("1\n");
-	}
-
-	return hit;
-
-}
-*/
-
 /**
 *
 * RUNS specific forkserver specified in fsrv_ctl_fd and fsrv_st_fd
@@ -2129,7 +2073,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   unique_blocks = 0;
 
   //printf("run_forkserver_on_target\n");
-  if(queue_cur) memset(queue_cur->blocks_hit, 0, sizeof(queue_cur->blocks_hit)); // clear array
 
   while( 1 ){
 
@@ -2169,7 +2112,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       /*
       if(  BLOCKS_FOUND[id] && !blocks_from_run[id]){
       	// add it to the in common
-
       	//(*nbr_in_common) = (*nbr_in_common) + 1;
       	//count ++;
       	//printf("*block_hit = 0x%08x has been seen before\n", id);
@@ -2225,7 +2167,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   	/*
   	it.it_value.tv_sec = 0;
   	it.it_value.tv_usec = 0;
-
   	setitimer(ITIMER_REAL, &it, NULL);
   	total_execs++;
 	*/
@@ -2233,10 +2174,8 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   //start running the blocks
   /*
   if ((res = write(fsrv_ctl_fd, &prev_timed_out, 4)) != 4) { //-WRITE
-
     if (stop_soon) return 0;
     RPFATAL(res, "Unable to request new process from fork server (OOM?)");
-
   }
   */
 
@@ -2316,7 +2255,6 @@ static u8 run_target(u32 timeout) {
   u8 fault;
   int hit;
   int *blocks = run_forkserver_on_target(timeout, &hit, CUR_PROG, &fault);
-
   free (blocks);
 
   /*
@@ -2334,26 +2272,21 @@ static u8 run_target(u32 timeout) {
 *
 * Also sets in size the number of blocks in each program
 **/
-static int** run_programs_once(u32 timeout, int *size[] ){
+static void run_programs_once(u32 timeout, int *size[] ){
 
 	//check if size ois of the correct length
 	if( sizeof(size) / sizeof(int) != numbr_of_progs_under_test ){
 		FATAL("Number of programs passed in value does not match number of programs passed in total");
 	}
 
-	int **blocks = malloc( sizeof( int* ) * numbr_of_progs_under_test ); 
-
-	if(!blocks){
-		FATAL("malloc failed running all the programs!");
-	}
 	u8 fault;
 	// Get all the blocks of all programs under	test
 	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
 		//blocks[i] = malloc( sizeof(int) );
-		blocks[i]= run_forkserver_on_target(timeout, &(size[i]), i, &fault);
+		int *blocks = run_forkserver_on_target(timeout, &(size[i]), i, &fault);
+		free(blocks);
 	}
 
-	return blocks;
 }
 
 /* Write modified data to file for testing. If out_file is set, the old file
@@ -2478,16 +2411,8 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     //fault = run_target(argv, use_tmout); // TODO -> change this
 
-    // TODO -> need to pass through every program here?
-    //		Or do we just want to pass the one being tested? and then change it over time?
 
-
-    int hit;
-    // TODO -> add the queue entry to the method so we can add the blocks that were hit
-    int* blocks = run_forkserver_on_target(use_tmout, &hit, CUR_PROG, &fault);
-
-
-    free(blocks);
+    run_target(use_tmout);
 
     //printf("\tfault = %d\n", fault);
 
@@ -2855,7 +2780,9 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
     //if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) || !(has_new_blocks()) ) {
   	// TODO -> we need to check every virgin_bits and if it has new coverage there its good
-  	if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) && !(has_new_blocks())) {
+  	// se não encontramos edges novas ou não encontramos blocs blocos nunca antes vistos
+  	// TODO -> não é redundate ver se temos blocos novos? Visto que se tivermos uma edge nova é porque ou a ordem trocou ou porque temos novos blocos nela?
+  	if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) || !(has_new_blocks())) {
       if (crash_mode) total_crashes++;
       return 0;
     }    
@@ -3982,9 +3909,9 @@ static void show_stats(void) {
 
    SAYF(bV bSTOP "    cur run time : " cRST "%-34s " bSTG bV bSTOP
        "  cur prog : %s  " bSTG bV "\n",
-       DTD(cur_ms, prog_start_time), cur_prog );
+       DTD(cur_ms, prog_start_time), cur_prog_title );
 
-  //SAYF(bV bSTOP "   current program : " cRST  "%-34s\n" bSTG bV bSTOP, cur_prog);
+  //SAYF(bV bSTOP "   current program : " cRST  "%-34s\n" bSTG bV bSTOP, cur_prog_title);
 
   /* We want to warn people about not seeing new paths after a full cycle,
      except when resuming fuzzing or running in non-instrumented mode. */
@@ -4835,6 +4762,14 @@ static u8 could_be_arith(u32 old_val, u32 new_val, u8 blen) {
 
 }
 
+/* returns the number of blocks shared between a seeds last run and a given program */
+int blocks_shared(struct queue_entry* q ,int prog){
+
+	//PROG_BLOCKS[]
+
+	return 0;
+}
+
 
 /* Last but not least, a similar helper to see if insertion of an 
    interesting integer is redundant given the insertions done for
@@ -4934,15 +4869,28 @@ static u8 fuzz_one(char** argv) {
 
 #else
 
-  // isWorthFuzzing
+  // isWorthFuzzing function can be summed up to this if
 
+  // if there are interesting seeds waiting to be fuzzed
   if (pending_favored) {
+
+  	 // idea: se um programa já foi fuzzed no programa e não devolveu nada de interessante podemos marcar como não interessante para o programa em si,
+  	 // usado apenas para havoc
+
+  	// idea: marcar os programas que pode ser interessante testar a seed, não diretamente, mas quando vemos se a seed é interessante vemos se já está marcada como interessante no CUR_PROG(sim ou não)
+  		// se sim então já sabemos que já sabemos que é interessante
+  		// se não, vemos as seeds do ultimo run e vemos se'tem acima de uma dada percentagem
+
+  	// verificar que funcionar
+  	// se não correu neste preograma mas correu em outro e o resutlado partilha seeds com o programa, correr.
+  	// TODO
+  	//if ((!queue_cur->was_fuzzed[CUR_PROG] ))
 
     /* If we have any favored, non-fuzzed new arrivals in the queue,
        possibly skip to them at the expense of already-fuzzed or non-favored
        cases. */
 
-    if ((queue_cur->was_fuzzed || !queue_cur->favored) &&
+    if ((queue_cur->was_fuzzed[CUR_PROG] || !queue_cur->favored) &&
         UR(100) < SKIP_TO_NEW_PROB) return 1;
 
   } else if (!dumb_mode && !queue_cur->favored && queued_paths > 10) {
@@ -4951,7 +4899,7 @@ static u8 fuzz_one(char** argv) {
        The odds of skipping stuff are higher for already-fuzzed inputs and
        lower for never-fuzzed entries. */
 
-    if (queue_cycle > 1 && !queue_cur->was_fuzzed) {
+    if (queue_cycle > 1 && !queue_cur->was_fuzzed[CUR_PROG]) {
 
       if (UR(100) < SKIP_NFAV_NEW_PROB) return 1;
 
@@ -5055,7 +5003,7 @@ static u8 fuzz_one(char** argv) {
      this entry ourselves (was_fuzzed), or if it has gone through deterministic
      testing in earlier, resumed runs (passed_det). */
 
-  if (skip_deterministic || queue_cur->was_fuzzed || queue_cur->passed_det)
+  if (skip_deterministic || queue_cur->was_fuzzed[CUR_PROG] || queue_cur->passed_det)
     goto havoc_stage;
 
   /* Skip deterministic fuzzing if exec path checksum puts this out of scope
@@ -6582,8 +6530,8 @@ abandon_entry:
   /* Update pending_not_fuzzed count if we made it through the calibration
      cycle and have not seen this entry before. */
 
-  if (!stop_soon && !queue_cur->cal_failed && !queue_cur->was_fuzzed) {
-    queue_cur->was_fuzzed = 1;
+  if (!stop_soon && !queue_cur->cal_failed && !queue_cur->was_fuzzed[CUR_PROG]) {
+    queue_cur->was_fuzzed[CUR_PROG] = 1;
     pending_not_fuzzed--;
     if (queue_cur->favored) pending_favored--;
   }
@@ -6783,7 +6731,7 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 
 static void getProgsBlockList(){
 
-	//short PROG_BLOCKS[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
+	//shostatic rt PROG_BLOCKS[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
 	char *line = NULL, copy = NULL, *block = NULL;
 	size_t len = 0;
 	int prog = 0;
@@ -6801,7 +6749,7 @@ static void getProgsBlockList(){
 		while ( block != NULL ){
 			unsigned short block_id = atoi(block);
 			//printf("block = %s\n", block);
-			PROG_BLOCKS[prog][block_id] = 1;
+ 			PROG_BLOCKS[prog][block_id] = 1;
 			block = strtok(NULL," ");
 		}
 
@@ -7591,7 +7539,7 @@ int main(int argc, char** argv) {
   use_argv = argv + optind;
   init_prog_args = optind;
 
-  cur_prog = argv[init_prog_args];
+  cur_prog_title = argv[init_prog_args];
 
   /*we start forkservers here*/
   init_all_forkservers(argv);
@@ -7600,7 +7548,7 @@ int main(int argc, char** argv) {
   perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
 
 
-  cull_queue(); // -> not needed, but very usefull and likely where i'll work the most
+  cull_queue();
 
   show_init_stats(); //-> not needed but usefull
 
@@ -7627,7 +7575,7 @@ int hit;
 u8 fault;
 
 
-while (1) { //main fuzzing loop //FUZZ
+while (1) { //main fuzzing loop //FUZZ LOP
 
     u8 skipped_fuzz;
 
@@ -7640,7 +7588,7 @@ while (1) { //main fuzzing loop //FUZZ
       init_time = get_cur_time();
       
       CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test; 
-      cur_prog = argv[init_prog_args + CUR_PROG];
+      cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
     }
 
