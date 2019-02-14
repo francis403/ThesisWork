@@ -92,10 +92,10 @@ EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
           *use_banner,                /* Display banner                   */
           *in_bitmap,                 /* Input bitmap                     */
           *doc_path,                  /* Path to documentation dir        */
-		  *target_path[MAX_AMOUT_OF_PROGRAMS],
-          //*target_path[MAX_AMOUT_OF_PROGRAMS],               /* Path to target binary            */
+		  *target_path[MAX_AMOUNT_OF_PROGS],
+          //*target_path[MAX_AMOUNT_OF_PROGS],               /* Path to target binary            */
 		  //*target_path,
-          *cur_prog_title;                  /* Current Program being fuzzed     */
+          *cur_prog_title,           /* Current Program being fuzzed     */
           *orig_cmdline;              /* Original command line            */
 
 static short init_prog_args;
@@ -136,12 +136,12 @@ EXP_ST u8  skip_deterministic,        /* Skip deterministic stages?       */
 static s32 out_fd,                    /* Persistent fd for out_file       */
            dev_urandom_fd = -1,       /* Persistent fd for /dev/urandom   */
            dev_null_fd = -1,          /* Persistent fd for /dev/null      */
-           fsrv_write_blocks[MAX_AMOUT_OF_PROGRAMS],        /* Fork server control pipe (write) */
-           fsrv_read_blocks[MAX_AMOUT_OF_PROGRAMS],        /* Fork server control pipe (write) */
-           fsrv_ctl_fd[MAX_AMOUT_OF_PROGRAMS],        /* Fork server control pipe (write) */
-           fsrv_st_fd[MAX_AMOUT_OF_PROGRAMS];				  /* Fork server status pipe (read)   */ 
+           fsrv_write_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
+           fsrv_read_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
+           fsrv_ctl_fd[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
+           fsrv_st_fd[MAX_AMOUNT_OF_PROGS];				  /* Fork server status pipe (read)   */ 
 
-static s32 forksrv_pid[MAX_AMOUT_OF_PROGRAMS],               /* PID of the fork server           */
+static s32 forksrv_pid[MAX_AMOUNT_OF_PROGS],               /* PID of the fork server           */
            child_pid = -1,            /* PID of the fuzzed program, maybe I'll need more than one        */
            out_dir_fd = -1;           /* FD of the lock file              */
 
@@ -154,7 +154,7 @@ static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program s
 static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
 
 /*Stores all the blocks of a specific programs*/
-static u8 PROG_BLOCKS[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE]; /*TODO -> try and use less memory here*/
+static u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
 
 /*The following data is important between runs so we can check if it should be saved
@@ -175,9 +175,9 @@ EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, change
 
 // TODO -> switch to main to have better control of memory
 // TO THINK -> Maybe we only need one? This will hold all the edges, if two programs have the same edge it's probably because It's the same two blocks
-EXP_ST u8  virgin_bits[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE],     /* Regions yet untouched by fuzzing */
-           virgin_tmout[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE],    /* Bits we haven't seen in tmouts   */
-           virgin_crash[MAX_AMOUT_OF_PROGRAMS][MAP_SIZE];    /* Bits we haven't seen in crashes  */
+EXP_ST u8  virgin_bits[MAX_AMOUNT_OF_PROGS][MAP_SIZE],     /* Regions yet untouched by fuzzing */
+           virgin_tmout[MAX_AMOUNT_OF_PROGS][MAP_SIZE],    /* Bits we haven't seen in tmouts   */
+           virgin_crash[MAX_AMOUNT_OF_PROGS][MAP_SIZE];    /* Bits we haven't seen in crashes  */
 
 static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
 
@@ -275,7 +275,8 @@ struct queue_entry {
 
   u8  cal_failed,                     /* Calibration failed?              */
       trim_done,                      /* Trimmed?                         */
-      was_fuzzed[MAX_AMOUT_OF_PROGRAMS], /* Had any fuzzing done yet?        */ // TODO -> add information about specific program
+      was_fuzzed[MAX_AMOUNT_OF_PROGS],/* Had any fuzzing done yet?       */ // TODO -> add information about specific program
+	  been_fuzzed,					  /* Has it been fuzzed at all?		  */
       passed_det,                     /* Deterministic stages passed?     */
       has_new_cov,                    /* Triggers new coverage?           */
       var_behavior,                   /* Variable behavior?               */
@@ -292,10 +293,7 @@ struct queue_entry {
   int shared_blocks;			  	  /* Number of the shared blocks found*/
   int uni_blcks;					  /* total blocks passed 			  */
 
-  u8 blocks_hit[MAP_SIZE];
-  // to reset memset(blocks_hit, 0, sizeof(blocks_hit))
-
-  // TODO -> blocks passed
+  u8 blocks_hit[MAP_SIZE];			  /* Saves all blocks found, during run and fuzz */
 
   u8* trace_mini;                     /* Trace bytes, if kept             */
   u32 tc_ref;                         /* Trace bytes ref count            */
@@ -2063,8 +2061,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   if(!blocks){
     FATAL("malloc failed in run_forkserver_on_target");
   }
-  
-  int message = 0;
 
   // tells us which blocks have been found
   short blocks_from_run[MAP_SIZE] = {};
@@ -2076,7 +2072,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   while( 1 ){
 
-    message = 0;
     //printf("poll\n");
     // check if there are things to read
     //if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 10) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
@@ -2086,8 +2081,11 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       //there's something to read
       //printf("gonna try and read something\n");
 
-      if (read(fsrv_st_fd[prog_index], &id, 4) != 4) { 
-          RPFATAL(-1, "Unable to read block_id from fork server (OOM?)");
+  	  // O erro está aqui, talvez ao fazermos ctrl+c ele ainda continue e depois como morre dá o erro?
+  	  int re = 10;
+      if ( (re = read(fsrv_st_fd[prog_index], &id, 4)) != 4) { 
+      	if(re == 0) return;
+        else 	RPFATAL(-1, "Unable to read block_id from fork server (OOM?) %d", re);
       }
 
       // code that we're getting the status next
@@ -2272,14 +2270,10 @@ static u8 run_target(u32 timeout) {
 *
 * Also sets in size the number of blocks in each program
 **/
-static void run_programs_once(u32 timeout, int *size[] ){
-
-	//check if size ois of the correct length
-	if( sizeof(size) / sizeof(int) != numbr_of_progs_under_test ){
-		FATAL("Number of programs passed in value does not match number of programs passed in total");
-	}
-
+static void run_programs_once(u32 timeout){
 	u8 fault;
+	int *size[numbr_of_progs_under_test];
+
 	// Get all the blocks of all programs under	test
 	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
 		//blocks[i] = malloc( sizeof(int) );
@@ -4451,6 +4445,21 @@ abort_trimming:
 
 }
 
+/*Returns the number of blocks shared between a seed in the queue
+* (found during the fuzzing process) and a given program
+* O(MAP_SIZE) -> todo: tentar melhorar isto
+*/
+int num_blocks_shared(struct queue_entry *q, u8 prog_index){
+	int result = 0;
+
+	for(int id = 1; id < MAP_SIZE; id++){
+		if( q->blocks_hit[id] && PROG_BLOCKS[prog_index][id] )
+			result ++;
+	}
+
+	return result;
+}
+
 /* Write a modified test case, run program, process results. Handle
    error conditions, returning 1 if it's time to bail out. This is
    a helper function for fuzz_one(). */
@@ -4882,9 +4891,14 @@ static u8 fuzz_one(char** argv) {
   		// se não, vemos as seeds do ultimo run e vemos se'tem acima de uma dada percentagem
 
   	// verificar que funcionar
-  	// se não correu neste preograma mas correu em outro e o resutlado partilha seeds com o programa, correr.
-  	// TODO
-  	//if ((!queue_cur->was_fuzzed[CUR_PROG] ))
+  	// se não foi fuzzed no programa a ser testado e não temos blocos nenhuns em comum não vale a pena
+  	// TODO -> verificar se já foi fuzzed de todo
+  	
+  	if (( !queue_cur->was_fuzzed[CUR_PROG] && queue_cur->been_fuzzed && !num_blocks_shared(queue_cur,CUR_PROG) )){ 
+  		printf("\tFOUND ONE!\n");
+  		return 1;
+  	}
+	
 
     /* If we have any favored, non-fuzzed new arrivals in the queue,
        possibly skip to them at the expense of already-fuzzed or non-favored
@@ -6532,6 +6546,7 @@ abandon_entry:
 
   if (!stop_soon && !queue_cur->cal_failed && !queue_cur->was_fuzzed[CUR_PROG]) {
     queue_cur->was_fuzzed[CUR_PROG] = 1;
+    queue_cur->been_fuzzed = 1;
     pending_not_fuzzed--;
     if (queue_cur->favored) pending_favored--;
   }
@@ -6732,7 +6747,7 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 static void getProgsBlockList(){
 
 	//shostatic rt PROG_BLOCKS[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
-	char *line = NULL, copy = NULL, *block = NULL;
+	char *line = NULL, *block = NULL;
 	size_t len = 0;
 	int prog = 0;
 	FILE *fblocks;
@@ -7570,10 +7585,6 @@ int main(int argc, char** argv) {
   }
 
 u64 init_time = get_cur_time(), end_t;
-
-int hit;
-u8 fault;
-
 
 while (1) { //main fuzzing loop //FUZZ LOP
 
