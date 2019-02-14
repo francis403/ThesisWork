@@ -1,10 +1,13 @@
 /*
-   Changed applied toamerican fuzzy lop - wrapper for GCC and clang 
+   Changed applied to american fuzzy lop - wrapper for GCC and clang 
    ----------------------------------------------
 	
 	The idea is to instrumentalize more than one program at a time to then be tested
   Adding the Forksrv_fd of the specific file
  
+  TODO -> we need to add all the blocks to a (file/shared memory) and allow the fuzzer to know what program
+  has which blocks
+
  */
 
 #define AFL_MAIN
@@ -328,6 +331,11 @@ int main(int argc, char** argv) {
 
   char snum[5];
 
+  // Opens the file and clears the contents
+  FILE *fblocks;
+  fblocks = fopen("./progs_blocks.txt","w");
+  if(fblocks) fclose(fblocks);
+
   while( *argv ){
     char *line = *argv++;
     //printf("line = %s\n", line);
@@ -356,6 +364,7 @@ int main(int argc, char** argv) {
 
             pid_t pid = fork();
             if(pid){
+                // send the program nmbr
                 setenv(FORKSRV_ENV, snum, 1);
                 execvp(cc_params[0], (char**)cc_params);
             }

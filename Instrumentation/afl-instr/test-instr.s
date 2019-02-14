@@ -1528,14 +1528,19 @@ __afl_store:
   shrq $1, __afl_prev_loc(%rip)
 
   incb (%rdx, %rcx, 1)
+
   
 /* Write home and tell them the id of the block */
   movq $4, %rdx               /* length    */
-  leaq __afl_block_temp, %rsi
+  leaq __afl_block_temp(%rip), %rsi
   movq __fsrv_write, %rdi       /* file desc */
 call write@PLT
 
+  /* In child process: close fds, resume execution. */
 
+  movq __afl_block_temp, %rdi       /* file desc */
+
+  movq __fsrv_read, %rdi       /* file desc */
 __afl_return:
 
   addb $127, %al
@@ -1660,9 +1665,4 @@ __afl_fork_wait_loop:
 
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
-  movq __fsrv_read, %rdi       /* file desc */
-call read@PLT
-  cmpq $4, %rax
-  jne  __afl_die
-
-  /* Once woken up, create a clone of our process. This is an excellent use
+  movq __

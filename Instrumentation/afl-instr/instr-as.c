@@ -26,6 +26,9 @@
    allow clang users to make things work even with hand-crafted assembly. Just
    note that there is no equivalent for GCC.
 
+  TODO -> we need to add all the blocks to a (file/shared memory) and allow the fuzzer to know what program
+  has which blocks
+
  */
 
 #define AFL_MAIN
@@ -67,6 +70,11 @@ int numbr_inst = 0;
 /*Version of the program being instrumentalized
      Affects what forksrv we are communicating*/
 int program_version;
+
+/*File of prog blocks*/
+FILE *fblocks;
+
+int blocks_hit[MAP_SIZE];
 
 /* If we don't find --32 or --64 in the command line, default to 
    instrumentation for whichever mode we were compiled with. This is not
@@ -261,7 +269,7 @@ int hash_string(char *input){
 unsigned int blockIDGenerator(char *block){
    
   char *string_to_hash = calloc(0, sizeof(char)); //string to eventually hash
-  
+
   char *copy = malloc ( sizeof(char) * strlen(block) + 1 );
   if(!copy) FATAL("malloc failed generating block ID");
 
@@ -334,10 +342,17 @@ void copy(FILE *source, FILE *target){
     fputc(ch, target);
 }
 
+
+/*Adds the lines to file*/
+/*TODO-> neewd to make it write the blocks which it has found to a file?*/
 void addToOutFile(FILE *file, char *lines){
   // get the id to add to the block
   int block_id = blockIDGenerator(lines);
   //int block_id = R(MAP_SIZE);
+  if(!blocks_hit[block_id]){
+    blocks_hit[block_id] = 1;
+    fprintf(fblocks, " %d", block_id);
+  }
   fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               block_id, block_id); 
 
@@ -442,18 +457,6 @@ static void add_instrumentation(void) {
         clearInstr(&lines_to_instrument);
 
       }
-	
-      //fprintf(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-      //        R(MAP_SIZE)); //ideia -> é aqui que estão a adicionar o id aleatorio!!!! e guarda no $0x%08x
-
-      // put it in the section above
-      
-      /*
-      fprintf(instr_lines_after, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
-              R(MAP_SIZE));
-
-      fputs("#----- FA - BEGINNING OF CODE to be hashed-----#\n", instr_lines_after);
-      */
 
       is_recording = 1;
 
@@ -465,36 +468,6 @@ static void add_instrumentation(void) {
     /* Output the actual line, call it a day in pass-thru mode. */
    //fputs(line, outf);
 
-    // added for the presentation
-   /*
-    char *newLine = NULL;
-    char *change = NULL;
-    //if( strstr(line, "\taddl\t$4, %eax") ){
-    //  change = "\taddl\t$100, %eax\n";
-    //} 
-    if(strstr(line, "\t.string\t\"This always happens\"\n")){
-      change = "\t.string \"This, amazingly, always happens\"\n";
-      //char *change = line;
-    } 
-    //addl  $4, %ecx
-    else{
-      fputs(line, outf);
-    }
-
-    if(change != NULL){
-      newLine = malloc( sizeof(char) * strlen(change) + 1);
-      strcpy(newLine, change);
-      fputs(change, outf);
-    }
-
-    if(newLine == NULL){
-      newLine = malloc(sizeof(char) * strlen(line) + 1);
-      strcpy(newLine, line);
-    }
-    */
-    /*---END OF ADDED FOR PRESENTATION*/
-
-    //if(strstr(line, "\tret")){printf("found the line -> %s\n", line);}
 
 
     if(is_recording){
@@ -777,12 +750,13 @@ static void add_instrumentation(void) {
 
 int main(int argc, char** argv) {
 
-
-  SAYF("\n\t-----Entry point to main point of instr-as.c-------\n");
+  // Open file to save blocks
+  fblocks = fopen("./progs_blocks.txt","a");
 
   program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
+  //fprintf(fblocks, "%d\n", program_version);
 
-  printf("env final = %d\n", program_version);
+  //printf("env final = %d\n", program_version);
 
   s32 pid;
   u32 rand_seed;
@@ -846,6 +820,9 @@ int main(int argc, char** argv) {
 
   if (!just_version) add_instrumentation();
 
+  fprintf(fblocks, "\n");
+
+  if(fblocks) fclose(fblocks);
   //printf("as_params[0] = %s\n", as_params[0]);
 
   if (!(pid = fork())) {
