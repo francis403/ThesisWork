@@ -1838,8 +1838,8 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 close(ctl_pipe[0]);
 close(st_pipe[1]);
 
-close(ctl_pipe[2]);
-close(st_pipe[3]);
+//close(ctl_pipe[2]);
+//close(st_pipe[3]);
 
 //close(ctl_pipe[2]);
 //close(st_pipe[3]);
@@ -2084,8 +2084,11 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   	  // O erro está aqui, talvez ao fazermos ctrl+c ele ainda continue e depois como morre dá o erro?
   	  int re = 10;
       if ( (re = read(fsrv_st_fd[prog_index], &id, 4)) != 4) { 
-      	if(re == 0) return 1;
-        else 	RPFATAL(-1, "Unable to read block_id from fork server (OOM?) %d", re);
+
+      	if (re != 0)
+          RPFATAL(-1, "Unable to read block_id from fork server (OOM?) %d", re);
+      	if (stop_soon) return 0;
+      	return 1;
       }
 
       // code that we're getting the status next
@@ -4891,12 +4894,10 @@ static u8 fuzz_one(char** argv) {
   		// se não, vemos as seeds do ultimo run e vemos se'tem acima de uma dada percentagem
 
   	// verificar que funcionar
-  	// se tivermos um que seja favored
-  	// se não foi fuzzed no programa a ser testado mas já foi fuzzed em algum e não temos blocos nenhuns em comum com o programa a ser testado -> não vale a pena
+  	// se não foi fuzzed no programa a ser testado e não temos blocos nenhuns em comum não vale a pena
   	// TODO -> verificar se já foi fuzzed de todo
-  	// deviamos verificar se eh favored?
-  	if (( !queue_cur->was_fuzzed[CUR_PROG] && queue_cur->been_fuzzed 
-  			&& !num_blocks_shared(queue_cur,CUR_PROG) )){ 
+  	
+  	if (( !queue_cur->was_fuzzed[CUR_PROG] && queue_cur->been_fuzzed && !num_blocks_shared(queue_cur,CUR_PROG) )){ 
   		printf("\tFOUND ONE!\n");
   		return 1;
   	}
@@ -6783,12 +6784,13 @@ static void getProgsBlockList(){
 **/
 static void init_all_forkservers(char **argv){
 	int index = optind, prog = 0;
-
+	printf("Enteres init_all_forkservers\n");
 	while (*(argv + index)){
 	  	printf("%s\n", (*(argv + index)));
 	  	check_binary(*(argv + index), &(target_path[prog]));
 	 	
 	  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], prog, FORKSRV_FD + (prog * 2));
+	  	printf("leaves init_forkserver_special\n");
 	  	index ++;
 	  	prog ++;
 	}
