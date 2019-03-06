@@ -10,7 +10,7 @@ MISC_PATH   = $(PREFIX)/share/afl
 
 # PROGS intentionally omit instr-as, which gets installed elsewhere.
 
-PROGS       = instr-gcc instr-all-gcc afl-fuzz afl-showmap
+PROGS       = instr-gcc instr-all-gcc instr-all-clang afl-fuzz afl-showmap
 
 CFLAGS     ?= -O3 -funroll-loops
 CFLAGS     += -Wall -D_FORTIFY_SOURCE=2 -g -Wno-pointer-sign \
@@ -47,6 +47,7 @@ test_x86:
 endif
 
 
+
 instr-gcc: instr-gcc.c $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 	set -e; for i in afl-g++ afl-clang afl-clang++; do ln -sf instr-gcc $$i; done
@@ -55,6 +56,8 @@ instr-gcc: instr-gcc.c $(COMM_HDR) | test_x86
 instr-all-gcc: instr-all-gcc $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 	
+instr-all-clang: instr-all-clang $(COMM_HDR) | test_x86
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 
 instr-as: instr-as.c instr-as.h $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
@@ -97,3 +100,28 @@ all_done: test_build
 
 clean:
 	rm -f $(PROGS) instr-as as afl-g++ afl-clang afl-clang++ *.o *~ a.out core core.[1-9][0-9]* *.stackdump test .test test-instr .test-instr0 .test-instr1 qemu_mode/qemu-2.10.0.tar.bz2 afl-qemu-trace
+
+#TODO -> provavelmente vou ter de mudar os nomes no install#
+
+install: all
+	mkdir -p -m 755 $${DESTDIR}$(BIN_PATH) $${DESTDIR}$(HELPER_PATH) $${DESTDIR}$(DOC_PATH) $${DESTDIR}$(MISC_PATH)
+	rm -f $${DESTDIR}$(BIN_PATH)/afl-plot.sh
+	install -m 755 $(PROGS) $(SH_PROGS) $${DESTDIR}$(BIN_PATH)
+	rm -f $${DESTDIR}$(BIN_PATH)/instr-as
+	if [ -f afl-qemu-trace ]; then install -m 755 afl-qemu-trace $${DESTDIR}$(BIN_PATH); fi
+ifndef AFL_TRACE_PC
+	if [ -f afl-clang-fast -a -f afl-llvm-pass.so -a -f afl-llvm-rt.o ]; then set -e; install -m 755 afl-clang-fast $${DESTDIR}$(BIN_PATH); ln -sf afl-clang-fast $${DESTDIR}$(BIN_PATH)/afl-clang-fast++; install -m 755 afl-llvm-pass.so afl-llvm-rt.o $${DESTDIR}$(HELPER_PATH); fi
+else
+	if [ -f afl-clang-fast -a -f afl-llvm-rt.o ]; then set -e; install -m 755 afl-clang-fast $${DESTDIR}$(BIN_PATH); ln -sf afl-clang-fast $${DESTDIR}$(BIN_PATH)/afl-clang-fast++; install -m 755 afl-llvm-rt.o $${DESTDIR}$(HELPER_PATH); fi
+endif
+	if [ -f afl-llvm-rt-32.o ]; then set -e; install -m 755 afl-llvm-rt-32.o $${DESTDIR}$(HELPER_PATH); fi
+	if [ -f afl-llvm-rt-64.o ]; then set -e; install -m 755 afl-llvm-rt-64.o $${DESTDIR}$(HELPER_PATH); fi
+	set -e; for i in afl-g++ afl-clang afl-clang++; do ln -sf instr-gcc $${DESTDIR}$(BIN_PATH)/$$i; done
+	install -m 755 instr-as $${DESTDIR}$(HELPER_PATH)
+	ln -sf instr-as $${DESTDIR}$(HELPER_PATH)/as
+	install -m 644 docs/README docs/ChangeLog docs/*.txt $${DESTDIR}$(DOC_PATH)
+	#cp -r testcases/ $${DESTDIR}$(MISC_PATH)
+	#cp -r dictionaries/ $${DESTDIR}$(MISC_PATH)
+
+
+

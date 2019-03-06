@@ -71,10 +71,12 @@ int numbr_inst = 0;
      Affects what forksrv we are communicating*/
 int program_version;
 
+
 /*File of prog blocks*/
 FILE *fblocks;
 
-int blocks_hit[MAP_SIZE];
+u8 blocks_hit[MAP_SIZE];
+int num_shared_blocks = 0;
 
 /* If we don't find --32 or --64 in the command line, default to 
    instrumentation for whichever mode we were compiled with. This is not
@@ -248,6 +250,11 @@ void concatInto( char **dest, char *line ){
   free(temp);
 }
 
+
+/*
+* Multiplies the position (i + 1) by the ASCII of 
+* the character found in that position
+*/
 int hash_string(char *input){
   int hash = 0;
   //printf("gonna hash = %s\n", input);
@@ -257,6 +264,7 @@ int hash_string(char *input){
 
   return hash == 0 ? 1 : hash;
 }
+
 
 /**
 * Quick hash just to see if it works
@@ -277,7 +285,7 @@ unsigned int blockIDGenerator(char *block){
 
   char *delim = "\n";
 
-  char *line = strtok(copy, delim);
+  char *line = strtok(copy, delim); //divide the line into a line
   while(line != NULL){
     //printf("line = %s\n", line);
     
@@ -292,10 +300,11 @@ unsigned int blockIDGenerator(char *block){
     //printf("%s\n", line);
 
     char *rest = line;
-    char *command;
+    char *command; // the word in the line (the command)
     
     while((command = strtok_r(rest, "\t", &rest))){
-      if(command[0] == '.' || command[1] == '.' ||command[0] == '%' || command[0] == '$' ) { continue; }
+      if(command[0] == '.' || command[1] == '.' || 
+        command[0] == '%' || command[0] == '$' ) { continue; }
 
 
       //SPECIAL CASES
@@ -327,7 +336,8 @@ unsigned int blockIDGenerator(char *block){
   free(line);
   free(copy);
   free(string_to_hash);
-  return val% MAP_SIZE + 1;
+  val = val % MAP_SIZE;
+  return val == 0 ? 1 : (val < 0 ? val + MAP_SIZE : val);
 }
 
 // clean the isntrumented pointer
@@ -344,15 +354,20 @@ void copy(FILE *source, FILE *target){
 
 
 /*Adds the lines to file*/
-/*TODO-> neewd to make it write the blocks which it has found to a file?*/
-void addToOutFile(FILE *file, char *lines){
+void addToOutFile(FILE *file, char *lines, int block_id){
   // get the id to add to the block
-  int block_id = blockIDGenerator(lines);
+  //int block_id = blockIDGenerator(lines);
   //int block_id = R(MAP_SIZE);
+  /*
   if(!blocks_hit[block_id]){
     blocks_hit[block_id] = 1;
     fprintf(fblocks, " %d", block_id);
   }
+  else{
+    blocks_hit[block_id] = 2;
+    num_shared_blocks ++;
+  }
+  */
   fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               block_id, block_id); 
 
@@ -364,12 +379,36 @@ void addToOutFile(FILE *file, char *lines){
   //fputs("#----- END OF CODE TO BE HASHED ------#\n", file);
 }
 
+/*
+* Function to help test
+* Remove before shipping
+*/
+void addToAllFiles(FILE *file, FILE *file2, char *lines){
+
+  unsigned int block_id = blockIDGenerator(lines);
+
+  //int block_id = R(MAP_SIZE);
+  if( !blocks_hit[block_id]) {
+    blocks_hit[block_id] = 1;
+    if(fblocks)   fprintf(fblocks, " %d", block_id);
+  }
+  else{
+    num_shared_blocks ++;
+    blocks_hit[block_id] = 2;
+    
+  }
+
+
+  addToOutFile(file, lines, block_id);
+  addToOutFile(file2, lines, block_id);
+
+}
+
 /* Process input file, generate modified_file. Insert instrumentation in all
    the appropriate places. */
 
 static void add_instrumentation(void) {
 
-  SAYF("\n\t-----add_instrumentation instr-as -------\n");
 
   //added by Francisco Araujo: keeps the lines to be instrumented
   FILE *instr_lines, *instr_lines_after;
@@ -386,7 +425,6 @@ static void add_instrumentation(void) {
  
   instr_lines = fopen(fname,"wb+");
   instr_lines_after = fopen(fname_after,"wb+");
-  
 
 
   static u8 line[MAX_LINE];
@@ -407,7 +445,6 @@ static void add_instrumentation(void) {
 
   if (input_file) {
 
-    printf("input_file = %s\n",input_file);
     inf = fopen(input_file, "r"); //change to read eventually
     if (!inf) PFATAL("Unable to read '%s'", input_file);
 
@@ -418,19 +455,16 @@ static void add_instrumentation(void) {
   if (outfd < 0) PFATAL("Unable to write to '%s'", modified_file);
 
   outf = fdopen(outfd, "w"); // opens the file
-  printf("modified_file = %s\n", modified_file);
-  //printf("inf = %s\n", inf);
+  
   if (!outf) PFATAL("fdopen() failed");  
 
   int num_of_lines_recorded = 0; //number of lines to be instrumented
   int is_recording = 0; // are we recording the lines to be added?
   
-
   char *lines_to_instrument = calloc(0, sizeof(char));
   
   while (fgets(line, MAX_LINE, inf)) { //pass through all the assembly line of code
 
-    //SAYF("line = %s", line);
     fputs(line, instr_lines); //adds the line so we can see how the file was originally
 
     /* In some cases, we want to defer writing the instrumentation trampoline
@@ -442,8 +476,6 @@ static void add_instrumentation(void) {
     if ( !skip_intel && !skip_app && !skip_csect && instr_ok &&
         instrument_next && line[0] == '\t' && isalpha(line[1])) {
 
-      //printf("\t\tenters in the first if\n");
-
       // if we found the new beggining of the next line to be instrumented and we're instrumenting the last one still, end it
       if(is_recording){
         numbr_inst ++;
@@ -451,8 +483,9 @@ static void add_instrumentation(void) {
         num_of_lines_recorded = 0; //no block no lines
 
         //add all the lines to the output file
-        addToOutFile(instr_lines_after, lines_to_instrument);
-        addToOutFile(outf, lines_to_instrument);
+        //addToOutFile(instr_lines_after, lines_to_instrument);
+        //addToOutFile(outf, lines_to_instrument);
+        addToAllFiles(instr_lines_after, outf, lines_to_instrument);
         // clean the value inside it
         clearInstr(&lines_to_instrument);
 
@@ -469,16 +502,13 @@ static void add_instrumentation(void) {
    //fputs(line, outf);
 
 
-
     if(is_recording){
       // checks if we need to add the code that it ended, doubtfull its good enough
-      
       concatInto(&lines_to_instrument, line);
       num_of_lines_recorded ++;
       
     }
     else { 
-
       fputs(line, instr_lines_after);
       fputs(line, outf);
     } 
@@ -492,8 +522,9 @@ static void add_instrumentation(void) {
             is_recording = 0;
               numbr_inst ++;
             //add all the lines out
-            addToOutFile(instr_lines_after, lines_to_instrument);
-            addToOutFile(outf, lines_to_instrument);
+            //addToOutFile(instr_lines_after, lines_to_instrument);
+            //addToOutFile(outf, lines_to_instrument);
+            addToAllFiles(instr_lines_after, outf, lines_to_instrument);
             //printf("lines = %s\n", lines_to_instrument);
 
             // clear the line
@@ -537,7 +568,6 @@ static void add_instrumentation(void) {
 
     }
 
-    //SAYF("line = %s", line);
 
     /* Detect off-flavor assembly (rare, happens in gdb). When this is
        encountered, we set skip_csect until the opposite directive is
@@ -608,8 +638,9 @@ static void add_instrumentation(void) {
             numbr_inst ++;
           
           //TODO -> we can remove the instr_lines_after its only here for testing purposes
-          addToOutFile(instr_lines_after, lines_to_instrument);
-          addToOutFile(outf, lines_to_instrument);
+          //addToOutFile(instr_lines_after, lines_to_instrument);
+          //addToOutFile(outf, lines_to_instrument);
+          addToAllFiles(instr_lines_after, outf, lines_to_instrument);
           // clean the lines buffer
           clearInstr(&lines_to_instrument);
         }
@@ -698,6 +729,7 @@ static void add_instrumentation(void) {
     }
 
   } //end of while
+
   //fputs("/*Teste do programa*/\n",inf);
   //free(lines_to_instrument);
 
@@ -735,11 +767,25 @@ static void add_instrumentation(void) {
 
     if (!ins_lines) WARNF("No instrumentation targets found%s.",
                           pass_thru ? " (pass-thru mode)" : "");
-    else OKF("Instrumented %u locations (%s-bit, %s mode, ratio %u%%).",
+    else{ 
+      OKF("Instrumented %u locations (%s-bit, %s mode, ratio %u%%).",
              ins_lines, use_64bit ? "64" : "32",
              getenv("AFL_HARDEN") ? "hardened" : 
              (sanitizer ? "ASAN/MSAN" : "non-hardened"),
              inst_ratio);
+      OKF("Program has %d shared blocks with itself",num_shared_blocks);
+
+      //printf("Shared IDS: ");
+      int found = 0, id = 1;
+      while( found < ins_lines && id < MAP_SIZE ){
+        //if(blocks_hit[id] > 1) printf("0x%08x ", id);          
+        
+        if(blocks_hit[id]) found++;
+        id ++;
+      }
+      //printf("\n");
+
+    }
  
   }
 
@@ -754,9 +800,7 @@ int main(int argc, char** argv) {
   fblocks = fopen("./progs_blocks.txt","a");
 
   program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
-  //fprintf(fblocks, "%d\n", program_version);
 
-  //printf("env final = %d\n", program_version);
 
   s32 pid;
   u32 rand_seed;
@@ -768,10 +812,10 @@ int main(int argc, char** argv) {
 
   clang_mode = !!getenv(CLANG_ENV_VAR);
 
+
+
   if (isatty(2) && !getenv("AFL_QUIET")) {
 
-    SAYF(cCYA "afl-as " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
- 
   } else be_quiet = 1;
 
   if (argc < 2) {
@@ -795,6 +839,8 @@ int main(int argc, char** argv) {
 
   srandom(rand_seed); // sets the random seed to generate the ids later
 
+
+
   edit_params(argc, argv);
 
   if (inst_ratio_str) {
@@ -807,6 +853,7 @@ int main(int argc, char** argv) {
   if (getenv(AS_LOOP_ENV_VAR))
     FATAL("Endless loop when calling 'as' (remove '.' from your PATH)");
 
+
   setenv(AS_LOOP_ENV_VAR, "1", 1);
 
   /* When compiling with ASAN, we don't have a particularly elegant way to skip
@@ -818,9 +865,10 @@ int main(int argc, char** argv) {
     inst_ratio /= 3;
   }
 
+
   if (!just_version) add_instrumentation();
 
-  fprintf(fblocks, "\n");
+  if(fblocks) fprintf(fblocks, "\n");
 
   if(fblocks) fclose(fblocks);
   //printf("as_params[0] = %s\n", as_params[0]);

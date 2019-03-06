@@ -99,7 +99,7 @@ static void edit_params(u32 argc, char** argv) {
   cc_params = ck_alloc((argc + 128) * sizeof(u8*));
 
   name = strrchr(argv[0], '/');
-  printf("NAME = %s\n", name);
+  //printf("NAME = %s\n", name);
   if (!name) name = argv[0]; else name++;
 
   if (!strncmp(name, "afl-clang", 9)) {
@@ -118,7 +118,7 @@ static void edit_params(u32 argc, char** argv) {
 
   } else {
 
-    printf("its not in clang\n");
+    //printf("its not in clang\n");
 
     if (!strcmp(name, "afl-g++")) {
       u8* alt_cxx = getenv("AFL_CXX");
@@ -127,7 +127,7 @@ static void edit_params(u32 argc, char** argv) {
       u8* alt_cc = getenv("AFL_GCJ");
       cc_params[0] = alt_cc ? alt_cc : (u8*)"gcj";
     } else {
-      printf("in gcc\n");
+      //printf("in gcc\n");
       u8* alt_cc = getenv("AFL_CC");
       cc_params[0] = alt_cc ? alt_cc : (u8*)"gcc";
     }
@@ -177,6 +177,7 @@ static void edit_params(u32 argc, char** argv) {
       cc_params[cc_par_cnt++] = "-D_FORTIFY_SOURCE=2";
 
   }
+
 
   if (asan_set) {
 
@@ -249,6 +250,8 @@ static void edit_params(u32 argc, char** argv) {
 
   }
 
+  //printf("VAI ACABAR\n");
+
   cc_params[cc_par_cnt] = NULL;
 
 }
@@ -258,7 +261,7 @@ static void edit_params(u32 argc, char** argv) {
 
 int main(int argc, char** argv) {
 
-  //SAYF("\n\t-----instr-gcc -------\n");
+  SAYF("\n\t-----instr-gcc -------\n");
 
   if (isatty(2) && !getenv("AFL_QUIET")) {
 
@@ -284,15 +287,20 @@ int main(int argc, char** argv) {
 
   }
 
+
   find_as(argv[0]);
 
+
   edit_params(argc, argv);
+
 
   //printf("cc_params[0] = %s\n", cc_params[0]);
   //printf("cc_params = %s\n", cc_params);
 
-  execvp(cc_params[0], (char**)cc_params);
-  //execvp(cc_params[1], (char**)cc_params);
+
+  //char *param = "valgrind --leak-check=full gcc";
+  execvp(cc_params[0], (char**)cc_params); 
+  //execvp(param, (char**)cc_params); 
 
   FATAL("Oops, failed to execute '%s' - check your PATH", cc_params[0]);
 
