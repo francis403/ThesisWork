@@ -390,7 +390,7 @@ void addToAllFiles(FILE *file, FILE *file2, char *lines){
   //int block_id = R(MAP_SIZE);
   if( !blocks_hit[block_id]) {
     blocks_hit[block_id] = 1;
-    if(fblocks)   fprintf(fblocks, " %d", block_id);
+    if(fblocks)   fprintf(fblocks, "%d ", block_id);
     // TODO -> check to see if the previous files have it the same block
   }
 
@@ -798,8 +798,19 @@ static void add_instrumentation(void) {
 
 int main(int argc, char** argv) {
 
+  //printf("\tin instr-as\n");
+
+  // get path to current dir
+  
+  char cwd[1000];
+  getcwd( cwd, sizeof(cwd) );
+  
+  char *path_instr = malloc (sizeof(char) * 1500 + 1);
+  sprintf(path_instr, "%s/progs_blocks.txt", cwd);
+  
   // Open file to save blocks
-  fblocks = fopen("./progs_blocks.txt","a");
+  //fblocks = fopen("./progs_blocks.txt","a");
+  fblocks = fopen(path_instr, "a");
 
   program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
 

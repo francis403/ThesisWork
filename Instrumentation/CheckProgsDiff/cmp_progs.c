@@ -21,6 +21,8 @@ When we are done writing all blocks to the file we then compare blocks between p
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 static u8*  as_path;                /* Path to the AFL 'as' wrapper      */
 static u32  cc_par_cnt = 1;         /* Param count, including argv0      */
@@ -34,6 +36,8 @@ int head_of_program = 0;
 /* Info that is important between progs */
 u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE];
 int numb_instr = 0;
+
+char *path_instr;
 
 /* Try to find our "fake" GNU assembler in AFL_PATH or at the location derived
    from argv[0]. If that fails, abort. */
@@ -291,7 +295,7 @@ static u8 **edit_params(u32 argc, char** argv) {
 /**
 * Get the list of blocks availabe in all programs
 * Used once in the beginning
-*TODO -> working but will probably be improved
+*
 **/
 
  void getProgsBlockList(){
@@ -300,34 +304,35 @@ static u8 **edit_params(u32 argc, char** argv) {
   char *line = NULL, *block = NULL;
   size_t len = 0;
   int prog = 0;
+
   FILE *fblocks;
-  fblocks = fopen("./progs_blocks.txt","r");
+  fblocks = fopen(path_instr,"r");
 
-  if( fblocks == NULL ){
-    // no list of blocks
-    FATAL("No blocks list found");
-  }
+  if( !fblocks )  FATAL("No blocks list found");
+  
 
-  while ( getline(&line, &len, fblocks) != -1 ){
+  ssize_t nread;
+
+  while ( (nread = getline(&line, &len, fblocks)) != -1 ){
     
-    printf("inside while\n");
+    //printf("inside while\n");
 
     block = strtok(line," ");
-    printf("\nprog: %d\n, prog");
+    //printf("\nprog: %d\n, prog");
     // Get the blocks from the file
     while ( block != NULL ){
       unsigned short block_id = atoi(block);
       //printf("block = %s\n", block);
       PROG_BLOCKS[prog][block_id] = 1;
-      /*
+      
       for( int i = 0; i < prog ; i++){
-        printf("Does prog %d share block %d\n", i, block_id);
-        if (PROG_BLOCKS[prog][block_id] == 1){
-          printf("prog %d shares block 0x%08x with prog %d\n",prog, block_id,i );
+        //printf("Does prog %d share block %d\n", i, block_id);
+        if (PROG_BLOCKS[i][block_id] == 1){
+          printf("prog %d shares block %d with prog %d\n",prog, block_id,i );
         }
       }
-      */
-      printf("%d ", block_id);
+      
+      //printf("%d ", block_id);
       block = strtok(NULL," ");
     }
 
@@ -337,8 +342,6 @@ static u8 **edit_params(u32 argc, char** argv) {
   if( line ) free(line);
 
   fclose(fblocks);
-
-  printf("\tend of  getProgsBlockList\n");
 }
 
 
@@ -368,6 +371,14 @@ int main(int argc, char** argv) {
 
   }
 
+  unsigned short prog_nbr = 0;
+  char cwd[1000];
+  getcwd( cwd, sizeof(cwd) );
+  
+  path_instr = malloc (sizeof(char) * 1500 + 1);
+  sprintf(path_instr, "%s/progs_blocks.txt", cwd);
+  //printf("\tpath_instr = %s\n", path_instr);
+
   find_as(argv[0]);
 
   //edit_params(argc, argv);
@@ -391,10 +402,19 @@ int main(int argc, char** argv) {
 
   // Opens the file and clears the contents
  
-  unsigned short prog_nbr = 0;
+  //printf("Cur dir = %s\n", getcwd(cwd, sizeof(cwd)));
+  //FILE *fblocks = fopen("./progs_blocks.txt","w");
 
-  FILE *fblocks = fopen("./progs_blocks.txt","w");
-  if(fblocks) fclose(fblocks);
+
+  //FILE *fblocks = fopen( "./progs_blocks.txt" ,"w");
+  FILE *fblocks = fopen( path_instr ,"w");
+  //printf("file = %d\n", fblocks == NULL);
+  if( fblocks ){
+    //printf("found file for deletion\n");
+    fclose(fblocks);
+  }
+
+  //free(path_instr);
 
   while( *argv ){
     char *line = *argv++;
@@ -423,14 +443,13 @@ int main(int argc, char** argv) {
             }
 
             pid_t pid = fork();
-            if(pid){
+            if(pid == 0){
                 // send the program nmbr
                 setenv(FORKSRV_ENV, snum, 1);
                 execvp(cc_params[0], (char**)cc_params);
                 FATAL("Oops, failed to execute");
             }
-
-            wait(NULL);
+            waitpid(pid,NULL,0);
             
         }
         else is_recording = 1;
@@ -443,8 +462,7 @@ int main(int argc, char** argv) {
     index++;
     
   }
-
-
+ 
   // this records the last one
   if(is_recording){
     //printf("\t is gonna instrumentalize the program\n");
@@ -455,21 +473,22 @@ int main(int argc, char** argv) {
     //printf("even should be = %d\n", numb_instr);
     numb_instr ++;
     pid_t pid = fork();
-    if(pid){
+    if(pid == 0){
       // send the program nmbr
       setenv(FORKSRV_ENV, snum, 1);
       execvp(cc_params[0], (char**)cc_params);
       FATAL("Oops, failed to execute");
     }
-
-    wait(NULL);
+    waitpid(pid, NULL, WCONTINUED);
   }
-  
+
   //TODO now we need to compare
-  printf("Begore getProgsBlockList\n");
+  //printf("Before getProgsBlockList\n");
   getProgsBlockList();
 
-  if (fblocks) fclose(fblocks);
+
+  free(path_instr);
+  //if (fblocks) fclose(fblocks);
 
   return 0;
 
