@@ -95,7 +95,6 @@ EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
 		  *target_path[MAX_AMOUNT_OF_PROGS],
           //*target_path[MAX_AMOUNT_OF_PROGS],               /* Path to target binary            */
 		  //*target_path,
-          *cur_prog_title,           /* Current Program being fuzzed     */
           *orig_cmdline;              /* Original command line            */
 
 static short init_prog_args;
@@ -156,6 +155,7 @@ static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
 /*Stores all the blocks of a specific programs*/
 static u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
+static u8 *prog_names[MAX_AMOUNT_OF_PROGS];
 
 /*The following data is important between runs so we can check if it should be saved
 * It can't go to the queue since if it went there we would be evaluating the queue input it self and not the mutation applied to it.*/
@@ -1691,7 +1691,7 @@ static void destroy_extras(void) {
 EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid, 
 								int prog_index, int fork_srv) {
 
-	printf("\t-> init_forkserver\n");
+	//printf("\t-> init_forkserver\n");
 
 	static struct itimerval it;
 	//int st_pipe[2], ctl_pipe[2];
@@ -1998,6 +1998,8 @@ FATAL("Fork server handshake failed");
 * Stores the reason the program crashed in fault, if it does not crash FAULT_NONE
 * Stores the amount of blocks found in hit
 **/ 
+
+// TODO -> tentar perceber como o input é passado
 int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
 	static struct itimerval it;
@@ -3906,7 +3908,7 @@ static void show_stats(void) {
 
    SAYF(bV bSTOP "    cur run time : " cRST "%-34s " bSTG bV bSTOP
        "  cur prog : %s  " bSTG bV "\n",
-       DTD(cur_ms, prog_start_time), cur_prog_title );
+       DTD(cur_ms, prog_start_time), prog_names[CUR_PROG] );
 
   //SAYF(bV bSTOP "   current program : " cRST  "%-34s\n" bSTG bV bSTOP, cur_prog_title);
 
@@ -4897,10 +4899,10 @@ static u8 fuzz_one(char** argv) {
   	// se não foi fuzzed no programa a ser testado e não temos blocos nenhuns em comum não vale a pena
   	// TODO -> verificar se já foi fuzzed de todo
   	
-  	if (( !queue_cur->was_fuzzed[CUR_PROG] && queue_cur->been_fuzzed && !num_blocks_shared(queue_cur,CUR_PROG) )){ 
-  		printf("\tFOUND ONE!\n");
-  		return 1;
-  	}
+  	//if (( !queue_cur->was_fuzzed[CUR_PROG] && queue_cur->been_fuzzed && !num_blocks_shared(queue_cur,CUR_PROG) )){ 
+  	//	printf("\tFOUND ONE!\n");
+  	//	return 1;
+  	//}
 	
 
     /* If we have any favored, non-fuzzed new arrivals in the queue,
@@ -6742,13 +6744,13 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 }
 
 /**
-* Get the list of blocks for all programs
+* Get the list of blocks availabe in all programs
 * Used once in the beginning
-*TODO
+*TODO -> working but will probably be improved
 **/
 
 static void getProgsBlockList(){
-
+  printf("\t in getProgsBlockList\n");
 	//shostatic rt PROG_BLOCKS[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
 	char *line = NULL, *block = NULL;
 	size_t len = 0;
@@ -6762,7 +6764,7 @@ static void getProgsBlockList(){
 	}
 	while ( getline(&line, &len, fblocks) != -1 ){
 		block = strtok(line," ");
-
+    printf("block = %s\n", block);
 		// Get the blocks from the file
 		while ( block != NULL ){
 			unsigned short block_id = atoi(block);
@@ -6781,21 +6783,77 @@ static void getProgsBlockList(){
 
 /**
 * Start all forkserver in the program and check their binary
+* TODO -> tem um bug se qualquer um dos programs tiver argumentos que precisa de passar
 **/
 static void init_all_forkservers(char **argv){
-	int index = optind, prog = 0;
-	printf("Enteres init_all_forkservers\n");
-	while (*(argv + index)){
-	  	printf("%s\n", (*(argv + index)));
-	  	check_binary(*(argv + index), &(target_path[prog]));
-	 	
-	  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], prog, FORKSRV_FD + (prog * 2));
-	  	printf("leaves init_forkserver_special\n");
-	  	index ++;
-	  	prog ++;
+
+int index = optind - 1, prog = -1, i = 0;
+  short size = 25;
+  char **prog_args = malloc(sizeof(char*) * size); 
+  u8 is_recording = 0;
+
+	printf("Enters init_all_forkservers!!!\n");
+  
+  
+	while( *(argv + index) ){
+	    //printf("argv = %s\n", *(argv + index));
+		  	//printf("%s\n", (*(argv + index)));
+	     
+
+	      // if it's a new program
+	    if(strcmp(*(argv + index), "-p") == 0){
+	          
+	        // found a new -p
+	        if( is_recording ){
+	          printf("prog title = %s\n", prog_args[0]);
+	          printf("prog num = %d\n", prog);
+	          check_binary(prog_args[0], &(target_path[prog]));
+	          init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
+	          	 prog, FORKSRV_FD + (prog * 2));
+	          prog_args = malloc(sizeof(char*) * size);
+	          i = 0;
+            printf("after init\n");
+	        }
+	        //printf("did not enter \n");
+          printf("outside if init\n");
+	        //prog_args = malloc(sizeof(char*) * size); // reset
+	        is_recording = 1;
+
+	           // printf("prog = %s\n", prog_args[0]);
+	           
+	      //printf("leaves init_forkserver_special\n");
+	        prog ++;
+	        index++;
+	        continue;
+	    }
+	    
+	      
+	      //if(!prog_args) prog_args = malloc(sizeof(char*) * size);
+	    if( !prog_args) FATAL("Programs must have -p behind them!");
+
+	    *(prog_args + i) = *(argv + index);
+	      //printf("%s\n", (prog_args + i));
+
+	      i++;
+		  index ++;
 	}
+
+  // initiate the last one
+  if(is_recording){
+    printf("\tlast one\n");
+  	printf("prog title = %s\n", prog_args[0]);
+    printf("prog num = %d\n", prog);
+    check_binary(prog_args[0], &(target_path[prog]));
+    init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
+      	prog, FORKSRV_FD + (prog * 2));
+  }
+
+  free(prog_args);
+
+
 	getProgsBlockList();
 }
+
 
 /* Trim and possibly create a banner for the run. */
 
@@ -7310,7 +7368,8 @@ static void check_asan_opts(void) {
 } 
 
 /* Detect @@ in args. */
-// TODO -> will we allow this? If so we need to allow it for every file or only specific ones?
+/* Marks where the file must go*/
+/*TODO -> need to make sure that if one has @@ all of them have it*/
 EXP_ST void detect_file_args(char** argv) {
 
   u32 i = 0;
@@ -7432,8 +7491,6 @@ static void save_cmdline(u32 argc, char** argv) {
 
 int main(int argc, char** argv) {
 
-	printf("\nMain entry point of AFL FUzz\n");
-
 	s32 opt;
 	u8  mem_limit_given = 0;
 	u64 prev_queued = 0;
@@ -7447,7 +7504,7 @@ int main(int argc, char** argv) {
 	doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
 
 
-	while ((opt = getopt(argc, argv, "+i:o:q:m:")) > 0){
+	while ((opt = getopt(argc, argv, "+i:o:q:m:p")) > 0){
 
 		switch (opt) {
 
@@ -7469,7 +7526,8 @@ int main(int argc, char** argv) {
       // receive the value in minutes
       switch_program_timer = 1000 * 60 * atoi(optarg);
       break;
-	 
+	 case 'p':
+    break;
     case 'm': { /* mem limit */
 
 			u8 suffix = 'M';
@@ -7511,11 +7569,24 @@ int main(int argc, char** argv) {
 
 		}
 	}
+  //printf("progs = %d\n", numbr_of_progs_under_test);
+
   //printf("optind = %d\n", optind);
   //printf("argc = %d\n", argc);
   if ( optind == argc || !in_dir || !out_dir ){ printf("here in this option of ours\n");usage(argv[0]);}
 
-  numbr_of_progs_under_test = argc - optind;
+  //numbr_of_progs_under_test = 0;
+  //numbr_of_progs_under_test = argc - optind;
+
+  // pass through every arg and get the number of programs and their names
+  int index = 0;
+  while( *(argv + index) ){
+	    if(strcmp(*(argv + index), "-p") == 0){
+	    	prog_names[numbr_of_progs_under_test] =*(argv + index + 1);
+	    	numbr_of_progs_under_test ++;
+	    }
+		index ++;
+	}
 
   //numbr_of_progs_under_test = getenv(FORKSRV_AMOUNT_ENV) == NULL ? 1 : getenv(FORKSRV_AMOUNT_ENV); // get number of programs under test
 
@@ -7547,7 +7618,7 @@ int main(int argc, char** argv) {
 
   if (!timeout_given) find_timeout();
 
-  //detect_file_args(argv + optind + 1);
+  detect_file_args(argv);
 
   if (!out_file) setup_stdio_file();
   //printf("%s\n", tmp_test);
@@ -7557,8 +7628,6 @@ int main(int argc, char** argv) {
 
   use_argv = argv + optind;
   init_prog_args = optind;
-
-  cur_prog_title = argv[init_prog_args];
 
   /*we start forkservers here*/
   init_all_forkservers(argv);
@@ -7603,7 +7672,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
       init_time = get_cur_time();
       
       CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test; 
-      cur_prog_title = argv[init_prog_args + CUR_PROG];
+      //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
     }
 
