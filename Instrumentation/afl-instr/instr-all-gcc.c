@@ -363,7 +363,7 @@ int main(int argc, char** argv) {
             }
 
             pid_t pid = fork();
-            if(pid){
+            if(!pid){
                 // send the program nmbr
                 setenv(FORKSRV_ENV, snum, 1);
                 execvp(cc_params[0], (char**)cc_params);
