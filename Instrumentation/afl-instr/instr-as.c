@@ -797,7 +797,15 @@ static void add_instrumentation(void) {
 int main(int argc, char** argv) {
 
   // Open file to save blocks
-  fblocks = fopen("./progs_blocks.txt","a");
+
+  char cwd[1000];
+  getcwd( cwd, sizeof(cwd) );
+  
+  char *path_instr = malloc (sizeof(char) * 1500 + 1);
+  sprintf(path_instr, "%s/progs_blocks.txt", cwd);
+
+  //fblocks = fopen("./progs_blocks.txt","a");
+  fblocks = fopen(path_instr,"a");
 
   program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
 

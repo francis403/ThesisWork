@@ -6755,8 +6755,18 @@ static void getProgsBlockList(){
 	char *line = NULL, *block = NULL;
 	size_t len = 0;
 	int prog = 0;
+
+  char cwd[1000];
+  getcwd( cwd, sizeof(cwd) );
+  
+  char *path_instr = malloc (sizeof(char) * 1500 + 1);
+  sprintf(path_instr, "%s/progs_blocks.txt", cwd);
+
 	FILE *fblocks;
-	fblocks = fopen("./progs_blocks.txt","r");
+	//fblocks = fopen("./progs_blocks.txt","r");
+  fblocks = fopen(path_instr,"r");
+
+  free(path_instr);
 
 	if( fblocks == NULL ){
 		// no list of blocks
