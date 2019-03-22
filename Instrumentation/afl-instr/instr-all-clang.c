@@ -121,13 +121,13 @@ static u8 **edit_params(u32 argc, char** argv) {
  
   if (!name) name = argv[0]; else name++;
   
-  if (!strncmp(name, "afl-clang", 9)) {
+  if (!strcmp(name, "afl-all-clang")) {
 
     clang_mode = 1;
 
     setenv(CLANG_ENV_VAR, "1", 1);
 
-    if (!strcmp(name, "afl-clang++")) {
+    if (!strcmp(name, "afl-all-clang++")) {
       u8* alt_cxx = getenv("AFL_CXX");
       cc_params[0] = alt_cxx ? alt_cxx : (u8*)"clang++";
     } else {
