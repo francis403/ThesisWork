@@ -387,7 +387,7 @@ void addToAllFiles(FILE *file, FILE *file2, char *lines){
 
   unsigned int block_id = blockIDGenerator(lines);
 
-  //int block_id = R(MAP_SIZE);
+  //first time seing this block
   if( !blocks_hit[block_id]) {
     blocks_hit[block_id] = 1;
     if(fblocks)   fprintf(fblocks, " %d", block_id);
@@ -412,8 +412,18 @@ static void add_instrumentation(void) {
 
   //added by Francisco Araujo: keeps the lines to be instrumented
   FILE *instr_lines, *instr_lines_after;
-  char *fname =  "/home/francis/Documents/ThesisWork/instr_lines.txt";
-  char *fname_after =  "/home/francis/Documents/ThesisWork/instr_lines_after.txt";
+
+  char cwd[1000];
+  getcwd( cwd, sizeof(cwd) );
+  
+  char *fname = malloc (sizeof(char) * 1500 + 1);
+  sprintf(fname, "%s/instr_lines.txt", cwd);
+
+  char *fname_after = malloc (sizeof(char) * 1500 + 1);
+  sprintf(fname_after, "%s/instr_lines_after.txt", cwd);
+
+  //char *fname =  "/home/francis/Documents/ThesisWork/instr_lines.txt";
+  //char *fname_after =  "/home/francis/Documents/ThesisWork/instr_lines_after.txt";
   //instr_lines = fopen("/home/francis/Documents/ThesisWork/instr_lines.txt","wb+");
 
   

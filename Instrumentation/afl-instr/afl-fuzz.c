@@ -6774,7 +6774,7 @@ static void getProgsBlockList(){
 	}
 	while ( getline(&line, &len, fblocks) != -1 ){
 		block = strtok(line," ");
-    printf("block = %s\n", block);
+    //printf("prog = %d\n", prog);
 		// Get the blocks from the file
 		while ( block != NULL ){
 			unsigned short block_id = atoi(block);
@@ -7668,6 +7668,9 @@ int main(int argc, char** argv) {
   }
 
 u64 init_time = get_cur_time(), end_t;
+
+
+
 
 while (1) { //main fuzzing loop //FUZZ LOP
 
