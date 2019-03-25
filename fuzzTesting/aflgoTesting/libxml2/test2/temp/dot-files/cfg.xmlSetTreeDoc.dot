@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlSetTreeDoc' function" {
+	label="CFG for 'xmlSetTreeDoc' function";
+
+	Node0x55a216c7e9f0 [shape=record,label="{tree.c:2804:|{<s0>T|<s1>F}}"];
+	Node0x55a216c7e9f0 -> Node0x55a216c80fb0;
+	Node0x55a216c7e9f0 -> Node0x55a216c81050;
+	Node0x55a216c81050 [shape=record,label="{tree.c:2807:|{<s0>T|<s1>F}}"];
+	Node0x55a216c81050 -> Node0x55a216c80fb0;
+	Node0x55a216c81050 -> Node0x55a216c81000;
+	Node0x55a216c80fb0 [shape=record,label="{tree.c:2808:}"];
+	Node0x55a216c80fb0 -> Node0x55a216c81740;
+	Node0x55a216c81000 [shape=record,label="{tree.c:2809:|{<s0>T|<s1>F}}"];
+	Node0x55a216c81000 -> Node0x55a216c816f0;
+	Node0x55a216c81000 -> Node0x55a216c81740;
+	Node0x55a216c816f0 [shape=record,label="{tree.c:2810:|{<s0>T|<s1>F}}"];
+	Node0x55a216c816f0 -> Node0x55a216ba12b0;
+	Node0x55a216c816f0 -> Node0x55a216ba1300;
+	Node0x55a216ba12b0 [shape=record,label="{tree.c:2811:}"];
+	Node0x55a216ba12b0 -> Node0x55a216ba1820;
+	Node0x55a216ba1820 [shape=record,label="{tree.c:2812:|{<s0>T|<s1>F}}"];
+	Node0x55a216ba1820 -> Node0x55a216ba1c20;
+	Node0x55a216ba1820 -> Node0x55a216ba1a40;
+	Node0x55a216ba1c20 [shape=record,label="{tree.c:2813:|{<s0>T|<s1>F}}"];
+	Node0x55a216ba1c20 -> Node0x55a216ba1dd0;
+	Node0x55a216ba1c20 -> Node0x55a216ba1e20;
+	Node0x55a216ba1dd0 [shape=record,label="{tree.c:2814:}"];
+	Node0x55a216ba1dd0 -> Node0x55a216ba1e20;
+	Node0x55a216ba1e20 [shape=record,label="{tree.c:2817:}"];
+	Node0x55a216ba1e20 -> Node0x55a216ba1820;
+	Node0x55a216ba1a40 [shape=record,label="{tree.c:2836:}"];
+	Node0x55a216ba1a40 -> Node0x55a216ba1300;
+	Node0x55a216ba1300 [shape=record,label="{tree.c:2837:|{<s0>T|<s1>F}}"];
+	Node0x55a216ba1300 -> Node0x55a216ba3390;
+	Node0x55a216ba1300 -> Node0x55a216ba33e0;
+	Node0x55a216ba3390 [shape=record,label="{tree.c:2838:}"];
+	Node0x55a216ba3390 -> Node0x55a216ba33e0;
+	Node0x55a216ba33e0 [shape=record,label="{tree.c:2839:}"];
+	Node0x55a216ba33e0 -> Node0x55a216c81740;
+	Node0x55a216c81740 [shape=record,label="{tree.c:2841:}"];
+}

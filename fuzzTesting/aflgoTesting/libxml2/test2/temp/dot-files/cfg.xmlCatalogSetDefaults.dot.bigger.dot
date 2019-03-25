@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlCatalogSetDefaults' function" {
+	label="CFG for 'xmlCatalogSetDefaults' function";
+
+	Node0x5621aa3fddc0 [shape=record,label="{catalog.c:3510:|{<s0>T|<s1>F}}"];
+	Node0x5621aa3fddc0:s0 -> Node0x5621aa3aba80;
+	Node0x5621aa3fddc0:s1 -> Node0x5621aa3abd20;
+	Node0x5621aa3aba80 [shape=record,label="{catalog.c:3512:|{<s0>def|<s1>0|<s2>1|<s3>2|<s4>3}}"];
+	Node0x5621aa3aba80:s0 -> Node0x5621aa3abfb0;
+	Node0x5621aa3aba80:s1 -> Node0x5621aa3ac1b0;
+	Node0x5621aa3aba80:s2 -> Node0x5621aa38f0e0;
+	Node0x5621aa3aba80:s3 -> Node0x5621aa38f490;
+	Node0x5621aa3aba80:s4 -> Node0x5621aa400870;
+	Node0x5621aa3ac1b0 [shape=record,label="{catalog.c:3514:}"];
+	Node0x5621aa3ac1b0 -> Node0x5621aa3abfb0;
+	Node0x5621aa38f0e0 [shape=record,label="{catalog.c:3518:}"];
+	Node0x5621aa38f0e0 -> Node0x5621aa3abfb0;
+	Node0x5621aa38f490 [shape=record,label="{catalog.c:3522:}"];
+	Node0x5621aa38f490 -> Node0x5621aa3abfb0;
+	Node0x5621aa400870 [shape=record,label="{catalog.c:3526:}"];
+	Node0x5621aa400870 -> Node0x5621aa3abfb0;
+	Node0x5621aa3abfb0 [shape=record,label="{catalog.c:3530:}"];
+	Node0x5621aa3abfb0 -> Node0x5621aa3abd20;
+	Node0x5621aa3abd20 [shape=record,label="{catalog.c:3531:}"];
+}

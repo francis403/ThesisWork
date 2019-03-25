@@ -1,0 +1,33 @@
+digraph "CFG for 'libxml_xmlIsID' function" {
+	label="CFG for 'libxml_xmlIsID' function";
+
+	Node0x55afb8c7c2e0 [shape=record,label="{libxml2-py.c:3404:|{<s0>T|<s1>F}}"];
+	Node0x55afb8c7c2e0:s0 -> Node0x55afb8c800e0;
+	Node0x55afb8c7c2e0:s1 -> Node0x55afb8c80090;
+	Node0x55afb8c80090 [shape=record,label="{libxml2-py.c:3415:}"];
+	Node0x55afb8c80090 -> Node0x55afb8c7c5e0;
+	Node0x55afb8c800e0 [shape=record,label="{libxml2-py.c:3416:|{<s0>T|<s1>F}}"];
+	Node0x55afb8c800e0:s0 -> Node0x55afb8c809b0;
+	Node0x55afb8c800e0:s1 -> Node0x55afb8c80a00;
+	Node0x55afb8c809b0 [shape=record,label="{libxml2-py.c:3416:}"];
+	Node0x55afb8c809b0 -> Node0x55afb8c80a50;
+	Node0x55afb8c80a00 [shape=record,label="{libxml2-py.c:3416:}"];
+	Node0x55afb8c80a00 -> Node0x55afb8c80a50;
+	Node0x55afb8c80a50 [shape=record,label="{libxml2-py.c:3416:|{<s0>T|<s1>F}}"];
+	Node0x55afb8c80a50:s0 -> Node0x55afb8c81040;
+	Node0x55afb8c80a50:s1 -> Node0x55afb8c81090;
+	Node0x55afb8c81040 [shape=record,label="{libxml2-py.c:3417:}"];
+	Node0x55afb8c81040 -> Node0x55afb8c810e0;
+	Node0x55afb8c81090 [shape=record,label="{libxml2-py.c:3417:}"];
+	Node0x55afb8c81090 -> Node0x55afb8c810e0;
+	Node0x55afb8c810e0 [shape=record,label="{libxml2-py.c:3417:|{<s0>T|<s1>F}}"];
+	Node0x55afb8c810e0:s0 -> Node0x55afb8c81670;
+	Node0x55afb8c810e0:s1 -> Node0x55afb8c816c0;
+	Node0x55afb8c81670 [shape=record,label="{libxml2-py.c:3418:}"];
+	Node0x55afb8c81670 -> Node0x55afb8c81710;
+	Node0x55afb8c816c0 [shape=record,label="{libxml2-py.c:3418:}"];
+	Node0x55afb8c816c0 -> Node0x55afb8c81710;
+	Node0x55afb8c81710 [shape=record,label="{libxml2-py.c:3418:}"];
+	Node0x55afb8c81710 -> Node0x55afb8c7c5e0;
+	Node0x55afb8c7c5e0 [shape=record,label="{libxml2-py.c:3423:}"];
+}

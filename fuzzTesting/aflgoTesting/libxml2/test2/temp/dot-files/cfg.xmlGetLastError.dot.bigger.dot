@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlGetLastError' function" {
+	label="CFG for 'xmlGetLastError' function";
+
+	Node0x55ddad9ca7a0 [shape=record,label="{error.c:861:|{<s0>T|<s1>F}}"];
+	Node0x55ddad9ca7a0:s0 -> Node0x55ddad9ca650;
+	Node0x55ddad9ca7a0:s1 -> Node0x55ddad9c26d0;
+	Node0x55ddad9ca650 [shape=record,label="{error.c:862:}"];
+	Node0x55ddad9ca650 -> Node0x55ddad9cacf0;
+	Node0x55ddad9c26d0 [shape=record,label="{error.c:863:}"];
+	Node0x55ddad9c26d0 -> Node0x55ddad9cacf0;
+	Node0x55ddad9cacf0 [shape=record,label="{error.c:864:}"];
+}

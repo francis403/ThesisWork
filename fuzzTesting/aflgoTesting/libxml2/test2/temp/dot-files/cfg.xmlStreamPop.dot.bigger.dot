@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlStreamPop' function" {
+	label="CFG for 'xmlStreamPop' function";
+
+	Node0x557f45e82c80 [shape=record,label="{pattern.c:2281:|{<s0>T|<s1>F}}"];
+	Node0x557f45e82c80:s0 -> Node0x557f45f064f0;
+	Node0x557f45e82c80:s1 -> Node0x557f45f06540;
+	Node0x557f45f064f0 [shape=record,label="{pattern.c:2285:}"];
+	Node0x557f45f064f0 -> Node0x557f45f05970;
+	Node0x557f45f06540 [shape=record,label="{pattern.c:2286:}"];
+	Node0x557f45f06540 -> Node0x557f45f06990;
+	Node0x557f45f06990 [shape=record,label="{pattern.c:2286:|{<s0>T|<s1>F}}"];
+	Node0x557f45f06990:s0 -> Node0x557f45f06d50;
+	Node0x557f45f06990:s1 -> Node0x557f45f06b70;
+	Node0x557f45f06d50 [shape=record,label="{pattern.c:2290:|{<s0>T|<s1>F}}"];
+	Node0x557f45f06d50:s0 -> Node0x557f45f06f00;
+	Node0x557f45f06d50:s1 -> Node0x557f45f06f50;
+	Node0x557f45f06f00 [shape=record,label="{pattern.c:2291:}"];
+	Node0x557f45f06f00 -> Node0x557f45f06f50;
+	Node0x557f45f06f50 [shape=record,label="{pattern.c:2298:|{<s0>T|<s1>F}}"];
+	Node0x557f45f06f50:s0 -> Node0x557f45f07580;
+	Node0x557f45f06f50:s1 -> Node0x557f45f075d0;
+	Node0x557f45f07580 [shape=record,label="{pattern.c:2299:}"];
+	Node0x557f45f07580 -> Node0x557f45f075d0;
+	Node0x557f45f075d0 [shape=record,label="{pattern.c:2303:}"];
+	Node0x557f45f075d0 -> Node0x557f45f08280;
+	Node0x557f45f08280 [shape=record,label="{pattern.c:2303:|{<s0>T|<s1>F}}"];
+	Node0x557f45f08280:s0 -> Node0x557f45f08560;
+	Node0x557f45f08280:s1 -> Node0x557f45f07940;
+	Node0x557f45f08560 [shape=record,label="{pattern.c:2305:|{<s0>T|<s1>F}}"];
+	Node0x557f45f08560:s0 -> Node0x557f45f08d90;
+	Node0x557f45f08560:s1 -> Node0x557f45f08de0;
+	Node0x557f45f08d90 [shape=record,label="{pattern.c:2307:}"];
+	Node0x557f45f08d90 -> Node0x557f45f08de0;
+	Node0x557f45f08de0 [shape=record,label="{pattern.c:2308:|{<s0>T|<s1>F}}"];
+	Node0x557f45f08de0:s0 -> Node0x557f45f095e0;
+	Node0x557f45f08de0:s1 -> Node0x557f45f09630;
+	Node0x557f45f095e0 [shape=record,label="{pattern.c:2309:}"];
+	Node0x557f45f095e0 -> Node0x557f45f07940;
+	Node0x557f45f09630 [shape=record,label="{pattern.c:2310:}"];
+	Node0x557f45f09630 -> Node0x557f45f084d0;
+	Node0x557f45f084d0 [shape=record,label="{pattern.c:2303:}"];
+	Node0x557f45f084d0 -> Node0x557f45f08280;
+	Node0x557f45f07940 [shape=record,label="{pattern.c:2311:}"];
+	Node0x557f45f07940 -> Node0x557f45f06990;
+	Node0x557f45f06b70 [shape=record,label="{pattern.c:2313:}"];
+	Node0x557f45f06b70 -> Node0x557f45f05970;
+	Node0x557f45f05970 [shape=record,label="{pattern.c:2314:}"];
+}

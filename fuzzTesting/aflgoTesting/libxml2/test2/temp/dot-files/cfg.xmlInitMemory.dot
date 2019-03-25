@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlInitMemory' function" {
+	label="CFG for 'xmlInitMemory' function";
+
+	Node0x564b37324d50 [shape=record,label="{xmlmemory.c:967:|{<s0>T|<s1>F}}"];
+	Node0x564b37324d50 -> Node0x564b37324050;
+	Node0x564b37324d50 -> Node0x564b372fde70;
+	Node0x564b37324050 [shape=record,label="{xmlmemory.c:977:}"];
+	Node0x564b37324050 -> Node0x564b37324d00;
+	Node0x564b372fde70 [shape=record,label="{xmlmemory.c:978:|{<s0>T|<s1>F}}"];
+	Node0x564b372fde70 -> Node0x564b37324fe0;
+	Node0x564b372fde70 -> Node0x564b37325e20;
+	Node0x564b37324fe0 [shape=record,label="{xmlmemory.c:984:}"];
+	Node0x564b37324fe0 -> Node0x564b37325e20;
+	Node0x564b37325e20 [shape=record,label="{xmlmemory.c:988:|{<s0>T|<s1>F}}"];
+	Node0x564b37325e20 -> Node0x564b373280d0;
+	Node0x564b37325e20 -> Node0x564b37328120;
+	Node0x564b373280d0 [shape=record,label="{xmlmemory.c:990:}"];
+	Node0x564b373280d0 -> Node0x564b37328120;
+	Node0x564b37328120 [shape=record,label="{xmlmemory.c:998:}"];
+	Node0x564b37328120 -> Node0x564b37324d00;
+	Node0x564b37324d00 [shape=record,label="{xmlmemory.c:999:}"];
+}

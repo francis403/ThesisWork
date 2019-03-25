@@ -1,0 +1,33 @@
+digraph "CFG for 'libxml_xmlValidatePushElement' function" {
+	label="CFG for 'libxml_xmlValidatePushElement' function";
+
+	Node0x55afb94b1700 [shape=record,label="{libxml2-py.c:12652:|{<s0>T|<s1>F}}"];
+	Node0x55afb94b1700:s0 -> Node0x55afb94b6af0;
+	Node0x55afb94b1700:s1 -> Node0x55afb94b6aa0;
+	Node0x55afb94b6aa0 [shape=record,label="{libxml2-py.c:12664:}"];
+	Node0x55afb94b6aa0 -> Node0x55afb94b1990;
+	Node0x55afb94b6af0 [shape=record,label="{libxml2-py.c:12665:|{<s0>T|<s1>F}}"];
+	Node0x55afb94b6af0:s0 -> Node0x55afb94b7440;
+	Node0x55afb94b6af0:s1 -> Node0x55afb94b7490;
+	Node0x55afb94b7440 [shape=record,label="{libxml2-py.c:12665:}"];
+	Node0x55afb94b7440 -> Node0x55afb94b74e0;
+	Node0x55afb94b7490 [shape=record,label="{libxml2-py.c:12665:}"];
+	Node0x55afb94b7490 -> Node0x55afb94b74e0;
+	Node0x55afb94b74e0 [shape=record,label="{libxml2-py.c:12665:|{<s0>T|<s1>F}}"];
+	Node0x55afb94b74e0:s0 -> Node0x55afb94b7a70;
+	Node0x55afb94b74e0:s1 -> Node0x55afb94b7ac0;
+	Node0x55afb94b7a70 [shape=record,label="{libxml2-py.c:12666:}"];
+	Node0x55afb94b7a70 -> Node0x55afb94b7b10;
+	Node0x55afb94b7ac0 [shape=record,label="{libxml2-py.c:12666:}"];
+	Node0x55afb94b7ac0 -> Node0x55afb94b7b10;
+	Node0x55afb94b7b10 [shape=record,label="{libxml2-py.c:12666:|{<s0>T|<s1>F}}"];
+	Node0x55afb94b7b10:s0 -> Node0x55afb94b8100;
+	Node0x55afb94b7b10:s1 -> Node0x55afb94b8150;
+	Node0x55afb94b8100 [shape=record,label="{libxml2-py.c:12667:}"];
+	Node0x55afb94b8100 -> Node0x55afb94b81a0;
+	Node0x55afb94b8150 [shape=record,label="{libxml2-py.c:12667:}"];
+	Node0x55afb94b8150 -> Node0x55afb94b81a0;
+	Node0x55afb94b81a0 [shape=record,label="{libxml2-py.c:12667:}"];
+	Node0x55afb94b81a0 -> Node0x55afb94b1990;
+	Node0x55afb94b1990 [shape=record,label="{libxml2-py.c:12672:}"];
+}

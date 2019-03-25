@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsHangulSyllables' function" {
+	label="CFG for 'xmlUCSIsHangulSyllables' function";
+
+	Node0x56123dd0a8f0 [shape=record,label="{xmlunicode.c:1665:|{<s0>T|<s1>F}}"];
+	Node0x56123dd0a8f0:s0 -> Node0x56123dd0dfc0;
+	Node0x56123dd0a8f0:s1 -> Node0x56123dd0df70;
+	Node0x56123dd0dfc0 [shape=record,label="{xmlunicode.c:1666:}"];
+	Node0x56123dd0dfc0 -> Node0x56123dd0df70;
+	Node0x56123dd0df70 [shape=record,label="{xmlunicode.c:1666:}"];
+}

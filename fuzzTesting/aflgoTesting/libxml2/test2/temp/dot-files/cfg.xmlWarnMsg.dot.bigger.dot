@@ -1,0 +1,23 @@
+digraph "CFG for 'xmlWarnMsg' function" {
+	label="CFG for 'xmlWarnMsg' function";
+
+	Node0x55fcf7daf6e0 [shape=record,label="{SAX2.c:169:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7daf6e0:s0 -> Node0x55fcf7db07d0;
+	Node0x55fcf7daf6e0:s1 -> Node0x55fcf7db0700;
+	Node0x55fcf7db07d0 [shape=record,label="{SAX2.c:172:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7db07d0:s0 -> Node0x55fcf7db0750;
+	Node0x55fcf7db07d0:s1 -> Node0x55fcf7db0700;
+	Node0x55fcf7db0750 [shape=record,label="{SAX2.c:173:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7db0750:s0 -> Node0x55fcf7db06b0;
+	Node0x55fcf7db0750:s1 -> Node0x55fcf7db0700;
+	Node0x55fcf7db06b0 [shape=record,label="{SAX2.c:174:}"];
+	Node0x55fcf7db06b0 -> Node0x55fcf7daf730;
+	Node0x55fcf7db0700 [shape=record,label="{SAX2.c:175:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7db0700:s0 -> Node0x55fcf7db1100;
+	Node0x55fcf7db0700:s1 -> Node0x55fcf7db1150;
+	Node0x55fcf7db1100 [shape=record,label="{SAX2.c:176:}"];
+	Node0x55fcf7db1100 -> Node0x55fcf7db1150;
+	Node0x55fcf7db1150 [shape=record,label="{SAX2.c:177:}"];
+	Node0x55fcf7db1150 -> Node0x55fcf7daf730;
+	Node0x55fcf7daf730 [shape=record,label="{SAX2.c:181:}"];
+}

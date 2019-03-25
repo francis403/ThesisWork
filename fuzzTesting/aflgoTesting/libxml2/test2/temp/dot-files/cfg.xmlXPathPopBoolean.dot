@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlXPathPopBoolean' function" {
+	label="CFG for 'xmlXPathPopBoolean' function";
+
+	Node0x562a798c3160 [shape=record,label="{xpath.c:2887:|{<s0>T|<s1>F}}"];
+	Node0x562a798c3160 -> Node0x562a798c9cb0;
+	Node0x562a798c3160 -> Node0x562a798c9d00;
+	Node0x562a798c9cb0 [shape=record,label="{xpath.c:2893:|{<s0>T|<s1>F}}"];
+	Node0x562a798c9cb0 -> Node0x562a798ca250;
+	Node0x562a798c9cb0 -> Node0x562a798ca2a0;
+	Node0x562a798ca250 [shape=record,label="{xpath.c:2893:}"];
+	Node0x562a798ca250 -> Node0x562a798ca2a0;
+	Node0x562a798ca2a0 [shape=record,label="{xpath.c:2894:}"];
+	Node0x562a798ca2a0 -> Node0x562a798c8f10;
+	Node0x562a798c9d00 [shape=record,label="{xpath.c:2896:|{<s0>T|<s1>F}}"];
+	Node0x562a798c9d00 -> Node0x562a798ca870;
+	Node0x562a798c9d00 -> Node0x562a798ca910;
+	Node0x562a798ca870 [shape=record,label="{xpath.c:2897:}"];
+	Node0x562a798ca870 -> Node0x562a798ca8c0;
+	Node0x562a798ca910 [shape=record,label="{xpath.c:2899:}"];
+	Node0x562a798ca910 -> Node0x562a798ca8c0;
+	Node0x562a798ca8c0 [shape=record,label="{xpath.c:2900:}"];
+	Node0x562a798ca8c0 -> Node0x562a798c8f10;
+	Node0x562a798c8f10 [shape=record,label="{xpath.c:2902:}"];
+}

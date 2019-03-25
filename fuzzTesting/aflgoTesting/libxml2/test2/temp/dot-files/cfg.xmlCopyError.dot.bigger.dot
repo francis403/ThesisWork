@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlCopyError' function" {
+	label="CFG for 'xmlCopyError' function";
+
+	Node0x55ddad9dd510 [shape=record,label="{error.c:957:|{<s0>T|<s1>F}}"];
+	Node0x55ddad9dd510:s0 -> Node0x55ddad99d160;
+	Node0x55ddad9dd510:s1 -> Node0x55ddad99d200;
+	Node0x55ddad99d200 [shape=record,label="{error.c:960:|{<s0>T|<s1>F}}"];
+	Node0x55ddad99d200:s0 -> Node0x55ddad99d160;
+	Node0x55ddad99d200:s1 -> Node0x55ddad99d1b0;
+	Node0x55ddad99d160 [shape=record,label="{error.c:961:}"];
+	Node0x55ddad99d160 -> Node0x55ddad9dbfb0;
+	Node0x55ddad99d1b0 [shape=record,label="{error.c:963:|{<s0>T|<s1>F}}"];
+	Node0x55ddad99d1b0:s0 -> Node0x55ddad9e3ec0;
+	Node0x55ddad99d1b0:s1 -> Node0x55ddad9e3f10;
+	Node0x55ddad9e3ec0 [shape=record,label="{error.c:970:}"];
+	Node0x55ddad9e3ec0 -> Node0x55ddad9e3f10;
+	Node0x55ddad9e3f10 [shape=record,label="{error.c:971:|{<s0>T|<s1>F}}"];
+	Node0x55ddad9e3f10:s0 -> Node0x55ddad9e46a0;
+	Node0x55ddad9e3f10:s1 -> Node0x55ddad9e46f0;
+	Node0x55ddad9e46a0 [shape=record,label="{error.c:972:}"];
+	Node0x55ddad9e46a0 -> Node0x55ddad9e46f0;
+	Node0x55ddad9e46f0 [shape=record,label="{error.c:973:|{<s0>T|<s1>F}}"];
+	Node0x55ddad9e46f0:s0 -> Node0x55ddad9e4e80;
+	Node0x55ddad9e46f0:s1 -> Node0x55ddad9e4ed0;
+	Node0x55ddad9e4e80 [shape=record,label="{error.c:974:}"];
+	Node0x55ddad9e4e80 -> Node0x55ddad9e4ed0;
+	Node0x55ddad9e4ed0 [shape=record,label="{error.c:975:|{<s0>T|<s1>F}}"];
+	Node0x55ddad9e4ed0:s0 -> Node0x55ddad9e5660;
+	Node0x55ddad9e4ed0:s1 -> Node0x55ddad9e56b0;
+	Node0x55ddad9e5660 [shape=record,label="{error.c:976:}"];
+	Node0x55ddad9e5660 -> Node0x55ddad9e56b0;
+	Node0x55ddad9e56b0 [shape=record,label="{error.c:977:|{<s0>T|<s1>F}}"];
+	Node0x55ddad9e56b0:s0 -> Node0x55ddad9e5e40;
+	Node0x55ddad9e56b0:s1 -> Node0x55ddad9e5e90;
+	Node0x55ddad9e5e40 [shape=record,label="{error.c:978:}"];
+	Node0x55ddad9e5e40 -> Node0x55ddad9e5e90;
+	Node0x55ddad9e5e90 [shape=record,label="{error.c:979:}"];
+	Node0x55ddad9e5e90 -> Node0x55ddad9dbfb0;
+	Node0x55ddad9dbfb0 [shape=record,label="{error.c:995:}"];
+}

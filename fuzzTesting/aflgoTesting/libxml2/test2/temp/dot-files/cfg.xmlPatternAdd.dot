@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlPatternAdd' function" {
+	label="CFG for 'xmlPatternAdd' function";
+
+	Node0x557f45f87620 [shape=record,label="{pattern.c:347:|{<s0>T|<s1>F}}"];
+	Node0x557f45f87620 -> Node0x557f45f9b1f0;
+	Node0x557f45f87620 -> Node0x557f45f9b240;
+	Node0x557f45f9b1f0 [shape=record,label="{pattern.c:352:|{<s0>T|<s1>F}}"];
+	Node0x557f45f9b1f0 -> Node0x557f45f160e0;
+	Node0x557f45f9b1f0 -> Node0x557f45f16130;
+	Node0x557f45f160e0 [shape=record,label="{pattern.c:358:}"];
+	Node0x557f45f160e0 -> Node0x557f45f87670;
+	Node0x557f45f16130 [shape=record,label="{pattern.c:360:}"];
+	Node0x557f45f16130 -> Node0x557f45f9b240;
+	Node0x557f45f9b240 [shape=record,label="{pattern.c:363:}"];
+	Node0x557f45f9b240 -> Node0x557f45f87670;
+	Node0x557f45f87670 [shape=record,label="{pattern.c:368:}"];
+}

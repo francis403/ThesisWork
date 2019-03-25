@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlErrorPtrWrap' function" {
+	label="CFG for 'libxml_xmlErrorPtrWrap' function";
+
+	Node0x5623683b1330 [shape=record,label="{types.c:942:|{<s0>T|<s1>F}}"];
+	Node0x5623683b1330:s0 -> Node0x5623683b1c10;
+	Node0x5623683b1330:s1 -> Node0x5623683b1c60;
+	Node0x5623683b1c10 [shape=record,label="{types.c:950:}"];
+	Node0x5623683b1c10 -> Node0x5623683b1380;
+	Node0x5623683b1c60 [shape=record,label="{types.c:953:}"];
+	Node0x5623683b1c60 -> Node0x5623683b1380;
+	Node0x5623683b1380 [shape=record,label="{types.c:955:}"];
+}

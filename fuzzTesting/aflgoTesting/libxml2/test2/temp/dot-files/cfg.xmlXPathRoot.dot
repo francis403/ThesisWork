@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlXPathRoot' function" {
+	label="CFG for 'xmlXPathRoot' function";
+
+	Node0x562a79b7f080 [shape=record,label="{xpath.c:8477:|{<s0>T|<s1>F}}"];
+	Node0x562a79b7f080 -> Node0x562a79b72f30;
+	Node0x562a79b7f080 -> Node0x562a79b7f3d0;
+	Node0x562a79b7f3d0 [shape=record,label="{xpath.c:8478:|{<s0>T|<s1>F}}"];
+	Node0x562a79b7f3d0 -> Node0x562a79b72f30;
+	Node0x562a79b7f3d0 -> Node0x562a79b82a40;
+	Node0x562a79b72f30 [shape=record,label="{xpath.c:8479:}"];
+	Node0x562a79b72f30 -> Node0x562a79b7f4e0;
+	Node0x562a79b82a40 [shape=record,label="{xpath.c:8480:}"];
+	Node0x562a79b82a40 -> Node0x562a79b7f4e0;
+	Node0x562a79b7f4e0 [shape=record,label="{xpath.c:8482:}"];
+}

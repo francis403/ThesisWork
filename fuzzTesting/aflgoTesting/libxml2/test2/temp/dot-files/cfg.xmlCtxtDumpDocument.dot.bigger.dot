@@ -1,0 +1,26 @@
+digraph "CFG for 'xmlCtxtDumpDocument' function" {
+	label="CFG for 'xmlCtxtDumpDocument' function";
+
+	Node0x5608700ea520 [shape=record,label="{debugXML.c:1214:|{<s0>T|<s1>F}}"];
+	Node0x5608700ea520:s0 -> Node0x5608700f0c40;
+	Node0x5608700ea520:s1 -> Node0x5608700f0c90;
+	Node0x5608700f0c40 [shape=record,label="{debugXML.c:1217:|{<s0>T|<s1>F}}"];
+	Node0x5608700f0c40:s0 -> Node0x5608700f10a0;
+	Node0x5608700f0c40:s1 -> Node0x5608700f1050;
+	Node0x5608700f1050 [shape=record,label="{debugXML.c:1218:}"];
+	Node0x5608700f1050 -> Node0x5608700f10a0;
+	Node0x5608700f10a0 [shape=record,label="{debugXML.c:1219:}"];
+	Node0x5608700f10a0 -> Node0x5608700f18d0;
+	Node0x5608700f0c90 [shape=record,label="{debugXML.c:1221:|{<s0>T|<s1>F}}"];
+	Node0x5608700f0c90:s0 -> Node0x5608700f1920;
+	Node0x5608700f0c90:s1 -> Node0x5608700f19a0;
+	Node0x5608700f19a0 [shape=record,label="{debugXML.c:1223:|{<s0>T|<s1>F}}"];
+	Node0x5608700f19a0:s0 -> Node0x5608700f1920;
+	Node0x5608700f19a0:s1 -> Node0x5608700f18d0;
+	Node0x5608700f1920 [shape=record,label="{debugXML.c:1224:|{<s0>T|<s1>F}}"];
+	Node0x5608700f1920:s0 -> Node0x5608700f1880;
+	Node0x5608700f1920:s1 -> Node0x5608700f18d0;
+	Node0x5608700f1880 [shape=record,label="{debugXML.c:1225:}"];
+	Node0x5608700f1880 -> Node0x5608700f18d0;
+	Node0x5608700f18d0 [shape=record,label="{debugXML.c:1229:}"];
+}

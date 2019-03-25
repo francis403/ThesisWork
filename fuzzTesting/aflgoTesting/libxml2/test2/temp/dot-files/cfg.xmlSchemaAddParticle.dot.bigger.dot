@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchemaAddParticle' function" {
+	label="CFG for 'xmlSchemaAddParticle' function";
+
+	Node0x5644a87fcf60 [shape=record,label="{xmlschemas.c:5541:|{<s0>T|<s1>F}}"];
+	Node0x5644a87fcf60:s0 -> Node0x5644a87fe330;
+	Node0x5644a87fcf60:s1 -> Node0x5644a87fe380;
+	Node0x5644a87fe330 [shape=record,label="{xmlschemas.c:5546:}"];
+	Node0x5644a87fe330 -> Node0x5644a87fcfb0;
+	Node0x5644a87fe380 [shape=record,label="{xmlschemas.c:5552:|{<s0>T|<s1>F}}"];
+	Node0x5644a87fe380:s0 -> Node0x5644a87feae0;
+	Node0x5644a87fe380:s1 -> Node0x5644a87feb30;
+	Node0x5644a87feae0 [shape=record,label="{xmlschemas.c:5554:}"];
+	Node0x5644a87feae0 -> Node0x5644a87fcfb0;
+	Node0x5644a87feb30 [shape=record,label="{xmlschemas.c:5558:}"];
+	Node0x5644a87feb30 -> Node0x5644a87fcfb0;
+	Node0x5644a87fcfb0 [shape=record,label="{xmlschemas.c:5574:}"];
+}

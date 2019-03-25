@@ -1,0 +1,19 @@
+digraph "CFG for 'compute_minrun' function" {
+	label="CFG for 'compute_minrun' function";
+
+	Node0x562a79e0b610 [shape=record,label="{timsort.h:129:|{<s0>T|<s1>F}}"];
+	Node0x562a79e0b610 -> Node0x562a79e371e0;
+	Node0x562a79e0b610 -> Node0x562a79e37230;
+	Node0x562a79e371e0 [shape=record,label="{timsort.h:131:}"];
+	Node0x562a79e371e0 -> Node0x562a79e37280;
+	Node0x562a79e37230 [shape=record,label="{timsort.h:131:}"];
+	Node0x562a79e37230 -> Node0x562a79e37280;
+	Node0x562a79e37280 [shape=record,label="{timsort.h:131:|{<s0>T|<s1>F}}"];
+	Node0x562a79e37280 -> Node0x562a79e383b0;
+	Node0x562a79e37280 -> Node0x562a79e38400;
+	Node0x562a79e383b0 [shape=record,label="{timsort.h:136:}"];
+	Node0x562a79e383b0 -> Node0x562a79e33690;
+	Node0x562a79e38400 [shape=record,label="{timsort.h:139:}"];
+	Node0x562a79e38400 -> Node0x562a79e33690;
+	Node0x562a79e33690 [shape=record,label="{timsort.h:140:}"];
+}

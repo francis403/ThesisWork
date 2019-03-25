@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlRemoveID' function" {
+	label="CFG for 'xmlRemoveID' function";
+
+	Node0x556e5f6a4040 [shape=record,label="{valid.c:2765:|{<s0>T|<s1>F}}"];
+	Node0x556e5f6a4040:s0 -> Node0x556e5f6b5710;
+	Node0x556e5f6a4040:s1 -> Node0x556e5f6b5760;
+	Node0x556e5f6b5710 [shape=record,label="{valid.c:2770:}"];
+	Node0x556e5f6b5710 -> Node0x556e5f6b44a0;
+	Node0x556e5f6b5760 [shape=record,label="{valid.c:2771:|{<s0>T|<s1>F}}"];
+	Node0x556e5f6b5760:s0 -> Node0x556e5f6b5c20;
+	Node0x556e5f6b5760:s1 -> Node0x556e5f6b5c70;
+	Node0x556e5f6b5c20 [shape=record,label="{valid.c:2771:}"];
+	Node0x556e5f6b5c20 -> Node0x556e5f6b44a0;
+	Node0x556e5f6b5c70 [shape=record,label="{valid.c:2773:|{<s0>T|<s1>F}}"];
+	Node0x556e5f6b5c70:s0 -> Node0x556e5f6b4390;
+	Node0x556e5f6b5c70:s1 -> Node0x556e5f69d000;
+	Node0x556e5f6b4390 [shape=record,label="{valid.c:2775:}"];
+	Node0x556e5f6b4390 -> Node0x556e5f6b44a0;
+	Node0x556e5f69d000 [shape=record,label="{valid.c:2777:|{<s0>T|<s1>F}}"];
+	Node0x556e5f69d000:s0 -> Node0x556e5f6b73c0;
+	Node0x556e5f69d000:s1 -> Node0x556e5f6b7410;
+	Node0x556e5f6b73c0 [shape=record,label="{valid.c:2779:}"];
+	Node0x556e5f6b73c0 -> Node0x556e5f6b44a0;
+	Node0x556e5f6b7410 [shape=record,label="{valid.c:2781:|{<s0>T|<s1>F}}"];
+	Node0x556e5f6b7410:s0 -> Node0x556e5f6b8e00;
+	Node0x556e5f6b7410:s1 -> Node0x556e5f6b8ea0;
+	Node0x556e5f6b8ea0 [shape=record,label="{valid.c:2782:|{<s0>T|<s1>F}}"];
+	Node0x556e5f6b8ea0:s0 -> Node0x556e5f6b8e00;
+	Node0x556e5f6b8ea0:s1 -> Node0x556e5f6b8e50;
+	Node0x556e5f6b8e00 [shape=record,label="{valid.c:2783:}"];
+	Node0x556e5f6b8e00 -> Node0x556e5f6b44a0;
+	Node0x556e5f6b8e50 [shape=record,label="{valid.c:2787:}"];
+	Node0x556e5f6b8e50 -> Node0x556e5f6b44a0;
+	Node0x556e5f6b44a0 [shape=record,label="{valid.c:2791:}"];
+}

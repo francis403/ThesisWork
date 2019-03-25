@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlXIncludeLoadFallback' function" {
+	label="CFG for 'xmlXIncludeLoadFallback' function";
+
+	Node0x55dca5df7c20 [shape=record,label="{xinclude.c:1963:|{<s0>T|<s1>F}}"];
+	Node0x55dca5df7c20:s0 -> Node0x55dca5e0f880;
+	Node0x55dca5df7c20:s1 -> Node0x55dca5e0f9a0;
+	Node0x55dca5e0f9a0 [shape=record,label="{xinclude.c:1967:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e0f9a0:s0 -> Node0x55dca5e0f880;
+	Node0x55dca5e0f9a0:s1 -> Node0x55dca5e0f920;
+	Node0x55dca5e0f920 [shape=record,label="{xinclude.c:1968:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e0f920:s0 -> Node0x55dca5e0f880;
+	Node0x55dca5e0f920:s1 -> Node0x55dca5e0f8d0;
+	Node0x55dca5e0f880 [shape=record,label="{xinclude.c:1969:}"];
+	Node0x55dca5e0f880 -> Node0x55dca5e0dd00;
+	Node0x55dca5e0f8d0 [shape=record,label="{xinclude.c:1970:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e0f8d0:s0 -> Node0x55dca5e10350;
+	Node0x55dca5e0f8d0:s1 -> Node0x55dca5e103f0;
+	Node0x55dca5e10350 [shape=record,label="{xinclude.c:1975:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e10350:s0 -> Node0x55dca5e10aa0;
+	Node0x55dca5e10350:s1 -> Node0x55dca5e10af0;
+	Node0x55dca5e10aa0 [shape=record,label="{xinclude.c:1977:}"];
+	Node0x55dca5e10aa0 -> Node0x55dca5e0dd00;
+	Node0x55dca5e10af0 [shape=record,label="{xinclude.c:1978:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e10af0:s0 -> Node0x55dca5e12110;
+	Node0x55dca5e10af0:s1 -> Node0x55dca5e121b0;
+	Node0x55dca5e12110 [shape=record,label="{xinclude.c:1983:}"];
+	Node0x55dca5e12110 -> Node0x55dca5e12160;
+	Node0x55dca5e121b0 [shape=record,label="{xinclude.c:1984:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e121b0:s0 -> Node0x55dca5e12770;
+	Node0x55dca5e121b0:s1 -> Node0x55dca5e127c0;
+	Node0x55dca5e12770 [shape=record,label="{xinclude.c:1985:}"];
+	Node0x55dca5e12770 -> Node0x55dca5e127c0;
+	Node0x55dca5e127c0 [shape=record,label="{%57}"];
+	Node0x55dca5e127c0 -> Node0x55dca5e12160;
+	Node0x55dca5e12160 [shape=record,label="{xinclude.c:1986:}"];
+	Node0x55dca5e12160 -> Node0x55dca5e103a0;
+	Node0x55dca5e103f0 [shape=record,label="{xinclude.c:1991:}"];
+	Node0x55dca5e103f0 -> Node0x55dca5e103a0;
+	Node0x55dca5e103a0 [shape=record,label="{xinclude.c:1994:}"];
+	Node0x55dca5e103a0 -> Node0x55dca5e0dd00;
+	Node0x55dca5e0dd00 [shape=record,label="{xinclude.c:1995:}"];
+}

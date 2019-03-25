@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlMallocLoc' function" {
+	label="CFG for 'xmlMallocLoc' function";
+
+	Node0x564b372d4fc0 [shape=record,label="{xmlmemory.c:162:|{<s0>T|<s1>F}}"];
+	Node0x564b372d4fc0:s0 -> Node0x564b372dc200;
+	Node0x564b372d4fc0:s1 -> Node0x564b372dc1b0;
+	Node0x564b372dc1b0 [shape=record,label="{xmlmemory.c:167:}"];
+	Node0x564b372dc1b0 -> Node0x564b372dc200;
+	Node0x564b372dc200 [shape=record,label="{xmlmemory.c:175:|{<s0>T|<s1>F}}"];
+	Node0x564b372dc200:s0 -> Node0x564b372dee70;
+	Node0x564b372dc200:s1 -> Node0x564b372deec0;
+	Node0x564b372dee70 [shape=record,label="{xmlmemory.c:176:}"];
+	Node0x564b372dee70 -> Node0x564b372ced50;
+	Node0x564b372deec0 [shape=record,label="{xmlmemory.c:182:|{<s0>T|<s1>F}}"];
+	Node0x564b372deec0:s0 -> Node0x564b372de6d0;
+	Node0x564b372deec0:s1 -> Node0x564b372dfc00;
+	Node0x564b372dfc00 [shape=record,label="{xmlmemory.c:185:}"];
+	Node0x564b372dfc00 -> Node0x564b372ced50;
+	Node0x564b372de6d0 [shape=record,label="{xmlmemory.c:190:|{<s0>T|<s1>F}}"];
+	Node0x564b372de6d0:s0 -> Node0x564b372dc280;
+	Node0x564b372de6d0:s1 -> Node0x564b372dc160;
+	Node0x564b372dc280 [shape=record,label="{xmlmemory.c:199:}"];
+	Node0x564b372dc280 -> Node0x564b372dc160;
+	Node0x564b372dc160 [shape=record,label="{xmlmemory.c:203:|{<s0>T|<s1>F}}"];
+	Node0x564b372dc160:s0 -> Node0x564b372e42b0;
+	Node0x564b372dc160:s1 -> Node0x564b372e4300;
+	Node0x564b372e42b0 [shape=record,label="{xmlmemory.c:210:}"];
+	Node0x564b372e42b0 -> Node0x564b372e4300;
+	Node0x564b372e4300 [shape=record,label="{xmlmemory.c:212:|{<s0>T|<s1>F}}"];
+	Node0x564b372e4300:s0 -> Node0x564b372e4a10;
+	Node0x564b372e4300:s1 -> Node0x564b372e4a60;
+	Node0x564b372e4a10 [shape=record,label="{xmlmemory.c:215:}"];
+	Node0x564b372e4a10 -> Node0x564b372e4a60;
+	Node0x564b372e4a60 [shape=record,label="{xmlmemory.c:223:}"];
+	Node0x564b372e4a60 -> Node0x564b372ced50;
+	Node0x564b372ced50 [shape=record,label="{xmlmemory.c:224:}"];
+}

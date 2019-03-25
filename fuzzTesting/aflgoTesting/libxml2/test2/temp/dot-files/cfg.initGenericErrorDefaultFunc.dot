@@ -1,0 +1,12 @@
+digraph "CFG for 'initGenericErrorDefaultFunc' function" {
+	label="CFG for 'initGenericErrorDefaultFunc' function";
+
+	Node0x55ddad8e9a80 [shape=record,label="{error.c:90:|{<s0>T|<s1>F}}"];
+	Node0x55ddad8e9a80 -> Node0x55ddad8ed3b0;
+	Node0x55ddad8e9a80 -> Node0x55ddad8ed450;
+	Node0x55ddad8ed3b0 [shape=record,label="{error.c:93:}"];
+	Node0x55ddad8ed3b0 -> Node0x55ddad8ed400;
+	Node0x55ddad8ed450 [shape=record,label="{error.c:95:}"];
+	Node0x55ddad8ed450 -> Node0x55ddad8ed400;
+	Node0x55ddad8ed400 [shape=record,label="{error.c:96:}"];
+}

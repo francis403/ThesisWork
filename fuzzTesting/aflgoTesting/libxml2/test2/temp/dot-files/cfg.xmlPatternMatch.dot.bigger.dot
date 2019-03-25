@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlPatternMatch' function" {
+	label="CFG for 'xmlPatternMatch' function";
+
+	Node0x557f45f12e90 [shape=record,label="{pattern.c:2464:|{<s0>T|<s1>F}}"];
+	Node0x557f45f12e90:s0 -> Node0x557f45f2e0d0;
+	Node0x557f45f12e90:s1 -> Node0x557f45f2e210;
+	Node0x557f45f2e210 [shape=record,label="{pattern.c:2468:|{<s0>T|<s1>F}}"];
+	Node0x557f45f2e210:s0 -> Node0x557f45f2e0d0;
+	Node0x557f45f2e210:s1 -> Node0x557f45f20600;
+	Node0x557f45f2e0d0 [shape=record,label="{pattern.c:2469:}"];
+	Node0x557f45f2e0d0 -> Node0x557f45f2e320;
+	Node0x557f45f20600 [shape=record,label="{pattern.c:2471:}"];
+	Node0x557f45f20600 -> Node0x557f45f2ff40;
+	Node0x557f45f2ff40 [shape=record,label="{pattern.c:2471:|{<s0>T|<s1>F}}"];
+	Node0x557f45f2ff40:s0 -> Node0x557f45f30300;
+	Node0x557f45f2ff40:s1 -> Node0x557f45f30120;
+	Node0x557f45f30300 [shape=record,label="{pattern.c:2472:|{<s0>T|<s1>F}}"];
+	Node0x557f45f30300:s0 -> Node0x557f45f30cb0;
+	Node0x557f45f30300:s1 -> Node0x557f45f30d00;
+	Node0x557f45f30cb0 [shape=record,label="{pattern.c:2474:}"];
+	Node0x557f45f30cb0 -> Node0x557f45f2e320;
+	Node0x557f45f30d00 [shape=record,label="{pattern.c:2475:}"];
+	Node0x557f45f30d00 -> Node0x557f45f2ff40;
+	Node0x557f45f30120 [shape=record,label="{pattern.c:2477:}"];
+	Node0x557f45f30120 -> Node0x557f45f2e320;
+	Node0x557f45f2e320 [shape=record,label="{pattern.c:2478:}"];
+}

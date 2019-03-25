@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParsePubidLiteral' function" {
+	label="CFG for 'libxml_xmlParsePubidLiteral' function";
+
+	Node0x55afb8bb5380 [shape=record,label="{libxml2-py.c:5288:|{<s0>T|<s1>F}}"];
+	Node0x55afb8bb5380:s0 -> Node0x55afb8bb9070;
+	Node0x55afb8bb5380:s1 -> Node0x55afb8bb9020;
+	Node0x55afb8bb9020 [shape=record,label="{libxml2-py.c:5295:}"];
+	Node0x55afb8bb9020 -> Node0x55afb8bb5610;
+	Node0x55afb8bb9070 [shape=record,label="{libxml2-py.c:5296:|{<s0>T|<s1>F}}"];
+	Node0x55afb8bb9070:s0 -> Node0x55afb8bb9850;
+	Node0x55afb8bb9070:s1 -> Node0x55afb8bb98a0;
+	Node0x55afb8bb9850 [shape=record,label="{libxml2-py.c:5296:}"];
+	Node0x55afb8bb9850 -> Node0x55afb8bb98f0;
+	Node0x55afb8bb98a0 [shape=record,label="{libxml2-py.c:5296:}"];
+	Node0x55afb8bb98a0 -> Node0x55afb8bb98f0;
+	Node0x55afb8bb98f0 [shape=record,label="{libxml2-py.c:5296:}"];
+	Node0x55afb8bb98f0 -> Node0x55afb8bb5610;
+	Node0x55afb8bb5610 [shape=record,label="{libxml2-py.c:5301:}"];
+}

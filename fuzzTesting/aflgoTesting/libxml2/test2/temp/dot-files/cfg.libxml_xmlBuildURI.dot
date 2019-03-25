@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlBuildURI' function" {
+	label="CFG for 'libxml_xmlBuildURI' function";
+
+	Node0x55afb8a459a0 [shape=record,label="{libxml2-py.c:1224:|{<s0>T|<s1>F}}"];
+	Node0x55afb8a459a0:s0 -> Node0x55afb8a49610;
+	Node0x55afb8a459a0:s1 -> Node0x55afb8a495c0;
+	Node0x55afb8a495c0 [shape=record,label="{libxml2-py.c:1231:}"];
+	Node0x55afb8a495c0 -> Node0x55afb8a456c0;
+	Node0x55afb8a49610 [shape=record,label="{libxml2-py.c:1233:}"];
+	Node0x55afb8a49610 -> Node0x55afb8a456c0;
+	Node0x55afb8a456c0 [shape=record,label="{libxml2-py.c:1236:}"];
+}

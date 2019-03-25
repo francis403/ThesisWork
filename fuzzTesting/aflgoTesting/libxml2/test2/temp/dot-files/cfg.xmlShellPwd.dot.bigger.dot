@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlShellPwd' function" {
+	label="CFG for 'xmlShellPwd' function";
+
+	Node0x56086ff6b610 [shape=record,label="{debugXML.c:2763:|{<s0>T|<s1>F}}"];
+	Node0x56086ff6b610:s0 -> Node0x56086ff6cc10;
+	Node0x56086ff6b610:s1 -> Node0x56086ff6ccb0;
+	Node0x56086ff6ccb0 [shape=record,label="{debugXML.c:2768:|{<s0>T|<s1>F}}"];
+	Node0x56086ff6ccb0:s0 -> Node0x56086ff6cc10;
+	Node0x56086ff6ccb0:s1 -> Node0x56086ff6cc60;
+	Node0x56086ff6cc10 [shape=record,label="{debugXML.c:2769:}"];
+	Node0x56086ff6cc10 -> Node0x56086ff5cac0;
+	Node0x56086ff6cc60 [shape=record,label="{debugXML.c:2771:|{<s0>T|<s1>F}}"];
+	Node0x56086ff6cc60:s0 -> Node0x56086ff6dde0;
+	Node0x56086ff6cc60:s1 -> Node0x56086ff6de30;
+	Node0x56086ff6dde0 [shape=record,label="{debugXML.c:2773:}"];
+	Node0x56086ff6dde0 -> Node0x56086ff5cac0;
+	Node0x56086ff6de30 [shape=record,label="{debugXML.c:2783:}"];
+	Node0x56086ff6de30 -> Node0x56086ff5cac0;
+	Node0x56086ff5cac0 [shape=record,label="{debugXML.c:2788:}"];
+}

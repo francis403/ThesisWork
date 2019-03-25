@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsLetterlikeSymbols' function" {
+	label="CFG for 'xmlUCSIsLetterlikeSymbols' function";
+
+	Node0x56123dd245e0 [shape=record,label="{xmlunicode.c:1925:|{<s0>T|<s1>F}}"];
+	Node0x56123dd245e0:s0 -> Node0x56123dd262d0;
+	Node0x56123dd245e0:s1 -> Node0x56123dd26280;
+	Node0x56123dd262d0 [shape=record,label="{xmlunicode.c:1926:}"];
+	Node0x56123dd262d0 -> Node0x56123dd26280;
+	Node0x56123dd26280 [shape=record,label="{xmlunicode.c:1926:}"];
+}

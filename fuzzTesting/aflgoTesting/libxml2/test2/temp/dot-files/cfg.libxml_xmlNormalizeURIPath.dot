@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlNormalizeURIPath' function" {
+	label="CFG for 'libxml_xmlNormalizeURIPath' function";
+
+	Node0x55afb8dc3030 [shape=record,label="{libxml2-py.c:4675:|{<s0>T|<s1>F}}"];
+	Node0x55afb8dc3030:s0 -> Node0x55afb8dc6360;
+	Node0x55afb8dc3030:s1 -> Node0x55afb8dc6310;
+	Node0x55afb8dc6310 [shape=record,label="{libxml2-py.c:4681:}"];
+	Node0x55afb8dc6310 -> Node0x55afb8dc2d50;
+	Node0x55afb8dc6360 [shape=record,label="{libxml2-py.c:4683:}"];
+	Node0x55afb8dc6360 -> Node0x55afb8dc2d50;
+	Node0x55afb8dc2d50 [shape=record,label="{libxml2-py.c:4686:}"];
+}

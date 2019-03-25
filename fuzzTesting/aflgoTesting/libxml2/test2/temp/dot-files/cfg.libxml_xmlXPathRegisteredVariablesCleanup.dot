@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathRegisteredVariablesCleanup' function" {
+	label="CFG for 'libxml_xmlXPathRegisteredVariablesCleanup' function";
+
+	Node0x55afb9633740 [shape=record,label="{libxml2-py.c:14287:|{<s0>T|<s1>F}}"];
+	Node0x55afb9633740:s0 -> Node0x55afb963caf0;
+	Node0x55afb9633740:s1 -> Node0x55afb963caa0;
+	Node0x55afb963caa0 [shape=record,label="{libxml2-py.c:14292:}"];
+	Node0x55afb963caa0 -> Node0x55afb9633840;
+	Node0x55afb963caf0 [shape=record,label="{libxml2-py.c:14293:|{<s0>T|<s1>F}}"];
+	Node0x55afb963caf0:s0 -> Node0x55afb963d2e0;
+	Node0x55afb963caf0:s1 -> Node0x55afb963d330;
+	Node0x55afb963d2e0 [shape=record,label="{libxml2-py.c:14293:}"];
+	Node0x55afb963d2e0 -> Node0x55afb963d380;
+	Node0x55afb963d330 [shape=record,label="{libxml2-py.c:14293:}"];
+	Node0x55afb963d330 -> Node0x55afb963d380;
+	Node0x55afb963d380 [shape=record,label="{libxml2-py.c:14293:}"];
+	Node0x55afb963d380 -> Node0x55afb9633840;
+	Node0x55afb9633840 [shape=record,label="{libxml2-py.c:14298:}"];
+}

@@ -1,0 +1,43 @@
+digraph "CFG for 'htmlCheckAutoClose' function" {
+	label="CFG for 'htmlCheckAutoClose' function";
+
+	Node0x5651a5ccc700 [shape=record,label="{HTMLparser.c:1296:|{<s0>T|<s1>F}}"];
+	Node0x5651a5ccc700 -> Node0x5651a5d19190;
+	Node0x5651a5ccc700 -> Node0x5651a5d191e0;
+	Node0x5651a5d19190 [shape=record,label="{HTMLparser.c:1302:}"];
+	Node0x5651a5d19190 -> Node0x5651a5d191e0;
+	Node0x5651a5d191e0 [shape=record,label="{HTMLparser.c:1305:}"];
+	Node0x5651a5d191e0 -> Node0x5651a5d196c0;
+	Node0x5651a5d196c0 [shape=record,label="{HTMLparser.c:1305:|{<s0>T|<s1>F}}"];
+	Node0x5651a5d196c0 -> Node0x5651a5d199a0;
+	Node0x5651a5d196c0 -> Node0x5651a5d19520;
+	Node0x5651a5d199a0 [shape=record,label="{HTMLparser.c:1306:|{<s0>T|<s1>F}}"];
+	Node0x5651a5d199a0 -> Node0x5651a5d19e60;
+	Node0x5651a5d199a0 -> Node0x5651a5d19eb0;
+	Node0x5651a5d19e60 [shape=record,label="{HTMLparser.c:1308:}"];
+	Node0x5651a5d19e60 -> Node0x5651a5cedd40;
+	Node0x5651a5d19eb0 [shape=record,label="{HTMLparser.c:1309:|{<s0>T|<s1>F}}"];
+	Node0x5651a5d19eb0 -> Node0x5651a5d1a340;
+	Node0x5651a5d19eb0 -> Node0x5651a5d1a390;
+	Node0x5651a5d1a340 [shape=record,label="{HTMLparser.c:1310:}"];
+	Node0x5651a5d1a340 -> Node0x5651a5d19520;
+	Node0x5651a5d1a390 [shape=record,label="{HTMLparser.c:1311:}"];
+	Node0x5651a5d1a390 -> Node0x5651a5d19910;
+	Node0x5651a5d19910 [shape=record,label="{HTMLparser.c:1305:}"];
+	Node0x5651a5d19910 -> Node0x5651a5d196c0;
+	Node0x5651a5d19520 [shape=record,label="{HTMLparser.c:1313:}"];
+	Node0x5651a5d19520 -> Node0x5651a5d1b140;
+	Node0x5651a5d1b140 [shape=record,label="{HTMLparser.c:1315:|{<s0>T|<s1>F}}"];
+	Node0x5651a5d1b140 -> Node0x5651a5d1b6d0;
+	Node0x5651a5d1b140 -> Node0x5651a5d1b360;
+	Node0x5651a5d1b6d0 [shape=record,label="{HTMLparser.c:1316:|{<s0>T|<s1>F}}"];
+	Node0x5651a5d1b6d0 -> Node0x5651a5d1b880;
+	Node0x5651a5d1b6d0 -> Node0x5651a5d1b8d0;
+	Node0x5651a5d1b880 [shape=record,label="{HTMLparser.c:1317:}"];
+	Node0x5651a5d1b880 -> Node0x5651a5cedd40;
+	Node0x5651a5d1b8d0 [shape=record,label="{HTMLparser.c:1319:}"];
+	Node0x5651a5d1b8d0 -> Node0x5651a5d1b140;
+	Node0x5651a5d1b360 [shape=record,label="{HTMLparser.c:1321:}"];
+	Node0x5651a5d1b360 -> Node0x5651a5cedd40;
+	Node0x5651a5cedd40 [shape=record,label="{HTMLparser.c:1322:}"];
+}

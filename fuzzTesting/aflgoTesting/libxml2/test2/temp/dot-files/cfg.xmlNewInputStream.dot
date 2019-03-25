@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlNewInputStream' function" {
+	label="CFG for 'xmlNewInputStream' function";
+
+	Node0x5639086c59b0 [shape=record,label="{parserInternals.c:1362:|{<s0>T|<s1>F}}"];
+	Node0x5639086c59b0 -> Node0x5639086c9080;
+	Node0x5639086c59b0 -> Node0x5639086c90d0;
+	Node0x5639086c9080 [shape=record,label="{parserInternals.c:1367:}"];
+	Node0x5639086c9080 -> Node0x5639086c1870;
+	Node0x5639086c90d0 [shape=record,label="{parserInternals.c:1370:|{<s0>T|<s1>F}}"];
+	Node0x5639086c90d0 -> Node0x5639086ca220;
+	Node0x5639086c90d0 -> Node0x5639086ca270;
+	Node0x5639086ca220 [shape=record,label="{parserInternals.c:1381:}"];
+	Node0x5639086ca220 -> Node0x5639086ca270;
+	Node0x5639086ca270 [shape=record,label="{parserInternals.c:1383:}"];
+	Node0x5639086ca270 -> Node0x5639086c1870;
+	Node0x5639086c1870 [shape=record,label="{parserInternals.c:1384:}"];
+}

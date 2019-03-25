@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlXPathContextPtrWrap' function" {
+	label="CFG for 'libxml_xmlXPathContextPtrWrap' function";
+
+	Node0x5623682d8610 [shape=record,label="{types.c:335:|{<s0>T|<s1>F}}"];
+	Node0x5623682d8610:s0 -> Node0x56236830da30;
+	Node0x5623682d8610:s1 -> Node0x56236830da80;
+	Node0x56236830da30 [shape=record,label="{types.c:343:}"];
+	Node0x56236830da30 -> Node0x5623682fc7f0;
+	Node0x56236830da80 [shape=record,label="{types.c:346:}"];
+	Node0x56236830da80 -> Node0x5623682fc7f0;
+	Node0x5623682fc7f0 [shape=record,label="{types.c:348:}"];
+}

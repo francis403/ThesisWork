@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlGetBooleanProp' function" {
+	label="CFG for 'xmlGetBooleanProp' function";
+
+	Node0x5644a87af5d0 [shape=record,label="{xmlschemas.c:6221:|{<s0>T|<s1>F}}"];
+	Node0x5644a87af5d0:s0 -> Node0x5644a87b0cc0;
+	Node0x5644a87af5d0:s1 -> Node0x5644a87b0d10;
+	Node0x5644a87b0cc0 [shape=record,label="{xmlschemas.c:6229:}"];
+	Node0x5644a87b0cc0 -> Node0x5644a87af620;
+	Node0x5644a87b0d10 [shape=record,label="{xmlschemas.c:6235:|{<s0>T|<s1>F}}"];
+	Node0x5644a87b0d10:s0 -> Node0x5644a87b1200;
+	Node0x5644a87b0d10:s1 -> Node0x5644a87b12a0;
+	Node0x5644a87b1200 [shape=record,label="{xmlschemas.c:6236:}"];
+	Node0x5644a87b1200 -> Node0x5644a87b1250;
+	Node0x5644a87b12a0 [shape=record,label="{xmlschemas.c:6237:|{<s0>T|<s1>F}}"];
+	Node0x5644a87b12a0:s0 -> Node0x5644a87b1730;
+	Node0x5644a87b12a0:s1 -> Node0x5644a87b17d0;
+	Node0x5644a87b1730 [shape=record,label="{xmlschemas.c:6238:}"];
+	Node0x5644a87b1730 -> Node0x5644a87b1780;
+	Node0x5644a87b17d0 [shape=record,label="{xmlschemas.c:6239:|{<s0>T|<s1>F}}"];
+	Node0x5644a87b17d0:s0 -> Node0x5644a87b1c60;
+	Node0x5644a87b17d0:s1 -> Node0x5644a87b1d00;
+	Node0x5644a87b1c60 [shape=record,label="{xmlschemas.c:6240:}"];
+	Node0x5644a87b1c60 -> Node0x5644a87b1cb0;
+	Node0x5644a87b1d00 [shape=record,label="{xmlschemas.c:6241:|{<s0>T|<s1>F}}"];
+	Node0x5644a87b1d00:s0 -> Node0x5644a87b2230;
+	Node0x5644a87b1d00:s1 -> Node0x5644a87b22d0;
+	Node0x5644a87b2230 [shape=record,label="{xmlschemas.c:6242:}"];
+	Node0x5644a87b2230 -> Node0x5644a87b2280;
+	Node0x5644a87b22d0 [shape=record,label="{xmlschemas.c:6244:}"];
+	Node0x5644a87b22d0 -> Node0x5644a87b2280;
+	Node0x5644a87b2280 [shape=record,label="{%36}"];
+	Node0x5644a87b2280 -> Node0x5644a87b1cb0;
+	Node0x5644a87b1cb0 [shape=record,label="{%37}"];
+	Node0x5644a87b1cb0 -> Node0x5644a87b1780;
+	Node0x5644a87b1780 [shape=record,label="{%38}"];
+	Node0x5644a87b1780 -> Node0x5644a87b1250;
+	Node0x5644a87b1250 [shape=record,label="{xmlschemas.c:6251:}"];
+	Node0x5644a87b1250 -> Node0x5644a87af620;
+	Node0x5644a87af620 [shape=record,label="{xmlschemas.c:6252:}"];
+}

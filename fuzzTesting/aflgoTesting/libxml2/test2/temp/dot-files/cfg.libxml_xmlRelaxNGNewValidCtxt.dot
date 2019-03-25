@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlRelaxNGNewValidCtxt' function" {
+	label="CFG for 'libxml_xmlRelaxNGNewValidCtxt' function";
+
+	Node0x55afb8aa11f0 [shape=record,label="{libxml2-py.c:6399:|{<s0>T|<s1>F}}"];
+	Node0x55afb8aa11f0:s0 -> Node0x55afb8c5f5e0;
+	Node0x55afb8aa11f0:s1 -> Node0x55afb8c5f590;
+	Node0x55afb8c5f590 [shape=record,label="{libxml2-py.c:6406:}"];
+	Node0x55afb8c5f590 -> Node0x55afb8aa13d0;
+	Node0x55afb8c5f5e0 [shape=record,label="{libxml2-py.c:6407:|{<s0>T|<s1>F}}"];
+	Node0x55afb8c5f5e0:s0 -> Node0x55afb8c5fdd0;
+	Node0x55afb8c5f5e0:s1 -> Node0x55afb8c5fe20;
+	Node0x55afb8c5fdd0 [shape=record,label="{libxml2-py.c:6407:}"];
+	Node0x55afb8c5fdd0 -> Node0x55afb8c5fe70;
+	Node0x55afb8c5fe20 [shape=record,label="{libxml2-py.c:6407:}"];
+	Node0x55afb8c5fe20 -> Node0x55afb8c5fe70;
+	Node0x55afb8c5fe70 [shape=record,label="{libxml2-py.c:6407:}"];
+	Node0x55afb8c5fe70 -> Node0x55afb8aa13d0;
+	Node0x55afb8aa13d0 [shape=record,label="{libxml2-py.c:6412:}"];
+}

@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlShellRegisterRootNamespaces' function" {
+	label="CFG for 'xmlShellRegisterRootNamespaces' function";
+
+	Node0x56087011cc20 [shape=record,label="{debugXML.c:2165:|{<s0>T|<s1>F}}"];
+	Node0x56087011cc20 -> Node0x5608701236c0;
+	Node0x56087011cc20 -> Node0x5608701238e0;
+	Node0x5608701238e0 [shape=record,label="{debugXML.c:2170:|{<s0>T|<s1>F}}"];
+	Node0x5608701238e0 -> Node0x5608701236c0;
+	Node0x5608701238e0 -> Node0x560870123860;
+	Node0x560870123860 [shape=record,label="{debugXML.c:2171:|{<s0>T|<s1>F}}"];
+	Node0x560870123860 -> Node0x5608701236c0;
+	Node0x560870123860 -> Node0x5608701237e0;
+	Node0x5608701237e0 [shape=record,label="{debugXML.c:2171:|{<s0>T|<s1>F}}"];
+	Node0x5608701237e0 -> Node0x5608701236c0;
+	Node0x5608701237e0 -> Node0x560870123760;
+	Node0x560870123760 [shape=record,label="{debugXML.c:2171:|{<s0>T|<s1>F}}"];
+	Node0x560870123760 -> Node0x5608701236c0;
+	Node0x560870123760 -> Node0x560870123710;
+	Node0x5608701236c0 [shape=record,label="{debugXML.c:2172:}"];
+	Node0x5608701236c0 -> Node0x56087011cc70;
+	Node0x560870123710 [shape=record,label="{debugXML.c:2173:}"];
+	Node0x560870123710 -> Node0x560870124a20;
+	Node0x560870124a20 [shape=record,label="{debugXML.c:2174:|{<s0>T|<s1>F}}"];
+	Node0x560870124a20 -> Node0x560870124de0;
+	Node0x560870124a20 -> Node0x560870124c00;
+	Node0x560870124de0 [shape=record,label="{debugXML.c:2175:|{<s0>T|<s1>F}}"];
+	Node0x560870124de0 -> Node0x560870124f90;
+	Node0x560870124de0 -> Node0x560870125030;
+	Node0x560870124f90 [shape=record,label="{debugXML.c:2176:}"];
+	Node0x560870124f90 -> Node0x560870124fe0;
+	Node0x560870125030 [shape=record,label="{debugXML.c:2178:}"];
+	Node0x560870125030 -> Node0x560870124fe0;
+	Node0x560870124fe0 [shape=record,label="{debugXML.c:2179:}"];
+	Node0x560870124fe0 -> Node0x560870124a20;
+	Node0x560870124c00 [shape=record,label="{debugXML.c:2181:}"];
+	Node0x560870124c00 -> Node0x56087011cc70;
+	Node0x56087011cc70 [shape=record,label="{debugXML.c:2182:}"];
+}

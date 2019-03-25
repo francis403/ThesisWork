@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlCtxtDumpEntities' function" {
+	label="CFG for 'xmlCtxtDumpEntities' function";
+
+	Node0x560870057d20 [shape=record,label="{debugXML.c:1285:|{<s0>T|<s1>F}}"];
+	Node0x560870057d20:s0 -> Node0x5608700587c0;
+	Node0x560870057d20:s1 -> Node0x560870058810;
+	Node0x5608700587c0 [shape=record,label="{debugXML.c:1287:}"];
+	Node0x5608700587c0 -> Node0x56087005de80;
+	Node0x560870058810 [shape=record,label="{debugXML.c:1288:|{<s0>T|<s1>F}}"];
+	Node0x560870058810:s0 -> Node0x560870059410;
+	Node0x560870058810:s1 -> Node0x5608700593c0;
+	Node0x560870059410 [shape=record,label="{debugXML.c:1289:|{<s0>T|<s1>F}}"];
+	Node0x560870059410:s0 -> Node0x560870059320;
+	Node0x560870059410:s1 -> Node0x5608700593c0;
+	Node0x560870059320 [shape=record,label="{debugXML.c:1290:|{<s0>T|<s1>F}}"];
+	Node0x560870059320:s0 -> Node0x56087005c550;
+	Node0x560870059320:s1 -> Node0x56087005c500;
+	Node0x56087005c500 [shape=record,label="{debugXML.c:1294:}"];
+	Node0x56087005c500 -> Node0x56087005c550;
+	Node0x56087005c550 [shape=record,label="{debugXML.c:1295:}"];
+	Node0x56087005c550 -> Node0x560870059370;
+	Node0x5608700593c0 [shape=record,label="{debugXML.c:1297:}"];
+	Node0x5608700593c0 -> Node0x560870059370;
+	Node0x560870059370 [shape=record,label="{debugXML.c:1298:|{<s0>T|<s1>F}}"];
+	Node0x560870059370:s0 -> Node0x56087005df20;
+	Node0x560870059370:s1 -> Node0x56087005ded0;
+	Node0x56087005df20 [shape=record,label="{debugXML.c:1298:|{<s0>T|<s1>F}}"];
+	Node0x56087005df20:s0 -> Node0x56087005de30;
+	Node0x56087005df20:s1 -> Node0x56087005ded0;
+	Node0x56087005de30 [shape=record,label="{debugXML.c:1299:|{<s0>T|<s1>F}}"];
+	Node0x56087005de30:s0 -> Node0x56087005eee0;
+	Node0x56087005de30:s1 -> Node0x56087005ee90;
+	Node0x56087005ee90 [shape=record,label="{debugXML.c:1303:}"];
+	Node0x56087005ee90 -> Node0x56087005eee0;
+	Node0x56087005eee0 [shape=record,label="{debugXML.c:1304:}"];
+	Node0x56087005eee0 -> Node0x56087005de80;
+	Node0x56087005ded0 [shape=record,label="{debugXML.c:1305:|{<s0>T|<s1>F}}"];
+	Node0x56087005ded0:s0 -> Node0x56087005fb50;
+	Node0x56087005ded0:s1 -> Node0x56087005fb00;
+	Node0x56087005fb00 [shape=record,label="{debugXML.c:1306:}"];
+	Node0x56087005fb00 -> Node0x56087005fb50;
+	Node0x56087005fb50 [shape=record,label="{%76}"];
+	Node0x56087005fb50 -> Node0x56087005de80;
+	Node0x56087005de80 [shape=record,label="{debugXML.c:1307:}"];
+}

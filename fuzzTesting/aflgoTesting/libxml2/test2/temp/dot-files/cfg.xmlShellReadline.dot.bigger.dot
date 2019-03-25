@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlShellReadline' function" {
+	label="CFG for 'xmlShellReadline' function";
+
+	Node0x55f766d71c70 [shape=record,label="{xmllint.c:777:|{<s0>T|<s1>F}}"];
+	Node0x55f766d71c70:s0 -> Node0x55f766f60030;
+	Node0x55f766d71c70:s1 -> Node0x55f766f60080;
+	Node0x55f766f60030 [shape=record,label="{xmllint.c:795:}"];
+	Node0x55f766f60030 -> Node0x55f766f60080;
+	Node0x55f766f60080 [shape=record,label="{xmllint.c:796:|{<s0>T|<s1>F}}"];
+	Node0x55f766f60080:s0 -> Node0x55f766f60eb0;
+	Node0x55f766f60080:s1 -> Node0x55f766f60e60;
+	Node0x55f766f60e60 [shape=record,label="{xmllint.c:798:}"];
+	Node0x55f766f60e60 -> Node0x55f766d71cc0;
+	Node0x55f766f60eb0 [shape=record,label="{xmllint.c:799:|{<s0>T|<s1>F}}"];
+	Node0x55f766f60eb0:s0 -> Node0x55f766f61d40;
+	Node0x55f766f60eb0:s1 -> Node0x55f766f61d90;
+	Node0x55f766f61d40 [shape=record,label="{xmllint.c:803:}"];
+	Node0x55f766f61d40 -> Node0x55f766f61d90;
+	Node0x55f766f61d90 [shape=record,label="{xmllint.c:805:}"];
+	Node0x55f766f61d90 -> Node0x55f766d71cc0;
+	Node0x55f766d71cc0 [shape=record,label="{xmllint.c:807:}"];
+}

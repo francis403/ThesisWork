@@ -1,0 +1,26 @@
+digraph "CFG for 'xmlNsErr' function" {
+	label="CFG for 'xmlNsErr' function";
+
+	Node0x556884791280 [shape=record,label="{parser.c:786:|{<s0>T|<s1>F}}"];
+	Node0x556884791280 -> Node0x55688474e390;
+	Node0x556884791280 -> Node0x55688474e2c0;
+	Node0x55688474e390 [shape=record,label="{parser.c:791:|{<s0>T|<s1>F}}"];
+	Node0x55688474e390 -> Node0x55688474e310;
+	Node0x55688474e390 -> Node0x55688474e2c0;
+	Node0x55688474e310 [shape=record,label="{parser.c:792:|{<s0>T|<s1>F}}"];
+	Node0x55688474e310 -> Node0x55688474e270;
+	Node0x55688474e310 -> Node0x55688474e2c0;
+	Node0x55688474e270 [shape=record,label="{parser.c:793:}"];
+	Node0x55688474e270 -> Node0x55688474fa60;
+	Node0x55688474e2c0 [shape=record,label="{parser.c:794:|{<s0>T|<s1>F}}"];
+	Node0x55688474e2c0 -> Node0x55688474ecc0;
+	Node0x55688474e2c0 -> Node0x55688474ed10;
+	Node0x55688474ecc0 [shape=record,label="{parser.c:795:}"];
+	Node0x55688474ecc0 -> Node0x55688474ed10;
+	Node0x55688474ed10 [shape=record,label="{parser.c:796:|{<s0>T|<s1>F}}"];
+	Node0x55688474ed10 -> Node0x55688474fa10;
+	Node0x55688474ed10 -> Node0x55688474fa60;
+	Node0x55688474fa10 [shape=record,label="{parser.c:801:}"];
+	Node0x55688474fa10 -> Node0x55688474fa60;
+	Node0x55688474fa60 [shape=record,label="{parser.c:802:}"];
+}

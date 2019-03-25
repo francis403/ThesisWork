@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlDictReference' function" {
+	label="CFG for 'xmlDictReference' function";
+
+	Node0x5612f25c4620 [shape=record,label="{dict.c:638:|{<s0>T|<s1>F}}"];
+	Node0x5612f25c4620:s0 -> Node0x5612f25bd8b0;
+	Node0x5612f25c4620:s1 -> Node0x5612f25c4790;
+	Node0x5612f25c4790 [shape=record,label="{dict.c:640:|{<s0>T|<s1>F}}"];
+	Node0x5612f25c4790:s0 -> Node0x5612f25beb40;
+	Node0x5612f25c4790:s1 -> Node0x5612f25beaf0;
+	Node0x5612f25beaf0 [shape=record,label="{dict.c:641:}"];
+	Node0x5612f25beaf0 -> Node0x5612f25be7f0;
+	Node0x5612f25beb40 [shape=record,label="{dict.c:640:}"];
+	Node0x5612f25beb40 -> Node0x5612f25bd8b0;
+	Node0x5612f25bd8b0 [shape=record,label="{dict.c:643:|{<s0>T|<s1>F}}"];
+	Node0x5612f25bd8b0:s0 -> Node0x5612f25c8680;
+	Node0x5612f25bd8b0:s1 -> Node0x5612f25c86d0;
+	Node0x5612f25c8680 [shape=record,label="{dict.c:643:}"];
+	Node0x5612f25c8680 -> Node0x5612f25be7f0;
+	Node0x5612f25c86d0 [shape=record,label="{dict.c:644:}"];
+	Node0x5612f25c86d0 -> Node0x5612f25be7f0;
+	Node0x5612f25be7f0 [shape=record,label="{dict.c:648:}"];
+}

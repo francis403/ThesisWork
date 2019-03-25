@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsPrivateUseArea' function" {
+	label="CFG for 'xmlUCSIsPrivateUseArea' function";
+
+	Node0x56123dd00980 [shape=record,label="{xmlunicode.c:2239:|{<s0>T|<s1>F}}"];
+	Node0x56123dd00980:s0 -> Node0x56123dd06370;
+	Node0x56123dd00980:s1 -> Node0x56123dd06320;
+	Node0x56123dd06370 [shape=record,label="{xmlunicode.c:2240:}"];
+	Node0x56123dd06370 -> Node0x56123dd06320;
+	Node0x56123dd06320 [shape=record,label="{xmlunicode.c:2240:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlBufDumpNotationTable' function" {
+	label="CFG for 'xmlBufDumpNotationTable' function";
+
+	Node0x561c32fdce60 [shape=record,label="{xmlsave.c:468:|{<s0>T|<s1>F}}"];
+	Node0x561c32fdce60:s0 -> Node0x561c33000db0;
+	Node0x561c32fdce60:s1 -> Node0x561c33000e00;
+	Node0x561c33000db0 [shape=record,label="{xmlsave.c:476:}"];
+	Node0x561c33000db0 -> Node0x561c32fd77a0;
+	Node0x561c33000e00 [shape=record,label="{xmlsave.c:478:}"];
+	Node0x561c33000e00 -> Node0x561c32fd77a0;
+	Node0x561c32fd77a0 [shape=record,label="{xmlsave.c:480:}"];
+}

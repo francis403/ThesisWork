@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathCastNodeToNumber' function" {
+	label="CFG for 'libxml_xmlXPathCastNodeToNumber' function";
+
+	Node0x55afb94db9b0 [shape=record,label="{libxml2-py.c:12854:|{<s0>T|<s1>F}}"];
+	Node0x55afb94db9b0:s0 -> Node0x55afb94dfc20;
+	Node0x55afb94db9b0:s1 -> Node0x55afb94dfbd0;
+	Node0x55afb94dfbd0 [shape=record,label="{libxml2-py.c:12861:}"];
+	Node0x55afb94dfbd0 -> Node0x55afb94dd2a0;
+	Node0x55afb94dfc20 [shape=record,label="{libxml2-py.c:12862:|{<s0>T|<s1>F}}"];
+	Node0x55afb94dfc20:s0 -> Node0x55afb94e0410;
+	Node0x55afb94dfc20:s1 -> Node0x55afb94e0460;
+	Node0x55afb94e0410 [shape=record,label="{libxml2-py.c:12862:}"];
+	Node0x55afb94e0410 -> Node0x55afb94e04b0;
+	Node0x55afb94e0460 [shape=record,label="{libxml2-py.c:12862:}"];
+	Node0x55afb94e0460 -> Node0x55afb94e04b0;
+	Node0x55afb94e04b0 [shape=record,label="{libxml2-py.c:12862:}"];
+	Node0x55afb94e04b0 -> Node0x55afb94dd2a0;
+	Node0x55afb94dd2a0 [shape=record,label="{libxml2-py.c:12867:}"];
+}

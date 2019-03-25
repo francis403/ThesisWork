@@ -1,0 +1,29 @@
+digraph "CFG for 'libxml_properties' function" {
+	label="CFG for 'libxml_properties' function";
+
+	Node0x55bbb2a17070 [shape=record,label="{libxml.c:2509:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2a17070:s0 -> Node0x55bbb2a18380;
+	Node0x55bbb2a17070:s1 -> Node0x55bbb2a18330;
+	Node0x55bbb2a18330 [shape=record,label="{libxml.c:2516:}"];
+	Node0x55bbb2a18330 -> Node0x55bbb2a170c0;
+	Node0x55bbb2a18380 [shape=record,label="{libxml.c:2517:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2a18380:s0 -> Node0x55bbb2a18af0;
+	Node0x55bbb2a18380:s1 -> Node0x55bbb2a18b40;
+	Node0x55bbb2a18af0 [shape=record,label="{libxml.c:2517:}"];
+	Node0x55bbb2a18af0 -> Node0x55bbb2a18b90;
+	Node0x55bbb2a18b40 [shape=record,label="{libxml.c:2517:}"];
+	Node0x55bbb2a18b40 -> Node0x55bbb2a18b90;
+	Node0x55bbb2a18b90 [shape=record,label="{libxml.c:2517:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2a18b90:s0 -> Node0x55bbb2a191f0;
+	Node0x55bbb2a18b90:s1 -> Node0x55bbb2a191a0;
+	Node0x55bbb2a191f0 [shape=record,label="{libxml.c:2518:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2a191f0:s0 -> Node0x55bbb2a19100;
+	Node0x55bbb2a191f0:s1 -> Node0x55bbb2a191a0;
+	Node0x55bbb2a19100 [shape=record,label="{libxml.c:2519:}"];
+	Node0x55bbb2a19100 -> Node0x55bbb2a19150;
+	Node0x55bbb2a191a0 [shape=record,label="{libxml.c:2521:}"];
+	Node0x55bbb2a191a0 -> Node0x55bbb2a19150;
+	Node0x55bbb2a19150 [shape=record,label="{libxml.c:2522:}"];
+	Node0x55bbb2a19150 -> Node0x55bbb2a170c0;
+	Node0x55bbb2a170c0 [shape=record,label="{libxml.c:2524:}"];
+}

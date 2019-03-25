@@ -1,0 +1,18 @@
+digraph "CFG for 'xmlTextReaderGetParserColumnNumber' function" {
+	label="CFG for 'xmlTextReaderGetParserColumnNumber' function";
+
+	Node0x556e3dbd8510 [shape=record,label="{xmlreader.c:3915:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbd8510 -> Node0x556e3dbd9c10;
+	Node0x556e3dbd8510 -> Node0x556e3dbd8a20;
+	Node0x556e3dbd8a20 [shape=record,label="{xmlreader.c:3917:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbd8a20 -> Node0x556e3dbd9c10;
+	Node0x556e3dbd8a20 -> Node0x556e3dbd89d0;
+	Node0x556e3dbd89d0 [shape=record,label="{xmlreader.c:3918:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbd89d0 -> Node0x556e3dbd9c10;
+	Node0x556e3dbd89d0 -> Node0x556e3dbd9c60;
+	Node0x556e3dbd9c10 [shape=record,label="{xmlreader.c:3919:}"];
+	Node0x556e3dbd9c10 -> Node0x556e3dbd8900;
+	Node0x556e3dbd9c60 [shape=record,label="{xmlreader.c:3921:}"];
+	Node0x556e3dbd9c60 -> Node0x556e3dbd8900;
+	Node0x556e3dbd8900 [shape=record,label="{xmlreader.c:3922:}"];
+}

@@ -1,0 +1,21 @@
+digraph "CFG for 'xmlListReverse' function" {
+	label="CFG for 'xmlListReverse' function";
+
+	Node0x55cd5e2a29a0 [shape=record,label="{list.c:618:|{<s0>T|<s1>F}}"];
+	Node0x55cd5e2a29a0:s0 -> Node0x55cd5e2853f0;
+	Node0x55cd5e2a29a0:s1 -> Node0x55cd5e285440;
+	Node0x55cd5e2853f0 [shape=record,label="{list.c:624:}"];
+	Node0x55cd5e2853f0 -> Node0x55cd5e2a3860;
+	Node0x55cd5e285440 [shape=record,label="{list.c:625:}"];
+	Node0x55cd5e285440 -> Node0x55cd5e2a6720;
+	Node0x55cd5e2a6720 [shape=record,label="{list.c:626:|{<s0>T|<s1>F}}"];
+	Node0x55cd5e2a6720:s0 -> Node0x55cd5e2a6a00;
+	Node0x55cd5e2a6720:s1 -> Node0x55cd5e2a4390;
+	Node0x55cd5e2a6a00 [shape=record,label="{list.c:627:}"];
+	Node0x55cd5e2a6a00 -> Node0x55cd5e2a6970;
+	Node0x55cd5e2a6970 [shape=record,label="{list.c:626:}"];
+	Node0x55cd5e2a6970 -> Node0x55cd5e2a6720;
+	Node0x55cd5e2a4390 [shape=record,label="{list.c:632:}"];
+	Node0x55cd5e2a4390 -> Node0x55cd5e2a3860;
+	Node0x55cd5e2a3860 [shape=record,label="{list.c:634:}"];
+}

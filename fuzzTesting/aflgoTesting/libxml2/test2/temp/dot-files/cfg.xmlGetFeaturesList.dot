@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlGetFeaturesList' function" {
+	label="CFG for 'xmlGetFeaturesList' function";
+
+	Node0x55cb2175b340 [shape=record,label="{legacy.c:145:|{<s0>T|<s1>F}}"];
+	Node0x55cb2175b340:s0 -> Node0x55cb2175fa80;
+	Node0x55cb2175b340:s1 -> Node0x55cb2175fb20;
+	Node0x55cb2175fb20 [shape=record,label="{legacy.c:150:|{<s0>T|<s1>F}}"];
+	Node0x55cb2175fb20:s0 -> Node0x55cb2175fa80;
+	Node0x55cb2175fb20:s1 -> Node0x55cb2175fad0;
+	Node0x55cb2175fa80 [shape=record,label="{legacy.c:151:}"];
+	Node0x55cb2175fa80 -> Node0x55cb2175e9f0;
+	Node0x55cb2175fad0 [shape=record,label="{legacy.c:152:|{<s0>T|<s1>F}}"];
+	Node0x55cb2175fad0:s0 -> Node0x55cb217602d0;
+	Node0x55cb2175fad0:s1 -> Node0x55cb21760370;
+	Node0x55cb21760370 [shape=record,label="{legacy.c:152:|{<s0>T|<s1>F}}"];
+	Node0x55cb21760370:s0 -> Node0x55cb217602d0;
+	Node0x55cb21760370:s1 -> Node0x55cb21760320;
+	Node0x55cb217602d0 [shape=record,label="{legacy.c:153:}"];
+	Node0x55cb217602d0 -> Node0x55cb2175e9f0;
+	Node0x55cb21760320 [shape=record,label="{legacy.c:154:|{<s0>T|<s1>F}}"];
+	Node0x55cb21760320:s0 -> Node0x55cb21762c40;
+	Node0x55cb21760320:s1 -> Node0x55cb21762c90;
+	Node0x55cb21762c40 [shape=record,label="{legacy.c:155:}"];
+	Node0x55cb21762c40 -> Node0x55cb21762c90;
+	Node0x55cb21762c90 [shape=record,label="{legacy.c:156:}"];
+	Node0x55cb21762c90 -> Node0x55cb21763430;
+	Node0x55cb21763430 [shape=record,label="{legacy.c:156:|{<s0>T|<s1>F}}"];
+	Node0x55cb21763430:s0 -> Node0x55cb21763710;
+	Node0x55cb21763430:s1 -> Node0x55cb21763290;
+	Node0x55cb21763710 [shape=record,label="{legacy.c:157:}"];
+	Node0x55cb21763710 -> Node0x55cb21763680;
+	Node0x55cb21763680 [shape=record,label="{legacy.c:156:}"];
+	Node0x55cb21763680 -> Node0x55cb21763430;
+	Node0x55cb21763290 [shape=record,label="{legacy.c:158:}"];
+	Node0x55cb21763290 -> Node0x55cb2175e9f0;
+	Node0x55cb2175e9f0 [shape=record,label="{legacy.c:159:}"];
+}

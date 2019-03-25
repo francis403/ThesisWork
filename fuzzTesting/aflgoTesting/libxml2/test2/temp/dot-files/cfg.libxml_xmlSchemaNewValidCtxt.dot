@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlSchemaNewValidCtxt' function" {
+	label="CFG for 'libxml_xmlSchemaNewValidCtxt' function";
+
+	Node0x55afb9003780 [shape=record,label="{libxml2-py.c:6951:|{<s0>T|<s1>F}}"];
+	Node0x55afb9003780:s0 -> Node0x55afb9006bd0;
+	Node0x55afb9003780:s1 -> Node0x55afb9006b80;
+	Node0x55afb9006b80 [shape=record,label="{libxml2-py.c:6958:}"];
+	Node0x55afb9006b80 -> Node0x55afb9003a10;
+	Node0x55afb9006bd0 [shape=record,label="{libxml2-py.c:6959:|{<s0>T|<s1>F}}"];
+	Node0x55afb9006bd0:s0 -> Node0x55afb90073c0;
+	Node0x55afb9006bd0:s1 -> Node0x55afb9007410;
+	Node0x55afb90073c0 [shape=record,label="{libxml2-py.c:6959:}"];
+	Node0x55afb90073c0 -> Node0x55afb9007460;
+	Node0x55afb9007410 [shape=record,label="{libxml2-py.c:6959:}"];
+	Node0x55afb9007410 -> Node0x55afb9007460;
+	Node0x55afb9007460 [shape=record,label="{libxml2-py.c:6959:}"];
+	Node0x55afb9007460 -> Node0x55afb9003a10;
+	Node0x55afb9003a10 [shape=record,label="{libxml2-py.c:6964:}"];
+}

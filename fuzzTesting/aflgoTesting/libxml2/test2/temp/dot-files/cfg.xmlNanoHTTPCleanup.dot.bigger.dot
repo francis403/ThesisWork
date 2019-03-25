@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlNanoHTTPCleanup' function" {
+	label="CFG for 'xmlNanoHTTPCleanup' function";
+
+	Node0x55930be86cd0 [shape=record,label="{nanohttp.c:262:|{<s0>T|<s1>F}}"];
+	Node0x55930be86cd0:s0 -> Node0x55930be87170;
+	Node0x55930be86cd0:s1 -> Node0x55930be89030;
+	Node0x55930be87170 [shape=record,label="{nanohttp.c:263:}"];
+	Node0x55930be87170 -> Node0x55930be89030;
+	Node0x55930be89030 [shape=record,label="{nanohttp.c:270:}"];
+}

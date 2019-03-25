@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlNanoFTPSendPasswd' function" {
+	label="CFG for 'xmlNanoFTPSendPasswd' function";
+
+	Node0x5612c54e75b0 [shape=record,label="{nanoftp.c:785:|{<s0>T|<s1>F}}"];
+	Node0x5612c54e75b0 -> Node0x5612c54e8710;
+	Node0x5612c54e75b0 -> Node0x5612c54e87b0;
+	Node0x5612c54e8710 [shape=record,label="{nanoftp.c:792:}"];
+	Node0x5612c54e8710 -> Node0x5612c54e8760;
+	Node0x5612c54e87b0 [shape=record,label="{nanoftp.c:794:}"];
+	Node0x5612c54e87b0 -> Node0x5612c54e8760;
+	Node0x5612c54e8760 [shape=record,label="{nanoftp.c:795:|{<s0>T|<s1>F}}"];
+	Node0x5612c54e8760 -> Node0x5612c54e9bf0;
+	Node0x5612c54e8760 -> Node0x5612c54e9c40;
+	Node0x5612c54e9bf0 [shape=record,label="{nanoftp.c:802:}"];
+	Node0x5612c54e9bf0 -> Node0x5612c54e7600;
+	Node0x5612c54e9c40 [shape=record,label="{nanoftp.c:805:}"];
+	Node0x5612c54e9c40 -> Node0x5612c54e7600;
+	Node0x5612c54e7600 [shape=record,label="{nanoftp.c:806:}"];
+}

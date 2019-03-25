@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlThrDefDefaultBufferSize' function" {
+	label="CFG for 'libxml_xmlThrDefDefaultBufferSize' function";
+
+	Node0x55afb8d81b10 [shape=record,label="{libxml2-py.c:8864:|{<s0>T|<s1>F}}"];
+	Node0x55afb8d81b10:s0 -> Node0x55afb92087e0;
+	Node0x55afb8d81b10:s1 -> Node0x55afb9208790;
+	Node0x55afb9208790 [shape=record,label="{libxml2-py.c:8870:}"];
+	Node0x55afb9208790 -> Node0x55afb8d81da0;
+	Node0x55afb92087e0 [shape=record,label="{libxml2-py.c:8872:}"];
+	Node0x55afb92087e0 -> Node0x55afb8d81da0;
+	Node0x55afb8d81da0 [shape=record,label="{libxml2-py.c:8875:}"];
+}

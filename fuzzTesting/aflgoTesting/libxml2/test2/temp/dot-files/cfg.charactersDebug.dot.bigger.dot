@@ -1,0 +1,26 @@
+digraph "CFG for 'charactersDebug' function" {
+	label="CFG for 'charactersDebug' function";
+
+	Node0x55f766dd3e30 [shape=record,label="{xmllint.c:1276:|{<s0>T|<s1>F}}"];
+	Node0x55f766dd3e30 -> Node0x55f766dd5d80;
+	Node0x55f766dd3e30 -> Node0x55f766dd5dd0;
+	Node0x55f766dd5d80 [shape=record,label="{xmllint.c:1283:}"];
+	Node0x55f766dd5d80 -> Node0x55f766dd3d90;
+	Node0x55f766dd5dd0 [shape=record,label="{xmllint.c:1284:}"];
+	Node0x55f766dd5dd0 -> Node0x55f766dd6220;
+	Node0x55f766dd6220 [shape=record,label="{xmllint.c:1284:|{<s0>T|<s1>F}}"];
+	Node0x55f766dd6220 -> Node0x55f766dd65d0;
+	Node0x55f766dd6220 -> Node0x55f766dd6580;
+	Node0x55f766dd65d0 [shape=record,label="{xmllint.c:1284:}"];
+	Node0x55f766dd65d0 -> Node0x55f766dd6580;
+	Node0x55f766dd6580 [shape=record,label="{xmllint.c:1284:|{<s0>T|<s1>F}}"];
+	Node0x55f766dd6580 -> Node0x55f766dd6500;
+	Node0x55f766dd6580 -> Node0x55f766dd6080;
+	Node0x55f766dd6500 [shape=record,label="{xmllint.c:1285:}"];
+	Node0x55f766dd6500 -> Node0x55f766dd6470;
+	Node0x55f766dd6470 [shape=record,label="{xmllint.c:1284:}"];
+	Node0x55f766dd6470 -> Node0x55f766dd6220;
+	Node0x55f766dd6080 [shape=record,label="{xmllint.c:1286:}"];
+	Node0x55f766dd6080 -> Node0x55f766dd3d90;
+	Node0x55f766dd3d90 [shape=record,label="{xmllint.c:1289:}"];
+}

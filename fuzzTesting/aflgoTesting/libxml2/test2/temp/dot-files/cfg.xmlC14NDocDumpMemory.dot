@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlC14NDocDumpMemory' function" {
+	label="CFG for 'xmlC14NDocDumpMemory' function";
+
+	Node0x55b0aec73c70 [shape=record,label="{c14n.c:2001:|{<s0>T|<s1>F}}"];
+	Node0x55b0aec73c70 -> Node0x55b0aec7bd40;
+	Node0x55b0aec73c70 -> Node0x55b0aec7bd90;
+	Node0x55b0aec7bd40 [shape=record,label="{c14n.c:2009:}"];
+	Node0x55b0aec7bd40 -> Node0x55b0aec767d0;
+	Node0x55b0aec7bd90 [shape=record,label="{c14n.c:2013:|{<s0>T|<s1>F}}"];
+	Node0x55b0aec7bd90 -> Node0x55b0aec50190;
+	Node0x55b0aec7bd90 -> Node0x55b0aec7e5d0;
+	Node0x55b0aec50190 [shape=record,label="{c14n.c:2020:}"];
+	Node0x55b0aec50190 -> Node0x55b0aec767d0;
+	Node0x55b0aec7e5d0 [shape=record,label="{c14n.c:2027:|{<s0>T|<s1>F}}"];
+	Node0x55b0aec7e5d0 -> Node0x55b0aec7f270;
+	Node0x55b0aec7e5d0 -> Node0x55b0aec7f2c0;
+	Node0x55b0aec7f270 [shape=record,label="{c14n.c:2030:}"];
+	Node0x55b0aec7f270 -> Node0x55b0aec767d0;
+	Node0x55b0aec7f2c0 [shape=record,label="{c14n.c:2035:|{<s0>T|<s1>F}}"];
+	Node0x55b0aec7f2c0 -> Node0x55b0aec81dc0;
+	Node0x55b0aec7f2c0 -> Node0x55b0aec81e10;
+	Node0x55b0aec81dc0 [shape=record,label="{c14n.c:2037:}"];
+	Node0x55b0aec81dc0 -> Node0x55b0aec81e10;
+	Node0x55b0aec81e10 [shape=record,label="{c14n.c:2039:|{<s0>T|<s1>F}}"];
+	Node0x55b0aec81e10 -> Node0x55b0aec82b40;
+	Node0x55b0aec81e10 -> Node0x55b0aec82af0;
+	Node0x55b0aec82b40 [shape=record,label="{c14n.c:2041:|{<s0>T|<s1>F}}"];
+	Node0x55b0aec82b40 -> Node0x55b0aec82aa0;
+	Node0x55b0aec82b40 -> Node0x55b0aec82af0;
+	Node0x55b0aec82aa0 [shape=record,label="{c14n.c:2042:}"];
+	Node0x55b0aec82aa0 -> Node0x55b0aec767d0;
+	Node0x55b0aec82af0 [shape=record,label="{c14n.c:2045:}"];
+	Node0x55b0aec82af0 -> Node0x55b0aec767d0;
+	Node0x55b0aec767d0 [shape=record,label="{c14n.c:2046:}"];
+}

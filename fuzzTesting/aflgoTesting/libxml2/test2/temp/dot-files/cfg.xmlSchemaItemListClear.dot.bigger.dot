@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlSchemaItemListClear' function" {
+	label="CFG for 'xmlSchemaItemListClear' function";
+
+	Node0x5644a9076e70 [shape=record,label="{xmlschemas.c:3352:|{<s0>T|<s1>F}}"];
+	Node0x5644a9076e70:s0 -> Node0x5644a85b4f20;
+	Node0x5644a9076e70:s1 -> Node0x5644a85b4f70;
+	Node0x5644a85b4f20 [shape=record,label="{xmlschemas.c:3355:}"];
+	Node0x5644a85b4f20 -> Node0x5644a85b4f70;
+	Node0x5644a85b4f70 [shape=record,label="{xmlschemas.c:3358:}"];
+}

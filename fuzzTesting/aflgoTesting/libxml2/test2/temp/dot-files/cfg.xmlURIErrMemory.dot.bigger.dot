@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlURIErrMemory' function" {
+	label="CFG for 'xmlURIErrMemory' function";
+
+	Node0x5589eaf1bf30 [shape=record,label="{uri.c:36:|{<s0>T|<s1>F}}"];
+	Node0x5589eaf1bf30:s0 -> Node0x5589eaf15f40;
+	Node0x5589eaf1bf30:s1 -> Node0x5589eaf15fe0;
+	Node0x5589eaf15f40 [shape=record,label="{uri.c:42:}"];
+	Node0x5589eaf15f40 -> Node0x5589eaf15f90;
+	Node0x5589eaf15fe0 [shape=record,label="{uri.c:45:}"];
+	Node0x5589eaf15fe0 -> Node0x5589eaf15f90;
+	Node0x5589eaf15f90 [shape=record,label="{uri.c:50:}"];
+}

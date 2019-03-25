@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlLoadExternalEntity' function" {
+	label="CFG for 'xmlLoadExternalEntity' function";
+
+	Node0x5651baa6eb70 [shape=record,label="{xmlIO.c:4020:|{<s0>T|<s1>F}}"];
+	Node0x5651baa6eb70 -> Node0x5651baa73c60;
+	Node0x5651baa6eb70 -> Node0x5651baa73c10;
+	Node0x5651baa73c60 [shape=record,label="{xmlIO.c:4022:|{<s0>T|<s1>F}}"];
+	Node0x5651baa73c60 -> Node0x5651baa73bc0;
+	Node0x5651baa73c60 -> Node0x5651baa73c10;
+	Node0x5651baa73bc0 [shape=record,label="{xmlIO.c:4023:|{<s0>T|<s1>F}}"];
+	Node0x5651baa73bc0 -> Node0x5651baa74f70;
+	Node0x5651baa73bc0 -> Node0x5651baa74fc0;
+	Node0x5651baa74f70 [shape=record,label="{xmlIO.c:4028:}"];
+	Node0x5651baa74f70 -> Node0x5651baa6eab0;
+	Node0x5651baa74fc0 [shape=record,label="{xmlIO.c:4032:}"];
+	Node0x5651baa74fc0 -> Node0x5651baa6eab0;
+	Node0x5651baa73c10 [shape=record,label="{xmlIO.c:4036:}"];
+	Node0x5651baa73c10 -> Node0x5651baa6eab0;
+	Node0x5651baa6eab0 [shape=record,label="{xmlIO.c:4037:}"];
+}

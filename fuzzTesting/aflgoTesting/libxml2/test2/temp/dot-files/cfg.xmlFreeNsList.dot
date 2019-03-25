@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlFreeNsList' function" {
+	label="CFG for 'xmlFreeNsList' function";
+
+	Node0x55a216b0f850 [shape=record,label="{tree.c:847:|{<s0>T|<s1>F}}"];
+	Node0x55a216b0f850 -> Node0x55a216b0fcd0;
+	Node0x55a216b0f850 -> Node0x55a216b10500;
+	Node0x55a216b0fcd0 [shape=record,label="{tree.c:854:}"];
+	Node0x55a216b0fcd0 -> Node0x55a216b10b30;
+	Node0x55a216b10500 [shape=record,label="{tree.c:856:}"];
+	Node0x55a216b10500 -> Node0x55a216b10910;
+	Node0x55a216b10910 [shape=record,label="{tree.c:856:|{<s0>T|<s1>F}}"];
+	Node0x55a216b10910 -> Node0x55a216b10d10;
+	Node0x55a216b10910 -> Node0x55a216b10b30;
+	Node0x55a216b10d10 [shape=record,label="{tree.c:857:}"];
+	Node0x55a216b10d10 -> Node0x55a216b10910;
+	Node0x55a216b10b30 [shape=record,label="{tree.c:861:}"];
+}

@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlNewCatalog' function" {
+	label="CFG for 'xmlNewCatalog' function";
+
+	Node0x5621aa3c0a90 [shape=record,label="{catalog.c:3025:|{<s0>T|<s1>F}}"];
+	Node0x5621aa3c0a90 -> Node0x5621aa39c1c0;
+	Node0x5621aa3c0a90 -> Node0x5621aa39c260;
+	Node0x5621aa39c1c0 [shape=record,label="{catalog.c:3030:|{<s0>T|<s1>F}}"];
+	Node0x5621aa39c1c0 -> Node0x5621aa3c0840;
+	Node0x5621aa39c1c0 -> Node0x5621aa3c0770;
+	Node0x5621aa3c0840 [shape=record,label="{catalog.c:3031:|{<s0>T|<s1>F}}"];
+	Node0x5621aa3c0840 -> Node0x5621aa39c730;
+	Node0x5621aa3c0840 -> Node0x5621aa3c0770;
+	Node0x5621aa39c730 [shape=record,label="{catalog.c:3032:}"];
+	Node0x5621aa39c730 -> Node0x5621aa3c0770;
+	Node0x5621aa3c0770 [shape=record,label="{catalog.c:3033:}"];
+	Node0x5621aa3c0770 -> Node0x5621aa39c210;
+	Node0x5621aa39c260 [shape=record,label="{catalog.c:3035:}"];
+	Node0x5621aa39c260 -> Node0x5621aa39c210;
+	Node0x5621aa39c210 [shape=record,label="{catalog.c:3036:}"];
+}

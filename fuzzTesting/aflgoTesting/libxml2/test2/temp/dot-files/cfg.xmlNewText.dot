@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlNewText' function" {
+	label="CFG for 'xmlNewText' function";
+
+	Node0x55a216c48030 [shape=record,label="{tree.c:2439:|{<s0>T|<s1>F}}"];
+	Node0x55a216c48030 -> Node0x55a216c49070;
+	Node0x55a216c48030 -> Node0x55a216c490c0;
+	Node0x55a216c49070 [shape=record,label="{tree.c:2447:}"];
+	Node0x55a216c49070 -> Node0x55a216c45de0;
+	Node0x55a216c490c0 [shape=record,label="{tree.c:2450:|{<s0>T|<s1>F}}"];
+	Node0x55a216c490c0 -> Node0x55a216c49e80;
+	Node0x55a216c490c0 -> Node0x55a216c49ed0;
+	Node0x55a216c49e80 [shape=record,label="{tree.c:2455:}"];
+	Node0x55a216c49e80 -> Node0x55a216c49ed0;
+	Node0x55a216c49ed0 [shape=record,label="{tree.c:2458:|{<s0>T|<s1>F}}"];
+	Node0x55a216c49ed0 -> Node0x55a216c4a680;
+	Node0x55a216c49ed0 -> Node0x55a216c4a630;
+	Node0x55a216c4a680 [shape=record,label="{tree.c:2458:|{<s0>T|<s1>F}}"];
+	Node0x55a216c4a680 -> Node0x55a216c4a5e0;
+	Node0x55a216c4a680 -> Node0x55a216c4a630;
+	Node0x55a216c4a5e0 [shape=record,label="{tree.c:2459:}"];
+	Node0x55a216c4a5e0 -> Node0x55a216c4a630;
+	Node0x55a216c4a630 [shape=record,label="{tree.c:2460:}"];
+	Node0x55a216c4a630 -> Node0x55a216c45de0;
+	Node0x55a216c45de0 [shape=record,label="{tree.c:2461:}"];
+}

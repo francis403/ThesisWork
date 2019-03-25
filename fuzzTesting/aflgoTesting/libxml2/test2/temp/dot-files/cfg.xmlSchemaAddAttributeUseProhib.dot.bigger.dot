@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaAddAttributeUseProhib' function" {
+	label="CFG for 'xmlSchemaAddAttributeUseProhib' function";
+
+	Node0x5644a888ff30 [shape=record,label="{xmlschemas.c:5468:|{<s0>T|<s1>F}}"];
+	Node0x5644a888ff30:s0 -> Node0x5644a8890d10;
+	Node0x5644a888ff30:s1 -> Node0x5644a8890d60;
+	Node0x5644a8890d10 [shape=record,label="{xmlschemas.c:5475:}"];
+	Node0x5644a8890d10 -> Node0x5644a888ff80;
+	Node0x5644a8890d60 [shape=record,label="{xmlschemas.c:5479:}"];
+	Node0x5644a8890d60 -> Node0x5644a888ff80;
+	Node0x5644a888ff80 [shape=record,label="{xmlschemas.c:5483:}"];
+}

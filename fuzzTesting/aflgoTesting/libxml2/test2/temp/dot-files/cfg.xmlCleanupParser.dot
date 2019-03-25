@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlCleanupParser' function" {
+	label="CFG for 'xmlCleanupParser' function";
+
+	Node0x556884a5c860 [shape=record,label="{parser.c:14767:|{<s0>T|<s1>F}}"];
+	Node0x556884a5c860 -> Node0x556884a5c9e0;
+	Node0x556884a5c860 -> Node0x556884a5c990;
+	Node0x556884a5c990 [shape=record,label="{parser.c:14768:}"];
+	Node0x556884a5c990 -> Node0x556884a5cac0;
+	Node0x556884a5c9e0 [shape=record,label="{parser.c:14770:}"];
+	Node0x556884a5c9e0 -> Node0x556884a5cac0;
+	Node0x556884a5cac0 [shape=record,label="{parser.c:14788:}"];
+}

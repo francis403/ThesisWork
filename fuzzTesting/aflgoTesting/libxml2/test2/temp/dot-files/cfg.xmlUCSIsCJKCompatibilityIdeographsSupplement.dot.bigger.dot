@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsCJKCompatibilityIdeographsSupplement' function" {
+	label="CFG for 'xmlUCSIsCJKCompatibilityIdeographsSupplement' function";
+
+	Node0x56123dcdead0 [shape=record,label="{xmlunicode.c:1223:|{<s0>T|<s1>F}}"];
+	Node0x56123dcdead0:s0 -> Node0x56123dcdf580;
+	Node0x56123dcdead0:s1 -> Node0x56123dcde530;
+	Node0x56123dcdf580 [shape=record,label="{xmlunicode.c:1224:}"];
+	Node0x56123dcdf580 -> Node0x56123dcde530;
+	Node0x56123dcde530 [shape=record,label="{xmlunicode.c:1224:}"];
+}

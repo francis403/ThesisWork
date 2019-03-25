@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlDictOwns' function" {
+	label="CFG for 'xmlDictOwns' function";
+
+	Node0x5612f2624380 [shape=record,label="{dict.c:1211:|{<s0>T|<s1>F}}"];
+	Node0x5612f2624380 -> Node0x5612f25fbf60;
+	Node0x5612f2624380 -> Node0x5612f25fc000;
+	Node0x5612f25fc000 [shape=record,label="{dict.c:1214:|{<s0>T|<s1>F}}"];
+	Node0x5612f25fc000 -> Node0x5612f25fbf60;
+	Node0x5612f25fc000 -> Node0x5612f25fbfb0;
+	Node0x5612f25fbf60 [shape=record,label="{dict.c:1215:}"];
+	Node0x5612f25fbf60 -> Node0x5612f262f0f0;
+	Node0x5612f25fbfb0 [shape=record,label="{dict.c:1216:}"];
+	Node0x5612f25fbfb0 -> Node0x5612f263a8f0;
+	Node0x5612f263a8f0 [shape=record,label="{dict.c:1217:|{<s0>T|<s1>F}}"];
+	Node0x5612f263a8f0 -> Node0x5612f263acb0;
+	Node0x5612f263a8f0 -> Node0x5612f263aad0;
+	Node0x5612f263acb0 [shape=record,label="{dict.c:1218:|{<s0>T|<s1>F}}"];
+	Node0x5612f263acb0 -> Node0x5612f263af00;
+	Node0x5612f263acb0 -> Node0x5612f263aeb0;
+	Node0x5612f263af00 [shape=record,label="{dict.c:1218:|{<s0>T|<s1>F}}"];
+	Node0x5612f263af00 -> Node0x5612f263ae60;
+	Node0x5612f263af00 -> Node0x5612f263aeb0;
+	Node0x5612f263ae60 [shape=record,label="{dict.c:1219:}"];
+	Node0x5612f263ae60 -> Node0x5612f262f0f0;
+	Node0x5612f263aeb0 [shape=record,label="{dict.c:1220:}"];
+	Node0x5612f263aeb0 -> Node0x5612f263a8f0;
+	Node0x5612f263aad0 [shape=record,label="{dict.c:1222:|{<s0>T|<s1>F}}"];
+	Node0x5612f263aad0 -> Node0x5612f263ba20;
+	Node0x5612f263aad0 -> Node0x5612f263ba70;
+	Node0x5612f263ba20 [shape=record,label="{dict.c:1223:}"];
+	Node0x5612f263ba20 -> Node0x5612f262f0f0;
+	Node0x5612f263ba70 [shape=record,label="{dict.c:1224:}"];
+	Node0x5612f263ba70 -> Node0x5612f262f0f0;
+	Node0x5612f262f0f0 [shape=record,label="{dict.c:1225:}"];
+}

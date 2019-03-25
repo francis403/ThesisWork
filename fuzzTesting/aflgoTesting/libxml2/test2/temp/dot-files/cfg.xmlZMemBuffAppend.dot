@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlZMemBuffAppend' function" {
+	label="CFG for 'xmlZMemBuffAppend' function";
+
+	Node0x5651baac2080 [shape=record,label="{xmlIO.c:1605:|{<s0>T|<s1>F}}"];
+	Node0x5651baac2080 -> Node0x5651baac72d0;
+	Node0x5651baac2080 -> Node0x5651baac7370;
+	Node0x5651baac7370 [shape=record,label="{xmlIO.c:1610:|{<s0>T|<s1>F}}"];
+	Node0x5651baac7370 -> Node0x5651baac72d0;
+	Node0x5651baac7370 -> Node0x5651baac7320;
+	Node0x5651baac72d0 [shape=record,label="{xmlIO.c:1611:}"];
+	Node0x5651baac72d0 -> Node0x5651baac20d0;
+	Node0x5651baac7320 [shape=record,label="{xmlIO.c:1613:}"];
+	Node0x5651baac7320 -> Node0x5651baac7f90;
+	Node0x5651baac7f90 [shape=record,label="{xmlIO.c:1615:|{<s0>T|<s1>F}}"];
+	Node0x5651baac7f90 -> Node0x5651baac8510;
+	Node0x5651baac7f90 -> Node0x5651baac8170;
+	Node0x5651baac8510 [shape=record,label="{xmlIO.c:1620:|{<s0>T|<s1>F}}"];
+	Node0x5651baac8510 -> Node0x5651baac8ad0;
+	Node0x5651baac8510 -> Node0x5651baac8b20;
+	Node0x5651baac8ad0 [shape=record,label="{xmlIO.c:1622:|{<s0>T|<s1>F}}"];
+	Node0x5651baac8ad0 -> Node0x5651baac91a0;
+	Node0x5651baac8ad0 -> Node0x5651baac91f0;
+	Node0x5651baac91a0 [shape=record,label="{xmlIO.c:1623:}"];
+	Node0x5651baac91a0 -> Node0x5651baac20d0;
+	Node0x5651baac91f0 [shape=record,label="{xmlIO.c:1624:}"];
+	Node0x5651baac91f0 -> Node0x5651baac8b20;
+	Node0x5651baac8b20 [shape=record,label="{xmlIO.c:1626:|{<s0>T|<s1>F}}"];
+	Node0x5651baac8b20 -> Node0x5651ba97c350;
+	Node0x5651baac8b20 -> Node0x5651ba97c3a0;
+	Node0x5651ba97c350 [shape=record,label="{xmlIO.c:1628:}"];
+	Node0x5651ba97c350 -> Node0x5651baac20d0;
+	Node0x5651ba97c3a0 [shape=record,label="{xmlIO.c:1615:}"];
+	Node0x5651ba97c3a0 -> Node0x5651baac7f90;
+	Node0x5651baac8170 [shape=record,label="{xmlIO.c:1638:}"];
+	Node0x5651baac8170 -> Node0x5651baac20d0;
+	Node0x5651baac20d0 [shape=record,label="{xmlIO.c:1641:}"];
+}

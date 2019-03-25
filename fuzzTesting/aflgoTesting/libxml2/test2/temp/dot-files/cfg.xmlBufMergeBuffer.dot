@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlBufMergeBuffer' function" {
+	label="CFG for 'xmlBufMergeBuffer' function";
+
+	Node0x558c8f898a10 [shape=record,label="{buf.c:1257:|{<s0>T|<s1>F}}"];
+	Node0x558c8f898a10 -> Node0x558c8f8a04c0;
+	Node0x558c8f898a10 -> Node0x558c8f8a0560;
+	Node0x558c8f8a0560 [shape=record,label="{buf.c:1260:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8a0560 -> Node0x558c8f8a04c0;
+	Node0x558c8f8a0560 -> Node0x558c8f8a0510;
+	Node0x558c8f8a04c0 [shape=record,label="{buf.c:1261:}"];
+	Node0x558c8f8a04c0 -> Node0x558c8f898c00;
+	Node0x558c8f8a0510 [shape=record,label="{buf.c:1264:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8a0510 -> Node0x558c8f8a1900;
+	Node0x558c8f8a0510 -> Node0x558c8f8a1950;
+	Node0x558c8f8a1900 [shape=record,label="{buf.c:1264:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8a1900 -> Node0x558c8f8a1d60;
+	Node0x558c8f8a1900 -> Node0x558c8f8a1db0;
+	Node0x558c8f8a1d60 [shape=record,label="{buf.c:1264:}"];
+	Node0x558c8f8a1d60 -> Node0x558c8f8a1db0;
+	Node0x558c8f8a1db0 [shape=record,label="{buf.c:1264:}"];
+	Node0x558c8f8a1db0 -> Node0x558c8f8a1950;
+	Node0x558c8f8a1950 [shape=record,label="{buf.c:1264:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8a1950 -> Node0x558c8f8a2340;
+	Node0x558c8f8a1950 -> Node0x558c8f8a2390;
+	Node0x558c8f8a2340 [shape=record,label="{buf.c:1264:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8a2340 -> Node0x558c8f8a28e0;
+	Node0x558c8f8a2340 -> Node0x558c8f8a2930;
+	Node0x558c8f8a28e0 [shape=record,label="{buf.c:1264:}"];
+	Node0x558c8f8a28e0 -> Node0x558c8f8a2930;
+	Node0x558c8f8a2930 [shape=record,label="{buf.c:1264:}"];
+	Node0x558c8f8a2930 -> Node0x558c8f8a2390;
+	Node0x558c8f8a2390 [shape=record,label="{buf.c:1265:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8a2390 -> Node0x558c8f8a3180;
+	Node0x558c8f8a2390 -> Node0x558c8f8a30b0;
+	Node0x558c8f8a3180 [shape=record,label="{buf.c:1265:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8a3180 -> Node0x558c8f8a3100;
+	Node0x558c8f8a3180 -> Node0x558c8f8a30b0;
+	Node0x558c8f8a3100 [shape=record,label="{buf.c:1266:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8a3100 -> Node0x558c8f8a3060;
+	Node0x558c8f8a3100 -> Node0x558c8f8a30b0;
+	Node0x558c8f8a3060 [shape=record,label="{buf.c:1267:}"];
+	Node0x558c8f8a3060 -> Node0x558c8f8a30b0;
+	Node0x558c8f8a30b0 [shape=record,label="{buf.c:1269:}"];
+	Node0x558c8f8a30b0 -> Node0x558c8f898c00;
+	Node0x558c8f898c00 [shape=record,label="{buf.c:1271:}"];
+}

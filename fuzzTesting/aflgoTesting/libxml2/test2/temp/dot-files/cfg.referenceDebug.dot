@@ -1,0 +1,12 @@
+digraph "CFG for 'referenceDebug' function" {
+	label="CFG for 'referenceDebug' function";
+
+	Node0x55f766dd2b10 [shape=record,label="{xmllint.c:1299:|{<s0>T|<s1>F}}"];
+	Node0x55f766dd2b10 -> Node0x55f766dd4200;
+	Node0x55f766dd2b10 -> Node0x55f766dd4250;
+	Node0x55f766dd4200 [shape=record,label="{xmllint.c:1303:}"];
+	Node0x55f766dd4200 -> Node0x55f766dd2a70;
+	Node0x55f766dd4250 [shape=record,label="{xmllint.c:1304:}"];
+	Node0x55f766dd4250 -> Node0x55f766dd2a70;
+	Node0x55f766dd2a70 [shape=record,label="{xmllint.c:1305:}"];
+}

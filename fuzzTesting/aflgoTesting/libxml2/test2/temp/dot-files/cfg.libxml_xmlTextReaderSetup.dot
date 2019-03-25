@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlTextReaderSetup' function" {
+	label="CFG for 'libxml_xmlTextReaderSetup' function";
+
+	Node0x55afb8d7c540 [shape=record,label="{libxml2-py.c:8823:|{<s0>T|<s1>F}}"];
+	Node0x55afb8d7c540:s0 -> Node0x55afb8d7f0e0;
+	Node0x55afb8d7c540:s1 -> Node0x55afb8d7f090;
+	Node0x55afb8d7f090 [shape=record,label="{libxml2-py.c:8835:}"];
+	Node0x55afb8d7f090 -> Node0x55afb8d7c720;
+	Node0x55afb8d7f0e0 [shape=record,label="{libxml2-py.c:8836:|{<s0>T|<s1>F}}"];
+	Node0x55afb8d7f0e0:s0 -> Node0x55afb8d7fac0;
+	Node0x55afb8d7f0e0:s1 -> Node0x55afb8d7fb10;
+	Node0x55afb8d7fac0 [shape=record,label="{libxml2-py.c:8836:}"];
+	Node0x55afb8d7fac0 -> Node0x55afb8d7fb60;
+	Node0x55afb8d7fb10 [shape=record,label="{libxml2-py.c:8836:}"];
+	Node0x55afb8d7fb10 -> Node0x55afb8d7fb60;
+	Node0x55afb8d7fb60 [shape=record,label="{libxml2-py.c:8836:|{<s0>T|<s1>F}}"];
+	Node0x55afb8d7fb60:s0 -> Node0x55afb8d800f0;
+	Node0x55afb8d7fb60:s1 -> Node0x55afb8d80140;
+	Node0x55afb8d800f0 [shape=record,label="{libxml2-py.c:8837:}"];
+	Node0x55afb8d800f0 -> Node0x55afb8d80190;
+	Node0x55afb8d80140 [shape=record,label="{libxml2-py.c:8837:}"];
+	Node0x55afb8d80140 -> Node0x55afb8d80190;
+	Node0x55afb8d80190 [shape=record,label="{libxml2-py.c:8837:}"];
+	Node0x55afb8d80190 -> Node0x55afb8d7c720;
+	Node0x55afb8d7c720 [shape=record,label="{libxml2-py.c:8842:}"];
+}

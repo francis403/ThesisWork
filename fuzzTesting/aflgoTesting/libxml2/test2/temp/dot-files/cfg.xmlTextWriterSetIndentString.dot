@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlTextWriterSetIndentString' function" {
+	label="CFG for 'xmlTextWriterSetIndentString' function";
+
+	Node0x558d984a2d50 [shape=record,label="{xmlwriter.c:4598:|{<s0>T|<s1>F}}"];
+	Node0x558d984a2d50:s0 -> Node0x558d984a5150;
+	Node0x558d984a2d50:s1 -> Node0x558d984a51f0;
+	Node0x558d984a51f0 [shape=record,label="{xmlwriter.c:4600:|{<s0>T|<s1>F}}"];
+	Node0x558d984a51f0:s0 -> Node0x558d984a51a0;
+	Node0x558d984a51f0:s1 -> Node0x558d984a5150;
+	Node0x558d984a5150 [shape=record,label="{xmlwriter.c:4601:}"];
+	Node0x558d984a5150 -> Node0x558d984a3140;
+	Node0x558d984a51a0 [shape=record,label="{xmlwriter.c:4603:|{<s0>T|<s1>F}}"];
+	Node0x558d984a51a0:s0 -> Node0x558d984a5880;
+	Node0x558d984a51a0:s1 -> Node0x558d984a58d0;
+	Node0x558d984a5880 [shape=record,label="{xmlwriter.c:4604:}"];
+	Node0x558d984a5880 -> Node0x558d984a58d0;
+	Node0x558d984a58d0 [shape=record,label="{xmlwriter.c:4605:|{<s0>T|<s1>F}}"];
+	Node0x558d984a58d0:s0 -> Node0x558d984a6280;
+	Node0x558d984a58d0:s1 -> Node0x558d984a61e0;
+	Node0x558d984a61e0 [shape=record,label="{xmlwriter.c:4608:}"];
+	Node0x558d984a61e0 -> Node0x558d984a3140;
+	Node0x558d984a6280 [shape=record,label="{xmlwriter.c:4610:}"];
+	Node0x558d984a6280 -> Node0x558d984a3140;
+	Node0x558d984a3140 [shape=record,label="{xmlwriter.c:4611:}"];
+}

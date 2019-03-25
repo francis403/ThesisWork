@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathCastBooleanToString' function" {
+	label="CFG for 'xmlXPathCastBooleanToString' function";
+
+	Node0x562a79a31610 [shape=record,label="{xpath.c:5687:|{<s0>T|<s1>F}}"];
+	Node0x562a79a31610 -> Node0x562a79a013d0;
+	Node0x562a79a31610 -> Node0x562a79a01470;
+	Node0x562a79a013d0 [shape=record,label="{xpath.c:5690:}"];
+	Node0x562a79a013d0 -> Node0x562a79a01420;
+	Node0x562a79a01470 [shape=record,label="{xpath.c:5692:}"];
+	Node0x562a79a01470 -> Node0x562a79a01420;
+	Node0x562a79a01420 [shape=record,label="{xpath.c:5693:}"];
+}

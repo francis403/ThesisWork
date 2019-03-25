@@ -1,0 +1,35 @@
+digraph "CFG for 'UTF8ToUTF8' function" {
+	label="CFG for 'UTF8ToUTF8' function";
+
+	Node0x56244109e820 [shape=record,label="{encoding.c:355:|{<s0>T|<s1>F}}"];
+	Node0x56244109e820 -> Node0x5624410a0230;
+	Node0x56244109e820 -> Node0x5624410a0350;
+	Node0x5624410a0350 [shape=record,label="{encoding.c:360:|{<s0>T|<s1>F}}"];
+	Node0x5624410a0350 -> Node0x5624410a0230;
+	Node0x5624410a0350 -> Node0x5624410a02d0;
+	Node0x5624410a02d0 [shape=record,label="{encoding.c:360:|{<s0>T|<s1>F}}"];
+	Node0x5624410a02d0 -> Node0x5624410a0230;
+	Node0x5624410a02d0 -> Node0x5624410a0280;
+	Node0x5624410a0230 [shape=record,label="{encoding.c:361:}"];
+	Node0x5624410a0230 -> Node0x56244109e870;
+	Node0x5624410a0280 [shape=record,label="{encoding.c:362:|{<s0>T|<s1>F}}"];
+	Node0x5624410a0280 -> Node0x5624410a0c70;
+	Node0x5624410a0280 -> Node0x5624410a0cc0;
+	Node0x5624410a0c70 [shape=record,label="{encoding.c:364:}"];
+	Node0x5624410a0c70 -> Node0x56244109e870;
+	Node0x5624410a0cc0 [shape=record,label="{encoding.c:368:|{<s0>T|<s1>F}}"];
+	Node0x5624410a0cc0 -> Node0x5624410a1560;
+	Node0x5624410a0cc0 -> Node0x5624410a1600;
+	Node0x5624410a1560 [shape=record,label="{encoding.c:369:}"];
+	Node0x5624410a1560 -> Node0x5624410a15b0;
+	Node0x5624410a1600 [shape=record,label="{encoding.c:371:}"];
+	Node0x5624410a1600 -> Node0x5624410a15b0;
+	Node0x5624410a15b0 [shape=record,label="{encoding.c:373:|{<s0>T|<s1>F}}"];
+	Node0x5624410a15b0 -> Node0x5624410a2100;
+	Node0x5624410a15b0 -> Node0x5624410a2150;
+	Node0x5624410a2100 [shape=record,label="{encoding.c:374:}"];
+	Node0x5624410a2100 -> Node0x56244109e870;
+	Node0x5624410a2150 [shape=record,label="{encoding.c:376:}"];
+	Node0x5624410a2150 -> Node0x56244109e870;
+	Node0x56244109e870 [shape=record,label="{encoding.c:381:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlStopParser' function" {
+	label="CFG for 'libxml_xmlStopParser' function";
+
+	Node0x55afb9067320 [shape=record,label="{libxml2-py.c:7362:|{<s0>T|<s1>F}}"];
+	Node0x55afb9067320:s0 -> Node0x55afb906a9e0;
+	Node0x55afb9067320:s1 -> Node0x55afb906a990;
+	Node0x55afb906a990 [shape=record,label="{libxml2-py.c:7367:}"];
+	Node0x55afb906a990 -> Node0x55afb9067620;
+	Node0x55afb906a9e0 [shape=record,label="{libxml2-py.c:7368:|{<s0>T|<s1>F}}"];
+	Node0x55afb906a9e0:s0 -> Node0x55afb906b1c0;
+	Node0x55afb906a9e0:s1 -> Node0x55afb906b210;
+	Node0x55afb906b1c0 [shape=record,label="{libxml2-py.c:7368:}"];
+	Node0x55afb906b1c0 -> Node0x55afb906b260;
+	Node0x55afb906b210 [shape=record,label="{libxml2-py.c:7368:}"];
+	Node0x55afb906b210 -> Node0x55afb906b260;
+	Node0x55afb906b260 [shape=record,label="{libxml2-py.c:7368:}"];
+	Node0x55afb906b260 -> Node0x55afb9067620;
+	Node0x55afb9067620 [shape=record,label="{libxml2-py.c:7373:}"];
+}

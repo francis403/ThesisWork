@@ -1,0 +1,12 @@
+digraph "CFG for 'startDocumentDebug' function" {
+	label="CFG for 'startDocumentDebug' function";
+
+	Node0x55f766dcbb80 [shape=record,label="{xmllint.c:1201:|{<s0>T|<s1>F}}"];
+	Node0x55f766dcbb80:s0 -> Node0x55f766dccea0;
+	Node0x55f766dcbb80:s1 -> Node0x55f766dccef0;
+	Node0x55f766dccea0 [shape=record,label="{xmllint.c:1205:}"];
+	Node0x55f766dccea0 -> Node0x55f766dcc570;
+	Node0x55f766dccef0 [shape=record,label="{xmllint.c:1206:}"];
+	Node0x55f766dccef0 -> Node0x55f766dcc570;
+	Node0x55f766dcc570 [shape=record,label="{xmllint.c:1207:}"];
+}

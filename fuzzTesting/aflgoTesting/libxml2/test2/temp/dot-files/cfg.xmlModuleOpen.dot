@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlModuleOpen' function" {
+	label="CFG for 'xmlModuleOpen' function";
+
+	Node0x56190228a7f0 [shape=record,label="{xmlmodule.c:78:|{<s0>T|<s1>F}}"];
+	Node0x56190228a7f0:s0 -> Node0x561902398730;
+	Node0x56190228a7f0:s1 -> Node0x561902398780;
+	Node0x561902398730 [shape=record,label="{xmlmodule.c:84:}"];
+	Node0x561902398730 -> Node0x56190228a950;
+	Node0x561902398780 [shape=record,label="{xmlmodule.c:88:|{<s0>T|<s1>F}}"];
+	Node0x561902398780:s0 -> Node0x56190239b7c0;
+	Node0x561902398780:s1 -> Node0x56190239b810;
+	Node0x56190239b7c0 [shape=record,label="{xmlmodule.c:93:}"];
+	Node0x56190239b7c0 -> Node0x56190228a950;
+	Node0x56190239b810 [shape=record,label="{xmlmodule.c:100:}"];
+	Node0x56190239b810 -> Node0x56190228a950;
+	Node0x56190228a950 [shape=record,label="{xmlmodule.c:102:}"];
+}

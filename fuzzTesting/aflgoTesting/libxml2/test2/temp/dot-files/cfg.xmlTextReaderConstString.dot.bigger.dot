@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlTextReaderConstString' function" {
+	label="CFG for 'xmlTextReaderConstString' function";
+
+	Node0x556e3dacf460 [shape=record,label="{xmlreader.c:3761:|{<s0>T|<s1>F}}"];
+	Node0x556e3dacf460:s0 -> Node0x556e3dad1780;
+	Node0x556e3dacf460:s1 -> Node0x556e3dad17d0;
+	Node0x556e3dad1780 [shape=record,label="{xmlreader.c:3763:}"];
+	Node0x556e3dad1780 -> Node0x556e3dacf650;
+	Node0x556e3dad17d0 [shape=record,label="{xmlreader.c:3764:}"];
+	Node0x556e3dad17d0 -> Node0x556e3dacf650;
+	Node0x556e3dacf650 [shape=record,label="{xmlreader.c:3765:}"];
+}

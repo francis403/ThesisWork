@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlSAX2ResolveEntity' function" {
+	label="CFG for 'xmlSAX2ResolveEntity' function";
+
+	Node0x55fcf7bfbca0 [shape=record,label="{SAX2.c:519:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7bfbca0:s0 -> Node0x55fcf7c118d0;
+	Node0x55fcf7bfbca0:s1 -> Node0x55fcf7c11920;
+	Node0x55fcf7c118d0 [shape=record,label="{SAX2.c:526:}"];
+	Node0x55fcf7c118d0 -> Node0x55fcf7c0feb0;
+	Node0x55fcf7c11920 [shape=record,label="{SAX2.c:527:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7c11920:s0 -> Node0x55fcf7c11e20;
+	Node0x55fcf7c11920:s1 -> Node0x55fcf7c11e70;
+	Node0x55fcf7c11e20 [shape=record,label="{SAX2.c:528:}"];
+	Node0x55fcf7c11e20 -> Node0x55fcf7c11e70;
+	Node0x55fcf7c11e70 [shape=record,label="{SAX2.c:529:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7c11e70:s0 -> Node0x55fcf7c12510;
+	Node0x55fcf7c11e70:s1 -> Node0x55fcf7c12560;
+	Node0x55fcf7c12510 [shape=record,label="{SAX2.c:530:}"];
+	Node0x55fcf7c12510 -> Node0x55fcf7c12560;
+	Node0x55fcf7c12560 [shape=record,label="{SAX2.c:532:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7c12560:s0 -> Node0x55fcf7c13900;
+	Node0x55fcf7c12560:s1 -> Node0x55fcf7c13950;
+	Node0x55fcf7c13900 [shape=record,label="{SAX2.c:542:}"];
+	Node0x55fcf7c13900 -> Node0x55fcf7c13950;
+	Node0x55fcf7c13950 [shape=record,label="{SAX2.c:543:}"];
+	Node0x55fcf7c13950 -> Node0x55fcf7c0feb0;
+	Node0x55fcf7c0feb0 [shape=record,label="{SAX2.c:544:}"];
+}

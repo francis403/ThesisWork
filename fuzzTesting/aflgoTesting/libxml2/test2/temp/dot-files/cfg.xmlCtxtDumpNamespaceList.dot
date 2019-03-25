@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlCtxtDumpNamespaceList' function" {
+	label="CFG for 'xmlCtxtDumpNamespaceList' function";
+
+	Node0x5608700d3410 [shape=record,label="{debugXML.c:754:}"];
+	Node0x5608700d3410 -> Node0x56086ff5de60;
+	Node0x56086ff5de60 [shape=record,label="{debugXML.c:756:|{<s0>T|<s1>F}}"];
+	Node0x56086ff5de60 -> Node0x56086ff5e260;
+	Node0x56086ff5de60 -> Node0x56086ff5e080;
+	Node0x56086ff5e260 [shape=record,label="{debugXML.c:757:}"];
+	Node0x56086ff5e260 -> Node0x56086ff5de60;
+	Node0x56086ff5e080 [shape=record,label="{debugXML.c:760:}"];
+}

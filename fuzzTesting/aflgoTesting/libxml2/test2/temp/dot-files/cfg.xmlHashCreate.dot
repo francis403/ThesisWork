@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlHashCreate' function" {
+	label="CFG for 'xmlHashCreate' function";
+
+	Node0x5646947f0990 [shape=record,label="{hash.c:174:|{<s0>T|<s1>F}}"];
+	Node0x5646947f0990 -> Node0x5646948dc510;
+	Node0x5646947f0990 -> Node0x5646948dc560;
+	Node0x5646948dc510 [shape=record,label="{hash.c:178:}"];
+	Node0x5646948dc510 -> Node0x5646948dc560;
+	Node0x5646948dc560 [shape=record,label="{hash.c:180:|{<s0>T|<s1>F}}"];
+	Node0x5646948dc560 -> Node0x5646948dce30;
+	Node0x5646948dc560 -> Node0x5646948dce80;
+	Node0x5646948dce30 [shape=record,label="{hash.c:182:|{<s0>T|<s1>F}}"];
+	Node0x5646948dce30 -> Node0x5646948de220;
+	Node0x5646948dce30 -> Node0x5646948de270;
+	Node0x5646948de220 [shape=record,label="{hash.c:187:}"];
+	Node0x5646948de220 -> Node0x5646947b7da0;
+	Node0x5646948de270 [shape=record,label="{hash.c:193:}"];
+	Node0x5646948de270 -> Node0x5646948dce80;
+	Node0x5646948dce80 [shape=record,label="{hash.c:195:}"];
+	Node0x5646948dce80 -> Node0x5646947b7da0;
+	Node0x5646947b7da0 [shape=record,label="{hash.c:196:}"];
+}

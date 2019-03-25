@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlTextReaderFreePropList' function" {
+	label="CFG for 'xmlTextReaderFreePropList' function";
+
+	Node0x556e3dcffbf0 [shape=record,label="{xmlreader.c:330:}"];
+	Node0x556e3dcffbf0 -> Node0x556e3dd0e490;
+	Node0x556e3dd0e490 [shape=record,label="{xmlreader.c:333:|{<s0>T|<s1>F}}"];
+	Node0x556e3dd0e490:s0 -> Node0x556e3dd0e890;
+	Node0x556e3dd0e490:s1 -> Node0x556e3dd0e6b0;
+	Node0x556e3dd0e890 [shape=record,label="{xmlreader.c:334:}"];
+	Node0x556e3dd0e890 -> Node0x556e3dd0e490;
+	Node0x556e3dd0e6b0 [shape=record,label="{xmlreader.c:338:}"];
+}

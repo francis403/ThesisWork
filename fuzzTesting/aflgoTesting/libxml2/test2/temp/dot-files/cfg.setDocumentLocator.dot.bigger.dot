@@ -1,0 +1,10 @@
+digraph "CFG for 'setDocumentLocator' function" {
+	label="CFG for 'setDocumentLocator' function";
+
+	Node0x55cb217553a0 [shape=record,label="{legacy.c:1072:|{<s0>T|<s1>F}}"];
+	Node0x55cb217553a0:s0 -> Node0x55cb2180d180;
+	Node0x55cb217553a0:s1 -> Node0x55cb2180d1d0;
+	Node0x55cb2180d180 [shape=record,label="{legacy.c:1075:}"];
+	Node0x55cb2180d180 -> Node0x55cb2180d1d0;
+	Node0x55cb2180d1d0 [shape=record,label="{legacy.c:1075:}"];
+}

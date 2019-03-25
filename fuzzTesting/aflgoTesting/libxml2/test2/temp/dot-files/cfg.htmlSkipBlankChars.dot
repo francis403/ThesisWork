@@ -1,0 +1,45 @@
+digraph "CFG for 'htmlSkipBlankChars' function" {
+	label="CFG for 'htmlSkipBlankChars' function";
+
+	Node0x5651a5f03180 [shape=record,label="{HTMLparser.c:575:}"];
+	Node0x5651a5f03180 -> Node0x5651a5f23730;
+	Node0x5651a5f23730 [shape=record,label="{HTMLparser.c:578:|{<s0>T|<s1>F}}"];
+	Node0x5651a5f23730 -> Node0x5651a5f239d0;
+	Node0x5651a5f23730 -> Node0x5651a5f23a70;
+	Node0x5651a5f23a70 [shape=record,label="{HTMLparser.c:578:|{<s0>T|<s1>F}}"];
+	Node0x5651a5f23a70 -> Node0x5651a5f23d90;
+	Node0x5651a5f23a70 -> Node0x5651a5f23a20;
+	Node0x5651a5f23d90 [shape=record,label="{HTMLparser.c:578:|{<s0>T|<s1>F}}"];
+	Node0x5651a5f23d90 -> Node0x5651a5f239d0;
+	Node0x5651a5f23d90 -> Node0x5651a5f23a20;
+	Node0x5651a5f23a20 [shape=record,label="{HTMLparser.c:578:}"];
+	Node0x5651a5f23a20 -> Node0x5651a5f239d0;
+	Node0x5651a5f239d0 [shape=record,label="{HTMLparser.c:578:|{<s0>T|<s1>F}}"];
+	Node0x5651a5f239d0 -> Node0x5651a5f24520;
+	Node0x5651a5f239d0 -> Node0x5651a5f23950;
+	Node0x5651a5f24520 [shape=record,label="{HTMLparser.c:579:|{<s0>T|<s1>F}}"];
+	Node0x5651a5f24520 -> Node0x5651a5f24c60;
+	Node0x5651a5f24520 -> Node0x5651a5f24c10;
+	Node0x5651a5f24c60 [shape=record,label="{HTMLparser.c:580:|{<s0>T|<s1>F}}"];
+	Node0x5651a5f24c60 -> Node0x5651a5f24b70;
+	Node0x5651a5f24c60 -> Node0x5651a5f24c10;
+	Node0x5651a5f24b70 [shape=record,label="{HTMLparser.c:581:}"];
+	Node0x5651a5f24b70 -> Node0x5651a5f24bc0;
+	Node0x5651a5f24c10 [shape=record,label="{HTMLparser.c:583:|{<s0>T|<s1>F}}"];
+	Node0x5651a5f24c10 -> Node0x5651a5f260c0;
+	Node0x5651a5f24c10 -> Node0x5651a5f26160;
+	Node0x5651a5f260c0 [shape=record,label="{HTMLparser.c:584:}"];
+	Node0x5651a5f260c0 -> Node0x5651a5f26110;
+	Node0x5651a5f26160 [shape=record,label="{HTMLparser.c:585:}"];
+	Node0x5651a5f26160 -> Node0x5651a5f26110;
+	Node0x5651a5f26110 [shape=record,label="{HTMLparser.c:586:|{<s0>T|<s1>F}}"];
+	Node0x5651a5f26110 -> Node0x5651a5f27bc0;
+	Node0x5651a5f26110 -> Node0x5651a5f27c10;
+	Node0x5651a5f27bc0 [shape=record,label="{HTMLparser.c:589:}"];
+	Node0x5651a5f27bc0 -> Node0x5651a5f27c10;
+	Node0x5651a5f27c10 [shape=record,label="{%97}"];
+	Node0x5651a5f27c10 -> Node0x5651a5f24bc0;
+	Node0x5651a5f24bc0 [shape=record,label="{HTMLparser.c:591:}"];
+	Node0x5651a5f24bc0 -> Node0x5651a5f23730;
+	Node0x5651a5f23950 [shape=record,label="{HTMLparser.c:593:}"];
+}

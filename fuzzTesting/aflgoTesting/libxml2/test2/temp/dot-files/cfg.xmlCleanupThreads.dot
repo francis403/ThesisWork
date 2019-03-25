@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlCleanupThreads' function" {
+	label="CFG for 'xmlCleanupThreads' function";
+
+	Node0x5584b6e29e70 [shape=record,label="{threads.c:914:|{<s0>T|<s1>F}}"];
+	Node0x5584b6e29e70 -> Node0x5584b6e2a140;
+	Node0x5584b6e29e70 -> Node0x5584b6e2ab20;
+	Node0x5584b6e2a140 [shape=record,label="{threads.c:915:}"];
+	Node0x5584b6e2a140 -> Node0x5584b6e2ab20;
+	Node0x5584b6e2ab20 [shape=record,label="{threads.c:916:}"];
+}

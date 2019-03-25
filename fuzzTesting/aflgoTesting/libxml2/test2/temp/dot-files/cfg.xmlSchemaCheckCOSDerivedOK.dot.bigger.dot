@@ -1,0 +1,18 @@
+digraph "CFG for 'xmlSchemaCheckCOSDerivedOK' function" {
+	label="CFG for 'xmlSchemaCheckCOSDerivedOK' function";
+
+	Node0x5644a8c6fcf0 [shape=record,label="{xmlschemas.c:16140:|{<s0>T|<s1>F}}"];
+	Node0x5644a8c6fcf0:s0 -> Node0x5644a8c70c40;
+	Node0x5644a8c6fcf0:s1 -> Node0x5644a8c70d30;
+	Node0x5644a8c70d30 [shape=record,label="{xmlschemas.c:16145:|{<s0>T|<s1>F}}"];
+	Node0x5644a8c70d30:s0 -> Node0x5644a8c70fe0;
+	Node0x5644a8c70d30:s1 -> Node0x5644a8c70ce0;
+	Node0x5644a8c70fe0 [shape=record,label="{xmlschemas.c:16145:|{<s0>T|<s1>F}}"];
+	Node0x5644a8c70fe0:s0 -> Node0x5644a8c70c40;
+	Node0x5644a8c70fe0:s1 -> Node0x5644a8c70ce0;
+	Node0x5644a8c70c40 [shape=record,label="{xmlschemas.c:16146:}"];
+	Node0x5644a8c70c40 -> Node0x5644a8c6fd40;
+	Node0x5644a8c70ce0 [shape=record,label="{xmlschemas.c:16148:}"];
+	Node0x5644a8c70ce0 -> Node0x5644a8c6fd40;
+	Node0x5644a8c6fd40 [shape=record,label="{xmlschemas.c:16149:}"];
+}

@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlReversePattern' function" {
+	label="CFG for 'xmlReversePattern' function";
+
+	Node0x557f46034f10 [shape=record,label="{pattern.c:408:|{<s0>T|<s1>F}}"];
+	Node0x557f46034f10 -> Node0x557f460490f0;
+	Node0x557f46034f10 -> Node0x557f460490a0;
+	Node0x557f460490f0 [shape=record,label="{pattern.c:414:|{<s0>T|<s1>F}}"];
+	Node0x557f460490f0 -> Node0x557f46049050;
+	Node0x557f460490f0 -> Node0x557f460490a0;
+	Node0x557f46049050 [shape=record,label="{pattern.c:415:}"];
+	Node0x557f46049050 -> Node0x557f46049bc0;
+	Node0x557f46049bc0 [shape=record,label="{pattern.c:415:|{<s0>T|<s1>F}}"];
+	Node0x557f46049bc0 -> Node0x557f46049e40;
+	Node0x557f46049bc0 -> Node0x557f460498e0;
+	Node0x557f46049e40 [shape=record,label="{pattern.c:416:}"];
+	Node0x557f46049e40 -> Node0x557f46049db0;
+	Node0x557f46049db0 [shape=record,label="{pattern.c:415:}"];
+	Node0x557f46049db0 -> Node0x557f46049bc0;
+	Node0x557f460498e0 [shape=record,label="{pattern.c:420:}"];
+	Node0x557f460498e0 -> Node0x557f460490a0;
+	Node0x557f460490a0 [shape=record,label="{pattern.c:422:|{<s0>T|<s1>F}}"];
+	Node0x557f460490a0 -> Node0x557f4604c6d0;
+	Node0x557f460490a0 -> Node0x557f4604c720;
+	Node0x557f4604c6d0 [shape=record,label="{pattern.c:423:|{<s0>T|<s1>F}}"];
+	Node0x557f4604c6d0 -> Node0x557f4604d840;
+	Node0x557f4604c6d0 -> Node0x557f4604d890;
+	Node0x557f4604d840 [shape=record,label="{pattern.c:429:}"];
+	Node0x557f4604d840 -> Node0x557f460483e0;
+	Node0x557f4604d890 [shape=record,label="{pattern.c:431:}"];
+	Node0x557f4604d890 -> Node0x557f4604c720;
+	Node0x557f4604c720 [shape=record,label="{pattern.c:434:}"];
+	Node0x557f4604c720 -> Node0x557f4604e8f0;
+	Node0x557f4604e8f0 [shape=record,label="{pattern.c:436:|{<s0>T|<s1>F}}"];
+	Node0x557f4604e8f0 -> Node0x557f4604ed10;
+	Node0x557f4604e8f0 -> Node0x557f4604eb10;
+	Node0x557f4604ed10 [shape=record,label="{pattern.c:437:}"];
+	Node0x557f4604ed10 -> Node0x557f4604e8f0;
+	Node0x557f4604eb10 [shape=record,label="{pattern.c:451:}"];
+	Node0x557f4604eb10 -> Node0x557f460483e0;
+	Node0x557f460483e0 [shape=record,label="{pattern.c:455:}"];
+}

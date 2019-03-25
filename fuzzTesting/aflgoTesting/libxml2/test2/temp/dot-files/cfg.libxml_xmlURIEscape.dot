@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlURIEscape' function" {
+	label="CFG for 'libxml_xmlURIEscape' function";
+
+	Node0x55afb93c82b0 [shape=record,label="{libxml2-py.c:11690:|{<s0>T|<s1>F}}"];
+	Node0x55afb93c82b0:s0 -> Node0x55afb93cb250;
+	Node0x55afb93c82b0:s1 -> Node0x55afb93cb200;
+	Node0x55afb93cb200 [shape=record,label="{libxml2-py.c:11696:}"];
+	Node0x55afb93cb200 -> Node0x55afb93c85b0;
+	Node0x55afb93cb250 [shape=record,label="{libxml2-py.c:11698:}"];
+	Node0x55afb93cb250 -> Node0x55afb93c85b0;
+	Node0x55afb93c85b0 [shape=record,label="{libxml2-py.c:11701:}"];
+}

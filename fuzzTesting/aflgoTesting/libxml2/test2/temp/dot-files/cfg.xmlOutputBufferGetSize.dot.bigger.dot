@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlOutputBufferGetSize' function" {
+	label="CFG for 'xmlOutputBufferGetSize' function";
+
+	Node0x5651ba9d4740 [shape=record,label="{xmlIO.c:2877:|{<s0>T|<s1>F}}"];
+	Node0x5651ba9d4740:s0 -> Node0x5651ba9d3e90;
+	Node0x5651ba9d4740:s1 -> Node0x5651ba9d5830;
+	Node0x5651ba9d5830 [shape=record,label="{xmlIO.c:2878:|{<s0>T|<s1>F}}"];
+	Node0x5651ba9d5830:s0 -> Node0x5651ba9d3e90;
+	Node0x5651ba9d5830:s1 -> Node0x5651ba9d54d0;
+	Node0x5651ba9d3e90 [shape=record,label="{xmlIO.c:2879:}"];
+	Node0x5651ba9d3e90 -> Node0x5651ba9d5c30;
+	Node0x5651ba9d54d0 [shape=record,label="{xmlIO.c:2881:}"];
+	Node0x5651ba9d54d0 -> Node0x5651ba9d5c30;
+	Node0x5651ba9d5c30 [shape=record,label="{xmlIO.c:2882:}"];
+}

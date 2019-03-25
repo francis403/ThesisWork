@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlSchemaAugmentIDC' function" {
+	label="CFG for 'xmlSchemaAugmentIDC' function";
+
+	Node0x5644a8e2c640 [shape=record,label="{xmlschemas.c:22021:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e2c640:s0 -> Node0x5644a8e339e0;
+	Node0x5644a8e2c640:s1 -> Node0x5644a8e33a30;
+	Node0x5644a8e339e0 [shape=record,label="{xmlschemas.c:22030:}"];
+	Node0x5644a8e339e0 -> Node0x5644a8e357b0;
+	Node0x5644a8e33a30 [shape=record,label="{xmlschemas.c:22035:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e33a30:s0 -> Node0x5644a8e347d0;
+	Node0x5644a8e33a30:s1 -> Node0x5644a8e34870;
+	Node0x5644a8e347d0 [shape=record,label="{xmlschemas.c:22039:}"];
+	Node0x5644a8e347d0 -> Node0x5644a8e34820;
+	Node0x5644a8e34870 [shape=record,label="{xmlschemas.c:22041:}"];
+	Node0x5644a8e34870 -> Node0x5644a8e34820;
+	Node0x5644a8e34820 [shape=record,label="{xmlschemas.c:22047:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e34820:s0 -> Node0x5644a8e35800;
+	Node0x5644a8e34820:s1 -> Node0x5644a8e357b0;
+	Node0x5644a8e35800 [shape=record,label="{xmlschemas.c:22048:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e35800:s0 -> Node0x5644a8e35760;
+	Node0x5644a8e35800:s1 -> Node0x5644a8e357b0;
+	Node0x5644a8e35760 [shape=record,label="{xmlschemas.c:22049:}"];
+	Node0x5644a8e35760 -> Node0x5644a8e357b0;
+	Node0x5644a8e357b0 [shape=record,label="{xmlschemas.c:22050:}"];
+}

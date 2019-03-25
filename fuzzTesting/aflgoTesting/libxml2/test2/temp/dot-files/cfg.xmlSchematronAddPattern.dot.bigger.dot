@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlSchematronAddPattern' function" {
+	label="CFG for 'xmlSchematronAddPattern' function";
+
+	Node0x5617dc503690 [shape=record,label="{schematron.c:484:|{<s0>T|<s1>F}}"];
+	Node0x5617dc503690:s0 -> Node0x5617dc5ea020;
+	Node0x5617dc503690:s1 -> Node0x5617dc5ea1c0;
+	Node0x5617dc5ea1c0 [shape=record,label="{schematron.c:489:|{<s0>T|<s1>F}}"];
+	Node0x5617dc5ea1c0:s0 -> Node0x5617dc5ea020;
+	Node0x5617dc5ea1c0:s1 -> Node0x5617dc5ea140;
+	Node0x5617dc5ea140 [shape=record,label="{schematron.c:489:|{<s0>T|<s1>F}}"];
+	Node0x5617dc5ea140:s0 -> Node0x5617dc5ea020;
+	Node0x5617dc5ea140:s1 -> Node0x5617dc5ea0c0;
+	Node0x5617dc5ea0c0 [shape=record,label="{schematron.c:489:|{<s0>T|<s1>F}}"];
+	Node0x5617dc5ea0c0:s0 -> Node0x5617dc5ea020;
+	Node0x5617dc5ea0c0:s1 -> Node0x5617dc5ea070;
+	Node0x5617dc5ea020 [shape=record,label="{schematron.c:490:}"];
+	Node0x5617dc5ea020 -> Node0x5617dc5036e0;
+	Node0x5617dc5ea070 [shape=record,label="{schematron.c:492:|{<s0>T|<s1>F}}"];
+	Node0x5617dc5ea070:s0 -> Node0x5617dc5eaf80;
+	Node0x5617dc5ea070:s1 -> Node0x5617dc5eafd0;
+	Node0x5617dc5eaf80 [shape=record,label="{schematron.c:494:}"];
+	Node0x5617dc5eaf80 -> Node0x5617dc5036e0;
+	Node0x5617dc5eafd0 [shape=record,label="{schematron.c:497:|{<s0>T|<s1>F}}"];
+	Node0x5617dc5eafd0:s0 -> Node0x5617dc5ebed0;
+	Node0x5617dc5eafd0:s1 -> Node0x5617dc5ebf70;
+	Node0x5617dc5ebed0 [shape=record,label="{schematron.c:501:}"];
+	Node0x5617dc5ebed0 -> Node0x5617dc5ebf20;
+	Node0x5617dc5ebf70 [shape=record,label="{schematron.c:503:}"];
+	Node0x5617dc5ebf70 -> Node0x5617dc5ecb60;
+	Node0x5617dc5ecb60 [shape=record,label="{schematron.c:505:|{<s0>T|<s1>F}}"];
+	Node0x5617dc5ecb60:s0 -> Node0x5617dc5ed090;
+	Node0x5617dc5ecb60:s1 -> Node0x5617dc5ecd80;
+	Node0x5617dc5ed090 [shape=record,label="{schematron.c:506:}"];
+	Node0x5617dc5ed090 -> Node0x5617dc5ecb60;
+	Node0x5617dc5ecd80 [shape=record,label="{schematron.c:507:}"];
+	Node0x5617dc5ecd80 -> Node0x5617dc5ebf20;
+	Node0x5617dc5ebf20 [shape=record,label="{schematron.c:509:}"];
+	Node0x5617dc5ebf20 -> Node0x5617dc5036e0;
+	Node0x5617dc5036e0 [shape=record,label="{schematron.c:510:}"];
+}

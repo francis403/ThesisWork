@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlAttrSerializeContent' function" {
+	label="CFG for 'xmlAttrSerializeContent' function";
+
+	Node0x561c331bb270 [shape=record,label="{xmlsave.c:435:}"];
+	Node0x561c331bb270 -> Node0x561c32fd6b10;
+	Node0x561c32fd6b10 [shape=record,label="{xmlsave.c:440:|{<s0>T|<s1>F}}"];
+	Node0x561c32fd6b10:s0 -> Node0x561c32fd6f10;
+	Node0x561c32fd6b10:s1 -> Node0x561c32fd6d30;
+	Node0x561c32fd6f10 [shape=record,label="{xmlsave.c:441:|{<s0>def|<s1>3|<s2>5}}"];
+	Node0x561c32fd6f10:s0 -> Node0x561c330290c0;
+	Node0x561c32fd6f10:s1 -> Node0x561c330291a0;
+	Node0x561c32fd6f10:s2 -> Node0x561c331c3ed0;
+	Node0x561c330291a0 [shape=record,label="{xmlsave.c:443:}"];
+	Node0x561c330291a0 -> Node0x561c33028fb0;
+	Node0x561c331c3ed0 [shape=record,label="{xmlsave.c:447:}"];
+	Node0x561c331c3ed0 -> Node0x561c33028fb0;
+	Node0x561c330290c0 [shape=record,label="{xmlsave.c:454:}"];
+	Node0x561c330290c0 -> Node0x561c33028fb0;
+	Node0x561c33028fb0 [shape=record,label="{xmlsave.c:456:}"];
+	Node0x561c33028fb0 -> Node0x561c32fd6b10;
+	Node0x561c32fd6d30 [shape=record,label="{xmlsave.c:458:}"];
+}

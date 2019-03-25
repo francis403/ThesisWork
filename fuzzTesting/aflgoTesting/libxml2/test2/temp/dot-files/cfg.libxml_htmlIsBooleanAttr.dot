@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_htmlIsBooleanAttr' function" {
+	label="CFG for 'libxml_htmlIsBooleanAttr' function";
+
+	Node0x55afb891de90 [shape=record,label="{libxml2-py.c:359:|{<s0>T|<s1>F}}"];
+	Node0x55afb891de90:s0 -> Node0x55afb8951f30;
+	Node0x55afb891de90:s1 -> Node0x55afb8951ee0;
+	Node0x55afb8951ee0 [shape=record,label="{libxml2-py.c:365:}"];
+	Node0x55afb8951ee0 -> Node0x55afb894a800;
+	Node0x55afb8951f30 [shape=record,label="{libxml2-py.c:367:}"];
+	Node0x55afb8951f30 -> Node0x55afb894a800;
+	Node0x55afb894a800 [shape=record,label="{libxml2-py.c:370:}"];
+}

@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaValueGetAsBoolean' function" {
+	label="CFG for 'xmlSchemaValueGetAsBoolean' function";
+
+	Node0x557a4e211c00 [shape=record,label="{xmlschemastypes.c:929:|{<s0>T|<s1>F}}"];
+	Node0x557a4e211c00 -> Node0x557a4e213750;
+	Node0x557a4e211c00 -> Node0x557a4e216250;
+	Node0x557a4e216250 [shape=record,label="{xmlschemastypes.c:931:|{<s0>T|<s1>F}}"];
+	Node0x557a4e216250 -> Node0x557a4e213750;
+	Node0x557a4e216250 -> Node0x557a4e2137a0;
+	Node0x557a4e213750 [shape=record,label="{xmlschemastypes.c:932:}"];
+	Node0x557a4e213750 -> Node0x557a4e2136c0;
+	Node0x557a4e2137a0 [shape=record,label="{xmlschemastypes.c:933:}"];
+	Node0x557a4e2137a0 -> Node0x557a4e2136c0;
+	Node0x557a4e2136c0 [shape=record,label="{xmlschemastypes.c:934:}"];
+}

@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlRelaxNGValidateDefinitionList' function" {
+	label="CFG for 'xmlRelaxNGValidateDefinitionList' function";
+
+	Node0x559f31a3cee0 [shape=record,label="{relaxng.c:9604:|{<s0>T|<s1>F}}"];
+	Node0x559f31a3cee0 -> Node0x559f31a3df10;
+	Node0x559f31a3cee0 -> Node0x559f31a3df60;
+	Node0x559f31a3df10 [shape=record,label="{relaxng.c:9611:}"];
+	Node0x559f31a3df10 -> Node0x559f31a3cf30;
+	Node0x559f31a3df60 [shape=record,label="{relaxng.c:9615:}"];
+	Node0x559f31a3df60 -> Node0x559f31a3e7a0;
+	Node0x559f31a3e7a0 [shape=record,label="{relaxng.c:9615:|{<s0>T|<s1>F}}"];
+	Node0x559f31a3e7a0 -> Node0x559f31a3eba0;
+	Node0x559f31a3e7a0 -> Node0x559f31a3e9c0;
+	Node0x559f31a3eba0 [shape=record,label="{relaxng.c:9616:|{<s0>T|<s1>F}}"];
+	Node0x559f31a3eba0 -> Node0x559f31a3ed50;
+	Node0x559f31a3eba0 -> Node0x559f31a3ee40;
+	Node0x559f31a3ee40 [shape=record,label="{relaxng.c:9616:|{<s0>T|<s1>F}}"];
+	Node0x559f31a3ee40 -> Node0x559f31a3ed50;
+	Node0x559f31a3ee40 -> Node0x559f31a3edf0;
+	Node0x559f31a3ed50 [shape=record,label="{relaxng.c:9617:|{<s0>T|<s1>F}}"];
+	Node0x559f31a3ed50 -> Node0x559f31a3f640;
+	Node0x559f31a3ed50 -> Node0x559f31a3f690;
+	Node0x559f31a3f640 [shape=record,label="{relaxng.c:9619:}"];
+	Node0x559f31a3f640 -> Node0x559f31a3f690;
+	Node0x559f31a3f690 [shape=record,label="{relaxng.c:9620:}"];
+	Node0x559f31a3f690 -> Node0x559f31a3eda0;
+	Node0x559f31a3edf0 [shape=record,label="{relaxng.c:9621:}"];
+	Node0x559f31a3edf0 -> Node0x559f31a3cf30;
+	Node0x559f31a3eda0 [shape=record,label="{relaxng.c:9624:|{<s0>T|<s1>F}}"];
+	Node0x559f31a3eda0 -> Node0x559f31a40060;
+	Node0x559f31a3eda0 -> Node0x559f31a400b0;
+	Node0x559f31a40060 [shape=record,label="{relaxng.c:9625:}"];
+	Node0x559f31a40060 -> Node0x559f31a3e9c0;
+	Node0x559f31a400b0 [shape=record,label="{relaxng.c:9626:}"];
+	Node0x559f31a400b0 -> Node0x559f31a3e7a0;
+	Node0x559f31a3e9c0 [shape=record,label="{relaxng.c:9629:}"];
+	Node0x559f31a3e9c0 -> Node0x559f31a3cf30;
+	Node0x559f31a3cf30 [shape=record,label="{relaxng.c:9630:}"];
+}

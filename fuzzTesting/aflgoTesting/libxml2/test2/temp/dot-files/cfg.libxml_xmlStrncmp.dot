@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlStrncmp' function" {
+	label="CFG for 'libxml_xmlStrncmp' function";
+
+	Node0x55afb90a9830 [shape=record,label="{libxml2-py.c:7636:|{<s0>T|<s1>F}}"];
+	Node0x55afb90a9830:s0 -> Node0x55afb90ad550;
+	Node0x55afb90a9830:s1 -> Node0x55afb90ad500;
+	Node0x55afb90ad500 [shape=record,label="{libxml2-py.c:7644:}"];
+	Node0x55afb90ad500 -> Node0x55afb90a9b30;
+	Node0x55afb90ad550 [shape=record,label="{libxml2-py.c:7646:}"];
+	Node0x55afb90ad550 -> Node0x55afb90a9b30;
+	Node0x55afb90a9b30 [shape=record,label="{libxml2-py.c:7649:}"];
+}

@@ -1,0 +1,23 @@
+digraph "CFG for 'xmlSchemaPCustomErrExt' function" {
+	label="CFG for 'xmlSchemaPCustomErrExt' function";
+
+	Node0x5644a8678b10 [shape=record,label="{xmlschemas.c:2938:|{<s0>T|<s1>F}}"];
+	Node0x5644a8678b10:s0 -> Node0x5644a867d540;
+	Node0x5644a8678b10:s1 -> Node0x5644a867d4f0;
+	Node0x5644a867d540 [shape=record,label="{xmlschemas.c:2953:|{<s0>T|<s1>F}}"];
+	Node0x5644a867d540:s0 -> Node0x5644a867d4a0;
+	Node0x5644a867d540:s1 -> Node0x5644a867d4f0;
+	Node0x5644a867d4a0 [shape=record,label="{xmlschemas.c:2954:}"];
+	Node0x5644a867d4a0 -> Node0x5644a867d4f0;
+	Node0x5644a867d4f0 [shape=record,label="{xmlschemas.c:2955:|{<s0>T|<s1>F}}"];
+	Node0x5644a867d4f0:s0 -> Node0x5644a867e350;
+	Node0x5644a867d4f0:s1 -> Node0x5644a867e3a0;
+	Node0x5644a867e350 [shape=record,label="{xmlschemas.c:2957:}"];
+	Node0x5644a867e350 -> Node0x5644a867e3a0;
+	Node0x5644a867e3a0 [shape=record,label="{xmlschemas.c:2958:|{<s0>T|<s1>F}}"];
+	Node0x5644a867e3a0:s0 -> Node0x5644a867e810;
+	Node0x5644a867e3a0:s1 -> Node0x5644a867e860;
+	Node0x5644a867e810 [shape=record,label="{xmlschemas.c:2958:}"];
+	Node0x5644a867e810 -> Node0x5644a867e860;
+	Node0x5644a867e860 [shape=record,label="{xmlschemas.c:2959:}"];
+}

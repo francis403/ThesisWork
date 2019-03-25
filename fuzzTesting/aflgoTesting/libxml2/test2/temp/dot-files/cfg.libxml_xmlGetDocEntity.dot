@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlGetDocEntity' function" {
+	label="CFG for 'libxml_xmlGetDocEntity' function";
+
+	Node0x55afb8bf1230 [shape=record,label="{libxml2-py.c:2852:|{<s0>T|<s1>F}}"];
+	Node0x55afb8bf1230:s0 -> Node0x55afb8bf5080;
+	Node0x55afb8bf1230:s1 -> Node0x55afb8bf5030;
+	Node0x55afb8bf5030 [shape=record,label="{libxml2-py.c:2860:}"];
+	Node0x55afb8bf5030 -> Node0x55afb8bf1530;
+	Node0x55afb8bf5080 [shape=record,label="{libxml2-py.c:2861:|{<s0>T|<s1>F}}"];
+	Node0x55afb8bf5080:s0 -> Node0x55afb8bf58d0;
+	Node0x55afb8bf5080:s1 -> Node0x55afb8bf5920;
+	Node0x55afb8bf58d0 [shape=record,label="{libxml2-py.c:2861:}"];
+	Node0x55afb8bf58d0 -> Node0x55afb8bf5970;
+	Node0x55afb8bf5920 [shape=record,label="{libxml2-py.c:2861:}"];
+	Node0x55afb8bf5920 -> Node0x55afb8bf5970;
+	Node0x55afb8bf5970 [shape=record,label="{libxml2-py.c:2861:}"];
+	Node0x55afb8bf5970 -> Node0x55afb8bf1530;
+	Node0x55afb8bf1530 [shape=record,label="{libxml2-py.c:2866:}"];
+}

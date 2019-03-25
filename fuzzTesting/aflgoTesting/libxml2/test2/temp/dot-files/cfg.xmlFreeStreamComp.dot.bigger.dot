@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlFreeStreamComp' function" {
+	label="CFG for 'xmlFreeStreamComp' function";
+
+	Node0x557f45f485a0 [shape=record,label="{pattern.c:1524:|{<s0>T|<s1>F}}"];
+	Node0x557f45f485a0:s0 -> Node0x557f45f43a90;
+	Node0x557f45f485a0:s1 -> Node0x557f45f43ae0;
+	Node0x557f45f43a90 [shape=record,label="{pattern.c:1526:|{<s0>T|<s1>F}}"];
+	Node0x557f45f43a90:s0 -> Node0x557f45f49130;
+	Node0x557f45f43a90:s1 -> Node0x557f45f49180;
+	Node0x557f45f49130 [shape=record,label="{pattern.c:1527:}"];
+	Node0x557f45f49130 -> Node0x557f45f49180;
+	Node0x557f45f49180 [shape=record,label="{pattern.c:1528:|{<s0>T|<s1>F}}"];
+	Node0x557f45f49180:s0 -> Node0x557f45f49800;
+	Node0x557f45f49180:s1 -> Node0x557f45f49850;
+	Node0x557f45f49800 [shape=record,label="{pattern.c:1529:}"];
+	Node0x557f45f49800 -> Node0x557f45f49850;
+	Node0x557f45f49850 [shape=record,label="{pattern.c:1530:}"];
+	Node0x557f45f49850 -> Node0x557f45f43ae0;
+	Node0x557f45f43ae0 [shape=record,label="{pattern.c:1532:}"];
+}

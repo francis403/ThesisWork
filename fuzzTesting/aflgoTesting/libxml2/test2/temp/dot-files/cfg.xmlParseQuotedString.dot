@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlParseQuotedString' function" {
+	label="CFG for 'xmlParseQuotedString' function";
+
+	Node0x55cb217d3f00 [shape=record,label="{legacy.c:531:|{<s0>T|<s1>F}}"];
+	Node0x55cb217d3f00:s0 -> Node0x55cb217d28a0;
+	Node0x55cb217d3f00:s1 -> Node0x55cb217d42a0;
+	Node0x55cb217d42a0 [shape=record,label="{legacy.c:536:}"];
+	Node0x55cb217d42a0 -> Node0x55cb217d28a0;
+	Node0x55cb217d28a0 [shape=record,label="{legacy.c:540:}"];
+}

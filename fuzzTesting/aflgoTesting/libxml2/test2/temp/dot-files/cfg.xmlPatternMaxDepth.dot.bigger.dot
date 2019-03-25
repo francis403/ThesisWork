@@ -1,0 +1,43 @@
+digraph "CFG for 'xmlPatternMaxDepth' function" {
+	label="CFG for 'xmlPatternMaxDepth' function";
+
+	Node0x557f45f3a4e0 [shape=record,label="{pattern.c:2549:|{<s0>T|<s1>F}}"];
+	Node0x557f45f3a4e0:s0 -> Node0x557f45f3cbc0;
+	Node0x557f45f3a4e0:s1 -> Node0x557f45f3cc10;
+	Node0x557f45f3cbc0 [shape=record,label="{pattern.c:2552:}"];
+	Node0x557f45f3cbc0 -> Node0x557f45f3bdd0;
+	Node0x557f45f3cc10 [shape=record,label="{pattern.c:2553:}"];
+	Node0x557f45f3cc10 -> Node0x557f45f3d0a0;
+	Node0x557f45f3d0a0 [shape=record,label="{pattern.c:2553:|{<s0>T|<s1>F}}"];
+	Node0x557f45f3d0a0:s0 -> Node0x557f45f3d460;
+	Node0x557f45f3d0a0:s1 -> Node0x557f45f3d280;
+	Node0x557f45f3d460 [shape=record,label="{pattern.c:2554:|{<s0>T|<s1>F}}"];
+	Node0x557f45f3d460:s0 -> Node0x557f45f3d610;
+	Node0x557f45f3d460:s1 -> Node0x557f45f3d660;
+	Node0x557f45f3d610 [shape=record,label="{pattern.c:2555:}"];
+	Node0x557f45f3d610 -> Node0x557f45f3bdd0;
+	Node0x557f45f3d660 [shape=record,label="{pattern.c:2556:}"];
+	Node0x557f45f3d660 -> Node0x557f45f3dc00;
+	Node0x557f45f3dc00 [shape=record,label="{pattern.c:2556:|{<s0>T|<s1>F}}"];
+	Node0x557f45f3dc00:s0 -> Node0x557f45f3dee0;
+	Node0x557f45f3dc00:s1 -> Node0x557f45f3daa0;
+	Node0x557f45f3dee0 [shape=record,label="{pattern.c:2557:|{<s0>T|<s1>F}}"];
+	Node0x557f45f3dee0:s0 -> Node0x557f45f3e330;
+	Node0x557f45f3dee0:s1 -> Node0x557f45f3e380;
+	Node0x557f45f3e330 [shape=record,label="{pattern.c:2558:}"];
+	Node0x557f45f3e330 -> Node0x557f45f3bdd0;
+	Node0x557f45f3e380 [shape=record,label="{pattern.c:2557:}"];
+	Node0x557f45f3e380 -> Node0x557f45f3de50;
+	Node0x557f45f3de50 [shape=record,label="{pattern.c:2556:}"];
+	Node0x557f45f3de50 -> Node0x557f45f3dc00;
+	Node0x557f45f3daa0 [shape=record,label="{pattern.c:2559:|{<s0>T|<s1>F}}"];
+	Node0x557f45f3daa0:s0 -> Node0x557f45f3ee30;
+	Node0x557f45f3daa0:s1 -> Node0x557f45f3ee80;
+	Node0x557f45f3ee30 [shape=record,label="{pattern.c:2560:}"];
+	Node0x557f45f3ee30 -> Node0x557f45f3ee80;
+	Node0x557f45f3ee80 [shape=record,label="{pattern.c:2561:}"];
+	Node0x557f45f3ee80 -> Node0x557f45f3d0a0;
+	Node0x557f45f3d280 [shape=record,label="{pattern.c:2563:}"];
+	Node0x557f45f3d280 -> Node0x557f45f3bdd0;
+	Node0x557f45f3bdd0 [shape=record,label="{pattern.c:2564:}"];
+}

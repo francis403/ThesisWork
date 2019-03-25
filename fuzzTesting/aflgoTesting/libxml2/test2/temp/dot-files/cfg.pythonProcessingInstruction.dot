@@ -1,0 +1,32 @@
+digraph "CFG for 'pythonProcessingInstruction' function" {
+	label="CFG for 'pythonProcessingInstruction' function";
+
+	Node0x55bbb28c2200 [shape=record,label="{libxml.c:1091:|{<s0>T|<s1>F}}"];
+	Node0x55bbb28c2200:s0 -> Node0x55bbb28c4950;
+	Node0x55bbb28c2200:s1 -> Node0x55bbb28c49a0;
+	Node0x55bbb28c4950 [shape=record,label="{libxml.c:1102:}"];
+	Node0x55bbb28c4950 -> Node0x55bbb28c5570;
+	Node0x55bbb28c5570 [shape=record,label="{libxml.c:1105:|{<s0>T|<s1>F}}"];
+	Node0x55bbb28c5570:s0 -> Node0x55bbb28c5810;
+	Node0x55bbb28c5570:s1 -> Node0x55bbb28c58b0;
+	Node0x55bbb28c5810 [shape=record,label="{libxml.c:1105:}"];
+	Node0x55bbb28c5810 -> Node0x55bbb28c5860;
+	Node0x55bbb28c58b0 [shape=record,label="{libxml.c:1105:}"];
+	Node0x55bbb28c58b0 -> Node0x55bbb28c5b60;
+	Node0x55bbb28c5b60 [shape=record,label="{libxml.c:1105:|{<s0>T|<s1>F}}"];
+	Node0x55bbb28c5b60:s0 -> Node0x55bbb28c5d40;
+	Node0x55bbb28c5b60:s1 -> Node0x55bbb28c5de0;
+	Node0x55bbb28c5d40 [shape=record,label="{libxml.c:1105:}"];
+	Node0x55bbb28c5d40 -> Node0x55bbb28c5d90;
+	Node0x55bbb28c5de0 [shape=record,label="{libxml.c:1105:}"];
+	Node0x55bbb28c5de0 -> Node0x55bbb28c5d90;
+	Node0x55bbb28c5d90 [shape=record,label="{libxml.c:1105:}"];
+	Node0x55bbb28c5d90 -> Node0x55bbb28c5ac0;
+	Node0x55bbb28c5ac0 [shape=record,label="{%30}"];
+	Node0x55bbb28c5ac0 -> Node0x55bbb28c5860;
+	Node0x55bbb28c5860 [shape=record,label="{libxml.c:1105:}"];
+	Node0x55bbb28c5860 -> Node0x55bbb28c54d0;
+	Node0x55bbb28c54d0 [shape=record,label="{libxml.c:1106:}"];
+	Node0x55bbb28c54d0 -> Node0x55bbb28c49a0;
+	Node0x55bbb28c49a0 [shape=record,label="{libxml.c:1107:}"];
+}

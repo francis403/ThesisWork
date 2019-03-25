@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchemaItemListFree' function" {
+	label="CFG for 'xmlSchemaItemListFree' function";
+
+	Node0x5644a83b5180 [shape=record,label="{xmlschemas.c:3528:|{<s0>T|<s1>F}}"];
+	Node0x5644a83b5180:s0 -> Node0x5644a83b4fd0;
+	Node0x5644a83b5180:s1 -> Node0x5644a83b5020;
+	Node0x5644a83b4fd0 [shape=record,label="{xmlschemas.c:3531:}"];
+	Node0x5644a83b4fd0 -> Node0x5644a83b50e0;
+	Node0x5644a83b5020 [shape=record,label="{xmlschemas.c:3532:|{<s0>T|<s1>F}}"];
+	Node0x5644a83b5020:s0 -> Node0x5644a83b6980;
+	Node0x5644a83b5020:s1 -> Node0x5644a83b69d0;
+	Node0x5644a83b6980 [shape=record,label="{xmlschemas.c:3533:}"];
+	Node0x5644a83b6980 -> Node0x5644a83b69d0;
+	Node0x5644a83b69d0 [shape=record,label="{xmlschemas.c:3534:}"];
+	Node0x5644a83b69d0 -> Node0x5644a83b50e0;
+	Node0x5644a83b50e0 [shape=record,label="{xmlschemas.c:3535:}"];
+}

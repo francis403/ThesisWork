@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlFreeTextWriterStackEntry' function" {
+	label="CFG for 'xmlFreeTextWriterStackEntry' function";
+
+	Node0x558d984c2c50 [shape=record,label="{xmlwriter.c:4257:|{<s0>T|<s1>F}}"];
+	Node0x558d984c2c50:s0 -> Node0x558d984c3a10;
+	Node0x558d984c2c50:s1 -> Node0x558d984c3a60;
+	Node0x558d984c3a10 [shape=record,label="{xmlwriter.c:4263:}"];
+	Node0x558d984c3a10 -> Node0x558d984c2ca0;
+	Node0x558d984c3a60 [shape=record,label="{xmlwriter.c:4265:|{<s0>T|<s1>F}}"];
+	Node0x558d984c3a60:s0 -> Node0x558d984c3e10;
+	Node0x558d984c3a60:s1 -> Node0x558d984c3e60;
+	Node0x558d984c3e10 [shape=record,label="{xmlwriter.c:4266:}"];
+	Node0x558d984c3e10 -> Node0x558d984c3e60;
+	Node0x558d984c3e60 [shape=record,label="{xmlwriter.c:4267:}"];
+	Node0x558d984c3e60 -> Node0x558d984c2ca0;
+	Node0x558d984c2ca0 [shape=record,label="{xmlwriter.c:4268:}"];
+}

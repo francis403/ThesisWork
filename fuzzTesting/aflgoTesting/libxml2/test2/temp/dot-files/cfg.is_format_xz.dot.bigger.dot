@@ -1,0 +1,10 @@
+digraph "CFG for 'is_format_xz' function" {
+	label="CFG for 'is_format_xz' function";
+
+	Node0x5641d2ef5210 [shape=record,label="{xzlib.c:290:|{<s0>T|<s1>F}}"];
+	Node0x5641d2ef5210:s0 -> Node0x5641d2ef5cc0;
+	Node0x5641d2ef5210:s1 -> Node0x5641d2ef5c70;
+	Node0x5641d2ef5cc0 [shape=record,label="{xzlib.c:294:}"];
+	Node0x5641d2ef5cc0 -> Node0x5641d2ef5c70;
+	Node0x5641d2ef5c70 [shape=record,label="{xzlib.c:294:}"];
+}

@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlBufLength' function" {
+	label="CFG for 'xmlBufLength' function";
+
+	Node0x558c8f7f0950 [shape=record,label="{buf.c:668:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7f0950:s0 -> Node0x558c8f7f0d40;
+	Node0x558c8f7f0950:s1 -> Node0x558c8f7f5820;
+	Node0x558c8f7f0d40 [shape=record,label="{buf.c:670:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7f0d40:s0 -> Node0x558c8f7f5820;
+	Node0x558c8f7f0d40:s1 -> Node0x558c8f7f0c30;
+	Node0x558c8f7f5820 [shape=record,label="{buf.c:671:}"];
+	Node0x558c8f7f5820 -> Node0x558c8f7f5620;
+	Node0x558c8f7f0c30 [shape=record,label="{buf.c:672:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7f0c30:s0 -> Node0x558c8f7f6650;
+	Node0x558c8f7f0c30:s1 -> Node0x558c8f7f66a0;
+	Node0x558c8f7f6650 [shape=record,label="{buf.c:672:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7f6650:s0 -> Node0x558c8f7f6ab0;
+	Node0x558c8f7f6650:s1 -> Node0x558c8f7f6b00;
+	Node0x558c8f7f6ab0 [shape=record,label="{buf.c:672:}"];
+	Node0x558c8f7f6ab0 -> Node0x558c8f7f6b00;
+	Node0x558c8f7f6b00 [shape=record,label="{buf.c:672:}"];
+	Node0x558c8f7f6b00 -> Node0x558c8f7f66a0;
+	Node0x558c8f7f66a0 [shape=record,label="{buf.c:672:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7f66a0:s0 -> Node0x558c8f7f7130;
+	Node0x558c8f7f66a0:s1 -> Node0x558c8f7f7180;
+	Node0x558c8f7f7130 [shape=record,label="{buf.c:672:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7f7130:s0 -> Node0x558c8f7f7ee0;
+	Node0x558c8f7f7130:s1 -> Node0x558c8f7f7f30;
+	Node0x558c8f7f7ee0 [shape=record,label="{buf.c:672:}"];
+	Node0x558c8f7f7ee0 -> Node0x558c8f7f7f30;
+	Node0x558c8f7f7f30 [shape=record,label="{buf.c:672:}"];
+	Node0x558c8f7f7f30 -> Node0x558c8f7f7180;
+	Node0x558c8f7f7180 [shape=record,label="{buf.c:674:}"];
+	Node0x558c8f7f7180 -> Node0x558c8f7f5620;
+	Node0x558c8f7f5620 [shape=record,label="{buf.c:675:}"];
+}

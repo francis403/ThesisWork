@@ -1,0 +1,10 @@
+digraph "CFG for 'namespaceDecl' function" {
+	label="CFG for 'namespaceDecl' function";
+
+	Node0x55cb21826100 [shape=record,label="{legacy.c:1303:|{<s0>T|<s1>F}}"];
+	Node0x55cb21826100:s0 -> Node0x55cb21827f50;
+	Node0x55cb21826100:s1 -> Node0x55cb21827fa0;
+	Node0x55cb21827f50 [shape=record,label="{legacy.c:1307:}"];
+	Node0x55cb21827f50 -> Node0x55cb21827fa0;
+	Node0x55cb21827fa0 [shape=record,label="{legacy.c:1307:}"];
+}

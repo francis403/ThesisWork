@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlRelaxNGFreePartition' function" {
+	label="CFG for 'xmlRelaxNGFreePartition' function";
+
+	Node0x559f317db620 [shape=record,label="{relaxng.c:938:|{<s0>T|<s1>F}}"];
+	Node0x559f317db620:s0 -> Node0x559f317e8620;
+	Node0x559f317db620:s1 -> Node0x559f317e8670;
+	Node0x559f317e8620 [shape=record,label="{relaxng.c:944:|{<s0>T|<s1>F}}"];
+	Node0x559f317e8620:s0 -> Node0x559f317e8a60;
+	Node0x559f317e8620:s1 -> Node0x559f317e8ab0;
+	Node0x559f317e8a60 [shape=record,label="{relaxng.c:945:}"];
+	Node0x559f317e8a60 -> Node0x559f317e9000;
+	Node0x559f317e9000 [shape=record,label="{relaxng.c:945:|{<s0>T|<s1>F}}"];
+	Node0x559f317e9000:s0 -> Node0x559f317e9280;
+	Node0x559f317e9000:s1 -> Node0x559f317e8e60;
+	Node0x559f317e9280 [shape=record,label="{relaxng.c:946:|{<s0>T|<s1>F}}"];
+	Node0x559f317e9280:s0 -> Node0x559f315367b0;
+	Node0x559f317e9280:s1 -> Node0x559f317e9a40;
+	Node0x559f315367b0 [shape=record,label="{relaxng.c:948:|{<s0>T|<s1>F}}"];
+	Node0x559f315367b0:s0 -> Node0x559f317e9e30;
+	Node0x559f315367b0:s1 -> Node0x559f317e9e80;
+	Node0x559f317e9e30 [shape=record,label="{relaxng.c:949:}"];
+	Node0x559f317e9e30 -> Node0x559f317e9e80;
+	Node0x559f317e9e80 [shape=record,label="{relaxng.c:950:|{<s0>T|<s1>F}}"];
+	Node0x559f317e9e80:s0 -> Node0x559f317ea610;
+	Node0x559f317e9e80:s1 -> Node0x559f317ea660;
+	Node0x559f317ea610 [shape=record,label="{relaxng.c:951:}"];
+	Node0x559f317ea610 -> Node0x559f317ea660;
+	Node0x559f317ea660 [shape=record,label="{relaxng.c:952:}"];
+	Node0x559f317ea660 -> Node0x559f317e9a40;
+	Node0x559f317e9a40 [shape=record,label="{relaxng.c:954:}"];
+	Node0x559f317e9a40 -> Node0x559f317e91f0;
+	Node0x559f317e91f0 [shape=record,label="{relaxng.c:945:}"];
+	Node0x559f317e91f0 -> Node0x559f317e9000;
+	Node0x559f317e8e60 [shape=record,label="{relaxng.c:955:}"];
+	Node0x559f317e8e60 -> Node0x559f317e8ab0;
+	Node0x559f317e8ab0 [shape=record,label="{relaxng.c:957:|{<s0>T|<s1>F}}"];
+	Node0x559f317e8ab0:s0 -> Node0x559f317eb890;
+	Node0x559f317e8ab0:s1 -> Node0x559f317eb8e0;
+	Node0x559f317eb890 [shape=record,label="{relaxng.c:958:}"];
+	Node0x559f317eb890 -> Node0x559f317eb8e0;
+	Node0x559f317eb8e0 [shape=record,label="{relaxng.c:960:}"];
+	Node0x559f317eb8e0 -> Node0x559f317e8670;
+	Node0x559f317e8670 [shape=record,label="{relaxng.c:962:}"];
+}

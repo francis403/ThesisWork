@@ -1,0 +1,40 @@
+digraph "CFG for 'htmlCheckEncoding' function" {
+	label="CFG for 'htmlCheckEncoding' function";
+
+	Node0x5651a6039290 [shape=record,label="{HTMLparser.c:3660:|{<s0>T|<s1>F}}"];
+	Node0x5651a6039290 -> Node0x5651a6039eb0;
+	Node0x5651a6039290 -> Node0x5651a6039e60;
+	Node0x5651a6039e60 [shape=record,label="{HTMLparser.c:3664:}"];
+	Node0x5651a6039e60 -> Node0x5651a603bc30;
+	Node0x5651a6039eb0 [shape=record,label="{HTMLparser.c:3666:|{<s0>T|<s1>F}}"];
+	Node0x5651a6039eb0 -> Node0x5651a603a400;
+	Node0x5651a6039eb0 -> Node0x5651a603a450;
+	Node0x5651a603a400 [shape=record,label="{HTMLparser.c:3668:}"];
+	Node0x5651a603a400 -> Node0x5651a603a450;
+	Node0x5651a603a450 [shape=record,label="{HTMLparser.c:3673:|{<s0>T|<s1>F}}"];
+	Node0x5651a603a450 -> Node0x5651a603ab40;
+	Node0x5651a603a450 -> Node0x5651a603aaf0;
+	Node0x5651a603ab40 [shape=record,label="{HTMLparser.c:3673:|{<s0>T|<s1>F}}"];
+	Node0x5651a603ab40 -> Node0x5651a603aaa0;
+	Node0x5651a603ab40 -> Node0x5651a603ade0;
+	Node0x5651a603ade0 [shape=record,label="{HTMLparser.c:3673:|{<s0>T|<s1>F}}"];
+	Node0x5651a603ade0 -> Node0x5651a603b0c0;
+	Node0x5651a603ade0 -> Node0x5651a603ad60;
+	Node0x5651a603b0c0 [shape=record,label="{HTMLparser.c:3673:|{<s0>T|<s1>F}}"];
+	Node0x5651a603b0c0 -> Node0x5651a603aaa0;
+	Node0x5651a603b0c0 -> Node0x5651a603ad60;
+	Node0x5651a603ad60 [shape=record,label="{HTMLparser.c:3673:|{<s0>T|<s1>F}}"];
+	Node0x5651a603ad60 -> Node0x5651a603aaa0;
+	Node0x5651a603ad60 -> Node0x5651a603aaf0;
+	Node0x5651a603aaa0 [shape=record,label="{HTMLparser.c:3674:}"];
+	Node0x5651a603aaa0 -> Node0x5651a603aaf0;
+	Node0x5651a603aaf0 [shape=record,label="{HTMLparser.c:3675:|{<s0>T|<s1>F}}"];
+	Node0x5651a603aaf0 -> Node0x5651a603bc80;
+	Node0x5651a603aaf0 -> Node0x5651a603bc30;
+	Node0x5651a603bc80 [shape=record,label="{HTMLparser.c:3675:|{<s0>T|<s1>F}}"];
+	Node0x5651a603bc80 -> Node0x5651a603bbe0;
+	Node0x5651a603bc80 -> Node0x5651a603bc30;
+	Node0x5651a603bbe0 [shape=record,label="{HTMLparser.c:3676:}"];
+	Node0x5651a603bbe0 -> Node0x5651a603bc30;
+	Node0x5651a603bc30 [shape=record,label="{HTMLparser.c:3679:}"];
+}

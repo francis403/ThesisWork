@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathRegisterVariableLookup' function" {
+	label="CFG for 'xmlXPathRegisterVariableLookup' function";
+
+	Node0x562a799f4a70 [shape=record,label="{xpath.c:5049:|{<s0>T|<s1>F}}"];
+	Node0x562a799f4a70:s0 -> Node0x562a7991d7b0;
+	Node0x562a799f4a70:s1 -> Node0x562a7991d800;
+	Node0x562a7991d7b0 [shape=record,label="{xpath.c:5052:}"];
+	Node0x562a7991d7b0 -> Node0x562a799f4930;
+	Node0x562a7991d800 [shape=record,label="{xpath.c:5053:}"];
+	Node0x562a7991d800 -> Node0x562a799f4930;
+	Node0x562a799f4930 [shape=record,label="{xpath.c:5055:}"];
+}

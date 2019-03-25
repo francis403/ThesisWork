@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlC14NCheckForRelativeNamespaces' function" {
+	label="CFG for 'xmlC14NCheckForRelativeNamespaces' function";
+
+	Node0x55b0aecc8300 [shape=record,label="{c14n.c:1366:|{<s0>T|<s1>F}}"];
+	Node0x55b0aecc8300 -> Node0x55b0aecc8f40;
+	Node0x55b0aecc8300 -> Node0x55b0aecc9060;
+	Node0x55b0aecc9060 [shape=record,label="{c14n.c:1370:|{<s0>T|<s1>F}}"];
+	Node0x55b0aecc9060 -> Node0x55b0aecc8f40;
+	Node0x55b0aecc9060 -> Node0x55b0aecc8fe0;
+	Node0x55b0aecc8fe0 [shape=record,label="{c14n.c:1370:|{<s0>T|<s1>F}}"];
+	Node0x55b0aecc8fe0 -> Node0x55b0aecc8f40;
+	Node0x55b0aecc8fe0 -> Node0x55b0aecc8f90;
+	Node0x55b0aecc8f40 [shape=record,label="{c14n.c:1371:}"];
+	Node0x55b0aecc8f40 -> Node0x55b0aecc8350;
+	Node0x55b0aecc8f90 [shape=record,label="{c14n.c:1375:}"];
+	Node0x55b0aecc8f90 -> Node0x55b0aecc9d60;
+	Node0x55b0aecc9d60 [shape=record,label="{c14n.c:1376:|{<s0>T|<s1>F}}"];
+	Node0x55b0aecc9d60 -> Node0x55b0aecca160;
+	Node0x55b0aecc9d60 -> Node0x55b0aecc9f80;
+	Node0x55b0aecca160 [shape=record,label="{c14n.c:1377:|{<s0>T|<s1>F}}"];
+	Node0x55b0aecca160 -> Node0x55b0aecca310;
+	Node0x55b0aecca160 -> Node0x55b0aecca360;
+	Node0x55b0aecca310 [shape=record,label="{c14n.c:1378:|{<s0>T|<s1>F}}"];
+	Node0x55b0aecca310 -> Node0x55b0aecccbb0;
+	Node0x55b0aecca310 -> Node0x55b0aecccc00;
+	Node0x55b0aecccbb0 [shape=record,label="{c14n.c:1382:}"];
+	Node0x55b0aecccbb0 -> Node0x55b0aecc8350;
+	Node0x55b0aecccc00 [shape=record,label="{c14n.c:1385:|{<s0>T|<s1>F}}"];
+	Node0x55b0aecccc00 -> Node0x55b0aeccd950;
+	Node0x55b0aecccc00 -> Node0x55b0aeccd9a0;
+	Node0x55b0aeccd950 [shape=record,label="{c14n.c:1386:}"];
+	Node0x55b0aeccd950 -> Node0x55b0aecc8350;
+	Node0x55b0aeccd9a0 [shape=record,label="{c14n.c:1390:}"];
+	Node0x55b0aeccd9a0 -> Node0x55b0aecca360;
+	Node0x55b0aecca360 [shape=record,label="{c14n.c:1392:}"];
+	Node0x55b0aecca360 -> Node0x55b0aecc9d60;
+	Node0x55b0aecc9f80 [shape=record,label="{c14n.c:1394:}"];
+	Node0x55b0aecc9f80 -> Node0x55b0aecc8350;
+	Node0x55b0aecc8350 [shape=record,label="{c14n.c:1395:}"];
+}

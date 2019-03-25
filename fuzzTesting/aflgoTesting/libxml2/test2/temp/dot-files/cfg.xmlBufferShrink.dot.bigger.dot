@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlBufferShrink' function" {
+	label="CFG for 'xmlBufferShrink' function";
+
+	Node0x55a216f45720 [shape=record,label="{tree.c:7220:|{<s0>T|<s1>F}}"];
+	Node0x55a216f45720:s0 -> Node0x55a216f45ad0;
+	Node0x55a216f45720:s1 -> Node0x55a216f45be0;
+	Node0x55a216f45ad0 [shape=record,label="{tree.c:7221:}"];
+	Node0x55a216f45ad0 -> Node0x55a216f49030;
+	Node0x55a216f45be0 [shape=record,label="{tree.c:7222:|{<s0>T|<s1>F}}"];
+	Node0x55a216f45be0:s0 -> Node0x55a216f4a100;
+	Node0x55a216f45be0:s1 -> Node0x55a216f4a150;
+	Node0x55a216f4a100 [shape=record,label="{tree.c:7222:}"];
+	Node0x55a216f4a100 -> Node0x55a216f49030;
+	Node0x55a216f4a150 [shape=record,label="{tree.c:7223:|{<s0>T|<s1>F}}"];
+	Node0x55a216f4a150:s0 -> Node0x55a216f4a5e0;
+	Node0x55a216f4a150:s1 -> Node0x55a216f4a630;
+	Node0x55a216f4a5e0 [shape=record,label="{tree.c:7223:}"];
+	Node0x55a216f4a5e0 -> Node0x55a216f49030;
+	Node0x55a216f4a630 [shape=record,label="{tree.c:7225:|{<s0>T|<s1>F}}"];
+	Node0x55a216f4a630:s0 -> Node0x55a216f4aec0;
+	Node0x55a216f4a630:s1 -> Node0x55a216f4afb0;
+	Node0x55a216f4afb0 [shape=record,label="{tree.c:7227:|{<s0>T|<s1>F}}"];
+	Node0x55a216f4afb0:s0 -> Node0x55a216f4b320;
+	Node0x55a216f4afb0:s1 -> Node0x55a216f4af60;
+	Node0x55a216f4b320 [shape=record,label="{tree.c:7227:|{<s0>T|<s1>F}}"];
+	Node0x55a216f4b320:s0 -> Node0x55a216f4aec0;
+	Node0x55a216f4b320:s1 -> Node0x55a216f4af60;
+	Node0x55a216f4aec0 [shape=record,label="{tree.c:7232:|{<s0>T|<s1>F}}"];
+	Node0x55a216f4aec0:s0 -> Node0x55a216f4c220;
+	Node0x55a216f4aec0:s1 -> Node0x55a216f4c1d0;
+	Node0x55a216f4c220 [shape=record,label="{tree.c:7239:|{<s0>T|<s1>F}}"];
+	Node0x55a216f4c220:s0 -> Node0x55a216f4c180;
+	Node0x55a216f4c220:s1 -> Node0x55a216f4c1d0;
+	Node0x55a216f4c180 [shape=record,label="{tree.c:7240:|{<s0>T|<s1>F}}"];
+	Node0x55a216f4c180:s0 -> Node0x55a216f4d1e0;
+	Node0x55a216f4c180:s1 -> Node0x55a216f4d230;
+	Node0x55a216f4d1e0 [shape=record,label="{tree.c:7242:}"];
+	Node0x55a216f4d1e0 -> Node0x55a216f4d230;
+	Node0x55a216f4d230 [shape=record,label="{tree.c:7247:}"];
+	Node0x55a216f4d230 -> Node0x55a216f4c1d0;
+	Node0x55a216f4c1d0 [shape=record,label="{tree.c:7248:}"];
+	Node0x55a216f4c1d0 -> Node0x55a216f4af10;
+	Node0x55a216f4af60 [shape=record,label="{tree.c:7249:}"];
+	Node0x55a216f4af60 -> Node0x55a216f4af10;
+	Node0x55a216f4af10 [shape=record,label="{tree.c:7252:}"];
+	Node0x55a216f4af10 -> Node0x55a216f49030;
+	Node0x55a216f49030 [shape=record,label="{tree.c:7253:}"];
+}

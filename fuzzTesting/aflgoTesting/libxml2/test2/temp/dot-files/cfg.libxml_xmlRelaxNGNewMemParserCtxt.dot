@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlRelaxNGNewMemParserCtxt' function" {
+	label="CFG for 'libxml_xmlRelaxNGNewMemParserCtxt' function";
+
+	Node0x55afb8f68090 [shape=record,label="{libxml2-py.c:6366:|{<s0>T|<s1>F}}"];
+	Node0x55afb8f68090:s0 -> Node0x55afb8f6be80;
+	Node0x55afb8f68090:s1 -> Node0x55afb8f6be30;
+	Node0x55afb8f6be30 [shape=record,label="{libxml2-py.c:6373:}"];
+	Node0x55afb8f6be30 -> Node0x55afb8f68320;
+	Node0x55afb8f6be80 [shape=record,label="{libxml2-py.c:6375:}"];
+	Node0x55afb8f6be80 -> Node0x55afb8f68320;
+	Node0x55afb8f68320 [shape=record,label="{libxml2-py.c:6378:}"];
+}

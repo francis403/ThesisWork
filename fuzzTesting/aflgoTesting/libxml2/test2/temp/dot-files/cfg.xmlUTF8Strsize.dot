@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlUTF8Strsize' function" {
+	label="CFG for 'xmlUTF8Strsize' function";
+
+	Node0x563c05300250 [shape=record,label="{xmlstring.c:833:|{<s0>T|<s1>F}}"];
+	Node0x563c05300250 -> Node0x563c05300e40;
+	Node0x563c05300250 -> Node0x563c05300e90;
+	Node0x563c05300e40 [shape=record,label="{xmlstring.c:838:}"];
+	Node0x563c05300e40 -> Node0x563c05300200;
+	Node0x563c05300e90 [shape=record,label="{xmlstring.c:840:|{<s0>T|<s1>F}}"];
+	Node0x563c05300e90 -> Node0x563c05301320;
+	Node0x563c05300e90 -> Node0x563c05301370;
+	Node0x563c05301320 [shape=record,label="{xmlstring.c:841:}"];
+	Node0x563c05301320 -> Node0x563c05300200;
+	Node0x563c05301370 [shape=record,label="{xmlstring.c:843:}"];
+	Node0x563c05301370 -> Node0x563c05301790;
+	Node0x563c05301790 [shape=record,label="{xmlstring.c:843:|{<s0>T|<s1>F}}"];
+	Node0x563c05301790 -> Node0x563c05301c00;
+	Node0x563c05301790 -> Node0x563c053019b0;
+	Node0x563c05301c00 [shape=record,label="{xmlstring.c:844:|{<s0>T|<s1>F}}"];
+	Node0x563c05301c00 -> Node0x563c05301e40;
+	Node0x563c05301c00 -> Node0x563c05301df0;
+	Node0x563c05301df0 [shape=record,label="{xmlstring.c:845:}"];
+	Node0x563c05301df0 -> Node0x563c053019b0;
+	Node0x563c05301e40 [shape=record,label="{xmlstring.c:846:|{<s0>T|<s1>F}}"];
+	Node0x563c05301e40 -> Node0x563c053021c0;
+	Node0x563c05301e40 -> Node0x563c05302210;
+	Node0x563c053021c0 [shape=record,label="{xmlstring.c:847:}"];
+	Node0x563c053021c0 -> Node0x563c05302850;
+	Node0x563c05302850 [shape=record,label="{xmlstring.c:847:|{<s0>T|<s1>F}}"];
+	Node0x563c05302850 -> Node0x563c05302e60;
+	Node0x563c05302850 -> Node0x563c05302a70;
+	Node0x563c05302e60 [shape=record,label="{xmlstring.c:848:|{<s0>T|<s1>F}}"];
+	Node0x563c05302e60 -> Node0x563c05303050;
+	Node0x563c05302e60 -> Node0x563c053030a0;
+	Node0x563c05303050 [shape=record,label="{xmlstring.c:848:}"];
+	Node0x563c05303050 -> Node0x563c05302a70;
+	Node0x563c053030a0 [shape=record,label="{xmlstring.c:849:}"];
+	Node0x563c053030a0 -> Node0x563c05302850;
+	Node0x563c05302a70 [shape=record,label="{xmlstring.c:847:}"];
+	Node0x563c05302a70 -> Node0x563c05302210;
+	Node0x563c05302210 [shape=record,label="{xmlstring.c:843:}"];
+	Node0x563c05302210 -> Node0x563c05301790;
+	Node0x563c053019b0 [shape=record,label="{xmlstring.c:852:}"];
+	Node0x563c053019b0 -> Node0x563c05300200;
+	Node0x563c05300200 [shape=record,label="{xmlstring.c:853:}"];
+}

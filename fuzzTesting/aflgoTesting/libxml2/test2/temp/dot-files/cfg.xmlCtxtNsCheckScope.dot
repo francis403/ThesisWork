@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlCtxtNsCheckScope' function" {
+	label="CFG for 'xmlCtxtNsCheckScope' function";
+
+	Node0x56087003c540 [shape=record,label="{debugXML.c:197:|{<s0>T|<s1>F}}"];
+	Node0x56087003c540 -> Node0x5608700427e0;
+	Node0x56087003c540 -> Node0x560870042830;
+	Node0x5608700427e0 [shape=record,label="{debugXML.c:203:|{<s0>T|<s1>F}}"];
+	Node0x5608700427e0 -> Node0x560870042bd0;
+	Node0x5608700427e0 -> Node0x560870042c70;
+	Node0x560870042bd0 [shape=record,label="{debugXML.c:204:}"];
+	Node0x560870042bd0 -> Node0x560870042c20;
+	Node0x560870042c70 [shape=record,label="{debugXML.c:207:}"];
+	Node0x560870042c70 -> Node0x560870042c20;
+	Node0x560870042c20 [shape=record,label="{debugXML.c:210:}"];
+	Node0x560870042c20 -> Node0x560870042830;
+	Node0x560870042830 [shape=record,label="{debugXML.c:211:|{<s0>T|<s1>F}}"];
+	Node0x560870042830 -> Node0x560870043a50;
+	Node0x560870042830 -> Node0x560870043aa0;
+	Node0x560870043a50 [shape=record,label="{debugXML.c:212:|{<s0>T|<s1>F}}"];
+	Node0x560870043a50 -> Node0x560870043ed0;
+	Node0x560870043a50 -> Node0x560870043f70;
+	Node0x560870043ed0 [shape=record,label="{debugXML.c:213:}"];
+	Node0x560870043ed0 -> Node0x560870043f20;
+	Node0x560870043f70 [shape=record,label="{debugXML.c:216:}"];
+	Node0x560870043f70 -> Node0x560870043f20;
+	Node0x560870043f20 [shape=record,label="{debugXML.c:219:}"];
+	Node0x560870043f20 -> Node0x560870043aa0;
+	Node0x560870043aa0 [shape=record,label="{debugXML.c:220:}"];
+}

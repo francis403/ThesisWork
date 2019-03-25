@@ -1,0 +1,28 @@
+digraph "CFG for 'xmlXPathSubValues' function" {
+	label="CFG for 'xmlXPathSubValues' function";
+
+	Node0x562a79a4b200 [shape=record,label="{xpath.c:7509:|{<s0>T|<s1>F}}"];
+	Node0x562a79a4b200:s0 -> Node0x562a79b022b0;
+	Node0x562a79a4b200:s1 -> Node0x562a79b02300;
+	Node0x562a79b022b0 [shape=record,label="{xpath.c:7515:}"];
+	Node0x562a79b022b0 -> Node0x562a79afa7e0;
+	Node0x562a79b02300 [shape=record,label="{xpath.c:7516:|{<s0>T|<s1>F}}"];
+	Node0x562a79b02300:s0 -> Node0x562a79b02c00;
+	Node0x562a79b02300:s1 -> Node0x562a79b02bb0;
+	Node0x562a79b02c00 [shape=record,label="{xpath.c:7518:|{<s0>T|<s1>F}}"];
+	Node0x562a79b02c00:s0 -> Node0x562a79b02b60;
+	Node0x562a79b02c00:s1 -> Node0x562a79b02bb0;
+	Node0x562a79b02b60 [shape=record,label="{xpath.c:7518:}"];
+	Node0x562a79b02b60 -> Node0x562a79b02bb0;
+	Node0x562a79b02bb0 [shape=record,label="{xpath.c:7519:|{<s0>T|<s1>F}}"];
+	Node0x562a79b02bb0:s0 -> Node0x562a79b03390;
+	Node0x562a79b02bb0:s1 -> Node0x562a79b03430;
+	Node0x562a79b03430 [shape=record,label="{xpath.c:7519:|{<s0>T|<s1>F}}"];
+	Node0x562a79b03430:s0 -> Node0x562a79b03390;
+	Node0x562a79b03430:s1 -> Node0x562a79b033e0;
+	Node0x562a79b03390 [shape=record,label="{xpath.c:7519:}"];
+	Node0x562a79b03390 -> Node0x562a79afa7e0;
+	Node0x562a79b033e0 [shape=record,label="{xpath.c:7520:}"];
+	Node0x562a79b033e0 -> Node0x562a79afa7e0;
+	Node0x562a79afa7e0 [shape=record,label="{xpath.c:7521:}"];
+}

@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlBufDetach' function" {
+	label="CFG for 'xmlBufDetach' function";
+
+	Node0x558c8f79c0c0 [shape=record,label="{buf.c:196:|{<s0>T|<s1>F}}"];
+	Node0x558c8f79c0c0:s0 -> Node0x558c8f79cee0;
+	Node0x558c8f79c0c0:s1 -> Node0x558c8f79cf30;
+	Node0x558c8f79cee0 [shape=record,label="{buf.c:200:}"];
+	Node0x558c8f79cee0 -> Node0x558c8f79c650;
+	Node0x558c8f79cf30 [shape=record,label="{buf.c:201:|{<s0>T|<s1>F}}"];
+	Node0x558c8f79cf30:s0 -> Node0x558c8f79d2d0;
+	Node0x558c8f79cf30:s1 -> Node0x558c8f79d320;
+	Node0x558c8f79d2d0 [shape=record,label="{buf.c:202:}"];
+	Node0x558c8f79d2d0 -> Node0x558c8f79c650;
+	Node0x558c8f79d320 [shape=record,label="{buf.c:203:|{<s0>T|<s1>F}}"];
+	Node0x558c8f79d320:s0 -> Node0x558c8f79d810;
+	Node0x558c8f79d320:s1 -> Node0x558c8f79d860;
+	Node0x558c8f79d810 [shape=record,label="{buf.c:204:}"];
+	Node0x558c8f79d810 -> Node0x558c8f79c650;
+	Node0x558c8f79d860 [shape=record,label="{buf.c:205:|{<s0>T|<s1>F}}"];
+	Node0x558c8f79d860:s0 -> Node0x558c8f79dd50;
+	Node0x558c8f79d860:s1 -> Node0x558c8f79dda0;
+	Node0x558c8f79dd50 [shape=record,label="{buf.c:206:}"];
+	Node0x558c8f79dd50 -> Node0x558c8f79c650;
+	Node0x558c8f79dda0 [shape=record,label="{buf.c:208:}"];
+	Node0x558c8f79dda0 -> Node0x558c8f79c650;
+	Node0x558c8f79c650 [shape=record,label="{buf.c:216:}"];
+}

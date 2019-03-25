@@ -1,0 +1,3293 @@
+diff --git a/.gitignore b/.gitignore
+index 62cd025b..ad751e89 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -15,6 +15,7 @@ Makefile.in
+ aclocal.m4
+ autom4te.cache
+ bissect*
++compile
+ config.guess
+ config.h
+ config.h.in
+@@ -23,6 +24,7 @@ config.log
+ config.status
+ config.sub
+ configure
++dba100000.xml
+ depcomp
+ doc/Makefile
+ doc/Makefile.in
+@@ -59,6 +61,7 @@ install-sh
+ libtool
+ libxml-2.0-uninstalled.pc
+ libxml-2.0.pc
++libxml2-config.cmake
+ libxml2.la
+ libxml2.spec
+ list
+@@ -117,6 +120,7 @@ xml2Conf.sh
+ xmlcatalog
+ xmlconf
+ xmllint
++xstc/*-test.py
+ xstc/Makefile
+ xstc/Makefile.in
+ xstc/Tests
+diff --git a/.travis.yml b/.travis.yml
+index 469f9c50..5275c4f3 100644
+--- a/.travis.yml
++++ b/.travis.yml
+@@ -10,13 +10,13 @@ matrix:
+     # Try to emulate a C89 compiler on a POSIX system by disabling as many
+     # GNU extensions as possible.
+     - compiler: gcc
+-      env: CFLAGS="-O2 -std=c89 -D_XOPEN_SOURCE=700 -Werror -Wno-error=unused-function"
++      env: CFLAGS="-O2 -std=c89 -D_XOPEN_SOURCE=700 -Werror"
+     # clang with AddressSanitizer and UndefinedBehaviorSanitizer.
+     - compiler: clang
+       sudo: required
+       dist: trusty
+       env: CONFIG="--without-python"
+-           CFLAGS="-O2 -g -fno-omit-frame-pointer -fsanitize=address,undefined -fno-sanitize=float-divide-by-zero,pointer-overflow -fno-sanitize-recover=all -Werror -Wno-error=unused-function -Wno-error=cast-align"
++           CFLAGS="-O2 -g -fno-omit-frame-pointer -fsanitize=address,undefined -fno-sanitize=float-divide-by-zero,pointer-overflow -fno-sanitize-recover=all -Werror -Wno-error=cast-align"
+            UBSAN_OPTIONS=print_stacktrace=1
+ script: sh autogen.sh $CONFIG && make -j2 V=1 && make check
+ git:
+diff --git a/CONTRIBUTING b/CONTRIBUTING
+index 6f7a9885..7189d74e 100644
+--- a/CONTRIBUTING
++++ b/CONTRIBUTING
+@@ -1,6 +1,6 @@
+ The current version of the code can be found in the GNOME Git Repository:
+ 
+-    https://git.gnome.org/browse/libxml2/
++    https://gitlab.gnome.org/GNOME/libxml2
+ 
+ There's mirror on GitHub:
+ 
+@@ -10,7 +10,7 @@ Start discussions and send patches to the mailing list, or file a bug and
+ add a patch as attachment.
+ 
+     https://mail.gnome.org/mailman/listinfo/xml
+-    https://bugzilla.gnome.org/enter_bug.cgi?product=libxml2
++    https://gitlab.gnome.org/GNOME/libxml2/issues
+ 
+ Format patches with git-format-patch and use plain text attachments
+ if possible.
+diff --git a/Makefile.am b/Makefile.am
+index 9c630be4..174b9843 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -126,11 +126,7 @@ testC14N_LDFLAGS =
+ testC14N_DEPENDENCIES = $(DEPS)
+ testC14N_LDADD= $(LDADDS)
+ 
+-if THREADS_W32
+-testThreads_SOURCES = testThreadsWin32.c
+-else
+ testThreads_SOURCES = testThreads.c
+-endif
+ testThreads_LDFLAGS = 
+ testThreads_DEPENDENCIES = $(DEPS)
+ testThreads_LDADD= $(BASE_THREAD_LIBS) $(LDADDS)
+@@ -1253,7 +1249,7 @@ EXTRA_DIST = xml2-config.in xml2Conf.sh.in libxml.spec.in libxml2.spec \
+ 	     libxml2-config.cmake.in autogen.sh \
+ 	     trionan.c trionan.h triostr.c triostr.h trio.c trio.h \
+ 	     triop.h triodef.h libxml.h elfgcchack.h xzlib.h buf.h \
+-	     enc.h save.h testThreadsWin32.c genUnicode.py TODO_SCHEMAS \
++	     enc.h save.h genUnicode.py TODO_SCHEMAS \
+ 	     dbgen.pl dbgenattr.pl regressions.py regressions.xml \
+ 	     README.tests Makefile.tests libxml2.syms timsort.h \
+ 	     README.zOS \
+diff --git a/NEWS b/NEWS
+index d248c693..5504bed8 100644
+--- a/NEWS
++++ b/NEWS
+@@ -8,8 +8,451 @@ The change log at
+ ChangeLog.html
+  describes the recents commits
+ to the GIT at 
+-http://git.gnome.org/browse/libxml2/
++https://gitlab.gnome.org/GNOME/libxml2
+  code base.Here is the list of public releases:
++v2.9.9: Jan 03 2019:
++   - Security:
++  CVE-2018-9251 CVE-2018-14567 Fix infinite loop in LZMA decompression (Nick Wellnhofer),
++  CVE-2018-14404 Fix nullptr deref with XPath logic ops (Nick Wellnhofer),
++  
++   - Documentation:
++  reader: Fix documentation comment (Mohammed Sadiq)
++  
++   - Portability:
++  Fix MSVC build with lzma (Nick Wellnhofer),
++  Variables need 'extern' in static lib on Cygwin (Michael Haubenwallner),
++  Really declare dllexport/dllimport for Cygwin (Michael Haubenwallner),
++  Merge branch 'patch-2' into 'master' (Nick Wellnhofer),
++  Change dir to $THEDIR after ACLOCAL_PATH check autoreconf creates aclocal.m4 in $srcdir (Vitaly Buka),
++  Improve error message if pkg.m4 couldn't be found (Nick Wellnhofer),
++  NaN and Inf fixes for pre-C99 compilers (Nick Wellnhofer)
++  
++   - Bug Fixes:
++  Revert "Support xmlTextReaderNextSibling w/o preparsed doc" (Nick Wellnhofer),
++  Fix building relative URIs (Thomas Holder),
++  Problem with data in interleave in RelaxNG validation (Nikolai Weibull),
++  Fix memory leak in xmlSwitchInputEncodingInt error path (Nick Wellnhofer),
++  Set doc on element obtained from freeElems (Nick Wellnhofer),
++  Fix HTML serialization with UTF-8 encoding (Nick Wellnhofer),
++  Use actual doc in xmlTextReaderRead*Xml (Nick Wellnhofer),
++  Unlink node before freeing it in xmlSAX2StartElement (Nick Wellnhofer),
++  Check return value of nodePush in xmlSAX2StartElement (Nick Wellnhofer),
++  Free input buffer in xmlHaltParser (Nick Wellnhofer),
++  Reset HTML parser input pointers on encoding failure (Nick Wellnhofer),
++  Don't run icu_parse_test if EUC-JP is unsupported (Nick Wellnhofer),
++  Fix xmlSchemaValidCtxtPtr reuse memory leak (Greg Hildstrom),
++  Fix xmlTextReaderNext with preparsed document (Felix Bünemann),
++  Remove stray character from comment (Nick Wellnhofer),
++  Remove a misleading line from xmlCharEncOutput (Andrey Bienkowski),
++  HTML noscript should not close p (Daniel Veillard),
++  Don't change context node in xmlXPathRoot (Nick Wellnhofer),
++  Stop using XPATH_OP_RESET (Nick Wellnhofer),
++  Revert "Change calls to xmlCharEncInput to set flush false" (Nick Wellnhofer)
++  
++   - Improvements:
++  Fix "Problem with data in interleave in RelaxNG validation" (Nikolai Weibull),
++  cleanup: remove some unreachable code (Thomas Holder),
++  add --relative to testURI (Thomas Holder),
++  Remove redefined starts and defines inside include elements (Nikolai Weibull),
++  Allow choice within choice in nameClass in RELAX NG (Nikolai Weibull),
++  Look inside divs for starts and defines inside include (Nikolai Weibull),
++  Add compile and libxml2-config.cmake to .gitignore (Nikolai Weibull),
++  Stop using doc->charset outside parser code (Nick Wellnhofer),
++  Add newlines to 'xmllint --xpath' output (Nick Wellnhofer),
++  Don't include SAX.h from globals.h (Nick Wellnhofer),
++  Support xmlTextReaderNextSibling w/o preparsed doc (Felix Bünemann),
++  Don't instruct user to run make when autogen.sh failed (林博仁(Buo-ren Lin)),
++  Run Travis ASan tests with "sudo: required" (Nick Wellnhofer),
++  Improve restoring of context size and position (Nick Wellnhofer),
++  Simplify and harden nodeset filtering (Nick Wellnhofer),
++  Avoid unnecessary backups of the context node (Nick Wellnhofer),
++  Fix inconsistency in xmlXPathIsInf (Nick Wellnhofer)
++  
++   - Cleanups:
++  
++
++
++v2.9.8: Mar 05 2018:
++   - Portability:
++  python: remove single use of _PyVerify_fd (Patrick Welche),
++  Build more test executables on Windows/MSVC (Nick Wellnhofer),
++  Stop including ansidecl.h (Nick Wellnhofer),
++  Fix libz and liblzma detection (Nick Wellnhofer),
++  Revert "Compile testapi with -Wno-unused-function" (Nick Wellnhofer)
++  
++   - Bug Fixes:
++  Fix xmlParserEntityCheck (Nick Wellnhofer),
++  Halt parser in case of encoding error (Nick Wellnhofer),
++  Clear entity content in case of errors (Nick Wellnhofer),
++  Change calls to xmlCharEncInput to set flush false when not final call. Having flush incorrectly set to true causes errors for ICU. (Joel Hockey),
++  Fix buffer over-read in xmlParseNCNameComplex (Nick Wellnhofer),
++  Fix ICU library filenames on Windows/MSVC (Nick Wellnhofer),
++  Fix xmlXPathIsNaN broken by recent commit (Nick Wellnhofer),
++  Fix -Wenum-compare warnings (Nick Wellnhofer),
++  Fix callback signature in testapi.c (Nick Wellnhofer),
++  Fix unused parameter warning without ICU (Nick Wellnhofer),
++  Fix IO callback signatures (Nick Wellnhofer),
++  Fix misc callback signatures (Nick Wellnhofer),
++  Fix list callback signatures (Nick Wellnhofer),
++  Fix hash callback signatures (Nick Wellnhofer),
++  Refactor name and type signature for xmlNop (Vlad Tsyrklevich),
++  Fixed ICU to set flush correctly and provide pivot buffer. (Joel Hockey),
++  Skip EBCDIC tests if EBCDIC isn't supported (Nick Wellnhofer)
++  
++   - Improvements:
++  Disable pointer-overflow UBSan checks under Travis (Nick Wellnhofer),
++  Improve handling of context input_id (Daniel Veillard),
++  Add resource file to Windows DLL (ccpaging),
++  Run Travis tests with -Werror (Nick Wellnhofer),
++  Build with "-Wall -Wextra" (Nick Wellnhofer),
++  Fix -Wtautological-pointer-compare warnings (Nick Wellnhofer),
++  Remove unused AC_CHECKs (Nick Wellnhofer),
++  Update information about contributing (Nick Wellnhofer),
++  Fix -Wmisleading-indentation warnings (Nick Wellnhofer),
++  Don't touch CFLAGS in configure.ac (Nick Wellnhofer),
++  Ignore function pointer cast warnings (Nick Wellnhofer),
++  Simplify XPath NaN, inf and -0 handling (Nick Wellnhofer),
++  Introduce xmlPosixStrdup and update xmlMemStrdup (Nick Wellnhofer),
++  Add test for ICU flush and pivot buffer (Nick Wellnhofer),
++  Compile testapi with -Wno-unused-function (Nick Wellnhofer)
++  
++
++
++2.9.7: Nov 02 2017:
++   - Documentation:
++  xmlcatalog: refresh man page wrt. quering system catalog easily (Jan Pokorný)
++  
++   - Portability:
++  Fix deprecated Travis compiler flag (Nick Wellnhofer),
++  Add declaration for DllMain (J. Peter Mugaas),
++  Fix preprocessor conditional in threads.h (J. Peter Mugaas),
++  Fix pointer comparison warnings on 64-bit Windows (J. Peter Mugaas),
++  Fix macro redefinition warning (J. Peter Mugaas),
++  Default to native threads on MinGW-w64 (Nick Wellnhofer),
++  Simplify Windows IO functions (Nick Wellnhofer),
++  Fix runtest on Windows (Nick Wellnhofer),
++  socklen_t is always int on Windows (Nick Wellnhofer),
++  Don't redefine socket error codes on Windows (Nick Wellnhofer),
++  Fix pointer/int cast warnings on 64-bit Windows (Nick Wellnhofer),
++  Fix Windows compiler warnings in xmlCanonicPath (Nick Wellnhofer)
++  
++   - Bug Fixes:
++  xmlcatalog: restore ability to query system catalog easily (Jan Pokorný),
++  Fix comparison of nodesets to strings (Nick Wellnhofer)
++  
++   - Improvements:
++  Add Makefile rules to rebuild HTML man pages (Nick Wellnhofer),
++  Fix mixed decls and code in timsort.h (Nick Wellnhofer),
++  Rework handling of return values in thread tests (Nick Wellnhofer),
++  Fix unused variable warnings in testrecurse (Nick Wellnhofer),
++  Fix -Wimplicit-fallthrough warnings (J. Peter Mugaas),
++  Upgrade timsort.h to latest revision (Nick Wellnhofer),
++  Increase warning level to /W3 under MSVC (Nick Wellnhofer),
++  Fix a couple of warnings in dict.c and threads.c (Nick Wellnhofer),
++  Update .gitignore for Windows (Nick Wellnhofer),
++  Fix unused variable warnings in nanohttp.c (Nick Wellnhofer),
++  Fix the Windows header mess (Nick Wellnhofer),
++  Don't include winsock2.h in xmllint.c (Nick Wellnhofer),
++  Remove generated file python/setup.py from version control (Nick Wellnhofer),
++  Use __linux__ macro in generated code (Nick Wellnhofer)
++  
++
++
++v2.9.6: Oct 06 2017:
++   - Portability:
++  Change preprocessor OS tests to __linux__ (Nick Wellnhofer)
++  
++   - Bug Fixes:
++  Fix XPath stack frame logic (Nick Wellnhofer),
++  Report undefined XPath variable error message (Nick Wellnhofer),
++  Fix regression with librsvg (Nick Wellnhofer),
++  Handle more invalid entity values in recovery mode (Nick Wellnhofer),
++  Fix structured validation errors (Nick Wellnhofer),
++  Fix memory leak in LZMA decompressor (Nick Wellnhofer),
++  Set memory limit for LZMA decompression (Nick Wellnhofer),
++  Handle illegal entity values in recovery mode (Nick Wellnhofer),
++  Fix debug dump of streaming XPath expressions (Nick Wellnhofer),
++  Fix memory leak in nanoftp (Nick Wellnhofer),
++  Fix memory leaks in SAX1 parser (Nick Wellnhofer)
++  
++
++
++v2.9.5: Sep 04 2017:
++   - Security:
++  Detect infinite recursion in parameter entities (Nick Wellnhofer),
++  Fix handling of parameter-entity references (Nick Wellnhofer),
++  Disallow namespace nodes in XPointer ranges (Nick Wellnhofer),
++  Fix XPointer paths beginning with range-to (Nick Wellnhofer)
++  
++   - Documentation:
++  Documentation fixes (Nick Wellnhofer),
++  Spelling and grammar fixes (Nick Wellnhofer)
++  
++   - Portability:
++  Adding README.zOS to list of extra files for the release (Daniel Veillard),
++  Description of work needed to compile on zOS (Stéphane Michaut),
++  Porting libxml2 on zOS encoding of code (Stéphane Michaut),
++  small changes for OS/400 (Patrick Monnerat),
++  relaxng.c, xmlschemas.c: Fix build on pre-C99 compilers (Chun-wei Fan)
++  
++   - Bug Fixes:
++  Problem resolving relative URIs (Daniel Veillard),
++  Fix unwanted warnings when switching encodings (Nick Wellnhofer),
++  Fix signature of xmlSchemaAugmentImportedIDC (Daniel Veillard),
++  Heap-buffer-overflow read of size 1 in xmlFAParsePosCharGroup (David Kilzer),
++  Fix NULL pointer deref in xmlFAParseCharClassEsc (Nick Wellnhofer),
++  Fix infinite loops with push parser in recovery mode (Nick Wellnhofer),
++  Send xmllint usage error to stderr (Nick Wellnhofer),
++  Fix NULL deref in xmlParseExternalEntityPrivate (Nick Wellnhofer),
++  Make sure not to call IS_BLANK_CH when parsing the DTD (Nick Wellnhofer),
++  Fix xmlHaltParser (Nick Wellnhofer),
++  Fix pathological performance when outputting charrefs (Nick Wellnhofer),
++  Fix invalid-source-encoding warnings in testWriter.c (Nick Wellnhofer),
++  Fix duplicate SAX callbacks for entity content (David Kilzer),
++  Treat URIs with scheme as absolute in C14N (Nick Wellnhofer),
++  Fix copy-paste errors in error messages (Nick Wellnhofer),
++  Fix sanity check in htmlParseNameComplex (Nick Wellnhofer),
++  Fix potential infinite loop in xmlStringLenDecodeEntities (Nick Wellnhofer),
++  Reset parser input pointers on encoding failure (Nick Wellnhofer),
++  Fix memory leak in xmlParseEntityDecl error path (Nick Wellnhofer),
++  Fix xmlBuildRelativeURI for URIs starting with './' (Nick Wellnhofer),
++  Fix type confusion in xmlValidateOneNamespace (Nick Wellnhofer),
++  Fix memory leak in xmlStringLenGetNodeList (Nick Wellnhofer),
++  Fix NULL pointer deref in xmlDumpElementContent (Daniel Veillard),
++  Fix memory leak in xmlBufAttrSerializeTxtContent (Nick Wellnhofer),
++  Stop parser on unsupported encodings (Nick Wellnhofer),
++  Check for integer overflow in memory debug code (Nick Wellnhofer),
++  Fix buffer size checks in xmlSnprintfElementContent (Nick Wellnhofer),
++  Avoid reparsing in xmlParseStartTag2 (Nick Wellnhofer),
++  Fix undefined behavior in xmlRegExecPushStringInternal (Nick Wellnhofer),
++  Check XPath exponents for overflow (Nick Wellnhofer),
++  Check for overflow in xmlXPathIsPositionalPredicate (Nick Wellnhofer),
++  Fix spurious error message (Nick Wellnhofer),
++  Fix memory leak in xmlCanonicPath (Nick Wellnhofer),
++  Fix memory leak in xmlXPathCompareNodeSetValue (Nick Wellnhofer),
++  Fix memory leak in pattern error path (Nick Wellnhofer),
++  Fix memory leak in parser error path (Nick Wellnhofer),
++  Fix memory leaks in XPointer error paths (Nick Wellnhofer),
++  Fix memory leak in xmlXPathNodeSetMergeAndClear (Nick Wellnhofer),
++  Fix memory leak in XPath filter optimizations (Nick Wellnhofer),
++  Fix memory leaks in XPath error paths (Nick Wellnhofer),
++  Do not leak the new CData node if adding fails (David Tardon),
++  Prevent unwanted external entity reference (Neel Mehta),
++  Increase buffer space for port in HTTP redirect support (Daniel Veillard),
++  Fix more NULL pointer derefs in xpointer.c (Nick Wellnhofer),
++  Avoid function/data pointer conversion in xpath.c (Nick Wellnhofer),
++  Fix format string warnings (Nick Wellnhofer),
++  Disallow namespace nodes in XPointer points (Nick Wellnhofer),
++  Fix comparison with root node in xmlXPathCmpNodes (Nick Wellnhofer),
++  Fix attribute decoding during XML schema validation (Alex Henrie),
++  Fix NULL pointer deref in XPointer range-to (Nick Wellnhofer)
++  
++   - Improvements:
++  Updating the spec file to reflect Fedora 24 (Daniel Veillard),
++  Add const in five places to move 1 KiB to .rdata (Bruce Dawson),
++  Fix missing part of comment for function xmlXPathEvalExpression() (Daniel Veillard),
++  Get rid of "blanks wrapper" for parameter entities (Nick Wellnhofer),
++  Simplify handling of parameter entity references (Nick Wellnhofer),
++  Deduplicate code in encoding.c (Nick Wellnhofer),
++  Make HTML parser functions take const pointers (Nick Wellnhofer),
++  Build test programs only when needed (Nick Wellnhofer),
++  Fix doc/examples/index.py (Nick Wellnhofer),
++  Fix compiler warnings in threads.c (Nick Wellnhofer),
++  Fix empty-body warning in nanohttp.c (Nick Wellnhofer),
++  Fix cast-align warnings (Nick Wellnhofer),
++  Fix unused-parameter warnings (Nick Wellnhofer),
++  Rework entity boundary checks (Nick Wellnhofer),
++  Don't switch encoding for internal parameter entities (Nick Wellnhofer),
++  Merge duplicate code paths handling PE references (Nick Wellnhofer),
++  Test SAX2 callbacks with entity substitution (Nick Wellnhofer),
++  Support catalog and threads tests under --without-sax1 (Nick Wellnhofer),
++  Misc fixes for 'make tests' (Nick Wellnhofer),
++  Initialize keepBlanks in HTML parser (Nick Wellnhofer),
++  Add test cases for bug 758518 (David Kilzer),
++  Fix compiler warning in htmlParseElementInternal (Nick Wellnhofer),
++  Remove useless check in xmlParseAttributeListDecl (Nick Wellnhofer),
++  Allow zero sized memory input buffers (Nick Wellnhofer),
++  Add TODO comment in xmlSwitchEncoding (Nick Wellnhofer),
++  Check for integer overflow in xmlXPathFormatNumber (Nick Wellnhofer),
++  Make Travis print UBSan stacktraces (Nick Wellnhofer),
++  Add .travis.yml (Nick Wellnhofer),
++  Fix expected error output in Python tests (Nick Wellnhofer),
++  Simplify control flow in xmlParseStartTag2 (Nick Wellnhofer),
++  Disable LeakSanitizer when running API tests (Nick Wellnhofer),
++  Avoid out-of-bound array access in API tests (Nick Wellnhofer),
++  Avoid spurious UBSan errors in parser.c (Nick Wellnhofer),
++  Parse small XPath numbers more accurately (Nick Wellnhofer),
++  Rework XPath rounding functions (Nick Wellnhofer),
++  Fix white space in test output (Nick Wellnhofer),
++  Fix axis traversal from attribute and namespace nodes (Nick Wellnhofer),
++  Check for trailing characters in XPath expressions earlier (Nick Wellnhofer),
++  Rework final handling of XPath results (Nick Wellnhofer),
++  Make xmlXPathEvalExpression call xmlXPathEval (Nick Wellnhofer),
++  Remove unused variables (Nick Wellnhofer),
++  Don't print generic error messages in XPath tests (Nick Wellnhofer)
++  
++   - Cleanups:
++  Fix a couple of misleading indentation errors (Daniel Veillard),
++  Remove unnecessary calls to xmlPopInput (Nick Wellnhofer)
++  
++
++
++2.9.4: May 23 2016:
++   - Security:
++  More format string warnings with possible format string vulnerability (David Kilzer),
++  Avoid building recursive entities (Daniel Veillard),
++  Heap-based buffer overread in htmlCurrentChar (Pranjal Jumde),
++  Heap-based buffer-underreads due to xmlParseName (David Kilzer),
++  Heap use-after-free in xmlSAX2AttributeNs (Pranjal Jumde),
++  Heap use-after-free in htmlParsePubidLiteral and htmlParseSystemiteral (Pranjal Jumde),
++  Fix some format string warnings with possible format string vulnerability (David Kilzer),
++  Detect change of encoding when parsing HTML names (Hugh Davenport),
++  Fix inappropriate fetch of entities content (Daniel Veillard),
++  Bug 759398: Heap use-after-free in xmlDictComputeFastKey <https://bugzilla.gnome.org/show_bug.cgi?id=759398> (Pranjal Jumde),
++  Bug 758605: Heap-based buffer overread in xmlDictAddString <https://bugzilla.gnome.org/show_bug.cgi?id=758605> (Pranjal Jumde),
++  Bug 758588: Heap-based buffer overread in xmlParserPrintFileContextInternal <https://bugzilla.gnome.org/show_bug.cgi?id=758588> (David Kilzer),
++  Bug 757711: heap-buffer-overflow in xmlFAParsePosCharGroup <https://bugzilla.gnome.org/show_bug.cgi?id=757711> (Pranjal Jumde),
++  Add missing increments of recursion depth counter to XML parser. (Peter Simons)
++  
++   - Documentation:
++  Fix typo: s{ ec -> cr }cipt (Jan Pokorný),
++  Fix typos: dictio{ nn -> n }ar{y,ies} (Jan Pokorný),
++  Fix typos: PATH_{ SEAPARATOR -> SEPARATOR } (Jan Pokorný),
++  Correct a typo. (Shlomi Fish)
++  
++   - Portability:
++  Correct the usage of LDFLAGS (Mattias Hansson),
++  Revert the use of SAVE_LDFLAGS in configure.ac (Mattias Hansson),
++  libxml2 hardcodes -L/lib in zlib/lzma tests which breaks cross-compiles (Mike Frysinger),
++  Fix apibuild for a recently added construct (Daniel Veillard),
++  Use pkg-config to locate zlib when possible (Stewart Brodie),
++  Use pkg-config to locate ICU when possible (Stewart Brodie),
++  Portability to non C99 compliant compilers (Patrick Monnerat),
++  dict.h: Move xmlDictPtr definition before includes to allow direct inclusion. (Patrick Monnerat),
++  os400: tell about xmllint and xmlcatalog in README400. (Patrick Monnerat),
++  os400: properly process SGML add in XMLCATALOG command. (Patrick Monnerat),
++  os400: implement CL command XMLCATALOG. (Patrick Monnerat),
++  os400: compile and install program xmlcatalog (qshell-only). (Patrick Monnerat),
++  os400: expand tabs in sources, strip trailing blanks. (Patrick Monnerat),
++  os400: implement CL command XMLLINT. (Patrick Monnerat),
++  os400: compile and install program xmllint (qshell-only). (Patrick Monnerat),
++  os400: initscript make_module(): Use options instead of positional parameters. (Patrick Monnerat),
++  os400: c14n.rpgle: allow *omit for nullable reference parameters. (Patrick Monnerat),
++  os400: use like() for double type. (Patrick Monnerat),
++  os400: use like() for int type. (Patrick Monnerat),
++  os400: use like() for unsigned int type. (Patrick Monnerat),
++  os400: use like() for enum types. (Patrick Monnerat),
++  Add xz to xml2-config --libs output (Baruch Siach),
++  Bug 760190: configure.ac should be able to build --with-icu without icu-config tool <https://bugzilla.gnome.org/show_bug.cgi?id=760190> (David Kilzer),
++  win32\VC10\config.h and VS 2015 (Bruce Dawson),
++  Add configure maintainer mode (orzen)
++  
++   - Bug Fixes:
++  Avoid an out of bound access when serializing malformed strings (Daniel Veillard),
++  Unsigned addition may overflow in xmlMallocAtomicLoc() (David Kilzer),
++  Integer signed/unsigned type mismatch in xmlParserInputGrow() (David Kilzer),
++  Bug 763071: heap-buffer-overflow in xmlStrncat <https://bugzilla.gnome.org/show_bug.cgi?id=763071> (Pranjal Jumde),
++  Integer overflow parsing port number in URI (Michael Paddon),
++  Fix an error with regexp on nullable counted char transition (Daniel Veillard),
++  Fix memory leak with XPath namespace nodes (Nick Wellnhofer),
++  Fix namespace axis traversal (Nick Wellnhofer),
++      Fix null pointer deref in docs with no root element (Hugh Davenport),
++  Fix XSD validation of URIs with ampersands (Alex Henrie),
++  xmlschemastypes.c: accept endOfDayFrag Times set to "24:00:00" mean "end of day" and should not cause an error. (Patrick Monnerat),
++  xmlcatalog: flush stdout before interactive shell input. (Patrick Monnerat),
++  xmllint: flush stdout before interactive shell input. (Patrick Monnerat),
++  Don't recurse into OP_VALUEs in xmlXPathOptimizeExpression (Nick Wellnhofer),
++  Fix namespace::node() XPath expression (Nick Wellnhofer),
++  Fix OOB write in xmlXPathEmptyNodeSet (Nick Wellnhofer),
++  Fix parsing of NCNames in XPath (Nick Wellnhofer),
++  Fix OOB read with invalid UTF-8 in xmlUTF8Strsize (Nick Wellnhofer),
++  Do normalize string-based datatype value in RelaxNG facet checking (Audric Schiltknecht),
++  Bug 760921: REGRESSION (8eb55d78): doc/examples/io1 test fails after fix for "xmlSaveUri() incorrectly recomposes URIs with rootless paths" <https://bugzilla.gnome.org/show_bug.cgi?id=760921> (David Kilzer),
++  Bug 760861: REGRESSION (bf9c1dad): Missing results for test/schemas/regexp-char-ref_[01].xsd <https://bugzilla.gnome.org/show_bug.cgi?id=760861> (David Kilzer),
++  error.c: *input->cur == 0 does not mean no error (Pavel Raiskup),
++  Add missing RNG test files (David Kilzer),
++  Bug 760183: REGRESSION (v2.9.3): XML push parser fails with bogus UTF-8 encoding error when multi-byte character in large CDATA section is split across buffer <https://bugzilla.gnome.org/show_bug.cgi?id=760183> (David Kilzer),
++  Bug 758572: ASAN crash in make check <https://bugzilla.gnome.org/show_bug.cgi?id=758572> (David Kilzer),
++  Bug 721158: Missing ICU string when doing --version on xmllint <https://bugzilla.gnome.org/show_bug.cgi?id=721158> (David Kilzer),
++  python 3: libxml2.c wrappers create Unicode str already (Michael Stahl),
++  Add autogen.sh to distrib (orzen),
++  Heap-based buffer overread in xmlNextChar (Daniel Veillard)
++  
++   - Improvements:
++  Add more debugging info to runtest (Daniel Veillard),
++  Implement "runtest -u" mode (David Kilzer),
++  Add a make rule to rebuild for ASAN (Daniel Veillard)
++  
++
++
++v2.9.3: Nov 20 2015:
++   - Security:
++  CVE-2015-8242 Buffer overead with HTML parser in push mode (Hugh Davenport),
++  CVE-2015-7500 Fix memory access error due to incorrect entities boundaries (Daniel Veillard),
++  CVE-2015-7499-2 Detect incoherency on GROW (Daniel Veillard),
++  CVE-2015-7499-1 Add xmlHaltParser() to stop the parser (Daniel Veillard),
++  CVE-2015-5312 Another entity expansion issue (David Drysdale),
++  CVE-2015-7497 Avoid an heap buffer overflow in xmlDictComputeFastQKey (David Drysdale),
++  CVE-2015-7498 Avoid processing entities after encoding conversion failures (Daniel Veillard),
++  CVE-2015-8035 Fix XZ compression support loop (Daniel Veillard),
++  CVE-2015-7942-2 Fix an error in previous Conditional section patch (Daniel Veillard),
++  CVE-2015-7942 Another variation of overflow in Conditional sections (Daniel Veillard),
++  CVE-2015-1819 Enforce the reader to run in constant memory (Daniel Veillard)
++  CVE-2015-7941_2 Cleanup conditional section error handling (Daniel Veillard),
++  CVE-2015-7941_1 Stop parsing on entities boundaries errors (Daniel Veillard),
++  
++   - Documentation:
++  Correct spelling of "calling" (Alex Henrie),
++  Fix a small error in xmllint --format description (Fabien Degomme),
++  Avoid XSS on the search of xmlsoft.org (Daniel Veillard)
++  
++   - Portability:
++  threads: use forward declarations only for glibc (Michael Heimpold),
++  Update Win32 configure.js to search for configure.ac (Daniel Veillard)
++  
++   - Bug Fixes:
++  Bug on creating new stream from entity (Daniel Veillard),
++  Fix some loop issues embedding NEXT (Daniel Veillard),
++  Do not print error context when there is none (Daniel Veillard),
++  Avoid extra processing of MarkupDecl when EOF (Hugh Davenport),
++  Fix parsing short unclosed comment uninitialized access (Daniel Veillard),
++  Add missing Null check in xmlParseExternalEntityPrivate (Gaurav Gupta),
++  Fix a bug in CData error handling in the push parser (Daniel Veillard),
++  Fix a bug on name parsing at the end of current input buffer (Daniel Veillard),
++  Fix the spurious ID already defined error (Daniel Veillard),
++  Fix previous change to node sort order (Nick Wellnhofer),
++  Fix a self assignment issue raised by clang (Scott Graham),
++  Fail parsing early on if encoding conversion failed (Daniel Veillard),
++  Do not process encoding values if the declaration if broken (Daniel Veillard),
++  Silence clang's -Wunknown-attribute (Michael Catanzaro),
++  xmlMemUsed is not thread-safe (Martin von Gagern),
++  Fix support for except in nameclasses (Daniel Veillard),
++  Fix order of root nodes (Nick Wellnhofer),
++  Allow attributes on descendant-or-self axis (Nick Wellnhofer),
++  Fix the fix to Windows locking (Steve Nairn),
++  Fix timsort invariant loop re: Envisage article (Christopher Swenson),
++  Don't add IDs in xmlSetTreeDoc (Nick Wellnhofer),
++  Account for ID attributes in xmlSetTreeDoc (Nick Wellnhofer),
++  Remove various unused value assignments (Philip Withnall),
++  Fix missing entities after CVE-2014-3660 fix (Daniel Veillard),
++  Revert "Missing initialization for the catalog module" (Daniel Veillard)
++  
++   - Improvements:
++  Reuse xmlHaltParser() where it makes sense (Daniel Veillard),
++  xmlStopParser reset errNo (Daniel Veillard),
++  Reenable xz support by default (Daniel Veillard),
++  Recover unescaped less-than character in HTML recovery parsing (Daniel Veillard),
++  Allow HTML serializer to output HTML5 DOCTYPE (Shaun McCance),
++  Regression test for bug #695699 (Nick Wellnhofer),
++  Add a couple of XPath tests (Nick Wellnhofer),
++  Add Python 3 rpm subpackage (Tomas Radej),
++  libxml2-config.cmake.in: update include directories (Samuel Martin),
++  Adding example from bugs 738805 to regression tests (Daniel Veillard)
++  
++   - Cleanups:
++  
++
++
+ 2.9.2: Oct 16 2014:
+    - Security:
+   Fix for CVE-2014-3660 billion laugh variant (Daniel Veillard),
+@@ -845,7 +1288,7 @@ Gansterer),
+    - Improvement: switch parser to XML-1.0 5th edition, add parsing flags
+       for old versions, switch URI parsing to RFC 3986,
+       add xmlSchemaValidCtxtGetParserCtxt (Holger Kaelberer),
+-      new hashing functions for dictionaries (based on Stefan Behnel work),
++      new hashing functions for dictionnaries (based on Stefan Behnel work),
+       improve handling of misplaced html/head/body in HTML parser, better
+       regression test tools and code coverage display, better algorithms
+       to detect various versions of the billion laughts attacks, make
+@@ -1231,7 +1674,7 @@ Do not use or package 2.6.25
+     Bakefile support (Francesco Montorsi), Windows compilation (Joel Reed),
+     some gcc4 fixes, HP-UX portability fixes (Rick Jones).
+    - bug fixes: xmlSchemaElementDump namespace (Kasimier Buchcik), push and
+-    xmlreader stopping on non-fatal errors, thread support for dictionaries
++    xmlreader stopping on non-fatal errors, thread support for dictionnaries
+     reference counting (Gary Coady), internal subset and push problem, URL
+     saved in xmlCopyDoc, various schemas bug fixes (Kasimier), Python paths
+     fixup (Stephane Bidoul), xmlGetNodePath and namespaces, xmlSetNsProp fix
+@@ -1482,7 +1925,7 @@ Do not use or package 2.6.25
+     William) reported by Yuuichi Teranishi
+    - bugfixes: make test and path issues, xmlWriter attribute serialization
+     (William Brack), xmlWriter indentation (William), schemas validation
+-    (Eric Haszlakiewicz), XInclude dictionaries issues (William and Oleg
++    (Eric Haszlakiewicz), XInclude dictionnaries issues (William and Oleg
+     Paraschenko), XInclude empty fallback (William), HTML warnings (William),
+     XPointer in XInclude (William), Python namespace serialization,
+     isolat1ToUTF8 bound error (Alfred Mickautsch), output of parameter
+@@ -1503,7 +1946,7 @@ Do not use or package 2.6.25
+ 
+ 
+ 2.6.5: Jan 25 2004:
+-   - Bugfixes: dictionaries for schemas (William Brack), regexp segfault
++   - Bugfixes: dictionnaries for schemas (William Brack), regexp segfault
+     (William), xs:all problem (William), a number of XPointer bugfixes
+     (William), xmllint error go to stderr, DTD validation problem with
+     namespace, memory leak (William), SAX1 cleanup and minimal options fixes
+diff --git a/SAX2.c b/SAX2.c
+index ac3ab19a..fee66b7f 100644
+--- a/SAX2.c
++++ b/SAX2.c
+@@ -1668,6 +1668,8 @@ xmlSAX2StartElement(void *ctx, const xmlChar *fullname, const xmlChar **atts)
+     if (nodePush(ctxt, ret) < 0) {
+         xmlUnlinkNode(ret);
+         xmlFreeNode(ret);
++        if (prefix != NULL)
++            xmlFree(prefix);
+         return;
+     }
+ 
+@@ -2261,6 +2263,7 @@ xmlSAX2StartElementNs(void *ctx,
+ 	ctxt->freeElems = ret->next;
+ 	ctxt->freeElemsNr--;
+ 	memset(ret, 0, sizeof(xmlNode));
++        ret->doc = ctxt->myDoc;
+ 	ret->type = XML_ELEMENT_NODE;
+ 
+ 	if (ctxt->dictNames)
+diff --git a/bakefile/libxml2.bkl b/bakefile/libxml2.bkl
+index dd6ce2c2..fa2d285e 100644
+--- a/bakefile/libxml2.bkl
++++ b/bakefile/libxml2.bkl
+@@ -736,12 +736,9 @@ $(TAB)copy "$(DOLLAR)(InputPath)" ..\$(CONFIG_DSTNAME)
+ 	<!-- FIXME:
+ 		<exe id="testModule" template="xml2test"><sources>$(XMLBASEDIR)$(DIRSEP)testModule.c</sources></exe>
+ 
+-		<if cond="WITH_THREADS=='posix'">
++		<if cond="WITH_THREADS!='no'">
+ 			<exe id="testThreads" template="xml2test"><sources>$(XMLBASEDIR)$(DIRSEP)testThreads.c</sources></exe>
+ 		</if>
+-		<if cond="WITH_THREADS=='ctls' or WITH_THREADS=='native'">
+-			<exe id="testThreadsWin32" template="xml2test"><sources>$(XMLBASEDIR)$(DIRSEP)testThreadsWin32.c</sources></exe>
+-		</if>
+ 	-->
+ 	</if>
+ 
+diff --git a/configure.ac b/configure.ac
+index 370e2dee..9cae50c8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -9,7 +9,7 @@ AC_CANONICAL_HOST
+ 
+ LIBXML_MAJOR_VERSION=2
+ LIBXML_MINOR_VERSION=9
+-LIBXML_MICRO_VERSION=8
++LIBXML_MICRO_VERSION=9
+ LIBXML_MICRO_VERSION_SUFFIX=
+ LIBXML_VERSION=$LIBXML_MAJOR_VERSION.$LIBXML_MINOR_VERSION.$LIBXML_MICRO_VERSION$LIBXML_MICRO_VERSION_SUFFIX
+ LIBXML_VERSION_INFO=`expr $LIBXML_MAJOR_VERSION + $LIBXML_MINOR_VERSION`:$LIBXML_MICRO_VERSION:$LIBXML_MINOR_VERSION
+@@ -1620,7 +1620,14 @@ case "$host" in
+  WIN32_EXTRA_LDFLAGS="-no-undefined"
+  if test "${PYTHON}" != ""
+  then
+-   WIN32_EXTRA_PYTHON_LIBADD="-L${pythondir}/../../libs -lpython$(echo ${PYTHON_VERSION} | tr -d .)"
++   case "$host" in
++     *-w64-mingw*)
++       WIN32_EXTRA_PYTHON_LIBADD="-shrext .pyd -L${pythondir}/../../lib -lpython${PYTHON_VERSION}"
++       ;;
++     *)
++       WIN32_EXTRA_PYTHON_LIBADD="-L${pythondir}/../../libs -lpython$(echo ${PYTHON_VERSION} | tr -d .)"
++       ;;
++   esac
+  fi
+  ;;
+  *-*-cygwin*)
+diff --git a/debugXML.c b/debugXML.c
+index c98db0bc..79bb50d1 100644
+--- a/debugXML.c
++++ b/debugXML.c
+@@ -2363,10 +2363,7 @@ xmlShellRNGValidate(xmlShellCtxtPtr sctxt, char *schemas,
+     int ret;
+ 
+     ctxt = xmlRelaxNGNewParserCtxt(schemas);
+-    xmlRelaxNGSetParserErrors(ctxt,
+-	    (xmlRelaxNGValidityErrorFunc) fprintf,
+-	    (xmlRelaxNGValidityWarningFunc) fprintf,
+-	    stderr);
++    xmlRelaxNGSetParserErrors(ctxt, xmlGenericError, xmlGenericError, NULL);
+     relaxngschemas = xmlRelaxNGParse(ctxt);
+     xmlRelaxNGFreeParserCtxt(ctxt);
+     if (relaxngschemas == NULL) {
+@@ -2375,10 +2372,7 @@ xmlShellRNGValidate(xmlShellCtxtPtr sctxt, char *schemas,
+ 	return(-1);
+     }
+     vctxt = xmlRelaxNGNewValidCtxt(relaxngschemas);
+-    xmlRelaxNGSetValidErrors(vctxt,
+-	    (xmlRelaxNGValidityErrorFunc) fprintf,
+-	    (xmlRelaxNGValidityWarningFunc) fprintf,
+-	    stderr);
++    xmlRelaxNGSetValidErrors(vctxt, xmlGenericError, xmlGenericError, NULL);
+     ret = xmlRelaxNGValidateDoc(vctxt, sctxt->doc);
+     if (ret == 0) {
+ 	fprintf(stderr, "%s validates\n", sctxt->filename);
+@@ -2647,9 +2641,9 @@ xmlShellValidate(xmlShellCtxtPtr ctxt, char *dtd,
+     int res = -1;
+ 
+     if ((ctxt == NULL) || (ctxt->doc == NULL)) return(-1);
+-    vctxt.userData = stderr;
+-    vctxt.error = (xmlValidityErrorFunc) fprintf;
+-    vctxt.warning = (xmlValidityWarningFunc) fprintf;
++    vctxt.userData = NULL;
++    vctxt.error = xmlGenericError;
++    vctxt.warning = xmlGenericError;
+ 
+     if ((dtd == NULL) || (dtd[0] == 0)) {
+         res = xmlValidateDocument(&vctxt, ctxt->doc);
+diff --git a/doc/apibuild.py b/doc/apibuild.py
+index 7a364663..7c69a537 100755
+--- a/doc/apibuild.py
++++ b/doc/apibuild.py
+@@ -42,7 +42,6 @@ ignored_files = {
+   "testThreads.c": "test tool",
+   "testC14N.c": "test tool",
+   "testRelax.c": "test tool",
+-  "testThreadsWin32.c": "test tool",
+   "testSAX.c": "test tool",
+   "testURI.c": "test tool",
+   "testapi.c": "generated regression tests",
+diff --git a/doc/html/libxml-xzlib.html b/doc/html/libxml-xzlib.html
+deleted file mode 100644
+index c4dfdc3b..00000000
+--- a/doc/html/libxml-xzlib.html
++++ /dev/null
+@@ -1,16 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link rel="SHORTCUT ICON" href="/favicon.ico" /><style type="text/css">
+-TD {font-family: Verdana,Arial,Helvetica}
+-BODY {font-family: Verdana,Arial,Helvetica; margin-top: 2em; margin-left: 0em; margin-right: 0em}
+-H1 {font-family: Verdana,Arial,Helvetica}
+-H2 {font-family: Verdana,Arial,Helvetica}
+-H3 {font-family: Verdana,Arial,Helvetica}
+-A:link, A:visited, A:active { text-decoration: underline }
+-</style><style type="text/css">
+-      div.deprecated pre.programlisting {border-style: double;border-color:red}
+-      pre.programlisting {border-style: double;background: #EECFA1}
+-    </style><title>Module xzlib from libxml2</title></head><body bgcolor="#8b7765" text="#000000" link="#a06060" vlink="#000000"><table border="0" width="100%" cellpadding="5" cellspacing="0" align="center"><tr><td width="120"><a href="http://swpat.ffii.org/"><img src="../epatents.png" alt="Action against software patents" /></a></td><td width="180"><a href="http://www.gnome.org/"><img src="../gnome2.png" alt="Gnome2 Logo" /></a><a href="http://www.w3.org/Status"><img src="../w3c.png" alt="W3C Logo" /></a><a href="http://www.redhat.com/"><img src="../redhat.gif" alt="Red Hat Logo" /></a><div align="left"><a href="http://xmlsoft.org/"><img src="../Libxml2-Logo-180x168.gif" alt="Made with Libxml2 Logo" /></a></div></td><td><table border="0" width="90%" cellpadding="2" cellspacing="0" align="center" bgcolor="#000000"><tr><td><table width="100%" border="0" cellspacing="1" cellpadding="3" bgcolor="#fffacd"><tr><td align="center"><h1></h1><h2>Module xzlib from libxml2</h2></td></tr></table></td></tr></table></td></tr></table><table border="0" cellpadding="4" cellspacing="0" width="100%" align="center"><tr><td bgcolor="#8b7765"><table border="0" cellspacing="0" cellpadding="2" width="100%"><tr><td valign="top" width="200" bgcolor="#8b7765"><table border="0" cellspacing="0" cellpadding="1" width="100%" bgcolor="#000000"><tr><td><table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td colspan="1" bgcolor="#eecfa1" align="center"><center><b>API Menu</b></center></td></tr><tr><td bgcolor="#fffacd"><form action="../search.php" enctype="application/x-www-form-urlencoded" method="get"><input name="query" type="text" size="20" value="" /><input name="submit" type="submit" value="Search ..." /></form><ul><li><a style="font-weight:bold" href="../index.html">Main Menu</a></li><li><a style="font-weight:bold" href="../docs.html">Developer Menu</a></li><li><a style="font-weight:bold" href="../examples/index.html">Code Examples</a></li><li><a style="font-weight:bold" href="index.html">API Menu</a></li><li><a href="libxml-parser.html">Parser API</a></li><li><a href="libxml-tree.html">Tree API</a></li><li><a href="libxml-xmlreader.html">Reader API</a></li><li><a href="../guidelines.html">XML Guidelines</a></li><li><a href="../ChangeLog.html">ChangeLog</a></li></ul></td></tr></table><table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td colspan="1" bgcolor="#eecfa1" align="center"><center><b>API Indexes</b></center></td></tr><tr><td bgcolor="#fffacd"><ul><li><a href="../APIchunk0.html">Alphabetic</a></li><li><a href="../APIconstructors.html">Constructors</a></li><li><a href="../APIfunctions.html">Functions/Types</a></li><li><a href="../APIfiles.html">Modules</a></li><li><a href="../APIsymbols.html">Symbols</a></li></ul></td></tr></table><table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td colspan="1" bgcolor="#eecfa1" align="center"><center><b>Related links</b></center></td></tr><tr><td bgcolor="#fffacd"><ul><li><a href="http://mail.gnome.org/archives/xml/">Mail archive</a></li><li><a href="http://xmlsoft.org/XSLT/">XSLT libxslt</a></li><li><a href="http://phd.cs.unibo.it/gdome2/">DOM gdome2</a></li><li><a href="http://www.aleksey.com/xmlsec/">XML-DSig xmlsec</a></li><li><a href="ftp://xmlsoft.org/">FTP</a></li><li><a href="http://www.zlatkovic.com/projects/libxml/">Windows binaries</a></li><li><a href="http://opencsw.org/packages/libxml2">Solaris binaries</a></li><li><a href="http://www.explain.com.au/oss/libxml2xslt.html">MacOsX binaries</a></li><li><a href="http://lxml.de/">lxml Python bindings</a></li><li><a href="http://cpan.uwinnipeg.ca/dist/XML-LibXML">Perl bindings</a></li><li><a href="http://libxmlplusplus.sourceforge.net/">C++ bindings</a></li><li><a href="http://www.zend.com/php5/articles/php5-xmlphp.php#Heading4">PHP bindings</a></li><li><a href="http://sourceforge.net/projects/libxml2-pas/">Pascal bindings</a></li><li><a href="http://libxml.rubyforge.org/">Ruby bindings</a></li><li><a href="http://tclxml.sourceforge.net/">Tcl bindings</a></li><li><a href="http://bugzilla.gnome.org/buglist.cgi?product=libxml2">Bug Tracker</a></li></ul></td></tr></table></td></tr></table></td><td valign="top" bgcolor="#8b7765"><table border="0" cellspacing="0" cellpadding="1" width="100%"><tr><td><table border="0" cellspacing="0" cellpadding="1" width="100%" bgcolor="#000000"><tr><td><table border="0" cellpadding="3" cellspacing="1" width="100%"><tr><td bgcolor="#fffacd"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="libxml-xpointer.html"><img src="left.png" width="24" height="24" border="0" alt="Prev" /></a></td><th align="left"><a href="libxml-xpointer.html">xpointer</a></th><td><a accesskey="u" href="index.html"><img src="up.png" width="24" height="24" border="0" alt="Up" /></a></td><th align="left"><a href="index.html">API documentation</a></th><td><a accesskey="h" href="../index.html"><img src="home.png" width="24" height="24" border="0" alt="Home" /></a></td><th align="center"><a href="../index.html">The XML C parser and toolkit of Gnome</a></th></tr></table><h2>Table of Contents</h2><pre class="programlisting">#define <a href="#LIBXML2_XZLIB_H">LIBXML2_XZLIB_H</a></pre><pre class="programlisting">Typedef void * <a name="xzFile" id="xzFile">xzFile</a>
+-</pre><h2>Description</h2>
+-<h3><a name="LIBXML2_XZLIB_H" id="LIBXML2_XZLIB_H"></a>Macro: LIBXML2_XZLIB_H</h3><pre>#define LIBXML2_XZLIB_H</pre><p></p>
+-<p><a href="../bugs.html">Daniel Veillard</a></p></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></body></html>
+diff --git a/doc/libxml2.xsa b/doc/libxml2.xsa
+index 33f38487..7f4c048b 100644
+--- a/doc/libxml2.xsa
++++ b/doc/libxml2.xsa
+@@ -8,45 +8,51 @@
+   </vendor>
+   <product id="libxml2">
+     <name>libxml2</name>
+-    <version>2.9.7</version>
+-    <last-release> Nov 02 2017</last-release>
++    <version>v2.9.8</version>
++    <last-release> Mar 05 2018</last-release>
+     <info-url>http://xmlsoft.org/</info-url>
+-    <changes>   - Documentation:
+-  xmlcatalog: refresh man page wrt. quering system catalog easily (Jan Pokorný)
+-  
+-   - Portability:
+-  Fix deprecated Travis compiler flag (Nick Wellnhofer),
+-  Add declaration for DllMain (J. Peter Mugaas),
+-  Fix preprocessor conditional in threads.h (J. Peter Mugaas),
+-  Fix pointer comparison warnings on 64-bit Windows (J. Peter Mugaas),
+-  Fix macro redefinition warning (J. Peter Mugaas),
+-  Default to native threads on MinGW-w64 (Nick Wellnhofer),
+-  Simplify Windows IO functions (Nick Wellnhofer),
+-  Fix runtest on Windows (Nick Wellnhofer),
+-  socklen_t is always int on Windows (Nick Wellnhofer),
+-  Don't redefine socket error codes on Windows (Nick Wellnhofer),
+-  Fix pointer/int cast warnings on 64-bit Windows (Nick Wellnhofer),
+-  Fix Windows compiler warnings in xmlCanonicPath (Nick Wellnhofer)
++    <changes>   - Portability:
++  python: remove single use of _PyVerify_fd (Patrick Welche),
++  Build more test executables on Windows/MSVC (Nick Wellnhofer),
++  Stop including ansidecl.h (Nick Wellnhofer),
++  Fix libz and liblzma detection (Nick Wellnhofer),
++  Revert "Compile testapi with -Wno-unused-function" (Nick Wellnhofer)
+   
+    - Bug Fixes:
+-  xmlcatalog: restore ability to query system catalog easily (Jan Pokorný),
+-  Fix comparison of nodesets to strings (Nick Wellnhofer)
++  Fix xmlParserEntityCheck (Nick Wellnhofer),
++  Halt parser in case of encoding error (Nick Wellnhofer),
++  Clear entity content in case of errors (Nick Wellnhofer),
++  Change calls to xmlCharEncInput to set flush false when not final call. Having flush incorrectly set to true causes errors for ICU. (Joel Hockey),
++  Fix buffer over-read in xmlParseNCNameComplex (Nick Wellnhofer),
++  Fix ICU library filenames on Windows/MSVC (Nick Wellnhofer),
++  Fix xmlXPathIsNaN broken by recent commit (Nick Wellnhofer),
++  Fix -Wenum-compare warnings (Nick Wellnhofer),
++  Fix callback signature in testapi.c (Nick Wellnhofer),
++  Fix unused parameter warning without ICU (Nick Wellnhofer),
++  Fix IO callback signatures (Nick Wellnhofer),
++  Fix misc callback signatures (Nick Wellnhofer),
++  Fix list callback signatures (Nick Wellnhofer),
++  Fix hash callback signatures (Nick Wellnhofer),
++  Refactor name and type signature for xmlNop (Vlad Tsyrklevich),
++  Fixed ICU to set flush correctly and provide pivot buffer. (Joel Hockey),
++  Skip EBCDIC tests if EBCDIC isn't supported (Nick Wellnhofer)
+   
+    - Improvements:
+-  Add Makefile rules to rebuild HTML man pages (Nick Wellnhofer),
+-  Fix mixed decls and code in timsort.h (Nick Wellnhofer),
+-  Rework handling of return values in thread tests (Nick Wellnhofer),
+-  Fix unused variable warnings in testrecurse (Nick Wellnhofer),
+-  Fix -Wimplicit-fallthrough warnings (J. Peter Mugaas),
+-  Upgrade timsort.h to latest revision (Nick Wellnhofer),
+-  Increase warning level to /W3 under MSVC (Nick Wellnhofer),
+-  Fix a couple of warnings in dict.c and threads.c (Nick Wellnhofer),
+-  Update .gitignore for Windows (Nick Wellnhofer),
+-  Fix unused variable warnings in nanohttp.c (Nick Wellnhofer),
+-  Fix the Windows header mess (Nick Wellnhofer),
+-  Don't include winsock2.h in xmllint.c (Nick Wellnhofer),
+-  Remove generated file python/setup.py from version control (Nick Wellnhofer),
+-  Use __linux__ macro in generated code (Nick Wellnhofer)
++  Disable pointer-overflow UBSan checks under Travis (Nick Wellnhofer),
++  Improve handling of context input_id (Daniel Veillard),
++  Add resource file to Windows DLL (ccpaging),
++  Run Travis tests with -Werror (Nick Wellnhofer),
++  Build with "-Wall -Wextra" (Nick Wellnhofer),
++  Fix -Wtautological-pointer-compare warnings (Nick Wellnhofer),
++  Remove unused AC_CHECKs (Nick Wellnhofer),
++  Update information about contributing (Nick Wellnhofer),
++  Fix -Wmisleading-indentation warnings (Nick Wellnhofer),
++  Don't touch CFLAGS in configure.ac (Nick Wellnhofer),
++  Ignore function pointer cast warnings (Nick Wellnhofer),
++  Simplify XPath NaN, inf and -0 handling (Nick Wellnhofer),
++  Introduce xmlPosixStrdup and update xmlMemStrdup (Nick Wellnhofer),
++  Add test for ICU flush and pivot buffer (Nick Wellnhofer),
++  Compile testapi with -Wno-unused-function (Nick Wellnhofer)
+   
+ 
+ </changes>
+diff --git a/doc/news.html b/doc/news.html
+index 65839ad4..db07ab6e 100644
+--- a/doc/news.html
++++ b/doc/news.html
+@@ -8,7 +8,72 @@ H2 {font-family: Verdana,Arial,Helvetica}
+ H3 {font-family: Verdana,Arial,Helvetica}
+ A:link, A:visited, A:active { text-decoration: underline }
+ </style><title>Releases</title></head><body bgcolor="#8b7765" text="#000000" link="#a06060" vlink="#000000"><table border="0" width="100%" cellpadding="5" cellspacing="0" align="center"><tr><td width="120"><a href="http://swpat.ffii.org/"><img src="epatents.png" alt="Action against software patents" /></a></td><td width="180"><a href="http://www.gnome.org/"><img src="gnome2.png" alt="Gnome2 Logo" /></a><a href="http://www.w3.org/Status"><img src="w3c.png" alt="W3C Logo" /></a><a href="http://www.redhat.com/"><img src="redhat.gif" alt="Red Hat Logo" /></a><div align="left"><a href="http://xmlsoft.org/"><img src="Libxml2-Logo-180x168.gif" alt="Made with Libxml2 Logo" /></a></div></td><td><table border="0" width="90%" cellpadding="2" cellspacing="0" align="center" bgcolor="#000000"><tr><td><table width="100%" border="0" cellspacing="1" cellpadding="3" bgcolor="#fffacd"><tr><td align="center"><h1>The XML C parser and toolkit of Gnome</h1><h2>Releases</h2></td></tr></table></td></tr></table></td></tr></table><table border="0" cellpadding="4" cellspacing="0" width="100%" align="center"><tr><td bgcolor="#8b7765"><table border="0" cellspacing="0" cellpadding="2" width="100%"><tr><td valign="top" width="200" bgcolor="#8b7765"><table border="0" cellspacing="0" cellpadding="1" width="100%" bgcolor="#000000"><tr><td><table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td colspan="1" bgcolor="#eecfa1" align="center"><center><b>Main Menu</b></center></td></tr><tr><td bgcolor="#fffacd"><form action="search.php" enctype="application/x-www-form-urlencoded" method="get"><input name="query" type="text" size="20" value="" /><input name="submit" type="submit" value="Search ..." /></form><ul><li><a href="index.html">Home</a></li><li><a href="html/index.html">Reference Manual</a></li><li><a href="intro.html">Introduction</a></li><li><a href="FAQ.html">FAQ</a></li><li><a href="docs.html" style="font-weight:bold">Developer Menu</a></li><li><a href="bugs.html">Reporting bugs and getting help</a></li><li><a href="help.html">How to help</a></li><li><a href="downloads.html">Downloads</a></li><li><a href="news.html">Releases</a></li><li><a href="XMLinfo.html">XML</a></li><li><a href="XSLT.html">XSLT</a></li><li><a href="xmldtd.html">Validation &amp; DTDs</a></li><li><a href="encoding.html">Encodings support</a></li><li><a href="catalog.html">Catalog support</a></li><li><a href="namespaces.html">Namespaces</a></li><li><a href="contribs.html">Contributions</a></li><li><a href="examples/index.html" style="font-weight:bold">Code Examples</a></li><li><a href="html/index.html" style="font-weight:bold">API Menu</a></li><li><a href="guidelines.html">XML Guidelines</a></li><li><a href="ChangeLog.html">Recent Changes</a></li></ul></td></tr></table><table width="100%" border="0" cellspacing="1" cellpadding="3"><tr><td colspan="1" bgcolor="#eecfa1" align="center"><center><b>Related links</b></center></td></tr><tr><td bgcolor="#fffacd"><ul><li><a href="http://mail.gnome.org/archives/xml/">Mail archive</a></li><li><a href="http://xmlsoft.org/XSLT/">XSLT libxslt</a></li><li><a href="http://phd.cs.unibo.it/gdome2/">DOM gdome2</a></li><li><a href="http://www.aleksey.com/xmlsec/">XML-DSig xmlsec</a></li><li><a href="ftp://xmlsoft.org/">FTP</a></li><li><a href="http://www.zlatkovic.com/projects/libxml/">Windows binaries</a></li><li><a href="http://opencsw.org/packages/libxml2">Solaris binaries</a></li><li><a href="http://www.explain.com.au/oss/libxml2xslt.html">MacOsX binaries</a></li><li><a href="http://lxml.de/">lxml Python bindings</a></li><li><a href="http://cpan.uwinnipeg.ca/dist/XML-LibXML">Perl bindings</a></li><li><a href="http://libxmlplusplus.sourceforge.net/">C++ bindings</a></li><li><a href="http://www.zend.com/php5/articles/php5-xmlphp.php#Heading4">PHP bindings</a></li><li><a href="http://sourceforge.net/projects/libxml2-pas/">Pascal bindings</a></li><li><a href="http://libxml.rubyforge.org/">Ruby bindings</a></li><li><a href="http://tclxml.sourceforge.net/">Tcl bindings</a></li><li><a href="http://bugzilla.gnome.org/buglist.cgi?product=libxml2">Bug Tracker</a></li></ul></td></tr></table></td></tr></table></td><td valign="top" bgcolor="#8b7765"><table border="0" cellspacing="0" cellpadding="1" width="100%"><tr><td><table border="0" cellspacing="0" cellpadding="1" width="100%" bgcolor="#000000"><tr><td><table border="0" cellpadding="3" cellspacing="1" width="100%"><tr><td bgcolor="#fffacd"><p>The <a href="ChangeLog.html">change log</a> describes the recents commits
+-to the <a href="http://git.gnome.org/browse/libxml2/">GIT</a> code base.</p><p>Here is the list of public releases:</p><h3>v2.9.8: Mar 05 2018</h3><ul>
++to the <a href="http://git.gnome.org/browse/libxml2/">GIT</a> code base.</p><p>Here is the list of public releases:</p><h3>v2.9.9: Jan 03 2019</h3><ul>
++  <li>Security:<br />
++  CVE-2018-9251 CVE-2018-14567 Fix infinite loop in LZMA decompression (Nick Wellnhofer),<br />
++  CVE-2018-14404 Fix nullptr deref with XPath logic ops (Nick Wellnhofer),<br />
++  </li>
++
++  <li>Documentation:<br />
++  reader: Fix documentation comment (Mohammed Sadiq)<br />
++  </li>
++
++  <li>Portability:<br />
++  Fix MSVC build with lzma (Nick Wellnhofer),<br />
++  Variables need 'extern' in static lib on Cygwin (Michael Haubenwallner),<br />
++  Really declare dllexport/dllimport for Cygwin (Michael Haubenwallner),<br />
++  Merge branch 'patch-2' into 'master' (Nick Wellnhofer),<br />
++  Change dir to $THEDIR after ACLOCAL_PATH check autoreconf creates aclocal.m4 in $srcdir (Vitaly Buka),<br />
++  Improve error message if pkg.m4 couldn't be found (Nick Wellnhofer),<br />
++  NaN and Inf fixes for pre-C99 compilers (Nick Wellnhofer)<br />
++  </li>
++
++  <li>Bug Fixes:<br />
++  Revert "Support xmlTextReaderNextSibling w/o preparsed doc" (Nick Wellnhofer),<br />
++  Fix building relative URIs (Thomas Holder),<br />
++  Problem with data in interleave in RelaxNG validation (Nikolai Weibull),<br />
++  Fix memory leak in xmlSwitchInputEncodingInt error path (Nick Wellnhofer),<br />
++  Set doc on element obtained from freeElems (Nick Wellnhofer),<br />
++  Fix HTML serialization with UTF-8 encoding (Nick Wellnhofer),<br />
++  Use actual doc in xmlTextReaderRead*Xml (Nick Wellnhofer),<br />
++  Unlink node before freeing it in xmlSAX2StartElement (Nick Wellnhofer),<br />
++  Check return value of nodePush in xmlSAX2StartElement (Nick Wellnhofer),<br />
++  Free input buffer in xmlHaltParser (Nick Wellnhofer),<br />
++  Reset HTML parser input pointers on encoding failure (Nick Wellnhofer),<br />
++  Don't run icu_parse_test if EUC-JP is unsupported (Nick Wellnhofer),<br />
++  Fix xmlSchemaValidCtxtPtr reuse memory leak (Greg Hildstrom),<br />
++  Fix xmlTextReaderNext with preparsed document (Felix Bünemann),<br />
++  Remove stray character from comment (Nick Wellnhofer),<br />
++  Remove a misleading line from xmlCharEncOutput (Andrey Bienkowski),<br />
++  HTML noscript should not close p (Daniel Veillard),<br />
++  Don't change context node in xmlXPathRoot (Nick Wellnhofer),<br />
++  Stop using XPATH_OP_RESET (Nick Wellnhofer),<br />
++  Revert "Change calls to xmlCharEncInput to set flush false" (Nick Wellnhofer)<br />
++  </li>
++
++  <li>Improvements:<br />
++  Fix "Problem with data in interleave in RelaxNG validation" (Nikolai Weibull),<br />
++  cleanup: remove some unreachable code (Thomas Holder),<br />
++  add --relative to testURI (Thomas Holder),<br />
++  Remove redefined starts and defines inside include elements (Nikolai Weibull),<br />
++  Allow choice within choice in nameClass in RELAX NG (Nikolai Weibull),<br />
++  Look inside divs for starts and defines inside include (Nikolai Weibull),<br />
++  Add compile and libxml2-config.cmake to .gitignore (Nikolai Weibull),<br />
++  Stop using doc-&gt;charset outside parser code (Nick Wellnhofer),<br />
++  Add newlines to 'xmllint --xpath' output (Nick Wellnhofer),<br />
++  Don't include SAX.h from globals.h (Nick Wellnhofer),<br />
++  Support xmlTextReaderNextSibling w/o preparsed doc (Felix Bünemann),<br />
++  Don't instruct user to run make when autogen.sh failed (林博仁(Buo-ren Lin)),<br />
++  Run Travis ASan tests with "sudo: required" (Nick Wellnhofer),<br />
++  Improve restoring of context size and position (Nick Wellnhofer),<br />
++  Simplify and harden nodeset filtering (Nick Wellnhofer),<br />
++  Avoid unnecessary backups of the context node (Nick Wellnhofer),<br />
++  Fix inconsistency in xmlXPathIsInf (Nick Wellnhofer)<br />
++  </li>
++
++  <li>Cleanups:<br />
++  </li>
++</ul><h3>v2.9.8: Mar 05 2018</h3><ul>
+   <li>Portability:<br />
+   python: remove single use of _PyVerify_fd (Patrick Welche),<br />
+   Build more test executables on Windows/MSVC (Nick Wellnhofer),<br />
+diff --git a/doc/site.xsl b/doc/site.xsl
+index 11aaee2b..353655ec 100644
+--- a/doc/site.xsl
++++ b/doc/site.xsl
+@@ -406,7 +406,7 @@
+       <li><a href="http://sourceforge.net/projects/libxml2-pas/">Pascal bindings</a></li>
+       <li><a href="http://libxml.rubyforge.org/">Ruby bindings</a></li>
+       <li><a href="http://tclxml.sourceforge.net/">Tcl bindings</a></li>
+-      <li><a href="http://bugzilla.gnome.org/buglist.cgi?product=libxml2">Bug Tracker</a></li>
++      <li><a href="https://gitlab.gnome.org/GNOME/libxml2/issues">Bug Tracker</a></li>
+     </ul>
+   </xsl:variable>
+   <xsl:template name="toc">
+diff --git a/doc/xml.html b/doc/xml.html
+index 4059fb76..336b2ab4 100644
+--- a/doc/xml.html
++++ b/doc/xml.html
+@@ -526,7 +526,7 @@ xmlDtdPtr dtd = xmlParseDTD(NULL, filename_of_dtd); /* parse the DTD */
+ 
+ <p>Well, bugs or missing features are always possible, and I will make a
+ point of fixing them in a timely fashion. The best way to report a bug is to
+-use the <a href="http://bugzilla.gnome.org/buglist.cgi?product=libxml2">Gnome
++use the <a href="https://gitlab.gnome.org/GNOME/libxml2/issues">Gnome
+ bug tracking database</a> (make sure to use the "libxml2" module name). I
+ look at reports there regularly and it's good to have a reminder when a bug
+ is still open. Be sure to specify that the bug is for the package libxml2.</p>
+@@ -569,7 +569,7 @@ posting</span></strong>:</p>
+   <li>Check the <a href="http://mail.gnome.org/archives/xml/">list
+     archives</a> to see if the problem was reported already. In this case
+     there is probably a fix available, similarly check the <a
+-    href="http://bugzilla.gnome.org/buglist.cgi?product=libxml2">registered
++    href="https://gitlab.gnome.org/GNOME/libxml2/issues">registered
+     open bugs</a>.</li>
+   <li>Make sure you can reproduce the bug with xmllint or one of the test
+     programs found in source in the distribution.</li>
+@@ -586,7 +586,7 @@ answer a given question, ask on the list.</p>
+ <p>To <span style="color: #E50000">be really clear about support</span>:</p>
+ <ul>
+   <li>Support or help <span style="color: #E50000">requests MUST be sent to
+-    the list or on bugzilla</span> in case of problems, so that the Question
++    the list or the bug tracker</span> in case of problems, so that the Question
+     and Answers can be shared publicly. Failing to do so carries the implicit
+     message "I want free support but I don't want to share the benefits with
+     others" and is not welcome. I will automatically Carbon-Copy the
+@@ -617,7 +617,7 @@ it's a good starting point.</p>
+ <p>You can help the project in various ways, the best thing to do first is to
+ subscribe to the mailing-list as explained before, check the <a
+ href="http://mail.gnome.org/archives/xml/">archives </a>and the <a
+-href="http://bugzilla.gnome.org/buglist.cgi?product=libxml2">Gnome bug
++href="https://gitlab.gnome.org/GNOME/libxml2/issues">Gnome bug
+ database</a>:</p>
+ <ol>
+   <li>Provide patches when you find problems.</li>
+@@ -694,21 +694,88 @@ href="python.html">bindings section</a></p>
+ 
+ <p>Libxml2 is also available from GIT:</p>
+ <ul>
+-  <li><p>See <a href="http://git.gnome.org/browse/libxml2/">libxml2 Git web</a>.
++  <li><p>See <a href="https://gitlab.gnome.org/GNOME/libxml2">libxml2 Git web</a>.
+          To checkout a local tree use:</p>
+-       <pre>git clone git://git.gnome.org/libxml2</pre>
++       <pre>git clone https://gitlab.gnome.org/GNOME/libxml2.git</pre>
+   </li>
+   <li>The <strong>libxslt</strong> module is also present 
+-      <a href="http://git.gnome.org/browse/libxslt/">there</a>.</li>
++      <a href="https://gitlab.gnome.org/GNOME/libxslt">there</a>.</li>
+ </ul>
+ 
+ <h2><a name="News">Releases</a></h2>
+ 
+ <p>The <a href="ChangeLog.html">change log</a> describes the recents commits
+-to the <a href="http://git.gnome.org/browse/libxml2/">GIT</a> code base.</p>
++to the <a href="https://gitlab.gnome.org/GNOME/libxml2">GIT</a> code base.</p>
+ 
+ <p>Here is the list of public releases:</p>
+ 
++<h3>v2.9.9: Jan 03 2019</h3>
++<ul>
++  <li>Security:<br/>
++  CVE-2018-9251 CVE-2018-14567 Fix infinite loop in LZMA decompression (Nick Wellnhofer),<br/>
++  CVE-2018-14404 Fix nullptr deref with XPath logic ops (Nick Wellnhofer),<br/>
++  </li>
++
++  <li>Documentation:<br/>
++  reader: Fix documentation comment (Mohammed Sadiq)<br/>
++  </li>
++
++  <li>Portability:<br/>
++  Fix MSVC build with lzma (Nick Wellnhofer),<br/>
++  Variables need 'extern' in static lib on Cygwin (Michael Haubenwallner),<br/>
++  Really declare dllexport/dllimport for Cygwin (Michael Haubenwallner),<br/>
++  Merge branch 'patch-2' into 'master' (Nick Wellnhofer),<br/>
++  Change dir to $THEDIR after ACLOCAL_PATH check autoreconf creates aclocal.m4 in $srcdir (Vitaly Buka),<br/>
++  Improve error message if pkg.m4 couldn't be found (Nick Wellnhofer),<br/>
++  NaN and Inf fixes for pre-C99 compilers (Nick Wellnhofer)<br/>
++  </li>
++
++  <li>Bug Fixes:<br/>
++  Revert "Support xmlTextReaderNextSibling w/o preparsed doc" (Nick Wellnhofer),<br/>
++  Fix building relative URIs (Thomas Holder),<br/>
++  Problem with data in interleave in RelaxNG validation (Nikolai Weibull),<br/>
++  Fix memory leak in xmlSwitchInputEncodingInt error path (Nick Wellnhofer),<br/>
++  Set doc on element obtained from freeElems (Nick Wellnhofer),<br/>
++  Fix HTML serialization with UTF-8 encoding (Nick Wellnhofer),<br/>
++  Use actual doc in xmlTextReaderRead*Xml (Nick Wellnhofer),<br/>
++  Unlink node before freeing it in xmlSAX2StartElement (Nick Wellnhofer),<br/>
++  Check return value of nodePush in xmlSAX2StartElement (Nick Wellnhofer),<br/>
++  Free input buffer in xmlHaltParser (Nick Wellnhofer),<br/>
++  Reset HTML parser input pointers on encoding failure (Nick Wellnhofer),<br/>
++  Don't run icu_parse_test if EUC-JP is unsupported (Nick Wellnhofer),<br/>
++  Fix xmlSchemaValidCtxtPtr reuse memory leak (Greg Hildstrom),<br/>
++  Fix xmlTextReaderNext with preparsed document (Felix Bünemann),<br/>
++  Remove stray character from comment (Nick Wellnhofer),<br/>
++  Remove a misleading line from xmlCharEncOutput (Andrey Bienkowski),<br/>
++  HTML noscript should not close p (Daniel Veillard),<br/>
++  Don't change context node in xmlXPathRoot (Nick Wellnhofer),<br/>
++  Stop using XPATH_OP_RESET (Nick Wellnhofer),<br/>
++  Revert "Change calls to xmlCharEncInput to set flush false" (Nick Wellnhofer)<br/>
++  </li>
++
++  <li>Improvements:<br/>
++  Fix "Problem with data in interleave in RelaxNG validation" (Nikolai Weibull),<br/>
++  cleanup: remove some unreachable code (Thomas Holder),<br/>
++  add --relative to testURI (Thomas Holder),<br/>
++  Remove redefined starts and defines inside include elements (Nikolai Weibull),<br/>
++  Allow choice within choice in nameClass in RELAX NG (Nikolai Weibull),<br/>
++  Look inside divs for starts and defines inside include (Nikolai Weibull),<br/>
++  Add compile and libxml2-config.cmake to .gitignore (Nikolai Weibull),<br/>
++  Stop using doc-&gt;charset outside parser code (Nick Wellnhofer),<br/>
++  Add newlines to 'xmllint --xpath' output (Nick Wellnhofer),<br/>
++  Don't include SAX.h from globals.h (Nick Wellnhofer),<br/>
++  Support xmlTextReaderNextSibling w/o preparsed doc (Felix Bünemann),<br/>
++  Don't instruct user to run make when autogen.sh failed (林博仁(Buo-ren Lin)),<br/>
++  Run Travis ASan tests with "sudo: required" (Nick Wellnhofer),<br/>
++  Improve restoring of context size and position (Nick Wellnhofer),<br/>
++  Simplify and harden nodeset filtering (Nick Wellnhofer),<br/>
++  Avoid unnecessary backups of the context node (Nick Wellnhofer),<br/>
++  Fix inconsistency in xmlXPathIsInf (Nick Wellnhofer)<br/>
++  </li>
++
++  <li>Cleanups:<br/>
++  </li>
++</ul>
+ <h3>v2.9.8: Mar 05 2018</h3>
+ <ul>
+   <li>Portability:<br/>
+diff --git a/error.c b/error.c
+index 50e9e6f8..9d39f79e 100644
+--- a/error.c
++++ b/error.c
+@@ -631,7 +631,7 @@ __xmlRaiseError(xmlStructuredErrorFunc schannel,
+ 	(channel == xmlParserValidityError) ||
+ 	(channel == xmlParserValidityWarning))
+ 	xmlReportError(to, ctxt, str, NULL, NULL);
+-    else if ((channel == (xmlGenericErrorFunc) fprintf) ||
++    else if (((void(*)(void)) channel == (void(*)(void)) fprintf) ||
+              (channel == xmlGenericErrorDefaultFunc))
+ 	xmlReportError(to, ctxt, str, channel, data);
+     else
+diff --git a/gentest.py b/gentest.py
+index e4a89325..b7633004 100755
+--- a/gentest.py
++++ b/gentest.py
+@@ -399,14 +399,20 @@ def type_convert(str, name, info, module, function, pos):
+ 
+ known_param_types = []
+ 
+-def is_known_param_type(name, rtype):
+-    global test
++def is_known_param_type(name):
+     for type in known_param_types:
+         if type == name:
+ 	    return 1
++    return name[-3:] == 'Ptr' or name[-4:] == '_ptr'
++
++def generate_param_type(name, rtype):
++    global test
++    for type in known_param_types:
++        if type == name:
++	    return
+     for type in generated_param_types:
+         if type == name:
+-	    return 1
++	    return
+ 
+     if name[-3:] == 'Ptr' or name[-4:] == '_ptr':
+         if rtype[0:6] == 'const ':
+@@ -429,9 +435,6 @@ static void des_%s(int no ATTRIBUTE_UNUSED, %s val ATTRIBUTE_UNUSED, int nr ATTR
+         if define == 1:
+ 	    test.write("#endif\n\n")
+         add_generated_param_type(name)
+-        return 1
+-
+-    return 0
+ 
+ #
+ # Provide the type destructors for the return values
+@@ -546,7 +549,7 @@ for enum in enums:
+         continue;
+     define = 0
+ 
+-    if argtypes.has_key(name) and is_known_param_type(name, name) == 0:
++    if argtypes.has_key(name) and is_known_param_type(name) == 0:
+ 	values = ctxt.xpathEval("/api/symbols/enum[@type='%s']" % name)
+ 	i = 0
+ 	vals = []
+@@ -689,7 +692,7 @@ def generate_test(module, node):
+ 	info = arg.xpathEval("string(@info)")
+ 	nam = arg.xpathEval("string(@name)")
+         type = type_convert(rtype, nam, info, module, name, n)
+-	if is_known_param_type(type, rtype) == 0:
++	if is_known_param_type(type) == 0:
+ 	    add_missing_type(type, name);
+ 	    no_gen = 1
+         if (type[-3:] == 'Ptr' or type[-4:] == '_ptr') and \
+@@ -716,6 +719,11 @@ def generate_test(module, node):
+ 	t_ret = (type, rtype, info)
+ 	break
+ 
++    if no_gen == 0:
++        for t_arg in t_args:
++            (nam, type, rtype, crtype, info) = t_arg
++            generate_param_type(type, rtype)
++
+     test.write("""
+ static int
+ test_%s(void) {
+diff --git a/include/libxml/xmlexports.h b/include/libxml/xmlexports.h
+index 31ab8a10..f03af0d0 100644
+--- a/include/libxml/xmlexports.h
++++ b/include/libxml/xmlexports.h
+@@ -73,9 +73,6 @@
+     #define XMLCALL __cdecl
+   #endif
+   #define XMLCDECL __cdecl
+-  #if !defined _REENTRANT
+-    #define _REENTRANT
+-  #endif
+ #endif
+ 
+ /* Windows platform with Borland compiler */
+@@ -97,9 +94,6 @@
+   #endif
+   #define XMLCALL __cdecl
+   #define XMLCDECL __cdecl
+-  #if !defined _REENTRANT
+-    #define _REENTRANT
+-  #endif
+ #endif
+ 
+ /* Windows platform with GNU compiler (Mingw) */
+@@ -126,9 +120,6 @@
+   #endif
+   #define XMLCALL __cdecl
+   #define XMLCDECL __cdecl
+-  #if !defined _REENTRANT
+-    #define _REENTRANT
+-  #endif
+ #endif
+ 
+ /* Cygwin platform (does not define _WIN32), GNU compiler */
+diff --git a/include/libxml/xmlversion.h.in b/include/libxml/xmlversion.h.in
+index d10f9754..5ba64f23 100644
+--- a/include/libxml/xmlversion.h.in
++++ b/include/libxml/xmlversion.h.in
+@@ -91,11 +91,8 @@ XMLPUBFUN void XMLCALL xmlCheckVersion(int version);
+  * Whether the thread support is configured in
+  */
+ #if @WITH_THREADS@
+-#if defined(_REENTRANT) || defined(__MT__) || \
+-    (defined(_POSIX_C_SOURCE) && (_POSIX_C_SOURCE - 0 >= 199506L))
+ #define LIBXML_THREAD_ENABLED
+ #endif
+-#endif
+ 
+ /**
+  * LIBXML_THREAD_ALLOC_ENABLED:
+diff --git a/include/wsockcompat.h b/include/wsockcompat.h
+index 0484ee36..e57ca8ec 100644
+--- a/include/wsockcompat.h
++++ b/include/wsockcompat.h
+@@ -11,6 +11,11 @@
+ #include <errno.h>
+ #include <winsock2.h>
+ 
++/* Fix for old MinGW. */
++#ifndef _WINSOCKAPI_
++#define _WINSOCKAPI_
++#endif
++
+ /* the following is a workaround a problem for 'inline' keyword in said
+    header when compiled with Borland C++ 6 */
+ #if defined(__BORLANDC__) && !defined(__cplusplus)
+diff --git a/parser.c b/parser.c
+index 5813a664..5879d3bc 100644
+--- a/parser.c
++++ b/parser.c
+@@ -7009,7 +7009,7 @@ xmlParseReference(xmlParserCtxtPtr ctxt) {
+      */
+     if (NXT(1) == '#') {
+ 	int i = 0;
+-	xmlChar out[10];
++	xmlChar out[16];
+ 	int hex = NXT(2);
+ 	int value = xmlParseCharRef(ctxt);
+ 
+@@ -9247,7 +9247,8 @@ xmlParseStartTag2(xmlParserCtxtPtr ctxt, const xmlChar **pref,
+                 xmlErrMemory(ctxt, "dictionary allocation failure");
+                 if ((attvalue != NULL) && (alloc != 0))
+                     xmlFree(attvalue);
+-                return(NULL);
++                localname = NULL;
++                goto done;
+             }
+             if (*URL != 0) {
+                 uri = xmlParseURI((const char *) URL);
+@@ -9497,7 +9498,8 @@ next_attr:
+ 
+ 		    if ((atts == NULL) || (nbatts + 5 > maxatts)) {
+ 			if (xmlCtxtGrowAttrs(ctxt, nbatts + 5) < 0) {
+-			    return(NULL);
++                            localname = NULL;
++                            goto done;
+ 			}
+ 			maxatts = ctxt->maxatts;
+ 			atts = ctxt->atts;
+diff --git a/parserInternals.c b/parserInternals.c
+index 09876ab4..0f015ded 100644
+--- a/parserInternals.c
++++ b/parserInternals.c
+@@ -1240,8 +1240,18 @@ xmlSwitchInputEncodingInt(xmlParserCtxtPtr ctxt, xmlParserInputPtr input,
+ 	 * size to be able to convert the buffer.
+ 	 */
+ 	xmlErrInternal(ctxt, "switching encoding : no input\n", NULL);
++        /*
++         * Callers assume that the input buffer takes ownership of the
++         * encoding handler. xmlCharEncCloseFunc frees unregistered
++         * handlers and avoids a memory leak.
++         */
++        xmlCharEncCloseFunc(handler);
+ 	return (-1);
+     }
++    /*
++     * We should actually raise an error here, see issue #34.
++     */
++    xmlCharEncCloseFunc(handler);
+     return (0);
+ }
+ 
+diff --git a/python/tests/Makefile.am b/python/tests/Makefile.am
+index 95ebead8..d44101c3 100644
+--- a/python/tests/Makefile.am
++++ b/python/tests/Makefile.am
+@@ -66,6 +66,7 @@ tests: $(PYTESTS)
+ 	   export PYTHONPATH; \
+ 	   LD_LIBRARY_PATH="$(top_builddir)/.libs:$$LD_LIBRARY_PATH" ; \
+ 	   export LD_LIBRARY_PATH; \
++	   export PATH="$(top_builddir)/.libs:$$PATH" ; \
+ 	   for test in $(PYTESTS) ; \
+ 	   do log=`$(PYTHON) $(srcdir)/$$test` ; \
+ 	   if [ "`echo $$log | grep OK`" = "" ] ; then \
+diff --git a/relaxng.c b/relaxng.c
+index 88d351df..914706ac 100644
+--- a/relaxng.c
++++ b/relaxng.c
+@@ -1573,6 +1573,9 @@ xmlRelaxNGRemoveRedefine(xmlRelaxNGParserCtxtPtr ctxt,
+ #endif
+                 }
+             }
++            if (xmlRelaxNGRemoveRedefine(ctxt, URL, tmp->children, name) == 1) {
++                found = 1;
++            }
+         }
+         tmp = tmp2;
+     }
+@@ -1739,7 +1742,18 @@ xmlRelaxNGLoadInclude(xmlRelaxNGParserCtxtPtr ctxt, const xmlChar * URL,
+                 xmlFree(name);
+             }
+         }
+-        cur = cur->next;
++        if (IS_RELAXNG(cur, "div") && cur->children != NULL) {
++            cur = cur->children;
++        } else {
++            if (cur->next != NULL) {
++                cur = cur->next;
++            } else {
++                while (cur->parent != node && cur->parent->next == NULL) {
++                    cur = cur->parent;
++                }
++                cur = cur->parent != node ? cur->parent->next : NULL;
++            }
++        }
+     }
+ 
+ 
+@@ -3979,7 +3993,7 @@ xmlRelaxNGGenerateAttributes(xmlRelaxNGParserCtxtPtr ctxt,
+  * xmlRelaxNGGetElements:
+  * @ctxt:  a Relax-NG parser context
+  * @def:  the definition definition
+- * @eora:  gather elements (0) or attributes (1)
++ * @eora:  gather elements (0), attributes (1) or elements and text (2)
+  *
+  * Compute the list of top elements a definition can generate
+  *
+@@ -4005,7 +4019,12 @@ xmlRelaxNGGetElements(xmlRelaxNGParserCtxtPtr ctxt,
+     while (cur != NULL) {
+         if (((eora == 0) && ((cur->type == XML_RELAXNG_ELEMENT) ||
+                              (cur->type == XML_RELAXNG_TEXT))) ||
+-            ((eora == 1) && (cur->type == XML_RELAXNG_ATTRIBUTE))) {
++            ((eora == 1) && (cur->type == XML_RELAXNG_ATTRIBUTE)) ||
++            ((eora == 2) && ((cur->type == XML_RELAXNG_DATATYPE) ||
++	                     (cur->type == XML_RELAXNG_ELEMENT) ||
++			     (cur->type == XML_RELAXNG_LIST) ||
++                             (cur->type == XML_RELAXNG_TEXT) ||
++			     (cur->type == XML_RELAXNG_VALUE)))) {
+             if (ret == NULL) {
+                 max = 10;
+                 ret = (xmlRelaxNGDefinePtr *)
+@@ -4360,7 +4379,7 @@ xmlRelaxNGComputeInterleaves(void *payload, void *data,
+         if (cur->type == XML_RELAXNG_TEXT)
+             is_mixed++;
+         groups[nbgroups]->rule = cur;
+-        groups[nbgroups]->defs = xmlRelaxNGGetElements(ctxt, cur, 0);
++        groups[nbgroups]->defs = xmlRelaxNGGetElements(ctxt, cur, 2);
+         groups[nbgroups]->attrs = xmlRelaxNGGetElements(ctxt, cur, 1);
+         nbgroups++;
+         cur = cur->next;
+@@ -5347,11 +5366,15 @@ xmlRelaxNGParseNameClass(xmlRelaxNGParserCtxtPtr ctxt, xmlNodePtr node,
+         xmlNodePtr child;
+         xmlRelaxNGDefinePtr last = NULL;
+ 
+-        ret = xmlRelaxNGNewDefine(ctxt, node);
+-        if (ret == NULL)
+-            return (NULL);
+-        ret->parent = def;
+-        ret->type = XML_RELAXNG_CHOICE;
++        if (def->type == XML_RELAXNG_CHOICE) {
++            ret = def;
++        } else {
++            ret = xmlRelaxNGNewDefine(ctxt, node);
++            if (ret == NULL)
++                return (NULL);
++            ret->parent = def;
++            ret->type = XML_RELAXNG_CHOICE;
++        }
+ 
+         if (node->children == NULL) {
+             xmlRngPErr(ctxt, node, XML_RNGP_CHOICE_EMPTY,
+@@ -5363,7 +5386,7 @@ xmlRelaxNGParseNameClass(xmlRelaxNGParserCtxtPtr ctxt, xmlNodePtr node,
+                 tmp = xmlRelaxNGParseNameClass(ctxt, child, ret);
+                 if (tmp != NULL) {
+                     if (last == NULL) {
+-                        last = ret->nameClass = tmp;
++                        last = tmp;
+                     } else {
+                         last->next = tmp;
+                         last = tmp;
+@@ -9262,7 +9285,10 @@ xmlRelaxNGNodeMatchesList(xmlNodePtr node, xmlRelaxNGDefinePtr * list)
+                 return (1);
+         } else if (((node->type == XML_TEXT_NODE) ||
+                     (node->type == XML_CDATA_SECTION_NODE)) &&
+-                   (cur->type == XML_RELAXNG_TEXT)) {
++                   ((cur->type == XML_RELAXNG_DATATYPE) ||
++		    (cur->type == XML_RELAXNG_LIST) ||
++                    (cur->type == XML_RELAXNG_TEXT) ||
++                    (cur->type == XML_RELAXNG_VALUE))) {
+             return (1);
+         }
+         cur = list[i++];
+diff --git a/result/XPath/expr/strings b/result/XPath/expr/strings
+index 1ae5cc40..4b0125cf 100644
+--- a/result/XPath/expr/strings
++++ b/result/XPath/expr/strings
+@@ -135,6 +135,14 @@ Object is a string :
+ Expression: substring("12345",-1 div 0,5)
+ Object is a string : 
+ 
++========================
++Expression: substring("12345",-0.7,4)
++Object is a string : 12
++
++========================
++Expression: substring("12345",-5000000000,5000000004)
++Object is a string : 123
++
+ ========================
+ Expression: string-length("")
+ Object is a number : 0
+diff --git a/result/relaxng/anyName0_0 b/result/relaxng/anyName0_0
+new file mode 100644
+index 00000000..e69de29b
+diff --git a/result/relaxng/anyName0_0.err b/result/relaxng/anyName0_0.err
+new file mode 100644
+index 00000000..f660c26d
+--- /dev/null
++++ b/result/relaxng/anyName0_0.err
+@@ -0,0 +1 @@
++./test/relaxng/anyName0_0.xml validates
+diff --git a/result/relaxng/anyName0_err b/result/relaxng/anyName0_err
+new file mode 100644
+index 00000000..ab6f08da
+--- /dev/null
++++ b/result/relaxng/anyName0_err
+@@ -0,0 +1 @@
++./test/relaxng/anyName0.rng validates
+diff --git a/result/relaxng/anyName0_valid b/result/relaxng/anyName0_valid
+new file mode 100644
+index 00000000..e69de29b
+diff --git a/result/relaxng/include0_0 b/result/relaxng/include0_0
+new file mode 100644
+index 00000000..e69de29b
+diff --git a/result/relaxng/include0_0.err b/result/relaxng/include0_0.err
+new file mode 100644
+index 00000000..24013bc5
+--- /dev/null
++++ b/result/relaxng/include0_0.err
+@@ -0,0 +1 @@
++./test/relaxng/include0_0.xml validates
+diff --git a/result/relaxng/include0_err b/result/relaxng/include0_err
+new file mode 100644
+index 00000000..cd16cbe2
+--- /dev/null
++++ b/result/relaxng/include0_err
+@@ -0,0 +1 @@
++./test/relaxng/include0.rng validates
+diff --git a/result/relaxng/include0_valid b/result/relaxng/include0_valid
+new file mode 100644
+index 00000000..e69de29b
+diff --git a/result/relaxng/include1_0 b/result/relaxng/include1_0
+new file mode 100644
+index 00000000..e69de29b
+diff --git a/result/relaxng/include1_0.err b/result/relaxng/include1_0.err
+new file mode 100644
+index 00000000..8c13f4c5
+--- /dev/null
++++ b/result/relaxng/include1_0.err
+@@ -0,0 +1 @@
++./test/relaxng/include1_0.xml validates
+diff --git a/result/relaxng/include1_err b/result/relaxng/include1_err
+new file mode 100644
+index 00000000..ad4850b0
+--- /dev/null
++++ b/result/relaxng/include1_err
+@@ -0,0 +1 @@
++./test/relaxng/include1.rng validates
+diff --git a/result/relaxng/include1_valid b/result/relaxng/include1_valid
+new file mode 100644
+index 00000000..e69de29b
+diff --git a/runsuite.c b/runsuite.c
+index aaab13e1..767455bd 100644
+--- a/runsuite.c
++++ b/runsuite.c
+@@ -327,10 +327,8 @@ xsdIncorectTestCase(xmlNodePtr cur) {
+     }
+     xmlNodeDump(buf, test->doc, test, 0, 0);
+     pctxt = xmlRelaxNGNewMemParserCtxt((const char *)buf->content, buf->use);
+-    xmlRelaxNGSetParserErrors(pctxt,
+-         (xmlRelaxNGValidityErrorFunc) testErrorHandler,
+-         (xmlRelaxNGValidityWarningFunc) testErrorHandler,
+-	 pctxt);
++    xmlRelaxNGSetParserErrors(pctxt, testErrorHandler, testErrorHandler,
++            pctxt);
+     rng = xmlRelaxNGParse(pctxt);
+     xmlRelaxNGFreeParserCtxt(pctxt);
+     if (rng != NULL) {
+@@ -462,10 +460,8 @@ xsdTestCase(xmlNodePtr tst) {
+     }
+     xmlNodeDump(buf, test->doc, test, 0, 0);
+     pctxt = xmlRelaxNGNewMemParserCtxt((const char *)buf->content, buf->use);
+-    xmlRelaxNGSetParserErrors(pctxt,
+-         (xmlRelaxNGValidityErrorFunc) testErrorHandler,
+-         (xmlRelaxNGValidityWarningFunc) testErrorHandler,
+-	 pctxt);
++    xmlRelaxNGSetParserErrors(pctxt, testErrorHandler, testErrorHandler,
++            pctxt);
+     rng = xmlRelaxNGParse(pctxt);
+     xmlRelaxNGFreeParserCtxt(pctxt);
+     if (extraMemoryFromResolver)
+@@ -510,9 +506,7 @@ xsdTestCase(xmlNodePtr tst) {
+ 		nb_tests++;
+ 	        ctxt = xmlRelaxNGNewValidCtxt(rng);
+ 		xmlRelaxNGSetValidErrors(ctxt,
+-		     (xmlRelaxNGValidityErrorFunc) testErrorHandler,
+-		     (xmlRelaxNGValidityWarningFunc) testErrorHandler,
+-		     ctxt);
++                        testErrorHandler, testErrorHandler, ctxt);
+ 		ret = xmlRelaxNGValidateDoc(ctxt, doc);
+ 		xmlRelaxNGFreeValidCtxt(ctxt);
+ 		if (ret > 0) {
+@@ -567,9 +561,7 @@ xsdTestCase(xmlNodePtr tst) {
+ 		nb_tests++;
+ 	        ctxt = xmlRelaxNGNewValidCtxt(rng);
+ 		xmlRelaxNGSetValidErrors(ctxt,
+-		     (xmlRelaxNGValidityErrorFunc) testErrorHandler,
+-		     (xmlRelaxNGValidityWarningFunc) testErrorHandler,
+-		     ctxt);
++                        testErrorHandler, testErrorHandler, ctxt);
+ 		ret = xmlRelaxNGValidateDoc(ctxt, doc);
+ 		xmlRelaxNGFreeValidCtxt(ctxt);
+ 		if (ret == 0) {
+@@ -825,10 +817,7 @@ xstcTestInstance(xmlNodePtr cur, xmlSchemaPtr schemas,
+     }
+ 
+     ctxt = xmlSchemaNewValidCtxt(schemas);
+-    xmlSchemaSetValidErrors(ctxt,
+-         (xmlSchemaValidityErrorFunc) testErrorHandler,
+-         (xmlSchemaValidityWarningFunc) testErrorHandler,
+-	 ctxt);
++    xmlSchemaSetValidErrors(ctxt, testErrorHandler, testErrorHandler, ctxt);
+     ret = xmlSchemaValidateDoc(ctxt, doc);
+ 
+     if (xmlStrEqual(validity, BAD_CAST "valid")) {
+@@ -916,10 +905,8 @@ xstcTestGroup(xmlNodePtr cur, const char *base) {
+     if (xmlStrEqual(validity, BAD_CAST "valid")) {
+         nb_schematas++;
+ 	ctxt = xmlSchemaNewParserCtxt((const char *) path);
+-	xmlSchemaSetParserErrors(ctxt,
+-	     (xmlSchemaValidityErrorFunc) testErrorHandler,
+-	     (xmlSchemaValidityWarningFunc) testErrorHandler,
+-	     ctxt);
++	xmlSchemaSetParserErrors(ctxt, testErrorHandler, testErrorHandler,
++                ctxt);
+ 	schemas = xmlSchemaParse(ctxt);
+ 	xmlSchemaFreeParserCtxt(ctxt);
+ 	if (schemas == NULL) {
+@@ -952,10 +939,8 @@ xstcTestGroup(xmlNodePtr cur, const char *base) {
+     } else if (xmlStrEqual(validity, BAD_CAST "invalid")) {
+         nb_schematas++;
+ 	ctxt = xmlSchemaNewParserCtxt((const char *) path);
+-	xmlSchemaSetParserErrors(ctxt,
+-	     (xmlSchemaValidityErrorFunc) testErrorHandler,
+-	     (xmlSchemaValidityWarningFunc) testErrorHandler,
+-	     ctxt);
++	xmlSchemaSetParserErrors(ctxt, testErrorHandler, testErrorHandler,
++                ctxt);
+ 	schemas = xmlSchemaParse(ctxt);
+ 	xmlSchemaFreeParserCtxt(ctxt);
+ 	if (schemas != NULL) {
+diff --git a/runtest.c b/runtest.c
+index addda5ca..b1c30d85 100644
+--- a/runtest.c
++++ b/runtest.c
+@@ -587,8 +587,8 @@ static char *resultFilename(const char *filename, const char *out,
+       suffixbuff[0]='_';
+ #endif
+ 
+-    snprintf(res, 499, "%s%s%s", out, base, suffixbuff);
+-    res[499] = 0;
++    if (snprintf(res, 499, "%s%s%s", out, base, suffixbuff) >= 499)
++        res[499] = 0;
+     return(strdup(res));
+ }
+ 
+@@ -2501,13 +2501,17 @@ xpathDocTest(const char *filename,
+ 	return(-1);
+     }
+ 
+-    snprintf(pattern, 499, "./test/XPath/tests/%s*", baseFilename(filename));
+-    pattern[499] = 0;
++    res = snprintf(pattern, 499, "./test/XPath/tests/%s*",
++            baseFilename(filename));
++    if (res >= 499)
++        pattern[499] = 0;
+     globbuf.gl_offs = 0;
+     glob(pattern, GLOB_DOOFFS, NULL, &globbuf);
+     for (i = 0;i < globbuf.gl_pathc;i++) {
+-        snprintf(result, 499, "result/XPath/tests/%s",
++        res = snprintf(result, 499, "result/XPath/tests/%s",
+ 	         baseFilename(globbuf.gl_pathv[i]));
++        if (res >= 499)
++            result[499] = 0;
+ 	res = xpathCommonTest(globbuf.gl_pathv[i], &result[0], 0, 0);
+ 	if (res != 0)
+ 	    ret = res;
+@@ -2549,13 +2553,17 @@ xptrDocTest(const char *filename,
+ 	return(-1);
+     }
+ 
+-    snprintf(pattern, 499, "./test/XPath/xptr/%s*", baseFilename(filename));
+-    pattern[499] = 0;
++    res = snprintf(pattern, 499, "./test/XPath/xptr/%s*",
++            baseFilename(filename));
++    if (res >= 499)
++        pattern[499] = 0;
+     globbuf.gl_offs = 0;
+     glob(pattern, GLOB_DOOFFS, NULL, &globbuf);
+     for (i = 0;i < globbuf.gl_pathc;i++) {
+-        snprintf(result, 499, "result/XPath/xptr/%s",
++        res = snprintf(result, 499, "result/XPath/xptr/%s",
+ 	         baseFilename(globbuf.gl_pathv[i]));
++        if (res >= 499)
++            result[499] = 0;
+ 	res = xpathCommonTest(globbuf.gl_pathv[i], &result[0], 1, 0);
+ 	if (res != 0)
+ 	    ret = res;
+@@ -3011,10 +3019,7 @@ schemasOneTest(const char *sch,
+     }
+ 
+     ctxt = xmlSchemaNewValidCtxt(schemas);
+-    xmlSchemaSetValidErrors(ctxt,
+-         (xmlSchemaValidityErrorFunc) testErrorHandler,
+-         (xmlSchemaValidityWarningFunc) testErrorHandler,
+-	 ctxt);
++    xmlSchemaSetValidErrors(ctxt, testErrorHandler, testErrorHandler, ctxt);
+     validResult = xmlSchemaValidateDoc(ctxt, doc);
+     if (validResult == 0) {
+ 	fprintf(schemasOutput, "%s validates\n", filename);
+@@ -3079,10 +3084,7 @@ schemasTest(const char *filename,
+ 
+     /* first compile the schemas if possible */
+     ctxt = xmlSchemaNewParserCtxt(filename);
+-    xmlSchemaSetParserErrors(ctxt,
+-         (xmlSchemaValidityErrorFunc) testErrorHandler,
+-         (xmlSchemaValidityWarningFunc) testErrorHandler,
+-	 ctxt);
++    xmlSchemaSetParserErrors(ctxt, testErrorHandler, testErrorHandler, ctxt);
+     schemas = xmlSchemaParse(ctxt);
+     xmlSchemaFreeParserCtxt(ctxt);
+ 
+@@ -3104,8 +3106,8 @@ schemasTest(const char *filename,
+     memcpy(prefix, base, len);
+     prefix[len] = 0;
+ 
+-    snprintf(pattern, 499, "./test/schemas/%s_?.xml", prefix);
+-    pattern[499] = 0;
++    if (snprintf(pattern, 499, "./test/schemas/%s_?.xml", prefix) >= 499)
++        pattern[499] = 0;
+ 
+     if (base[len] == '_') {
+         len += 2;
+@@ -3123,12 +3125,14 @@ schemasTest(const char *filename,
+ 	len = strlen(base2);
+ 	if ((len > 6) && (base2[len - 6] == '_')) {
+ 	    count = base2[len - 5];
+-	    snprintf(result, 499, "result/schemas/%s_%c",
++	    ret = snprintf(result, 499, "result/schemas/%s_%c",
+ 		     prefix, count);
+-	    result[499] = 0;
+-	    snprintf(err, 499, "result/schemas/%s_%c.err",
++            if (ret >= 499)
++	        result[499] = 0;
++	    ret = snprintf(err, 499, "result/schemas/%s_%c.err",
+ 		     prefix, count);
+-	    err[499] = 0;
++            if (ret >= 499)
++	        err[499] = 0;
+ 	} else {
+ 	    fprintf(stderr, "don't know how to process %s\n", instance);
+ 	    continue;
+@@ -3186,10 +3190,7 @@ rngOneTest(const char *sch,
+     }
+ 
+     ctxt = xmlRelaxNGNewValidCtxt(schemas);
+-    xmlRelaxNGSetValidErrors(ctxt,
+-         (xmlRelaxNGValidityErrorFunc) testErrorHandler,
+-         (xmlRelaxNGValidityWarningFunc) testErrorHandler,
+-	 ctxt);
++    xmlRelaxNGSetValidErrors(ctxt, testErrorHandler, testErrorHandler, ctxt);
+     ret = xmlRelaxNGValidateDoc(ctxt, doc);
+     if (ret == 0) {
+ 	testErrorHandler(NULL, "%s validates\n", filename);
+@@ -3256,10 +3257,7 @@ rngTest(const char *filename,
+ 
+     /* first compile the schemas if possible */
+     ctxt = xmlRelaxNGNewParserCtxt(filename);
+-    xmlRelaxNGSetParserErrors(ctxt,
+-         (xmlRelaxNGValidityErrorFunc) testErrorHandler,
+-         (xmlRelaxNGValidityWarningFunc) testErrorHandler,
+-	 ctxt);
++    xmlRelaxNGSetParserErrors(ctxt, testErrorHandler, testErrorHandler, ctxt);
+     schemas = xmlRelaxNGParse(ctxt);
+     xmlRelaxNGFreeParserCtxt(ctxt);
+ 
+@@ -3275,8 +3273,8 @@ rngTest(const char *filename,
+     memcpy(prefix, base, len);
+     prefix[len] = 0;
+ 
+-    snprintf(pattern, 499, "./test/relaxng/%s_?.xml", prefix);
+-    pattern[499] = 0;
++    if (snprintf(pattern, 499, "./test/relaxng/%s_?.xml", prefix) >= 499)
++        pattern[499] = 0;
+ 
+     globbuf.gl_offs = 0;
+     glob(pattern, GLOB_DOOFFS, NULL, &globbuf);
+@@ -3288,12 +3286,14 @@ rngTest(const char *filename,
+ 	len = strlen(base2);
+ 	if ((len > 6) && (base2[len - 6] == '_')) {
+ 	    count = base2[len - 5];
+-	    snprintf(result, 499, "result/relaxng/%s_%c",
++	    res = snprintf(result, 499, "result/relaxng/%s_%c",
+ 		     prefix, count);
+-	    result[499] = 0;
+-	    snprintf(err, 499, "result/relaxng/%s_%c.err",
++            if (res >= 499)
++	        result[499] = 0;
++	    res = snprintf(err, 499, "result/relaxng/%s_%c.err",
+ 		     prefix, count);
+-	    err[499] = 0;
++            if (res >= 499)
++	        err[499] = 0;
+ 	} else {
+ 	    fprintf(stderr, "don't know how to process %s\n", instance);
+ 	    continue;
+@@ -3301,7 +3301,7 @@ rngTest(const char *filename,
+ 	if (schemas == NULL) {
+ 	} else {
+ 	    nb_tests++;
+-	    ret = rngOneTest(filename, instance, result, err,
++	    res = rngOneTest(filename, instance, result, err,
+ 	                         options, schemas);
+ 	    if (res != 0)
+ 		ret = res;
+@@ -3364,8 +3364,8 @@ rngStreamTest(const char *filename,
+         (!strcmp(prefix, "tutor8_2")))
+ 	disable_err = 1;
+ 
+-    snprintf(pattern, 499, "./test/relaxng/%s_?.xml", prefix);
+-    pattern[499] = 0;
++    if (snprintf(pattern, 499, "./test/relaxng/%s_?.xml", prefix) >= 499)
++        pattern[499] = 0;
+ 
+     globbuf.gl_offs = 0;
+     glob(pattern, GLOB_DOOFFS, NULL, &globbuf);
+@@ -3377,12 +3377,14 @@ rngStreamTest(const char *filename,
+ 	len = strlen(base2);
+ 	if ((len > 6) && (base2[len - 6] == '_')) {
+ 	    count = base2[len - 5];
+-	    snprintf(result, 499, "result/relaxng/%s_%c",
++	    ret = snprintf(result, 499, "result/relaxng/%s_%c",
+ 		     prefix, count);
+-	    result[499] = 0;
+-	    snprintf(err, 499, "result/relaxng/%s_%c.err",
++            if (ret >= 499)
++	        result[499] = 0;
++	    ret = snprintf(err, 499, "result/relaxng/%s_%c.err",
+ 		     prefix, count);
+-	    err[499] = 0;
++            if (ret >= 499)
++	        err[499] = 0;
+ 	} else {
+ 	    fprintf(stderr, "don't know how to process %s\n", instance);
+ 	    continue;
+@@ -3507,8 +3509,8 @@ patternTest(const char *filename,
+     len -= 4;
+     memcpy(xml, filename, len);
+     xml[len] = 0;
+-    snprintf(result, 499, "result/pattern/%s", baseFilename(xml));
+-    result[499] = 0;
++    if (snprintf(result, 499, "result/pattern/%s", baseFilename(xml)) >= 499)
++        result[499] = 0;
+     memcpy(xml + len, ".xml", 5);
+ 
+     if (!checkTestFile(xml) && !update_results) {
+@@ -3885,17 +3887,20 @@ c14nCommonTest(const char *filename, int with_comments, int mode,
+     memcpy(prefix, base, len);
+     prefix[len] = 0;
+ 
+-    snprintf(buf, 499, "result/c14n/%s/%s", subdir,prefix);
++    if (snprintf(buf, 499, "result/c14n/%s/%s", subdir, prefix) >= 499)
++        buf[499] = 0;
+     if (!checkTestFile(buf) && !update_results) {
+         fprintf(stderr, "Missing result file %s", buf);
+ 	return(-1);
+     }
+     result = strdup(buf);
+-    snprintf(buf, 499, "test/c14n/%s/%s.xpath", subdir,prefix);
++    if (snprintf(buf, 499, "test/c14n/%s/%s.xpath", subdir, prefix) >= 499)
++        buf[499] = 0;
+     if (checkTestFile(buf)) {
+ 	xpath = strdup(buf);
+     }
+-    snprintf(buf, 499, "test/c14n/%s/%s.ns", subdir,prefix);
++    if (snprintf(buf, 499, "test/c14n/%s/%s.ns", subdir, prefix) >= 499)
++        buf[499] = 0;
+     if (checkTestFile(buf)) {
+ 	ns = strdup(buf);
+     }
+diff --git a/test/XPath/expr/strings b/test/XPath/expr/strings
+index ba02c794..c741ee25 100644
+--- a/test/XPath/expr/strings
++++ b/test/XPath/expr/strings
+@@ -32,5 +32,7 @@ substring("12345",3,-1 div 0)
+ substring("12345",-42, 1 div 0)
+ substring("12345",-1 div 0, 1 div 0)
+ substring("12345",-1 div 0,5)
++substring("12345",-0.7,4)
++substring("12345",-5000000000,5000000004)
+ string-length("")
+ string-length("titi")
+diff --git a/test/relaxng/anyName0.rng b/test/relaxng/anyName0.rng
+new file mode 100644
+index 00000000..9fc5ead0
+--- /dev/null
++++ b/test/relaxng/anyName0.rng
+@@ -0,0 +1,15 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<grammar xmlns="http://relaxng.org/ns/structure/1.0">
++  <start>
++    <element>
++      <choice>
++        <choice>
++          <name>a</name>
++          <name>b</name>
++        </choice>
++        <name>c</name>
++      </choice>
++      <empty/>
++    </element>
++  </start>
++</grammar>
+diff --git a/test/relaxng/anyName0_0.xml b/test/relaxng/anyName0_0.xml
+new file mode 100644
+index 00000000..fb08e36d
+--- /dev/null
++++ b/test/relaxng/anyName0_0.xml
+@@ -0,0 +1 @@
++<b/>
+diff --git a/test/relaxng/include0.inc b/test/relaxng/include0.inc
+new file mode 100644
+index 00000000..8636ee4e
+--- /dev/null
++++ b/test/relaxng/include0.inc
+@@ -0,0 +1,5 @@
++<grammar xmlns="http://relaxng.org/ns/structure/1.0">
++  <start>
++    <notAllowed/>
++  </start>
++</grammar>
+diff --git a/test/relaxng/include0.rng b/test/relaxng/include0.rng
+new file mode 100644
+index 00000000..e8edb92f
+--- /dev/null
++++ b/test/relaxng/include0.rng
+@@ -0,0 +1,11 @@
++<grammar xmlns="http://relaxng.org/ns/structure/1.0">
++  <include href="include0.inc">
++    <div>
++      <start>
++        <element name="root">
++          <empty/>
++        </element>
++      </start>
++    </div>
++  </include>
++</grammar>
+diff --git a/test/relaxng/include0_0.xml b/test/relaxng/include0_0.xml
+new file mode 100644
+index 00000000..f3f286ea
+--- /dev/null
++++ b/test/relaxng/include0_0.xml
+@@ -0,0 +1 @@
++<root/>
+diff --git a/test/relaxng/include1-0.inc b/test/relaxng/include1-0.inc
+new file mode 100644
+index 00000000..87c68028
+--- /dev/null
++++ b/test/relaxng/include1-0.inc
+@@ -0,0 +1,12 @@
++<grammar xmlns="http://relaxng.org/ns/structure/1.0">
++ <include href="include1-1.inc">
++   <start>
++     <notAllowed/>
++   </start>
++ </include>
++ <start combine="choice">
++   <element name="b">
++     <empty/>
++   </element>
++ </start>
++</grammar>
+diff --git a/test/relaxng/include1-1.inc b/test/relaxng/include1-1.inc
+new file mode 100644
+index 00000000..8af51ec0
+--- /dev/null
++++ b/test/relaxng/include1-1.inc
+@@ -0,0 +1,7 @@
++<grammar xmlns="http://relaxng.org/ns/structure/1.0">
++ <start>
++   <element name="c">
++     <empty/>
++   </element>
++ </start>
++</grammar>
+diff --git a/test/relaxng/include1.rng b/test/relaxng/include1.rng
+new file mode 100644
+index 00000000..c36bff93
+--- /dev/null
++++ b/test/relaxng/include1.rng
+@@ -0,0 +1,12 @@
++<grammar xmlns="http://relaxng.org/ns/structure/1.0">
++ <include href="include1-0.inc">
++   <start>
++     <notAllowed/>
++   </start>
++ </include>
++ <start combine="choice">
++   <element name="a">
++     <empty/>
++   </element>
++ </start>
++</grammar>
+diff --git a/test/relaxng/include1_0.xml b/test/relaxng/include1_0.xml
+new file mode 100644
+index 00000000..d80a5e27
+--- /dev/null
++++ b/test/relaxng/include1_0.xml
+@@ -0,0 +1 @@
++<a/>
+diff --git a/testC14N.c b/testC14N.c
+index 86e58f27..addc800e 100644
+--- a/testC14N.c
++++ b/testC14N.c
+@@ -18,6 +18,9 @@
+ #define STDOUT_FILENO fileno(stdout)
+ #endif /* HAVE_UNISTD_H */
+ #endif
++#ifdef _WIN32
++#include <io.h>
++#endif
+ #ifdef HAVE_STDLIB_H
+ #include <stdlib.h>
+ #endif
+diff --git a/testRelax.c b/testRelax.c
+index 8e94a7a8..3549f938 100644
+--- a/testRelax.c
++++ b/testRelax.c
+@@ -101,9 +101,7 @@ int main(int argc, char **argv) {
+ 		    ctxt = xmlRelaxNGNewMemParserCtxt((char *)base,info.st_size);
+ 
+ 		    xmlRelaxNGSetParserErrors(ctxt,
+-			    (xmlRelaxNGValidityErrorFunc) fprintf,
+-			    (xmlRelaxNGValidityWarningFunc) fprintf,
+-			    stderr);
++                            xmlGenericError, xmlGenericError, NULL);
+ 		    schema = xmlRelaxNGParse(ctxt);
+ 		    xmlRelaxNGFreeParserCtxt(ctxt);
+ 		    munmap((char *) base, info.st_size);
+@@ -112,9 +110,7 @@ int main(int argc, char **argv) {
+ 		{
+ 		    ctxt = xmlRelaxNGNewParserCtxt(argv[i]);
+ 		    xmlRelaxNGSetParserErrors(ctxt,
+-			    (xmlRelaxNGValidityErrorFunc) fprintf,
+-			    (xmlRelaxNGValidityWarningFunc) fprintf,
+-			    stderr);
++                            xmlGenericError, xmlGenericError, NULL);
+ 		    schema = xmlRelaxNGParse(ctxt);
+ 		    xmlRelaxNGFreeParserCtxt(ctxt);
+ 		}
+@@ -144,9 +140,7 @@ int main(int argc, char **argv) {
+ 
+ 		    ctxt = xmlRelaxNGNewValidCtxt(schema);
+ 		    xmlRelaxNGSetValidErrors(ctxt,
+-			    (xmlRelaxNGValidityErrorFunc) fprintf,
+-			    (xmlRelaxNGValidityWarningFunc) fprintf,
+-			    stderr);
++                            xmlGenericError, xmlGenericError, NULL);
+ 		    ret = xmlRelaxNGValidateDoc(ctxt, doc);
+ 		    if (ret == 0) {
+ 			printf("%s validates\n", argv[i]);
+diff --git a/testSchemas.c b/testSchemas.c
+index b98e6313..fc39862c 100644
+--- a/testSchemas.c
++++ b/testSchemas.c
+@@ -97,9 +97,7 @@ int main(int argc, char **argv) {
+ 		    ctxt = xmlSchemaNewMemParserCtxt((char *)base,info.st_size);
+ 
+ 		    xmlSchemaSetParserErrors(ctxt,
+-			    (xmlSchemaValidityErrorFunc) fprintf,
+-			    (xmlSchemaValidityWarningFunc) fprintf,
+-			    stderr);
++                            xmlGenericError, xmlGenericError, NULL);
+ 		    schema = xmlSchemaParse(ctxt);
+ 		    xmlSchemaFreeParserCtxt(ctxt);
+ 		    munmap((char *) base, info.st_size);
+@@ -108,9 +106,7 @@ int main(int argc, char **argv) {
+ 		{
+ 		    ctxt = xmlSchemaNewParserCtxt(argv[i]);
+ 		    xmlSchemaSetParserErrors(ctxt,
+-			    (xmlSchemaValidityErrorFunc) fprintf,
+-			    (xmlSchemaValidityWarningFunc) fprintf,
+-			    stderr);
++                            xmlGenericError, xmlGenericError, NULL);
+ 		    schema = xmlSchemaParse(ctxt);
+ 		    xmlSchemaFreeParserCtxt(ctxt);
+ 		}
+@@ -135,9 +131,7 @@ int main(int argc, char **argv) {
+ 
+ 		    ctxt = xmlSchemaNewValidCtxt(schema);
+ 		    xmlSchemaSetValidErrors(ctxt,
+-			    (xmlSchemaValidityErrorFunc) fprintf,
+-			    (xmlSchemaValidityWarningFunc) fprintf,
+-			    stderr);
++                            xmlGenericError, xmlGenericError, NULL);
+ 		    ret = xmlSchemaValidateDoc(ctxt, doc);
+ 		    if (ret == 0) {
+ 			printf("%s validates\n", argv[i]);
+diff --git a/testThreads.c b/testThreads.c
+index 2ef70a74..bef65377 100644
+--- a/testThreads.c
++++ b/testThreads.c
+@@ -10,6 +10,8 @@
+ #include <libxml/catalog.h>
+ #ifdef HAVE_PTHREAD_H
+ #include <pthread.h>
++#elif defined HAVE_WIN32_THREADS
++#include <windows.h>
+ #elif defined HAVE_BEOS_THREADS
+ #include <OS.h>
+ #endif
+@@ -20,25 +22,32 @@
+ #include <assert.h>
+ 
+ #define	MAX_ARGC	20
++#define TEST_REPEAT_COUNT 500
+ #ifdef HAVE_PTHREAD_H
+ static pthread_t tid[MAX_ARGC];
++#elif defined HAVE_WIN32_THREADS
++static HANDLE tid[MAX_ARGC];
+ #elif defined HAVE_BEOS_THREADS
+ static thread_id tid[MAX_ARGC];
+ #endif
+ 
++typedef struct {
++    const char *filename;
++    int okay;
++} xmlThreadParams;
++
+ static const char *catalog = "test/threads/complex.xml";
+-static const char *testfiles[] = {
+-    "test/threads/abc.xml",
+-    "test/threads/acb.xml",
+-    "test/threads/bac.xml",
+-    "test/threads/bca.xml",
+-    "test/threads/cab.xml",
+-    "test/threads/cba.xml",
+-    "test/threads/invalid.xml",
++static xmlThreadParams threadParams[] = {
++    { "test/threads/abc.xml", 0 },
++    { "test/threads/acb.xml", 0 },
++    { "test/threads/bac.xml", 0 },
++    { "test/threads/bca.xml", 0 },
++    { "test/threads/cab.xml", 0 },
++    { "test/threads/cba.xml", 0 },
++    { "test/threads/invalid.xml", 0 }
+ };
+-
+-static const char *Okay = "OK";
+-static const char *Failed = "Failed";
++static const unsigned int num_threads = sizeof(threadParams) /
++                                        sizeof(threadParams[0]);
+ 
+ #ifndef xmlDoValidityCheckingDefaultValue
+ #error xmlDoValidityCheckingDefaultValue is not a macro
+@@ -51,7 +60,8 @@ static void *
+ thread_specific_data(void *private_data)
+ {
+     xmlDocPtr myDoc;
+-    const char *filename = (const char *) private_data;
++    xmlThreadParams *params = (xmlThreadParams *) private_data;
++    const char *filename = params->filename;
+     int okay = 1;
+ 
+     if (!strcmp(filename, "test/threads/invalid.xml")) {
+@@ -91,9 +101,8 @@ thread_specific_data(void *private_data)
+ 	    okay = 0;
+ 	}
+     }
+-    if (okay == 0)
+-	return((void *) Failed);
+-    return ((void *) Okay);
++    params->okay = okay;
++    return(NULL);
+ }
+ 
+ #ifdef HAVE_PTHREAD_H
+@@ -101,27 +110,25 @@ int
+ main(void)
+ {
+     unsigned int i, repeat;
+-    unsigned int num_threads = sizeof(testfiles) / sizeof(testfiles[0]);
+-    void *results[MAX_ARGC];
+     int ret;
+ 
+     xmlInitParser();
+-    for (repeat = 0;repeat < 500;repeat++) {
++    for (repeat = 0;repeat < TEST_REPEAT_COUNT;repeat++) {
+ 	xmlLoadCatalog(catalog);
+ 
+-        memset(results, 0, sizeof(*results)*num_threads);
+         memset(tid, 0xff, sizeof(*tid)*num_threads);
+ 
+ 	for (i = 0; i < num_threads; i++) {
+ 	    ret = pthread_create(&tid[i], NULL, thread_specific_data,
+-				 (void *) testfiles[i]);
++				 (void *) &threadParams[i]);
+ 	    if (ret != 0) {
+ 		perror("pthread_create");
+ 		exit(1);
+ 	    }
+ 	}
+ 	for (i = 0; i < num_threads; i++) {
+-	    ret = pthread_join(tid[i], &results[i]);
++            void *result;
++	    ret = pthread_join(tid[i], &result);
+ 	    if (ret != 0) {
+ 		perror("pthread_join");
+ 		exit(1);
+@@ -130,35 +137,97 @@ main(void)
+ 
+ 	xmlCatalogCleanup();
+ 	for (i = 0; i < num_threads; i++)
+-	    if (results[i] != (void *) Okay)
+-		printf("Thread %d handling %s failed\n", i, testfiles[i]);
++	    if (threadParams[i].okay == 0)
++		printf("Thread %d handling %s failed\n", i,
++                       threadParams[i].filename);
+     }
+     xmlCleanupParser();
+     xmlMemoryDump();
+     return (0);
+ }
++#elif defined HAVE_WIN32_THREADS
++static DWORD WINAPI
++win32_thread_specific_data(void *private_data)
++{
++    thread_specific_data(private_data);
++    return(0);
++}
++
++int
++main(void)
++{
++    unsigned int i, repeat;
++    BOOL ret;
++
++    xmlInitParser();
++    for (repeat = 0;repeat < TEST_REPEAT_COUNT;repeat++)
++    {
++        xmlLoadCatalog(catalog);
++
++        for (i = 0; i < num_threads; i++)
++        {
++            tid[i] = (HANDLE) -1;
++        }
++
++        for (i = 0; i < num_threads; i++)
++        {
++            DWORD useless;
++            tid[i] = CreateThread(NULL, 0,
++                win32_thread_specific_data, &threadParams[i], 0, &useless);
++            if (tid[i] == NULL)
++            {
++                perror("CreateThread");
++                exit(1);
++            }
++        }
++
++        if (WaitForMultipleObjects (num_threads, tid, TRUE, INFINITE) == WAIT_FAILED)
++            perror ("WaitForMultipleObjects failed");
++
++        for (i = 0; i < num_threads; i++)
++        {
++            DWORD exitCode;
++            ret = GetExitCodeThread (tid[i], &exitCode);
++            if (ret == 0)
++            {
++                perror("GetExitCodeThread");
++                exit(1);
++            }
++            CloseHandle (tid[i]);
++        }
++
++        xmlCatalogCleanup();
++        for (i = 0; i < num_threads; i++) {
++            if (threadParams[i].okay == 0)
++            printf("Thread %d handling %s failed\n", i,
++                   threadParams[i].filename);
++        }
++    }
++
++    xmlCleanupParser();
++    xmlMemoryDump();
++
++    return (0);
++}
+ #elif defined HAVE_BEOS_THREADS
+ int
+ main(void)
+ {
+     unsigned int i, repeat;
+-    unsigned int num_threads = sizeof(testfiles) / sizeof(testfiles[0]);
+-    void *results[MAX_ARGC];
+     status_t ret;
+ 
+     xmlInitParser();
+     printf("Parser initialized\n");
+-    for (repeat = 0;repeat < 500;repeat++) {
++    for (repeat = 0;repeat < TEST_REPEAT_COUNT;repeat++) {
+     printf("repeat: %d\n",repeat);
+ 	xmlLoadCatalog(catalog);
+ 	printf("loaded catalog: %s\n", catalog);
+ 	for (i = 0; i < num_threads; i++) {
+-	    results[i] = NULL;
+ 	    tid[i] = (thread_id) -1;
+ 	}
+ 	printf("cleaned threads\n");
+ 	for (i = 0; i < num_threads; i++) {
+-		tid[i] = spawn_thread(thread_specific_data, "xmlTestThread", B_NORMAL_PRIORITY, (void *) testfiles[i]);
++		tid[i] = spawn_thread(thread_specific_data, "xmlTestThread", B_NORMAL_PRIORITY, (void *) &threadParams[i]);
+ 		if (tid[i] < B_OK) {
+ 			perror("beos_thread_create");
+ 			exit(1);
+@@ -166,7 +235,8 @@ main(void)
+ 		printf("beos_thread_create %d -> %d\n", i, tid[i]);
+ 	}
+ 	for (i = 0; i < num_threads; i++) {
+-	    ret = wait_for_thread(tid[i], &results[i]);
++            void *result;
++	    ret = wait_for_thread(tid[i], &result);
+ 	    printf("beos_thread_wait %d -> %d\n", i, ret);
+ 	    if (ret != B_OK) {
+ 			perror("beos_thread_wait");
+@@ -177,8 +247,9 @@ main(void)
+ 	xmlCatalogCleanup();
+ 	ret = B_OK;
+ 	for (i = 0; i < num_threads; i++)
+-	    if (results[i] != (void *) Okay) {
+-			printf("Thread %d handling %s failed\n", i, testfiles[i]);
++	    if (threadParams[i].okay == 0) {
++			printf("Thread %d handling %s failed\n", i,
++                               threadParams[i].filename);
+ 			ret = B_ERROR;
+ 		}
+     }
+diff --git a/testThreadsWin32.c b/testThreadsWin32.c
+deleted file mode 100644
+index 3d1a5ba2..00000000
+--- a/testThreadsWin32.c
++++ /dev/null
+@@ -1,150 +0,0 @@
+-#include "libxml.h"
+-#include <stdlib.h>
+-#include <stdio.h>
+-
+-#if defined(LIBXML_THREAD_ENABLED) && defined(LIBXML_CATALOG_ENABLED)
+-#include <libxml/globals.h>
+-#include <libxml/threads.h>
+-#include <libxml/parser.h>
+-#include <libxml/catalog.h>
+-#include <windows.h>
+-#include <string.h>
+-#include <assert.h>
+-
+-#define	MAX_ARGC	20
+-#define TEST_REPEAT_COUNT 500
+-
+-static HANDLE tid[MAX_ARGC];
+-
+-static const char *catalog = "test/threads/complex.xml";
+-static char *testfiles[] = {
+-    "test/threads/abc.xml",
+-    "test/threads/acb.xml",
+-    "test/threads/bac.xml",
+-    "test/threads/bca.xml",
+-    "test/threads/cab.xml",
+-    "test/threads/cba.xml",
+-    "test/threads/invalid.xml",
+-};
+-
+-const char *Okay = "OK";
+-const char *Failed = "Failed";
+-
+-#ifndef xmlDoValidityCheckingDefaultValue
+-#error xmlDoValidityCheckingDefaultValue is not a macro
+-#endif
+-#ifndef xmlGenericErrorContext
+-#error xmlGenericErrorContext is not a macro
+-#endif
+-
+-static DWORD WINAPI
+-thread_specific_data(void *private_data)
+-{
+-    xmlDocPtr myDoc;
+-    const char *filename = (const char *) private_data;
+-    int okay = 1;
+-
+-    if (!strcmp(filename, "test/threads/invalid.xml")) {
+-        xmlDoValidityCheckingDefaultValue = 0;
+-        xmlGenericErrorContext = stdout;
+-    } else {
+-        xmlDoValidityCheckingDefaultValue = 1;
+-        xmlGenericErrorContext = stderr;
+-    }
+-    myDoc = xmlParseFile(filename);
+-    if (myDoc) {
+-        xmlFreeDoc(myDoc);
+-    } else {
+-        printf("parse failed\n");
+-	okay = 0;
+-    }
+-    if (!strcmp(filename, "test/threads/invalid.xml")) {
+-        if (xmlDoValidityCheckingDefaultValue != 0) {
+-	    printf("ValidityCheckingDefaultValue override failed\n");
+-	    okay = 0;
+-	}
+-        if (xmlGenericErrorContext != stdout) {
+-	    printf("xmlGenericErrorContext override failed\n");
+-	    okay = 0;
+-	}
+-    } else {
+-        if (xmlDoValidityCheckingDefaultValue != 1) {
+-	    printf("ValidityCheckingDefaultValue override failed\n");
+-	    okay = 0;
+-	}
+-        if (xmlGenericErrorContext != stderr) {
+-	    printf("xmlGenericErrorContext override failed\n");
+-	    okay = 0;
+-	}
+-    }
+-    if (okay == 0)
+-	return ((DWORD) Failed);
+-    return ((DWORD) Okay);
+-}
+-
+-int
+-main()
+-{
+-	unsigned int i, repeat;
+-	unsigned int num_threads = sizeof(testfiles) / sizeof(testfiles[0]);
+-	DWORD results[MAX_ARGC];
+-	BOOL ret;
+-
+-	xmlInitParser();
+-	for (repeat = 0;repeat < TEST_REPEAT_COUNT;repeat++)
+-	{
+-		xmlLoadCatalog(catalog);
+-
+-		for (i = 0; i < num_threads; i++)
+-		{
+-			results[i] = 0;
+-			tid[i] = (HANDLE) -1;
+-		}
+-
+-		for (i = 0; i < num_threads; i++)
+-		{
+-			DWORD useless;
+-			tid[i] = CreateThread(NULL, 0,
+-				thread_specific_data, testfiles[i], 0, &useless);
+-			if (tid[i] == NULL)
+-			{
+-				perror("CreateThread");
+-				exit(1);
+-			}
+-		}
+-
+-		if (WaitForMultipleObjects (num_threads, tid, TRUE, INFINITE) == WAIT_FAILED)
+-			perror ("WaitForMultipleObjects failed");
+-
+-		for (i = 0; i < num_threads; i++)
+-		{
+-			ret = GetExitCodeThread (tid[i], &results[i]);
+-			if (ret == 0)
+-			{
+-				perror("GetExitCodeThread");
+-				exit(1);
+-			}
+-			CloseHandle (tid[i]);
+-		}
+-
+-		xmlCatalogCleanup();
+-		for (i = 0; i < num_threads; i++) {
+-		    if (results[i] != (DWORD) Okay)
+-			printf("Thread %d handling %s failed\n", i, testfiles[i]);
+-		}
+-	}
+-
+-	xmlCleanupParser();
+-	xmlMemoryDump();
+-
+-	return (0);
+-}
+-
+-#else /* !LIBXML_THREADS_ENABLED */
+-int
+-main()
+-{
+-    fprintf(stderr, "libxml was not compiled with thread or catalog support\n");
+-    return (0);
+-}
+-#endif
+diff --git a/testURI.c b/testURI.c
+index d20989d4..0043b203 100644
+--- a/testURI.c
++++ b/testURI.c
+@@ -19,6 +19,7 @@
+ static const char *base = NULL;
+ static int escape = 0;
+ static int debug = 0;
++static int relative = 0;
+ 
+ static void handleURI(const char *str) {
+     int ret;
+@@ -57,7 +58,12 @@ static void handleURI(const char *str) {
+ 	    }
+ 	}
+     } else {
+-	res = xmlBuildURI((xmlChar *)str, (xmlChar *) base);
++	if (relative) {
++	    res = xmlBuildRelativeURI((xmlChar *)str, (xmlChar *) base);
++	} else {
++	    res = xmlBuildURI((xmlChar *)str, (xmlChar *) base);
++	}
++
+ 	if (res != NULL) {
+ 	    printf("%s\n", (char *) res);
+ 	}
+@@ -74,6 +80,11 @@ static void handleURI(const char *str) {
+ int main(int argc, char **argv) {
+     int i, arg = 1;
+ 
++    if ((argc > arg) && (argv[arg] != NULL) &&
++	(!strcmp(argv[arg], "--relative"))) {
++	arg++;
++	relative++;
++    }
+     if ((argc > arg) && (argv[arg] != NULL) &&
+ 	((!strcmp(argv[arg], "-base")) || (!strcmp(argv[arg], "--base")))) {
+ 	arg++;
+diff --git a/testapi.c b/testapi.c
+index 4a751e20..980d7fb5 100644
+--- a/testapi.c
++++ b/testapi.c
+@@ -7511,13 +7511,6 @@ test_xmlLsOneNode(void) {
+ }
+ 
+ 
+-#define gen_nb_char_ptr 1
+-static char * gen_char_ptr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_char_ptr(int no ATTRIBUTE_UNUSED, char * val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-
+ static int
+ test_xmlShell(void) {
+     int test_ret = 0;
+@@ -7528,6 +7521,13 @@ test_xmlShell(void) {
+ }
+ 
+ 
++#define gen_nb_char_ptr 1
++static char * gen_char_ptr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++    return(NULL);
++}
++static void des_char_ptr(int no ATTRIBUTE_UNUSED, char * val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++}
++
+ static int
+ test_xmlShellBase(void) {
+     int test_ret = 0;
+@@ -9334,13 +9334,6 @@ test_xmlCleanupPredefinedEntities(void) {
+ }
+ 
+ 
+-#define gen_nb_xmlEntitiesTablePtr 1
+-static xmlEntitiesTablePtr gen_xmlEntitiesTablePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlEntitiesTablePtr(int no ATTRIBUTE_UNUSED, xmlEntitiesTablePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-
+ static int
+ test_xmlCopyEntitiesTable(void) {
+     int test_ret = 0;
+@@ -9361,6 +9354,13 @@ test_xmlCreateEntitiesTable(void) {
+ }
+ 
+ 
++#define gen_nb_xmlEntitiesTablePtr 1
++static xmlEntitiesTablePtr gen_xmlEntitiesTablePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++    return(NULL);
++}
++static void des_xmlEntitiesTablePtr(int no ATTRIBUTE_UNUSED, xmlEntitiesTablePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++}
++
+ static int
+ test_xmlDumpEntitiesTable(void) {
+     int test_ret = 0;
+@@ -18145,16 +18145,6 @@ test_xmlSchematronNewParserCtxt(void) {
+     return(test_ret);
+ }
+ 
+-#ifdef LIBXML_SCHEMATRON_ENABLED
+-
+-#define gen_nb_xmlSchematronPtr 1
+-static xmlSchematronPtr gen_xmlSchematronPtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlSchematronPtr(int no ATTRIBUTE_UNUSED, xmlSchematronPtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-#endif
+-
+ 
+ static int
+ test_xmlSchematronNewValidCtxt(void) {
+@@ -18165,19 +18155,19 @@ test_xmlSchematronNewValidCtxt(void) {
+     return(test_ret);
+ }
+ 
+-#ifdef LIBXML_SCHEMATRON_ENABLED
+ 
+-#define gen_nb_xmlSchematronParserCtxtPtr 1
+-static xmlSchematronParserCtxtPtr gen_xmlSchematronParserCtxtPtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlSchematronParserCtxtPtr(int no ATTRIBUTE_UNUSED, xmlSchematronParserCtxtPtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++static int
++test_xmlSchematronParse(void) {
++    int test_ret = 0;
++
++
++    /* missing type support */
++    return(test_ret);
+ }
+-#endif
+ 
+ 
+ static int
+-test_xmlSchematronParse(void) {
++test_xmlSchematronSetValidStructuredErrors(void) {
+     int test_ret = 0;
+ 
+ 
+@@ -18196,16 +18186,6 @@ static void des_xmlSchematronValidCtxtPtr(int no ATTRIBUTE_UNUSED, xmlSchematron
+ #endif
+ 
+ 
+-static int
+-test_xmlSchematronSetValidStructuredErrors(void) {
+-    int test_ret = 0;
+-
+-
+-    /* missing type support */
+-    return(test_ret);
+-}
+-
+-
+ static int
+ test_xmlSchematronValidateDoc(void) {
+     int test_ret = 0;
+@@ -18665,13 +18645,6 @@ test_xmlBufShrink(void) {
+ }
+ 
+ 
+-#define gen_nb_const_xmlBufPtr 1
+-static xmlBufPtr gen_const_xmlBufPtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_const_xmlBufPtr(int no ATTRIBUTE_UNUSED, const xmlBufPtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-
+ static int
+ test_xmlBufUse(void) {
+     int test_ret = 0;
+@@ -25100,13 +25073,6 @@ test_xmlAddRef(void) {
+ }
+ 
+ 
+-#define gen_nb_xmlAttributeTablePtr 1
+-static xmlAttributeTablePtr gen_xmlAttributeTablePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlAttributeTablePtr(int no ATTRIBUTE_UNUSED, xmlAttributeTablePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-
+ static int
+ test_xmlCopyAttributeTable(void) {
+     int test_ret = 0;
+@@ -25188,13 +25154,6 @@ test_xmlCopyElementContent(void) {
+ }
+ 
+ 
+-#define gen_nb_xmlElementTablePtr 1
+-static xmlElementTablePtr gen_xmlElementTablePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlElementTablePtr(int no ATTRIBUTE_UNUSED, xmlElementTablePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-
+ static int
+ test_xmlCopyElementTable(void) {
+     int test_ret = 0;
+@@ -25215,13 +25174,6 @@ test_xmlCopyEnumeration(void) {
+ }
+ 
+ 
+-#define gen_nb_xmlNotationTablePtr 1
+-static xmlNotationTablePtr gen_xmlNotationTablePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlNotationTablePtr(int no ATTRIBUTE_UNUSED, xmlNotationTablePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-
+ static int
+ test_xmlCopyNotationTable(void) {
+     int test_ret = 0;
+@@ -25288,6 +25240,13 @@ test_xmlDumpAttributeDecl(void) {
+ }
+ 
+ 
++#define gen_nb_xmlAttributeTablePtr 1
++static xmlAttributeTablePtr gen_xmlAttributeTablePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++    return(NULL);
++}
++static void des_xmlAttributeTablePtr(int no ATTRIBUTE_UNUSED, xmlAttributeTablePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++}
++
+ static int
+ test_xmlDumpAttributeTable(void) {
+     int test_ret = 0;
+@@ -25373,6 +25332,13 @@ test_xmlDumpElementDecl(void) {
+ }
+ 
+ 
++#define gen_nb_xmlElementTablePtr 1
++static xmlElementTablePtr gen_xmlElementTablePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++    return(NULL);
++}
++static void des_xmlElementTablePtr(int no ATTRIBUTE_UNUSED, xmlElementTablePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++}
++
+ static int
+ test_xmlDumpElementTable(void) {
+     int test_ret = 0;
+@@ -25458,6 +25424,13 @@ test_xmlDumpNotationDecl(void) {
+ }
+ 
+ 
++#define gen_nb_xmlNotationTablePtr 1
++static xmlNotationTablePtr gen_xmlNotationTablePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++    return(NULL);
++}
++static void des_xmlNotationTablePtr(int no ATTRIBUTE_UNUSED, xmlNotationTablePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++}
++
+ static int
+ test_xmlDumpNotationTable(void) {
+     int test_ret = 0;
+@@ -29389,16 +29362,6 @@ test_xmlIO(void) {
+ 	printf("Module xmlIO: %d errors\n", test_ret);
+     return(test_ret);
+ }
+-#ifdef LIBXML_AUTOMATA_ENABLED
+-
+-#define gen_nb_xmlAutomataPtr 1
+-static xmlAutomataPtr gen_xmlAutomataPtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlAutomataPtr(int no ATTRIBUTE_UNUSED, xmlAutomataPtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-#endif
+-
+ 
+ static int
+ test_xmlAutomataCompile(void) {
+@@ -29419,6 +29382,16 @@ test_xmlAutomataGetInitState(void) {
+     return(test_ret);
+ }
+ 
++#ifdef LIBXML_AUTOMATA_ENABLED
++
++#define gen_nb_xmlAutomataPtr 1
++static xmlAutomataPtr gen_xmlAutomataPtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++    return(NULL);
++}
++static void des_xmlAutomataPtr(int no ATTRIBUTE_UNUSED, xmlAutomataPtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++}
++#endif
++
+ 
+ static int
+ test_xmlAutomataIsDeterminist(void) {
+@@ -29453,16 +29426,6 @@ test_xmlAutomataIsDeterminist(void) {
+     return(test_ret);
+ }
+ 
+-#ifdef LIBXML_AUTOMATA_ENABLED
+-
+-#define gen_nb_xmlAutomataStatePtr 1
+-static xmlAutomataStatePtr gen_xmlAutomataStatePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlAutomataStatePtr(int no ATTRIBUTE_UNUSED, xmlAutomataStatePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-#endif
+-
+ 
+ static int
+ test_xmlAutomataNewAllTrans(void) {
+@@ -29631,6 +29594,16 @@ test_xmlAutomataNewTransition2(void) {
+     return(test_ret);
+ }
+ 
++#ifdef LIBXML_AUTOMATA_ENABLED
++
++#define gen_nb_xmlAutomataStatePtr 1
++static xmlAutomataStatePtr gen_xmlAutomataStatePtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++    return(NULL);
++}
++static void des_xmlAutomataStatePtr(int no ATTRIBUTE_UNUSED, xmlAutomataStatePtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++}
++#endif
++
+ 
+ static int
+ test_xmlAutomataSetFinalState(void) {
+@@ -33908,16 +33881,6 @@ test_xmlRegExecPushString2(void) {
+     return(test_ret);
+ }
+ 
+-#ifdef LIBXML_REGEXP_ENABLED
+-
+-#define gen_nb_xmlRegexpPtr 1
+-static xmlRegexpPtr gen_xmlRegexpPtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlRegexpPtr(int no ATTRIBUTE_UNUSED, xmlRegexpPtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-#endif
+-
+ 
+ static int
+ test_xmlRegNewExecCtxt(void) {
+@@ -33938,6 +33901,16 @@ test_xmlRegexpCompile(void) {
+     return(test_ret);
+ }
+ 
++#ifdef LIBXML_REGEXP_ENABLED
++
++#define gen_nb_xmlRegexpPtr 1
++static xmlRegexpPtr gen_xmlRegexpPtr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++    return(NULL);
++}
++static void des_xmlRegexpPtr(int no ATTRIBUTE_UNUSED, xmlRegexpPtr val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
++}
++#endif
++
+ 
+ static int
+ test_xmlRegexpExec(void) {
+@@ -34662,16 +34635,6 @@ test_xmlSchemaParse(void) {
+     return(test_ret);
+ }
+ 
+-#ifdef LIBXML_SCHEMAS_ENABLED
+-
+-#define gen_nb_xmlSAXHandlerPtr_ptr 1
+-static xmlSAXHandlerPtr * gen_xmlSAXHandlerPtr_ptr(int no ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-    return(NULL);
+-}
+-static void des_xmlSAXHandlerPtr_ptr(int no ATTRIBUTE_UNUSED, xmlSAXHandlerPtr * val ATTRIBUTE_UNUSED, int nr ATTRIBUTE_UNUSED) {
+-}
+-#endif
+-
+ 
+ static int
+ test_xmlSchemaSAXPlug(void) {
+diff --git a/testrecurse.c b/testrecurse.c
+index f95ae1c3..64b9cd0b 100644
+--- a/testrecurse.c
++++ b/testrecurse.c
+@@ -632,8 +632,8 @@ static char *resultFilename(const char *filename, const char *out,
+       suffixbuff[0]='_';
+ #endif
+ 
+-    snprintf(res, 499, "%s%s%s", out, base, suffixbuff);
+-    res[499] = 0;
++    if (snprintf(res, 499, "%s%s%s", out, base, suffixbuff) >= 499)
++        res[499] = 0;
+     return(strdup(res));
+ }
+ 
+diff --git a/uri.c b/uri.c
+index 84e420a0..2cf8d9f1 100644
+--- a/uri.c
++++ b/uri.c
+@@ -2236,25 +2236,8 @@ xmlBuildRelativeURI (const xmlChar * URI, const xmlChar * base)
+      * First we take care of the special case where either of the
+      * two path components may be missing (bug 316224)
+      */
+-    if (bas->path == NULL) {
+-	if (ref->path != NULL) {
+-	    uptr = (xmlChar *) ref->path;
+-	    if (*uptr == '/')
+-		uptr++;
+-	    /* exception characters from xmlSaveUri */
+-	    val = xmlURIEscapeStr(uptr, BAD_CAST "/;&=+$,");
+-	}
+-	goto done;
+-    }
+     bptr = (xmlChar *)bas->path;
+-    if (ref->path == NULL) {
+-	for (ix = 0; bptr[ix] != 0; ix++) {
+-	    if (bptr[ix] == '/')
+-		nbslash++;
+-	}
+-	uptr = NULL;
+-	len = 1;	/* this is for a string terminator only */
+-    } else {
++    {
+         xmlChar *rptr = (xmlChar *) ref->path;
+         int pos = 0;
+ 
+@@ -2280,30 +2263,28 @@ xmlBuildRelativeURI (const xmlChar * URI, const xmlChar * base)
+ 	 * beginning of the "unique" suffix of URI
+ 	 */
+ 	ix = pos;
+-	if ((rptr[ix] == '/') && (ix > 0))
+-	    ix--;
+-	else if ((rptr[ix] == 0) && (ix > 1) && (rptr[ix - 1] == '/'))
+-	    ix -= 2;
+ 	for (; ix > 0; ix--) {
+-	    if (rptr[ix] == '/')
++	    if (rptr[ix - 1] == '/')
+ 		break;
+ 	}
+-	if (ix == 0) {
+-	    uptr = (xmlChar *)rptr;
+-	} else {
+-	    ix++;
+-	    uptr = (xmlChar *)&rptr[ix];
+-	}
++	uptr = (xmlChar *)&rptr[ix];
+ 
+ 	/*
+ 	 * In base, count the number of '/' from the differing point
+ 	 */
+-	if (bptr[pos] != rptr[pos]) {/* check for trivial URI == base */
+-	    for (; bptr[ix] != 0; ix++) {
+-		if (bptr[ix] == '/')
+-		    nbslash++;
+-	    }
++	for (; bptr[ix] != 0; ix++) {
++	    if (bptr[ix] == '/')
++		nbslash++;
+ 	}
++
++	/*
++	 * e.g: URI="foo/" base="foo/bar" -> "./"
++	 */
++	if (nbslash == 0 && !uptr[0]) {
++	    val = xmlStrdup(BAD_CAST "./");
++	    goto done;
++	}
++
+ 	len = xmlStrlen (uptr) + 1;
+     }
+ 
+diff --git a/win32/Makefile.bcb b/win32/Makefile.bcb
+index 41002da5..d326fb99 100644
+--- a/win32/Makefile.bcb
++++ b/win32/Makefile.bcb
+@@ -225,9 +225,7 @@ UTILS = $(BINDIR)\xmllint.exe\
+ 	$(BINDIR)\testlimits.exe
+ 
+ 
+-!if "$(WITH_THREADS)" == "yes" || "$(WITH_THREADS)" == "ctls" || "$(WITH_THREADS)" == "native"
+-UTILS = $(UTILS) $(BINDIR)\testThreadsWin32.exe
+-!else if "$(WITH_THREADS)" == "posix"
++!if "$(WITH_THREADS)" != "no"
+ UTILS = $(UTILS) $(BINDIR)\testThreads.exe
+ !endif
+ 
+diff --git a/win32/Makefile.mingw b/win32/Makefile.mingw
+index 3d4cb888..9dfa4abe 100644
+--- a/win32/Makefile.mingw
++++ b/win32/Makefile.mingw
+@@ -220,16 +220,7 @@ UTILS = $(BINDIR)/xmllint.exe\
+ 	$(BINDIR)/testapi.exe\
+ 	$(BINDIR)/testlimits.exe
+ 
+-ifeq ($(WITH_THREADS),yes)
+-UTILS += $(BINDIR)/testThreadsWin32.exe
+-endif
+-ifeq ($(WITH_THREADS),ctls) 
+-UTILS += $(BINDIR)/testThreadsWin32.exe
+-endif
+-ifeq ($(WITH_THREADS),native)
+-UTILS += $(BINDIR)/testThreadsWin32.exe
+-endif
+-ifeq ($(WITH_THREADS),posix)
++ifneq ($(WITH_THREADS),no)
+ UTILS += $(BINDIR)/testThreads.exe
+ endif
+ 
+diff --git a/win32/Makefile.msvc b/win32/Makefile.msvc
+index ee4250af..f6a0182d 100644
+--- a/win32/Makefile.msvc
++++ b/win32/Makefile.msvc
+@@ -274,9 +274,7 @@ UTILS = $(BINDIR)\xmllint.exe\
+ 	$(BINDIR)\testlimits.exe\
+ 	$(BINDIR)\testrecurse.exe
+ 	
+-!if "$(WITH_THREADS)" == "yes" || "$(WITH_THREADS)" == "ctls" || "$(WITH_THREADS)" == "native"
+-UTILS = $(UTILS) $(BINDIR)\testThreadsWin32.exe
+-!else if "$(WITH_THREADS)" == "posix"
++!if "$(WITH_THREADS)" != "no"
+ UTILS = $(UTILS) $(BINDIR)\testThreads.exe
+ !endif
+ 
+diff --git a/xmllint.c b/xmllint.c
+index d6f5eb0e..67cec205 100644
+--- a/xmllint.c
++++ b/xmllint.c
+@@ -1652,10 +1652,7 @@ testSAX(const char *filename) {
+ 	xmlSchemaValidCtxtPtr vctxt;
+ 
+ 	vctxt = xmlSchemaNewValidCtxt(wxschemas);
+-	xmlSchemaSetValidErrors(vctxt,
+-		(xmlSchemaValidityErrorFunc) fprintf,
+-		(xmlSchemaValidityWarningFunc) fprintf,
+-		stderr);
++	xmlSchemaSetValidErrors(vctxt, xmlGenericError, xmlGenericError, NULL);
+ 	xmlSchemaValidateSetFilename(vctxt, filename);
+ 
+ 	ret = xmlSchemaValidateStream(vctxt, buf, 0, handler,
+@@ -2086,7 +2083,7 @@ static void doXPathDump(xmlXPathObjectPtr cur) {
+             }
+             for (i = 0;i < cur->nodesetval->nodeNr;i++) {
+                 node = cur->nodesetval->nodeTab[i];
+-                xmlNodeDumpOutput(buf, node->doc, node, 0, 0, NULL);
++                xmlNodeDumpOutput(buf, NULL, node, 0, 0, NULL);
+                 xmlOutputBufferWrite(buf, 1, "\n");
+             }
+             xmlOutputBufferClose(buf);
+@@ -2760,9 +2757,9 @@ static void parseAndPrintFile(char *filename, xmlParserCtxtPtr rectxt) {
+ 			"Couldn't allocate validation context\n");
+ 		exit(-1);
+ 	    }
+-	    cvp->userData = (void *) stderr;
+-	    cvp->error    = (xmlValidityErrorFunc) fprintf;
+-	    cvp->warning  = (xmlValidityWarningFunc) fprintf;
++	    cvp->userData = NULL;
++	    cvp->error    = xmlGenericError;
++	    cvp->warning  = xmlGenericError;
+ 
+ 	    if ((timing) && (!repeat)) {
+ 		startTimer();
+@@ -2796,9 +2793,9 @@ static void parseAndPrintFile(char *filename, xmlParserCtxtPtr rectxt) {
+ 	if ((timing) && (!repeat)) {
+ 	    startTimer();
+ 	}
+-	cvp->userData = (void *) stderr;
+-	cvp->error    = (xmlValidityErrorFunc) fprintf;
+-	cvp->warning  = (xmlValidityWarningFunc) fprintf;
++	cvp->userData = NULL;
++	cvp->error    = xmlGenericError;
++	cvp->warning  = xmlGenericError;
+ 	if (!xmlValidateDocument(cvp, doc)) {
+ 	    xmlGenericError(xmlGenericErrorContext,
+ 		    "Document %s does not validate\n", filename);
+@@ -2828,10 +2825,8 @@ static void parseAndPrintFile(char *filename, xmlParserCtxtPtr rectxt) {
+ 	    flag |= XML_SCHEMATRON_OUT_QUIET;
+ 	ctxt = xmlSchematronNewValidCtxt(wxschematron, flag);
+ #if 0
+-	xmlSchematronSetValidErrors(ctxt,
+-		(xmlSchematronValidityErrorFunc) fprintf,
+-		(xmlSchematronValidityWarningFunc) fprintf,
+-		stderr);
++	xmlSchematronSetValidErrors(ctxt, xmlGenericError, xmlGenericError,
++                NULL);
+ #endif
+ 	ret = xmlSchematronValidateDoc(ctxt, doc);
+ 	if (ret == 0) {
+@@ -2860,10 +2855,7 @@ static void parseAndPrintFile(char *filename, xmlParserCtxtPtr rectxt) {
+ 	}
+ 
+ 	ctxt = xmlRelaxNGNewValidCtxt(relaxngschemas);
+-	xmlRelaxNGSetValidErrors(ctxt,
+-		(xmlRelaxNGValidityErrorFunc) fprintf,
+-		(xmlRelaxNGValidityWarningFunc) fprintf,
+-		stderr);
++	xmlRelaxNGSetValidErrors(ctxt, xmlGenericError, xmlGenericError, NULL);
+ 	ret = xmlRelaxNGValidateDoc(ctxt, doc);
+ 	if (ret == 0) {
+ 	    fprintf(stderr, "%s validates\n", filename);
+@@ -2888,10 +2880,7 @@ static void parseAndPrintFile(char *filename, xmlParserCtxtPtr rectxt) {
+ 	}
+ 
+ 	ctxt = xmlSchemaNewValidCtxt(wxschemas);
+-	xmlSchemaSetValidErrors(ctxt,
+-		(xmlSchemaValidityErrorFunc) fprintf,
+-		(xmlSchemaValidityWarningFunc) fprintf,
+-		stderr);
++	xmlSchemaSetValidErrors(ctxt, xmlGenericError, xmlGenericError, NULL);
+ 	ret = xmlSchemaValidateDoc(ctxt, doc);
+ 	if (ret == 0) {
+ 	    fprintf(stderr, "%s validates\n", filename);
+@@ -3552,10 +3541,8 @@ main(int argc, char **argv) {
+ 	}
+ 	ctxt = xmlSchematronNewParserCtxt(schematron);
+ #if 0
+-	xmlSchematronSetParserErrors(ctxt,
+-		(xmlSchematronValidityErrorFunc) fprintf,
+-		(xmlSchematronValidityWarningFunc) fprintf,
+-		stderr);
++	xmlSchematronSetParserErrors(ctxt, xmlGenericError, xmlGenericError,
++                NULL);
+ #endif
+ 	wxschematron = xmlSchematronParse(ctxt);
+ 	if (wxschematron == NULL) {
+@@ -3585,10 +3572,8 @@ main(int argc, char **argv) {
+ 	    startTimer();
+ 	}
+ 	ctxt = xmlRelaxNGNewParserCtxt(relaxng);
+-	xmlRelaxNGSetParserErrors(ctxt,
+-		(xmlRelaxNGValidityErrorFunc) fprintf,
+-		(xmlRelaxNGValidityWarningFunc) fprintf,
+-		stderr);
++	xmlRelaxNGSetParserErrors(ctxt, xmlGenericError, xmlGenericError,
++                NULL);
+ 	relaxngschemas = xmlRelaxNGParse(ctxt);
+ 	if (relaxngschemas == NULL) {
+ 	    xmlGenericError(xmlGenericErrorContext,
+@@ -3611,10 +3596,7 @@ main(int argc, char **argv) {
+ 	    startTimer();
+ 	}
+ 	ctxt = xmlSchemaNewParserCtxt(schema);
+-	xmlSchemaSetParserErrors(ctxt,
+-		(xmlSchemaValidityErrorFunc) fprintf,
+-		(xmlSchemaValidityWarningFunc) fprintf,
+-		stderr);
++	xmlSchemaSetParserErrors(ctxt, xmlGenericError, xmlGenericError, NULL);
+ 	wxschemas = xmlSchemaParse(ctxt);
+ 	if (wxschemas == NULL) {
+ 	    xmlGenericError(xmlGenericErrorContext,
+diff --git a/xmlreader.c b/xmlreader.c
+index df395347..ebf3ca15 100644
+--- a/xmlreader.c
++++ b/xmlreader.c
+@@ -238,6 +238,8 @@ xmlFreeID(xmlIDPtr id) {
+ 
+     if (id->value != NULL)
+ 	DICT_FREE(id->value)
++    if (id->name != NULL)
++	DICT_FREE(id->name)
+     xmlFree(id);
+ }
+ 
+@@ -271,6 +273,7 @@ xmlTextReaderRemoveID(xmlDocPtr doc, xmlAttrPtr attr) {
+ 	return(-1);
+     }
+     id->name = attr->name;
++    attr->name = NULL;
+     id->attr = NULL;
+     return(0);
+ }
+@@ -983,7 +986,6 @@ xmlTextReaderValidatePush(xmlTextReaderPtr reader ATTRIBUTE_UNUSED) {
+ 	     */
+ 	    node = xmlTextReaderExpand(reader);
+ 	    if (node == NULL) {
+-printf("Expand failed !\n");
+ 	        ret = -1;
+ 	    } else {
+ 		ret = xmlRelaxNGValidateFullElement(reader->rngValidCtxt,
+@@ -1112,11 +1114,11 @@ xmlTextReaderValidateEntity(xmlTextReaderPtr reader) {
+ 		continue;
+ 	    } else {
+ 		/*
+-		 * The error has probably be raised already.
++		 * The error has probably been raised already.
+ 		 */
+ 		if (node == oldnode)
+ 		    break;
+-		node = node->next;
++                goto skip_children;
+ 	    }
+ #ifdef LIBXML_REGEXP_ENABLED
+ 	} else if (node->type == XML_ELEMENT_NODE) {
+@@ -1138,6 +1140,7 @@ xmlTextReaderValidateEntity(xmlTextReaderPtr reader) {
+ 	} else if (node->type == XML_ELEMENT_NODE) {
+ 	    xmlTextReaderValidatePop(reader);
+ 	}
++skip_children:
+ 	if (node->next != NULL) {
+ 	    node = node->next;
+ 	    continue;
+@@ -1755,11 +1758,11 @@ xmlTextReaderReadOuterXml(xmlTextReaderPtr reader ATTRIBUTE_UNUSED)
+     xmlBufferPtr buff;
+     xmlDocPtr doc;
+ 
+-    node = reader->node;
+-    doc = node->doc;
+     if (xmlTextReaderExpand(reader) == NULL) {
+         return NULL;
+     }
++    node = reader->node;
++    doc = node->doc;
+     /* XXX: Why is the node copied? */
+ 	if (node->type == XML_DTD_NODE) {
+ 		node = (xmlNodePtr) xmlCopyDtd((xmlDtdPtr) node);
+@@ -2027,6 +2030,7 @@ found_node:
+  *
+  * Skip to the node following the current one in document order while
+  * avoiding the subtree if any.
++ * Currently implemented only for Readers built on a document
+  *
+  * Returns 1 if the node was read successfully, 0 if there is no more
+  *          nodes to read, or -1 in case of error
+@@ -2035,16 +2039,16 @@ int
+ xmlTextReaderNextSibling(xmlTextReaderPtr reader) {
+     if (reader == NULL)
+         return(-1);
++    if (reader->doc == NULL) {
++        /* TODO */
++	return(-1);
++    }
+ 
+     if (reader->state == XML_TEXTREADER_END)
+         return(0);
+ 
+-    if (reader->node == NULL) {
+-        if (reader->doc != NULL)
+-            return(xmlTextReaderNextTree(reader));
+-        else
+-            return(xmlTextReaderRead(reader));
+-    }
++    if (reader->node == NULL)
++        return(xmlTextReaderNextTree(reader));
+ 
+     if (reader->node->next != NULL) {
+         reader->node = reader->node->next;
+@@ -2261,17 +2265,19 @@ xmlFreeTextReader(xmlTextReaderPtr reader) {
+     if (reader->ctxt != NULL) {
+         if (reader->dict == reader->ctxt->dict)
+ 	    reader->dict = NULL;
+-	if (reader->ctxt->myDoc != NULL) {
+-	    if (reader->preserve == 0)
+-		xmlTextReaderFreeDoc(reader, reader->ctxt->myDoc);
+-	    reader->ctxt->myDoc = NULL;
+-	}
+ 	if ((reader->ctxt->vctxt.vstateTab != NULL) &&
+ 	    (reader->ctxt->vctxt.vstateMax > 0)){
++            while (reader->ctxt->vctxt.vstateNr > 0)
++                xmlValidatePopElement(&reader->ctxt->vctxt, NULL, NULL, NULL);
+ 	    xmlFree(reader->ctxt->vctxt.vstateTab);
+ 	    reader->ctxt->vctxt.vstateTab = NULL;
+ 	    reader->ctxt->vctxt.vstateMax = 0;
+ 	}
++	if (reader->ctxt->myDoc != NULL) {
++	    if (reader->preserve == 0)
++		xmlTextReaderFreeDoc(reader, reader->ctxt->myDoc);
++	    reader->ctxt->myDoc = NULL;
++	}
+ 	if (reader->allocs & XML_TEXTREADER_CTXT)
+ 	    xmlFreeParserCtxt(reader->ctxt);
+     }
+@@ -3004,7 +3010,7 @@ xmlTextReaderAttributeCount(xmlTextReaderPtr reader) {
+  * Reference:
+  * http://www.gnu.org/software/dotgnu/pnetlib-doc/System/Xml/XmlNodeType.html
+  *
+- * Returns the xmlNodeType of the current node or -1 in case of error
++ * Returns the xmlReaderTypes of the current node or -1 in case of error
+  */
+ int
+ xmlTextReaderNodeType(xmlTextReaderPtr reader) {
+diff --git a/xmlregexp.c b/xmlregexp.c
+index d255fbf0..9e9c3752 100644
+--- a/xmlregexp.c
++++ b/xmlregexp.c
+@@ -5537,6 +5537,8 @@ xmlRegexpIsDeterminist(xmlRegexpPtr comp) {
+ 	return(comp->determinist);
+ 
+     am = xmlNewAutomata();
++    if (am == NULL)
++        return(-1);
+     if (am->states != NULL) {
+ 	int i;
+ 
+diff --git a/xpath.c b/xpath.c
+index 5e3bb9ff..72c63382 100644
+--- a/xpath.c
++++ b/xpath.c
+@@ -9135,8 +9135,7 @@ void
+ xmlXPathSubstringFunction(xmlXPathParserContextPtr ctxt, int nargs) {
+     xmlXPathObjectPtr str, start, len;
+     double le=0, in;
+-    int i, l, m;
+-    xmlChar *ret;
++    int i = 1, j = INT_MAX;
+ 
+     if (nargs < 2) {
+ 	CHECK_ARITY(2);
+@@ -9163,67 +9162,42 @@ xmlXPathSubstringFunction(xmlXPathParserContextPtr ctxt, int nargs) {
+     CAST_TO_STRING;
+     CHECK_TYPE(XPATH_STRING);
+     str = valuePop(ctxt);
+-    m = xmlUTF8Strlen((const unsigned char *)str->stringval);
+ 
+-    /*
+-     * If last pos not present, calculate last position
+-    */
+-    if (nargs != 3) {
+-	le = (double)m;
+-	if (in < 1.0)
+-	    in = 1.0;
++    if (!(in < INT_MAX)) { /* Logical NOT to handle NaNs */
++        i = INT_MAX;
++    } else if (in >= 1.0) {
++        i = (int)in;
++        if (in - floor(in) >= 0.5)
++            i += 1;
+     }
+ 
+-    /* Need to check for the special cases where either
+-     * the index is NaN, the length is NaN, or both
+-     * arguments are infinity (relying on Inf + -Inf = NaN)
+-     */
+-    if (!xmlXPathIsInf(in) && !xmlXPathIsNaN(in + le)) {
+-        /*
+-         * To meet the requirements of the spec, the arguments
+-	 * must be converted to integer format before
+-	 * initial index calculations are done
+-         *
+-         * First we go to integer form, rounding up
+-	 * and checking for special cases
+-         */
+-        i = (int) in;
+-        if (((double)i)+0.5 <= in) i++;
+-
+-	if (xmlXPathIsInf(le) == 1) {
+-	    l = m;
+-	    if (i < 1)
+-		i = 1;
+-	}
+-	else if (xmlXPathIsInf(le) == -1 || le < 0.0)
+-	    l = 0;
+-	else {
+-	    l = (int) le;
+-	    if (((double)l)+0.5 <= le) l++;
+-	}
++    if (nargs == 3) {
++        double rin, rle, end;
+ 
+-	/* Now we normalize inidices */
+-        i -= 1;
+-        l += i;
+-        if (i < 0)
+-            i = 0;
+-        if (l > m)
+-            l = m;
++        rin = floor(in);
++        if (in - rin >= 0.5)
++            rin += 1.0;
+ 
+-        /* number of chars to copy */
+-        l -= i;
++        rle = floor(le);
++        if (le - rle >= 0.5)
++            rle += 1.0;
+ 
+-        ret = xmlUTF8Strsub(str->stringval, i, l);
+-    }
+-    else {
+-        ret = NULL;
++        end = rin + rle;
++        if (!(end >= 1.0)) { /* Logical NOT to handle NaNs */
++            j = 1;
++        } else if (end < INT_MAX) {
++            j = (int)end;
++        }
+     }
+-    if (ret == NULL)
+-	valuePush(ctxt, xmlXPathCacheNewCString(ctxt->context, ""));
+-    else {
++
++    if (i < j) {
++        xmlChar *ret = xmlUTF8Strsub(str->stringval, i - 1, j - i);
+ 	valuePush(ctxt, xmlXPathCacheNewString(ctxt->context, ret));
+ 	xmlFree(ret);
++    } else {
++	valuePush(ctxt, xmlXPathCacheNewCString(ctxt->context, ""));
+     }
++
+     xmlXPathReleaseObject(ctxt->context, str);
+ }
+ 

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSaveUriRealloc' function" {
+	label="CFG for 'xmlSaveUriRealloc' function";
+
+	Node0x5589eac80c90 [shape=record,label="{uri.c:1031:|{<s0>T|<s1>F}}"];
+	Node0x5589eac80c90 -> Node0x5589eaf32620;
+	Node0x5589eac80c90 -> Node0x5589eaf32670;
+	Node0x5589eaf32620 [shape=record,label="{uri.c:1036:}"];
+	Node0x5589eaf32620 -> Node0x5589eaf1c740;
+	Node0x5589eaf32670 [shape=record,label="{uri.c:1039:|{<s0>T|<s1>F}}"];
+	Node0x5589eaf32670 -> Node0x5589eaf33700;
+	Node0x5589eaf32670 -> Node0x5589eaf33750;
+	Node0x5589eaf33700 [shape=record,label="{uri.c:1042:}"];
+	Node0x5589eaf33700 -> Node0x5589eaf1c740;
+	Node0x5589eaf33750 [shape=record,label="{uri.c:1045:}"];
+	Node0x5589eaf33750 -> Node0x5589eaf1c740;
+	Node0x5589eaf1c740 [shape=record,label="{uri.c:1047:}"];
+}

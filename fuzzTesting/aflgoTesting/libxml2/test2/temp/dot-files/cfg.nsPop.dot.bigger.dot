@@ -1,0 +1,31 @@
+digraph "CFG for 'nsPop' function" {
+	label="CFG for 'nsPop' function";
+
+	Node0x556884d03650 [shape=record,label="{parser.c:1645:|{<s0>T|<s1>F}}"];
+	Node0x556884d03650:s0 -> Node0x556884d06de0;
+	Node0x556884d03650:s1 -> Node0x556884d06e30;
+	Node0x556884d06de0 [shape=record,label="{parser.c:1649:}"];
+	Node0x556884d06de0 -> Node0x556884d036a0;
+	Node0x556884d06e30 [shape=record,label="{parser.c:1650:|{<s0>T|<s1>F}}"];
+	Node0x556884d06e30:s0 -> Node0x556884d07350;
+	Node0x556884d06e30:s1 -> Node0x556884d073a0;
+	Node0x556884d07350 [shape=record,label="{parser.c:1651:}"];
+	Node0x556884d07350 -> Node0x556884d073a0;
+	Node0x556884d073a0 [shape=record,label="{parser.c:1654:|{<s0>T|<s1>F}}"];
+	Node0x556884d073a0:s0 -> Node0x556884d07f20;
+	Node0x556884d073a0:s1 -> Node0x556884d07f70;
+	Node0x556884d07f20 [shape=record,label="{parser.c:1655:}"];
+	Node0x556884d07f20 -> Node0x556884d036a0;
+	Node0x556884d07f70 [shape=record,label="{parser.c:1657:}"];
+	Node0x556884d07f70 -> Node0x556884d08660;
+	Node0x556884d08660 [shape=record,label="{parser.c:1657:|{<s0>T|<s1>F}}"];
+	Node0x556884d08660:s0 -> Node0x556884d08940;
+	Node0x556884d08660:s1 -> Node0x556884d084c0;
+	Node0x556884d08940 [shape=record,label="{parser.c:1658:}"];
+	Node0x556884d08940 -> Node0x556884d088b0;
+	Node0x556884d088b0 [shape=record,label="{parser.c:1657:}"];
+	Node0x556884d088b0 -> Node0x556884d08660;
+	Node0x556884d084c0 [shape=record,label="{parser.c:1661:}"];
+	Node0x556884d084c0 -> Node0x556884d036a0;
+	Node0x556884d036a0 [shape=record,label="{parser.c:1662:}"];
+}

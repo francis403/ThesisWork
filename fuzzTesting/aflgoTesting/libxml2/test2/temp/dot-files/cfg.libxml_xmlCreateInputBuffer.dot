@@ -1,0 +1,25 @@
+digraph "CFG for 'libxml_xmlCreateInputBuffer' function" {
+	label="CFG for 'libxml_xmlCreateInputBuffer' function";
+
+	Node0x55bbb2623560 [shape=record,label="{libxml.c:678:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2623560:s0 -> Node0x55bbb25ff940;
+	Node0x55bbb2623560:s1 -> Node0x55bbb25ff8f0;
+	Node0x55bbb25ff8f0 [shape=record,label="{libxml.c:688:}"];
+	Node0x55bbb25ff8f0 -> Node0x55bbb26237e0;
+	Node0x55bbb25ff940 [shape=record,label="{libxml.c:689:|{<s0>T|<s1>F}}"];
+	Node0x55bbb25ff940:s0 -> Node0x55bbb263dac0;
+	Node0x55bbb25ff940:s1 -> Node0x55bbb263da70;
+	Node0x55bbb263dac0 [shape=record,label="{libxml.c:689:|{<s0>T|<s1>F}}"];
+	Node0x55bbb263dac0:s0 -> Node0x55bbb263da20;
+	Node0x55bbb263dac0:s1 -> Node0x55bbb263da70;
+	Node0x55bbb263da20 [shape=record,label="{libxml.c:690:}"];
+	Node0x55bbb263da20 -> Node0x55bbb263da70;
+	Node0x55bbb263da70 [shape=record,label="{libxml.c:692:|{<s0>T|<s1>F}}"];
+	Node0x55bbb263da70:s0 -> Node0x55bbb263f060;
+	Node0x55bbb263da70:s1 -> Node0x55bbb263f0b0;
+	Node0x55bbb263f060 [shape=record,label="{libxml.c:694:}"];
+	Node0x55bbb263f060 -> Node0x55bbb263f0b0;
+	Node0x55bbb263f0b0 [shape=record,label="{libxml.c:695:}"];
+	Node0x55bbb263f0b0 -> Node0x55bbb26237e0;
+	Node0x55bbb26237e0 [shape=record,label="{libxml.c:697:}"];
+}

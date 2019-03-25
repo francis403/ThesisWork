@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlTextReaderGetRemainder' function" {
+	label="CFG for 'xmlTextReaderGetRemainder' function";
+
+	Node0x556e3d7cc770 [shape=record,label="{xmlreader.c:2516:|{<s0>T|<s1>F}}"];
+	Node0x556e3d7cc770:s0 -> Node0x556e3da58e00;
+	Node0x556e3d7cc770:s1 -> Node0x556e3d7cd780;
+	Node0x556e3da58e00 [shape=record,label="{xmlreader.c:2520:}"];
+	Node0x556e3da58e00 -> Node0x556e3d7cc960;
+	Node0x556e3d7cd780 [shape=record,label="{xmlreader.c:2521:|{<s0>T|<s1>F}}"];
+	Node0x556e3d7cd780:s0 -> Node0x556e3d7cdbe0;
+	Node0x556e3d7cd780:s1 -> Node0x556e3d7cdc30;
+	Node0x556e3d7cdbe0 [shape=record,label="{xmlreader.c:2522:}"];
+	Node0x556e3d7cdbe0 -> Node0x556e3d7cc960;
+	Node0x556e3d7cdc30 [shape=record,label="{xmlreader.c:2524:|{<s0>T|<s1>F}}"];
+	Node0x556e3d7cdc30:s0 -> Node0x556e3d7ce600;
+	Node0x556e3d7cdc30:s1 -> Node0x556e3d7ce650;
+	Node0x556e3d7ce600 [shape=record,label="{xmlreader.c:2528:|{<s0>T|<s1>F}}"];
+	Node0x556e3d7ce600:s0 -> Node0x556e3d7ced60;
+	Node0x556e3d7ce600:s1 -> Node0x556e3d7cedb0;
+	Node0x556e3d7ced60 [shape=record,label="{xmlreader.c:2530:|{<s0>T|<s1>F}}"];
+	Node0x556e3d7ced60:s0 -> Node0x556e3d7cf3d0;
+	Node0x556e3d7ced60:s1 -> Node0x556e3d7cf420;
+	Node0x556e3d7cf3d0 [shape=record,label="{xmlreader.c:2531:}"];
+	Node0x556e3d7cf3d0 -> Node0x556e3d7cf420;
+	Node0x556e3d7cf420 [shape=record,label="{xmlreader.c:2532:}"];
+	Node0x556e3d7cf420 -> Node0x556e3d7cedb0;
+	Node0x556e3d7cedb0 [shape=record,label="{xmlreader.c:2534:}"];
+	Node0x556e3d7cedb0 -> Node0x556e3d7ce650;
+	Node0x556e3d7ce650 [shape=record,label="{xmlreader.c:2535:|{<s0>T|<s1>F}}"];
+	Node0x556e3d7ce650:s0 -> Node0x556e3d7d0210;
+	Node0x556e3d7ce650:s1 -> Node0x556e3d7d02b0;
+	Node0x556e3d7d0210 [shape=record,label="{xmlreader.c:2536:}"];
+	Node0x556e3d7d0210 -> Node0x556e3d7d0260;
+	Node0x556e3d7d02b0 [shape=record,label="{xmlreader.c:2546:}"];
+	Node0x556e3d7d02b0 -> Node0x556e3d7cc960;
+	Node0x556e3d7d0260 [shape=record,label="{xmlreader.c:2549:}"];
+	Node0x556e3d7d0260 -> Node0x556e3d7cc960;
+	Node0x556e3d7cc960 [shape=record,label="{xmlreader.c:2550:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlLinkGetData' function" {
+	label="CFG for 'xmlLinkGetData' function";
+
+	Node0x55cd5e2a22c0 [shape=record,label="{list.c:604:|{<s0>T|<s1>F}}"];
+	Node0x55cd5e2a22c0:s0 -> Node0x55cd5e2a24b0;
+	Node0x55cd5e2a22c0:s1 -> Node0x55cd5e29f650;
+	Node0x55cd5e2a24b0 [shape=record,label="{list.c:607:}"];
+	Node0x55cd5e2a24b0 -> Node0x55cd5e2a28f0;
+	Node0x55cd5e29f650 [shape=record,label="{list.c:608:}"];
+	Node0x55cd5e29f650 -> Node0x55cd5e2a28f0;
+	Node0x55cd5e2a28f0 [shape=record,label="{list.c:609:}"];
+}

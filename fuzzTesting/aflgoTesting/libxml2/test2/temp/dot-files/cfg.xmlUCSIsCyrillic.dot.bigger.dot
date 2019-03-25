@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsCyrillic' function" {
+	label="CFG for 'xmlUCSIsCyrillic' function";
+
+	Node0x56123dceea30 [shape=record,label="{xmlunicode.c:1405:|{<s0>T|<s1>F}}"];
+	Node0x56123dceea30:s0 -> Node0x56123dcef840;
+	Node0x56123dceea30:s1 -> Node0x56123dcf0600;
+	Node0x56123dcef840 [shape=record,label="{xmlunicode.c:1406:}"];
+	Node0x56123dcef840 -> Node0x56123dcf0600;
+	Node0x56123dcf0600 [shape=record,label="{xmlunicode.c:1406:}"];
+}

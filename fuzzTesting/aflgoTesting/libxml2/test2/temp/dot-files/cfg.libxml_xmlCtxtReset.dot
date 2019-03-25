@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlCtxtReset' function" {
+	label="CFG for 'libxml_xmlCtxtReset' function";
+
+	Node0x55afb8afc050 [shape=record,label="{libxml2-py.c:2015:|{<s0>T|<s1>F}}"];
+	Node0x55afb8afc050:s0 -> Node0x55afb8b05aa0;
+	Node0x55afb8afc050:s1 -> Node0x55afb8b05a50;
+	Node0x55afb8b05a50 [shape=record,label="{libxml2-py.c:2020:}"];
+	Node0x55afb8b05a50 -> Node0x55afb8afc230;
+	Node0x55afb8b05aa0 [shape=record,label="{libxml2-py.c:2021:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b05aa0:s0 -> Node0x55afb8b06280;
+	Node0x55afb8b05aa0:s1 -> Node0x55afb8b062d0;
+	Node0x55afb8b06280 [shape=record,label="{libxml2-py.c:2021:}"];
+	Node0x55afb8b06280 -> Node0x55afb8b06320;
+	Node0x55afb8b062d0 [shape=record,label="{libxml2-py.c:2021:}"];
+	Node0x55afb8b062d0 -> Node0x55afb8b06320;
+	Node0x55afb8b06320 [shape=record,label="{libxml2-py.c:2021:}"];
+	Node0x55afb8b06320 -> Node0x55afb8afc230;
+	Node0x55afb8afc230 [shape=record,label="{libxml2-py.c:2026:}"];
+}

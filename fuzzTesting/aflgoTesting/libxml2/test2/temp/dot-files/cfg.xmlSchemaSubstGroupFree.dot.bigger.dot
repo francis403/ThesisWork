@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchemaSubstGroupFree' function" {
+	label="CFG for 'xmlSchemaSubstGroupFree' function";
+
+	Node0x5644a84cc480 [shape=record,label="{xmlschemas.c:5712:|{<s0>T|<s1>F}}"];
+	Node0x5644a84cc480:s0 -> Node0x5644a84cda70;
+	Node0x5644a84cc480:s1 -> Node0x5644a84cdac0;
+	Node0x5644a84cda70 [shape=record,label="{xmlschemas.c:5715:}"];
+	Node0x5644a84cda70 -> Node0x5644a84ca950;
+	Node0x5644a84cdac0 [shape=record,label="{xmlschemas.c:5716:|{<s0>T|<s1>F}}"];
+	Node0x5644a84cdac0:s0 -> Node0x5644a84cf2c0;
+	Node0x5644a84cdac0:s1 -> Node0x5644a84cf310;
+	Node0x5644a84cf2c0 [shape=record,label="{xmlschemas.c:5717:}"];
+	Node0x5644a84cf2c0 -> Node0x5644a84cf310;
+	Node0x5644a84cf310 [shape=record,label="{xmlschemas.c:5718:}"];
+	Node0x5644a84cf310 -> Node0x5644a84ca950;
+	Node0x5644a84ca950 [shape=record,label="{xmlschemas.c:5719:}"];
+}

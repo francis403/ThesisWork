@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlBufferContent' function" {
+	label="CFG for 'xmlBufferContent' function";
+
+	Node0x55a216f5fd40 [shape=record,label="{tree.c:7353:|{<s0>T|<s1>F}}"];
+	Node0x55a216f5fd40 -> Node0x55a216f62130;
+	Node0x55a216f5fd40 -> Node0x55a216f5f950;
+	Node0x55a216f5f950 [shape=record,label="{tree.c:7356:}"];
+	Node0x55a216f5f950 -> Node0x55a216f62a50;
+	Node0x55a216f62130 [shape=record,label="{tree.c:7358:}"];
+	Node0x55a216f62130 -> Node0x55a216f62a50;
+	Node0x55a216f62a50 [shape=record,label="{tree.c:7359:}"];
+}

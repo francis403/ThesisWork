@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUTF8Strsize' function" {
+	label="CFG for 'libxml_xmlUTF8Strsize' function";
+
+	Node0x55afb9436be0 [shape=record,label="{libxml2-py.c:12142:|{<s0>T|<s1>F}}"];
+	Node0x55afb9436be0:s0 -> Node0x55afb9439fb0;
+	Node0x55afb9436be0:s1 -> Node0x55afb9439f60;
+	Node0x55afb9439f60 [shape=record,label="{libxml2-py.c:12149:}"];
+	Node0x55afb9439f60 -> Node0x55afb9436900;
+	Node0x55afb9439fb0 [shape=record,label="{libxml2-py.c:12151:}"];
+	Node0x55afb9439fb0 -> Node0x55afb9436900;
+	Node0x55afb9436900 [shape=record,label="{libxml2-py.c:12154:}"];
+}

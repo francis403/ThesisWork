@@ -1,0 +1,47 @@
+digraph "CFG for 'xmlParserInputBufferPush' function" {
+	label="CFG for 'xmlParserInputBufferPush' function";
+
+	Node0x5651ba985fb0 [shape=record,label="{xmlIO.c:3136:|{<s0>T|<s1>F}}"];
+	Node0x5651ba985fb0 -> Node0x5651baa02eb0;
+	Node0x5651ba985fb0 -> Node0x5651baa02f00;
+	Node0x5651baa02eb0 [shape=record,label="{xmlIO.c:3141:}"];
+	Node0x5651baa02eb0 -> Node0x5651ba987d10;
+	Node0x5651baa02f00 [shape=record,label="{xmlIO.c:3142:|{<s0>T|<s1>F}}"];
+	Node0x5651baa02f00 -> Node0x5651baa03390;
+	Node0x5651baa02f00 -> Node0x5651baa03430;
+	Node0x5651baa03430 [shape=record,label="{xmlIO.c:3142:|{<s0>T|<s1>F}}"];
+	Node0x5651baa03430 -> Node0x5651baa03390;
+	Node0x5651baa03430 -> Node0x5651baa033e0;
+	Node0x5651baa03390 [shape=record,label="{xmlIO.c:3142:}"];
+	Node0x5651baa03390 -> Node0x5651ba987d10;
+	Node0x5651baa033e0 [shape=record,label="{xmlIO.c:3143:|{<s0>T|<s1>F}}"];
+	Node0x5651baa033e0 -> Node0x5651baa03bb0;
+	Node0x5651baa033e0 -> Node0x5651baa03c50;
+	Node0x5651baa03bb0 [shape=record,label="{xmlIO.c:3144:|{<s0>T|<s1>F}}"];
+	Node0x5651baa03bb0 -> Node0x5651baa04300;
+	Node0x5651baa03bb0 -> Node0x5651baa04350;
+	Node0x5651baa04300 [shape=record,label="{xmlIO.c:3150:}"];
+	Node0x5651baa04300 -> Node0x5651baa04350;
+	Node0x5651baa04350 [shape=record,label="{xmlIO.c:3152:|{<s0>T|<s1>F}}"];
+	Node0x5651baa04350 -> Node0x5651baa04e20;
+	Node0x5651baa04350 -> Node0x5651baa04e70;
+	Node0x5651baa04e20 [shape=record,label="{xmlIO.c:3154:}"];
+	Node0x5651baa04e20 -> Node0x5651ba987d10;
+	Node0x5651baa04e70 [shape=record,label="{xmlIO.c:3159:|{<s0>T|<s1>F}}"];
+	Node0x5651baa04e70 -> Node0x5651baa060f0;
+	Node0x5651baa04e70 -> Node0x5651baa06140;
+	Node0x5651baa060f0 [shape=record,label="{xmlIO.c:3162:}"];
+	Node0x5651baa060f0 -> Node0x5651ba987d10;
+	Node0x5651baa06140 [shape=record,label="{xmlIO.c:3166:}"];
+	Node0x5651baa06140 -> Node0x5651baa03c00;
+	Node0x5651baa03c50 [shape=record,label="{xmlIO.c:3168:|{<s0>T|<s1>F}}"];
+	Node0x5651baa03c50 -> Node0x5651baa07d30;
+	Node0x5651baa03c50 -> Node0x5651baa07d80;
+	Node0x5651baa07d30 [shape=record,label="{xmlIO.c:3171:}"];
+	Node0x5651baa07d30 -> Node0x5651ba987d10;
+	Node0x5651baa07d80 [shape=record,label="{%68}"];
+	Node0x5651baa07d80 -> Node0x5651baa03c00;
+	Node0x5651baa03c00 [shape=record,label="{xmlIO.c:3178:}"];
+	Node0x5651baa03c00 -> Node0x5651ba987d10;
+	Node0x5651ba987d10 [shape=record,label="{xmlIO.c:3179:}"];
+}

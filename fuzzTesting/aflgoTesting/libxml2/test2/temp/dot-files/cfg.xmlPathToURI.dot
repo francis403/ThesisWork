@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlPathToURI' function" {
+	label="CFG for 'xmlPathToURI' function";
+
+	Node0x5589eae65ac0 [shape=record,label="{uri.c:2511:|{<s0>T|<s1>F}}"];
+	Node0x5589eae65ac0 -> Node0x5589eae6dc10;
+	Node0x5589eae65ac0 -> Node0x5589eae6dc60;
+	Node0x5589eae6dc10 [shape=record,label="{uri.c:2518:}"];
+	Node0x5589eae6dc10 -> Node0x5589eadcb360;
+	Node0x5589eae6dc60 [shape=record,label="{uri.c:2520:|{<s0>T|<s1>F}}"];
+	Node0x5589eae6dc60 -> Node0x5589eae6e0c0;
+	Node0x5589eae6dc60 -> Node0x5589eae6e110;
+	Node0x5589eae6e0c0 [shape=record,label="{uri.c:2521:}"];
+	Node0x5589eae6e0c0 -> Node0x5589eadcb360;
+	Node0x5589eae6e110 [shape=record,label="{uri.c:2524:|{<s0>T|<s1>F}}"];
+	Node0x5589eae6e110 -> Node0x5589eae6ece0;
+	Node0x5589eae6e110 -> Node0x5589eae6ed30;
+	Node0x5589eae6ece0 [shape=record,label="{uri.c:2526:}"];
+	Node0x5589eae6ece0 -> Node0x5589eadcb360;
+	Node0x5589eae6ed30 [shape=record,label="{uri.c:2545:}"];
+	Node0x5589eae6ed30 -> Node0x5589eadcb360;
+	Node0x5589eadcb360 [shape=record,label="{uri.c:2550:}"];
+}

@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlShellRegisterNamespace' function" {
+	label="CFG for 'xmlShellRegisterNamespace' function";
+
+	Node0x560870117bf0 [shape=record,label="{debugXML.c:2109:}"];
+	Node0x560870117bf0 -> Node0x56087011e4e0;
+	Node0x56087011e4e0 [shape=record,label="{debugXML.c:2119:|{<s0>T|<s1>F}}"];
+	Node0x56087011e4e0 -> Node0x56087011e8a0;
+	Node0x56087011e4e0 -> Node0x56087011e6c0;
+	Node0x56087011e8a0 [shape=record,label="{debugXML.c:2122:|{<s0>T|<s1>F}}"];
+	Node0x56087011e8a0 -> Node0x56087011ea50;
+	Node0x56087011e8a0 -> Node0x56087011eaa0;
+	Node0x56087011ea50 [shape=record,label="{debugXML.c:2122:}"];
+	Node0x56087011ea50 -> Node0x56087011e6c0;
+	Node0x56087011eaa0 [shape=record,label="{debugXML.c:2125:|{<s0>T|<s1>F}}"];
+	Node0x56087011eaa0 -> Node0x56087011f280;
+	Node0x56087011eaa0 -> Node0x56087011f2d0;
+	Node0x56087011f280 [shape=record,label="{debugXML.c:2128:}"];
+	Node0x56087011f280 -> Node0x560870117c40;
+	Node0x56087011f2d0 [shape=record,label="{debugXML.c:2132:|{<s0>T|<s1>F}}"];
+	Node0x56087011f2d0 -> Node0x560870120280;
+	Node0x56087011f2d0 -> Node0x5608701202d0;
+	Node0x560870120280 [shape=record,label="{debugXML.c:2138:}"];
+	Node0x560870120280 -> Node0x5608701202d0;
+	Node0x5608701202d0 [shape=record,label="{debugXML.c:2142:|{<s0>T|<s1>F}}"];
+	Node0x5608701202d0 -> Node0x560870120a00;
+	Node0x5608701202d0 -> Node0x560870120a50;
+	Node0x560870120a00 [shape=record,label="{debugXML.c:2143:}"];
+	Node0x560870120a00 -> Node0x560870117c40;
+	Node0x560870120a50 [shape=record,label="{debugXML.c:2119:}"];
+	Node0x560870120a50 -> Node0x56087011e4e0;
+	Node0x56087011e6c0 [shape=record,label="{debugXML.c:2149:}"];
+	Node0x56087011e6c0 -> Node0x560870117c40;
+	Node0x560870117c40 [shape=record,label="{debugXML.c:2151:}"];
+}

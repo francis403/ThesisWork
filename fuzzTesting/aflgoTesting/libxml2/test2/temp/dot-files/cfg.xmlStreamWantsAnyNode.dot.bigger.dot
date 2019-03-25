@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlStreamWantsAnyNode' function" {
+	label="CFG for 'xmlStreamWantsAnyNode' function";
+
+	Node0x557f45f05ad0 [shape=record,label="{pattern.c:2329:|{<s0>T|<s1>F}}"];
+	Node0x557f45f05ad0:s0 -> Node0x557f45f0a8c0;
+	Node0x557f45f05ad0:s1 -> Node0x557f45f026e0;
+	Node0x557f45f0a8c0 [shape=record,label="{pattern.c:2332:}"];
+	Node0x557f45f0a8c0 -> Node0x557f45f0aae0;
+	Node0x557f45f026e0 [shape=record,label="{pattern.c:2333:}"];
+	Node0x557f45f026e0 -> Node0x557f45f0be30;
+	Node0x557f45f0be30 [shape=record,label="{pattern.c:2333:|{<s0>T|<s1>F}}"];
+	Node0x557f45f0be30:s0 -> Node0x557f45f0c1f0;
+	Node0x557f45f0be30:s1 -> Node0x557f45f0c010;
+	Node0x557f45f0c1f0 [shape=record,label="{pattern.c:2334:|{<s0>T|<s1>F}}"];
+	Node0x557f45f0c1f0:s0 -> Node0x557f45f0c3a0;
+	Node0x557f45f0c1f0:s1 -> Node0x557f45f0c3f0;
+	Node0x557f45f0c3a0 [shape=record,label="{pattern.c:2335:}"];
+	Node0x557f45f0c3a0 -> Node0x557f45f0aae0;
+	Node0x557f45f0c3f0 [shape=record,label="{pattern.c:2336:}"];
+	Node0x557f45f0c3f0 -> Node0x557f45f0be30;
+	Node0x557f45f0c010 [shape=record,label="{pattern.c:2338:}"];
+	Node0x557f45f0c010 -> Node0x557f45f0aae0;
+	Node0x557f45f0aae0 [shape=record,label="{pattern.c:2339:}"];
+}

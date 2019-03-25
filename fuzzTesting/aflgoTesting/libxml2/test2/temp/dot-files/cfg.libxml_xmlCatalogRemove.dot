@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCatalogRemove' function" {
+	label="CFG for 'libxml_xmlCatalogRemove' function";
+
+	Node0x55afb8a6c230 [shape=record,label="{libxml2-py.c:1377:|{<s0>T|<s1>F}}"];
+	Node0x55afb8a6c230:s0 -> Node0x55afb8a6fbd0;
+	Node0x55afb8a6c230:s1 -> Node0x55afb8a6fb80;
+	Node0x55afb8a6fb80 [shape=record,label="{libxml2-py.c:1383:}"];
+	Node0x55afb8a6fb80 -> Node0x55afb8a6c530;
+	Node0x55afb8a6fbd0 [shape=record,label="{libxml2-py.c:1385:}"];
+	Node0x55afb8a6fbd0 -> Node0x55afb8a6c530;
+	Node0x55afb8a6c530 [shape=record,label="{libxml2-py.c:1388:}"];
+}

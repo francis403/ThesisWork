@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsPhoneticExtensions' function" {
+	label="CFG for 'xmlUCSIsPhoneticExtensions' function";
+
+	Node0x56123dd3d1a0 [shape=record,label="{xmlunicode.c:2211:|{<s0>T|<s1>F}}"];
+	Node0x56123dd3d1a0:s0 -> Node0x56123dd3f380;
+	Node0x56123dd3d1a0:s1 -> Node0x56123dd3f070;
+	Node0x56123dd3f380 [shape=record,label="{xmlunicode.c:2212:}"];
+	Node0x56123dd3f380 -> Node0x56123dd3f070;
+	Node0x56123dd3f070 [shape=record,label="{xmlunicode.c:2212:}"];
+}

@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlOutputBufferWriteBinHex' function" {
+	label="CFG for 'xmlOutputBufferWriteBinHex' function";
+
+	Node0x558d984b56f0 [shape=record,label="{xmlwriter.c:1672:|{<s0>T|<s1>F}}"];
+	Node0x558d984b56f0:s0 -> Node0x558d984bf2b0;
+	Node0x558d984b56f0:s1 -> Node0x558d984bf3d0;
+	Node0x558d984bf3d0 [shape=record,label="{xmlwriter.c:1681:|{<s0>T|<s1>F}}"];
+	Node0x558d984bf3d0:s0 -> Node0x558d984bf2b0;
+	Node0x558d984bf3d0:s1 -> Node0x558d984bf350;
+	Node0x558d984bf350 [shape=record,label="{xmlwriter.c:1681:|{<s0>T|<s1>F}}"];
+	Node0x558d984bf350:s0 -> Node0x558d984bf2b0;
+	Node0x558d984bf350:s1 -> Node0x558d984bf300;
+	Node0x558d984bf2b0 [shape=record,label="{xmlwriter.c:1682:}"];
+	Node0x558d984bf2b0 -> Node0x558d984bdae0;
+	Node0x558d984bf300 [shape=record,label="{xmlwriter.c:1685:}"];
+	Node0x558d984bf300 -> Node0x558d984bffd0;
+	Node0x558d984bffd0 [shape=record,label="{xmlwriter.c:1686:|{<s0>T|<s1>F}}"];
+	Node0x558d984bffd0:s0 -> Node0x558d984c02b0;
+	Node0x558d984bffd0:s1 -> Node0x558d984bfe30;
+	Node0x558d984c02b0 [shape=record,label="{xmlwriter.c:1688:|{<s0>T|<s1>F}}"];
+	Node0x558d984c02b0:s0 -> Node0x558d984c0ca0;
+	Node0x558d984c02b0:s1 -> Node0x558d984c0cf0;
+	Node0x558d984c0ca0 [shape=record,label="{xmlwriter.c:1691:}"];
+	Node0x558d984c0ca0 -> Node0x558d984bdae0;
+	Node0x558d984c0cf0 [shape=record,label="{xmlwriter.c:1692:|{<s0>T|<s1>F}}"];
+	Node0x558d984c0cf0:s0 -> Node0x558d984c1b30;
+	Node0x558d984c0cf0:s1 -> Node0x558d984c1b80;
+	Node0x558d984c1b30 [shape=record,label="{xmlwriter.c:1697:}"];
+	Node0x558d984c1b30 -> Node0x558d984bdae0;
+	Node0x558d984c1b80 [shape=record,label="{xmlwriter.c:1698:}"];
+	Node0x558d984c1b80 -> Node0x558d984c0220;
+	Node0x558d984c0220 [shape=record,label="{xmlwriter.c:1686:}"];
+	Node0x558d984c0220 -> Node0x558d984bffd0;
+	Node0x558d984bfe30 [shape=record,label="{xmlwriter.c:1701:}"];
+	Node0x558d984bfe30 -> Node0x558d984bdae0;
+	Node0x558d984bdae0 [shape=record,label="{xmlwriter.c:1702:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlRegexpIsDeterminist' function" {
+	label="CFG for 'libxml_xmlRegexpIsDeterminist' function";
+
+	Node0x55afb8f38af0 [shape=record,label="{libxml2-py.c:6186:|{<s0>T|<s1>F}}"];
+	Node0x55afb8f38af0:s0 -> Node0x55afb8f3c930;
+	Node0x55afb8f38af0:s1 -> Node0x55afb8f3c8e0;
+	Node0x55afb8f3c8e0 [shape=record,label="{libxml2-py.c:6193:}"];
+	Node0x55afb8f3c8e0 -> Node0x55afb8f3afe0;
+	Node0x55afb8f3c930 [shape=record,label="{libxml2-py.c:6194:|{<s0>T|<s1>F}}"];
+	Node0x55afb8f3c930:s0 -> Node0x55afb8f3d120;
+	Node0x55afb8f3c930:s1 -> Node0x55afb8f3d170;
+	Node0x55afb8f3d120 [shape=record,label="{libxml2-py.c:6194:}"];
+	Node0x55afb8f3d120 -> Node0x55afb8f3d1c0;
+	Node0x55afb8f3d170 [shape=record,label="{libxml2-py.c:6194:}"];
+	Node0x55afb8f3d170 -> Node0x55afb8f3d1c0;
+	Node0x55afb8f3d1c0 [shape=record,label="{libxml2-py.c:6194:}"];
+	Node0x55afb8f3d1c0 -> Node0x55afb8f3afe0;
+	Node0x55afb8f3afe0 [shape=record,label="{libxml2-py.c:6199:}"];
+}

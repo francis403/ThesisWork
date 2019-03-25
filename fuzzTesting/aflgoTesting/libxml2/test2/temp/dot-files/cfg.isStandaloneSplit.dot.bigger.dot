@@ -1,0 +1,18 @@
+digraph "CFG for 'isStandaloneSplit' function" {
+	label="CFG for 'isStandaloneSplit' function";
+
+	Node0x5644a900da10 [shape=record,label="{xmlschemas.c:28316:|{<s0>T|<s1>F}}"];
+	Node0x5644a900da10:s0 -> Node0x5644a900e590;
+	Node0x5644a900da10:s1 -> Node0x5644a900e4c0;
+	Node0x5644a900e590 [shape=record,label="{xmlschemas.c:28319:|{<s0>T|<s1>F}}"];
+	Node0x5644a900e590:s0 -> Node0x5644a900e510;
+	Node0x5644a900e590:s1 -> Node0x5644a900e4c0;
+	Node0x5644a900e510 [shape=record,label="{xmlschemas.c:28320:|{<s0>T|<s1>F}}"];
+	Node0x5644a900e510:s0 -> Node0x5644a900e470;
+	Node0x5644a900e510:s1 -> Node0x5644a900e4c0;
+	Node0x5644a900e470 [shape=record,label="{xmlschemas.c:28321:}"];
+	Node0x5644a900e470 -> Node0x5644a900da60;
+	Node0x5644a900e4c0 [shape=record,label="{xmlschemas.c:28322:}"];
+	Node0x5644a900e4c0 -> Node0x5644a900da60;
+	Node0x5644a900da60 [shape=record,label="{xmlschemas.c:28323:}"];
+}

@@ -1,0 +1,37 @@
+digraph "CFG for 'libxml_xmlUnregisterInputCallback' function" {
+	label="CFG for 'libxml_xmlUnregisterInputCallback' function";
+
+	Node0x55bbb2654bf0 [shape=record,label="{libxml.c:855:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2654bf0:s0 -> Node0x55bbb26595a0;
+	Node0x55bbb2654bf0:s1 -> Node0x55bbb2659640;
+	Node0x55bbb26595a0 [shape=record,label="{libxml.c:863:|{<s0>T|<s1>F}}"];
+	Node0x55bbb26595a0:s0 -> Node0x55bbb2659910;
+	Node0x55bbb26595a0:s1 -> Node0x55bbb26599b0;
+	Node0x55bbb2659910 [shape=record,label="{libxml.c:864:}"];
+	Node0x55bbb2659910 -> Node0x55bbb2659ee0;
+	Node0x55bbb2659ee0 [shape=record,label="{libxml.c:865:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2659ee0:s0 -> Node0x55bbb265a120;
+	Node0x55bbb2659ee0:s1 -> Node0x55bbb265a1c0;
+	Node0x55bbb265a120 [shape=record,label="{libxml.c:865:}"];
+	Node0x55bbb265a120 -> Node0x55bbb265a170;
+	Node0x55bbb265a1c0 [shape=record,label="{libxml.c:865:}"];
+	Node0x55bbb265a1c0 -> Node0x55bbb265a170;
+	Node0x55bbb265a170 [shape=record,label="{libxml.c:865:}"];
+	Node0x55bbb265a170 -> Node0x55bbb2659e40;
+	Node0x55bbb2659e40 [shape=record,label="{libxml.c:866:}"];
+	Node0x55bbb2659e40 -> Node0x55bbb2659960;
+	Node0x55bbb26599b0 [shape=record,label="{libxml.c:868:}"];
+	Node0x55bbb26599b0 -> Node0x55bbb2658380;
+	Node0x55bbb2659960 [shape=record,label="{libxml.c:871:}"];
+	Node0x55bbb2659960 -> Node0x55bbb26595f0;
+	Node0x55bbb2659640 [shape=record,label="{libxml.c:871:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2659640:s0 -> Node0x55bbb2659e90;
+	Node0x55bbb2659640:s1 -> Node0x55bbb265afd0;
+	Node0x55bbb2659e90 [shape=record,label="{libxml.c:873:}"];
+	Node0x55bbb2659e90 -> Node0x55bbb2658380;
+	Node0x55bbb265afd0 [shape=record,label="{%27}"];
+	Node0x55bbb265afd0 -> Node0x55bbb26595f0;
+	Node0x55bbb26595f0 [shape=record,label="{libxml.c:877:}"];
+	Node0x55bbb26595f0 -> Node0x55bbb2658380;
+	Node0x55bbb2658380 [shape=record,label="{libxml.c:879:}"];
+}

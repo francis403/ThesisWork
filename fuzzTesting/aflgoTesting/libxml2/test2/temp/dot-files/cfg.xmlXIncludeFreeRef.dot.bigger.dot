@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlXIncludeFreeRef' function" {
+	label="CFG for 'xmlXIncludeFreeRef' function";
+
+	Node0x55dca5cb8a80 [shape=record,label="{xinclude.c:194:|{<s0>T|<s1>F}}"];
+	Node0x55dca5cb8a80:s0 -> Node0x55dca5cb8890;
+	Node0x55dca5cb8a80:s1 -> Node0x55dca5cb88e0;
+	Node0x55dca5cb8890 [shape=record,label="{xinclude.c:196:}"];
+	Node0x55dca5cb8890 -> Node0x55dca5cc5100;
+	Node0x55dca5cb88e0 [shape=record,label="{xinclude.c:200:|{<s0>T|<s1>F}}"];
+	Node0x55dca5cb88e0:s0 -> Node0x55dca5cc5c90;
+	Node0x55dca5cb88e0:s1 -> Node0x55dca5cc5ce0;
+	Node0x55dca5cc5c90 [shape=record,label="{xinclude.c:204:}"];
+	Node0x55dca5cc5c90 -> Node0x55dca5cc5ce0;
+	Node0x55dca5cc5ce0 [shape=record,label="{xinclude.c:206:|{<s0>T|<s1>F}}"];
+	Node0x55dca5cc5ce0:s0 -> Node0x55dca5cc6c10;
+	Node0x55dca5cc5ce0:s1 -> Node0x55dca5cc6c60;
+	Node0x55dca5cc6c10 [shape=record,label="{xinclude.c:207:}"];
+	Node0x55dca5cc6c10 -> Node0x55dca5cc6c60;
+	Node0x55dca5cc6c60 [shape=record,label="{xinclude.c:208:|{<s0>T|<s1>F}}"];
+	Node0x55dca5cc6c60:s0 -> Node0x55dca5cc72b0;
+	Node0x55dca5cc6c60:s1 -> Node0x55dca5cc7300;
+	Node0x55dca5cc72b0 [shape=record,label="{xinclude.c:209:}"];
+	Node0x55dca5cc72b0 -> Node0x55dca5cc7300;
+	Node0x55dca5cc7300 [shape=record,label="{xinclude.c:210:|{<s0>T|<s1>F}}"];
+	Node0x55dca5cc7300:s0 -> Node0x55dca5cc7a90;
+	Node0x55dca5cc7300:s1 -> Node0x55dca5cc7ae0;
+	Node0x55dca5cc7a90 [shape=record,label="{xinclude.c:211:}"];
+	Node0x55dca5cc7a90 -> Node0x55dca5cc7ae0;
+	Node0x55dca5cc7ae0 [shape=record,label="{xinclude.c:212:}"];
+	Node0x55dca5cc7ae0 -> Node0x55dca5cc5100;
+	Node0x55dca5cc5100 [shape=record,label="{xinclude.c:213:}"];
+}

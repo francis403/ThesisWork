@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlSchemaGetComponentTypeStr' function" {
+	label="CFG for 'xmlSchemaGetComponentTypeStr' function";
+
+	Node0x5644a848a6d0 [shape=record,label="{xmlschemas.c:1181:|{<s0>def|<s1>1}}"];
+	Node0x5644a848a6d0:s0 -> Node0x5644a848d1a0;
+	Node0x5644a848a6d0:s1 -> Node0x5644a848d2c0;
+	Node0x5644a848d2c0 [shape=record,label="{xmlschemas.c:1185:|{<s0>T|<s1>F}}"];
+	Node0x5644a848d2c0:s0 -> Node0x5644a848d3b0;
+	Node0x5644a848d2c0:s1 -> Node0x5644a848d4a0;
+	Node0x5644a848d4a0 [shape=record,label="{xmlschemas.c:1185:|{<s0>T|<s1>F}}"];
+	Node0x5644a848d4a0:s0 -> Node0x5644a848d3b0;
+	Node0x5644a848d4a0:s1 -> Node0x5644a848d450;
+	Node0x5644a848d3b0 [shape=record,label="{xmlschemas.c:1186:}"];
+	Node0x5644a848d3b0 -> Node0x5644a848a720;
+	Node0x5644a848d450 [shape=record,label="{xmlschemas.c:1188:}"];
+	Node0x5644a848d450 -> Node0x5644a848a720;
+	Node0x5644a848d1a0 [shape=record,label="{xmlschemas.c:1190:}"];
+	Node0x5644a848d1a0 -> Node0x5644a848a720;
+	Node0x5644a848a720 [shape=record,label="{xmlschemas.c:1192:}"];
+}

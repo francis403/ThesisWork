@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlSchemaValidateElemWildcard' function" {
+	label="CFG for 'xmlSchemaValidateElemWildcard' function";
+
+	Node0x5644a8e5f820 [shape=record,label="{xmlschemas.c:25843:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e5f820:s0 -> Node0x5644a8e70b40;
+	Node0x5644a8e5f820:s1 -> Node0x5644a8e70c60;
+	Node0x5644a8e70c60 [shape=record,label="{xmlschemas.c:25851:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e70c60:s0 -> Node0x5644a8e70b40;
+	Node0x5644a8e70c60:s1 -> Node0x5644a8e70be0;
+	Node0x5644a8e70be0 [shape=record,label="{xmlschemas.c:25852:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e70be0:s0 -> Node0x5644a8e70b40;
+	Node0x5644a8e70be0:s1 -> Node0x5644a8e70b90;
+	Node0x5644a8e70b40 [shape=record,label="{xmlschemas.c:25853:}"];
+	Node0x5644a8e70b40 -> Node0x5644a8e5f870;
+	Node0x5644a8e70b90 [shape=record,label="{xmlschemas.c:25857:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e70b90:s0 -> Node0x5644a8e71d80;
+	Node0x5644a8e70b90:s1 -> Node0x5644a8e71dd0;
+	Node0x5644a8e71d80 [shape=record,label="{xmlschemas.c:25863:}"];
+	Node0x5644a8e71d80 -> Node0x5644a8e5f870;
+	Node0x5644a8e71dd0 [shape=record,label="{xmlschemas.c:25867:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e71dd0:s0 -> Node0x5644a8e732f0;
+	Node0x5644a8e71dd0:s1 -> Node0x5644a8e73340;
+	Node0x5644a8e732f0 [shape=record,label="{xmlschemas.c:25872:}"];
+	Node0x5644a8e732f0 -> Node0x5644a8e5f870;
+	Node0x5644a8e73340 [shape=record,label="{xmlschemas.c:25876:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e73340:s0 -> Node0x5644a8e73cd0;
+	Node0x5644a8e73340:s1 -> Node0x5644a8e73d20;
+	Node0x5644a8e73cd0 [shape=record,label="{xmlschemas.c:25878:}"];
+	Node0x5644a8e73cd0 -> Node0x5644a8e5f870;
+	Node0x5644a8e73d20 [shape=record,label="{xmlschemas.c:25883:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e73d20:s0 -> Node0x5644a8e74830;
+	Node0x5644a8e73d20:s1 -> Node0x5644a8e74880;
+	Node0x5644a8e74830 [shape=record,label="{xmlschemas.c:25884:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e74830:s0 -> Node0x5644a8e75150;
+	Node0x5644a8e74830:s1 -> Node0x5644a8e751a0;
+	Node0x5644a8e75150 [shape=record,label="{xmlschemas.c:25894:|{<s0>T|<s1>F}}"];
+	Node0x5644a8e75150:s0 -> Node0x5644a8e75560;
+	Node0x5644a8e75150:s1 -> Node0x5644a8e755b0;
+	Node0x5644a8e75560 [shape=record,label="{xmlschemas.c:25896:}"];
+	Node0x5644a8e75560 -> Node0x5644a8e5f870;
+	Node0x5644a8e755b0 [shape=record,label="{xmlschemas.c:25904:}"];
+	Node0x5644a8e755b0 -> Node0x5644a8e5f870;
+	Node0x5644a8e751a0 [shape=record,label="{xmlschemas.c:25906:}"];
+	Node0x5644a8e751a0 -> Node0x5644a8e74880;
+	Node0x5644a8e74880 [shape=record,label="{xmlschemas.c:25913:}"];
+	Node0x5644a8e74880 -> Node0x5644a8e5f870;
+	Node0x5644a8e5f870 [shape=record,label="{xmlschemas.c:25915:}"];
+}

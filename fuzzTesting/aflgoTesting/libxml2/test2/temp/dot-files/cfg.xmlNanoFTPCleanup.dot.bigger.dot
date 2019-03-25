@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlNanoFTPCleanup' function" {
+	label="CFG for 'xmlNanoFTPCleanup' function";
+
+	Node0x5612c535d900 [shape=record,label="{nanoftp.c:226:|{<s0>T|<s1>F}}"];
+	Node0x5612c535d900:s0 -> Node0x5612c535dd40;
+	Node0x5612c535d900:s1 -> Node0x5612c535dd90;
+	Node0x5612c535dd40 [shape=record,label="{nanoftp.c:227:}"];
+	Node0x5612c535dd40 -> Node0x5612c535dd90;
+	Node0x5612c535dd90 [shape=record,label="{nanoftp.c:230:|{<s0>T|<s1>F}}"];
+	Node0x5612c535dd90:s0 -> Node0x5612c535e8e0;
+	Node0x5612c535dd90:s1 -> Node0x5612c535e930;
+	Node0x5612c535e8e0 [shape=record,label="{nanoftp.c:231:}"];
+	Node0x5612c535e8e0 -> Node0x5612c535e930;
+	Node0x5612c535e930 [shape=record,label="{nanoftp.c:234:|{<s0>T|<s1>F}}"];
+	Node0x5612c535e930:s0 -> Node0x5612c535efb0;
+	Node0x5612c535e930:s1 -> Node0x5612c535f000;
+	Node0x5612c535efb0 [shape=record,label="{nanoftp.c:235:}"];
+	Node0x5612c535efb0 -> Node0x5612c535f000;
+	Node0x5612c535f000 [shape=record,label="{nanoftp.c:242:}"];
+}

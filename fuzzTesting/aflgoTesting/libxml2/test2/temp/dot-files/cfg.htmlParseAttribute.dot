@@ -1,0 +1,17 @@
+digraph "CFG for 'htmlParseAttribute' function" {
+	label="CFG for 'htmlParseAttribute' function";
+
+	Node0x5651a5e34250 [shape=record,label="{HTMLparser.c:3536:|{<s0>T|<s1>F}}"];
+	Node0x5651a5e34250 -> Node0x5651a5e3fc00;
+	Node0x5651a5e34250 -> Node0x5651a5e3fc50;
+	Node0x5651a5e3fc00 [shape=record,label="{HTMLparser.c:3543:}"];
+	Node0x5651a5e3fc00 -> Node0x5651a5e3e790;
+	Node0x5651a5e3fc50 [shape=record,label="{HTMLparser.c:3551:|{<s0>T|<s1>F}}"];
+	Node0x5651a5e3fc50 -> Node0x5651a5e406c0;
+	Node0x5651a5e3fc50 -> Node0x5651a5e40710;
+	Node0x5651a5e406c0 [shape=record,label="{HTMLparser.c:3553:}"];
+	Node0x5651a5e406c0 -> Node0x5651a5e40710;
+	Node0x5651a5e40710 [shape=record,label="{HTMLparser.c:3558:}"];
+	Node0x5651a5e40710 -> Node0x5651a5e3e790;
+	Node0x5651a5e3e790 [shape=record,label="{HTMLparser.c:3560:}"];
+}

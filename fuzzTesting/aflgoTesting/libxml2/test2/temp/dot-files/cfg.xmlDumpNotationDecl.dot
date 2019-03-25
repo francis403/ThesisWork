@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlDumpNotationDecl' function" {
+	label="CFG for 'xmlDumpNotationDecl' function";
+
+	Node0x556e5f678360 [shape=record,label="{valid.c:2503:|{<s0>T|<s1>F}}"];
+	Node0x556e5f678360 -> Node0x556e5f67a810;
+	Node0x556e5f678360 -> Node0x556e5f67a9b0;
+	Node0x556e5f67a9b0 [shape=record,label="{valid.c:2504:|{<s0>T|<s1>F}}"];
+	Node0x556e5f67a9b0 -> Node0x556e5f67a810;
+	Node0x556e5f67a9b0 -> Node0x556e5f67a700;
+	Node0x556e5f67a810 [shape=record,label="{valid.c:2505:}"];
+	Node0x556e5f67a810 -> Node0x556e5f67aa20;
+	Node0x556e5f67a700 [shape=record,label="{valid.c:2506:|{<s0>T|<s1>F}}"];
+	Node0x556e5f67a700 -> Node0x556e5f5faf40;
+	Node0x556e5f67a700 -> Node0x556e5f5fafe0;
+	Node0x556e5f5faf40 [shape=record,label="{valid.c:2509:|{<s0>T|<s1>F}}"];
+	Node0x556e5f5faf40 -> Node0x556e5f5fb810;
+	Node0x556e5f5faf40 -> Node0x556e5f5fb860;
+	Node0x556e5f5fb810 [shape=record,label="{valid.c:2512:}"];
+	Node0x556e5f5fb810 -> Node0x556e5f5fb860;
+	Node0x556e5f5fb860 [shape=record,label="{valid.c:2515:}"];
+	Node0x556e5f5fb860 -> Node0x556e5f5faf90;
+	Node0x556e5f5fafe0 [shape=record,label="{valid.c:2516:}"];
+	Node0x556e5f5fafe0 -> Node0x556e5f5faf90;
+	Node0x556e5f5faf90 [shape=record,label="{valid.c:2519:}"];
+	Node0x556e5f5faf90 -> Node0x556e5f67aa20;
+	Node0x556e5f67aa20 [shape=record,label="{valid.c:2520:}"];
+}

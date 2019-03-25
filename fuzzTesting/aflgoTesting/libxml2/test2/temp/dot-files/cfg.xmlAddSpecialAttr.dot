@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlAddSpecialAttr' function" {
+	label="CFG for 'xmlAddSpecialAttr' function";
+
+	Node0x556884b505d0 [shape=record,label="{parser.c:1317:|{<s0>T|<s1>F}}"];
+	Node0x556884b505d0 -> Node0x556884b5d200;
+	Node0x556884b505d0 -> Node0x556884b5d250;
+	Node0x556884b5d200 [shape=record,label="{parser.c:1323:|{<s0>T|<s1>F}}"];
+	Node0x556884b5d200 -> Node0x556884b5d9d0;
+	Node0x556884b5d200 -> Node0x556884b5da20;
+	Node0x556884b5d9d0 [shape=record,label="{parser.c:1325:}"];
+	Node0x556884b5d9d0 -> Node0x556884b5e680;
+	Node0x556884b5da20 [shape=record,label="{parser.c:1326:}"];
+	Node0x556884b5da20 -> Node0x556884b5d250;
+	Node0x556884b5d250 [shape=record,label="{parser.c:1328:|{<s0>T|<s1>F}}"];
+	Node0x556884b5d250 -> Node0x556884b5e850;
+	Node0x556884b5d250 -> Node0x556884b5e8a0;
+	Node0x556884b5e850 [shape=record,label="{parser.c:1329:}"];
+	Node0x556884b5e850 -> Node0x556884b50620;
+	Node0x556884b5e8a0 [shape=record,label="{parser.c:1331:}"];
+	Node0x556884b5e8a0 -> Node0x556884b50620;
+	Node0x556884b5e680 [shape=record,label="{parser.c:1336:}"];
+	Node0x556884b5e680 -> Node0x556884b50620;
+	Node0x556884b50620 [shape=record,label="{parser.c:1338:}"];
+}

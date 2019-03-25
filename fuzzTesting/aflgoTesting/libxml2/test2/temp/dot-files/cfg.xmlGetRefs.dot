@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlGetRefs' function" {
+	label="CFG for 'xmlGetRefs' function";
+
+	Node0x556e5f6e1e70 [shape=record,label="{valid.c:3141:|{<s0>T|<s1>F}}"];
+	Node0x556e5f6e1e70 -> Node0x556e5f6e1130;
+	Node0x556e5f6e1e70 -> Node0x556e5f6dcd80;
+	Node0x556e5f6e1130 [shape=record,label="{valid.c:3145:}"];
+	Node0x556e5f6e1130 -> Node0x556e5f6e12d0;
+	Node0x556e5f6dcd80 [shape=record,label="{valid.c:3148:|{<s0>T|<s1>F}}"];
+	Node0x556e5f6dcd80 -> Node0x556e5f6e6200;
+	Node0x556e5f6dcd80 -> Node0x556e5f6e6250;
+	Node0x556e5f6e6200 [shape=record,label="{valid.c:3149:}"];
+	Node0x556e5f6e6200 -> Node0x556e5f6e12d0;
+	Node0x556e5f6e6250 [shape=record,label="{valid.c:3152:|{<s0>T|<s1>F}}"];
+	Node0x556e5f6e6250 -> Node0x556e5f649a90;
+	Node0x556e5f6e6250 -> Node0x556e5f649ae0;
+	Node0x556e5f649a90 [shape=record,label="{valid.c:3154:}"];
+	Node0x556e5f649a90 -> Node0x556e5f6e12d0;
+	Node0x556e5f649ae0 [shape=record,label="{valid.c:3156:}"];
+	Node0x556e5f649ae0 -> Node0x556e5f6e12d0;
+	Node0x556e5f6e12d0 [shape=record,label="{valid.c:3157:}"];
+}

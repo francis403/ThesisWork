@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlEncodeSpecialChars' function" {
+	label="CFG for 'libxml_xmlEncodeSpecialChars' function";
+
+	Node0x55afb8b95c20 [shape=record,label="{libxml2-py.c:2525:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b95c20:s0 -> Node0x55afb8b99d90;
+	Node0x55afb8b95c20:s1 -> Node0x55afb8b99d40;
+	Node0x55afb8b99d40 [shape=record,label="{libxml2-py.c:2533:}"];
+	Node0x55afb8b99d40 -> Node0x55afb8b981b0;
+	Node0x55afb8b99d90 [shape=record,label="{libxml2-py.c:2534:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b99d90:s0 -> Node0x55afb8b9a5f0;
+	Node0x55afb8b99d90:s1 -> Node0x55afb8b9a640;
+	Node0x55afb8b9a5f0 [shape=record,label="{libxml2-py.c:2534:}"];
+	Node0x55afb8b9a5f0 -> Node0x55afb8b9a690;
+	Node0x55afb8b9a640 [shape=record,label="{libxml2-py.c:2534:}"];
+	Node0x55afb8b9a640 -> Node0x55afb8b9a690;
+	Node0x55afb8b9a690 [shape=record,label="{libxml2-py.c:2534:}"];
+	Node0x55afb8b9a690 -> Node0x55afb8b981b0;
+	Node0x55afb8b981b0 [shape=record,label="{libxml2-py.c:2539:}"];
+}

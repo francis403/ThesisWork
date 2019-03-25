@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlCharStrdup' function" {
+	label="CFG for 'xmlCharStrdup' function";
+
+	Node0x563c0527ef20 [shape=record,label="{xmlstring.c:113:|{<s0>T|<s1>F}}"];
+	Node0x563c0527ef20 -> Node0x563c05281c50;
+	Node0x563c0527ef20 -> Node0x563c05281ca0;
+	Node0x563c05281c50 [shape=record,label="{xmlstring.c:116:}"];
+	Node0x563c05281c50 -> Node0x563c0527a8d0;
+	Node0x563c05281ca0 [shape=record,label="{xmlstring.c:117:}"];
+	Node0x563c05281ca0 -> Node0x563c0527be00;
+	Node0x563c0527be00 [shape=record,label="{xmlstring.c:117:|{<s0>T|<s1>F}}"];
+	Node0x563c0527be00 -> Node0x563c05282580;
+	Node0x563c0527be00 -> Node0x563c052822f0;
+	Node0x563c05282580 [shape=record,label="{xmlstring.c:117:}"];
+	Node0x563c05282580 -> Node0x563c0527be00;
+	Node0x563c052822f0 [shape=record,label="{xmlstring.c:118:}"];
+	Node0x563c052822f0 -> Node0x563c0527a8d0;
+	Node0x563c0527a8d0 [shape=record,label="{xmlstring.c:119:}"];
+}

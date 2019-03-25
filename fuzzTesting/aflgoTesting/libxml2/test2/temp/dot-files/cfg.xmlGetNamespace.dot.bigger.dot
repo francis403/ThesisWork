@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlGetNamespace' function" {
+	label="CFG for 'xmlGetNamespace' function";
+
+	Node0x556884a03560 [shape=record,label="{parser.c:8663:|{<s0>T|<s1>F}}"];
+	Node0x556884a03560:s0 -> Node0x556884e4a6b0;
+	Node0x556884a03560:s1 -> Node0x556884e4a700;
+	Node0x556884e4a6b0 [shape=record,label="{parser.c:8666:}"];
+	Node0x556884e4a6b0 -> Node0x556884a035b0;
+	Node0x556884e4a700 [shape=record,label="{parser.c:8667:}"];
+	Node0x556884e4a700 -> Node0x556884e4b070;
+	Node0x556884e4b070 [shape=record,label="{parser.c:8667:|{<s0>T|<s1>F}}"];
+	Node0x556884e4b070:s0 -> Node0x556884e4b350;
+	Node0x556884e4b070:s1 -> Node0x556884e4ad00;
+	Node0x556884e4b350 [shape=record,label="{parser.c:8668:|{<s0>T|<s1>F}}"];
+	Node0x556884e4b350:s0 -> Node0x556884e4b620;
+	Node0x556884e4b350:s1 -> Node0x556884e4b670;
+	Node0x556884e4b620 [shape=record,label="{parser.c:8669:|{<s0>T|<s1>F}}"];
+	Node0x556884e4b620:s0 -> Node0x556884e4bd60;
+	Node0x556884e4b620:s1 -> Node0x556884e4bd10;
+	Node0x556884e4bd60 [shape=record,label="{parser.c:8669:|{<s0>T|<s1>F}}"];
+	Node0x556884e4bd60:s0 -> Node0x556884e4bcc0;
+	Node0x556884e4bd60:s1 -> Node0x556884e4bd10;
+	Node0x556884e4bcc0 [shape=record,label="{parser.c:8670:}"];
+	Node0x556884e4bcc0 -> Node0x556884a035b0;
+	Node0x556884e4bd10 [shape=record,label="{parser.c:8671:}"];
+	Node0x556884e4bd10 -> Node0x556884a035b0;
+	Node0x556884e4b670 [shape=record,label="{parser.c:8668:}"];
+	Node0x556884e4b670 -> Node0x556884e4b2c0;
+	Node0x556884e4b2c0 [shape=record,label="{parser.c:8667:}"];
+	Node0x556884e4b2c0 -> Node0x556884e4b070;
+	Node0x556884e4ad00 [shape=record,label="{parser.c:8673:}"];
+	Node0x556884e4ad00 -> Node0x556884a035b0;
+	Node0x556884a035b0 [shape=record,label="{parser.c:8674:}"];
+}

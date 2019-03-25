@@ -1,0 +1,33 @@
+digraph "CFG for 'libxml_domnode_binary_insertion_sort_start' function" {
+	label="CFG for 'libxml_domnode_binary_insertion_sort_start' function";
+
+	Node0x562a79e013f0 [shape=record,label="{timsort.h:217:}"];
+	Node0x562a79e013f0 -> Node0x562a79e093a0;
+	Node0x562a79e093a0 [shape=record,label="{timsort.h:220:|{<s0>T|<s1>F}}"];
+	Node0x562a79e093a0:s0 -> Node0x562a79e09680;
+	Node0x562a79e093a0:s1 -> Node0x562a79e091a0;
+	Node0x562a79e09680 [shape=record,label="{timsort.h:221:|{<s0>T|<s1>F}}"];
+	Node0x562a79e09680:s0 -> Node0x562a79e0a140;
+	Node0x562a79e09680:s1 -> Node0x562a79e0a190;
+	Node0x562a79e0a140 [shape=record,label="{timsort.h:227:}"];
+	Node0x562a79e0a140 -> Node0x562a79e095f0;
+	Node0x562a79e0a190 [shape=record,label="{timsort.h:231:}"];
+	Node0x562a79e0a190 -> Node0x562a79e0bb00;
+	Node0x562a79e0bb00 [shape=record,label="{timsort.h:234:|{<s0>T|<s1>F}}"];
+	Node0x562a79e0bb00:s0 -> Node0x562a79e0bde0;
+	Node0x562a79e0bb00:s1 -> Node0x562a79e0b8c0;
+	Node0x562a79e0bde0 [shape=record,label="{timsort.h:235:|{<s0>T|<s1>F}}"];
+	Node0x562a79e0bde0:s0 -> Node0x562a79e0c560;
+	Node0x562a79e0bde0:s1 -> Node0x562a79e0c5b0;
+	Node0x562a79e0c560 [shape=record,label="{timsort.h:238:}"];
+	Node0x562a79e0c560 -> Node0x562a79e0b8c0;
+	Node0x562a79e0c5b0 [shape=record,label="{timsort.h:240:}"];
+	Node0x562a79e0c5b0 -> Node0x562a79e0bd50;
+	Node0x562a79e0bd50 [shape=record,label="{timsort.h:234:}"];
+	Node0x562a79e0bd50 -> Node0x562a79e0bb00;
+	Node0x562a79e0b8c0 [shape=record,label="{timsort.h:242:}"];
+	Node0x562a79e0b8c0 -> Node0x562a79e095f0;
+	Node0x562a79e095f0 [shape=record,label="{timsort.h:220:}"];
+	Node0x562a79e095f0 -> Node0x562a79e093a0;
+	Node0x562a79e091a0 [shape=record,label="{timsort.h:244:}"];
+}

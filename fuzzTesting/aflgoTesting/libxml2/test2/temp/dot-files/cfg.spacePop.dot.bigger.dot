@@ -1,0 +1,19 @@
+digraph "CFG for 'spacePop' function" {
+	label="CFG for 'spacePop' function";
+
+	Node0x556884cfedb0 [shape=record,label="{parser.c:1971:|{<s0>T|<s1>F}}"];
+	Node0x556884cfedb0:s0 -> Node0x556884cff150;
+	Node0x556884cfedb0:s1 -> Node0x556884cff1a0;
+	Node0x556884cff150 [shape=record,label="{parser.c:1973:}"];
+	Node0x556884cff150 -> Node0x556884cfee00;
+	Node0x556884cff1a0 [shape=record,label="{parser.c:1974:|{<s0>T|<s1>F}}"];
+	Node0x556884cff1a0:s0 -> Node0x556884d04100;
+	Node0x556884cff1a0:s1 -> Node0x556884d041a0;
+	Node0x556884d04100 [shape=record,label="{parser.c:1976:}"];
+	Node0x556884d04100 -> Node0x556884d04150;
+	Node0x556884d041a0 [shape=record,label="{parser.c:1978:}"];
+	Node0x556884d041a0 -> Node0x556884d04150;
+	Node0x556884d04150 [shape=record,label="{parser.c:1979:}"];
+	Node0x556884d04150 -> Node0x556884cfee00;
+	Node0x556884cfee00 [shape=record,label="{parser.c:1982:}"];
+}

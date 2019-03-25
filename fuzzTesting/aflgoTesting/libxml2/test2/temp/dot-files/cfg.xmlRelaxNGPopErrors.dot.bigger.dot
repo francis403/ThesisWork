@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlRelaxNGPopErrors' function" {
+	label="CFG for 'xmlRelaxNGPopErrors' function";
+
+	Node0x559f31b41d50 [shape=record,label="{relaxng.c:2282:}"];
+	Node0x559f31b41d50 -> Node0x559f31b579c0;
+	Node0x559f31b579c0 [shape=record,label="{relaxng.c:2291:|{<s0>T|<s1>F}}"];
+	Node0x559f31b579c0:s0 -> Node0x559f31b57ca0;
+	Node0x559f31b579c0:s1 -> Node0x559f31b577c0;
+	Node0x559f31b57ca0 [shape=record,label="{relaxng.c:2292:|{<s0>T|<s1>F}}"];
+	Node0x559f31b57ca0:s0 -> Node0x559f31b583a0;
+	Node0x559f31b57ca0:s1 -> Node0x559f31b583f0;
+	Node0x559f31b583a0 [shape=record,label="{relaxng.c:2294:|{<s0>T|<s1>F}}"];
+	Node0x559f31b583a0:s0 -> Node0x559f31b58860;
+	Node0x559f31b583a0:s1 -> Node0x559f31b588b0;
+	Node0x559f31b58860 [shape=record,label="{relaxng.c:2295:}"];
+	Node0x559f31b58860 -> Node0x559f31b588b0;
+	Node0x559f31b588b0 [shape=record,label="{relaxng.c:2296:|{<s0>T|<s1>F}}"];
+	Node0x559f31b588b0:s0 -> Node0x559f31b592b0;
+	Node0x559f31b588b0:s1 -> Node0x559f31b59300;
+	Node0x559f31b592b0 [shape=record,label="{relaxng.c:2298:}"];
+	Node0x559f31b592b0 -> Node0x559f31b59300;
+	Node0x559f31b59300 [shape=record,label="{relaxng.c:2299:}"];
+	Node0x559f31b59300 -> Node0x559f31b583f0;
+	Node0x559f31b583f0 [shape=record,label="{relaxng.c:2302:}"];
+	Node0x559f31b583f0 -> Node0x559f31b57c10;
+	Node0x559f31b57c10 [shape=record,label="{relaxng.c:2291:}"];
+	Node0x559f31b57c10 -> Node0x559f31b579c0;
+	Node0x559f31b577c0 [shape=record,label="{relaxng.c:2303:|{<s0>T|<s1>F}}"];
+	Node0x559f31b577c0:s0 -> Node0x559f31b5a5e0;
+	Node0x559f31b577c0:s1 -> Node0x559f31b5a630;
+	Node0x559f31b5a5e0 [shape=record,label="{relaxng.c:2305:}"];
+	Node0x559f31b5a5e0 -> Node0x559f31b5a630;
+	Node0x559f31b5a630 [shape=record,label="{relaxng.c:2306:}"];
+}

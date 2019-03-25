@@ -1,0 +1,36 @@
+digraph "CFG for 'xmlRelaxNGDump' function" {
+	label="CFG for 'xmlRelaxNGDump' function";
+
+	Node0x559f31715d10 [shape=record,label="{relaxng.c:7887:|{<s0>T|<s1>F}}"];
+	Node0x559f31715d10:s0 -> Node0x559f31726500;
+	Node0x559f31715d10:s1 -> Node0x559f31726550;
+	Node0x559f31726500 [shape=record,label="{relaxng.c:7890:}"];
+	Node0x559f31726500 -> Node0x559f315cb120;
+	Node0x559f31726550 [shape=record,label="{relaxng.c:7891:|{<s0>T|<s1>F}}"];
+	Node0x559f31726550:s0 -> Node0x559f31726930;
+	Node0x559f31726550:s1 -> Node0x559f31726980;
+	Node0x559f31726930 [shape=record,label="{relaxng.c:7892:}"];
+	Node0x559f31726930 -> Node0x559f315cb120;
+	Node0x559f31726980 [shape=record,label="{relaxng.c:7895:|{<s0>T|<s1>F}}"];
+	Node0x559f31726980:s0 -> Node0x559f31727ac0;
+	Node0x559f31726980:s1 -> Node0x559f31727b60;
+	Node0x559f31727ac0 [shape=record,label="{relaxng.c:7897:}"];
+	Node0x559f31727ac0 -> Node0x559f31727b10;
+	Node0x559f31727b60 [shape=record,label="{relaxng.c:7898:|{<s0>T|<s1>F}}"];
+	Node0x559f31727b60:s0 -> Node0x559f317281e0;
+	Node0x559f31727b60:s1 -> Node0x559f31728280;
+	Node0x559f317281e0 [shape=record,label="{relaxng.c:7899:}"];
+	Node0x559f317281e0 -> Node0x559f31728230;
+	Node0x559f31728280 [shape=record,label="{relaxng.c:7901:}"];
+	Node0x559f31728280 -> Node0x559f31728230;
+	Node0x559f31728230 [shape=record,label="{%33}"];
+	Node0x559f31728230 -> Node0x559f31727b10;
+	Node0x559f31727b10 [shape=record,label="{relaxng.c:7903:|{<s0>T|<s1>F}}"];
+	Node0x559f31727b10:s0 -> Node0x559f31729350;
+	Node0x559f31727b10:s1 -> Node0x559f317293a0;
+	Node0x559f31729350 [shape=record,label="{relaxng.c:7904:}"];
+	Node0x559f31729350 -> Node0x559f315cb120;
+	Node0x559f317293a0 [shape=record,label="{relaxng.c:7907:}"];
+	Node0x559f317293a0 -> Node0x559f315cb120;
+	Node0x559f315cb120 [shape=record,label="{relaxng.c:7908:}"];
+}

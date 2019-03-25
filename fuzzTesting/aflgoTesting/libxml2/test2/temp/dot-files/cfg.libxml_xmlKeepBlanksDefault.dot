@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlKeepBlanksDefault' function" {
+	label="CFG for 'libxml_xmlKeepBlanksDefault' function";
+
+	Node0x55afb8c911e0 [shape=record,label="{libxml2-py.c:3522:|{<s0>T|<s1>F}}"];
+	Node0x55afb8c911e0:s0 -> Node0x55afb8c94460;
+	Node0x55afb8c911e0:s1 -> Node0x55afb8c94410;
+	Node0x55afb8c94410 [shape=record,label="{libxml2-py.c:3528:}"];
+	Node0x55afb8c94410 -> Node0x55afb8c92e40;
+	Node0x55afb8c94460 [shape=record,label="{libxml2-py.c:3530:}"];
+	Node0x55afb8c94460 -> Node0x55afb8c92e40;
+	Node0x55afb8c92e40 [shape=record,label="{libxml2-py.c:3533:}"];
+}

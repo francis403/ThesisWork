@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlTextReaderCurrentNode' function" {
+	label="CFG for 'xmlTextReaderCurrentNode' function";
+
+	Node0x556e3dbda0b0 [shape=record,label="{xmlreader.c:3935:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbda0b0:s0 -> Node0x556e3dbdbae0;
+	Node0x556e3dbda0b0:s1 -> Node0x556e3dbdb7e0;
+	Node0x556e3dbdbae0 [shape=record,label="{xmlreader.c:3937:}"];
+	Node0x556e3dbdbae0 -> Node0x556e3dbda4a0;
+	Node0x556e3dbdb7e0 [shape=record,label="{xmlreader.c:3939:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbdb7e0:s0 -> Node0x556e3dbdc4c0;
+	Node0x556e3dbdb7e0:s1 -> Node0x556e3dbdc510;
+	Node0x556e3dbdc4c0 [shape=record,label="{xmlreader.c:3940:}"];
+	Node0x556e3dbdc4c0 -> Node0x556e3dbda4a0;
+	Node0x556e3dbdc510 [shape=record,label="{xmlreader.c:3941:}"];
+	Node0x556e3dbdc510 -> Node0x556e3dbda4a0;
+	Node0x556e3dbda4a0 [shape=record,label="{xmlreader.c:3942:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlParserInputBufferCreateFd' function" {
+	label="CFG for 'xmlParserInputBufferCreateFd' function";
+
+	Node0x5651ba9d6190 [shape=record,label="{xmlIO.c:2898:|{<s0>T|<s1>F}}"];
+	Node0x5651ba9d6190 -> Node0x5651ba9d84b0;
+	Node0x5651ba9d6190 -> Node0x5651ba9d8500;
+	Node0x5651ba9d84b0 [shape=record,label="{xmlIO.c:2901:}"];
+	Node0x5651ba9d84b0 -> Node0x5651ba9d6380;
+	Node0x5651ba9d8500 [shape=record,label="{xmlIO.c:2903:|{<s0>T|<s1>F}}"];
+	Node0x5651ba9d8500 -> Node0x5651ba969af0;
+	Node0x5651ba9d8500 -> Node0x5651ba969b40;
+	Node0x5651ba969af0 [shape=record,label="{xmlIO.c:2905:}"];
+	Node0x5651ba969af0 -> Node0x5651ba969b40;
+	Node0x5651ba969b40 [shape=record,label="{xmlIO.c:2910:}"];
+	Node0x5651ba969b40 -> Node0x5651ba9d6380;
+	Node0x5651ba9d6380 [shape=record,label="{xmlIO.c:2911:}"];
+}

@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlSchematronNewMemParserCtxt' function" {
+	label="CFG for 'xmlSchematronNewMemParserCtxt' function";
+
+	Node0x5617dc50a2e0 [shape=record,label="{schematron.c:632:|{<s0>T|<s1>F}}"];
+	Node0x5617dc50a2e0 -> Node0x5617dc512fc0;
+	Node0x5617dc50a2e0 -> Node0x5617dc513060;
+	Node0x5617dc513060 [shape=record,label="{schematron.c:636:|{<s0>T|<s1>F}}"];
+	Node0x5617dc513060 -> Node0x5617dc512fc0;
+	Node0x5617dc513060 -> Node0x5617dc513010;
+	Node0x5617dc512fc0 [shape=record,label="{schematron.c:637:}"];
+	Node0x5617dc512fc0 -> Node0x5617dc50aa40;
+	Node0x5617dc513010 [shape=record,label="{schematron.c:641:|{<s0>T|<s1>F}}"];
+	Node0x5617dc513010 -> Node0x5617dc5139e0;
+	Node0x5617dc513010 -> Node0x5617dc513a30;
+	Node0x5617dc5139e0 [shape=record,label="{schematron.c:643:}"];
+	Node0x5617dc5139e0 -> Node0x5617dc50aa40;
+	Node0x5617dc513a30 [shape=record,label="{schematron.c:647:|{<s0>T|<s1>F}}"];
+	Node0x5617dc513a30 -> Node0x5617dc50dac0;
+	Node0x5617dc513a30 -> Node0x5617dc50db10;
+	Node0x5617dc50dac0 [shape=record,label="{schematron.c:653:}"];
+	Node0x5617dc50dac0 -> Node0x5617dc50aa40;
+	Node0x5617dc50db10 [shape=record,label="{schematron.c:658:}"];
+	Node0x5617dc50db10 -> Node0x5617dc50aa40;
+	Node0x5617dc50aa40 [shape=record,label="{schematron.c:659:}"];
+}

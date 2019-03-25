@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlRegFreeRange' function" {
+	label="CFG for 'xmlRegFreeRange' function";
+
+	Node0x56384ff775a0 [shape=record,label="{xmlregexp.c:738:|{<s0>T|<s1>F}}"];
+	Node0x56384ff775a0 -> Node0x56384ff78800;
+	Node0x56384ff775a0 -> Node0x56384ff78850;
+	Node0x56384ff78800 [shape=record,label="{xmlregexp.c:740:}"];
+	Node0x56384ff78800 -> Node0x56384ff775f0;
+	Node0x56384ff78850 [shape=record,label="{xmlregexp.c:742:|{<s0>T|<s1>F}}"];
+	Node0x56384ff78850 -> Node0x56384fbb4240;
+	Node0x56384ff78850 -> Node0x56384fbb4290;
+	Node0x56384fbb4240 [shape=record,label="{xmlregexp.c:743:}"];
+	Node0x56384fbb4240 -> Node0x56384fbb4290;
+	Node0x56384fbb4290 [shape=record,label="{xmlregexp.c:744:}"];
+	Node0x56384fbb4290 -> Node0x56384ff775f0;
+	Node0x56384ff775f0 [shape=record,label="{xmlregexp.c:745:}"];
+}

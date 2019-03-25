@@ -1,0 +1,10 @@
+digraph "CFG for 'setNamespace' function" {
+	label="CFG for 'setNamespace' function";
+
+	Node0x55cb21821ae0 [shape=record,label="{legacy.c:1250:|{<s0>T|<s1>F}}"];
+	Node0x55cb21821ae0:s0 -> Node0x55cb21824610;
+	Node0x55cb21821ae0:s1 -> Node0x55cb21824660;
+	Node0x55cb21824610 [shape=record,label="{legacy.c:1253:}"];
+	Node0x55cb21824610 -> Node0x55cb21824660;
+	Node0x55cb21824660 [shape=record,label="{legacy.c:1253:}"];
+}

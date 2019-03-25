@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlStrncasecmp' function" {
+	label="CFG for 'xmlStrncasecmp' function";
+
+	Node0x563c0529c520 [shape=record,label="{xmlstring.c:296:|{<s0>T|<s1>F}}"];
+	Node0x563c0529c520:s0 -> Node0x563c052a1800;
+	Node0x563c0529c520:s1 -> Node0x563c052a1850;
+	Node0x563c052a1800 [shape=record,label="{xmlstring.c:299:}"];
+	Node0x563c052a1800 -> Node0x563c052a06d0;
+	Node0x563c052a1850 [shape=record,label="{xmlstring.c:300:|{<s0>T|<s1>F}}"];
+	Node0x563c052a1850:s0 -> Node0x563c052a1ce0;
+	Node0x563c052a1850:s1 -> Node0x563c052a1d30;
+	Node0x563c052a1ce0 [shape=record,label="{xmlstring.c:300:}"];
+	Node0x563c052a1ce0 -> Node0x563c052a06d0;
+	Node0x563c052a1d30 [shape=record,label="{xmlstring.c:301:|{<s0>T|<s1>F}}"];
+	Node0x563c052a1d30:s0 -> Node0x563c052a2220;
+	Node0x563c052a1d30:s1 -> Node0x563c052a2270;
+	Node0x563c052a2220 [shape=record,label="{xmlstring.c:301:}"];
+	Node0x563c052a2220 -> Node0x563c052a06d0;
+	Node0x563c052a2270 [shape=record,label="{xmlstring.c:302:|{<s0>T|<s1>F}}"];
+	Node0x563c052a2270:s0 -> Node0x563c052a2730;
+	Node0x563c052a2270:s1 -> Node0x563c052a2780;
+	Node0x563c052a2730 [shape=record,label="{xmlstring.c:302:}"];
+	Node0x563c052a2730 -> Node0x563c052a06d0;
+	Node0x563c052a2780 [shape=record,label="{xmlstring.c:303:}"];
+	Node0x563c052a2780 -> Node0x563c052a2c80;
+	Node0x563c052a2c80 [shape=record,label="{xmlstring.c:304:|{<s0>T|<s1>F}}"];
+	Node0x563c052a2c80:s0 -> Node0x563c052a3620;
+	Node0x563c052a2c80:s1 -> Node0x563c052a36c0;
+	Node0x563c052a36c0 [shape=record,label="{xmlstring.c:305:|{<s0>T|<s1>F}}"];
+	Node0x563c052a36c0:s0 -> Node0x563c052a3620;
+	Node0x563c052a36c0:s1 -> Node0x563c052a3670;
+	Node0x563c052a3620 [shape=record,label="{xmlstring.c:305:}"];
+	Node0x563c052a3620 -> Node0x563c052a06d0;
+	Node0x563c052a3670 [shape=record,label="{xmlstring.c:306:}"];
+	Node0x563c052a3670 -> Node0x563c052a2c30;
+	Node0x563c052a2c30 [shape=record,label="{xmlstring.c:306:|{<s0>T|<s1>F}}"];
+	Node0x563c052a2c30:s0 -> Node0x563c052a2c80;
+	Node0x563c052a2c30:s1 -> Node0x563c052a2be0;
+	Node0x563c052a2be0 [shape=record,label="{xmlstring.c:307:}"];
+	Node0x563c052a2be0 -> Node0x563c052a06d0;
+	Node0x563c052a06d0 [shape=record,label="{xmlstring.c:308:}"];
+}

@@ -1,0 +1,26 @@
+digraph "CFG for 'xmlDOMWrapNsMapFree' function" {
+	label="CFG for 'xmlDOMWrapNsMapFree' function";
+
+	Node0x55a217117310 [shape=record,label="{tree.c:7851:|{<s0>T|<s1>F}}"];
+	Node0x55a217117310:s0 -> Node0x55a217117eb0;
+	Node0x55a217117310:s1 -> Node0x55a217117f00;
+	Node0x55a217117eb0 [shape=record,label="{tree.c:7856:}"];
+	Node0x55a217117eb0 -> Node0x55a217117360;
+	Node0x55a217117f00 [shape=record,label="{tree.c:7857:}"];
+	Node0x55a217117f00 -> Node0x55a217118480;
+	Node0x55a217118480 [shape=record,label="{tree.c:7858:|{<s0>T|<s1>F}}"];
+	Node0x55a217118480:s0 -> Node0x55a217118840;
+	Node0x55a217118480:s1 -> Node0x55a217118660;
+	Node0x55a217118840 [shape=record,label="{tree.c:7859:}"];
+	Node0x55a217118840 -> Node0x55a217118480;
+	Node0x55a217118660 [shape=record,label="{tree.c:7863:}"];
+	Node0x55a217118660 -> Node0x55a2171190b0;
+	Node0x55a2171190b0 [shape=record,label="{tree.c:7864:|{<s0>T|<s1>F}}"];
+	Node0x55a2171190b0:s0 -> Node0x55a2171194b0;
+	Node0x55a2171190b0:s1 -> Node0x55a2171192d0;
+	Node0x55a2171194b0 [shape=record,label="{tree.c:7865:}"];
+	Node0x55a2171194b0 -> Node0x55a2171190b0;
+	Node0x55a2171192d0 [shape=record,label="{tree.c:7869:}"];
+	Node0x55a2171192d0 -> Node0x55a217117360;
+	Node0x55a217117360 [shape=record,label="{tree.c:7870:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlTextReaderValidityErrorRelay' function" {
+	label="CFG for 'xmlTextReaderValidityErrorRelay' function";
+
+	Node0x556e3dd91ed0 [shape=record,label="{xmlreader.c:4077:|{<s0>T|<s1>F}}"];
+	Node0x556e3dd91ed0:s0 -> Node0x556e3d9e9520;
+	Node0x556e3dd91ed0:s1 -> Node0x556e3d9e9480;
+	Node0x556e3d9e9480 [shape=record,label="{xmlreader.c:4088:}"];
+	Node0x556e3d9e9480 -> Node0x556e3d9e94d0;
+	Node0x556e3d9e9520 [shape=record,label="{xmlreader.c:4090:}"];
+	Node0x556e3d9e9520 -> Node0x556e3d9e94d0;
+	Node0x556e3d9e94d0 [shape=record,label="{xmlreader.c:4094:|{<s0>T|<s1>F}}"];
+	Node0x556e3d9e94d0:s0 -> Node0x556e3d9ea300;
+	Node0x556e3d9e94d0:s1 -> Node0x556e3d9ea350;
+	Node0x556e3d9ea300 [shape=record,label="{xmlreader.c:4095:}"];
+	Node0x556e3d9ea300 -> Node0x556e3d9ea350;
+	Node0x556e3d9ea350 [shape=record,label="{xmlreader.c:4096:}"];
+}

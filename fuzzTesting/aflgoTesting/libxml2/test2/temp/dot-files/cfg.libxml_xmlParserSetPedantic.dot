@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParserSetPedantic' function" {
+	label="CFG for 'libxml_xmlParserSetPedantic' function";
+
+	Node0x55afb8ec9e20 [shape=record,label="{libxml2-py.c:5666:|{<s0>T|<s1>F}}"];
+	Node0x55afb8ec9e20:s0 -> Node0x55afb8ecb200;
+	Node0x55afb8ec9e20:s1 -> Node0x55afb8ecb1b0;
+	Node0x55afb8ecb1b0 [shape=record,label="{libxml2-py.c:5672:}"];
+	Node0x55afb8ecb1b0 -> Node0x55afb8eca010;
+	Node0x55afb8ecb200 [shape=record,label="{libxml2-py.c:5673:|{<s0>T|<s1>F}}"];
+	Node0x55afb8ecb200:s0 -> Node0x55afb8ecba60;
+	Node0x55afb8ecb200:s1 -> Node0x55afb8ecbab0;
+	Node0x55afb8ecba60 [shape=record,label="{libxml2-py.c:5673:}"];
+	Node0x55afb8ecba60 -> Node0x55afb8ecbb00;
+	Node0x55afb8ecbab0 [shape=record,label="{libxml2-py.c:5673:}"];
+	Node0x55afb8ecbab0 -> Node0x55afb8ecbb00;
+	Node0x55afb8ecbb00 [shape=record,label="{libxml2-py.c:5673:}"];
+	Node0x55afb8ecbb00 -> Node0x55afb8eca010;
+	Node0x55afb8eca010 [shape=record,label="{libxml2-py.c:5678:}"];
+}

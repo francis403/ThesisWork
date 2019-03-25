@@ -1,0 +1,16 @@
+digraph "CFG for 'setDocumentLocatorSplit' function" {
+	label="CFG for 'setDocumentLocatorSplit' function";
+
+	Node0x5644a9026a70 [shape=record,label="{xmlschemas.c:28448:|{<s0>T|<s1>F}}"];
+	Node0x5644a9026a70:s0 -> Node0x5644a90279d0;
+	Node0x5644a9026a70:s1 -> Node0x5644a9027900;
+	Node0x5644a90279d0 [shape=record,label="{xmlschemas.c:28451:|{<s0>T|<s1>F}}"];
+	Node0x5644a90279d0:s0 -> Node0x5644a9027950;
+	Node0x5644a90279d0:s1 -> Node0x5644a9027900;
+	Node0x5644a9027950 [shape=record,label="{xmlschemas.c:28452:|{<s0>T|<s1>F}}"];
+	Node0x5644a9027950:s0 -> Node0x5644a90278b0;
+	Node0x5644a9027950:s1 -> Node0x5644a9027900;
+	Node0x5644a90278b0 [shape=record,label="{xmlschemas.c:28453:}"];
+	Node0x5644a90278b0 -> Node0x5644a9027900;
+	Node0x5644a9027900 [shape=record,label="{xmlschemas.c:28454:}"];
+}

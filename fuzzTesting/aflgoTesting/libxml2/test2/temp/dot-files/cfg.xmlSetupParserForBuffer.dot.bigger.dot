@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlSetupParserForBuffer' function" {
+	label="CFG for 'xmlSetupParserForBuffer' function";
+
+	Node0x556884a13b20 [shape=record,label="{parser.c:14282:|{<s0>T|<s1>F}}"];
+	Node0x556884a13b20:s0 -> Node0x556884a165a0;
+	Node0x556884a13b20:s1 -> Node0x556884a16640;
+	Node0x556884a16640 [shape=record,label="{parser.c:14287:|{<s0>T|<s1>F}}"];
+	Node0x556884a16640:s0 -> Node0x556884a165a0;
+	Node0x556884a16640:s1 -> Node0x556884a165f0;
+	Node0x556884a165a0 [shape=record,label="{parser.c:14288:}"];
+	Node0x556884a165a0 -> Node0x556884a14690;
+	Node0x556884a165f0 [shape=record,label="{parser.c:14290:|{<s0>T|<s1>F}}"];
+	Node0x556884a165f0:s0 -> Node0x556884a16e80;
+	Node0x556884a165f0:s1 -> Node0x556884a16ed0;
+	Node0x556884a16e80 [shape=record,label="{parser.c:14292:}"];
+	Node0x556884a16e80 -> Node0x556884a14690;
+	Node0x556884a16ed0 [shape=record,label="{parser.c:14297:|{<s0>T|<s1>F}}"];
+	Node0x556884a16ed0:s0 -> Node0x556884a17e60;
+	Node0x556884a16ed0:s1 -> Node0x556884a17eb0;
+	Node0x556884a17e60 [shape=record,label="{parser.c:14299:}"];
+	Node0x556884a17e60 -> Node0x556884a17eb0;
+	Node0x556884a17eb0 [shape=record,label="{parser.c:14300:}"];
+	Node0x556884a17eb0 -> Node0x556884a14690;
+	Node0x556884a14690 [shape=record,label="{parser.c:14304:}"];
+}

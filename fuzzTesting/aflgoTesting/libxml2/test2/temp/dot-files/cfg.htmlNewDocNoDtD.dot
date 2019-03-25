@@ -1,0 +1,20 @@
+digraph "CFG for 'htmlNewDocNoDtD' function" {
+	label="CFG for 'htmlNewDocNoDtD' function";
+
+	Node0x5651a5a61c60 [shape=record,label="{HTMLparser.c:2310:|{<s0>T|<s1>F}}"];
+	Node0x5651a5a61c60 -> Node0x5651a5a75760;
+	Node0x5651a5a61c60 -> Node0x5651a5a81d70;
+	Node0x5651a5a75760 [shape=record,label="{HTMLparser.c:2318:}"];
+	Node0x5651a5a75760 -> Node0x5651a5a755b0;
+	Node0x5651a5a81d70 [shape=record,label="{HTMLparser.c:2321:|{<s0>T|<s1>F}}"];
+	Node0x5651a5a81d70 -> Node0x5651a5a88030;
+	Node0x5651a5a81d70 -> Node0x5651a5a92640;
+	Node0x5651a5a92640 [shape=record,label="{HTMLparser.c:2340:|{<s0>T|<s1>F}}"];
+	Node0x5651a5a92640 -> Node0x5651a5a88030;
+	Node0x5651a5a92640 -> Node0x5651a5a925f0;
+	Node0x5651a5a88030 [shape=record,label="{HTMLparser.c:2341:}"];
+	Node0x5651a5a88030 -> Node0x5651a5a925f0;
+	Node0x5651a5a925f0 [shape=record,label="{HTMLparser.c:2342:}"];
+	Node0x5651a5a925f0 -> Node0x5651a5a755b0;
+	Node0x5651a5a755b0 [shape=record,label="{HTMLparser.c:2343:}"];
+}

@@ -1,0 +1,47 @@
+digraph "CFG for 'htmlDoRead' function" {
+	label="CFG for 'htmlDoRead' function";
+
+	Node0x5651a60399c0 [shape=record,label="{HTMLparser.c:6770:|{<s0>T|<s1>F}}"];
+	Node0x5651a60399c0:s0 -> Node0x5651a5d10020;
+	Node0x5651a60399c0:s1 -> Node0x5651a5d10070;
+	Node0x5651a5d10020 [shape=record,label="{HTMLparser.c:6778:|{<s0>T|<s1>F}}"];
+	Node0x5651a5d10020:s0 -> Node0x5651a5d108d0;
+	Node0x5651a5d10020:s1 -> Node0x5651a5d10920;
+	Node0x5651a5d108d0 [shape=record,label="{HTMLparser.c:6782:|{<s0>T|<s1>F}}"];
+	Node0x5651a5d108d0:s0 -> Node0x5651a5d10dd0;
+	Node0x5651a5d108d0:s1 -> Node0x5651a5d10e20;
+	Node0x5651a5d10dd0 [shape=record,label="{HTMLparser.c:6784:}"];
+	Node0x5651a5d10dd0 -> Node0x5651a5d10e20;
+	Node0x5651a5d10e20 [shape=record,label="{HTMLparser.c:6785:}"];
+	Node0x5651a5d10e20 -> Node0x5651a5d10920;
+	Node0x5651a5d10920 [shape=record,label="{HTMLparser.c:6787:}"];
+	Node0x5651a5d10920 -> Node0x5651a5d10070;
+	Node0x5651a5d10070 [shape=record,label="{HTMLparser.c:6788:|{<s0>T|<s1>F}}"];
+	Node0x5651a5d10070:s0 -> Node0x5651a6044950;
+	Node0x5651a5d10070:s1 -> Node0x5651a6044880;
+	Node0x5651a6044950 [shape=record,label="{HTMLparser.c:6788:|{<s0>T|<s1>F}}"];
+	Node0x5651a6044950:s0 -> Node0x5651a60448d0;
+	Node0x5651a6044950:s1 -> Node0x5651a6044880;
+	Node0x5651a60448d0 [shape=record,label="{HTMLparser.c:6789:|{<s0>T|<s1>F}}"];
+	Node0x5651a60448d0:s0 -> Node0x5651a6044830;
+	Node0x5651a60448d0:s1 -> Node0x5651a6044880;
+	Node0x5651a6044830 [shape=record,label="{HTMLparser.c:6790:}"];
+	Node0x5651a6044830 -> Node0x5651a6044880;
+	Node0x5651a6044880 [shape=record,label="{HTMLparser.c:6791:|{<s0>T|<s1>F}}"];
+	Node0x5651a6044880:s0 -> Node0x5651a6046030;
+	Node0x5651a6044880:s1 -> Node0x5651a6045fe0;
+	Node0x5651a6045fe0 [shape=record,label="{HTMLparser.c:6795:|{<s0>T|<s1>F}}"];
+	Node0x5651a6045fe0:s0 -> Node0x5651a6046450;
+	Node0x5651a6045fe0:s1 -> Node0x5651a6046380;
+	Node0x5651a6046450 [shape=record,label="{HTMLparser.c:6796:|{<s0>T|<s1>F}}"];
+	Node0x5651a6046450:s0 -> Node0x5651a60463d0;
+	Node0x5651a6046450:s1 -> Node0x5651a6046380;
+	Node0x5651a60463d0 [shape=record,label="{HTMLparser.c:6797:|{<s0>T|<s1>F}}"];
+	Node0x5651a60463d0:s0 -> Node0x5651a6046330;
+	Node0x5651a60463d0:s1 -> Node0x5651a6046380;
+	Node0x5651a6046330 [shape=record,label="{HTMLparser.c:6798:}"];
+	Node0x5651a6046330 -> Node0x5651a6046380;
+	Node0x5651a6046380 [shape=record,label="{HTMLparser.c:6799:}"];
+	Node0x5651a6046380 -> Node0x5651a6046030;
+	Node0x5651a6046030 [shape=record,label="{HTMLparser.c:6801:}"];
+}

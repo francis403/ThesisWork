@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlTextWriterWriteDTDExternalEntity' function" {
+	label="CFG for 'xmlTextWriterWriteDTDExternalEntity' function";
+
+	Node0x558d9845cbf0 [shape=record,label="{xmlwriter.c:3931:|{<s0>T|<s1>F}}"];
+	Node0x558d9845cbf0:s0 -> Node0x558d98464790;
+	Node0x558d9845cbf0:s1 -> Node0x558d98464740;
+	Node0x558d98464790 [shape=record,label="{xmlwriter.c:3941:|{<s0>T|<s1>F}}"];
+	Node0x558d98464790:s0 -> Node0x558d984646f0;
+	Node0x558d98464790:s1 -> Node0x558d98464740;
+	Node0x558d984646f0 [shape=record,label="{xmlwriter.c:3942:}"];
+	Node0x558d984646f0 -> Node0x558d98460e00;
+	Node0x558d98464740 [shape=record,label="{xmlwriter.c:3943:|{<s0>T|<s1>F}}"];
+	Node0x558d98464740:s0 -> Node0x558d98464f20;
+	Node0x558d98464740:s1 -> Node0x558d98464ed0;
+	Node0x558d98464f20 [shape=record,label="{xmlwriter.c:3943:|{<s0>T|<s1>F}}"];
+	Node0x558d98464f20:s0 -> Node0x558d98464e80;
+	Node0x558d98464f20:s1 -> Node0x558d98464ed0;
+	Node0x558d98464e80 [shape=record,label="{xmlwriter.c:3944:}"];
+	Node0x558d98464e80 -> Node0x558d98460e00;
+	Node0x558d98464ed0 [shape=record,label="{xmlwriter.c:3946:|{<s0>T|<s1>F}}"];
+	Node0x558d98464ed0:s0 -> Node0x558d98465aa0;
+	Node0x558d98464ed0:s1 -> Node0x558d98465af0;
+	Node0x558d98465aa0 [shape=record,label="{xmlwriter.c:3949:}"];
+	Node0x558d98465aa0 -> Node0x558d98460e00;
+	Node0x558d98465af0 [shape=record,label="{xmlwriter.c:3950:|{<s0>T|<s1>F}}"];
+	Node0x558d98465af0:s0 -> Node0x558d982ca970;
+	Node0x558d98465af0:s1 -> Node0x558d982ca9c0;
+	Node0x558d982ca970 [shape=record,label="{xmlwriter.c:3956:}"];
+	Node0x558d982ca970 -> Node0x558d98460e00;
+	Node0x558d982ca9c0 [shape=record,label="{xmlwriter.c:3957:|{<s0>T|<s1>F}}"];
+	Node0x558d982ca9c0:s0 -> Node0x558d98468680;
+	Node0x558d982ca9c0:s1 -> Node0x558d984686d0;
+	Node0x558d98468680 [shape=record,label="{xmlwriter.c:3961:}"];
+	Node0x558d98468680 -> Node0x558d98460e00;
+	Node0x558d984686d0 [shape=record,label="{xmlwriter.c:3962:}"];
+	Node0x558d984686d0 -> Node0x558d98460e00;
+	Node0x558d98460e00 [shape=record,label="{xmlwriter.c:3965:}"];
+}

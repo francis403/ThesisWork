@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_domnode_reverse_elements' function" {
+	label="CFG for 'libxml_domnode_reverse_elements' function";
+
+	Node0x562a79e43ee0 [shape=record,label="{timsort.h:258:}"];
+	Node0x562a79e43ee0 -> Node0x562a79e48ac0;
+	Node0x562a79e48ac0 [shape=record,label="{timsort.h:260:|{<s0>T|<s1>F}}"];
+	Node0x562a79e48ac0:s0 -> Node0x562a79e48c80;
+	Node0x562a79e48ac0:s1 -> Node0x562a79e48cd0;
+	Node0x562a79e48c80 [shape=record,label="{timsort.h:261:}"];
+	Node0x562a79e48cd0 [shape=record,label="{timsort.h:264:}"];
+	Node0x562a79e48cd0 -> Node0x562a79e48ac0;
+}

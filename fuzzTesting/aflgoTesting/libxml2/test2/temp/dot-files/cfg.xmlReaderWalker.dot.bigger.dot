@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlReaderWalker' function" {
+	label="CFG for 'xmlReaderWalker' function";
+
+	Node0x556e3dc91280 [shape=record,label="{xmlreader.c:5350:|{<s0>T|<s1>F}}"];
+	Node0x556e3dc91280:s0 -> Node0x556e3dc933e0;
+	Node0x556e3dc91280:s1 -> Node0x556e3dc93430;
+	Node0x556e3dc933e0 [shape=record,label="{xmlreader.c:5355:}"];
+	Node0x556e3dc933e0 -> Node0x556e3dc92b20;
+	Node0x556e3dc93430 [shape=record,label="{xmlreader.c:5357:|{<s0>T|<s1>F}}"];
+	Node0x556e3dc93430:s0 -> Node0x556e3dc93b20;
+	Node0x556e3dc93430:s1 -> Node0x556e3dc93b70;
+	Node0x556e3dc93b20 [shape=record,label="{xmlreader.c:5359:}"];
+	Node0x556e3dc93b20 -> Node0x556e3dc92b20;
+	Node0x556e3dc93b70 [shape=record,label="{xmlreader.c:5363:}"];
+	Node0x556e3dc93b70 -> Node0x556e3dc92b20;
+	Node0x556e3dc92b20 [shape=record,label="{xmlreader.c:5376:}"];
+}

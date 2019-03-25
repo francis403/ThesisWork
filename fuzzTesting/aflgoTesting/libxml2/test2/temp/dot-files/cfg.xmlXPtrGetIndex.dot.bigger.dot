@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlXPtrGetIndex' function" {
+	label="CFG for 'xmlXPtrGetIndex' function";
+
+	Node0x55cf3ba619e0 [shape=record,label="{xpointer.c:167:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba619e0:s0 -> Node0x55cf3ba65420;
+	Node0x55cf3ba619e0:s1 -> Node0x55cf3ba654c0;
+	Node0x55cf3ba654c0 [shape=record,label="{xpointer.c:169:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba654c0:s0 -> Node0x55cf3ba65420;
+	Node0x55cf3ba654c0:s1 -> Node0x55cf3ba65470;
+	Node0x55cf3ba65420 [shape=record,label="{xpointer.c:170:}"];
+	Node0x55cf3ba65420 -> Node0x55cf3ba61a30;
+	Node0x55cf3ba65470 [shape=record,label="{xpointer.c:171:}"];
+	Node0x55cf3ba65470 -> Node0x55cf3ba65da0;
+	Node0x55cf3ba65da0 [shape=record,label="{xpointer.c:171:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba65da0:s0 -> Node0x55cf3ba66080;
+	Node0x55cf3ba65da0:s1 -> Node0x55cf3ba65c40;
+	Node0x55cf3ba66080 [shape=record,label="{xpointer.c:172:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba66080:s0 -> Node0x55cf3ba663c0;
+	Node0x55cf3ba66080:s1 -> Node0x55cf3ba664e0;
+	Node0x55cf3ba664e0 [shape=record,label="{xpointer.c:173:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba664e0:s0 -> Node0x55cf3ba663c0;
+	Node0x55cf3ba664e0:s1 -> Node0x55cf3ba66460;
+	Node0x55cf3ba66460 [shape=record,label="{xpointer.c:174:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba66460:s0 -> Node0x55cf3ba663c0;
+	Node0x55cf3ba66460:s1 -> Node0x55cf3ba66410;
+	Node0x55cf3ba663c0 [shape=record,label="{xpointer.c:175:}"];
+	Node0x55cf3ba663c0 -> Node0x55cf3ba66410;
+	Node0x55cf3ba66410 [shape=record,label="{xpointer.c:177:}"];
+	Node0x55cf3ba66410 -> Node0x55cf3ba65ff0;
+	Node0x55cf3ba65ff0 [shape=record,label="{xpointer.c:171:}"];
+	Node0x55cf3ba65ff0 -> Node0x55cf3ba65da0;
+	Node0x55cf3ba65c40 [shape=record,label="{xpointer.c:178:}"];
+	Node0x55cf3ba65c40 -> Node0x55cf3ba61a30;
+	Node0x55cf3ba61a30 [shape=record,label="{xpointer.c:179:}"];
+}

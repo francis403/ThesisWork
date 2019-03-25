@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlXPathStringEvalNumber' function" {
+	label="CFG for 'libxml_xmlXPathStringEvalNumber' function";
+
+	Node0x55afb964b900 [shape=record,label="{libxml2-py.c:14391:|{<s0>T|<s1>F}}"];
+	Node0x55afb964b900:s0 -> Node0x55afb964ed80;
+	Node0x55afb964b900:s1 -> Node0x55afb964ed30;
+	Node0x55afb964ed30 [shape=record,label="{libxml2-py.c:14397:}"];
+	Node0x55afb964ed30 -> Node0x55afb964b690;
+	Node0x55afb964ed80 [shape=record,label="{libxml2-py.c:14399:}"];
+	Node0x55afb964ed80 -> Node0x55afb964b690;
+	Node0x55afb964b690 [shape=record,label="{libxml2-py.c:14402:}"];
+}

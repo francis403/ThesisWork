@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParserInputBufferGrow' function" {
+	label="CFG for 'libxml_xmlParserInputBufferGrow' function";
+
+	Node0x55afb8eae850 [shape=record,label="{libxml2-py.c:5584:|{<s0>T|<s1>F}}"];
+	Node0x55afb8eae850:s0 -> Node0x55afb8ba6180;
+	Node0x55afb8eae850:s1 -> Node0x55afb8ba6130;
+	Node0x55afb8ba6130 [shape=record,label="{libxml2-py.c:5592:}"];
+	Node0x55afb8ba6130 -> Node0x55afb8eaeae0;
+	Node0x55afb8ba6180 [shape=record,label="{libxml2-py.c:5593:|{<s0>T|<s1>F}}"];
+	Node0x55afb8ba6180:s0 -> Node0x55afb8ba69e0;
+	Node0x55afb8ba6180:s1 -> Node0x55afb8ba6a30;
+	Node0x55afb8ba69e0 [shape=record,label="{libxml2-py.c:5593:}"];
+	Node0x55afb8ba69e0 -> Node0x55afb8ba6a80;
+	Node0x55afb8ba6a30 [shape=record,label="{libxml2-py.c:5593:}"];
+	Node0x55afb8ba6a30 -> Node0x55afb8ba6a80;
+	Node0x55afb8ba6a80 [shape=record,label="{libxml2-py.c:5593:}"];
+	Node0x55afb8ba6a80 -> Node0x55afb8eaeae0;
+	Node0x55afb8eaeae0 [shape=record,label="{libxml2-py.c:5598:}"];
+}

@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlDelEncodingAlias' function" {
+	label="CFG for 'xmlDelEncodingAlias' function";
+
+	Node0x562440f52db0 [shape=record,label="{encoding.c:1114:|{<s0>T|<s1>F}}"];
+	Node0x562440f52db0:s0 -> Node0x562440f5d9a0;
+	Node0x562440f52db0:s1 -> Node0x562440f5d9f0;
+	Node0x562440f5d9a0 [shape=record,label="{encoding.c:1118:}"];
+	Node0x562440f5d9a0 -> Node0x562440f5d1a0;
+	Node0x562440f5d9f0 [shape=record,label="{encoding.c:1120:|{<s0>T|<s1>F}}"];
+	Node0x562440f5d9f0:s0 -> Node0x562440f5deb0;
+	Node0x562440f5d9f0:s1 -> Node0x562440f5df00;
+	Node0x562440f5deb0 [shape=record,label="{encoding.c:1121:}"];
+	Node0x562440f5deb0 -> Node0x562440f5d1a0;
+	Node0x562440f5df00 [shape=record,label="{encoding.c:1125:}"];
+	Node0x562440f5df00 -> Node0x562440f5e4f0;
+	Node0x562440f5e4f0 [shape=record,label="{encoding.c:1125:|{<s0>T|<s1>F}}"];
+	Node0x562440f5e4f0:s0 -> Node0x562440f5e7d0;
+	Node0x562440f5e4f0:s1 -> Node0x562440f5e390;
+	Node0x562440f5e7d0 [shape=record,label="{encoding.c:1126:|{<s0>T|<s1>F}}"];
+	Node0x562440f5e7d0:s0 -> Node0x562440f5ebc0;
+	Node0x562440f5e7d0:s1 -> Node0x562440f5eb70;
+	Node0x562440f5eb70 [shape=record,label="{encoding.c:1127:}"];
+	Node0x562440f5eb70 -> Node0x562440f5d1a0;
+	Node0x562440f5ebc0 [shape=record,label="{encoding.c:1134:}"];
+	Node0x562440f5ebc0 -> Node0x562440f5e740;
+	Node0x562440f5e740 [shape=record,label="{encoding.c:1125:}"];
+	Node0x562440f5e740 -> Node0x562440f5e4f0;
+	Node0x562440f5e390 [shape=record,label="{encoding.c:1135:}"];
+	Node0x562440f5e390 -> Node0x562440f5d1a0;
+	Node0x562440f5d1a0 [shape=record,label="{encoding.c:1136:}"];
+}

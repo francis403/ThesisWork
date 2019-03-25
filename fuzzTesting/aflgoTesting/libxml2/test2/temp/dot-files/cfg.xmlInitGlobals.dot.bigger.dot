@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlInitGlobals' function" {
+	label="CFG for 'xmlInitGlobals' function";
+
+	Node0x555a3f9d6640 [shape=record,label="{globals.c:49:|{<s0>T|<s1>F}}"];
+	Node0x555a3f9d6640:s0 -> Node0x555a3f861530;
+	Node0x555a3f9d6640:s1 -> Node0x555a3f82ade0;
+	Node0x555a3f861530 [shape=record,label="{globals.c:50:}"];
+	Node0x555a3f861530 -> Node0x555a3f82ade0;
+	Node0x555a3f82ade0 [shape=record,label="{globals.c:51:}"];
+}

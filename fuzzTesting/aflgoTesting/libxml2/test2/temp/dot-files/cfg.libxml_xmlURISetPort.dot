@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlURISetPort' function" {
+	label="CFG for 'libxml_xmlURISetPort' function";
+
+	Node0x55afb940db20 [shape=record,label="{libxml2-py.c:11943:|{<s0>T|<s1>F}}"];
+	Node0x55afb940db20:s0 -> Node0x55afb940ef90;
+	Node0x55afb940db20:s1 -> Node0x55afb940ef40;
+	Node0x55afb940ef40 [shape=record,label="{libxml2-py.c:11949:}"];
+	Node0x55afb940ef40 -> Node0x55afb940dd10;
+	Node0x55afb940ef90 [shape=record,label="{libxml2-py.c:11950:|{<s0>T|<s1>F}}"];
+	Node0x55afb940ef90:s0 -> Node0x55afb940f7e0;
+	Node0x55afb940ef90:s1 -> Node0x55afb940f830;
+	Node0x55afb940f7e0 [shape=record,label="{libxml2-py.c:11950:}"];
+	Node0x55afb940f7e0 -> Node0x55afb940f880;
+	Node0x55afb940f830 [shape=record,label="{libxml2-py.c:11950:}"];
+	Node0x55afb940f830 -> Node0x55afb940f880;
+	Node0x55afb940f880 [shape=record,label="{libxml2-py.c:11950:}"];
+	Node0x55afb940f880 -> Node0x55afb940dd10;
+	Node0x55afb940dd10 [shape=record,label="{libxml2-py.c:11955:}"];
+}

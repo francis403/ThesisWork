@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathLocalNameFunction' function" {
+	label="CFG for 'libxml_xmlXPathLocalNameFunction' function";
+
+	Node0x55afb957c0f0 [shape=record,label="{libxml2-py.c:13472:|{<s0>T|<s1>F}}"];
+	Node0x55afb957c0f0:s0 -> Node0x55afb957f390;
+	Node0x55afb957c0f0:s1 -> Node0x55afb957f340;
+	Node0x55afb957f340 [shape=record,label="{libxml2-py.c:13478:}"];
+	Node0x55afb957f340 -> Node0x55afb957be10;
+	Node0x55afb957f390 [shape=record,label="{libxml2-py.c:13479:|{<s0>T|<s1>F}}"];
+	Node0x55afb957f390:s0 -> Node0x55afb957fbf0;
+	Node0x55afb957f390:s1 -> Node0x55afb957fc40;
+	Node0x55afb957fbf0 [shape=record,label="{libxml2-py.c:13479:}"];
+	Node0x55afb957fbf0 -> Node0x55afb957fc90;
+	Node0x55afb957fc40 [shape=record,label="{libxml2-py.c:13479:}"];
+	Node0x55afb957fc40 -> Node0x55afb957fc90;
+	Node0x55afb957fc90 [shape=record,label="{libxml2-py.c:13479:}"];
+	Node0x55afb957fc90 -> Node0x55afb957be10;
+	Node0x55afb957be10 [shape=record,label="{libxml2-py.c:13484:}"];
+}

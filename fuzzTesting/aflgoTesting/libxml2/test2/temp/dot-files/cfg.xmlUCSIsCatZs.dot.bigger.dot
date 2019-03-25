@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlUCSIsCatZs' function" {
+	label="CFG for 'xmlUCSIsCatZs' function";
+
+	Node0x56123dd3e0f0 [shape=record,label="{xmlunicode.c:3147:|{<s0>T|<s1>F}}"];
+	Node0x56123dd3e0f0:s0 -> Node0x56123dd3fdd0;
+	Node0x56123dd3e0f0:s1 -> Node0x56123dda02f0;
+	Node0x56123dda02f0 [shape=record,label="{xmlunicode.c:3149:|{<s0>T|<s1>F}}"];
+	Node0x56123dda02f0:s0 -> Node0x56123dd3fdd0;
+	Node0x56123dda02f0:s1 -> Node0x56123dd40020;
+	Node0x56123dd40020 [shape=record,label="{xmlunicode.c:3150:|{<s0>T|<s1>F}}"];
+	Node0x56123dd40020:s0 -> Node0x56123dd3fdd0;
+	Node0x56123dd40020:s1 -> Node0x56123dd3ffa0;
+	Node0x56123dd3ffa0 [shape=record,label="{xmlunicode.c:3151:|{<s0>T|<s1>F}}"];
+	Node0x56123dd3ffa0:s0 -> Node0x56123dd3fdd0;
+	Node0x56123dd3ffa0:s1 -> Node0x56123dd3ff20;
+	Node0x56123dd3ff20 [shape=record,label="{xmlunicode.c:3152:|{<s0>T|<s1>F}}"];
+	Node0x56123dd3ff20:s0 -> Node0x56123dda0be0;
+	Node0x56123dd3ff20:s1 -> Node0x56123dd3fea0;
+	Node0x56123dda0be0 [shape=record,label="{xmlunicode.c:3152:|{<s0>T|<s1>F}}"];
+	Node0x56123dda0be0:s0 -> Node0x56123dd3fdd0;
+	Node0x56123dda0be0:s1 -> Node0x56123dd3fea0;
+	Node0x56123dd3fea0 [shape=record,label="{xmlunicode.c:3153:|{<s0>T|<s1>F}}"];
+	Node0x56123dd3fea0:s0 -> Node0x56123dd3fdd0;
+	Node0x56123dd3fea0:s1 -> Node0x56123dd3fba0;
+	Node0x56123dd3fba0 [shape=record,label="{xmlunicode.c:3154:|{<s0>T|<s1>F}}"];
+	Node0x56123dd3fba0:s0 -> Node0x56123dd3fdd0;
+	Node0x56123dd3fba0:s1 -> Node0x56123dd3e940;
+	Node0x56123dd3e940 [shape=record,label="{xmlunicode.c:3155:}"];
+	Node0x56123dd3e940 -> Node0x56123dd3fdd0;
+	Node0x56123dd3fdd0 [shape=record,label="{xmlunicode.c:3154:}"];
+}

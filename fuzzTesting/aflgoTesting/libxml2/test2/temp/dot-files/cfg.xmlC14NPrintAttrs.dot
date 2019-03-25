@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlC14NPrintAttrs' function" {
+	label="CFG for 'xmlC14NPrintAttrs' function";
+
+	Node0x55b0aed500e0 [shape=record,label="{c14n.c:944:|{<s0>T|<s1>F}}"];
+	Node0x55b0aed500e0 -> Node0x55b0aed5d550;
+	Node0x55b0aed500e0 -> Node0x55b0aed5d5f0;
+	Node0x55b0aed5d5f0 [shape=record,label="{c14n.c:951:|{<s0>T|<s1>F}}"];
+	Node0x55b0aed5d5f0 -> Node0x55b0aed5d550;
+	Node0x55b0aed5d5f0 -> Node0x55b0aed5d5a0;
+	Node0x55b0aed5d550 [shape=record,label="{c14n.c:952:}"];
+	Node0x55b0aed5d550 -> Node0x55b0aed50130;
+	Node0x55b0aed5d5a0 [shape=record,label="{c14n.c:956:|{<s0>T|<s1>F}}"];
+	Node0x55b0aed5d5a0 -> Node0x55b0aed5e230;
+	Node0x55b0aed5d5a0 -> Node0x55b0aed5e1e0;
+	Node0x55b0aed5e230 [shape=record,label="{c14n.c:957:|{<s0>T|<s1>F}}"];
+	Node0x55b0aed5e230 -> Node0x55b0aed5e190;
+	Node0x55b0aed5e230 -> Node0x55b0aed5e1e0;
+	Node0x55b0aed5e190 [shape=record,label="{c14n.c:958:}"];
+	Node0x55b0aed5e190 -> Node0x55b0aed5e1e0;
+	Node0x55b0aed5e1e0 [shape=record,label="{c14n.c:962:|{<s0>T|<s1>F}}"];
+	Node0x55b0aed5e1e0 -> Node0x55b0aed602d0;
+	Node0x55b0aed5e1e0 -> Node0x55b0aed60320;
+	Node0x55b0aed602d0 [shape=record,label="{c14n.c:968:|{<s0>T|<s1>F}}"];
+	Node0x55b0aed602d0 -> Node0x55b0aed60a40;
+	Node0x55b0aed602d0 -> Node0x55b0aed60ae0;
+	Node0x55b0aed60a40 [shape=record,label="{c14n.c:971:}"];
+	Node0x55b0aed60a40 -> Node0x55b0aed60a90;
+	Node0x55b0aed60ae0 [shape=record,label="{c14n.c:974:}"];
+	Node0x55b0aed60ae0 -> Node0x55b0aed50130;
+	Node0x55b0aed60a90 [shape=record,label="{c14n.c:977:}"];
+	Node0x55b0aed60a90 -> Node0x55b0aed60320;
+	Node0x55b0aed60320 [shape=record,label="{c14n.c:978:}"];
+	Node0x55b0aed60320 -> Node0x55b0aed50130;
+	Node0x55b0aed50130 [shape=record,label="{c14n.c:980:}"];
+}

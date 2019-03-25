@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsCherokee' function" {
+	label="CFG for 'xmlUCSIsCherokee' function";
+
+	Node0x56123dc90480 [shape=record,label="{xmlunicode.c:1301:|{<s0>T|<s1>F}}"];
+	Node0x56123dc90480:s0 -> Node0x56123dce7470;
+	Node0x56123dc90480:s1 -> Node0x56123dce8840;
+	Node0x56123dce7470 [shape=record,label="{xmlunicode.c:1302:}"];
+	Node0x56123dce7470 -> Node0x56123dce8840;
+	Node0x56123dce8840 [shape=record,label="{xmlunicode.c:1302:}"];
+}

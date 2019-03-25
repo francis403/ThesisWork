@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlRelaxNGIncludePop' function" {
+	label="CFG for 'xmlRelaxNGIncludePop' function";
+
+	Node0x559f31866ef0 [shape=record,label="{relaxng.c:1490:|{<s0>T|<s1>F}}"];
+	Node0x559f31866ef0:s0 -> Node0x559f31867930;
+	Node0x559f31866ef0:s1 -> Node0x559f31867980;
+	Node0x559f31867930 [shape=record,label="{relaxng.c:1495:}"];
+	Node0x559f31867930 -> Node0x559f31866f40;
+	Node0x559f31867980 [shape=record,label="{relaxng.c:1496:|{<s0>T|<s1>F}}"];
+	Node0x559f31867980:s0 -> Node0x559f31868000;
+	Node0x559f31867980:s1 -> Node0x559f318680a0;
+	Node0x559f31868000 [shape=record,label="{relaxng.c:1498:}"];
+	Node0x559f31868000 -> Node0x559f31868050;
+	Node0x559f318680a0 [shape=record,label="{relaxng.c:1500:}"];
+	Node0x559f318680a0 -> Node0x559f31868050;
+	Node0x559f31868050 [shape=record,label="{relaxng.c:1501:}"];
+	Node0x559f31868050 -> Node0x559f31866f40;
+	Node0x559f31866f40 [shape=record,label="{relaxng.c:1504:}"];
+}

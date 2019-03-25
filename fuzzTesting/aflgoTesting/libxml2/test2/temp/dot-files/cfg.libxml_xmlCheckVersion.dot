@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCheckVersion' function" {
+	label="CFG for 'libxml_xmlCheckVersion' function";
+
+	Node0x55afb8a89900 [shape=record,label="{libxml2-py.c:1544:|{<s0>T|<s1>F}}"];
+	Node0x55afb8a89900:s0 -> Node0x55afb8a8c360;
+	Node0x55afb8a89900:s1 -> Node0x55afb8a8c310;
+	Node0x55afb8a8c310 [shape=record,label="{libxml2-py.c:1548:}"];
+	Node0x55afb8a8c310 -> Node0x55afb8a89c00;
+	Node0x55afb8a8c360 [shape=record,label="{libxml2-py.c:1550:}"];
+	Node0x55afb8a8c360 -> Node0x55afb8a89c00;
+	Node0x55afb8a89c00 [shape=record,label="{libxml2-py.c:1553:}"];
+}

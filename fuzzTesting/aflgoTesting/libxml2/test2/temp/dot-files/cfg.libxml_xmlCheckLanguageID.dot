@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCheckLanguageID' function" {
+	label="CFG for 'libxml_xmlCheckLanguageID' function";
+
+	Node0x55afb8a852d0 [shape=record,label="{libxml2-py.c:1516:|{<s0>T|<s1>F}}"];
+	Node0x55afb8a852d0:s0 -> Node0x55afb8a88320;
+	Node0x55afb8a852d0:s1 -> Node0x55afb8a882d0;
+	Node0x55afb8a882d0 [shape=record,label="{libxml2-py.c:1522:}"];
+	Node0x55afb8a882d0 -> Node0x55afb8a85560;
+	Node0x55afb8a88320 [shape=record,label="{libxml2-py.c:1524:}"];
+	Node0x55afb8a88320 -> Node0x55afb8a85560;
+	Node0x55afb8a85560 [shape=record,label="{libxml2-py.c:1527:}"];
+}

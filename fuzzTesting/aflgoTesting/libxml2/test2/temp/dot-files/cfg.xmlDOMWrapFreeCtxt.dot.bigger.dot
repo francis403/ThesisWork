@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlDOMWrapFreeCtxt' function" {
+	label="CFG for 'xmlDOMWrapFreeCtxt' function";
+
+	Node0x55a216fb3190 [shape=record,label="{tree.c:8029:|{<s0>T|<s1>F}}"];
+	Node0x55a216fb3190:s0 -> Node0x55a216fb1cd0;
+	Node0x55a216fb3190:s1 -> Node0x55a216fa4ea0;
+	Node0x55a216fb1cd0 [shape=record,label="{tree.c:8032:}"];
+	Node0x55a216fb1cd0 -> Node0x55a216fb3510;
+	Node0x55a216fa4ea0 [shape=record,label="{tree.c:8033:|{<s0>T|<s1>F}}"];
+	Node0x55a216fa4ea0:s0 -> Node0x55a216fb3ec0;
+	Node0x55a216fa4ea0:s1 -> Node0x55a216fb3f10;
+	Node0x55a216fb3ec0 [shape=record,label="{tree.c:8034:}"];
+	Node0x55a216fb3ec0 -> Node0x55a216fb3f10;
+	Node0x55a216fb3f10 [shape=record,label="{tree.c:8038:}"];
+	Node0x55a216fb3f10 -> Node0x55a216fb3510;
+	Node0x55a216fb3510 [shape=record,label="{tree.c:8039:}"];
+}

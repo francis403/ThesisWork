@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlSchemaValidateFile' function" {
+	label="CFG for 'xmlSchemaValidateFile' function";
+
+	Node0x5644a843d670 [shape=record,label="{xmlschemas.c:28950:|{<s0>T|<s1>F}}"];
+	Node0x5644a843d670:s0 -> Node0x5644a8452ff0;
+	Node0x5644a843d670:s1 -> Node0x5644a8453090;
+	Node0x5644a8453090 [shape=record,label="{xmlschemas.c:28957:|{<s0>T|<s1>F}}"];
+	Node0x5644a8453090:s0 -> Node0x5644a8452ff0;
+	Node0x5644a8453090:s1 -> Node0x5644a8453040;
+	Node0x5644a8452ff0 [shape=record,label="{xmlschemas.c:28958:}"];
+	Node0x5644a8452ff0 -> Node0x5644a843d7e0;
+	Node0x5644a8453040 [shape=record,label="{xmlschemas.c:28960:|{<s0>T|<s1>F}}"];
+	Node0x5644a8453040:s0 -> Node0x5644a84541f0;
+	Node0x5644a8453040:s1 -> Node0x5644a8454240;
+	Node0x5644a84541f0 [shape=record,label="{xmlschemas.c:28963:}"];
+	Node0x5644a84541f0 -> Node0x5644a843d7e0;
+	Node0x5644a8454240 [shape=record,label="{xmlschemas.c:28964:}"];
+	Node0x5644a8454240 -> Node0x5644a843d7e0;
+	Node0x5644a843d7e0 [shape=record,label="{xmlschemas.c:28967:}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsDevanagari' function" {
+	label="CFG for 'xmlUCSIsDevanagari' function";
+
+	Node0x56123dcf3700 [shape=record,label="{xmlunicode.c:1444:|{<s0>T|<s1>F}}"];
+	Node0x56123dcf3700:s0 -> Node0x56123dcf4dc0;
+	Node0x56123dcf3700:s1 -> Node0x56123dcf4d70;
+	Node0x56123dcf4dc0 [shape=record,label="{xmlunicode.c:1445:}"];
+	Node0x56123dcf4dc0 -> Node0x56123dcf4d70;
+	Node0x56123dcf4d70 [shape=record,label="{xmlunicode.c:1445:}"];
+}

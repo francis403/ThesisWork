@@ -1,0 +1,31 @@
+digraph "CFG for 'startElementDebug' function" {
+	label="CFG for 'startElementDebug' function";
+
+	Node0x55f766dce3e0 [shape=record,label="{xmllint.c:1232:|{<s0>T|<s1>F}}"];
+	Node0x55f766dce3e0 -> Node0x55f766dcf490;
+	Node0x55f766dce3e0 -> Node0x55f766dcf4e0;
+	Node0x55f766dcf490 [shape=record,label="{xmllint.c:1238:}"];
+	Node0x55f766dcf490 -> Node0x55f766dce430;
+	Node0x55f766dcf4e0 [shape=record,label="{xmllint.c:1239:|{<s0>T|<s1>F}}"];
+	Node0x55f766dcf4e0 -> Node0x55f766dcfc10;
+	Node0x55f766dcf4e0 -> Node0x55f766dcfc60;
+	Node0x55f766dcfc10 [shape=record,label="{xmllint.c:1241:}"];
+	Node0x55f766dcfc10 -> Node0x55f766dd0150;
+	Node0x55f766dd0150 [shape=record,label="{xmllint.c:1241:|{<s0>T|<s1>F}}"];
+	Node0x55f766dd0150 -> Node0x55f766dd03d0;
+	Node0x55f766dd0150 -> Node0x55f766dcffb0;
+	Node0x55f766dd03d0 [shape=record,label="{xmllint.c:1242:|{<s0>T|<s1>F}}"];
+	Node0x55f766dd03d0 -> Node0x55f766dd0f00;
+	Node0x55f766dd03d0 -> Node0x55f766dd0f50;
+	Node0x55f766dd0f00 [shape=record,label="{xmllint.c:1244:}"];
+	Node0x55f766dd0f00 -> Node0x55f766dd0f50;
+	Node0x55f766dd0f50 [shape=record,label="{xmllint.c:1245:}"];
+	Node0x55f766dd0f50 -> Node0x55f766dd0340;
+	Node0x55f766dd0340 [shape=record,label="{xmllint.c:1241:}"];
+	Node0x55f766dd0340 -> Node0x55f766dd0150;
+	Node0x55f766dcffb0 [shape=record,label="{xmllint.c:1246:}"];
+	Node0x55f766dcffb0 -> Node0x55f766dcfc60;
+	Node0x55f766dcfc60 [shape=record,label="{xmllint.c:1247:}"];
+	Node0x55f766dcfc60 -> Node0x55f766dce430;
+	Node0x55f766dce430 [shape=record,label="{xmllint.c:1248:}"];
+}

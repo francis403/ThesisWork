@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlFreeRefTableEntry' function" {
+	label="CFG for 'xmlFreeRefTableEntry' function";
+
+	Node0x556e5f79e970 [shape=record,label="{valid.c:2877:|{<s0>T|<s1>F}}"];
+	Node0x556e5f79e970:s0 -> Node0x556e5f79f940;
+	Node0x556e5f79e970:s1 -> Node0x556e5f7a0dd0;
+	Node0x556e5f79f940 [shape=record,label="{valid.c:2879:}"];
+	Node0x556e5f79f940 -> Node0x556e5f79f380;
+	Node0x556e5f7a0dd0 [shape=record,label="{valid.c:2880:}"];
+	Node0x556e5f7a0dd0 -> Node0x556e5f79f380;
+	Node0x556e5f79f380 [shape=record,label="{valid.c:2881:}"];
+}

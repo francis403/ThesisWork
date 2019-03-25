@@ -1,0 +1,47 @@
+digraph "CFG for 'xmlCopyCharMultiByte' function" {
+	label="CFG for 'xmlCopyCharMultiByte' function";
+
+	Node0x563908686200 [shape=record,label="{parserInternals.c:857:|{<s0>T|<s1>F}}"];
+	Node0x563908686200 -> Node0x5639086941b0;
+	Node0x563908686200 -> Node0x563908694200;
+	Node0x5639086941b0 [shape=record,label="{parserInternals.c:858:}"];
+	Node0x5639086941b0 -> Node0x5639086937e0;
+	Node0x563908694200 [shape=record,label="{parserInternals.c:868:|{<s0>T|<s1>F}}"];
+	Node0x563908694200 -> Node0x563908694690;
+	Node0x563908694200 -> Node0x5639086946e0;
+	Node0x563908694690 [shape=record,label="{parserInternals.c:869:|{<s0>T|<s1>F}}"];
+	Node0x563908694690 -> Node0x563908695010;
+	Node0x563908694690 -> Node0x5639086950b0;
+	Node0x563908695010 [shape=record,label="{parserInternals.c:871:}"];
+	Node0x563908695010 -> Node0x563908695060;
+	Node0x5639086950b0 [shape=record,label="{parserInternals.c:872:|{<s0>T|<s1>F}}"];
+	Node0x5639086950b0 -> Node0x563908695e80;
+	Node0x5639086950b0 -> Node0x563908695f20;
+	Node0x563908695e80 [shape=record,label="{parserInternals.c:872:}"];
+	Node0x563908695e80 -> Node0x563908695ed0;
+	Node0x563908695f20 [shape=record,label="{parserInternals.c:873:|{<s0>T|<s1>F}}"];
+	Node0x563908695f20 -> Node0x5639086969e0;
+	Node0x563908695f20 -> Node0x563908696a80;
+	Node0x5639086969e0 [shape=record,label="{parserInternals.c:873:}"];
+	Node0x5639086969e0 -> Node0x563908696a30;
+	Node0x563908696a80 [shape=record,label="{parserInternals.c:877:}"];
+	Node0x563908696a80 -> Node0x5639086937e0;
+	Node0x563908696a30 [shape=record,label="{%37}"];
+	Node0x563908696a30 -> Node0x563908695ed0;
+	Node0x563908695ed0 [shape=record,label="{%38}"];
+	Node0x563908695ed0 -> Node0x563908695060;
+	Node0x563908695060 [shape=record,label="{parserInternals.c:880:}"];
+	Node0x563908695060 -> Node0x563908697cb0;
+	Node0x563908697cb0 [shape=record,label="{parserInternals.c:880:|{<s0>T|<s1>F}}"];
+	Node0x563908697cb0 -> Node0x563908697f90;
+	Node0x563908697cb0 -> Node0x563908697c20;
+	Node0x563908697f90 [shape=record,label="{parserInternals.c:881:}"];
+	Node0x563908697f90 -> Node0x563908697f00;
+	Node0x563908697f00 [shape=record,label="{parserInternals.c:880:}"];
+	Node0x563908697f00 -> Node0x563908697cb0;
+	Node0x563908697c20 [shape=record,label="{parserInternals.c:882:}"];
+	Node0x563908697c20 -> Node0x5639086937e0;
+	Node0x5639086946e0 [shape=record,label="{parserInternals.c:884:}"];
+	Node0x5639086946e0 -> Node0x5639086937e0;
+	Node0x5639086937e0 [shape=record,label="{parserInternals.c:886:}"];
+}

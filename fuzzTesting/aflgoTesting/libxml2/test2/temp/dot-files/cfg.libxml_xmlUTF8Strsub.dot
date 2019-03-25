@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUTF8Strsub' function" {
+	label="CFG for 'libxml_xmlUTF8Strsub' function";
+
+	Node0x55afb9439300 [shape=record,label="{libxml2-py.c:12157:|{<s0>T|<s1>F}}"];
+	Node0x55afb9439300:s0 -> Node0x55afb9445a10;
+	Node0x55afb9439300:s1 -> Node0x55afb94459c0;
+	Node0x55afb94459c0 [shape=record,label="{libxml2-py.c:12165:}"];
+	Node0x55afb94459c0 -> Node0x55afb943acb0;
+	Node0x55afb9445a10 [shape=record,label="{libxml2-py.c:12167:}"];
+	Node0x55afb9445a10 -> Node0x55afb943acb0;
+	Node0x55afb943acb0 [shape=record,label="{libxml2-py.c:12170:}"];
+}

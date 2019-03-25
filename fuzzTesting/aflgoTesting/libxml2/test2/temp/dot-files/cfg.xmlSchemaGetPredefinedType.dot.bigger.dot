@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchemaGetPredefinedType' function" {
+	label="CFG for 'xmlSchemaGetPredefinedType' function";
+
+	Node0x557a4e223e50 [shape=record,label="{xmlschemastypes.c:1082:|{<s0>T|<s1>F}}"];
+	Node0x557a4e223e50:s0 -> Node0x557a4e223990;
+	Node0x557a4e223e50:s1 -> Node0x557a4e21f650;
+	Node0x557a4e223990 [shape=record,label="{xmlschemastypes.c:1084:}"];
+	Node0x557a4e223990 -> Node0x557a4e21f650;
+	Node0x557a4e21f650 [shape=record,label="{xmlschemastypes.c:1085:|{<s0>T|<s1>F}}"];
+	Node0x557a4e21f650:s0 -> Node0x557a4e22b6a0;
+	Node0x557a4e21f650:s1 -> Node0x557a4e22b6f0;
+	Node0x557a4e22b6a0 [shape=record,label="{xmlschemastypes.c:1086:}"];
+	Node0x557a4e22b6a0 -> Node0x557a4e21f450;
+	Node0x557a4e22b6f0 [shape=record,label="{xmlschemastypes.c:1087:}"];
+	Node0x557a4e22b6f0 -> Node0x557a4e21f450;
+	Node0x557a4e21f450 [shape=record,label="{xmlschemastypes.c:1088:}"];
+}

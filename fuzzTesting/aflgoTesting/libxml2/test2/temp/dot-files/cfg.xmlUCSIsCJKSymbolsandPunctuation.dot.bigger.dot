@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsCJKSymbolsandPunctuation' function" {
+	label="CFG for 'xmlUCSIsCJKSymbolsandPunctuation' function";
+
+	Node0x56123dcdf890 [shape=record,label="{xmlunicode.c:1249:|{<s0>T|<s1>F}}"];
+	Node0x56123dcdf890:s0 -> Node0x56123dce1490;
+	Node0x56123dcdf890:s1 -> Node0x56123dce1440;
+	Node0x56123dce1490 [shape=record,label="{xmlunicode.c:1250:}"];
+	Node0x56123dce1490 -> Node0x56123dce1440;
+	Node0x56123dce1440 [shape=record,label="{xmlunicode.c:1250:}"];
+}

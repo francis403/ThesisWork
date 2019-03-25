@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlTextReaderByteConsumed' function" {
+	label="CFG for 'libxml_xmlTextReaderByteConsumed' function";
+
+	Node0x55afb90c7890 [shape=record,label="{libxml2-py.c:7768:|{<s0>T|<s1>F}}"];
+	Node0x55afb90c7890:s0 -> Node0x55afb90cb6e0;
+	Node0x55afb90c7890:s1 -> Node0x55afb90cb690;
+	Node0x55afb90cb690 [shape=record,label="{libxml2-py.c:7775:}"];
+	Node0x55afb90cb690 -> Node0x55afb90c7b20;
+	Node0x55afb90cb6e0 [shape=record,label="{libxml2-py.c:7776:|{<s0>T|<s1>F}}"];
+	Node0x55afb90cb6e0:s0 -> Node0x55afb90cbed0;
+	Node0x55afb90cb6e0:s1 -> Node0x55afb90cbf20;
+	Node0x55afb90cbed0 [shape=record,label="{libxml2-py.c:7776:}"];
+	Node0x55afb90cbed0 -> Node0x55afb90cbf70;
+	Node0x55afb90cbf20 [shape=record,label="{libxml2-py.c:7776:}"];
+	Node0x55afb90cbf20 -> Node0x55afb90cbf70;
+	Node0x55afb90cbf70 [shape=record,label="{libxml2-py.c:7776:}"];
+	Node0x55afb90cbf70 -> Node0x55afb90c7b20;
+	Node0x55afb90c7b20 [shape=record,label="{libxml2-py.c:7781:}"];
+}

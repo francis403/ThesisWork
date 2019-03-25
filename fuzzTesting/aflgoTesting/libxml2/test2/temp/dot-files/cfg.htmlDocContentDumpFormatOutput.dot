@@ -1,0 +1,25 @@
+digraph "CFG for 'htmlDocContentDumpFormatOutput' function" {
+	label="CFG for 'htmlDocContentDumpFormatOutput' function";
+
+	Node0x5580bc4b3d50 [shape=record,label="{HTMLtree.c:1021:|{<s0>T|<s1>F}}"];
+	Node0x5580bc4b3d50 -> Node0x5580bc4b65f0;
+	Node0x5580bc4b3d50 -> Node0x5580bc4b6690;
+	Node0x5580bc4b6690 [shape=record,label="{HTMLtree.c:1027:|{<s0>T|<s1>F}}"];
+	Node0x5580bc4b6690 -> Node0x5580bc4b65f0;
+	Node0x5580bc4b6690 -> Node0x5580bc4b6640;
+	Node0x5580bc4b65f0 [shape=record,label="{HTMLtree.c:1028:}"];
+	Node0x5580bc4b65f0 -> Node0x5580bc4b3f00;
+	Node0x5580bc4b6640 [shape=record,label="{HTMLtree.c:1033:|{<s0>T|<s1>F}}"];
+	Node0x5580bc4b6640 -> Node0x5580bc4b7040;
+	Node0x5580bc4b6640 -> Node0x5580bc4b7090;
+	Node0x5580bc4b7040 [shape=record,label="{HTMLtree.c:1036:}"];
+	Node0x5580bc4b7040 -> Node0x5580bc4b7090;
+	Node0x5580bc4b7090 [shape=record,label="{HTMLtree.c:1038:|{<s0>T|<s1>F}}"];
+	Node0x5580bc4b7090 -> Node0x5580bc4b7f40;
+	Node0x5580bc4b7090 -> Node0x5580bc4b7f90;
+	Node0x5580bc4b7f40 [shape=record,label="{HTMLtree.c:1039:}"];
+	Node0x5580bc4b7f40 -> Node0x5580bc4b7f90;
+	Node0x5580bc4b7f90 [shape=record,label="{HTMLtree.c:1041:}"];
+	Node0x5580bc4b7f90 -> Node0x5580bc4b3f00;
+	Node0x5580bc4b3f00 [shape=record,label="{HTMLtree.c:1043:}"];
+}

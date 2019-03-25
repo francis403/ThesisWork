@@ -1,0 +1,26 @@
+digraph "CFG for 'xmlSchemaGetUnionSimpleTypeMemberTypes' function" {
+	label="CFG for 'xmlSchemaGetUnionSimpleTypeMemberTypes' function";
+
+	Node0x5644a8a813b0 [shape=record,label="{xmlschemas.c:14668:}"];
+	Node0x5644a8a813b0 -> Node0x5644a8a84f30;
+	Node0x5644a8a84f30 [shape=record,label="{xmlschemas.c:14670:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a84f30:s0 -> Node0x5644a8a87020;
+	Node0x5644a8a84f30:s1 -> Node0x5644a8a86fd0;
+	Node0x5644a8a87020 [shape=record,label="{xmlschemas.c:14670:}"];
+	Node0x5644a8a87020 -> Node0x5644a8a86fd0;
+	Node0x5644a8a86fd0 [shape=record,label="{xmlschemas.c:14670:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a86fd0:s0 -> Node0x5644a8a87550;
+	Node0x5644a8a86fd0:s1 -> Node0x5644a8a812b0;
+	Node0x5644a8a87550 [shape=record,label="{xmlschemas.c:14671:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a87550:s0 -> Node0x5644a8a87700;
+	Node0x5644a8a87550:s1 -> Node0x5644a8a877a0;
+	Node0x5644a8a87700 [shape=record,label="{xmlschemas.c:14672:}"];
+	Node0x5644a8a87700 -> Node0x5644a8a81400;
+	Node0x5644a8a877a0 [shape=record,label="{xmlschemas.c:14674:}"];
+	Node0x5644a8a877a0 -> Node0x5644a8a87750;
+	Node0x5644a8a87750 [shape=record,label="{xmlschemas.c:14670:}"];
+	Node0x5644a8a87750 -> Node0x5644a8a84f30;
+	Node0x5644a8a812b0 [shape=record,label="{xmlschemas.c:14676:}"];
+	Node0x5644a8a812b0 -> Node0x5644a8a81400;
+	Node0x5644a8a81400 [shape=record,label="{xmlschemas.c:14677:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlValidateNCName' function" {
+	label="CFG for 'libxml_xmlValidateNCName' function";
+
+	Node0x55afb94730c0 [shape=record,label="{libxml2-py.c:12389:|{<s0>T|<s1>F}}"];
+	Node0x55afb94730c0:s0 -> Node0x55afb94786a0;
+	Node0x55afb94730c0:s1 -> Node0x55afb9478650;
+	Node0x55afb9478650 [shape=record,label="{libxml2-py.c:12396:}"];
+	Node0x55afb9478650 -> Node0x55afb9472ee0;
+	Node0x55afb94786a0 [shape=record,label="{libxml2-py.c:12398:}"];
+	Node0x55afb94786a0 -> Node0x55afb9472ee0;
+	Node0x55afb9472ee0 [shape=record,label="{libxml2-py.c:12401:}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'getLineNumber' function" {
+	label="CFG for 'getLineNumber' function";
+
+	Node0x55cb217e7620 [shape=record,label="{legacy.c:797:|{<s0>T|<s1>F}}"];
+	Node0x55cb217e7620:s0 -> Node0x55cb217e8290;
+	Node0x55cb217e7620:s1 -> Node0x55cb217e4e50;
+	Node0x55cb217e8290 [shape=record,label="{legacy.c:799:}"];
+	Node0x55cb217e8290 -> Node0x55cb217e4e50;
+	Node0x55cb217e4e50 [shape=record,label="{legacy.c:799:}"];
+}

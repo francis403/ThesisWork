@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlGetDtdNotationDesc' function" {
+	label="CFG for 'xmlGetDtdNotationDesc' function";
+
+	Node0x556e5f3b7800 [shape=record,label="{valid.c:3357:|{<s0>T|<s1>F}}"];
+	Node0x556e5f3b7800:s0 -> Node0x556e5f3ba950;
+	Node0x556e5f3b7800:s1 -> Node0x556e5f3ba9a0;
+	Node0x556e5f3ba950 [shape=record,label="{valid.c:3360:}"];
+	Node0x556e5f3ba950 -> Node0x556e5f3b9a60;
+	Node0x556e5f3ba9a0 [shape=record,label="{valid.c:3361:|{<s0>T|<s1>F}}"];
+	Node0x556e5f3ba9a0:s0 -> Node0x556e5f3bae00;
+	Node0x556e5f3ba9a0:s1 -> Node0x556e5f3bae50;
+	Node0x556e5f3bae00 [shape=record,label="{valid.c:3361:}"];
+	Node0x556e5f3bae00 -> Node0x556e5f3b9a60;
+	Node0x556e5f3bae50 [shape=record,label="{valid.c:3362:}"];
+	Node0x556e5f3bae50 -> Node0x556e5f3b9a60;
+	Node0x556e5f3b9a60 [shape=record,label="{valid.c:3365:}"];
+}

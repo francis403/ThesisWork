@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsArabic' function" {
+	label="CFG for 'xmlUCSIsArabic' function";
+
+	Node0x56123dcc6de0 [shape=record,label="{xmlunicode.c:1002:|{<s0>T|<s1>F}}"];
+	Node0x56123dcc6de0 -> Node0x56123dcc5660;
+	Node0x56123dcc6de0 -> Node0x56123dcc5f10;
+	Node0x56123dcc5660 [shape=record,label="{xmlunicode.c:1003:}"];
+	Node0x56123dcc5660 -> Node0x56123dcc5f10;
+	Node0x56123dcc5f10 [shape=record,label="{xmlunicode.c:1003:}"];
+}

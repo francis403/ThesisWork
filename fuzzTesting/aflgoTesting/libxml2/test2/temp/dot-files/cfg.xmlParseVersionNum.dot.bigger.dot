@@ -1,0 +1,47 @@
+digraph "CFG for 'xmlParseVersionNum' function" {
+	label="CFG for 'xmlParseVersionNum' function";
+
+	Node0x5568847b98c0 [shape=record,label="{parser.c:10072:|{<s0>T|<s1>F}}"];
+	Node0x5568847b98c0:s0 -> Node0x5568847da2a0;
+	Node0x5568847b98c0:s1 -> Node0x5568847da2f0;
+	Node0x5568847da2a0 [shape=record,label="{parser.c:10080:}"];
+	Node0x5568847da2a0 -> Node0x5568847bda40;
+	Node0x5568847da2f0 [shape=record,label="{parser.c:10083:|{<s0>T|<s1>F}}"];
+	Node0x5568847da2f0:s0 -> Node0x5568847dac40;
+	Node0x5568847da2f0:s1 -> Node0x5568847daba0;
+	Node0x5568847dac40 [shape=record,label="{parser.c:10084:|{<s0>T|<s1>F}}"];
+	Node0x5568847dac40:s0 -> Node0x5568847dabf0;
+	Node0x5568847dac40:s1 -> Node0x5568847daba0;
+	Node0x5568847daba0 [shape=record,label="{parser.c:10085:}"];
+	Node0x5568847daba0 -> Node0x5568847bda40;
+	Node0x5568847dabf0 [shape=record,label="{parser.c:10088:|{<s0>T|<s1>F}}"];
+	Node0x5568847dabf0:s0 -> Node0x5568847dbf10;
+	Node0x5568847dabf0:s1 -> Node0x5568847dbf60;
+	Node0x5568847dbf10 [shape=record,label="{parser.c:10092:}"];
+	Node0x5568847dbf10 -> Node0x5568847bda40;
+	Node0x5568847dbf60 [shape=record,label="{parser.c:10095:}"];
+	Node0x5568847dbf60 -> Node0x5568847dcfa0;
+	Node0x5568847dcfa0 [shape=record,label="{parser.c:10098:|{<s0>T|<s1>F}}"];
+	Node0x5568847dcfa0:s0 -> Node0x5568847dd290;
+	Node0x5568847dcfa0:s1 -> Node0x5568847dd240;
+	Node0x5568847dd290 [shape=record,label="{parser.c:10098:}"];
+	Node0x5568847dd290 -> Node0x5568847dd240;
+	Node0x5568847dd240 [shape=record,label="{parser.c:10098:|{<s0>T|<s1>F}}"];
+	Node0x5568847dd240:s0 -> Node0x5568847dd7b0;
+	Node0x5568847dd240:s1 -> Node0x5568847dd1c0;
+	Node0x5568847dd7b0 [shape=record,label="{parser.c:10099:|{<s0>T|<s1>F}}"];
+	Node0x5568847dd7b0:s0 -> Node0x5568847dd9a0;
+	Node0x5568847dd7b0:s1 -> Node0x5568847dd9f0;
+	Node0x5568847dd9a0 [shape=record,label="{parser.c:10100:|{<s0>T|<s1>F}}"];
+	Node0x5568847dd9a0:s0 -> Node0x5568847de720;
+	Node0x5568847dd9a0:s1 -> Node0x5568847de770;
+	Node0x5568847de720 [shape=record,label="{parser.c:10105:}"];
+	Node0x5568847de720 -> Node0x5568847bda40;
+	Node0x5568847de770 [shape=record,label="{parser.c:10109:}"];
+	Node0x5568847de770 -> Node0x5568847dd9f0;
+	Node0x5568847dd9f0 [shape=record,label="{parser.c:10111:}"];
+	Node0x5568847dd9f0 -> Node0x5568847dcfa0;
+	Node0x5568847dd1c0 [shape=record,label="{parser.c:10115:}"];
+	Node0x5568847dd1c0 -> Node0x5568847bda40;
+	Node0x5568847bda40 [shape=record,label="{parser.c:10117:}"];
+}

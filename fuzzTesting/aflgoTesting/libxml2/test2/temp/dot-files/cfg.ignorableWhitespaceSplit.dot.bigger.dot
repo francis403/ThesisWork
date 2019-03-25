@@ -1,0 +1,23 @@
+digraph "CFG for 'ignorableWhitespaceSplit' function" {
+	label="CFG for 'ignorableWhitespaceSplit' function";
+
+	Node0x5644a903e9c0 [shape=record,label="{xmlschemas.c:28539:|{<s0>T|<s1>F}}"];
+	Node0x5644a903e9c0:s0 -> Node0x5644a903fb20;
+	Node0x5644a903e9c0:s1 -> Node0x5644a903fb70;
+	Node0x5644a903fb20 [shape=record,label="{xmlschemas.c:28543:}"];
+	Node0x5644a903fb20 -> Node0x5644a9040e30;
+	Node0x5644a903fb70 [shape=record,label="{xmlschemas.c:28544:|{<s0>T|<s1>F}}"];
+	Node0x5644a903fb70:s0 -> Node0x5644a903ffc0;
+	Node0x5644a903fb70:s1 -> Node0x5644a903ff70;
+	Node0x5644a903ffc0 [shape=record,label="{xmlschemas.c:28545:|{<s0>T|<s1>F}}"];
+	Node0x5644a903ffc0:s0 -> Node0x5644a903ff20;
+	Node0x5644a903ffc0:s1 -> Node0x5644a903ff70;
+	Node0x5644a903ff20 [shape=record,label="{xmlschemas.c:28546:}"];
+	Node0x5644a903ff20 -> Node0x5644a903ff70;
+	Node0x5644a903ff70 [shape=record,label="{xmlschemas.c:28547:|{<s0>T|<s1>F}}"];
+	Node0x5644a903ff70:s0 -> Node0x5644a9040de0;
+	Node0x5644a903ff70:s1 -> Node0x5644a9040e30;
+	Node0x5644a9040de0 [shape=record,label="{xmlschemas.c:28548:}"];
+	Node0x5644a9040de0 -> Node0x5644a9040e30;
+	Node0x5644a9040e30 [shape=record,label="{xmlschemas.c:28549:}"];
+}

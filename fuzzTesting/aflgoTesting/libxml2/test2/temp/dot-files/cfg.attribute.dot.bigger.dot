@@ -1,0 +1,10 @@
+digraph "CFG for 'attribute' function" {
+	label="CFG for 'attribute' function";
+
+	Node0x55cb21811070 [shape=record,label="{legacy.c:1120:|{<s0>T|<s1>F}}"];
+	Node0x55cb21811070 -> Node0x55cb21812e40;
+	Node0x55cb21811070 -> Node0x55cb21812e90;
+	Node0x55cb21812e40 [shape=record,label="{legacy.c:1124:}"];
+	Node0x55cb21812e40 -> Node0x55cb21812e90;
+	Node0x55cb21812e90 [shape=record,label="{legacy.c:1124:}"];
+}

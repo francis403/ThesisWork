@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSaveToFd' function" {
+	label="CFG for 'xmlSaveToFd' function";
+
+	Node0x561c33030bc0 [shape=record,label="{xmlsave.c:1802:|{<s0>T|<s1>F}}"];
+	Node0x561c33030bc0:s0 -> Node0x561c3306b130;
+	Node0x561c33030bc0:s1 -> Node0x561c3306b180;
+	Node0x561c3306b130 [shape=record,label="{xmlsave.c:1807:}"];
+	Node0x561c3306b130 -> Node0x561c33054b20;
+	Node0x561c3306b180 [shape=record,label="{xmlsave.c:1808:|{<s0>T|<s1>F}}"];
+	Node0x561c3306b180:s0 -> Node0x561c3306bb40;
+	Node0x561c3306b180:s1 -> Node0x561c3306bb90;
+	Node0x561c3306bb40 [shape=record,label="{xmlsave.c:1810:}"];
+	Node0x561c3306bb40 -> Node0x561c33054b20;
+	Node0x561c3306bb90 [shape=record,label="{xmlsave.c:1813:}"];
+	Node0x561c3306bb90 -> Node0x561c33054b20;
+	Node0x561c33054b20 [shape=record,label="{xmlsave.c:1814:}"];
+}

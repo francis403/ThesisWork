@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlDictSetLimit' function" {
+	label="CFG for 'xmlDictSetLimit' function";
+
+	Node0x5612f263ca60 [shape=record,label="{dict.c:1256:|{<s0>T|<s1>F}}"];
+	Node0x5612f263ca60:s0 -> Node0x5612f263f3f0;
+	Node0x5612f263ca60:s1 -> Node0x5612f263f440;
+	Node0x5612f263f3f0 [shape=record,label="{dict.c:1260:}"];
+	Node0x5612f263f3f0 -> Node0x5612f263e810;
+	Node0x5612f263f440 [shape=record,label="{dict.c:1261:}"];
+	Node0x5612f263f440 -> Node0x5612f263e810;
+	Node0x5612f263e810 [shape=record,label="{dict.c:1264:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlTextReaderXmlLang' function" {
+	label="CFG for 'xmlTextReaderXmlLang' function";
+
+	Node0x556e3dbafb70 [shape=record,label="{xmlreader.c:3716:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbafb70:s0 -> Node0x556e3dbb06a0;
+	Node0x556e3dbafb70:s1 -> Node0x556e3dbab4d0;
+	Node0x556e3dbb06a0 [shape=record,label="{xmlreader.c:3718:}"];
+	Node0x556e3dbb06a0 -> Node0x556e3dbafbc0;
+	Node0x556e3dbab4d0 [shape=record,label="{xmlreader.c:3719:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbab4d0:s0 -> Node0x556e3dbb13e0;
+	Node0x556e3dbab4d0:s1 -> Node0x556e3dbb1430;
+	Node0x556e3dbb13e0 [shape=record,label="{xmlreader.c:3720:}"];
+	Node0x556e3dbb13e0 -> Node0x556e3dbafbc0;
+	Node0x556e3dbb1430 [shape=record,label="{xmlreader.c:3721:}"];
+	Node0x556e3dbb1430 -> Node0x556e3dbafbc0;
+	Node0x556e3dbafbc0 [shape=record,label="{xmlreader.c:3722:}"];
+}

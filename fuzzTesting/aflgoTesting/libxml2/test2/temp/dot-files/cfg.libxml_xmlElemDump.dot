@@ -1,0 +1,43 @@
+digraph "CFG for 'libxml_xmlElemDump' function" {
+	label="CFG for 'libxml_xmlElemDump' function";
+
+	Node0x55afb8b82870 [shape=record,label="{libxml2-py.c:2467:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b82870:s0 -> Node0x55afb8b87560;
+	Node0x55afb8b82870:s1 -> Node0x55afb8b87510;
+	Node0x55afb8b87510 [shape=record,label="{libxml2-py.c:2476:}"];
+	Node0x55afb8b87510 -> Node0x55afb8b826c0;
+	Node0x55afb8b87560 [shape=record,label="{libxml2-py.c:2477:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b87560:s0 -> Node0x55afb8b87e30;
+	Node0x55afb8b87560:s1 -> Node0x55afb8b87e80;
+	Node0x55afb8b87e30 [shape=record,label="{libxml2-py.c:2477:}"];
+	Node0x55afb8b87e30 -> Node0x55afb8b87ed0;
+	Node0x55afb8b87e80 [shape=record,label="{libxml2-py.c:2477:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b87e80:s0 -> Node0x55afb8b880f0;
+	Node0x55afb8b87e80:s1 -> Node0x55afb8b881e0;
+	Node0x55afb8b881e0 [shape=record,label="{libxml2-py.c:2477:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b881e0:s0 -> Node0x55afb8b880f0;
+	Node0x55afb8b881e0:s1 -> Node0x55afb8b88140;
+	Node0x55afb8b880f0 [shape=record,label="{libxml2-py.c:2477:}"];
+	Node0x55afb8b880f0 -> Node0x55afb8b88190;
+	Node0x55afb8b88140 [shape=record,label="{libxml2-py.c:2477:}"];
+	Node0x55afb8b88140 -> Node0x55afb8b88190;
+	Node0x55afb8b88190 [shape=record,label="{libxml2-py.c:2477:}"];
+	Node0x55afb8b88190 -> Node0x55afb8b87ed0;
+	Node0x55afb8b87ed0 [shape=record,label="{libxml2-py.c:2477:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b87ed0:s0 -> Node0x55afb8b88ae0;
+	Node0x55afb8b87ed0:s1 -> Node0x55afb8b88b30;
+	Node0x55afb8b88ae0 [shape=record,label="{libxml2-py.c:2478:}"];
+	Node0x55afb8b88ae0 -> Node0x55afb8b88b80;
+	Node0x55afb8b88b30 [shape=record,label="{libxml2-py.c:2478:}"];
+	Node0x55afb8b88b30 -> Node0x55afb8b88b80;
+	Node0x55afb8b88b80 [shape=record,label="{libxml2-py.c:2478:|{<s0>T|<s1>F}}"];
+	Node0x55afb8b88b80:s0 -> Node0x55afb8b89170;
+	Node0x55afb8b88b80:s1 -> Node0x55afb8b891c0;
+	Node0x55afb8b89170 [shape=record,label="{libxml2-py.c:2479:}"];
+	Node0x55afb8b89170 -> Node0x55afb8b89210;
+	Node0x55afb8b891c0 [shape=record,label="{libxml2-py.c:2479:}"];
+	Node0x55afb8b891c0 -> Node0x55afb8b89210;
+	Node0x55afb8b89210 [shape=record,label="{libxml2-py.c:2479:}"];
+	Node0x55afb8b89210 -> Node0x55afb8b826c0;
+	Node0x55afb8b826c0 [shape=record,label="{libxml2-py.c:2485:}"];
+}

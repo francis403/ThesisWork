@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_htmlIsScriptAttribute' function" {
+	label="CFG for 'libxml_htmlIsScriptAttribute' function";
+
+	Node0x55afb8951500 [shape=record,label="{libxml2-py.c:375:|{<s0>T|<s1>F}}"];
+	Node0x55afb8951500:s0 -> Node0x55afb8954300;
+	Node0x55afb8951500:s1 -> Node0x55afb89542b0;
+	Node0x55afb89542b0 [shape=record,label="{libxml2-py.c:381:}"];
+	Node0x55afb89542b0 -> Node0x55afb8951790;
+	Node0x55afb8954300 [shape=record,label="{libxml2-py.c:383:}"];
+	Node0x55afb8954300 -> Node0x55afb8951790;
+	Node0x55afb8951790 [shape=record,label="{libxml2-py.c:386:}"];
+}

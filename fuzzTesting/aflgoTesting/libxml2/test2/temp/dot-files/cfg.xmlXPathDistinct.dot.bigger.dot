@@ -1,0 +1,18 @@
+digraph "CFG for 'xmlXPathDistinct' function" {
+	label="CFG for 'xmlXPathDistinct' function";
+
+	Node0x562a799a5940 [shape=record,label="{xpath.c:4586:|{<s0>T|<s1>F}}"];
+	Node0x562a799a5940:s0 -> Node0x562a799a86e0;
+	Node0x562a799a5940:s1 -> Node0x562a799a56f0;
+	Node0x562a799a56f0 [shape=record,label="{xpath.c:4587:|{<s0>T|<s1>F}}"];
+	Node0x562a799a56f0:s0 -> Node0x562a799a86e0;
+	Node0x562a799a56f0:s1 -> Node0x562a799a8230;
+	Node0x562a799a8230 [shape=record,label="{xpath.c:4587:|{<s0>T|<s1>F}}"];
+	Node0x562a799a8230:s0 -> Node0x562a799a86e0;
+	Node0x562a799a8230:s1 -> Node0x562a799a8490;
+	Node0x562a799a86e0 [shape=record,label="{xpath.c:4588:}"];
+	Node0x562a799a86e0 -> Node0x562a799a5800;
+	Node0x562a799a8490 [shape=record,label="{xpath.c:4590:}"];
+	Node0x562a799a8490 -> Node0x562a799a5800;
+	Node0x562a799a5800 [shape=record,label="{xpath.c:4592:}"];
+}

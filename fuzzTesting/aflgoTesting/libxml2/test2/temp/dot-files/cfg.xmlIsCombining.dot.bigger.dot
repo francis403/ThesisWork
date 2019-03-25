@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlIsCombining' function" {
+	label="CFG for 'xmlIsCombining' function";
+
+	Node0x561aa1a5f590 [shape=record,label="{chvalid.c:271:|{<s0>T|<s1>F}}"];
+	Node0x561aa1a5f590:s0 -> Node0x561aa1a61a70;
+	Node0x561aa1a5f590:s1 -> Node0x561aa1a61b40;
+	Node0x561aa1a61a70 [shape=record,label="{chvalid.c:272:}"];
+	Node0x561aa1a61a70 -> Node0x561aa1a5fc70;
+	Node0x561aa1a61b40 [shape=record,label="{chvalid.c:272:}"];
+	Node0x561aa1a61b40 -> Node0x561aa1a5fc70;
+	Node0x561aa1a5fc70 [shape=record,label="{chvalid.c:272:}"];
+}

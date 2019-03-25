@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathNsLookup' function" {
+	label="CFG for 'libxml_xmlXPathNsLookup' function";
+
+	Node0x55afb9603780 [shape=record,label="{libxml2-py.c:14038:|{<s0>T|<s1>F}}"];
+	Node0x55afb9603780:s0 -> Node0x55afb9606f10;
+	Node0x55afb9603780:s1 -> Node0x55afb9606ec0;
+	Node0x55afb9606ec0 [shape=record,label="{libxml2-py.c:14046:}"];
+	Node0x55afb9606ec0 -> Node0x55afb9603510;
+	Node0x55afb9606f10 [shape=record,label="{libxml2-py.c:14047:|{<s0>T|<s1>F}}"];
+	Node0x55afb9606f10:s0 -> Node0x55afb9607760;
+	Node0x55afb9606f10:s1 -> Node0x55afb96077b0;
+	Node0x55afb9607760 [shape=record,label="{libxml2-py.c:14047:}"];
+	Node0x55afb9607760 -> Node0x55afb9607800;
+	Node0x55afb96077b0 [shape=record,label="{libxml2-py.c:14047:}"];
+	Node0x55afb96077b0 -> Node0x55afb9607800;
+	Node0x55afb9607800 [shape=record,label="{libxml2-py.c:14047:}"];
+	Node0x55afb9607800 -> Node0x55afb9603510;
+	Node0x55afb9603510 [shape=record,label="{libxml2-py.c:14052:}"];
+}

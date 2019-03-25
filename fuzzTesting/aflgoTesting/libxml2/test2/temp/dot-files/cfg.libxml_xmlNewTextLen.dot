@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlNewTextLen' function" {
+	label="CFG for 'libxml_xmlNewTextLen' function";
+
+	Node0x55afb8d62600 [shape=record,label="{libxml2-py.c:4299:|{<s0>T|<s1>F}}"];
+	Node0x55afb8d62600:s0 -> Node0x55afb8d6c4d0;
+	Node0x55afb8d62600:s1 -> Node0x55afb8d6c480;
+	Node0x55afb8d6c480 [shape=record,label="{libxml2-py.c:4306:}"];
+	Node0x55afb8d6c480 -> Node0x55afb8d627e0;
+	Node0x55afb8d6c4d0 [shape=record,label="{libxml2-py.c:4308:}"];
+	Node0x55afb8d6c4d0 -> Node0x55afb8d627e0;
+	Node0x55afb8d627e0 [shape=record,label="{libxml2-py.c:4311:}"];
+}

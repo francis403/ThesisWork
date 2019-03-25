@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlCatalogSetDebug' function" {
+	label="CFG for 'xmlCatalogSetDebug' function";
+
+	Node0x5621aa404c30 [shape=record,label="{catalog.c:3579:|{<s0>T|<s1>F}}"];
+	Node0x5621aa404c30:s0 -> Node0x5621aa406a70;
+	Node0x5621aa404c30:s1 -> Node0x5621aa406b10;
+	Node0x5621aa406a70 [shape=record,label="{catalog.c:3583:}"];
+	Node0x5621aa406a70 -> Node0x5621aa406ac0;
+	Node0x5621aa406b10 [shape=record,label="{catalog.c:3585:}"];
+	Node0x5621aa406b10 -> Node0x5621aa406ac0;
+	Node0x5621aa406ac0 [shape=record,label="{catalog.c:3586:}"];
+}

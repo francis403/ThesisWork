@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlSchemaPMutualExclAttrErr' function" {
+	label="CFG for 'xmlSchemaPMutualExclAttrErr' function";
+
+	Node0x5644a885a9c0 [shape=record,label="{xmlschemas.c:3091:|{<s0>T|<s1>F}}"];
+	Node0x5644a885a9c0 -> Node0x5644a8611c80;
+	Node0x5644a885a9c0 -> Node0x5644a8611cd0;
+	Node0x5644a8611c80 [shape=record,label="{xmlschemas.c:3104:}"];
+	Node0x5644a8611c80 -> Node0x5644a8611cd0;
+	Node0x5644a8611cd0 [shape=record,label="{xmlschemas.c:3105:}"];
+}

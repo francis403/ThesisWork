@@ -1,0 +1,17 @@
+digraph "CFG for 'htmlGetEndPriority' function" {
+	label="CFG for 'htmlGetEndPriority' function";
+
+	Node0x5651a5eb12f0 [shape=record,label="{HTMLparser.c:1273:}"];
+	Node0x5651a5eb12f0 -> Node0x5651a5eb1cf0;
+	Node0x5651a5eb1cf0 [shape=record,label="{HTMLparser.c:1276:|{<s0>T|<s1>F}}"];
+	Node0x5651a5eb1cf0 -> Node0x5651a5eb1fb0;
+	Node0x5651a5eb1cf0 -> Node0x5651a5eb1f60;
+	Node0x5651a5eb1fb0 [shape=record,label="{HTMLparser.c:1277:}"];
+	Node0x5651a5eb1fb0 -> Node0x5651a5eb1f60;
+	Node0x5651a5eb1f60 [shape=record,label="{HTMLparser.c:1276:|{<s0>T|<s1>F}}"];
+	Node0x5651a5eb1f60 -> Node0x5651a5eb2140;
+	Node0x5651a5eb1f60 -> Node0x5651a5eb1ee0;
+	Node0x5651a5eb2140 [shape=record,label="{HTMLparser.c:1278:}"];
+	Node0x5651a5eb2140 -> Node0x5651a5eb1cf0;
+	Node0x5651a5eb1ee0 [shape=record,label="{HTMLparser.c:1280:}"];
+}

@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlSAX2Reference' function" {
+	label="CFG for 'xmlSAX2Reference' function";
+
+	Node0x55fcf7d4da00 [shape=record,label="{SAX2.c:2502:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7d4da00:s0 -> Node0x55fcf7d50e80;
+	Node0x55fcf7d4da00:s1 -> Node0x55fcf7d50ed0;
+	Node0x55fcf7d50e80 [shape=record,label="{SAX2.c:2507:}"];
+	Node0x55fcf7d50e80 -> Node0x55fcf7d527d0;
+	Node0x55fcf7d50ed0 [shape=record,label="{SAX2.c:2512:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7d50ed0:s0 -> Node0x55fcf7d51280;
+	Node0x55fcf7d50ed0:s1 -> Node0x55fcf7d51320;
+	Node0x55fcf7d51280 [shape=record,label="{SAX2.c:2513:}"];
+	Node0x55fcf7d51280 -> Node0x55fcf7d512d0;
+	Node0x55fcf7d51320 [shape=record,label="{SAX2.c:2515:}"];
+	Node0x55fcf7d51320 -> Node0x55fcf7d512d0;
+	Node0x55fcf7d512d0 [shape=record,label="{SAX2.c:2520:|{<s0>T|<s1>F}}"];
+	Node0x55fcf7d512d0:s0 -> Node0x55fcf7d52780;
+	Node0x55fcf7d512d0:s1 -> Node0x55fcf7d527d0;
+	Node0x55fcf7d52780 [shape=record,label="{SAX2.c:2521:}"];
+	Node0x55fcf7d52780 -> Node0x55fcf7d527d0;
+	Node0x55fcf7d527d0 [shape=record,label="{SAX2.c:2523:}"];
+}

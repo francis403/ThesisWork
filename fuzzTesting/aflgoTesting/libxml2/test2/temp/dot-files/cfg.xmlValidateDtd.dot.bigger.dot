@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlValidateDtd' function" {
+	label="CFG for 'xmlValidateDtd' function";
+
+	Node0x556e5f890d10 [shape=record,label="{valid.c:6654:|{<s0>T|<s1>F}}"];
+	Node0x556e5f890d10:s0 -> Node0x556e5f8965a0;
+	Node0x556e5f890d10:s1 -> Node0x556e5f8965f0;
+	Node0x556e5f8965a0 [shape=record,label="{valid.c:6659:}"];
+	Node0x556e5f8965a0 -> Node0x556e5f6e6f90;
+	Node0x556e5f8965f0 [shape=record,label="{valid.c:6660:|{<s0>T|<s1>F}}"];
+	Node0x556e5f8965f0:s0 -> Node0x556e5f896a80;
+	Node0x556e5f8965f0:s1 -> Node0x556e5f896ad0;
+	Node0x556e5f896a80 [shape=record,label="{valid.c:6660:}"];
+	Node0x556e5f896a80 -> Node0x556e5f6e6f90;
+	Node0x556e5f896ad0 [shape=record,label="{valid.c:6661:|{<s0>T|<s1>F}}"];
+	Node0x556e5f896ad0:s0 -> Node0x556e5f8979d0;
+	Node0x556e5f896ad0:s1 -> Node0x556e5f897a20;
+	Node0x556e5f8979d0 [shape=record,label="{valid.c:6667:}"];
+	Node0x556e5f8979d0 -> Node0x556e5f6e6f90;
+	Node0x556e5f897a20 [shape=record,label="{valid.c:6671:|{<s0>T|<s1>F}}"];
+	Node0x556e5f897a20:s0 -> Node0x556e5f898520;
+	Node0x556e5f897a20:s1 -> Node0x556e5f898570;
+	Node0x556e5f898520 [shape=record,label="{valid.c:6672:}"];
+	Node0x556e5f898520 -> Node0x556e5f898570;
+	Node0x556e5f898570 [shape=record,label="{valid.c:6675:|{<s0>T|<s1>F}}"];
+	Node0x556e5f898570:s0 -> Node0x556e5f899010;
+	Node0x556e5f898570:s1 -> Node0x556e5f899060;
+	Node0x556e5f899010 [shape=record,label="{valid.c:6676:}"];
+	Node0x556e5f899010 -> Node0x556e5f899060;
+	Node0x556e5f899060 [shape=record,label="{valid.c:6679:}"];
+	Node0x556e5f899060 -> Node0x556e5f6e6f90;
+	Node0x556e5f6e6f90 [shape=record,label="{valid.c:6685:}"];
+}

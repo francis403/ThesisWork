@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlExpandCatalog' function" {
+	label="CFG for 'xmlExpandCatalog' function";
+
+	Node0x5621aa59b190 [shape=record,label="{catalog.c:2740:|{<s0>T|<s1>F}}"];
+	Node0x5621aa59b190:s0 -> Node0x5621aa59c620;
+	Node0x5621aa59b190:s1 -> Node0x5621aa59c6c0;
+	Node0x5621aa59c6c0 [shape=record,label="{catalog.c:2744:|{<s0>T|<s1>F}}"];
+	Node0x5621aa59c6c0:s0 -> Node0x5621aa59c620;
+	Node0x5621aa59c6c0:s1 -> Node0x5621aa59c670;
+	Node0x5621aa59c620 [shape=record,label="{catalog.c:2745:}"];
+	Node0x5621aa59c620 -> Node0x5621aa59b1e0;
+	Node0x5621aa59c670 [shape=record,label="{catalog.c:2748:|{<s0>T|<s1>F}}"];
+	Node0x5621aa59c670:s0 -> Node0x5621aa59cde0;
+	Node0x5621aa59c670:s1 -> Node0x5621aa59ce80;
+	Node0x5621aa59cde0 [shape=record,label="{catalog.c:2749:|{<s0>T|<s1>F}}"];
+	Node0x5621aa59cde0:s0 -> Node0x5621aa59d700;
+	Node0x5621aa59cde0:s1 -> Node0x5621aa59d750;
+	Node0x5621aa59d700 [shape=record,label="{catalog.c:2753:}"];
+	Node0x5621aa59d700 -> Node0x5621aa59b1e0;
+	Node0x5621aa59d750 [shape=record,label="{catalog.c:2755:|{<s0>T|<s1>F}}"];
+	Node0x5621aa59d750:s0 -> Node0x5621aa59df00;
+	Node0x5621aa59d750:s1 -> Node0x5621aa59df50;
+	Node0x5621aa59df00 [shape=record,label="{catalog.c:2757:}"];
+	Node0x5621aa59df00 -> Node0x5621aa59b1e0;
+	Node0x5621aa59df50 [shape=record,label="{catalog.c:2760:}"];
+	Node0x5621aa59df50 -> Node0x5621aa59ce30;
+	Node0x5621aa59ce80 [shape=record,label="{catalog.c:2762:|{<s0>T|<s1>F}}"];
+	Node0x5621aa59ce80:s0 -> Node0x5621aa59f420;
+	Node0x5621aa59ce80:s1 -> Node0x5621aa59f4c0;
+	Node0x5621aa59f420 [shape=record,label="{catalog.c:2768:}"];
+	Node0x5621aa59f420 -> Node0x5621aa59f470;
+	Node0x5621aa59f4c0 [shape=record,label="{catalog.c:2770:}"];
+	Node0x5621aa59f4c0 -> Node0x5621aa59fae0;
+	Node0x5621aa59fae0 [shape=record,label="{catalog.c:2770:|{<s0>T|<s1>F}}"];
+	Node0x5621aa59fae0:s0 -> Node0x5621aa59ff70;
+	Node0x5621aa59fae0:s1 -> Node0x5621aa59fd00;
+	Node0x5621aa59ff70 [shape=record,label="{catalog.c:2770:}"];
+	Node0x5621aa59ff70 -> Node0x5621aa59fae0;
+	Node0x5621aa59fd00 [shape=record,label="{catalog.c:2771:}"];
+	Node0x5621aa59fd00 -> Node0x5621aa59f470;
+	Node0x5621aa59f470 [shape=record,label="{%52}"];
+	Node0x5621aa59f470 -> Node0x5621aa59ce30;
+	Node0x5621aa59ce30 [shape=record,label="{catalog.c:2774:}"];
+	Node0x5621aa59ce30 -> Node0x5621aa59b1e0;
+	Node0x5621aa59b1e0 [shape=record,label="{catalog.c:2775:}"];
+}

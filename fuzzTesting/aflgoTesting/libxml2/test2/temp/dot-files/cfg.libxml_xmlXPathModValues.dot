@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathModValues' function" {
+	label="CFG for 'libxml_xmlXPathModValues' function";
+
+	Node0x55afb957e9a0 [shape=record,label="{libxml2-py.c:13489:|{<s0>T|<s1>F}}"];
+	Node0x55afb957e9a0:s0 -> Node0x55afb95819f0;
+	Node0x55afb957e9a0:s1 -> Node0x55afb95819a0;
+	Node0x55afb95819a0 [shape=record,label="{libxml2-py.c:13494:}"];
+	Node0x55afb95819a0 -> Node0x55afb957e6c0;
+	Node0x55afb95819f0 [shape=record,label="{libxml2-py.c:13495:|{<s0>T|<s1>F}}"];
+	Node0x55afb95819f0:s0 -> Node0x55afb95821d0;
+	Node0x55afb95819f0:s1 -> Node0x55afb9582220;
+	Node0x55afb95821d0 [shape=record,label="{libxml2-py.c:13495:}"];
+	Node0x55afb95821d0 -> Node0x55afb9582270;
+	Node0x55afb9582220 [shape=record,label="{libxml2-py.c:13495:}"];
+	Node0x55afb9582220 -> Node0x55afb9582270;
+	Node0x55afb9582270 [shape=record,label="{libxml2-py.c:13495:}"];
+	Node0x55afb9582270 -> Node0x55afb957e6c0;
+	Node0x55afb957e6c0 [shape=record,label="{libxml2-py.c:13500:}"];
+}

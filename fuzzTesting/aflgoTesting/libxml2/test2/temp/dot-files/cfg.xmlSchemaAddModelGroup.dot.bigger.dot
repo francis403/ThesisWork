@@ -1,0 +1,28 @@
+digraph "CFG for 'xmlSchemaAddModelGroup' function" {
+	label="CFG for 'xmlSchemaAddModelGroup' function";
+
+	Node0x5644a87dd770 [shape=record,label="{xmlschemas.c:5499:|{<s0>T|<s1>F}}"];
+	Node0x5644a87dd770:s0 -> Node0x5644a87df5f0;
+	Node0x5644a87dd770:s1 -> Node0x5644a87df690;
+	Node0x5644a87df690 [shape=record,label="{xmlschemas.c:5506:|{<s0>T|<s1>F}}"];
+	Node0x5644a87df690:s0 -> Node0x5644a87df5f0;
+	Node0x5644a87df690:s1 -> Node0x5644a87df640;
+	Node0x5644a87df5f0 [shape=record,label="{xmlschemas.c:5507:}"];
+	Node0x5644a87df5f0 -> Node0x5644a87b4020;
+	Node0x5644a87df640 [shape=record,label="{xmlschemas.c:5510:|{<s0>T|<s1>F}}"];
+	Node0x5644a87df640:s0 -> Node0x5644a87e0050;
+	Node0x5644a87df640:s1 -> Node0x5644a87e00a0;
+	Node0x5644a87e0050 [shape=record,label="{xmlschemas.c:5512:}"];
+	Node0x5644a87e0050 -> Node0x5644a87b4020;
+	Node0x5644a87e00a0 [shape=record,label="{xmlschemas.c:5516:|{<s0>T|<s1>F}}"];
+	Node0x5644a87e00a0:s0 -> Node0x5644a87e13e0;
+	Node0x5644a87e00a0:s1 -> Node0x5644a87e1480;
+	Node0x5644a87e1480 [shape=record,label="{xmlschemas.c:5521:|{<s0>T|<s1>F}}"];
+	Node0x5644a87e1480:s0 -> Node0x5644a87e13e0;
+	Node0x5644a87e1480:s1 -> Node0x5644a87e1430;
+	Node0x5644a87e13e0 [shape=record,label="{xmlschemas.c:5522:}"];
+	Node0x5644a87e13e0 -> Node0x5644a87e1430;
+	Node0x5644a87e1430 [shape=record,label="{xmlschemas.c:5523:}"];
+	Node0x5644a87e1430 -> Node0x5644a87b4020;
+	Node0x5644a87b4020 [shape=record,label="{xmlschemas.c:5524:}"];
+}

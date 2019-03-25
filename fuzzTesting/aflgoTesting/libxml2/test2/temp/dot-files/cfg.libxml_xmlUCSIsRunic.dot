@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsRunic' function" {
+	label="CFG for 'libxml_xmlUCSIsRunic' function";
+
+	Node0x55afb9375a80 [shape=record,label="{libxml2-py.c:11211:|{<s0>T|<s1>F}}"];
+	Node0x55afb9375a80:s0 -> Node0x55afb9378a10;
+	Node0x55afb9375a80:s1 -> Node0x55afb93789c0;
+	Node0x55afb93789c0 [shape=record,label="{libxml2-py.c:11217:}"];
+	Node0x55afb93789c0 -> Node0x55afb9375d80;
+	Node0x55afb9378a10 [shape=record,label="{libxml2-py.c:11219:}"];
+	Node0x55afb9378a10 -> Node0x55afb9375d80;
+	Node0x55afb9375d80 [shape=record,label="{libxml2-py.c:11222:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlC14NFreeCtx' function" {
+	label="CFG for 'xmlC14NFreeCtx' function";
+
+	Node0x55b0aed79150 [shape=record,label="{c14n.c:1744:|{<s0>T|<s1>F}}"];
+	Node0x55b0aed79150:s0 -> Node0x55b0aed79270;
+	Node0x55b0aed79150:s1 -> Node0x55b0aed792c0;
+	Node0x55b0aed79270 [shape=record,label="{c14n.c:1747:}"];
+	Node0x55b0aed79270 -> Node0x55b0aed791a0;
+	Node0x55b0aed792c0 [shape=record,label="{c14n.c:1751:|{<s0>T|<s1>F}}"];
+	Node0x55b0aed792c0:s0 -> Node0x55b0aed7ba90;
+	Node0x55b0aed792c0:s1 -> Node0x55b0aed7bae0;
+	Node0x55b0aed7ba90 [shape=record,label="{c14n.c:1752:}"];
+	Node0x55b0aed7ba90 -> Node0x55b0aed7bae0;
+	Node0x55b0aed7bae0 [shape=record,label="{c14n.c:1754:}"];
+	Node0x55b0aed7bae0 -> Node0x55b0aed791a0;
+	Node0x55b0aed791a0 [shape=record,label="{c14n.c:1755:}"];
+}

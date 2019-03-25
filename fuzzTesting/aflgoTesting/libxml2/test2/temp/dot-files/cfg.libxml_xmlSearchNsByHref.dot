@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlSearchNsByHref' function" {
+	label="CFG for 'libxml_xmlSearchNsByHref' function";
+
+	Node0x55afb903af00 [shape=record,label="{libxml2-py.c:7156:|{<s0>T|<s1>F}}"];
+	Node0x55afb903af00:s0 -> Node0x55afb90403b0;
+	Node0x55afb903af00:s1 -> Node0x55afb9040360;
+	Node0x55afb9040360 [shape=record,label="{libxml2-py.c:7166:}"];
+	Node0x55afb9040360 -> Node0x55afb903e120;
+	Node0x55afb90403b0 [shape=record,label="{libxml2-py.c:7167:|{<s0>T|<s1>F}}"];
+	Node0x55afb90403b0:s0 -> Node0x55afb9040c80;
+	Node0x55afb90403b0:s1 -> Node0x55afb9040cd0;
+	Node0x55afb9040c80 [shape=record,label="{libxml2-py.c:7167:}"];
+	Node0x55afb9040c80 -> Node0x55afb9040d20;
+	Node0x55afb9040cd0 [shape=record,label="{libxml2-py.c:7167:}"];
+	Node0x55afb9040cd0 -> Node0x55afb9040d20;
+	Node0x55afb9040d20 [shape=record,label="{libxml2-py.c:7167:|{<s0>T|<s1>F}}"];
+	Node0x55afb9040d20:s0 -> Node0x55afb9041310;
+	Node0x55afb9040d20:s1 -> Node0x55afb9041360;
+	Node0x55afb9041310 [shape=record,label="{libxml2-py.c:7168:}"];
+	Node0x55afb9041310 -> Node0x55afb90413b0;
+	Node0x55afb9041360 [shape=record,label="{libxml2-py.c:7168:}"];
+	Node0x55afb9041360 -> Node0x55afb90413b0;
+	Node0x55afb90413b0 [shape=record,label="{libxml2-py.c:7168:}"];
+	Node0x55afb90413b0 -> Node0x55afb903e120;
+	Node0x55afb903e120 [shape=record,label="{libxml2-py.c:7173:}"];
+}

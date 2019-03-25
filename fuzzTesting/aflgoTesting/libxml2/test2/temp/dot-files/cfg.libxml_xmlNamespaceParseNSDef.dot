@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlNamespaceParseNSDef' function" {
+	label="CFG for 'libxml_xmlNamespaceParseNSDef' function";
+
+	Node0x55afb8cb5360 [shape=record,label="{libxml2-py.c:3687:|{<s0>T|<s1>F}}"];
+	Node0x55afb8cb5360:s0 -> Node0x55afb8cb8eb0;
+	Node0x55afb8cb5360:s1 -> Node0x55afb8cb8e60;
+	Node0x55afb8cb8e60 [shape=record,label="{libxml2-py.c:3694:}"];
+	Node0x55afb8cb8e60 -> Node0x55afb8cb75e0;
+	Node0x55afb8cb8eb0 [shape=record,label="{libxml2-py.c:3695:|{<s0>T|<s1>F}}"];
+	Node0x55afb8cb8eb0:s0 -> Node0x55afb8cb96a0;
+	Node0x55afb8cb8eb0:s1 -> Node0x55afb8cb96f0;
+	Node0x55afb8cb96a0 [shape=record,label="{libxml2-py.c:3695:}"];
+	Node0x55afb8cb96a0 -> Node0x55afb8cb9740;
+	Node0x55afb8cb96f0 [shape=record,label="{libxml2-py.c:3695:}"];
+	Node0x55afb8cb96f0 -> Node0x55afb8cb9740;
+	Node0x55afb8cb9740 [shape=record,label="{libxml2-py.c:3695:}"];
+	Node0x55afb8cb9740 -> Node0x55afb8cb75e0;
+	Node0x55afb8cb75e0 [shape=record,label="{libxml2-py.c:3700:}"];
+}

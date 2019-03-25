@@ -1,0 +1,33 @@
+digraph "CFG for 'xmlXPathCacheNewBoolean' function" {
+	label="CFG for 'xmlXPathCacheNewBoolean' function";
+
+	Node0x562a79faafc0 [shape=record,label="{xpath.c:2551:|{<s0>T|<s1>F}}"];
+	Node0x562a79faafc0:s0 -> Node0x562a79fb0f40;
+	Node0x562a79faafc0:s1 -> Node0x562a79fab4e0;
+	Node0x562a79fb0f40 [shape=record,label="{xpath.c:2553:|{<s0>T|<s1>F}}"];
+	Node0x562a79fb0f40:s0 -> Node0x562a79fab490;
+	Node0x562a79fb0f40:s1 -> Node0x562a79fab4e0;
+	Node0x562a79fab490 [shape=record,label="{xpath.c:2554:|{<s0>T|<s1>F}}"];
+	Node0x562a79fab490:s0 -> Node0x562a79fb1ab0;
+	Node0x562a79fab490:s1 -> Node0x562a79fb1a60;
+	Node0x562a79fb1ab0 [shape=record,label="{xpath.c:2557:|{<s0>T|<s1>F}}"];
+	Node0x562a79fb1ab0:s0 -> Node0x562a79fb19c0;
+	Node0x562a79fb1ab0:s1 -> Node0x562a79fb1a60;
+	Node0x562a79fb19c0 [shape=record,label="{xpath.c:2559:}"];
+	Node0x562a79fb19c0 -> Node0x562a79fab010;
+	Node0x562a79fb1a60 [shape=record,label="{xpath.c:2569:|{<s0>T|<s1>F}}"];
+	Node0x562a79fb1a60:s0 -> Node0x562a79fb3880;
+	Node0x562a79fb1a60:s1 -> Node0x562a79fb3830;
+	Node0x562a79fb3880 [shape=record,label="{xpath.c:2570:|{<s0>T|<s1>F}}"];
+	Node0x562a79fb3880:s0 -> Node0x562a79fb37e0;
+	Node0x562a79fb3880:s1 -> Node0x562a79fb3830;
+	Node0x562a79fb37e0 [shape=record,label="{xpath.c:2572:}"];
+	Node0x562a79fb37e0 -> Node0x562a79fab010;
+	Node0x562a79fb3830 [shape=record,label="{%84}"];
+	Node0x562a79fb3830 -> Node0x562a79fb1a10;
+	Node0x562a79fb1a10 [shape=record,label="{xpath.c:2584:}"];
+	Node0x562a79fb1a10 -> Node0x562a79fab4e0;
+	Node0x562a79fab4e0 [shape=record,label="{xpath.c:2585:}"];
+	Node0x562a79fab4e0 -> Node0x562a79fab010;
+	Node0x562a79fab010 [shape=record,label="{xpath.c:2586:}"];
+}

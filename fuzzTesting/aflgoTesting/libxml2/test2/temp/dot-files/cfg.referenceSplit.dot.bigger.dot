@@ -1,0 +1,26 @@
+digraph "CFG for 'referenceSplit' function" {
+	label="CFG for 'referenceSplit' function";
+
+	Node0x5644a9044740 [shape=record,label="{xmlschemas.c:28565:|{<s0>T|<s1>F}}"];
+	Node0x5644a9044740:s0 -> Node0x5644a90455b0;
+	Node0x5644a9044740:s1 -> Node0x5644a9045600;
+	Node0x5644a90455b0 [shape=record,label="{xmlschemas.c:28569:}"];
+	Node0x5644a90455b0 -> Node0x5644a9046a90;
+	Node0x5644a9045600 [shape=record,label="{xmlschemas.c:28570:|{<s0>T|<s1>F}}"];
+	Node0x5644a9045600:s0 -> Node0x5644a9045ad0;
+	Node0x5644a9045600:s1 -> Node0x5644a9045a00;
+	Node0x5644a9045ad0 [shape=record,label="{xmlschemas.c:28570:|{<s0>T|<s1>F}}"];
+	Node0x5644a9045ad0:s0 -> Node0x5644a9045a50;
+	Node0x5644a9045ad0:s1 -> Node0x5644a9045a00;
+	Node0x5644a9045a50 [shape=record,label="{xmlschemas.c:28571:|{<s0>T|<s1>F}}"];
+	Node0x5644a9045a50:s0 -> Node0x5644a90459b0;
+	Node0x5644a9045a50:s1 -> Node0x5644a9045a00;
+	Node0x5644a90459b0 [shape=record,label="{xmlschemas.c:28572:}"];
+	Node0x5644a90459b0 -> Node0x5644a9045a00;
+	Node0x5644a9045a00 [shape=record,label="{xmlschemas.c:28573:|{<s0>T|<s1>F}}"];
+	Node0x5644a9045a00:s0 -> Node0x5644a9046a40;
+	Node0x5644a9045a00:s1 -> Node0x5644a9046a90;
+	Node0x5644a9046a40 [shape=record,label="{xmlschemas.c:28574:}"];
+	Node0x5644a9046a40 -> Node0x5644a9046a90;
+	Node0x5644a9046a90 [shape=record,label="{xmlschemas.c:28575:}"];
+}

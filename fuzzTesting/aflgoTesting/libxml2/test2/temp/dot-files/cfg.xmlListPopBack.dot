@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlListPopBack' function" {
+	label="CFG for 'xmlListPopBack' function";
+
+	Node0x55cd5e292150 [shape=record,label="{list.c:526:|{<s0>T|<s1>F}}"];
+	Node0x55cd5e292150 -> Node0x55cd5e298cf0;
+	Node0x55cd5e292150 -> Node0x55cd5e298ca0;
+	Node0x55cd5e298ca0 [shape=record,label="{list.c:529:}"];
+	Node0x55cd5e298ca0 -> Node0x55cd5e298cf0;
+	Node0x55cd5e298cf0 [shape=record,label="{list.c:530:}"];
+}

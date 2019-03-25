@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUTF8Strlen' function" {
+	label="CFG for 'libxml_xmlUTF8Strlen' function";
+
+	Node0x55afb942d680 [shape=record,label="{libxml2-py.c:12083:|{<s0>T|<s1>F}}"];
+	Node0x55afb942d680:s0 -> Node0x55afb9430660;
+	Node0x55afb942d680:s1 -> Node0x55afb9430610;
+	Node0x55afb9430610 [shape=record,label="{libxml2-py.c:12089:}"];
+	Node0x55afb9430610 -> Node0x55afb942d980;
+	Node0x55afb9430660 [shape=record,label="{libxml2-py.c:12091:}"];
+	Node0x55afb9430660 -> Node0x55afb942d980;
+	Node0x55afb942d980 [shape=record,label="{libxml2-py.c:12094:}"];
+}

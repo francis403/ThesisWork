@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlSchemaCheckUnionTypeDefCircularRecur' function" {
+	label="CFG for 'xmlSchemaCheckUnionTypeDefCircularRecur' function";
+
+	Node0x5644a8a7f9a0 [shape=record,label="{xmlschemas.c:15004:}"];
+	Node0x5644a8a7f9a0 -> Node0x5644a8a82210;
+	Node0x5644a8a82210 [shape=record,label="{xmlschemas.c:15012:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a82210 -> Node0x5644a8a82610;
+	Node0x5644a8a82210 -> Node0x5644a8a82430;
+	Node0x5644a8a82610 [shape=record,label="{xmlschemas.c:15013:}"];
+	Node0x5644a8a82610 -> Node0x5644a8a82870;
+	Node0x5644a8a82870 [shape=record,label="{xmlschemas.c:15014:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a82870 -> Node0x5644a8a82b60;
+	Node0x5644a8a82870 -> Node0x5644a8a82b10;
+	Node0x5644a8a82b60 [shape=record,label="{xmlschemas.c:15015:}"];
+	Node0x5644a8a82b60 -> Node0x5644a8a82b10;
+	Node0x5644a8a82b10 [shape=record,label="{xmlschemas.c:15014:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a82b10 -> Node0x5644a8a83090;
+	Node0x5644a8a82b10 -> Node0x5644a8a82a90;
+	Node0x5644a8a83090 [shape=record,label="{xmlschemas.c:15016:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a83090 -> Node0x5644a8a83240;
+	Node0x5644a8a83090 -> Node0x5644a8a83290;
+	Node0x5644a8a83240 [shape=record,label="{xmlschemas.c:15017:}"];
+	Node0x5644a8a83240 -> Node0x5644a8a7f9f0;
+	Node0x5644a8a83290 [shape=record,label="{xmlschemas.c:15023:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a83290 -> Node0x5644a8a83e20;
+	Node0x5644a8a83290 -> Node0x5644a8a83dd0;
+	Node0x5644a8a83e20 [shape=record,label="{xmlschemas.c:15024:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a83e20 -> Node0x5644a8a83d80;
+	Node0x5644a8a83e20 -> Node0x5644a8a83dd0;
+	Node0x5644a8a83d80 [shape=record,label="{xmlschemas.c:15026:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a83d80 -> Node0x5644a8a85a00;
+	Node0x5644a8a83d80 -> Node0x5644a8a85a50;
+	Node0x5644a8a85a00 [shape=record,label="{xmlschemas.c:15033:}"];
+	Node0x5644a8a85a00 -> Node0x5644a8a7f9f0;
+	Node0x5644a8a85a50 [shape=record,label="{xmlschemas.c:15034:}"];
+	Node0x5644a8a85a50 -> Node0x5644a8a83dd0;
+	Node0x5644a8a83dd0 [shape=record,label="{xmlschemas.c:15035:}"];
+	Node0x5644a8a83dd0 -> Node0x5644a8a82870;
+	Node0x5644a8a82a90 [shape=record,label="{xmlschemas.c:15037:}"];
+	Node0x5644a8a82a90 -> Node0x5644a8a82210;
+	Node0x5644a8a82430 [shape=record,label="{xmlschemas.c:15039:}"];
+	Node0x5644a8a82430 -> Node0x5644a8a7f9f0;
+	Node0x5644a8a7f9f0 [shape=record,label="{xmlschemas.c:15040:}"];
+}

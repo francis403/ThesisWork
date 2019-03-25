@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlDumpNotationTable' function" {
+	label="CFG for 'xmlDumpNotationTable' function";
+
+	Node0x556e5f67bbd0 [shape=record,label="{valid.c:2543:|{<s0>T|<s1>F}}"];
+	Node0x556e5f67bbd0 -> Node0x556e5f600560;
+	Node0x556e5f67bbd0 -> Node0x556e5f600600;
+	Node0x556e5f600600 [shape=record,label="{valid.c:2544:|{<s0>T|<s1>F}}"];
+	Node0x556e5f600600 -> Node0x556e5f600560;
+	Node0x556e5f600600 -> Node0x556e5f6005b0;
+	Node0x556e5f600560 [shape=record,label="{valid.c:2545:}"];
+	Node0x556e5f600560 -> Node0x556e5f5fcfd0;
+	Node0x556e5f6005b0 [shape=record,label="{valid.c:2546:}"];
+	Node0x556e5f6005b0 -> Node0x556e5f5fcfd0;
+	Node0x556e5f5fcfd0 [shape=record,label="{valid.c:2547:}"];
+}

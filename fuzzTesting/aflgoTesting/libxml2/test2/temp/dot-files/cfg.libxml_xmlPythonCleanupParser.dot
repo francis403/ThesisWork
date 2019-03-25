@@ -1,0 +1,44 @@
+digraph "CFG for 'libxml_xmlPythonCleanupParser' function" {
+	label="CFG for 'libxml_xmlPythonCleanupParser' function";
+
+	Node0x55bbb25f21d0 [shape=record,label="{libxml.c:186:|{<s0>T|<s1>F}}"];
+	Node0x55bbb25f21d0:s0 -> Node0x55bbb25fe780;
+	Node0x55bbb25f21d0:s1 -> Node0x55bbb25fe7d0;
+	Node0x55bbb25fe780 [shape=record,label="{libxml.c:193:}"];
+	Node0x55bbb25fe780 -> Node0x55bbb25fe7d0;
+	Node0x55bbb25fe7d0 [shape=record,label="{libxml.c:196:|{<s0>T|<s1>F}}"];
+	Node0x55bbb25fe7d0:s0 -> Node0x55bbb25fa2a0;
+	Node0x55bbb25fe7d0:s1 -> Node0x55bbb25fa2f0;
+	Node0x55bbb25fa2a0 [shape=record,label="{libxml.c:203:}"];
+	Node0x55bbb25fa2a0 -> Node0x55bbb2606430;
+	Node0x55bbb2606430 [shape=record,label="{libxml.c:203:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2606430:s0 -> Node0x55bbb260aab0;
+	Node0x55bbb2606430:s1 -> Node0x55bbb25c6500;
+	Node0x55bbb260aab0 [shape=record,label="{libxml.c:204:|{<s0>T|<s1>F}}"];
+	Node0x55bbb260aab0:s0 -> Node0x55bbb260adb0;
+	Node0x55bbb260aab0:s1 -> Node0x55bbb260ae00;
+	Node0x55bbb260adb0 [shape=record,label="{libxml.c:205:}"];
+	Node0x55bbb260adb0 -> Node0x55bbb260ae00;
+	Node0x55bbb260ae00 [shape=record,label="{libxml.c:206:|{<s0>T|<s1>F}}"];
+	Node0x55bbb260ae00:s0 -> Node0x55bbb260b710;
+	Node0x55bbb260ae00:s1 -> Node0x55bbb260b760;
+	Node0x55bbb260b710 [shape=record,label="{libxml.c:207:}"];
+	Node0x55bbb260b710 -> Node0x55bbb260b760;
+	Node0x55bbb260b760 [shape=record,label="{libxml.c:208:}"];
+	Node0x55bbb260b760 -> Node0x55bbb260aa20;
+	Node0x55bbb260aa20 [shape=record,label="{libxml.c:203:}"];
+	Node0x55bbb260aa20 -> Node0x55bbb2606430;
+	Node0x55bbb25c6500 [shape=record,label="{libxml.c:209:}"];
+	Node0x55bbb25c6500 -> Node0x55bbb25fa2f0;
+	Node0x55bbb25fa2f0 [shape=record,label="{libxml.c:214:|{<s0>T|<s1>F}}"];
+	Node0x55bbb25fa2f0:s0 -> Node0x55bbb25f3bb0;
+	Node0x55bbb25fa2f0:s1 -> Node0x55bbb260da00;
+	Node0x55bbb25f3bb0 [shape=record,label="{libxml.c:215:|{<s0>T|<s1>F}}"];
+	Node0x55bbb25f3bb0:s0 -> Node0x55bbb260e1a0;
+	Node0x55bbb25f3bb0:s1 -> Node0x55bbb260e1f0;
+	Node0x55bbb260e1a0 [shape=record,label="{libxml.c:218:}"];
+	Node0x55bbb260e1a0 -> Node0x55bbb260e1f0;
+	Node0x55bbb260e1f0 [shape=record,label="{libxml.c:219:}"];
+	Node0x55bbb260e1f0 -> Node0x55bbb260da00;
+	Node0x55bbb260da00 [shape=record,label="{libxml.c:221:}"];
+}

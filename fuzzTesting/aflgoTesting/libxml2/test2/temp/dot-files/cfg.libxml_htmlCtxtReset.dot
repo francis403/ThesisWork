@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_htmlCtxtReset' function" {
+	label="CFG for 'libxml_htmlCtxtReset' function";
+
+	Node0x55afb8917820 [shape=record,label="{libxml2-py.c:170:|{<s0>T|<s1>F}}"];
+	Node0x55afb8917820:s0 -> Node0x55afb891e590;
+	Node0x55afb8917820:s1 -> Node0x55afb891e540;
+	Node0x55afb891e540 [shape=record,label="{libxml2-py.c:175:}"];
+	Node0x55afb891e540 -> Node0x55afb891b840;
+	Node0x55afb891e590 [shape=record,label="{libxml2-py.c:176:|{<s0>T|<s1>F}}"];
+	Node0x55afb891e590:s0 -> Node0x55afb891edf0;
+	Node0x55afb891e590:s1 -> Node0x55afb891ee40;
+	Node0x55afb891edf0 [shape=record,label="{libxml2-py.c:176:}"];
+	Node0x55afb891edf0 -> Node0x55afb891ee90;
+	Node0x55afb891ee40 [shape=record,label="{libxml2-py.c:176:}"];
+	Node0x55afb891ee40 -> Node0x55afb891ee90;
+	Node0x55afb891ee90 [shape=record,label="{libxml2-py.c:176:}"];
+	Node0x55afb891ee90 -> Node0x55afb891b840;
+	Node0x55afb891b840 [shape=record,label="{libxml2-py.c:181:}"];
+}

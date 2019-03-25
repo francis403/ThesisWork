@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlNodeGetLang' function" {
+	label="CFG for 'libxml_xmlNodeGetLang' function";
+
+	Node0x55afb8d9ad30 [shape=record,label="{libxml2-py.c:4484:|{<s0>T|<s1>F}}"];
+	Node0x55afb8d9ad30:s0 -> Node0x55afb8d9e9c0;
+	Node0x55afb8d9ad30:s1 -> Node0x55afb8d9e970;
+	Node0x55afb8d9e970 [shape=record,label="{libxml2-py.c:4491:}"];
+	Node0x55afb8d9e970 -> Node0x55afb8d9b030;
+	Node0x55afb8d9e9c0 [shape=record,label="{libxml2-py.c:4492:|{<s0>T|<s1>F}}"];
+	Node0x55afb8d9e9c0:s0 -> Node0x55afb8d9f1a0;
+	Node0x55afb8d9e9c0:s1 -> Node0x55afb8d9f1f0;
+	Node0x55afb8d9f1a0 [shape=record,label="{libxml2-py.c:4492:}"];
+	Node0x55afb8d9f1a0 -> Node0x55afb8d9f240;
+	Node0x55afb8d9f1f0 [shape=record,label="{libxml2-py.c:4492:}"];
+	Node0x55afb8d9f1f0 -> Node0x55afb8d9f240;
+	Node0x55afb8d9f240 [shape=record,label="{libxml2-py.c:4492:}"];
+	Node0x55afb8d9f240 -> Node0x55afb8d9b030;
+	Node0x55afb8d9b030 [shape=record,label="{libxml2-py.c:4497:}"];
+}

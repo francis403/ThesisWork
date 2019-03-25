@@ -1,0 +1,23 @@
+digraph "CFG for 'xmlFileWrite' function" {
+	label="CFG for 'xmlFileWrite' function";
+
+	Node0x5651baabc990 [shape=record,label="{xmlIO.c:957:|{<s0>T|<s1>F}}"];
+	Node0x5651baabc990 -> Node0x5651baabd810;
+	Node0x5651baabc990 -> Node0x5651baabd8b0;
+	Node0x5651baabd8b0 [shape=record,label="{xmlIO.c:960:|{<s0>T|<s1>F}}"];
+	Node0x5651baabd8b0 -> Node0x5651baabd810;
+	Node0x5651baabd8b0 -> Node0x5651baabd860;
+	Node0x5651baabd810 [shape=record,label="{xmlIO.c:961:}"];
+	Node0x5651baabd810 -> Node0x5651baabc9e0;
+	Node0x5651baabd860 [shape=record,label="{xmlIO.c:962:|{<s0>T|<s1>F}}"];
+	Node0x5651baabd860 -> Node0x5651baabece0;
+	Node0x5651baabd860 -> Node0x5651baabec90;
+	Node0x5651baabece0 [shape=record,label="{xmlIO.c:963:|{<s0>T|<s1>F}}"];
+	Node0x5651baabece0 -> Node0x5651baabec40;
+	Node0x5651baabece0 -> Node0x5651baabec90;
+	Node0x5651baabec40 [shape=record,label="{xmlIO.c:964:}"];
+	Node0x5651baabec40 -> Node0x5651baabc9e0;
+	Node0x5651baabec90 [shape=record,label="{xmlIO.c:967:}"];
+	Node0x5651baabec90 -> Node0x5651baabc9e0;
+	Node0x5651baabc9e0 [shape=record,label="{xmlIO.c:968:}"];
+}

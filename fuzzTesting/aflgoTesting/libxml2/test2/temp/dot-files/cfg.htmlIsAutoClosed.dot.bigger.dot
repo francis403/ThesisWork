@@ -1,0 +1,24 @@
+digraph "CFG for 'htmlIsAutoClosed' function" {
+	label="CFG for 'htmlIsAutoClosed' function";
+
+	Node0x5651a5a12030 [shape=record,label="{HTMLparser.c:1464:|{<s0>T|<s1>F}}"];
+	Node0x5651a5a12030:s0 -> Node0x5651a5a122d0;
+	Node0x5651a5a12030:s1 -> Node0x5651a5a0fe60;
+	Node0x5651a5a122d0 [shape=record,label="{HTMLparser.c:1467:}"];
+	Node0x5651a5a122d0 -> Node0x5651a5a0fab0;
+	Node0x5651a5a0fe60 [shape=record,label="{HTMLparser.c:1468:}"];
+	Node0x5651a5a0fe60 -> Node0x5651a5a13f60;
+	Node0x5651a5a13f60 [shape=record,label="{HTMLparser.c:1469:|{<s0>T|<s1>F}}"];
+	Node0x5651a5a13f60:s0 -> Node0x5651a59bd510;
+	Node0x5651a5a13f60:s1 -> Node0x5651a59fb0a0;
+	Node0x5651a59bd510 [shape=record,label="{HTMLparser.c:1470:|{<s0>T|<s1>F}}"];
+	Node0x5651a59bd510:s0 -> Node0x5651a59fb470;
+	Node0x5651a59bd510:s1 -> Node0x5651a59fb4c0;
+	Node0x5651a59fb470 [shape=record,label="{HTMLparser.c:1470:}"];
+	Node0x5651a59fb470 -> Node0x5651a5a0fab0;
+	Node0x5651a59fb4c0 [shape=record,label="{HTMLparser.c:1471:}"];
+	Node0x5651a59fb4c0 -> Node0x5651a5a13f60;
+	Node0x5651a59fb0a0 [shape=record,label="{HTMLparser.c:1473:}"];
+	Node0x5651a59fb0a0 -> Node0x5651a5a0fab0;
+	Node0x5651a5a0fab0 [shape=record,label="{HTMLparser.c:1474:}"];
+}

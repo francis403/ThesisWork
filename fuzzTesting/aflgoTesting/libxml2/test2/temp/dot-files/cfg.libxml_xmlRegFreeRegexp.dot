@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlRegFreeRegexp' function" {
+	label="CFG for 'libxml_xmlRegFreeRegexp' function";
+
+	Node0x55afb8f30740 [shape=record,label="{libxml2-py.c:6135:|{<s0>T|<s1>F}}"];
+	Node0x55afb8f30740:s0 -> Node0x55afb8f33f80;
+	Node0x55afb8f30740:s1 -> Node0x55afb8f33f30;
+	Node0x55afb8f33f30 [shape=record,label="{libxml2-py.c:6140:}"];
+	Node0x55afb8f33f30 -> Node0x55afb8f30590;
+	Node0x55afb8f33f80 [shape=record,label="{libxml2-py.c:6141:|{<s0>T|<s1>F}}"];
+	Node0x55afb8f33f80:s0 -> Node0x55afb8f34760;
+	Node0x55afb8f33f80:s1 -> Node0x55afb8f347b0;
+	Node0x55afb8f34760 [shape=record,label="{libxml2-py.c:6141:}"];
+	Node0x55afb8f34760 -> Node0x55afb8f34800;
+	Node0x55afb8f347b0 [shape=record,label="{libxml2-py.c:6141:}"];
+	Node0x55afb8f347b0 -> Node0x55afb8f34800;
+	Node0x55afb8f34800 [shape=record,label="{libxml2-py.c:6141:}"];
+	Node0x55afb8f34800 -> Node0x55afb8f30590;
+	Node0x55afb8f30590 [shape=record,label="{libxml2-py.c:6146:}"];
+}

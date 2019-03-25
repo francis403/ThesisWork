@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaRedefListFree' function" {
+	label="CFG for 'xmlSchemaRedefListFree' function";
+
+	Node0x5644a84cfcc0 [shape=record,label="{xmlschemas.c:9914:}"];
+	Node0x5644a84cfcc0 -> Node0x5644a84cee00;
+	Node0x5644a84cee00 [shape=record,label="{xmlschemas.c:9918:|{<s0>T|<s1>F}}"];
+	Node0x5644a84cee00:s0 -> Node0x5644a84d0910;
+	Node0x5644a84cee00:s1 -> Node0x5644a84d0730;
+	Node0x5644a84d0910 [shape=record,label="{xmlschemas.c:9919:}"];
+	Node0x5644a84d0910 -> Node0x5644a84cee00;
+	Node0x5644a84d0730 [shape=record,label="{xmlschemas.c:9923:}"];
+}

@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlBufCreateStatic' function" {
+	label="CFG for 'xmlBufCreateStatic' function";
+
+	Node0x558c8f79fac0 [shape=record,label="{buf.c:231:|{<s0>T|<s1>F}}"];
+	Node0x558c8f79fac0 -> Node0x558c8f7a2a60;
+	Node0x558c8f79fac0 -> Node0x558c8f7a2ab0;
+	Node0x558c8f7a2a60 [shape=record,label="{buf.c:235:}"];
+	Node0x558c8f7a2a60 -> Node0x558c8f79f470;
+	Node0x558c8f7a2ab0 [shape=record,label="{buf.c:237:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7a2ab0 -> Node0x558c8f7a31d0;
+	Node0x558c8f7a2ab0 -> Node0x558c8f7a3220;
+	Node0x558c8f7a31d0 [shape=record,label="{buf.c:239:}"];
+	Node0x558c8f7a31d0 -> Node0x558c8f79f470;
+	Node0x558c8f7a3220 [shape=record,label="{buf.c:242:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7a3220 -> Node0x558c8f7a37e0;
+	Node0x558c8f7a3220 -> Node0x558c8f7a3880;
+	Node0x558c8f7a37e0 [shape=record,label="{buf.c:243:}"];
+	Node0x558c8f7a37e0 -> Node0x558c8f7a3830;
+	Node0x558c8f7a3880 [shape=record,label="{buf.c:246:}"];
+	Node0x558c8f7a3880 -> Node0x558c8f7a3830;
+	Node0x558c8f7a3830 [shape=record,label="{buf.c:249:}"];
+	Node0x558c8f7a3830 -> Node0x558c8f79f470;
+	Node0x558c8f79f470 [shape=record,label="{buf.c:256:}"];
+}

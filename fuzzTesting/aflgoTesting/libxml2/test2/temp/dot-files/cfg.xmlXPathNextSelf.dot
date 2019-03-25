@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlXPathNextSelf' function" {
+	label="CFG for 'xmlXPathNextSelf' function";
+
+	Node0x562a79b0eeb0 [shape=record,label="{xpath.c:7640:|{<s0>T|<s1>F}}"];
+	Node0x562a79b0eeb0 -> Node0x562a79b13490;
+	Node0x562a79b0eeb0 -> Node0x562a79b13530;
+	Node0x562a79b13530 [shape=record,label="{xpath.c:7641:|{<s0>T|<s1>F}}"];
+	Node0x562a79b13530 -> Node0x562a79b13490;
+	Node0x562a79b13530 -> Node0x562a79b134e0;
+	Node0x562a79b13490 [shape=record,label="{xpath.c:7641:}"];
+	Node0x562a79b13490 -> Node0x562a79b12b80;
+	Node0x562a79b134e0 [shape=record,label="{xpath.c:7642:|{<s0>T|<s1>F}}"];
+	Node0x562a79b134e0 -> Node0x562a79b13c80;
+	Node0x562a79b134e0 -> Node0x562a79b13cd0;
+	Node0x562a79b13c80 [shape=record,label="{xpath.c:7643:}"];
+	Node0x562a79b13c80 -> Node0x562a79b12b80;
+	Node0x562a79b13cd0 [shape=record,label="{xpath.c:7644:}"];
+	Node0x562a79b13cd0 -> Node0x562a79b12b80;
+	Node0x562a79b12b80 [shape=record,label="{xpath.c:7645:}"];
+}

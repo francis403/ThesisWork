@@ -1,0 +1,16 @@
+digraph "CFG for 'xmlSetBufferAllocationScheme' function" {
+	label="CFG for 'xmlSetBufferAllocationScheme' function";
+
+	Node0x55a216aecfe0 [shape=record,label="{tree.c:692:|{<s0>T|<s1>F}}"];
+	Node0x55a216aecfe0:s0 -> Node0x55a216aedcd0;
+	Node0x55a216aecfe0:s1 -> Node0x55a216aeddf0;
+	Node0x55a216aeddf0 [shape=record,label="{tree.c:694:|{<s0>T|<s1>F}}"];
+	Node0x55a216aeddf0:s0 -> Node0x55a216aedcd0;
+	Node0x55a216aeddf0:s1 -> Node0x55a216aedd70;
+	Node0x55a216aedd70 [shape=record,label="{tree.c:695:|{<s0>T|<s1>F}}"];
+	Node0x55a216aedd70:s0 -> Node0x55a216aedcd0;
+	Node0x55a216aedd70:s1 -> Node0x55a216aedd20;
+	Node0x55a216aedcd0 [shape=record,label="{tree.c:696:}"];
+	Node0x55a216aedcd0 -> Node0x55a216aedd20;
+	Node0x55a216aedd20 [shape=record,label="{tree.c:697:}"];
+}

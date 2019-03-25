@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlPointerListCreate' function" {
+	label="CFG for 'xmlPointerListCreate' function";
+
+	Node0x562a79ec9bf0 [shape=record,label="{xpath.c:816:|{<s0>T|<s1>F}}"];
+	Node0x562a79ec9bf0 -> Node0x562a799d25b0;
+	Node0x562a79ec9bf0 -> Node0x562a799d2600;
+	Node0x562a799d25b0 [shape=record,label="{xpath.c:822:}"];
+	Node0x562a799d25b0 -> Node0x562a79ec9c40;
+	Node0x562a799d2600 [shape=record,label="{xpath.c:826:|{<s0>T|<s1>F}}"];
+	Node0x562a799d2600 -> Node0x562a799d2fe0;
+	Node0x562a799d2600 -> Node0x562a799d3030;
+	Node0x562a799d2fe0 [shape=record,label="{xpath.c:828:}"];
+	Node0x562a799d2fe0 -> Node0x562a799d3030;
+	Node0x562a799d3030 [shape=record,label="{xpath.c:831:}"];
+	Node0x562a799d3030 -> Node0x562a79ec9c40;
+	Node0x562a79ec9c40 [shape=record,label="{xpath.c:832:}"];
+}

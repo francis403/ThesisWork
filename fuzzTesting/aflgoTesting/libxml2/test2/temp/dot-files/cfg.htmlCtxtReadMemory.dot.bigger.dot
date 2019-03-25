@@ -1,0 +1,27 @@
+digraph "CFG for 'htmlCtxtReadMemory' function" {
+	label="CFG for 'htmlCtxtReadMemory' function";
+
+	Node0x5651a5cb6f20 [shape=record,label="{HTMLparser.c:7051:|{<s0>T|<s1>F}}"];
+	Node0x5651a5cb6f20:s0 -> Node0x5651a5c2eac0;
+	Node0x5651a5cb6f20:s1 -> Node0x5651a5c2eb10;
+	Node0x5651a5c2eac0 [shape=record,label="{HTMLparser.c:7058:}"];
+	Node0x5651a5c2eac0 -> Node0x5651a5cb46d0;
+	Node0x5651a5c2eb10 [shape=record,label="{HTMLparser.c:7059:|{<s0>T|<s1>F}}"];
+	Node0x5651a5c2eb10:s0 -> Node0x5651a5c2ef70;
+	Node0x5651a5c2eb10:s1 -> Node0x5651a5c2efc0;
+	Node0x5651a5c2ef70 [shape=record,label="{HTMLparser.c:7060:}"];
+	Node0x5651a5c2ef70 -> Node0x5651a5cb46d0;
+	Node0x5651a5c2efc0 [shape=record,label="{HTMLparser.c:7061:|{<s0>T|<s1>F}}"];
+	Node0x5651a5c2efc0:s0 -> Node0x5651a5c2f930;
+	Node0x5651a5c2efc0:s1 -> Node0x5651a5c2f980;
+	Node0x5651a5c2f930 [shape=record,label="{HTMLparser.c:7067:}"];
+	Node0x5651a5c2f930 -> Node0x5651a5cb46d0;
+	Node0x5651a5c2f980 [shape=record,label="{HTMLparser.c:7070:|{<s0>T|<s1>F}}"];
+	Node0x5651a5c2f980:s0 -> Node0x5651a5c301d0;
+	Node0x5651a5c2f980:s1 -> Node0x5651a5c30220;
+	Node0x5651a5c301d0 [shape=record,label="{HTMLparser.c:7072:}"];
+	Node0x5651a5c301d0 -> Node0x5651a5cb46d0;
+	Node0x5651a5c30220 [shape=record,label="{HTMLparser.c:7076:}"];
+	Node0x5651a5c30220 -> Node0x5651a5cb46d0;
+	Node0x5651a5cb46d0 [shape=record,label="{HTMLparser.c:7078:}"];
+}

@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlDictComputeBigKey' function" {
+	label="CFG for 'xmlDictComputeBigKey' function";
+
+	Node0x5612f264b3c0 [shape=record,label="{dict.c:375:|{<s0>T|<s1>F}}"];
+	Node0x5612f264b3c0:s0 -> Node0x5612f264cb00;
+	Node0x5612f264b3c0:s1 -> Node0x5612f264cba0;
+	Node0x5612f264cba0 [shape=record,label="{dict.c:379:|{<s0>T|<s1>F}}"];
+	Node0x5612f264cba0:s0 -> Node0x5612f264cb00;
+	Node0x5612f264cba0:s1 -> Node0x5612f264cb50;
+	Node0x5612f264cb00 [shape=record,label="{dict.c:379:}"];
+	Node0x5612f264cb00 -> Node0x5612f264b410;
+	Node0x5612f264cb50 [shape=record,label="{dict.c:381:}"];
+	Node0x5612f264cb50 -> Node0x5612f264d500;
+	Node0x5612f264d500 [shape=record,label="{dict.c:383:|{<s0>T|<s1>F}}"];
+	Node0x5612f264d500:s0 -> Node0x5612f264d7e0;
+	Node0x5612f264d500:s1 -> Node0x5612f264d3a0;
+	Node0x5612f264d7e0 [shape=record,label="{dict.c:384:}"];
+	Node0x5612f264d7e0 -> Node0x5612f264d750;
+	Node0x5612f264d750 [shape=record,label="{dict.c:383:}"];
+	Node0x5612f264d750 -> Node0x5612f264d500;
+	Node0x5612f264d3a0 [shape=record,label="{dict.c:388:}"];
+	Node0x5612f264d3a0 -> Node0x5612f264b410;
+	Node0x5612f264b410 [shape=record,label="{dict.c:393:}"];
+}

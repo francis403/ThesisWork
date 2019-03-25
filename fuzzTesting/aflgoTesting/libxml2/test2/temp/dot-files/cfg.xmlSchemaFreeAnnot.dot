@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlSchemaFreeAnnot' function" {
+	label="CFG for 'xmlSchemaFreeAnnot' function";
+
+	Node0x5644a83b1a80 [shape=record,label="{xmlschemas.c:3727:|{<s0>T|<s1>F}}"];
+	Node0x5644a83b1a80 -> Node0x5644a8444530;
+	Node0x5644a83b1a80 -> Node0x5644a83b29b0;
+	Node0x5644a8444530 [shape=record,label="{xmlschemas.c:3730:}"];
+	Node0x5644a8444530 -> Node0x5644a83b2030;
+	Node0x5644a83b29b0 [shape=record,label="{xmlschemas.c:3731:|{<s0>T|<s1>F}}"];
+	Node0x5644a83b29b0 -> Node0x5644a83b1fe0;
+	Node0x5644a83b29b0 -> Node0x5644a83b33f0;
+	Node0x5644a83b1fe0 [shape=record,label="{xmlschemas.c:3732:}"];
+	Node0x5644a83b1fe0 -> Node0x5644a83b2030;
+	Node0x5644a83b33f0 [shape=record,label="{xmlschemas.c:3734:}"];
+	Node0x5644a83b33f0 -> Node0x5644a83b3db0;
+	Node0x5644a83b3db0 [shape=record,label="{xmlschemas.c:3737:}"];
+	Node0x5644a83b3db0 -> Node0x5644a83b3d60;
+	Node0x5644a83b3d60 [shape=record,label="{xmlschemas.c:3740:|{<s0>T|<s1>F}}"];
+	Node0x5644a83b3d60 -> Node0x5644a83b3db0;
+	Node0x5644a83b3d60 -> Node0x5644a83b3d10;
+	Node0x5644a83b3d10 [shape=record,label="{%21}"];
+	Node0x5644a83b3d10 -> Node0x5644a83b2030;
+	Node0x5644a83b2030 [shape=record,label="{xmlschemas.c:3742:}"];
+}

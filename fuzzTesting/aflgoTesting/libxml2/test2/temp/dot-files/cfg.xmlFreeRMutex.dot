@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlFreeRMutex' function" {
+	label="CFG for 'xmlFreeRMutex' function";
+
+	Node0x5584b6ccd140 [shape=record,label="{threads.c:319:|{<s0>T|<s1>F}}"];
+	Node0x5584b6ccd140 -> Node0x5584b6ccf450;
+	Node0x5584b6ccd140 -> Node0x5584b6ccd030;
+	Node0x5584b6ccf450 [shape=record,label="{threads.c:322:}"];
+	Node0x5584b6ccf450 -> Node0x5584b6ccf560;
+	Node0x5584b6ccd030 [shape=record,label="{threads.c:324:|{<s0>T|<s1>F}}"];
+	Node0x5584b6ccd030 -> Node0x5584b6ccffa0;
+	Node0x5584b6ccd030 -> Node0x5584b6ccfff0;
+	Node0x5584b6ccffa0 [shape=record,label="{threads.c:325:}"];
+	Node0x5584b6ccffa0 -> Node0x5584b6ccfff0;
+	Node0x5584b6ccfff0 [shape=record,label="{threads.c:333:}"];
+	Node0x5584b6ccfff0 -> Node0x5584b6ccf560;
+	Node0x5584b6ccf560 [shape=record,label="{threads.c:334:}"];
+}

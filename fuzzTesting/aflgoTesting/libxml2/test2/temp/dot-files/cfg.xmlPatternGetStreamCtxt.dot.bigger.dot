@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlPatternGetStreamCtxt' function" {
+	label="CFG for 'xmlPatternGetStreamCtxt' function";
+
+	Node0x557f45f2e600 [shape=record,label="{pattern.c:2490:|{<s0>T|<s1>F}}"];
+	Node0x557f45f2e600:s0 -> Node0x557f45f316c0;
+	Node0x557f45f2e600:s1 -> Node0x557f45f30ab0;
+	Node0x557f45f30ab0 [shape=record,label="{pattern.c:2494:|{<s0>T|<s1>F}}"];
+	Node0x557f45f30ab0:s0 -> Node0x557f45f316c0;
+	Node0x557f45f30ab0:s1 -> Node0x557f45f31790;
+	Node0x557f45f316c0 [shape=record,label="{pattern.c:2495:}"];
+	Node0x557f45f316c0 -> Node0x557f45f308f0;
+	Node0x557f45f31790 [shape=record,label="{pattern.c:2497:}"];
+	Node0x557f45f31790 -> Node0x557f45f1d120;
+	Node0x557f45f1d120 [shape=record,label="{pattern.c:2497:|{<s0>T|<s1>F}}"];
+	Node0x557f45f1d120:s0 -> Node0x557f45f1d4e0;
+	Node0x557f45f1d120:s1 -> Node0x557f45f1d300;
+	Node0x557f45f1d4e0 [shape=record,label="{pattern.c:2498:|{<s0>T|<s1>F}}"];
+	Node0x557f45f1d4e0:s0 -> Node0x557f45f1d690;
+	Node0x557f45f1d4e0:s1 -> Node0x557f45f1d6e0;
+	Node0x557f45f1d690 [shape=record,label="{pattern.c:2499:}"];
+	Node0x557f45f1d690 -> Node0x557f45f1e1c0;
+	Node0x557f45f1d6e0 [shape=record,label="{pattern.c:2500:|{<s0>T|<s1>F}}"];
+	Node0x557f45f1d6e0:s0 -> Node0x557f45f1ec30;
+	Node0x557f45f1d6e0:s1 -> Node0x557f45f1ec80;
+	Node0x557f45f1ec30 [shape=record,label="{pattern.c:2502:}"];
+	Node0x557f45f1ec30 -> Node0x557f45f1e1c0;
+	Node0x557f45f1ec80 [shape=record,label="{pattern.c:2503:|{<s0>T|<s1>F}}"];
+	Node0x557f45f1ec80:s0 -> Node0x557f45f36f40;
+	Node0x557f45f1ec80:s1 -> Node0x557f45f36fe0;
+	Node0x557f45f36f40 [shape=record,label="{pattern.c:2504:}"];
+	Node0x557f45f36f40 -> Node0x557f45f36f90;
+	Node0x557f45f36fe0 [shape=record,label="{pattern.c:2506:}"];
+	Node0x557f45f36fe0 -> Node0x557f45f36f90;
+	Node0x557f45f36f90 [shape=record,label="{pattern.c:2509:}"];
+	Node0x557f45f36f90 -> Node0x557f45f1d120;
+	Node0x557f45f1d300 [shape=record,label="{pattern.c:2512:}"];
+	Node0x557f45f1d300 -> Node0x557f45f308f0;
+	Node0x557f45f1e1c0 [shape=record,label="{pattern.c:2514:}"];
+	Node0x557f45f1e1c0 -> Node0x557f45f308f0;
+	Node0x557f45f308f0 [shape=record,label="{pattern.c:2516:}"];
+}

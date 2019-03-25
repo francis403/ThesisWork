@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlErrAttributeDup' function" {
+	label="CFG for 'xmlErrAttributeDup' function";
+
+	Node0x556884bf9d40 [shape=record,label="{parser.c:314:|{<s0>T|<s1>F}}"];
+	Node0x556884bf9d40 -> Node0x556884bfab00;
+	Node0x556884bf9d40 -> Node0x556884bfaa30;
+	Node0x556884bfab00 [shape=record,label="{parser.c:317:|{<s0>T|<s1>F}}"];
+	Node0x556884bfab00 -> Node0x556884bfaa80;
+	Node0x556884bfab00 -> Node0x556884bfaa30;
+	Node0x556884bfaa80 [shape=record,label="{parser.c:318:|{<s0>T|<s1>F}}"];
+	Node0x556884bfaa80 -> Node0x556884bfa9e0;
+	Node0x556884bfaa80 -> Node0x556884bfaa30;
+	Node0x556884bfa9e0 [shape=record,label="{parser.c:319:}"];
+	Node0x556884bfa9e0 -> Node0x556884bfcd10;
+	Node0x556884bfaa30 [shape=record,label="{parser.c:320:|{<s0>T|<s1>F}}"];
+	Node0x556884bfaa30 -> Node0x556884bfb430;
+	Node0x556884bfaa30 -> Node0x556884bfb480;
+	Node0x556884bfb430 [shape=record,label="{parser.c:321:}"];
+	Node0x556884bfb430 -> Node0x556884bfb480;
+	Node0x556884bfb480 [shape=record,label="{parser.c:323:|{<s0>T|<s1>F}}"];
+	Node0x556884bfb480 -> Node0x556884bfb9a0;
+	Node0x556884bfb480 -> Node0x556884bfba40;
+	Node0x556884bfb9a0 [shape=record,label="{parser.c:324:}"];
+	Node0x556884bfb9a0 -> Node0x556884bfb9f0;
+	Node0x556884bfba40 [shape=record,label="{parser.c:329:}"];
+	Node0x556884bfba40 -> Node0x556884bfb9f0;
+	Node0x556884bfb9f0 [shape=record,label="{parser.c:334:|{<s0>T|<s1>F}}"];
+	Node0x556884bfb9f0 -> Node0x556884bfccc0;
+	Node0x556884bfb9f0 -> Node0x556884bfcd10;
+	Node0x556884bfccc0 [shape=record,label="{parser.c:335:|{<s0>T|<s1>F}}"];
+	Node0x556884bfccc0 -> Node0x556884bfd780;
+	Node0x556884bfccc0 -> Node0x556884bfd7d0;
+	Node0x556884bfd780 [shape=record,label="{parser.c:337:}"];
+	Node0x556884bfd780 -> Node0x556884bfd7d0;
+	Node0x556884bfd7d0 [shape=record,label="{parser.c:338:}"];
+	Node0x556884bfd7d0 -> Node0x556884bfcd10;
+	Node0x556884bfcd10 [shape=record,label="{parser.c:339:}"];
+}

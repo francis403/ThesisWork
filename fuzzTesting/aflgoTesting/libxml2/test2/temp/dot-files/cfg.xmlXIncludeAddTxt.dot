@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlXIncludeAddTxt' function" {
+	label="CFG for 'xmlXIncludeAddTxt' function";
+
+	Node0x55dca5e02b10 [shape=record,label="{xinclude.c:758:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e02b10 -> Node0x55dca5deb340;
+	Node0x55dca5e02b10 -> Node0x55dca5e07c00;
+	Node0x55dca5deb340 [shape=record,label="{xinclude.c:763:|{<s0>T|<s1>F}}"];
+	Node0x55dca5deb340 -> Node0x55dca5e08780;
+	Node0x55dca5deb340 -> Node0x55dca5e087d0;
+	Node0x55dca5e08780 [shape=record,label="{xinclude.c:767:}"];
+	Node0x55dca5e08780 -> Node0x55dca5deb3b0;
+	Node0x55dca5e087d0 [shape=record,label="{xinclude.c:770:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e087d0 -> Node0x55dca5e09790;
+	Node0x55dca5e087d0 -> Node0x55dca5e097e0;
+	Node0x55dca5e09790 [shape=record,label="{xinclude.c:773:}"];
+	Node0x55dca5e09790 -> Node0x55dca5deb3b0;
+	Node0x55dca5e097e0 [shape=record,label="{xinclude.c:776:}"];
+	Node0x55dca5e097e0 -> Node0x55dca5e07c00;
+	Node0x55dca5e07c00 [shape=record,label="{xinclude.c:777:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e07c00 -> Node0x55dca5e0a060;
+	Node0x55dca5e07c00 -> Node0x55dca5e0a0b0;
+	Node0x55dca5e0a060 [shape=record,label="{xinclude.c:778:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e0a060 -> Node0x55dca5e0b2e0;
+	Node0x55dca5e0a060 -> Node0x55dca5e0b330;
+	Node0x55dca5e0b2e0 [shape=record,label="{xinclude.c:782:}"];
+	Node0x55dca5e0b2e0 -> Node0x55dca5deb3b0;
+	Node0x55dca5e0b330 [shape=record,label="{xinclude.c:785:|{<s0>T|<s1>F}}"];
+	Node0x55dca5e0b330 -> Node0x55dca5e0c3b0;
+	Node0x55dca5e0b330 -> Node0x55dca5e0c400;
+	Node0x55dca5e0c3b0 [shape=record,label="{xinclude.c:788:}"];
+	Node0x55dca5e0c3b0 -> Node0x55dca5deb3b0;
+	Node0x55dca5e0c400 [shape=record,label="{xinclude.c:791:}"];
+	Node0x55dca5e0c400 -> Node0x55dca5e0a0b0;
+	Node0x55dca5e0a0b0 [shape=record,label="{xinclude.c:792:}"];
+	Node0x55dca5e0a0b0 -> Node0x55dca5deb3b0;
+	Node0x55dca5deb3b0 [shape=record,label="{xinclude.c:795:}"];
+}

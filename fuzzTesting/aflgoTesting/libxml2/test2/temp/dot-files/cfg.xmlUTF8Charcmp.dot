@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlUTF8Charcmp' function" {
+	label="CFG for 'xmlUTF8Charcmp' function";
+
+	Node0x563c052d9b70 [shape=record,label="{xmlstring.c:646:|{<s0>T|<s1>F}}"];
+	Node0x563c052d9b70 -> Node0x563c052dcd80;
+	Node0x563c052d9b70 -> Node0x563c052d6cc0;
+	Node0x563c052dcd80 [shape=record,label="{xmlstring.c:649:|{<s0>T|<s1>F}}"];
+	Node0x563c052dcd80 -> Node0x563c052ddc30;
+	Node0x563c052dcd80 -> Node0x563c052ddc80;
+	Node0x563c052ddc30 [shape=record,label="{xmlstring.c:650:}"];
+	Node0x563c052ddc30 -> Node0x563c052d9bc0;
+	Node0x563c052ddc80 [shape=record,label="{xmlstring.c:651:}"];
+	Node0x563c052ddc80 -> Node0x563c052d9bc0;
+	Node0x563c052d6cc0 [shape=record,label="{xmlstring.c:653:}"];
+	Node0x563c052d6cc0 -> Node0x563c052d9bc0;
+	Node0x563c052d9bc0 [shape=record,label="{xmlstring.c:654:}"];
+}

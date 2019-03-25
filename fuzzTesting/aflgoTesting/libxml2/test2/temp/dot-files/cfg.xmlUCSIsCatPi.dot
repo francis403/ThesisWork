@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlUCSIsCatPi' function" {
+	label="CFG for 'xmlUCSIsCatPi' function";
+
+	Node0x56123dd8ff60 [shape=record,label="{xmlunicode.c:3000:|{<s0>T|<s1>F}}"];
+	Node0x56123dd8ff60 -> Node0x56123dd8e870;
+	Node0x56123dd8ff60 -> Node0x56123dd902f0;
+	Node0x56123dd902f0 [shape=record,label="{xmlunicode.c:3002:|{<s0>T|<s1>F}}"];
+	Node0x56123dd902f0 -> Node0x56123dd8e870;
+	Node0x56123dd902f0 -> Node0x56123dd90270;
+	Node0x56123dd90270 [shape=record,label="{xmlunicode.c:3003:|{<s0>T|<s1>F}}"];
+	Node0x56123dd90270 -> Node0x56123dd92010;
+	Node0x56123dd90270 -> Node0x56123dd8ed10;
+	Node0x56123dd92010 [shape=record,label="{xmlunicode.c:3003:|{<s0>T|<s1>F}}"];
+	Node0x56123dd92010 -> Node0x56123dd8e870;
+	Node0x56123dd92010 -> Node0x56123dd8ed10;
+	Node0x56123dd8ed10 [shape=record,label="{xmlunicode.c:3004:|{<s0>T|<s1>F}}"];
+	Node0x56123dd8ed10 -> Node0x56123dd8e870;
+	Node0x56123dd8ed10 -> Node0x56123dd916f0;
+	Node0x56123dd916f0 [shape=record,label="{xmlunicode.c:3005:}"];
+	Node0x56123dd916f0 -> Node0x56123dd8e870;
+	Node0x56123dd8e870 [shape=record,label="{xmlunicode.c:3004:}"];
+}

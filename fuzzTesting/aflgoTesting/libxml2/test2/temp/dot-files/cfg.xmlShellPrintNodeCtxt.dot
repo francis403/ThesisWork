@@ -1,0 +1,33 @@
+digraph "CFG for 'xmlShellPrintNodeCtxt' function" {
+	label="CFG for 'xmlShellPrintNodeCtxt' function";
+
+	Node0x5608700f37d0 [shape=record,label="{debugXML.c:1891:|{<s0>T|<s1>F}}"];
+	Node0x5608700f37d0 -> Node0x5608700f6a10;
+	Node0x5608700f37d0 -> Node0x5608700f69c0;
+	Node0x5608700f69c0 [shape=record,label="{debugXML.c:1896:}"];
+	Node0x5608700f69c0 -> Node0x5608700f5c60;
+	Node0x5608700f6a10 [shape=record,label="{debugXML.c:1897:|{<s0>T|<s1>F}}"];
+	Node0x5608700f6a10 -> Node0x5608700f6d60;
+	Node0x5608700f6a10 -> Node0x5608700f6e00;
+	Node0x5608700f6d60 [shape=record,label="{debugXML.c:1898:}"];
+	Node0x5608700f6d60 -> Node0x5608700f6db0;
+	Node0x5608700f6e00 [shape=record,label="{debugXML.c:1900:}"];
+	Node0x5608700f6e00 -> Node0x5608700f6db0;
+	Node0x5608700f6db0 [shape=record,label="{debugXML.c:1902:|{<s0>T|<s1>F}}"];
+	Node0x5608700f6db0 -> Node0x5608700f7550;
+	Node0x5608700f6db0 -> Node0x5608700f75f0;
+	Node0x5608700f7550 [shape=record,label="{debugXML.c:1903:}"];
+	Node0x5608700f7550 -> Node0x5608700f75a0;
+	Node0x5608700f75f0 [shape=record,label="{debugXML.c:1904:|{<s0>T|<s1>F}}"];
+	Node0x5608700f75f0 -> Node0x5608700f7bb0;
+	Node0x5608700f75f0 -> Node0x5608700f7c50;
+	Node0x5608700f7bb0 [shape=record,label="{debugXML.c:1905:}"];
+	Node0x5608700f7bb0 -> Node0x5608700f7c00;
+	Node0x5608700f7c50 [shape=record,label="{debugXML.c:1907:}"];
+	Node0x5608700f7c50 -> Node0x5608700f7c00;
+	Node0x5608700f7c00 [shape=record,label="{%33}"];
+	Node0x5608700f7c00 -> Node0x5608700f75a0;
+	Node0x5608700f75a0 [shape=record,label="{debugXML.c:1909:}"];
+	Node0x5608700f75a0 -> Node0x5608700f5c60;
+	Node0x5608700f5c60 [shape=record,label="{debugXML.c:1910:}"];
+}

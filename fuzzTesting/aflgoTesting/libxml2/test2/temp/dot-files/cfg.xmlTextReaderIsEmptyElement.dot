@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlTextReaderIsEmptyElement' function" {
+	label="CFG for 'xmlTextReaderIsEmptyElement' function";
+
+	Node0x556e3db428b0 [shape=record,label="{xmlreader.c:3088:|{<s0>T|<s1>F}}"];
+	Node0x556e3db428b0 -> Node0x556e3db43a00;
+	Node0x556e3db428b0 -> Node0x556e3db43f20;
+	Node0x556e3db43f20 [shape=record,label="{xmlreader.c:3089:|{<s0>T|<s1>F}}"];
+	Node0x556e3db43f20 -> Node0x556e3db43a00;
+	Node0x556e3db43f20 -> Node0x556e3db46660;
+	Node0x556e3db43a00 [shape=record,label="{xmlreader.c:3090:}"];
+	Node0x556e3db43a00 -> Node0x556e3db46880;
+	Node0x556e3db46660 [shape=record,label="{xmlreader.c:3091:|{<s0>T|<s1>F}}"];
+	Node0x556e3db46660 -> Node0x556e3db47f20;
+	Node0x556e3db46660 -> Node0x556e3db47f70;
+	Node0x556e3db47f20 [shape=record,label="{xmlreader.c:3092:}"];
+	Node0x556e3db47f20 -> Node0x556e3db46880;
+	Node0x556e3db47f70 [shape=record,label="{xmlreader.c:3093:|{<s0>T|<s1>F}}"];
+	Node0x556e3db47f70 -> Node0x556e3db48520;
+	Node0x556e3db47f70 -> Node0x556e3db48570;
+	Node0x556e3db48520 [shape=record,label="{xmlreader.c:3094:}"];
+	Node0x556e3db48520 -> Node0x556e3db46880;
+	Node0x556e3db48570 [shape=record,label="{xmlreader.c:3095:|{<s0>T|<s1>F}}"];
+	Node0x556e3db48570 -> Node0x556e3db48a90;
+	Node0x556e3db48570 -> Node0x556e3db48ae0;
+	Node0x556e3db48a90 [shape=record,label="{xmlreader.c:3096:}"];
+	Node0x556e3db48a90 -> Node0x556e3db46880;
+	Node0x556e3db48ae0 [shape=record,label="{xmlreader.c:3097:|{<s0>T|<s1>F}}"];
+	Node0x556e3db48ae0 -> Node0x556e3db491d0;
+	Node0x556e3db48ae0 -> Node0x556e3db49220;
+	Node0x556e3db491d0 [shape=record,label="{xmlreader.c:3098:}"];
+	Node0x556e3db491d0 -> Node0x556e3db46880;
+	Node0x556e3db49220 [shape=record,label="{xmlreader.c:3099:|{<s0>T|<s1>F}}"];
+	Node0x556e3db49220 -> Node0x556e3db497e0;
+	Node0x556e3db49220 -> Node0x556e3db49830;
+	Node0x556e3db497e0 [shape=record,label="{xmlreader.c:3100:}"];
+	Node0x556e3db497e0 -> Node0x556e3db46880;
+	Node0x556e3db49830 [shape=record,label="{xmlreader.c:3102:|{<s0>T|<s1>F}}"];
+	Node0x556e3db49830 -> Node0x556e3db49df0;
+	Node0x556e3db49830 -> Node0x556e3db49e40;
+	Node0x556e3db49df0 [shape=record,label="{xmlreader.c:3103:}"];
+	Node0x556e3db49df0 -> Node0x556e3db46880;
+	Node0x556e3db49e40 [shape=record,label="{xmlreader.c:3105:}"];
+	Node0x556e3db49e40 -> Node0x556e3db46880;
+	Node0x556e3db46880 [shape=record,label="{xmlreader.c:3106:}"];
+}

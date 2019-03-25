@@ -1,0 +1,28 @@
+digraph "CFG for 'xmlSchemaResolveAttrUseReferences' function" {
+	label="CFG for 'xmlSchemaResolveAttrUseReferences' function";
+
+	Node0x5644a89f38e0 [shape=record,label="{xmlschemas.c:20205:|{<s0>T|<s1>F}}"];
+	Node0x5644a89f38e0:s0 -> Node0x5644a89f42f0;
+	Node0x5644a89f38e0:s1 -> Node0x5644a89f4390;
+	Node0x5644a89f4390 [shape=record,label="{xmlschemas.c:20208:|{<s0>T|<s1>F}}"];
+	Node0x5644a89f4390:s0 -> Node0x5644a89f42f0;
+	Node0x5644a89f4390:s1 -> Node0x5644a89f4340;
+	Node0x5644a89f42f0 [shape=record,label="{xmlschemas.c:20209:}"];
+	Node0x5644a89f42f0 -> Node0x5644a89f3930;
+	Node0x5644a89f4340 [shape=record,label="{xmlschemas.c:20210:|{<s0>T|<s1>F}}"];
+	Node0x5644a89f4340:s0 -> Node0x5644a89f4ab0;
+	Node0x5644a89f4340:s1 -> Node0x5644a89f4b50;
+	Node0x5644a89f4b50 [shape=record,label="{xmlschemas.c:20211:|{<s0>T|<s1>F}}"];
+	Node0x5644a89f4b50:s0 -> Node0x5644a89f4ab0;
+	Node0x5644a89f4b50:s1 -> Node0x5644a89f4b00;
+	Node0x5644a89f4ab0 [shape=record,label="{xmlschemas.c:20212:}"];
+	Node0x5644a89f4ab0 -> Node0x5644a89f3930;
+	Node0x5644a89f4b00 [shape=record,label="{xmlschemas.c:20215:|{<s0>T|<s1>F}}"];
+	Node0x5644a89f4b00:s0 -> Node0x5644a89f68a0;
+	Node0x5644a89f4b00:s1 -> Node0x5644a89f68f0;
+	Node0x5644a89f68a0 [shape=record,label="{xmlschemas.c:20224:}"];
+	Node0x5644a89f68a0 -> Node0x5644a89f3930;
+	Node0x5644a89f68f0 [shape=record,label="{xmlschemas.c:20232:}"];
+	Node0x5644a89f68f0 -> Node0x5644a89f3930;
+	Node0x5644a89f3930 [shape=record,label="{xmlschemas.c:20233:}"];
+}

@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlNodeGetLang' function" {
+	label="CFG for 'xmlNodeGetLang' function";
+
+	Node0x55a216dcc960 [shape=record,label="{tree.c:5020:|{<s0>T|<s1>F}}"];
+	Node0x55a216dcc960:s0 -> Node0x55a216dd3c80;
+	Node0x55a216dcc960:s1 -> Node0x55a216dd3d20;
+	Node0x55a216dd3d20 [shape=record,label="{tree.c:5023:|{<s0>T|<s1>F}}"];
+	Node0x55a216dd3d20:s0 -> Node0x55a216dd3c80;
+	Node0x55a216dd3d20:s1 -> Node0x55a216dd3cd0;
+	Node0x55a216dd3c80 [shape=record,label="{tree.c:5024:}"];
+	Node0x55a216dd3c80 -> Node0x55a216dd34e0;
+	Node0x55a216dd3cd0 [shape=record,label="{tree.c:5025:}"];
+	Node0x55a216dd3cd0 -> Node0x55a216dd4440;
+	Node0x55a216dd4440 [shape=record,label="{tree.c:5025:|{<s0>T|<s1>F}}"];
+	Node0x55a216dd4440:s0 -> Node0x55a216dd4800;
+	Node0x55a216dd4440:s1 -> Node0x55a216dd4620;
+	Node0x55a216dd4800 [shape=record,label="{tree.c:5026:|{<s0>T|<s1>F}}"];
+	Node0x55a216dd4800:s0 -> Node0x55a216dd6320;
+	Node0x55a216dd4800:s1 -> Node0x55a216dd6370;
+	Node0x55a216dd6320 [shape=record,label="{tree.c:5028:}"];
+	Node0x55a216dd6320 -> Node0x55a216dd34e0;
+	Node0x55a216dd6370 [shape=record,label="{tree.c:5029:}"];
+	Node0x55a216dd6370 -> Node0x55a216dd4440;
+	Node0x55a216dd4620 [shape=record,label="{tree.c:5031:}"];
+	Node0x55a216dd4620 -> Node0x55a216dd34e0;
+	Node0x55a216dd34e0 [shape=record,label="{tree.c:5032:}"];
+}

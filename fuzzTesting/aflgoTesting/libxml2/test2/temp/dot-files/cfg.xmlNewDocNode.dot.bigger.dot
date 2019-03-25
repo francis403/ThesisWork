@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlNewDocNode' function" {
+	label="CFG for 'xmlNewDocNode' function";
+
+	Node0x55a216c2d820 [shape=record,label="{tree.c:2315:|{<s0>T|<s1>F}}"];
+	Node0x55a216c2d820:s0 -> Node0x55a216c32ff0;
+	Node0x55a216c2d820:s1 -> Node0x55a216c32fa0;
+	Node0x55a216c32ff0 [shape=record,label="{tree.c:2319:|{<s0>T|<s1>F}}"];
+	Node0x55a216c32ff0:s0 -> Node0x55a216c32f00;
+	Node0x55a216c32ff0:s1 -> Node0x55a216c32fa0;
+	Node0x55a216c32f00 [shape=record,label="{tree.c:2320:}"];
+	Node0x55a216c32f00 -> Node0x55a216c32f50;
+	Node0x55a216c32fa0 [shape=record,label="{tree.c:2323:}"];
+	Node0x55a216c32fa0 -> Node0x55a216c32f50;
+	Node0x55a216c32f50 [shape=record,label="{tree.c:2324:|{<s0>T|<s1>F}}"];
+	Node0x55a216c32f50:s0 -> Node0x55a216c33dc0;
+	Node0x55a216c32f50:s1 -> Node0x55a216c33e10;
+	Node0x55a216c33dc0 [shape=record,label="{tree.c:2325:|{<s0>T|<s1>F}}"];
+	Node0x55a216c33dc0:s0 -> Node0x55a216c34370;
+	Node0x55a216c33dc0:s1 -> Node0x55a216c343c0;
+	Node0x55a216c34370 [shape=record,label="{tree.c:2327:|{<s0>T|<s1>F}}"];
+	Node0x55a216c34370:s0 -> Node0x55a216b5f8e0;
+	Node0x55a216c34370:s1 -> Node0x55a216b5f930;
+	Node0x55a216b5f8e0 [shape=record,label="{tree.c:2328:|{<s0>T|<s1>F}}"];
+	Node0x55a216b5f8e0:s0 -> Node0x55a216b5ffb0;
+	Node0x55a216b5f8e0:s1 -> Node0x55a216b60050;
+	Node0x55a216b5ffb0 [shape=record,label="{tree.c:2328:}"];
+	Node0x55a216b5ffb0 -> Node0x55a216b60000;
+	Node0x55a216b60050 [shape=record,label="{tree.c:2328:}"];
+	Node0x55a216b60050 -> Node0x55a216b60500;
+	Node0x55a216b60500 [shape=record,label="{tree.c:2328:|{<s0>T|<s1>F}}"];
+	Node0x55a216b60500:s0 -> Node0x55a216b608a0;
+	Node0x55a216b60500:s1 -> Node0x55a216b606f0;
+	Node0x55a216b608a0 [shape=record,label="{tree.c:2328:}"];
+	Node0x55a216b608a0 -> Node0x55a216b60500;
+	Node0x55a216b606f0 [shape=record,label="{tree.c:2328:}"];
+	Node0x55a216b606f0 -> Node0x55a216b60000;
+	Node0x55a216b60000 [shape=record,label="{tree.c:2328:}"];
+	Node0x55a216b60000 -> Node0x55a216b5f930;
+	Node0x55a216b5f930 [shape=record,label="{tree.c:2329:}"];
+	Node0x55a216b5f930 -> Node0x55a216c343c0;
+	Node0x55a216c343c0 [shape=record,label="{tree.c:2330:}"];
+	Node0x55a216c343c0 -> Node0x55a216c33e10;
+	Node0x55a216c33e10 [shape=record,label="{tree.c:2332:}"];
+}

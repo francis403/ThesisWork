@@ -1,0 +1,12 @@
+digraph "CFG for 'myClose' function" {
+	label="CFG for 'myClose' function";
+
+	Node0x55f766f09580 [shape=record,label="{xmllint.c:820:|{<s0>T|<s1>F}}"];
+	Node0x55f766f09580:s0 -> Node0x55f766f19920;
+	Node0x55f766f09580:s1 -> Node0x55f766f19970;
+	Node0x55f766f19920 [shape=record,label="{xmllint.c:823:}"];
+	Node0x55f766f19920 -> Node0x55f766f18940;
+	Node0x55f766f19970 [shape=record,label="{xmllint.c:824:}"];
+	Node0x55f766f19970 -> Node0x55f766f18940;
+	Node0x55f766f18940 [shape=record,label="{xmllint.c:825:}"];
+}

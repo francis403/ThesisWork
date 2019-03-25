@@ -1,0 +1,47 @@
+digraph "CFG for 'htmlCreateFileParserCtxt' function" {
+	label="CFG for 'htmlCreateFileParserCtxt' function";
+
+	Node0x5651a5c400d0 [shape=record,label="{HTMLparser.c:6338:|{<s0>T|<s1>F}}"];
+	Node0x5651a5c400d0 -> Node0x5651a5b576c0;
+	Node0x5651a5c400d0 -> Node0x5651a5b57710;
+	Node0x5651a5b576c0 [shape=record,label="{HTMLparser.c:6347:}"];
+	Node0x5651a5b576c0 -> Node0x5651a5b50a10;
+	Node0x5651a5b57710 [shape=record,label="{HTMLparser.c:6349:|{<s0>T|<s1>F}}"];
+	Node0x5651a5b57710 -> Node0x5651a5b57c80;
+	Node0x5651a5b57710 -> Node0x5651a5b57cd0;
+	Node0x5651a5b57c80 [shape=record,label="{HTMLparser.c:6351:}"];
+	Node0x5651a5b57c80 -> Node0x5651a5b50a10;
+	Node0x5651a5b57cd0 [shape=record,label="{HTMLparser.c:6353:|{<s0>T|<s1>F}}"];
+	Node0x5651a5b57cd0 -> Node0x5651a5b58490;
+	Node0x5651a5b57cd0 -> Node0x5651a5b584e0;
+	Node0x5651a5b58490 [shape=record,label="{HTMLparser.c:6356:|{<s0>T|<s1>F}}"];
+	Node0x5651a5b58490 -> Node0x5651a5c52650;
+	Node0x5651a5b58490 -> Node0x5651a5c526a0;
+	Node0x5651a5c52650 [shape=record,label="{HTMLparser.c:6357:}"];
+	Node0x5651a5c52650 -> Node0x5651a5c526a0;
+	Node0x5651a5c526a0 [shape=record,label="{HTMLparser.c:6360:}"];
+	Node0x5651a5c526a0 -> Node0x5651a5b50a10;
+	Node0x5651a5b584e0 [shape=record,label="{HTMLparser.c:6364:|{<s0>T|<s1>F}}"];
+	Node0x5651a5b584e0 -> Node0x5651a5c53ec0;
+	Node0x5651a5b584e0 -> Node0x5651a5c53f10;
+	Node0x5651a5c53ec0 [shape=record,label="{HTMLparser.c:6367:}"];
+	Node0x5651a5c53ec0 -> Node0x5651a5b50a10;
+	Node0x5651a5c53f10 [shape=record,label="{HTMLparser.c:6371:|{<s0>T|<s1>F}}"];
+	Node0x5651a5c53f10 -> Node0x5651a5c546e0;
+	Node0x5651a5c53f10 -> Node0x5651a5c54730;
+	Node0x5651a5c546e0 [shape=record,label="{HTMLparser.c:6375:|{<s0>T|<s1>F}}"];
+	Node0x5651a5c546e0 -> Node0x5651a5c54e60;
+	Node0x5651a5c546e0 -> Node0x5651a5c54eb0;
+	Node0x5651a5c54e60 [shape=record,label="{HTMLparser.c:6378:|{<s0>T|<s1>F}}"];
+	Node0x5651a5c54e60 -> Node0x5651a5c55ae0;
+	Node0x5651a5c54e60 -> Node0x5651a5c55b30;
+	Node0x5651a5c55ae0 [shape=record,label="{HTMLparser.c:6380:}"];
+	Node0x5651a5c55ae0 -> Node0x5651a5c55b30;
+	Node0x5651a5c55b30 [shape=record,label="{HTMLparser.c:6385:}"];
+	Node0x5651a5c55b30 -> Node0x5651a5c54eb0;
+	Node0x5651a5c54eb0 [shape=record,label="{HTMLparser.c:6386:}"];
+	Node0x5651a5c54eb0 -> Node0x5651a5c54730;
+	Node0x5651a5c54730 [shape=record,label="{HTMLparser.c:6388:}"];
+	Node0x5651a5c54730 -> Node0x5651a5b50a10;
+	Node0x5651a5b50a10 [shape=record,label="{HTMLparser.c:6389:}"];
+}

@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlConvertSGMLCatalog' function" {
+	label="CFG for 'xmlConvertSGMLCatalog' function";
+
+	Node0x5621aa1e0770 [shape=record,label="{catalog.c:798:|{<s0>T|<s1>F}}"];
+	Node0x5621aa1e0770 -> Node0x5621aa2bf2d0;
+	Node0x5621aa1e0770 -> Node0x5621aa2cb300;
+	Node0x5621aa2cb300 [shape=record,label="{catalog.c:800:|{<s0>T|<s1>F}}"];
+	Node0x5621aa2cb300 -> Node0x5621aa2bf2d0;
+	Node0x5621aa2cb300 -> Node0x5621aa2cb210;
+	Node0x5621aa2bf2d0 [shape=record,label="{catalog.c:801:}"];
+	Node0x5621aa2bf2d0 -> Node0x5621aa2c05e0;
+	Node0x5621aa2cb210 [shape=record,label="{catalog.c:803:|{<s0>T|<s1>F}}"];
+	Node0x5621aa2cb210 -> Node0x5621aa10f6c0;
+	Node0x5621aa2cb210 -> Node0x5621aa10f710;
+	Node0x5621aa10f6c0 [shape=record,label="{catalog.c:804:}"];
+	Node0x5621aa10f6c0 -> Node0x5621aa10f710;
+	Node0x5621aa10f710 [shape=record,label="{catalog.c:807:}"];
+	Node0x5621aa10f710 -> Node0x5621aa2c05e0;
+	Node0x5621aa2c05e0 [shape=record,label="{catalog.c:809:}"];
+}

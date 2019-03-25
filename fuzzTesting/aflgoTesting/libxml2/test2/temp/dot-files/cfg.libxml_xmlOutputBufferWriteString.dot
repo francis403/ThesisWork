@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlOutputBufferWriteString' function" {
+	label="CFG for 'libxml_xmlOutputBufferWriteString' function";
+
+	Node0x55afb8dd49f0 [shape=record,label="{libxml2-py.c:4742:|{<s0>T|<s1>F}}"];
+	Node0x55afb8dd49f0:s0 -> Node0x55afb8ddb1d0;
+	Node0x55afb8dd49f0:s1 -> Node0x55afb8ddb180;
+	Node0x55afb8ddb180 [shape=record,label="{libxml2-py.c:4750:}"];
+	Node0x55afb8ddb180 -> Node0x55afb8dd4c80;
+	Node0x55afb8ddb1d0 [shape=record,label="{libxml2-py.c:4751:|{<s0>T|<s1>F}}"];
+	Node0x55afb8ddb1d0:s0 -> Node0x55afb8ddba30;
+	Node0x55afb8ddb1d0:s1 -> Node0x55afb8ddba80;
+	Node0x55afb8ddba30 [shape=record,label="{libxml2-py.c:4751:}"];
+	Node0x55afb8ddba30 -> Node0x55afb8ddbad0;
+	Node0x55afb8ddba80 [shape=record,label="{libxml2-py.c:4751:}"];
+	Node0x55afb8ddba80 -> Node0x55afb8ddbad0;
+	Node0x55afb8ddbad0 [shape=record,label="{libxml2-py.c:4751:}"];
+	Node0x55afb8ddbad0 -> Node0x55afb8dd4c80;
+	Node0x55afb8dd4c80 [shape=record,label="{libxml2-py.c:4756:}"];
+}

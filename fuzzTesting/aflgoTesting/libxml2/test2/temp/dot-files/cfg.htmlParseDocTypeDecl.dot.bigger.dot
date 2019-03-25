@@ -1,0 +1,36 @@
+digraph "CFG for 'htmlParseDocTypeDecl' function" {
+	label="CFG for 'htmlParseDocTypeDecl' function";
+
+	Node0x5651a5dcb750 [shape=record,label="{HTMLparser.c:3457:|{<s0>T|<s1>F}}"];
+	Node0x5651a5dcb750:s0 -> Node0x5651a5dcd1c0;
+	Node0x5651a5dcb750:s1 -> Node0x5651a5dcd210;
+	Node0x5651a5dcd1c0 [shape=record,label="{HTMLparser.c:3474:}"];
+	Node0x5651a5dcd1c0 -> Node0x5651a5dcd210;
+	Node0x5651a5dcd210 [shape=record,label="{HTMLparser.c:3482:|{<s0>T|<s1>F}}"];
+	Node0x5651a5dcd210:s0 -> Node0x5651a5dce580;
+	Node0x5651a5dcd210:s1 -> Node0x5651a5dce5d0;
+	Node0x5651a5dce580 [shape=record,label="{HTMLparser.c:3494:}"];
+	Node0x5651a5dce580 -> Node0x5651a5dce5d0;
+	Node0x5651a5dce5d0 [shape=record,label="{HTMLparser.c:3498:|{<s0>T|<s1>F}}"];
+	Node0x5651a5dce5d0:s0 -> Node0x5651a5dcf340;
+	Node0x5651a5dce5d0:s1 -> Node0x5651a5dcf270;
+	Node0x5651a5dcf340 [shape=record,label="{HTMLparser.c:3503:|{<s0>T|<s1>F}}"];
+	Node0x5651a5dcf340:s0 -> Node0x5651a5dcf2c0;
+	Node0x5651a5dcf340:s1 -> Node0x5651a5dcf270;
+	Node0x5651a5dcf2c0 [shape=record,label="{HTMLparser.c:3504:|{<s0>T|<s1>F}}"];
+	Node0x5651a5dcf2c0:s0 -> Node0x5651a5dcf270;
+	Node0x5651a5dcf2c0:s1 -> Node0x5651a5dcf220;
+	Node0x5651a5dcf220 [shape=record,label="{HTMLparser.c:3505:}"];
+	Node0x5651a5dcf220 -> Node0x5651a5dcf270;
+	Node0x5651a5dcf270 [shape=record,label="{HTMLparser.c:3510:|{<s0>T|<s1>F}}"];
+	Node0x5651a5dcf270:s0 -> Node0x5651a5dd06e0;
+	Node0x5651a5dcf270:s1 -> Node0x5651a5dd0730;
+	Node0x5651a5dd06e0 [shape=record,label="{HTMLparser.c:3510:}"];
+	Node0x5651a5dd06e0 -> Node0x5651a5dd0730;
+	Node0x5651a5dd0730 [shape=record,label="{HTMLparser.c:3511:|{<s0>T|<s1>F}}"];
+	Node0x5651a5dd0730:s0 -> Node0x5651a5dd0c60;
+	Node0x5651a5dd0730:s1 -> Node0x5651a5dd0cb0;
+	Node0x5651a5dd0c60 [shape=record,label="{HTMLparser.c:3511:}"];
+	Node0x5651a5dd0c60 -> Node0x5651a5dd0cb0;
+	Node0x5651a5dd0cb0 [shape=record,label="{HTMLparser.c:3512:}"];
+}

@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlDetectSAX2' function" {
+	label="CFG for 'xmlDetectSAX2' function";
+
+	Node0x556884bb7690 [shape=record,label="{parser.c:1066:|{<s0>T|<s1>F}}"];
+	Node0x556884bb7690:s0 -> Node0x556884bb8b60;
+	Node0x556884bb7690:s1 -> Node0x556884bb8bb0;
+	Node0x556884bb8b60 [shape=record,label="{parser.c:1067:}"];
+	Node0x556884bb8b60 -> Node0x556884bbbdc0;
+	Node0x556884bb8bb0 [shape=record,label="{parser.c:1069:|{<s0>T|<s1>F}}"];
+	Node0x556884bb8bb0:s0 -> Node0x556884bb9aa0;
+	Node0x556884bb8bb0:s1 -> Node0x556884bb99d0;
+	Node0x556884bb9aa0 [shape=record,label="{parser.c:1069:|{<s0>T|<s1>F}}"];
+	Node0x556884bb9aa0:s0 -> Node0x556884bb9a20;
+	Node0x556884bb9aa0:s1 -> Node0x556884bb99d0;
+	Node0x556884bb9a20 [shape=record,label="{parser.c:1070:|{<s0>T|<s1>F}}"];
+	Node0x556884bb9a20:s0 -> Node0x556884bb9980;
+	Node0x556884bb9a20:s1 -> Node0x556884bba100;
+	Node0x556884bba100 [shape=record,label="{parser.c:1071:|{<s0>T|<s1>F}}"];
+	Node0x556884bba100:s0 -> Node0x556884bb9980;
+	Node0x556884bba100:s1 -> Node0x556884bb99d0;
+	Node0x556884bb9980 [shape=record,label="{parser.c:1071:}"];
+	Node0x556884bb9980 -> Node0x556884bb99d0;
+	Node0x556884bb99d0 [shape=record,label="{parser.c:1076:|{<s0>T|<s1>F}}"];
+	Node0x556884bb99d0:s0 -> Node0x556884bbbd70;
+	Node0x556884bb99d0:s1 -> Node0x556884bbbe90;
+	Node0x556884bbbe90 [shape=record,label="{parser.c:1079:|{<s0>T|<s1>F}}"];
+	Node0x556884bbbe90:s0 -> Node0x556884bbbd70;
+	Node0x556884bbbe90:s1 -> Node0x556884bbbe10;
+	Node0x556884bbbe10 [shape=record,label="{parser.c:1080:|{<s0>T|<s1>F}}"];
+	Node0x556884bbbe10:s0 -> Node0x556884bbbd70;
+	Node0x556884bbbe10:s1 -> Node0x556884bbbdc0;
+	Node0x556884bbbd70 [shape=record,label="{parser.c:1081:}"];
+	Node0x556884bbbd70 -> Node0x556884bbbdc0;
+	Node0x556884bbbdc0 [shape=record,label="{parser.c:1083:}"];
+}

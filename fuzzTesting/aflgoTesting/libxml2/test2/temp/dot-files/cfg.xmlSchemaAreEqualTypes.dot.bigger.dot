@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaAreEqualTypes' function" {
+	label="CFG for 'xmlSchemaAreEqualTypes' function";
+
+	Node0x5644a8c76210 [shape=record,label="{xmlschemas.c:16041:|{<s0>T|<s1>F}}"];
+	Node0x5644a8c76210:s0 -> Node0x5644a8c77fe0;
+	Node0x5644a8c76210:s1 -> Node0x5644a8c78080;
+	Node0x5644a8c78080 [shape=record,label="{xmlschemas.c:16048:|{<s0>T|<s1>F}}"];
+	Node0x5644a8c78080:s0 -> Node0x5644a8c77fe0;
+	Node0x5644a8c78080:s1 -> Node0x5644a8c78030;
+	Node0x5644a8c77fe0 [shape=record,label="{xmlschemas.c:16049:}"];
+	Node0x5644a8c77fe0 -> Node0x5644a8c72650;
+	Node0x5644a8c78030 [shape=record,label="{xmlschemas.c:16050:}"];
+	Node0x5644a8c78030 -> Node0x5644a8c72650;
+	Node0x5644a8c72650 [shape=record,label="{xmlschemas.c:16051:}"];
+}

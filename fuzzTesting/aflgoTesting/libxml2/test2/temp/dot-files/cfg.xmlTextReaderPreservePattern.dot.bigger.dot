@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlTextReaderPreservePattern' function" {
+	label="CFG for 'xmlTextReaderPreservePattern' function";
+
+	Node0x556e3dbdd4a0 [shape=record,label="{xmlreader.c:3997:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbdd4a0:s0 -> Node0x556e3dbe71a0;
+	Node0x556e3dbdd4a0:s1 -> Node0x556e3dbe7240;
+	Node0x556e3dbe7240 [shape=record,label="{xmlreader.c:4002:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbe7240:s0 -> Node0x556e3dbe71a0;
+	Node0x556e3dbe7240:s1 -> Node0x556e3dbe71f0;
+	Node0x556e3dbe71a0 [shape=record,label="{xmlreader.c:4003:}"];
+	Node0x556e3dbe71a0 -> Node0x556e3dbe1a70;
+	Node0x556e3dbe71f0 [shape=record,label="{xmlreader.c:4005:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbe71f0:s0 -> Node0x556e3dbe84e0;
+	Node0x556e3dbe71f0:s1 -> Node0x556e3dbe8530;
+	Node0x556e3dbe84e0 [shape=record,label="{xmlreader.c:4007:}"];
+	Node0x556e3dbe84e0 -> Node0x556e3dbe1a70;
+	Node0x556e3dbe8530 [shape=record,label="{xmlreader.c:4009:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbe8530:s0 -> Node0x556e3dbe8960;
+	Node0x556e3dbe8530:s1 -> Node0x556e3dbe89b0;
+	Node0x556e3dbe8960 [shape=record,label="{xmlreader.c:4010:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbe8960:s0 -> Node0x556e3dbe9870;
+	Node0x556e3dbe8960:s1 -> Node0x556e3dbe98c0;
+	Node0x556e3dbe9870 [shape=record,label="{xmlreader.c:4014:}"];
+	Node0x556e3dbe9870 -> Node0x556e3dbe1a70;
+	Node0x556e3dbe98c0 [shape=record,label="{xmlreader.c:4017:}"];
+	Node0x556e3dbe98c0 -> Node0x556e3dbe89b0;
+	Node0x556e3dbe89b0 [shape=record,label="{xmlreader.c:4018:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbe89b0:s0 -> Node0x556e3dbea3d0;
+	Node0x556e3dbe89b0:s1 -> Node0x556e3dbea420;
+	Node0x556e3dbea3d0 [shape=record,label="{xmlreader.c:4019:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbea3d0:s0 -> Node0x556e3dbeb940;
+	Node0x556e3dbea3d0:s1 -> Node0x556e3dbeb990;
+	Node0x556e3dbeb940 [shape=record,label="{xmlreader.c:4025:}"];
+	Node0x556e3dbeb940 -> Node0x556e3dbe1a70;
+	Node0x556e3dbeb990 [shape=record,label="{xmlreader.c:4029:}"];
+	Node0x556e3dbeb990 -> Node0x556e3dbea420;
+	Node0x556e3dbea420 [shape=record,label="{xmlreader.c:4031:}"];
+	Node0x556e3dbea420 -> Node0x556e3dbe1a70;
+	Node0x556e3dbe1a70 [shape=record,label="{xmlreader.c:4033:}"];
+}

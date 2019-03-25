@@ -1,0 +1,12 @@
+digraph "CFG for 'f' function" {
+	label="CFG for 'f' function";
+
+	Node0x55c1afdfac20 [shape=record,label="{conftest.c:23:|{<s0>T|<s1>F}}"];
+	Node0x55c1afdfac20 -> Node0x55c1afdfdad0;
+	Node0x55c1afdfac20 -> Node0x55c1afdfdb20;
+	Node0x55c1afdfdad0 [shape=record,label="{conftest.c:28:}"];
+	Node0x55c1afdfdad0 -> Node0x55c1afdfdb70;
+	Node0x55c1afdfdb20 [shape=record,label="{conftest.c:28:}"];
+	Node0x55c1afdfdb20 -> Node0x55c1afdfdb70;
+	Node0x55c1afdfdb70 [shape=record,label="{conftest.c:28:}"];
+}

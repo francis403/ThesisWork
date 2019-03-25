@@ -1,0 +1,12 @@
+digraph "CFG for 'inithtmlDefaultSAXHandler' function" {
+	label="CFG for 'inithtmlDefaultSAXHandler' function";
+
+	Node0x55f4561ef3d0 [shape=record,label="{SAX.c:91:|{<s0>T|<s1>F}}"];
+	Node0x55f4561ef3d0:s0 -> Node0x55f4561ed790;
+	Node0x55f4561ef3d0:s1 -> Node0x55f4561ed650;
+	Node0x55f4561ed790 [shape=record,label="{SAX.c:94:}"];
+	Node0x55f4561ed790 -> Node0x55f4561f17c0;
+	Node0x55f4561ed650 [shape=record,label="{SAX.c:96:}"];
+	Node0x55f4561ed650 -> Node0x55f4561f17c0;
+	Node0x55f4561f17c0 [shape=record,label="{SAX.c:125:}"];
+}

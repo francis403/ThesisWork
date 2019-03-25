@@ -1,0 +1,27 @@
+digraph "CFG for 'is_hex' function" {
+	label="CFG for 'is_hex' function";
+
+	Node0x5589eaf2edb0 [shape=record,label="{uri.c:1589:|{<s0>T|<s1>F}}"];
+	Node0x5589eaf2edb0:s0 -> Node0x5589eaf41a10;
+	Node0x5589eaf2edb0:s1 -> Node0x5589eaf41990;
+	Node0x5589eaf41a10 [shape=record,label="{uri.c:1590:|{<s0>T|<s1>F}}"];
+	Node0x5589eaf41a10:s0 -> Node0x5589eaf2eb80;
+	Node0x5589eaf41a10:s1 -> Node0x5589eaf41990;
+	Node0x5589eaf41990 [shape=record,label="{uri.c:1591:|{<s0>T|<s1>F}}"];
+	Node0x5589eaf41990:s0 -> Node0x5589eaf41fb0;
+	Node0x5589eaf41990:s1 -> Node0x5589eaf41910;
+	Node0x5589eaf41fb0 [shape=record,label="{uri.c:1591:|{<s0>T|<s1>F}}"];
+	Node0x5589eaf41fb0:s0 -> Node0x5589eaf2eb80;
+	Node0x5589eaf41fb0:s1 -> Node0x5589eaf41910;
+	Node0x5589eaf41910 [shape=record,label="{uri.c:1592:|{<s0>T|<s1>F}}"];
+	Node0x5589eaf41910:s0 -> Node0x5589eaf424f0;
+	Node0x5589eaf41910:s1 -> Node0x5589eaf2ebd0;
+	Node0x5589eaf424f0 [shape=record,label="{uri.c:1592:|{<s0>T|<s1>F}}"];
+	Node0x5589eaf424f0:s0 -> Node0x5589eaf2eb80;
+	Node0x5589eaf424f0:s1 -> Node0x5589eaf2ebd0;
+	Node0x5589eaf2eb80 [shape=record,label="{uri.c:1593:}"];
+	Node0x5589eaf2eb80 -> Node0x5589eaf2ee00;
+	Node0x5589eaf2ebd0 [shape=record,label="{uri.c:1594:}"];
+	Node0x5589eaf2ebd0 -> Node0x5589eaf2ee00;
+	Node0x5589eaf2ee00 [shape=record,label="{uri.c:1595:}"];
+}

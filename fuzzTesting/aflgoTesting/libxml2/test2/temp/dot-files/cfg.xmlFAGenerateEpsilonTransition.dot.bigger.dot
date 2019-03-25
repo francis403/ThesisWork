@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlFAGenerateEpsilonTransition' function" {
+	label="CFG for 'xmlFAGenerateEpsilonTransition' function";
+
+	Node0x56384ffbfdc0 [shape=record,label="{xmlregexp.c:1486:|{<s0>T|<s1>F}}"];
+	Node0x56384ffbfdc0:s0 -> Node0x56384ffc1be0;
+	Node0x56384ffbfdc0:s1 -> Node0x56384ffc1c30;
+	Node0x56384ffc1be0 [shape=record,label="{xmlregexp.c:1489:}"];
+	Node0x56384ffc1be0 -> Node0x56384ffc1c30;
+	Node0x56384ffc1c30 [shape=record,label="{xmlregexp.c:1493:}"];
+}

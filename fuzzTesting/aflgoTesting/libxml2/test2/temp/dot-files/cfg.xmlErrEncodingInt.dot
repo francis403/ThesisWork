@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlErrEncodingInt' function" {
+	label="CFG for 'xmlErrEncodingInt' function";
+
+	Node0x563908762960 [shape=record,label="{parserInternals.c:201:|{<s0>T|<s1>F}}"];
+	Node0x563908762960 -> Node0x563908766210;
+	Node0x563908762960 -> Node0x563908766140;
+	Node0x563908766210 [shape=record,label="{parserInternals.c:204:|{<s0>T|<s1>F}}"];
+	Node0x563908766210 -> Node0x563908766190;
+	Node0x563908766210 -> Node0x563908766140;
+	Node0x563908766190 [shape=record,label="{parserInternals.c:205:|{<s0>T|<s1>F}}"];
+	Node0x563908766190 -> Node0x5639087660f0;
+	Node0x563908766190 -> Node0x563908766140;
+	Node0x5639087660f0 [shape=record,label="{parserInternals.c:206:}"];
+	Node0x5639087660f0 -> Node0x563908767790;
+	Node0x563908766140 [shape=record,label="{parserInternals.c:207:|{<s0>T|<s1>F}}"];
+	Node0x563908766140 -> Node0x563908766b40;
+	Node0x563908766140 -> Node0x563908766b90;
+	Node0x563908766b40 [shape=record,label="{parserInternals.c:208:}"];
+	Node0x563908766b40 -> Node0x563908766b90;
+	Node0x563908766b90 [shape=record,label="{parserInternals.c:210:|{<s0>T|<s1>F}}"];
+	Node0x563908766b90 -> Node0x563908767740;
+	Node0x563908766b90 -> Node0x563908767790;
+	Node0x563908767740 [shape=record,label="{parserInternals.c:213:|{<s0>T|<s1>F}}"];
+	Node0x563908767740 -> Node0x563908767f10;
+	Node0x563908767740 -> Node0x563908767f60;
+	Node0x563908767f10 [shape=record,label="{parserInternals.c:215:}"];
+	Node0x563908767f10 -> Node0x563908767f60;
+	Node0x563908767f60 [shape=record,label="{parserInternals.c:216:}"];
+	Node0x563908767f60 -> Node0x563908767790;
+	Node0x563908767790 [shape=record,label="{parserInternals.c:217:}"];
+}

@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlGetGlobalState' function" {
+	label="CFG for 'xmlGetGlobalState' function";
+
+	Node0x5584b6cfb9b0 [shape=record,label="{threads.c:657:|{<s0>T|<s1>F}}"];
+	Node0x5584b6cfb9b0:s0 -> Node0x5584b6e0a000;
+	Node0x5584b6cfb9b0:s1 -> Node0x5584b6e0a050;
+	Node0x5584b6e0a000 [shape=record,label="{threads.c:660:}"];
+	Node0x5584b6e0a000 -> Node0x5584b6dec820;
+	Node0x5584b6e0a050 [shape=record,label="{threads.c:662:|{<s0>T|<s1>F}}"];
+	Node0x5584b6e0a050:s0 -> Node0x5584b6ccb4a0;
+	Node0x5584b6e0a050:s1 -> Node0x5584b6e1dda0;
+	Node0x5584b6ccb4a0 [shape=record,label="{threads.c:666:|{<s0>T|<s1>F}}"];
+	Node0x5584b6ccb4a0:s0 -> Node0x5584b6e1eaa0;
+	Node0x5584b6ccb4a0:s1 -> Node0x5584b6e1eaf0;
+	Node0x5584b6e1eaa0 [shape=record,label="{threads.c:668:}"];
+	Node0x5584b6e1eaa0 -> Node0x5584b6dec820;
+	Node0x5584b6e1eaf0 [shape=record,label="{threads.c:670:}"];
+	Node0x5584b6e1eaf0 -> Node0x5584b6dec820;
+	Node0x5584b6e1dda0 [shape=record,label="{threads.c:673:}"];
+	Node0x5584b6e1dda0 -> Node0x5584b6dec820;
+	Node0x5584b6dec820 [shape=record,label="{threads.c:746:}"];
+}

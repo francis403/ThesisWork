@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlHTMLPrintFileInfo' function" {
+	label="CFG for 'xmlHTMLPrintFileInfo' function";
+
+	Node0x55f766f1e3b0 [shape=record,label="{xmllint.c:547:|{<s0>T|<s1>F}}"];
+	Node0x55f766f1e3b0:s0 -> Node0x55f766f20ba0;
+	Node0x55f766f1e3b0:s1 -> Node0x55f766f20bf0;
+	Node0x55f766f20ba0 [shape=record,label="{xmllint.c:553:|{<s0>T|<s1>F}}"];
+	Node0x55f766f20ba0:s0 -> Node0x55f766f20fb0;
+	Node0x55f766f20ba0:s1 -> Node0x55f766f21050;
+	Node0x55f766f20fb0 [shape=record,label="{xmllint.c:554:}"];
+	Node0x55f766f20fb0 -> Node0x55f766f21000;
+	Node0x55f766f21050 [shape=record,label="{xmllint.c:557:}"];
+	Node0x55f766f21050 -> Node0x55f766f21000;
+	Node0x55f766f21000 [shape=record,label="{xmllint.c:559:}"];
+	Node0x55f766f21000 -> Node0x55f766f20bf0;
+	Node0x55f766f20bf0 [shape=record,label="{xmllint.c:560:}"];
+}

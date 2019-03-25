@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlTextWriterOutputNSDecl' function" {
+	label="CFG for 'xmlTextWriterOutputNSDecl' function";
+
+	Node0x558d984c7b70 [shape=record,label="{xmlwriter.c:4311:}"];
+	Node0x558d984c7b70 -> Node0x558d984c8d00;
+	Node0x558d984c8d00 [shape=record,label="{xmlwriter.c:4319:|{<s0>T|<s1>F}}"];
+	Node0x558d984c8d00:s0 -> Node0x558d984c99b0;
+	Node0x558d984c8d00:s1 -> Node0x558d984c8ee0;
+	Node0x558d984c99b0 [shape=record,label="{xmlwriter.c:4320:|{<s0>T|<s1>F}}"];
+	Node0x558d984c99b0:s0 -> Node0x558d984ca650;
+	Node0x558d984c99b0:s1 -> Node0x558d984ca6a0;
+	Node0x558d984ca650 [shape=record,label="{xmlwriter.c:4327:}"];
+	Node0x558d984ca650 -> Node0x558d984ca6a0;
+	Node0x558d984ca6a0 [shape=record,label="{xmlwriter.c:4331:|{<s0>T|<s1>F}}"];
+	Node0x558d984ca6a0:s0 -> Node0x558d984cb2f0;
+	Node0x558d984ca6a0:s1 -> Node0x558d984cb340;
+	Node0x558d984cb2f0 [shape=record,label="{xmlwriter.c:4334:|{<s0>T|<s1>F}}"];
+	Node0x558d984cb2f0:s0 -> Node0x558d984cbd80;
+	Node0x558d984cb2f0:s1 -> Node0x558d984cbdd0;
+	Node0x558d984cbd80 [shape=record,label="{xmlwriter.c:4339:}"];
+	Node0x558d984cbd80 -> Node0x558d984c7bc0;
+	Node0x558d984cbdd0 [shape=record,label="{xmlwriter.c:4343:}"];
+	Node0x558d984cbdd0 -> Node0x558d984cb340;
+	Node0x558d984cb340 [shape=record,label="{xmlwriter.c:4319:}"];
+	Node0x558d984cb340 -> Node0x558d984c8d00;
+	Node0x558d984c8ee0 [shape=record,label="{xmlwriter.c:4346:}"];
+	Node0x558d984c8ee0 -> Node0x558d984c7bc0;
+	Node0x558d984c7bc0 [shape=record,label="{xmlwriter.c:4347:}"];
+}

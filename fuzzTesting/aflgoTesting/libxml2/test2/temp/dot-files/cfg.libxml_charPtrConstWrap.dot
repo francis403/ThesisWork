@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_charPtrConstWrap' function" {
+	label="CFG for 'libxml_charPtrConstWrap' function";
+
+	Node0x5623682cfac0 [shape=record,label="{types.c:141:|{<s0>T|<s1>F}}"];
+	Node0x5623682cfac0:s0 -> Node0x5623682d05c0;
+	Node0x5623682cfac0:s1 -> Node0x5623682d0610;
+	Node0x5623682d05c0 [shape=record,label="{types.c:149:}"];
+	Node0x5623682d05c0 -> Node0x5623682cfdc0;
+	Node0x5623682d0610 [shape=record,label="{types.c:152:}"];
+	Node0x5623682d0610 -> Node0x5623682cfdc0;
+	Node0x5623682cfdc0 [shape=record,label="{types.c:154:}"];
+}

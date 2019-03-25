@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlStrstr' function" {
+	label="CFG for 'libxml_xmlStrstr' function";
+
+	Node0x55afb90af100 [shape=record,label="{libxml2-py.c:7667:|{<s0>T|<s1>F}}"];
+	Node0x55afb90af100:s0 -> Node0x55afb90b2440;
+	Node0x55afb90af100:s1 -> Node0x55afb90b23f0;
+	Node0x55afb90b23f0 [shape=record,label="{libxml2-py.c:7674:}"];
+	Node0x55afb90b23f0 -> Node0x55afb90aee20;
+	Node0x55afb90b2440 [shape=record,label="{libxml2-py.c:7676:}"];
+	Node0x55afb90b2440 -> Node0x55afb90aee20;
+	Node0x55afb90aee20 [shape=record,label="{libxml2-py.c:7679:}"];
+}

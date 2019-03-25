@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlBufDump' function" {
+	label="CFG for 'xmlBufDump' function";
+
+	Node0x558c8f7d44c0 [shape=record,label="{buf.c:548:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7d44c0 -> Node0x558c8f7dc520;
+	Node0x558c8f7d44c0 -> Node0x558c8f7dc5c0;
+	Node0x558c8f7dc5c0 [shape=record,label="{buf.c:551:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7dc5c0 -> Node0x558c8f7dc520;
+	Node0x558c8f7dc5c0 -> Node0x558c8f7dc570;
+	Node0x558c8f7dc520 [shape=record,label="{buf.c:556:}"];
+	Node0x558c8f7dc520 -> Node0x558c8f7d46b0;
+	Node0x558c8f7dc570 [shape=record,label="{buf.c:558:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7dc570 -> Node0x558c8f7dce10;
+	Node0x558c8f7dc570 -> Node0x558c8f7dce60;
+	Node0x558c8f7dce10 [shape=record,label="{buf.c:563:}"];
+	Node0x558c8f7dce10 -> Node0x558c8f7d46b0;
+	Node0x558c8f7dce60 [shape=record,label="{buf.c:565:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7dce60 -> Node0x558c8f7dd420;
+	Node0x558c8f7dce60 -> Node0x558c8f7dd470;
+	Node0x558c8f7dd420 [shape=record,label="{buf.c:565:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7dd420 -> Node0x558c8f7dd880;
+	Node0x558c8f7dd420 -> Node0x558c8f7dd8d0;
+	Node0x558c8f7dd880 [shape=record,label="{buf.c:565:}"];
+	Node0x558c8f7dd880 -> Node0x558c8f7dd8d0;
+	Node0x558c8f7dd8d0 [shape=record,label="{buf.c:565:}"];
+	Node0x558c8f7dd8d0 -> Node0x558c8f7dd470;
+	Node0x558c8f7dd470 [shape=record,label="{buf.c:565:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7dd470 -> Node0x558c8f7dde60;
+	Node0x558c8f7dd470 -> Node0x558c8f7ddeb0;
+	Node0x558c8f7dde60 [shape=record,label="{buf.c:565:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7dde60 -> Node0x558c8f7de400;
+	Node0x558c8f7dde60 -> Node0x558c8f7de450;
+	Node0x558c8f7de400 [shape=record,label="{buf.c:565:}"];
+	Node0x558c8f7de400 -> Node0x558c8f7de450;
+	Node0x558c8f7de450 [shape=record,label="{buf.c:565:}"];
+	Node0x558c8f7de450 -> Node0x558c8f7ddeb0;
+	Node0x558c8f7ddeb0 [shape=record,label="{buf.c:566:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7ddeb0 -> Node0x558c8f7deb80;
+	Node0x558c8f7ddeb0 -> Node0x558c8f7debd0;
+	Node0x558c8f7deb80 [shape=record,label="{buf.c:567:}"];
+	Node0x558c8f7deb80 -> Node0x558c8f7debd0;
+	Node0x558c8f7debd0 [shape=record,label="{buf.c:568:}"];
+	Node0x558c8f7debd0 -> Node0x558c8f7d46b0;
+	Node0x558c8f7d46b0 [shape=record,label="{buf.c:570:}"];
+}

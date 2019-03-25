@@ -1,0 +1,34 @@
+digraph "CFG for 'PUSH_NEXT' function" {
+	label="CFG for 'PUSH_NEXT' function";
+
+	Node0x562a79e36ac0 [shape=record,label="{timsort.h:487:|{<s0>T|<s1>F}}"];
+	Node0x562a79e36ac0:s0 -> Node0x562a79e3bf40;
+	Node0x562a79e36ac0:s1 -> Node0x562a79e3bf90;
+	Node0x562a79e3bf40 [shape=record,label="{timsort.h:498:}"];
+	Node0x562a79e3bf40 -> Node0x562a79e3bf90;
+	Node0x562a79e3bf90 [shape=record,label="{timsort.h:501:|{<s0>T|<s1>F}}"];
+	Node0x562a79e3bf90:s0 -> Node0x562a79e3c950;
+	Node0x562a79e3bf90:s1 -> Node0x562a79e3c9a0;
+	Node0x562a79e3c950 [shape=record,label="{timsort.h:502:}"];
+	Node0x562a79e3c950 -> Node0x562a79e3c9a0;
+	Node0x562a79e3c9a0 [shape=record,label="{timsort.h:506:|{<s0>T|<s1>F}}"];
+	Node0x562a79e3c9a0:s0 -> Node0x562a79e3e190;
+	Node0x562a79e3c9a0:s1 -> Node0x562a79e3e1e0;
+	Node0x562a79e3e190 [shape=record,label="{timsort.h:513:}"];
+	Node0x562a79e3e190 -> Node0x562a79e3e620;
+	Node0x562a79e3e620 [shape=record,label="{timsort.h:513:|{<s0>T|<s1>F}}"];
+	Node0x562a79e3e620:s0 -> Node0x562a79e3ea10;
+	Node0x562a79e3e620:s1 -> Node0x562a79e3e7e0;
+	Node0x562a79e3ea10 [shape=record,label="{timsort.h:514:}"];
+	Node0x562a79e3ea10 -> Node0x562a79e3e620;
+	Node0x562a79e3e7e0 [shape=record,label="{timsort.h:519:|{<s0>T|<s1>F}}"];
+	Node0x562a79e3e7e0:s0 -> Node0x562a79e3fdc0;
+	Node0x562a79e3e7e0:s1 -> Node0x562a79e3fe10;
+	Node0x562a79e3fdc0 [shape=record,label="{timsort.h:520:}"];
+	Node0x562a79e3fdc0 -> Node0x562a79e3fe10;
+	Node0x562a79e3fe10 [shape=record,label="{timsort.h:524:}"];
+	Node0x562a79e3fe10 -> Node0x562a79e36b10;
+	Node0x562a79e3e1e0 [shape=record,label="{timsort.h:527:}"];
+	Node0x562a79e3e1e0 -> Node0x562a79e36b10;
+	Node0x562a79e36b10 [shape=record,label="{timsort.h:528:}"];
+}

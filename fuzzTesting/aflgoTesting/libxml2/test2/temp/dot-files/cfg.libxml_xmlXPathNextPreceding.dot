@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlXPathNextPreceding' function" {
+	label="CFG for 'libxml_xmlXPathNextPreceding' function";
+
+	Node0x55afb95e04e0 [shape=record,label="{libxml2-py.c:13885:|{<s0>T|<s1>F}}"];
+	Node0x55afb95e04e0:s0 -> Node0x55afb95e51b0;
+	Node0x55afb95e04e0:s1 -> Node0x55afb95e5160;
+	Node0x55afb95e5160 [shape=record,label="{libxml2-py.c:13894:}"];
+	Node0x55afb95e5160 -> Node0x55afb95e0300;
+	Node0x55afb95e51b0 [shape=record,label="{libxml2-py.c:13895:|{<s0>T|<s1>F}}"];
+	Node0x55afb95e51b0:s0 -> Node0x55afb95e5a10;
+	Node0x55afb95e51b0:s1 -> Node0x55afb95e5a60;
+	Node0x55afb95e5a10 [shape=record,label="{libxml2-py.c:13895:}"];
+	Node0x55afb95e5a10 -> Node0x55afb95e5ab0;
+	Node0x55afb95e5a60 [shape=record,label="{libxml2-py.c:13895:}"];
+	Node0x55afb95e5a60 -> Node0x55afb95e5ab0;
+	Node0x55afb95e5ab0 [shape=record,label="{libxml2-py.c:13895:|{<s0>T|<s1>F}}"];
+	Node0x55afb95e5ab0:s0 -> Node0x55afb95e6040;
+	Node0x55afb95e5ab0:s1 -> Node0x55afb95e6090;
+	Node0x55afb95e6040 [shape=record,label="{libxml2-py.c:13896:}"];
+	Node0x55afb95e6040 -> Node0x55afb95e60e0;
+	Node0x55afb95e6090 [shape=record,label="{libxml2-py.c:13896:}"];
+	Node0x55afb95e6090 -> Node0x55afb95e60e0;
+	Node0x55afb95e60e0 [shape=record,label="{libxml2-py.c:13896:}"];
+	Node0x55afb95e60e0 -> Node0x55afb95e0300;
+	Node0x55afb95e0300 [shape=record,label="{libxml2-py.c:13901:}"];
+}

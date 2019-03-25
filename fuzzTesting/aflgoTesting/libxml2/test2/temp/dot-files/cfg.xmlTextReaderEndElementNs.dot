@@ -1,0 +1,13 @@
+digraph "CFG for 'xmlTextReaderEndElementNs' function" {
+	label="CFG for 'xmlTextReaderEndElementNs' function";
+
+	Node0x556e3dbc3c70 [shape=record,label="{xmlreader.c:761:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbc3c70 -> Node0x556e3dbc54c0;
+	Node0x556e3dbc3c70 -> Node0x556e3dbc5470;
+	Node0x556e3dbc54c0 [shape=record,label="{xmlreader.c:772:|{<s0>T|<s1>F}}"];
+	Node0x556e3dbc54c0 -> Node0x556e3dbc5420;
+	Node0x556e3dbc54c0 -> Node0x556e3dbc5470;
+	Node0x556e3dbc5420 [shape=record,label="{xmlreader.c:773:}"];
+	Node0x556e3dbc5420 -> Node0x556e3dbc5470;
+	Node0x556e3dbc5470 [shape=record,label="{xmlreader.c:775:}"];
+}

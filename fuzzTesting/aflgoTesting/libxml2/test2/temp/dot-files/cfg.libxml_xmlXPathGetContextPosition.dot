@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathGetContextPosition' function" {
+	label="CFG for 'libxml_xmlXPathGetContextPosition' function";
+
+	Node0x55afb955bdc0 [shape=record,label="{libxml2-py.c:13291:|{<s0>T|<s1>F}}"];
+	Node0x55afb955bdc0:s0 -> Node0x55afb955d400;
+	Node0x55afb955bdc0:s1 -> Node0x55afb955d3b0;
+	Node0x55afb955d3b0 [shape=record,label="{libxml2-py.c:13298:}"];
+	Node0x55afb955d3b0 -> Node0x55afb95599e0;
+	Node0x55afb955d400 [shape=record,label="{libxml2-py.c:13299:|{<s0>T|<s1>F}}"];
+	Node0x55afb955d400:s0 -> Node0x55afb955dbf0;
+	Node0x55afb955d400:s1 -> Node0x55afb955dc40;
+	Node0x55afb955dbf0 [shape=record,label="{libxml2-py.c:13299:}"];
+	Node0x55afb955dbf0 -> Node0x55afb955dc90;
+	Node0x55afb955dc40 [shape=record,label="{libxml2-py.c:13299:}"];
+	Node0x55afb955dc40 -> Node0x55afb955dc90;
+	Node0x55afb955dc90 [shape=record,label="{libxml2-py.c:13299:}"];
+	Node0x55afb955dc90 -> Node0x55afb95599e0;
+	Node0x55afb95599e0 [shape=record,label="{libxml2-py.c:13304:}"];
+}

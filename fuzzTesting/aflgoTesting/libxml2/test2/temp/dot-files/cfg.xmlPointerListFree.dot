@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlPointerListFree' function" {
+	label="CFG for 'xmlPointerListFree' function";
+
+	Node0x562a79eb6910 [shape=record,label="{xpath.c:841:|{<s0>T|<s1>F}}"];
+	Node0x562a79eb6910 -> Node0x562a79eb0bb0;
+	Node0x562a79eb6910 -> Node0x562a79eb0d30;
+	Node0x562a79eb0bb0 [shape=record,label="{xpath.c:844:}"];
+	Node0x562a79eb0bb0 -> Node0x562a79eb6960;
+	Node0x562a79eb0d30 [shape=record,label="{xpath.c:845:|{<s0>T|<s1>F}}"];
+	Node0x562a79eb0d30 -> Node0x562a79eb7390;
+	Node0x562a79eb0d30 -> Node0x562a79eb73e0;
+	Node0x562a79eb7390 [shape=record,label="{xpath.c:846:}"];
+	Node0x562a79eb7390 -> Node0x562a79eb73e0;
+	Node0x562a79eb73e0 [shape=record,label="{xpath.c:847:}"];
+	Node0x562a79eb73e0 -> Node0x562a79eb6960;
+	Node0x562a79eb6960 [shape=record,label="{xpath.c:848:}"];
+}

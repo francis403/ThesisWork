@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlIsBlankNode' function" {
+	label="CFG for 'xmlIsBlankNode' function";
+
+	Node0x55a216f20ed0 [shape=record,label="{tree.c:6950:|{<s0>T|<s1>F}}"];
+	Node0x55a216f20ed0 -> Node0x55a216f22d50;
+	Node0x55a216f20ed0 -> Node0x55a216f22da0;
+	Node0x55a216f22d50 [shape=record,label="{tree.c:6952:}"];
+	Node0x55a216f22d50 -> Node0x55a216f21440;
+	Node0x55a216f22da0 [shape=record,label="{tree.c:6954:|{<s0>T|<s1>F}}"];
+	Node0x55a216f22da0 -> Node0x55a216f232d0;
+	Node0x55a216f22da0 -> Node0x55a216f23280;
+	Node0x55a216f232d0 [shape=record,label="{tree.c:6955:|{<s0>T|<s1>F}}"];
+	Node0x55a216f232d0 -> Node0x55a216f23230;
+	Node0x55a216f232d0 -> Node0x55a216f23280;
+	Node0x55a216f23230 [shape=record,label="{tree.c:6956:}"];
+	Node0x55a216f23230 -> Node0x55a216f21440;
+	Node0x55a216f23280 [shape=record,label="{tree.c:6957:|{<s0>T|<s1>F}}"];
+	Node0x55a216f23280 -> Node0x55a216f23ae0;
+	Node0x55a216f23280 -> Node0x55a216f23b30;
+	Node0x55a216f23ae0 [shape=record,label="{tree.c:6957:}"];
+	Node0x55a216f23ae0 -> Node0x55a216f21440;
+	Node0x55a216f23b30 [shape=record,label="{tree.c:6958:}"];
+	Node0x55a216f23b30 -> Node0x55a216f24220;
+	Node0x55a216f24220 [shape=record,label="{tree.c:6959:|{<s0>T|<s1>F}}"];
+	Node0x55a216f24220 -> Node0x55a216f24690;
+	Node0x55a216f24220 -> Node0x55a216f24400;
+	Node0x55a216f24690 [shape=record,label="{tree.c:6960:|{<s0>T|<s1>F}}"];
+	Node0x55a216f24690 -> Node0x55a216f248d0;
+	Node0x55a216f24690 -> Node0x55a216f249a0;
+	Node0x55a216f249a0 [shape=record,label="{tree.c:6960:|{<s0>T|<s1>F}}"];
+	Node0x55a216f249a0 -> Node0x55a216f24ba0;
+	Node0x55a216f249a0 -> Node0x55a216f24920;
+	Node0x55a216f24ba0 [shape=record,label="{tree.c:6960:|{<s0>T|<s1>F}}"];
+	Node0x55a216f24ba0 -> Node0x55a216f248d0;
+	Node0x55a216f24ba0 -> Node0x55a216f24920;
+	Node0x55a216f24920 [shape=record,label="{tree.c:6960:|{<s0>T|<s1>F}}"];
+	Node0x55a216f24920 -> Node0x55a216f248d0;
+	Node0x55a216f24920 -> Node0x55a216f24880;
+	Node0x55a216f24880 [shape=record,label="{tree.c:6960:}"];
+	Node0x55a216f24880 -> Node0x55a216f21440;
+	Node0x55a216f248d0 [shape=record,label="{tree.c:6961:}"];
+	Node0x55a216f248d0 -> Node0x55a216f24220;
+	Node0x55a216f24400 [shape=record,label="{tree.c:6964:}"];
+	Node0x55a216f24400 -> Node0x55a216f21440;
+	Node0x55a216f21440 [shape=record,label="{tree.c:6965:}"];
+}

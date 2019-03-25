@@ -1,0 +1,46 @@
+digraph "CFG for 'htmlInitParserCtxt' function" {
+	label="CFG for 'htmlInitParserCtxt' function";
+
+	Node0x5651a5ddc340 [shape=record,label="{HTMLparser.c:4861:|{<s0>T|<s1>F}}"];
+	Node0x5651a5ddc340 -> Node0x5651a5fa4570;
+	Node0x5651a5ddc340 -> Node0x5651a5fa45c0;
+	Node0x5651a5fa4570 [shape=record,label="{HTMLparser.c:4865:}"];
+	Node0x5651a5fa4570 -> Node0x5651a5fa2bc0;
+	Node0x5651a5fa45c0 [shape=record,label="{HTMLparser.c:4866:|{<s0>T|<s1>F}}"];
+	Node0x5651a5fa45c0 -> Node0x5651a5fa5670;
+	Node0x5651a5fa45c0 -> Node0x5651a5fa56c0;
+	Node0x5651a5fa5670 [shape=record,label="{HTMLparser.c:4870:}"];
+	Node0x5651a5fa5670 -> Node0x5651a5fa2bc0;
+	Node0x5651a5fa56c0 [shape=record,label="{HTMLparser.c:4873:|{<s0>T|<s1>F}}"];
+	Node0x5651a5fa56c0 -> Node0x5651a5fa60f0;
+	Node0x5651a5fa56c0 -> Node0x5651a5fa6190;
+	Node0x5651a5fa60f0 [shape=record,label="{HTMLparser.c:4875:}"];
+	Node0x5651a5fa60f0 -> Node0x5651a5fa2bc0;
+	Node0x5651a5fa6190 [shape=record,label="{HTMLparser.c:4879:}"];
+	Node0x5651a5fa6190 -> Node0x5651a5fa6140;
+	Node0x5651a5fa6140 [shape=record,label="{HTMLparser.c:4883:|{<s0>T|<s1>F}}"];
+	Node0x5651a5fa6140 -> Node0x5651a5fa6ed0;
+	Node0x5651a5fa6140 -> Node0x5651a5fa6f20;
+	Node0x5651a5fa6ed0 [shape=record,label="{HTMLparser.c:4885:}"];
+	Node0x5651a5fa6ed0 -> Node0x5651a5fa2bc0;
+	Node0x5651a5fa6f20 [shape=record,label="{HTMLparser.c:4891:|{<s0>T|<s1>F}}"];
+	Node0x5651a5fa6f20 -> Node0x5651a5fa92c0;
+	Node0x5651a5fa6f20 -> Node0x5651a5fa9310;
+	Node0x5651a5fa92c0 [shape=record,label="{HTMLparser.c:4902:}"];
+	Node0x5651a5fa92c0 -> Node0x5651a5fa2bc0;
+	Node0x5651a5fa9310 [shape=record,label="{HTMLparser.c:4911:|{<s0>T|<s1>F}}"];
+	Node0x5651a5fa9310 -> Node0x5651a5fab3c0;
+	Node0x5651a5fa9310 -> Node0x5651a5fab410;
+	Node0x5651a5fab3c0 [shape=record,label="{HTMLparser.c:4918:}"];
+	Node0x5651a5fab3c0 -> Node0x5651a5fa2bc0;
+	Node0x5651a5fab410 [shape=record,label="{HTMLparser.c:4930:|{<s0>T|<s1>F}}"];
+	Node0x5651a5fab410 -> Node0x5651a5faddc0;
+	Node0x5651a5fab410 -> Node0x5651a5fade60;
+	Node0x5651a5faddc0 [shape=record,label="{HTMLparser.c:4938:}"];
+	Node0x5651a5faddc0 -> Node0x5651a5fade10;
+	Node0x5651a5fade60 [shape=record,label="{HTMLparser.c:4940:}"];
+	Node0x5651a5fade60 -> Node0x5651a5fade10;
+	Node0x5651a5fade10 [shape=record,label="{HTMLparser.c:4943:}"];
+	Node0x5651a5fade10 -> Node0x5651a5fa2bc0;
+	Node0x5651a5fa2bc0 [shape=record,label="{HTMLparser.c:4961:}"];
+}

@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlRemoveRef' function" {
+	label="CFG for 'libxml_xmlRemoveRef' function";
+
+	Node0x55afb8face80 [shape=record,label="{libxml2-py.c:6601:|{<s0>T|<s1>F}}"];
+	Node0x55afb8face80:s0 -> Node0x55afb8fb1180;
+	Node0x55afb8face80:s1 -> Node0x55afb8fb1130;
+	Node0x55afb8fb1130 [shape=record,label="{libxml2-py.c:6610:}"];
+	Node0x55afb8fb1130 -> Node0x55afb8fad180;
+	Node0x55afb8fb1180 [shape=record,label="{libxml2-py.c:6611:|{<s0>T|<s1>F}}"];
+	Node0x55afb8fb1180:s0 -> Node0x55afb8fb19d0;
+	Node0x55afb8fb1180:s1 -> Node0x55afb8fb1a20;
+	Node0x55afb8fb19d0 [shape=record,label="{libxml2-py.c:6611:}"];
+	Node0x55afb8fb19d0 -> Node0x55afb8fb1a70;
+	Node0x55afb8fb1a20 [shape=record,label="{libxml2-py.c:6611:}"];
+	Node0x55afb8fb1a20 -> Node0x55afb8fb1a70;
+	Node0x55afb8fb1a70 [shape=record,label="{libxml2-py.c:6611:|{<s0>T|<s1>F}}"];
+	Node0x55afb8fb1a70:s0 -> Node0x55afb8fb2060;
+	Node0x55afb8fb1a70:s1 -> Node0x55afb8fb20b0;
+	Node0x55afb8fb2060 [shape=record,label="{libxml2-py.c:6612:}"];
+	Node0x55afb8fb2060 -> Node0x55afb8fb2100;
+	Node0x55afb8fb20b0 [shape=record,label="{libxml2-py.c:6612:}"];
+	Node0x55afb8fb20b0 -> Node0x55afb8fb2100;
+	Node0x55afb8fb2100 [shape=record,label="{libxml2-py.c:6612:}"];
+	Node0x55afb8fb2100 -> Node0x55afb8fad180;
+	Node0x55afb8fad180 [shape=record,label="{libxml2-py.c:6617:}"];
+}

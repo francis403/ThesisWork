@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlTextReaderConstBaseUri' function" {
+	label="CFG for 'xmlTextReaderConstBaseUri' function";
+
+	Node0x556e3db87370 [shape=record,label="{xmlreader.c:3460:|{<s0>T|<s1>F}}"];
+	Node0x556e3db87370 -> Node0x556e3db8d070;
+	Node0x556e3db87370 -> Node0x556e3db8d110;
+	Node0x556e3db8d110 [shape=record,label="{xmlreader.c:3464:|{<s0>T|<s1>F}}"];
+	Node0x556e3db8d110 -> Node0x556e3db8d070;
+	Node0x556e3db8d110 -> Node0x556e3db8d0c0;
+	Node0x556e3db8d070 [shape=record,label="{xmlreader.c:3465:}"];
+	Node0x556e3db8d070 -> Node0x556e3db87fc0;
+	Node0x556e3db8d0c0 [shape=record,label="{xmlreader.c:3466:|{<s0>T|<s1>F}}"];
+	Node0x556e3db8d0c0 -> Node0x556e3db8da60;
+	Node0x556e3db8d0c0 -> Node0x556e3db8dab0;
+	Node0x556e3db8da60 [shape=record,label="{xmlreader.c:3468:}"];
+	Node0x556e3db8da60 -> Node0x556e3db87fc0;
+	Node0x556e3db8dab0 [shape=record,label="{xmlreader.c:3469:}"];
+	Node0x556e3db8dab0 -> Node0x556e3db87fc0;
+	Node0x556e3db87fc0 [shape=record,label="{xmlreader.c:3472:}"];
+}

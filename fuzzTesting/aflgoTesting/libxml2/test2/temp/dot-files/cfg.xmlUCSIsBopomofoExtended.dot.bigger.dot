@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsBopomofoExtended' function" {
+	label="CFG for 'xmlUCSIsBopomofoExtended' function";
+
+	Node0x56123dcd41f0 [shape=record,label="{xmlunicode.c:1119:|{<s0>T|<s1>F}}"];
+	Node0x56123dcd41f0:s0 -> Node0x56123dcd5060;
+	Node0x56123dcd41f0:s1 -> Node0x56123dcd5010;
+	Node0x56123dcd5060 [shape=record,label="{xmlunicode.c:1120:}"];
+	Node0x56123dcd5060 -> Node0x56123dcd5010;
+	Node0x56123dcd5010 [shape=record,label="{xmlunicode.c:1120:}"];
+}

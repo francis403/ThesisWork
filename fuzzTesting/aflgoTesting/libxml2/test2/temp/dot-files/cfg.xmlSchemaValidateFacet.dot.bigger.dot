@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlSchemaValidateFacet' function" {
+	label="CFG for 'xmlSchemaValidateFacet' function";
+
+	Node0x557a4e358ef0 [shape=record,label="{xmlschemastypes.c:5540:|{<s0>T|<s1>F}}"];
+	Node0x557a4e358ef0:s0 -> Node0x557a4e363c90;
+	Node0x557a4e358ef0:s1 -> Node0x557a4e363d30;
+	Node0x557a4e363c90 [shape=record,label="{xmlschemastypes.c:5551:}"];
+	Node0x557a4e363c90 -> Node0x557a4e362e50;
+	Node0x557a4e363d30 [shape=record,label="{xmlschemastypes.c:5554:|{<s0>T|<s1>F}}"];
+	Node0x557a4e363d30:s0 -> Node0x557a4e364c60;
+	Node0x557a4e363d30:s1 -> Node0x557a4e364cb0;
+	Node0x557a4e364c60 [shape=record,label="{xmlschemastypes.c:5555:}"];
+	Node0x557a4e364c60 -> Node0x557a4e362e50;
+	Node0x557a4e364cb0 [shape=record,label="{%27}"];
+	Node0x557a4e364cb0 -> Node0x557a4e363ce0;
+	Node0x557a4e363ce0 [shape=record,label="{xmlschemastypes.c:5558:}"];
+	Node0x557a4e363ce0 -> Node0x557a4e362e50;
+	Node0x557a4e362e50 [shape=record,label="{xmlschemastypes.c:5559:}"];
+}

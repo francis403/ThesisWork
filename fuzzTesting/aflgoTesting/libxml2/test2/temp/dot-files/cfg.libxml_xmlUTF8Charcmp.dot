@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUTF8Charcmp' function" {
+	label="CFG for 'libxml_xmlUTF8Charcmp' function";
+
+	Node0x55afb9428480 [shape=record,label="{libxml2-py.c:12054:|{<s0>T|<s1>F}}"];
+	Node0x55afb9428480:s0 -> Node0x55afb942bf80;
+	Node0x55afb9428480:s1 -> Node0x55afb942bf30;
+	Node0x55afb942bf30 [shape=record,label="{libxml2-py.c:12061:}"];
+	Node0x55afb942bf30 -> Node0x55afb94282d0;
+	Node0x55afb942bf80 [shape=record,label="{libxml2-py.c:12063:}"];
+	Node0x55afb942bf80 -> Node0x55afb94282d0;
+	Node0x55afb94282d0 [shape=record,label="{libxml2-py.c:12066:}"];
+}

@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlTextReaderRelaxNGValidateCtxt' function" {
+	label="CFG for 'libxml_xmlTextReaderRelaxNGValidateCtxt' function";
+
+	Node0x55afb91d53a0 [shape=record,label="{libxml2-py.c:8719:|{<s0>T|<s1>F}}"];
+	Node0x55afb91d53a0:s0 -> Node0x55afb91d9bd0;
+	Node0x55afb91d53a0:s1 -> Node0x55afb91d9b80;
+	Node0x55afb91d9b80 [shape=record,label="{libxml2-py.c:8729:}"];
+	Node0x55afb91d9b80 -> Node0x55afb91d7950;
+	Node0x55afb91d9bd0 [shape=record,label="{libxml2-py.c:8730:|{<s0>T|<s1>F}}"];
+	Node0x55afb91d9bd0:s0 -> Node0x55afb91da4b0;
+	Node0x55afb91d9bd0:s1 -> Node0x55afb91da500;
+	Node0x55afb91da4b0 [shape=record,label="{libxml2-py.c:8730:}"];
+	Node0x55afb91da4b0 -> Node0x55afb91da550;
+	Node0x55afb91da500 [shape=record,label="{libxml2-py.c:8730:}"];
+	Node0x55afb91da500 -> Node0x55afb91da550;
+	Node0x55afb91da550 [shape=record,label="{libxml2-py.c:8730:|{<s0>T|<s1>F}}"];
+	Node0x55afb91da550:s0 -> Node0x55afb91daae0;
+	Node0x55afb91da550:s1 -> Node0x55afb91dab30;
+	Node0x55afb91daae0 [shape=record,label="{libxml2-py.c:8731:}"];
+	Node0x55afb91daae0 -> Node0x55afb91dab80;
+	Node0x55afb91dab30 [shape=record,label="{libxml2-py.c:8731:}"];
+	Node0x55afb91dab30 -> Node0x55afb91dab80;
+	Node0x55afb91dab80 [shape=record,label="{libxml2-py.c:8731:}"];
+	Node0x55afb91dab80 -> Node0x55afb91d7950;
+	Node0x55afb91d7950 [shape=record,label="{libxml2-py.c:8736:}"];
+}

@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlPointerListAddSize' function" {
+	label="CFG for 'xmlPointerListAddSize' function";
+
+	Node0x562a79ecea40 [shape=record,label="{xpath.c:773:|{<s0>T|<s1>F}}"];
+	Node0x562a79ecea40:s0 -> Node0x562a79eced90;
+	Node0x562a79ecea40:s1 -> Node0x562a79ee4840;
+	Node0x562a79eced90 [shape=record,label="{xpath.c:778:|{<s0>T|<s1>F}}"];
+	Node0x562a79eced90:s0 -> Node0x562a79ee4c90;
+	Node0x562a79eced90:s1 -> Node0x562a79ee4ce0;
+	Node0x562a79ee4c90 [shape=record,label="{xpath.c:779:}"];
+	Node0x562a79ee4c90 -> Node0x562a79ee4ce0;
+	Node0x562a79ee4ce0 [shape=record,label="{xpath.c:780:|{<s0>T|<s1>F}}"];
+	Node0x562a79ee4ce0:s0 -> Node0x562a79ee5600;
+	Node0x562a79ee4ce0:s1 -> Node0x562a79ee5650;
+	Node0x562a79ee5600 [shape=record,label="{xpath.c:782:}"];
+	Node0x562a79ee5600 -> Node0x562a79ad3d40;
+	Node0x562a79ee5650 [shape=record,label="{xpath.c:786:}"];
+	Node0x562a79ee5650 -> Node0x562a79ee47f0;
+	Node0x562a79ee4840 [shape=record,label="{xpath.c:788:|{<s0>T|<s1>F}}"];
+	Node0x562a79ee4840:s0 -> Node0x562a79ee6340;
+	Node0x562a79ee4840:s1 -> Node0x562a79ee6390;
+	Node0x562a79ee6340 [shape=record,label="{xpath.c:789:|{<s0>T|<s1>F}}"];
+	Node0x562a79ee6340:s0 -> Node0x562a79ee6a10;
+	Node0x562a79ee6340:s1 -> Node0x562a79ee6a60;
+	Node0x562a79ee6a10 [shape=record,label="{xpath.c:790:}"];
+	Node0x562a79ee6a10 -> Node0x562a79ad3d40;
+	Node0x562a79ee6a60 [shape=record,label="{xpath.c:794:|{<s0>T|<s1>F}}"];
+	Node0x562a79ee6a60:s0 -> Node0x562a79ee8000;
+	Node0x562a79ee6a60:s1 -> Node0x562a79ee8050;
+	Node0x562a79ee8000 [shape=record,label="{xpath.c:798:}"];
+	Node0x562a79ee8000 -> Node0x562a79ad3d40;
+	Node0x562a79ee8050 [shape=record,label="{xpath.c:803:}"];
+	Node0x562a79ee8050 -> Node0x562a79ee6390;
+	Node0x562a79ee6390 [shape=record,label="{%65}"];
+	Node0x562a79ee6390 -> Node0x562a79ee47f0;
+	Node0x562a79ee47f0 [shape=record,label="{xpath.c:804:}"];
+	Node0x562a79ee47f0 -> Node0x562a79ad3d40;
+	Node0x562a79ad3d40 [shape=record,label="{xpath.c:806:}"];
+}

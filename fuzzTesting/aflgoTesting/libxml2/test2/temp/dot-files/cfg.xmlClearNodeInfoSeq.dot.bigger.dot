@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlClearNodeInfoSeq' function" {
+	label="CFG for 'xmlClearNodeInfoSeq' function";
+
+	Node0x563908742ab0 [shape=record,label="{parserInternals.c:1951:|{<s0>T|<s1>F}}"];
+	Node0x563908742ab0:s0 -> Node0x563908743b40;
+	Node0x563908742ab0:s1 -> Node0x563908743ea0;
+	Node0x563908743b40 [shape=record,label="{parserInternals.c:1954:}"];
+	Node0x563908743b40 -> Node0x563908742c20;
+	Node0x563908743ea0 [shape=record,label="{parserInternals.c:1955:|{<s0>T|<s1>F}}"];
+	Node0x563908743ea0:s0 -> Node0x563908744950;
+	Node0x563908743ea0:s1 -> Node0x5639087449a0;
+	Node0x563908744950 [shape=record,label="{parserInternals.c:1956:}"];
+	Node0x563908744950 -> Node0x5639087449a0;
+	Node0x5639087449a0 [shape=record,label="{parserInternals.c:1957:}"];
+	Node0x5639087449a0 -> Node0x563908742c20;
+	Node0x563908742c20 [shape=record,label="{parserInternals.c:1958:}"];
+}

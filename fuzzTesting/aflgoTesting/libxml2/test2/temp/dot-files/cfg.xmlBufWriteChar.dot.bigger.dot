@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlBufWriteChar' function" {
+	label="CFG for 'xmlBufWriteChar' function";
+
+	Node0x558c8f87c0a0 [shape=record,label="{buf.c:1088:|{<s0>T|<s1>F}}"];
+	Node0x558c8f87c0a0:s0 -> Node0x558c8f874140;
+	Node0x558c8f87c0a0:s1 -> Node0x558c8f882030;
+	Node0x558c8f882030 [shape=record,label="{buf.c:1089:|{<s0>T|<s1>F}}"];
+	Node0x558c8f882030:s0 -> Node0x558c8f874140;
+	Node0x558c8f882030:s1 -> Node0x558c8f87c420;
+	Node0x558c8f874140 [shape=record,label="{buf.c:1090:}"];
+	Node0x558c8f874140 -> Node0x558c8f87f5c0;
+	Node0x558c8f87c420 [shape=record,label="{buf.c:1091:|{<s0>T|<s1>F}}"];
+	Node0x558c8f87c420:s0 -> Node0x558c8f882780;
+	Node0x558c8f87c420:s1 -> Node0x558c8f8827d0;
+	Node0x558c8f882780 [shape=record,label="{buf.c:1091:|{<s0>T|<s1>F}}"];
+	Node0x558c8f882780:s0 -> Node0x558c8f882be0;
+	Node0x558c8f882780:s1 -> Node0x558c8f882c30;
+	Node0x558c8f882be0 [shape=record,label="{buf.c:1091:}"];
+	Node0x558c8f882be0 -> Node0x558c8f882c30;
+	Node0x558c8f882c30 [shape=record,label="{buf.c:1091:}"];
+	Node0x558c8f882c30 -> Node0x558c8f8827d0;
+	Node0x558c8f8827d0 [shape=record,label="{buf.c:1091:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8827d0:s0 -> Node0x558c8f883260;
+	Node0x558c8f8827d0:s1 -> Node0x558c8f8832b0;
+	Node0x558c8f883260 [shape=record,label="{buf.c:1091:|{<s0>T|<s1>F}}"];
+	Node0x558c8f883260:s0 -> Node0x558c8f883800;
+	Node0x558c8f883260:s1 -> Node0x558c8f883850;
+	Node0x558c8f883800 [shape=record,label="{buf.c:1091:}"];
+	Node0x558c8f883800 -> Node0x558c8f883850;
+	Node0x558c8f883850 [shape=record,label="{buf.c:1091:}"];
+	Node0x558c8f883850 -> Node0x558c8f8832b0;
+	Node0x558c8f8832b0 [shape=record,label="{buf.c:1092:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8832b0:s0 -> Node0x558c8f883f80;
+	Node0x558c8f8832b0:s1 -> Node0x558c8f883fd0;
+	Node0x558c8f883f80 [shape=record,label="{buf.c:1093:}"];
+	Node0x558c8f883f80 -> Node0x558c8f87f5c0;
+	Node0x558c8f883fd0 [shape=record,label="{buf.c:1094:}"];
+	Node0x558c8f883fd0 -> Node0x558c8f87f5c0;
+	Node0x558c8f87f5c0 [shape=record,label="{buf.c:1095:}"];
+}

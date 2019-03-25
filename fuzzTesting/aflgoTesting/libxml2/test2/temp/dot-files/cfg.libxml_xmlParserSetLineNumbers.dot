@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParserSetLineNumbers' function" {
+	label="CFG for 'libxml_xmlParserSetLineNumbers' function";
+
+	Node0x55afb8ec1640 [shape=record,label="{libxml2-py.c:5636:|{<s0>T|<s1>F}}"];
+	Node0x55afb8ec1640:s0 -> Node0x55afb8ec5090;
+	Node0x55afb8ec1640:s1 -> Node0x55afb8ec5040;
+	Node0x55afb8ec5040 [shape=record,label="{libxml2-py.c:5642:}"];
+	Node0x55afb8ec5040 -> Node0x55afb8ec39e0;
+	Node0x55afb8ec5090 [shape=record,label="{libxml2-py.c:5643:|{<s0>T|<s1>F}}"];
+	Node0x55afb8ec5090:s0 -> Node0x55afb8ec58f0;
+	Node0x55afb8ec5090:s1 -> Node0x55afb8ec5940;
+	Node0x55afb8ec58f0 [shape=record,label="{libxml2-py.c:5643:}"];
+	Node0x55afb8ec58f0 -> Node0x55afb8ec5990;
+	Node0x55afb8ec5940 [shape=record,label="{libxml2-py.c:5643:}"];
+	Node0x55afb8ec5940 -> Node0x55afb8ec5990;
+	Node0x55afb8ec5990 [shape=record,label="{libxml2-py.c:5643:}"];
+	Node0x55afb8ec5990 -> Node0x55afb8ec39e0;
+	Node0x55afb8ec39e0 [shape=record,label="{libxml2-py.c:5648:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlNodeAddContent' function" {
+	label="CFG for 'xmlNodeAddContent' function";
+
+	Node0x55a216e4de20 [shape=record,label="{tree.c:5856:|{<s0>T|<s1>F}}"];
+	Node0x55a216e4de20:s0 -> Node0x55a216c85030;
+	Node0x55a216e4de20:s1 -> Node0x55a216c85080;
+	Node0x55a216c85030 [shape=record,label="{tree.c:5864:}"];
+	Node0x55a216c85030 -> Node0x55a216e4bcd0;
+	Node0x55a216c85080 [shape=record,label="{tree.c:5866:|{<s0>T|<s1>F}}"];
+	Node0x55a216c85080:s0 -> Node0x55a216c85500;
+	Node0x55a216c85080:s1 -> Node0x55a216c85550;
+	Node0x55a216c85500 [shape=record,label="{tree.c:5866:}"];
+	Node0x55a216c85500 -> Node0x55a216e4bcd0;
+	Node0x55a216c85550 [shape=record,label="{tree.c:5867:}"];
+	Node0x55a216c85550 -> Node0x55a216e4bcd0;
+	Node0x55a216e4bcd0 [shape=record,label="{tree.c:5869:}"];
+}

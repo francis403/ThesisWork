@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlInitializeCatalogData' function" {
+	label="CFG for 'xmlInitializeCatalogData' function";
+
+	Node0x5621aa599440 [shape=record,label="{catalog.c:3091:|{<s0>T|<s1>F}}"];
+	Node0x5621aa599440:s0 -> Node0x5621aa599560;
+	Node0x5621aa599440:s1 -> Node0x5621aa5995b0;
+	Node0x5621aa599560 [shape=record,label="{catalog.c:3092:}"];
+	Node0x5621aa599560 -> Node0x5621aa599490;
+	Node0x5621aa5995b0 [shape=record,label="{catalog.c:3094:|{<s0>T|<s1>F}}"];
+	Node0x5621aa5995b0:s0 -> Node0x5621aa599930;
+	Node0x5621aa5995b0:s1 -> Node0x5621aa599980;
+	Node0x5621aa599930 [shape=record,label="{catalog.c:3095:}"];
+	Node0x5621aa599930 -> Node0x5621aa599980;
+	Node0x5621aa599980 [shape=record,label="{catalog.c:3096:}"];
+	Node0x5621aa599980 -> Node0x5621aa599490;
+	Node0x5621aa599490 [shape=record,label="{catalog.c:3099:}"];
+}

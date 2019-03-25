@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsLatinExtendedB' function" {
+	label="CFG for 'libxml_xmlUCSIsLatinExtendedB' function";
+
+	Node0x55afb8e66c40 [shape=record,label="{libxml2-py.c:10795:|{<s0>T|<s1>F}}"];
+	Node0x55afb8e66c40:s0 -> Node0x55afb8e6aca0;
+	Node0x55afb8e66c40:s1 -> Node0x55afb8e6ac50;
+	Node0x55afb8e6ac50 [shape=record,label="{libxml2-py.c:10801:}"];
+	Node0x55afb8e6ac50 -> Node0x55afb8e66ed0;
+	Node0x55afb8e6aca0 [shape=record,label="{libxml2-py.c:10803:}"];
+	Node0x55afb8e6aca0 -> Node0x55afb8e66ed0;
+	Node0x55afb8e66ed0 [shape=record,label="{libxml2-py.c:10806:}"];
+}

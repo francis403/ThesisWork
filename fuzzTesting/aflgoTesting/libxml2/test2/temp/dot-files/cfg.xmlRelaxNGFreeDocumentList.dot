@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlRelaxNGFreeDocumentList' function" {
+	label="CFG for 'xmlRelaxNGFreeDocumentList' function";
+
+	Node0x559f317d3a10 [shape=record,label="{relaxng.c:702:}"];
+	Node0x559f317d3a10 -> Node0x559f317d4400;
+	Node0x559f317d4400 [shape=record,label="{relaxng.c:706:|{<s0>T|<s1>F}}"];
+	Node0x559f317d4400 -> Node0x559f317d4800;
+	Node0x559f317d4400 -> Node0x559f317d4620;
+	Node0x559f317d4800 [shape=record,label="{relaxng.c:707:}"];
+	Node0x559f317d4800 -> Node0x559f317d4400;
+	Node0x559f317d4620 [shape=record,label="{relaxng.c:711:}"];
+}

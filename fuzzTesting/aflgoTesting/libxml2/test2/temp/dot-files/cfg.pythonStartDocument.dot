@@ -1,0 +1,37 @@
+digraph "CFG for 'pythonStartDocument' function" {
+	label="CFG for 'pythonStartDocument' function";
+
+	Node0x55bbb2892bd0 [shape=record,label="{libxml.c:948:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2892bd0:s0 -> Node0x55bbb2895ef0;
+	Node0x55bbb2892bd0:s1 -> Node0x55bbb2895f40;
+	Node0x55bbb2895ef0 [shape=record,label="{libxml.c:959:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2895ef0:s0 -> Node0x55bbb2896730;
+	Node0x55bbb2895ef0:s1 -> Node0x55bbb2896780;
+	Node0x55bbb2896730 [shape=record,label="{libxml.c:961:}"];
+	Node0x55bbb2896730 -> Node0x55bbb2896780;
+	Node0x55bbb2896780 [shape=record,label="{libxml.c:962:}"];
+	Node0x55bbb2896780 -> Node0x55bbb2896ad0;
+	Node0x55bbb2896ad0 [shape=record,label="{libxml.c:962:|{<s0>T|<s1>F}}"];
+	Node0x55bbb2896ad0:s0 -> Node0x55bbb2896d70;
+	Node0x55bbb2896ad0:s1 -> Node0x55bbb2896e10;
+	Node0x55bbb2896d70 [shape=record,label="{libxml.c:962:}"];
+	Node0x55bbb2896d70 -> Node0x55bbb2896dc0;
+	Node0x55bbb2896e10 [shape=record,label="{libxml.c:962:}"];
+	Node0x55bbb2896e10 -> Node0x55bbb28970c0;
+	Node0x55bbb28970c0 [shape=record,label="{libxml.c:962:|{<s0>T|<s1>F}}"];
+	Node0x55bbb28970c0:s0 -> Node0x55bbb28972a0;
+	Node0x55bbb28970c0:s1 -> Node0x55bbb2897340;
+	Node0x55bbb28972a0 [shape=record,label="{libxml.c:962:}"];
+	Node0x55bbb28972a0 -> Node0x55bbb28972f0;
+	Node0x55bbb2897340 [shape=record,label="{libxml.c:962:}"];
+	Node0x55bbb2897340 -> Node0x55bbb28972f0;
+	Node0x55bbb28972f0 [shape=record,label="{libxml.c:962:}"];
+	Node0x55bbb28972f0 -> Node0x55bbb2897020;
+	Node0x55bbb2897020 [shape=record,label="{%26}"];
+	Node0x55bbb2897020 -> Node0x55bbb2896dc0;
+	Node0x55bbb2896dc0 [shape=record,label="{libxml.c:962:}"];
+	Node0x55bbb2896dc0 -> Node0x55bbb2896a30;
+	Node0x55bbb2896a30 [shape=record,label="{libxml.c:963:}"];
+	Node0x55bbb2896a30 -> Node0x55bbb2895f40;
+	Node0x55bbb2895f40 [shape=record,label="{libxml.c:964:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlRngVErr' function" {
+	label="CFG for 'xmlRngVErr' function";
+
+	Node0x559f31b42af0 [shape=record,label="{relaxng.c:546:|{<s0>T|<s1>F}}"];
+	Node0x559f31b42af0 -> Node0x559f31b549b0;
+	Node0x559f31b42af0 -> Node0x559f31b54a00;
+	Node0x559f31b549b0 [shape=record,label="{relaxng.c:554:|{<s0>T|<s1>F}}"];
+	Node0x559f31b549b0 -> Node0x559f31b54dc0;
+	Node0x559f31b549b0 -> Node0x559f31b54e60;
+	Node0x559f31b54dc0 [shape=record,label="{relaxng.c:555:}"];
+	Node0x559f31b54dc0 -> Node0x559f31b54e10;
+	Node0x559f31b54e60 [shape=record,label="{relaxng.c:557:}"];
+	Node0x559f31b54e60 -> Node0x559f31b54e10;
+	Node0x559f31b54e10 [shape=record,label="{relaxng.c:558:}"];
+	Node0x559f31b54e10 -> Node0x559f31b54a00;
+	Node0x559f31b54a00 [shape=record,label="{relaxng.c:561:}"];
+}

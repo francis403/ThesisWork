@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlTextMerge' function" {
+	label="CFG for 'libxml_xmlTextMerge' function";
+
+	Node0x55afb90bb1e0 [shape=record,label="{libxml2-py.c:7730:|{<s0>T|<s1>F}}"];
+	Node0x55afb90bb1e0:s0 -> Node0x55afb90c54a0;
+	Node0x55afb90bb1e0:s1 -> Node0x55afb90c5450;
+	Node0x55afb90c5450 [shape=record,label="{libxml2-py.c:7739:}"];
+	Node0x55afb90c5450 -> Node0x55afb90bb3c0;
+	Node0x55afb90c54a0 [shape=record,label="{libxml2-py.c:7740:|{<s0>T|<s1>F}}"];
+	Node0x55afb90c54a0:s0 -> Node0x55afb90c5cf0;
+	Node0x55afb90c54a0:s1 -> Node0x55afb90c5d40;
+	Node0x55afb90c5cf0 [shape=record,label="{libxml2-py.c:7740:}"];
+	Node0x55afb90c5cf0 -> Node0x55afb90c5d90;
+	Node0x55afb90c5d40 [shape=record,label="{libxml2-py.c:7740:}"];
+	Node0x55afb90c5d40 -> Node0x55afb90c5d90;
+	Node0x55afb90c5d90 [shape=record,label="{libxml2-py.c:7740:|{<s0>T|<s1>F}}"];
+	Node0x55afb90c5d90:s0 -> Node0x55afb90c6320;
+	Node0x55afb90c5d90:s1 -> Node0x55afb90c6370;
+	Node0x55afb90c6320 [shape=record,label="{libxml2-py.c:7741:}"];
+	Node0x55afb90c6320 -> Node0x55afb90c63c0;
+	Node0x55afb90c6370 [shape=record,label="{libxml2-py.c:7741:}"];
+	Node0x55afb90c6370 -> Node0x55afb90c63c0;
+	Node0x55afb90c63c0 [shape=record,label="{libxml2-py.c:7741:}"];
+	Node0x55afb90c63c0 -> Node0x55afb90bb3c0;
+	Node0x55afb90bb3c0 [shape=record,label="{libxml2-py.c:7746:}"];
+}

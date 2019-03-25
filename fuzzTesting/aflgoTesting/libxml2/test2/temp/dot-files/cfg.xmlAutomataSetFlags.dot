@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlAutomataSetFlags' function" {
+	label="CFG for 'xmlAutomataSetFlags' function";
+
+	Node0x56384fbcac70 [shape=record,label="{xmlregexp.c:5663:|{<s0>T|<s1>F}}"];
+	Node0x56384fbcac70 -> Node0x56384faea210;
+	Node0x56384fbcac70 -> Node0x56384faea260;
+	Node0x56384faea210 [shape=record,label="{xmlregexp.c:5665:}"];
+	Node0x56384faea210 -> Node0x56384fbcb080;
+	Node0x56384faea260 [shape=record,label="{xmlregexp.c:5666:}"];
+	Node0x56384faea260 -> Node0x56384fbcb080;
+	Node0x56384fbcb080 [shape=record,label="{xmlregexp.c:5667:}"];
+}

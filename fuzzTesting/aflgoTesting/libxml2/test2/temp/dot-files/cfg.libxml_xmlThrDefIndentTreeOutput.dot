@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlThrDefIndentTreeOutput' function" {
+	label="CFG for 'libxml_xmlThrDefIndentTreeOutput' function";
+
+	Node0x55afb920c3e0 [shape=record,label="{libxml2-py.c:8906:|{<s0>T|<s1>F}}"];
+	Node0x55afb920c3e0:s0 -> Node0x55afb92103c0;
+	Node0x55afb920c3e0:s1 -> Node0x55afb9210370;
+	Node0x55afb9210370 [shape=record,label="{libxml2-py.c:8912:}"];
+	Node0x55afb9210370 -> Node0x55afb920c670;
+	Node0x55afb92103c0 [shape=record,label="{libxml2-py.c:8914:}"];
+	Node0x55afb92103c0 -> Node0x55afb920c670;
+	Node0x55afb920c670 [shape=record,label="{libxml2-py.c:8917:}"];
+}

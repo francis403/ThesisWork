@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlAutomataNewTransition2' function" {
+	label="CFG for 'xmlAutomataNewTransition2' function";
+
+	Node0x56384fbd4fb0 [shape=record,label="{xmlregexp.c:5754:|{<s0>T|<s1>F}}"];
+	Node0x56384fbd4fb0:s0 -> Node0x56384fbda9a0;
+	Node0x56384fbd4fb0:s1 -> Node0x56384fbdaac0;
+	Node0x56384fbdaac0 [shape=record,label="{xmlregexp.c:5759:|{<s0>T|<s1>F}}"];
+	Node0x56384fbdaac0:s0 -> Node0x56384fbda9a0;
+	Node0x56384fbdaac0:s1 -> Node0x56384fbdaa40;
+	Node0x56384fbdaa40 [shape=record,label="{xmlregexp.c:5759:|{<s0>T|<s1>F}}"];
+	Node0x56384fbdaa40:s0 -> Node0x56384fbda9a0;
+	Node0x56384fbdaa40:s1 -> Node0x56384fbda9f0;
+	Node0x56384fbda9a0 [shape=record,label="{xmlregexp.c:5760:}"];
+	Node0x56384fbda9a0 -> Node0x56384fbd9130;
+	Node0x56384fbda9f0 [shape=record,label="{xmlregexp.c:5761:|{<s0>T|<s1>F}}"];
+	Node0x56384fbda9f0:s0 -> Node0x56384fbdb550;
+	Node0x56384fbda9f0:s1 -> Node0x56384fbdb5a0;
+	Node0x56384fbdb550 [shape=record,label="{xmlregexp.c:5763:}"];
+	Node0x56384fbdb550 -> Node0x56384fbd9130;
+	Node0x56384fbdb5a0 [shape=record,label="{xmlregexp.c:5764:|{<s0>T|<s1>F}}"];
+	Node0x56384fbdb5a0:s0 -> Node0x56384fbdbc00;
+	Node0x56384fbdb5a0:s1 -> Node0x56384fbdbcf0;
+	Node0x56384fbdbcf0 [shape=record,label="{xmlregexp.c:5765:|{<s0>T|<s1>F}}"];
+	Node0x56384fbdbcf0:s0 -> Node0x56384fbdbc00;
+	Node0x56384fbdbcf0:s1 -> Node0x56384fbdbca0;
+	Node0x56384fbdbc00 [shape=record,label="{xmlregexp.c:5766:}"];
+	Node0x56384fbdbc00 -> Node0x56384fbdbc50;
+	Node0x56384fbdbca0 [shape=record,label="{xmlregexp.c:5768:|{<s0>T|<s1>F}}"];
+	Node0x56384fbdbca0:s0 -> Node0x56384fbdda60;
+	Node0x56384fbdbca0:s1 -> Node0x56384fbddab0;
+	Node0x56384fbdda60 [shape=record,label="{xmlregexp.c:5776:}"];
+	Node0x56384fbdda60 -> Node0x56384fbd9130;
+	Node0x56384fbddab0 [shape=record,label="{xmlregexp.c:5779:}"];
+	Node0x56384fbddab0 -> Node0x56384fbdbc50;
+	Node0x56384fbdbc50 [shape=record,label="{xmlregexp.c:5787:|{<s0>T|<s1>F}}"];
+	Node0x56384fbdbc50:s0 -> Node0x56384fbdf5d0;
+	Node0x56384fbdbc50:s1 -> Node0x56384fbdf620;
+	Node0x56384fbdf5d0 [shape=record,label="{xmlregexp.c:5788:}"];
+	Node0x56384fbdf5d0 -> Node0x56384fbd9130;
+	Node0x56384fbdf620 [shape=record,label="{xmlregexp.c:5791:|{<s0>T|<s1>F}}"];
+	Node0x56384fbdf620:s0 -> Node0x56384fbdff50;
+	Node0x56384fbdf620:s1 -> Node0x56384fbdffa0;
+	Node0x56384fbdff50 [shape=record,label="{xmlregexp.c:5792:}"];
+	Node0x56384fbdff50 -> Node0x56384fbd9130;
+	Node0x56384fbdffa0 [shape=record,label="{xmlregexp.c:5793:}"];
+	Node0x56384fbdffa0 -> Node0x56384fbd9130;
+	Node0x56384fbd9130 [shape=record,label="{xmlregexp.c:5794:}"];
+}

@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlNanoFTPCloseConnection' function" {
+	label="CFG for 'xmlNanoFTPCloseConnection' function";
+
+	Node0x5612c5440ef0 [shape=record,label="{nanoftp.c:1547:|{<s0>T|<s1>F}}"];
+	Node0x5612c5440ef0 -> Node0x5612c5462bf0;
+	Node0x5612c5440ef0 -> Node0x5612c5462c90;
+	Node0x5612c5462c90 [shape=record,label="{nanoftp.c:1553:|{<s0>T|<s1>F}}"];
+	Node0x5612c5462c90 -> Node0x5612c5462bf0;
+	Node0x5612c5462c90 -> Node0x5612c5462c40;
+	Node0x5612c5462bf0 [shape=record,label="{nanoftp.c:1553:}"];
+	Node0x5612c5462bf0 -> Node0x5612c544c790;
+	Node0x5612c5462c40 [shape=record,label="{nanoftp.c:1555:}"];
+	Node0x5612c5462c40 -> Node0x5612c5463af0;
+	Node0x5612c5463af0 [shape=record,label="{nanoftp.c:1558:}"];
+	Node0x5612c5463af0 -> Node0x5612c5463a50;
+	Node0x5612c5463a50 [shape=record,label="{nanoftp.c:1559:}"];
+	Node0x5612c5463a50 -> Node0x5612c54651d0;
+	Node0x5612c54651d0 [shape=record,label="{nanoftp.c:1560:}"];
+	Node0x5612c54651d0 -> Node0x5612c5463aa0;
+	Node0x5612c5463aa0 [shape=record,label="{nanoftp.c:1561:|{<s0>T|<s1>F}}"];
+	Node0x5612c5463aa0 -> Node0x5612c54645d0;
+	Node0x5612c5463aa0 -> Node0x5612c5465a20;
+	Node0x5612c54645d0 [shape=record,label="{nanoftp.c:1567:}"];
+	Node0x5612c54645d0 -> Node0x5612c544c790;
+	Node0x5612c5465a20 [shape=record,label="{nanoftp.c:1570:|{<s0>T|<s1>F}}"];
+	Node0x5612c5465a20 -> Node0x5612c54675b0;
+	Node0x5612c5465a20 -> Node0x5612c5467650;
+	Node0x5612c54675b0 [shape=record,label="{nanoftp.c:1575:}"];
+	Node0x5612c54675b0 -> Node0x5612c5467600;
+	Node0x5612c5467650 [shape=record,label="{nanoftp.c:1577:|{<s0>T|<s1>F}}"];
+	Node0x5612c5467650 -> Node0x5612c54681d0;
+	Node0x5612c5467650 -> Node0x5612c5468220;
+	Node0x5612c54681d0 [shape=record,label="{nanoftp.c:1579:}"];
+	Node0x5612c54681d0 -> Node0x5612c544c790;
+	Node0x5612c5468220 [shape=record,label="{%106}"];
+	Node0x5612c5468220 -> Node0x5612c5467600;
+	Node0x5612c5467600 [shape=record,label="{nanoftp.c:1583:}"];
+	Node0x5612c5467600 -> Node0x5612c544c790;
+	Node0x5612c544c790 [shape=record,label="{nanoftp.c:1584:}"];
+}

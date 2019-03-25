@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlThrDefSaveNoEmptyTags' function" {
+	label="CFG for 'libxml_xmlThrDefSaveNoEmptyTags' function";
+
+	Node0x55afb921a7a0 [shape=record,label="{libxml2-py.c:8990:|{<s0>T|<s1>F}}"];
+	Node0x55afb921a7a0:s0 -> Node0x55afb9225850;
+	Node0x55afb921a7a0:s1 -> Node0x55afb9225800;
+	Node0x55afb9225800 [shape=record,label="{libxml2-py.c:8996:}"];
+	Node0x55afb9225800 -> Node0x55afb921c130;
+	Node0x55afb9225850 [shape=record,label="{libxml2-py.c:8998:}"];
+	Node0x55afb9225850 -> Node0x55afb921c130;
+	Node0x55afb921c130 [shape=record,label="{libxml2-py.c:9001:}"];
+}

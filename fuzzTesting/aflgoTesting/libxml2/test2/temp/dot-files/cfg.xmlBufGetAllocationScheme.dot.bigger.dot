@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlBufGetAllocationScheme' function" {
+	label="CFG for 'xmlBufGetAllocationScheme' function";
+
+	Node0x558c8f7a5bd0 [shape=record,label="{buf.c:267:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7a5bd0:s0 -> Node0x558c8f7a2130;
+	Node0x558c8f7a5bd0:s1 -> Node0x558c8f7a21d0;
+	Node0x558c8f7a2130 [shape=record,label="{buf.c:273:}"];
+	Node0x558c8f7a2130 -> Node0x558c8f7a6090;
+	Node0x558c8f7a21d0 [shape=record,label="{buf.c:275:}"];
+	Node0x558c8f7a21d0 -> Node0x558c8f7a6090;
+	Node0x558c8f7a6090 [shape=record,label="{buf.c:276:}"];
+}

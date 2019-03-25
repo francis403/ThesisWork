@@ -1,0 +1,16 @@
+digraph "CFG for 'errorSplit' function" {
+	label="CFG for 'errorSplit' function";
+
+	Node0x5644a90333c0 [shape=record,label="{xmlschemas.c:28506:|{<s0>T|<s1>F}}"];
+	Node0x5644a90333c0 -> Node0x5644a9034390;
+	Node0x5644a90333c0 -> Node0x5644a90342c0;
+	Node0x5644a9034390 [shape=record,label="{xmlschemas.c:28508:|{<s0>T|<s1>F}}"];
+	Node0x5644a9034390 -> Node0x5644a9034310;
+	Node0x5644a9034390 -> Node0x5644a90342c0;
+	Node0x5644a9034310 [shape=record,label="{xmlschemas.c:28509:|{<s0>T|<s1>F}}"];
+	Node0x5644a9034310 -> Node0x5644a9034270;
+	Node0x5644a9034310 -> Node0x5644a90342c0;
+	Node0x5644a9034270 [shape=record,label="{xmlschemas.c:28510:}"];
+	Node0x5644a9034270 -> Node0x5644a90342c0;
+	Node0x5644a90342c0 [shape=record,label="{xmlschemas.c:28512:}"];
+}

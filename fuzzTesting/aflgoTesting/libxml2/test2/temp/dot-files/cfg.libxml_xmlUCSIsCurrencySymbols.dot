@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsCurrencySymbols' function" {
+	label="CFG for 'libxml_xmlUCSIsCurrencySymbols' function";
+
+	Node0x55afb92f6890 [shape=record,label="{libxml2-py.c:10139:|{<s0>T|<s1>F}}"];
+	Node0x55afb92f6890:s0 -> Node0x55afb92f9850;
+	Node0x55afb92f6890:s1 -> Node0x55afb92f9800;
+	Node0x55afb92f9800 [shape=record,label="{libxml2-py.c:10145:}"];
+	Node0x55afb92f9800 -> Node0x55afb92f6b20;
+	Node0x55afb92f9850 [shape=record,label="{libxml2-py.c:10147:}"];
+	Node0x55afb92f9850 -> Node0x55afb92f6b20;
+	Node0x55afb92f6b20 [shape=record,label="{libxml2-py.c:10150:}"];
+}

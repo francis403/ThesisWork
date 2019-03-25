@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlOutputBufferWriteWSNonSig' function" {
+	label="CFG for 'xmlOutputBufferWriteWSNonSig' function";
+
+	Node0x561c3312a830 [shape=record,label="{xmlsave.c:607:|{<s0>T|<s1>F}}"];
+	Node0x561c3312a830 -> Node0x561c33131340;
+	Node0x561c3312a830 -> Node0x561c331313e0;
+	Node0x561c331313e0 [shape=record,label="{xmlsave.c:610:|{<s0>T|<s1>F}}"];
+	Node0x561c331313e0 -> Node0x561c33131340;
+	Node0x561c331313e0 -> Node0x561c33131390;
+	Node0x561c33131340 [shape=record,label="{xmlsave.c:611:}"];
+	Node0x561c33131340 -> Node0x561c33131dc0;
+	Node0x561c33131390 [shape=record,label="{xmlsave.c:612:}"];
+	Node0x561c33131390 -> Node0x561c33131f60;
+	Node0x561c33131f60 [shape=record,label="{xmlsave.c:613:|{<s0>T|<s1>F}}"];
+	Node0x561c33131f60 -> Node0x561c33132240;
+	Node0x561c33131f60 -> Node0x561c33131dc0;
+	Node0x561c33132240 [shape=record,label="{xmlsave.c:614:|{<s0>T|<s1>F}}"];
+	Node0x561c33132240 -> Node0x561c33132aa0;
+	Node0x561c33132240 -> Node0x561c33132af0;
+	Node0x561c33132aa0 [shape=record,label="{xmlsave.c:616:}"];
+	Node0x561c33132aa0 -> Node0x561c33132b40;
+	Node0x561c33132af0 [shape=record,label="{xmlsave.c:616:}"];
+	Node0x561c33132af0 -> Node0x561c33132b40;
+	Node0x561c33132b40 [shape=record,label="{xmlsave.c:615:}"];
+	Node0x561c33132b40 -> Node0x561c331321b0;
+	Node0x561c331321b0 [shape=record,label="{xmlsave.c:613:}"];
+	Node0x561c331321b0 -> Node0x561c33131f60;
+	Node0x561c33131dc0 [shape=record,label="{xmlsave.c:619:}"];
+}

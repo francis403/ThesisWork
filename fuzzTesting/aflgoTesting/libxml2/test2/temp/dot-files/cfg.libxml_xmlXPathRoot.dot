@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathRoot' function" {
+	label="CFG for 'libxml_xmlXPathRoot' function";
+
+	Node0x55afb963c0c0 [shape=record,label="{libxml2-py.c:14303:|{<s0>T|<s1>F}}"];
+	Node0x55afb963c0c0:s0 -> Node0x55afb963efb0;
+	Node0x55afb963c0c0:s1 -> Node0x55afb963ef60;
+	Node0x55afb963ef60 [shape=record,label="{libxml2-py.c:14308:}"];
+	Node0x55afb963ef60 -> Node0x55afb963c3c0;
+	Node0x55afb963efb0 [shape=record,label="{libxml2-py.c:14309:|{<s0>T|<s1>F}}"];
+	Node0x55afb963efb0:s0 -> Node0x55afb963f790;
+	Node0x55afb963efb0:s1 -> Node0x55afb963f7e0;
+	Node0x55afb963f790 [shape=record,label="{libxml2-py.c:14309:}"];
+	Node0x55afb963f790 -> Node0x55afb963f830;
+	Node0x55afb963f7e0 [shape=record,label="{libxml2-py.c:14309:}"];
+	Node0x55afb963f7e0 -> Node0x55afb963f830;
+	Node0x55afb963f830 [shape=record,label="{libxml2-py.c:14309:}"];
+	Node0x55afb963f830 -> Node0x55afb963c3c0;
+	Node0x55afb963c3c0 [shape=record,label="{libxml2-py.c:14314:}"];
+}

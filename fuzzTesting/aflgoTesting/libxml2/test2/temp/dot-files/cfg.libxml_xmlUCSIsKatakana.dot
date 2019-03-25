@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsKatakana' function" {
+	label="CFG for 'libxml_xmlUCSIsKatakana' function";
+
+	Node0x55afb8e4c2a0 [shape=record,label="{libxml2-py.c:10667:|{<s0>T|<s1>F}}"];
+	Node0x55afb8e4c2a0:s0 -> Node0x55afb8e4f360;
+	Node0x55afb8e4c2a0:s1 -> Node0x55afb8e4f310;
+	Node0x55afb8e4f310 [shape=record,label="{libxml2-py.c:10673:}"];
+	Node0x55afb8e4f310 -> Node0x55afb8e4c5a0;
+	Node0x55afb8e4f360 [shape=record,label="{libxml2-py.c:10675:}"];
+	Node0x55afb8e4f360 -> Node0x55afb8e4c5a0;
+	Node0x55afb8e4c5a0 [shape=record,label="{libxml2-py.c:10678:}"];
+}

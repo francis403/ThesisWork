@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlListCopy' function" {
+	label="CFG for 'xmlListCopy' function";
+
+	Node0x55cd5e2b9780 [shape=record,label="{list.c:761:|{<s0>T|<s1>F}}"];
+	Node0x55cd5e2b9780:s0 -> Node0x55cd5e2ba470;
+	Node0x55cd5e2b9780:s1 -> Node0x55cd5e2ba510;
+	Node0x55cd5e2ba510 [shape=record,label="{list.c:766:|{<s0>T|<s1>F}}"];
+	Node0x55cd5e2ba510:s0 -> Node0x55cd5e2ba470;
+	Node0x55cd5e2ba510:s1 -> Node0x55cd5e2ba4c0;
+	Node0x55cd5e2ba470 [shape=record,label="{list.c:767:}"];
+	Node0x55cd5e2ba470 -> Node0x55cd5e2b9860;
+	Node0x55cd5e2ba4c0 [shape=record,label="{list.c:768:}"];
+	Node0x55cd5e2ba4c0 -> Node0x55cd5e2baeb0;
+	Node0x55cd5e2baeb0 [shape=record,label="{list.c:768:|{<s0>T|<s1>F}}"];
+	Node0x55cd5e2baeb0:s0 -> Node0x55cd5e2bb190;
+	Node0x55cd5e2baeb0:s1 -> Node0x55cd5e2babd0;
+	Node0x55cd5e2bb190 [shape=record,label="{list.c:769:|{<s0>T|<s1>F}}"];
+	Node0x55cd5e2bb190:s0 -> Node0x55cd5e2bb5c0;
+	Node0x55cd5e2bb190:s1 -> Node0x55cd5e2bb610;
+	Node0x55cd5e2bb5c0 [shape=record,label="{list.c:770:}"];
+	Node0x55cd5e2bb5c0 -> Node0x55cd5e2b9860;
+	Node0x55cd5e2bb610 [shape=record,label="{list.c:773:}"];
+	Node0x55cd5e2bb610 -> Node0x55cd5e2bb100;
+	Node0x55cd5e2bb100 [shape=record,label="{list.c:768:}"];
+	Node0x55cd5e2bb100 -> Node0x55cd5e2baeb0;
+	Node0x55cd5e2babd0 [shape=record,label="{list.c:774:}"];
+	Node0x55cd5e2babd0 -> Node0x55cd5e2b9860;
+	Node0x55cd5e2b9860 [shape=record,label="{list.c:775:}"];
+}

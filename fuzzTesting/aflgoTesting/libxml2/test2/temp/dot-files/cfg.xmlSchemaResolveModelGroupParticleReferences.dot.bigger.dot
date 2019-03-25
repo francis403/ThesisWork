@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlSchemaResolveModelGroupParticleReferences' function" {
+	label="CFG for 'xmlSchemaResolveModelGroupParticleReferences' function";
+
+	Node0x5644a8a02b80 [shape=record,label="{xmlschemas.c:20058:}"];
+	Node0x5644a8a02b80 -> Node0x5644a8a05a00;
+	Node0x5644a8a05a00 [shape=record,label="{xmlschemas.c:20068:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a05a00:s0 -> Node0x5644a8a05dc0;
+	Node0x5644a8a05a00:s1 -> Node0x5644a8a05be0;
+	Node0x5644a8a05dc0 [shape=record,label="{xmlschemas.c:20069:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a05dc0:s0 -> Node0x5644a8a05f70;
+	Node0x5644a8a05dc0:s1 -> Node0x5644a8a06010;
+	Node0x5644a8a06010 [shape=record,label="{xmlschemas.c:20070:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a06010:s0 -> Node0x5644a8a05f70;
+	Node0x5644a8a06010:s1 -> Node0x5644a8a05fc0;
+	Node0x5644a8a05f70 [shape=record,label="{xmlschemas.c:20073:}"];
+	Node0x5644a8a05f70 -> Node0x5644a8a06ee0;
+	Node0x5644a8a05fc0 [shape=record,label="{xmlschemas.c:20075:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a05fc0:s0 -> Node0x5644a8a07eb0;
+	Node0x5644a8a05fc0:s1 -> Node0x5644a8a07f00;
+	Node0x5644a8a07eb0 [shape=record,label="{xmlschemas.c:20085:}"];
+	Node0x5644a8a07eb0 -> Node0x5644a8a06ee0;
+	Node0x5644a8a07f00 [shape=record,label="{xmlschemas.c:20091:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a07f00:s0 -> Node0x5644a8a08d10;
+	Node0x5644a8a07f00:s1 -> Node0x5644a8a08db0;
+	Node0x5644a8a08d10 [shape=record,label="{xmlschemas.c:20092:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a08d10:s0 -> Node0x5644a8a092a0;
+	Node0x5644a8a08d10:s1 -> Node0x5644a8a092f0;
+	Node0x5644a8a092a0 [shape=record,label="{xmlschemas.c:20094:}"];
+	Node0x5644a8a092a0 -> Node0x5644a8a06ee0;
+	Node0x5644a8a092f0 [shape=record,label="{xmlschemas.c:20102:|{<s0>T|<s1>F}}"];
+	Node0x5644a8a092f0:s0 -> Node0x5644a8a097a0;
+	Node0x5644a8a092f0:s1 -> Node0x5644a8a097f0;
+	Node0x5644a8a097a0 [shape=record,label="{xmlschemas.c:20114:}"];
+	Node0x5644a8a097a0 -> Node0x5644a8a06ee0;
+	Node0x5644a8a097f0 [shape=record,label="{xmlschemas.c:20125:}"];
+	Node0x5644a8a097f0 -> Node0x5644a8a08d60;
+	Node0x5644a8a08db0 [shape=record,label="{xmlschemas.c:20131:}"];
+	Node0x5644a8a08db0 -> Node0x5644a8a08d60;
+	Node0x5644a8a08d60 [shape=record,label="{xmlschemas.c:20091:}"];
+	Node0x5644a8a08d60 -> Node0x5644a8a06ee0;
+	Node0x5644a8a06ee0 [shape=record,label="{xmlschemas.c:20134:}"];
+	Node0x5644a8a06ee0 -> Node0x5644a8a05a00;
+	Node0x5644a8a05be0 [shape=record,label="{xmlschemas.c:20136:}"];
+}

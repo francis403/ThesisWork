@@ -1,0 +1,47 @@
+digraph "CFG for 'xmlTextConcat' function" {
+	label="CFG for 'xmlTextConcat' function";
+
+	Node0x55a216f22680 [shape=record,label="{tree.c:6979:|{<s0>T|<s1>F}}"];
+	Node0x55a216f22680:s0 -> Node0x55a216f26950;
+	Node0x55a216f22680:s1 -> Node0x55a216f269a0;
+	Node0x55a216f26950 [shape=record,label="{tree.c:6980:}"];
+	Node0x55a216f26950 -> Node0x55a216f25b30;
+	Node0x55a216f269a0 [shape=record,label="{tree.c:6982:|{<s0>T|<s1>F}}"];
+	Node0x55a216f269a0:s0 -> Node0x55a216f27000;
+	Node0x55a216f269a0:s1 -> Node0x55a216f26eb0;
+	Node0x55a216f27000 [shape=record,label="{tree.c:6983:|{<s0>T|<s1>F}}"];
+	Node0x55a216f27000:s0 -> Node0x55a216f26f80;
+	Node0x55a216f27000:s1 -> Node0x55a216f26eb0;
+	Node0x55a216f26f80 [shape=record,label="{tree.c:6984:|{<s0>T|<s1>F}}"];
+	Node0x55a216f26f80:s0 -> Node0x55a216f26f00;
+	Node0x55a216f26f80:s1 -> Node0x55a216f26eb0;
+	Node0x55a216f26f00 [shape=record,label="{tree.c:6985:|{<s0>T|<s1>F}}"];
+	Node0x55a216f26f00:s0 -> Node0x55a216f26e60;
+	Node0x55a216f26f00:s1 -> Node0x55a216f26eb0;
+	Node0x55a216f26e60 [shape=record,label="{tree.c:6990:}"];
+	Node0x55a216f26e60 -> Node0x55a216f25b30;
+	Node0x55a216f26eb0 [shape=record,label="{tree.c:6993:|{<s0>T|<s1>F}}"];
+	Node0x55a216f26eb0:s0 -> Node0x55a216f27e30;
+	Node0x55a216f26eb0:s1 -> Node0x55a216f27f20;
+	Node0x55a216f27f20 [shape=record,label="{tree.c:6994:|{<s0>T|<s1>F}}"];
+	Node0x55a216f27f20:s0 -> Node0x55a216f284d0;
+	Node0x55a216f27f20:s1 -> Node0x55a216f27ed0;
+	Node0x55a216f284d0 [shape=record,label="{tree.c:6994:|{<s0>T|<s1>F}}"];
+	Node0x55a216f284d0:s0 -> Node0x55a216f28450;
+	Node0x55a216f284d0:s1 -> Node0x55a216f27ed0;
+	Node0x55a216f28450 [shape=record,label="{tree.c:6995:|{<s0>T|<s1>F}}"];
+	Node0x55a216f28450:s0 -> Node0x55a216f27e30;
+	Node0x55a216f28450:s1 -> Node0x55a216f27ed0;
+	Node0x55a216f27e30 [shape=record,label="{tree.c:6996:}"];
+	Node0x55a216f27e30 -> Node0x55a216f27e80;
+	Node0x55a216f27ed0 [shape=record,label="{tree.c:6998:}"];
+	Node0x55a216f27ed0 -> Node0x55a216f27e80;
+	Node0x55a216f27e80 [shape=record,label="{tree.c:7000:|{<s0>T|<s1>F}}"];
+	Node0x55a216f27e80:s0 -> Node0x55a216f2a390;
+	Node0x55a216f27e80:s1 -> Node0x55a216f2a3e0;
+	Node0x55a216f2a390 [shape=record,label="{tree.c:7002:}"];
+	Node0x55a216f2a390 -> Node0x55a216f25b30;
+	Node0x55a216f2a3e0 [shape=record,label="{tree.c:7003:}"];
+	Node0x55a216f2a3e0 -> Node0x55a216f25b30;
+	Node0x55a216f25b30 [shape=record,label="{tree.c:7004:}"];
+}

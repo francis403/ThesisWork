@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlInitNodeInfoSeq' function" {
+	label="CFG for 'xmlInitNodeInfoSeq' function";
+
+	Node0x563908741a60 [shape=record,label="{parserInternals.c:1934:|{<s0>T|<s1>F}}"];
+	Node0x563908741a60 -> Node0x563908741680;
+	Node0x563908741a60 -> Node0x56390873fab0;
+	Node0x563908741680 [shape=record,label="{parserInternals.c:1937:}"];
+	Node0x563908741680 -> Node0x56390873fc50;
+	Node0x56390873fab0 [shape=record,label="{parserInternals.c:1938:}"];
+	Node0x56390873fab0 -> Node0x56390873fc50;
+	Node0x56390873fc50 [shape=record,label="{parserInternals.c:1941:}"];
+}

@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlSchematronFree' function" {
+	label="CFG for 'xmlSchematronFree' function";
+
+	Node0x5617dc257e90 [shape=record,label="{schematron.c:563:|{<s0>T|<s1>F}}"];
+	Node0x5617dc257e90 -> Node0x5617dc4f1e70;
+	Node0x5617dc257e90 -> Node0x5617dc4f1ec0;
+	Node0x5617dc4f1e70 [shape=record,label="{schematron.c:566:}"];
+	Node0x5617dc4f1e70 -> Node0x5617dc3c4590;
+	Node0x5617dc4f1ec0 [shape=record,label="{schematron.c:568:|{<s0>T|<s1>F}}"];
+	Node0x5617dc4f1ec0 -> Node0x5617dc4f2780;
+	Node0x5617dc4f1ec0 -> Node0x5617dc4f2730;
+	Node0x5617dc4f2780 [shape=record,label="{schematron.c:568:|{<s0>T|<s1>F}}"];
+	Node0x5617dc4f2780 -> Node0x5617dc4f2730;
+	Node0x5617dc4f2780 -> Node0x5617dc4f26e0;
+	Node0x5617dc4f26e0 [shape=record,label="{schematron.c:569:}"];
+	Node0x5617dc4f26e0 -> Node0x5617dc4f2730;
+	Node0x5617dc4f2730 [shape=record,label="{schematron.c:571:|{<s0>T|<s1>F}}"];
+	Node0x5617dc4f2730 -> Node0x5617dc4f3990;
+	Node0x5617dc4f2730 -> Node0x5617dc4f39e0;
+	Node0x5617dc4f3990 [shape=record,label="{schematron.c:572:}"];
+	Node0x5617dc4f3990 -> Node0x5617dc4f39e0;
+	Node0x5617dc4f39e0 [shape=record,label="{schematron.c:574:}"];
+	Node0x5617dc4f39e0 -> Node0x5617dc3c4590;
+	Node0x5617dc3c4590 [shape=record,label="{schematron.c:578:}"];
+}

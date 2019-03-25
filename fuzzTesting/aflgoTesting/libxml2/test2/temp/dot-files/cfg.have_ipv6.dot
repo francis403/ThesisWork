@@ -1,0 +1,12 @@
+digraph "CFG for 'have_ipv6' function" {
+	label="CFG for 'have_ipv6' function";
+
+	Node0x55930bf77b00 [shape=record,label="{nanohttp.c:201:|{<s0>T|<s1>F}}"];
+	Node0x55930bf77b00 -> Node0x55930bf995c0;
+	Node0x55930bf77b00 -> Node0x55930bf99610;
+	Node0x55930bf995c0 [shape=record,label="{nanohttp.c:205:}"];
+	Node0x55930bf995c0 -> Node0x55930bf976c0;
+	Node0x55930bf99610 [shape=record,label="{nanohttp.c:208:}"];
+	Node0x55930bf99610 -> Node0x55930bf976c0;
+	Node0x55930bf976c0 [shape=record,label="{nanohttp.c:209:}"];
+}

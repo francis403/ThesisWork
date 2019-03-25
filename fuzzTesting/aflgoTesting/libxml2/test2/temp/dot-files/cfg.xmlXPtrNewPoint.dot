@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlXPtrNewPoint' function" {
+	label="CFG for 'xmlXPtrNewPoint' function";
+
+	Node0x55cf3ba36600 [shape=record,label="{xpointer.c:253:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba36600 -> Node0x55cf3ba41740;
+	Node0x55cf3ba36600 -> Node0x55cf3ba41790;
+	Node0x55cf3ba41740 [shape=record,label="{xpointer.c:257:}"];
+	Node0x55cf3ba41740 -> Node0x55cf3ba36650;
+	Node0x55cf3ba41790 [shape=record,label="{xpointer.c:258:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba41790 -> Node0x55cf3ba41bf0;
+	Node0x55cf3ba41790 -> Node0x55cf3ba41c40;
+	Node0x55cf3ba41bf0 [shape=record,label="{xpointer.c:259:}"];
+	Node0x55cf3ba41bf0 -> Node0x55cf3ba36650;
+	Node0x55cf3ba41c40 [shape=record,label="{xpointer.c:261:|{<s0>T|<s1>F}}"];
+	Node0x55cf3ba41c40 -> Node0x55cf3ba42360;
+	Node0x55cf3ba41c40 -> Node0x55cf3ba423b0;
+	Node0x55cf3ba42360 [shape=record,label="{xpointer.c:263:}"];
+	Node0x55cf3ba42360 -> Node0x55cf3ba36650;
+	Node0x55cf3ba423b0 [shape=record,label="{xpointer.c:266:}"];
+	Node0x55cf3ba423b0 -> Node0x55cf3ba36650;
+	Node0x55cf3ba36650 [shape=record,label="{xpointer.c:271:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlFreeZMemBuff' function" {
+	label="CFG for 'xmlFreeZMemBuff' function";
+
+	Node0x5651baa8e6f0 [shape=record,label="{xmlIO.c:1448:|{<s0>T|<s1>F}}"];
+	Node0x5651baa8e6f0:s0 -> Node0x5651baa94b00;
+	Node0x5651baa8e6f0:s1 -> Node0x5651baa94b50;
+	Node0x5651baa94b00 [shape=record,label="{xmlIO.c:1455:}"];
+	Node0x5651baa94b00 -> Node0x5651baa8d730;
+	Node0x5651baa94b50 [shape=record,label="{xmlIO.c:1457:}"];
+	Node0x5651baa94b50 -> Node0x5651baa8d730;
+	Node0x5651baa8d730 [shape=record,label="{xmlIO.c:1470:}"];
+}

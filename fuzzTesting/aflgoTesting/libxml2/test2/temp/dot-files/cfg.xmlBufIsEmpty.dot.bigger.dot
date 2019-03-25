@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlBufIsEmpty' function" {
+	label="CFG for 'xmlBufIsEmpty' function";
+
+	Node0x558c8f7fdd50 [shape=record,label="{buf.c:726:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7fdd50:s0 -> Node0x558c8f7fe0d0;
+	Node0x558c8f7fdd50:s1 -> Node0x558c8f7fd7f0;
+	Node0x558c8f7fe0d0 [shape=record,label="{buf.c:728:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7fe0d0:s0 -> Node0x558c8f7fd7f0;
+	Node0x558c8f7fe0d0:s1 -> Node0x558c8f7fdf20;
+	Node0x558c8f7fd7f0 [shape=record,label="{buf.c:729:}"];
+	Node0x558c8f7fd7f0 -> Node0x558c8f800990;
+	Node0x558c8f7fdf20 [shape=record,label="{buf.c:730:|{<s0>T|<s1>F}}"];
+	Node0x558c8f7fdf20:s0 -> Node0x558c8f803fb0;
+	Node0x558c8f7fdf20:s1 -> Node0x558c8f804000;
+	Node0x558c8f803fb0 [shape=record,label="{buf.c:730:|{<s0>T|<s1>F}}"];
+	Node0x558c8f803fb0:s0 -> Node0x558c8f804410;
+	Node0x558c8f803fb0:s1 -> Node0x558c8f804460;
+	Node0x558c8f804410 [shape=record,label="{buf.c:730:}"];
+	Node0x558c8f804410 -> Node0x558c8f804460;
+	Node0x558c8f804460 [shape=record,label="{buf.c:730:}"];
+	Node0x558c8f804460 -> Node0x558c8f804000;
+	Node0x558c8f804000 [shape=record,label="{buf.c:730:|{<s0>T|<s1>F}}"];
+	Node0x558c8f804000:s0 -> Node0x558c8f8049f0;
+	Node0x558c8f804000:s1 -> Node0x558c8f804a40;
+	Node0x558c8f8049f0 [shape=record,label="{buf.c:730:|{<s0>T|<s1>F}}"];
+	Node0x558c8f8049f0:s0 -> Node0x558c8f804f90;
+	Node0x558c8f8049f0:s1 -> Node0x558c8f804fe0;
+	Node0x558c8f804f90 [shape=record,label="{buf.c:730:}"];
+	Node0x558c8f804f90 -> Node0x558c8f804fe0;
+	Node0x558c8f804fe0 [shape=record,label="{buf.c:730:}"];
+	Node0x558c8f804fe0 -> Node0x558c8f804a40;
+	Node0x558c8f804a40 [shape=record,label="{buf.c:732:}"];
+	Node0x558c8f804a40 -> Node0x558c8f800990;
+	Node0x558c8f800990 [shape=record,label="{buf.c:733:}"];
+}

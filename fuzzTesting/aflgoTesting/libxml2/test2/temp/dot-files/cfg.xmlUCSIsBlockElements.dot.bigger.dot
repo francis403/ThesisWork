@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsBlockElements' function" {
+	label="CFG for 'xmlUCSIsBlockElements' function";
+
+	Node0x56123dcd2290 [shape=record,label="{xmlunicode.c:1093:|{<s0>T|<s1>F}}"];
+	Node0x56123dcd2290:s0 -> Node0x56123dcd3fb0;
+	Node0x56123dcd2290:s1 -> Node0x56123dcd3ee0;
+	Node0x56123dcd3fb0 [shape=record,label="{xmlunicode.c:1094:}"];
+	Node0x56123dcd3fb0 -> Node0x56123dcd3ee0;
+	Node0x56123dcd3ee0 [shape=record,label="{xmlunicode.c:1094:}"];
+}

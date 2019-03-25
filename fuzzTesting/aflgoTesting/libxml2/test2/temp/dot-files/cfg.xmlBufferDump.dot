@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlBufferDump' function" {
+	label="CFG for 'xmlBufferDump' function";
+
+	Node0x55a216f5cca0 [shape=record,label="{tree.c:7320:|{<s0>T|<s1>F}}"];
+	Node0x55a216f5cca0 -> Node0x55a216f60720;
+	Node0x55a216f5cca0 -> Node0x55a216f60770;
+	Node0x55a216f60720 [shape=record,label="{tree.c:7328:}"];
+	Node0x55a216f60720 -> Node0x55a216f5ce50;
+	Node0x55a216f60770 [shape=record,label="{tree.c:7330:|{<s0>T|<s1>F}}"];
+	Node0x55a216f60770 -> Node0x55a216f60cd0;
+	Node0x55a216f60770 -> Node0x55a216f60d20;
+	Node0x55a216f60cd0 [shape=record,label="{tree.c:7335:}"];
+	Node0x55a216f60cd0 -> Node0x55a216f5ce50;
+	Node0x55a216f60d20 [shape=record,label="{tree.c:7337:|{<s0>T|<s1>F}}"];
+	Node0x55a216f60d20 -> Node0x55a216f61310;
+	Node0x55a216f60d20 -> Node0x55a216f61360;
+	Node0x55a216f61310 [shape=record,label="{tree.c:7338:}"];
+	Node0x55a216f61310 -> Node0x55a216f61360;
+	Node0x55a216f61360 [shape=record,label="{tree.c:7339:}"];
+	Node0x55a216f61360 -> Node0x55a216f5ce50;
+	Node0x55a216f5ce50 [shape=record,label="{tree.c:7341:}"];
+}

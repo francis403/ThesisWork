@@ -1,0 +1,31 @@
+digraph "CFG for '__xmlErrEncoding' function" {
+	label="CFG for '__xmlErrEncoding' function";
+
+	Node0x5639085cd520 [shape=record,label="{parserInternals.c:145:|{<s0>T|<s1>F}}"];
+	Node0x5639085cd520:s0 -> Node0x5639086114e0;
+	Node0x5639085cd520:s1 -> Node0x563908611410;
+	Node0x5639086114e0 [shape=record,label="{parserInternals.c:148:|{<s0>T|<s1>F}}"];
+	Node0x5639086114e0:s0 -> Node0x563908611460;
+	Node0x5639086114e0:s1 -> Node0x563908611410;
+	Node0x563908611460 [shape=record,label="{parserInternals.c:149:|{<s0>T|<s1>F}}"];
+	Node0x563908611460:s0 -> Node0x5639086113c0;
+	Node0x563908611460:s1 -> Node0x563908611410;
+	Node0x5639086113c0 [shape=record,label="{parserInternals.c:150:}"];
+	Node0x5639086113c0 -> Node0x5639085ef120;
+	Node0x563908611410 [shape=record,label="{parserInternals.c:151:|{<s0>T|<s1>F}}"];
+	Node0x563908611410:s0 -> Node0x5639085ecfd0;
+	Node0x563908611410:s1 -> Node0x563908611b20;
+	Node0x5639085ecfd0 [shape=record,label="{parserInternals.c:152:}"];
+	Node0x5639085ecfd0 -> Node0x563908611b20;
+	Node0x563908611b20 [shape=record,label="{parserInternals.c:154:|{<s0>T|<s1>F}}"];
+	Node0x563908611b20:s0 -> Node0x5639086047d0;
+	Node0x563908611b20:s1 -> Node0x5639085ef120;
+	Node0x5639086047d0 [shape=record,label="{parserInternals.c:158:|{<s0>T|<s1>F}}"];
+	Node0x5639086047d0:s0 -> Node0x563908613780;
+	Node0x5639086047d0:s1 -> Node0x5639086137d0;
+	Node0x563908613780 [shape=record,label="{parserInternals.c:160:}"];
+	Node0x563908613780 -> Node0x5639086137d0;
+	Node0x5639086137d0 [shape=record,label="{parserInternals.c:161:}"];
+	Node0x5639086137d0 -> Node0x5639085ef120;
+	Node0x5639085ef120 [shape=record,label="{parserInternals.c:162:}"];
+}

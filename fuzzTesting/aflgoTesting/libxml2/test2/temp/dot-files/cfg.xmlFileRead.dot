@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlFileRead' function" {
+	label="CFG for 'xmlFileRead' function";
+
+	Node0x5651ba91e0f0 [shape=record,label="{xmlIO.c:936:|{<s0>T|<s1>F}}"];
+	Node0x5651ba91e0f0 -> Node0x5651ba929580;
+	Node0x5651ba91e0f0 -> Node0x5651ba929620;
+	Node0x5651ba929620 [shape=record,label="{xmlIO.c:938:|{<s0>T|<s1>F}}"];
+	Node0x5651ba929620 -> Node0x5651ba929580;
+	Node0x5651ba929620 -> Node0x5651ba9295d0;
+	Node0x5651ba929580 [shape=record,label="{xmlIO.c:939:}"];
+	Node0x5651ba929580 -> Node0x5651ba91ca80;
+	Node0x5651ba9295d0 [shape=record,label="{xmlIO.c:940:|{<s0>T|<s1>F}}"];
+	Node0x5651ba9295d0 -> Node0x5651ba929ea0;
+	Node0x5651ba9295d0 -> Node0x5651ba92f760;
+	Node0x5651ba929ea0 [shape=record,label="{xmlIO.c:941:}"];
+	Node0x5651ba929ea0 -> Node0x5651ba92f760;
+	Node0x5651ba92f760 [shape=record,label="{xmlIO.c:942:}"];
+	Node0x5651ba92f760 -> Node0x5651ba91ca80;
+	Node0x5651ba91ca80 [shape=record,label="{xmlIO.c:943:}"];
+}

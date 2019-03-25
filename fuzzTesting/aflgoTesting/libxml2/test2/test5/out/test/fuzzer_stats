@@ -1,0 +1,27 @@
+start_time        : 1553521425
+last_update       : 1553535825
+fuzzer_pid        : 45380
+cycles_done       : 7
+execs_done        : 7609182
+execs_per_sec     : 564.59
+paths_total       : 3351
+paths_favored     : 281
+paths_found       : 3350
+paths_imported    : 0
+max_depth         : 16
+cur_path          : 2587
+pending_favs      : 2
+pending_total     : 2514
+variable_paths    : 10
+stability         : 97.51%
+bitmap_cvg        : 10.61%
+unique_crashes    : 0
+unique_hangs      : 0
+last_path         : 1553535760
+last_crash        : 0
+last_hang         : 0
+execs_since_crash : 7609182
+exec_timeout      : 20
+afl_banner        : test
+afl_version       : 2.49b
+command_line      : /home/deploy/Documents/utils/fuzzers/aflgo/afl-fuzz -S test -i test5/in -o test5/out /home/deploy/Documents/utils/datasets/libxml2/xmllint --valid --recover @@

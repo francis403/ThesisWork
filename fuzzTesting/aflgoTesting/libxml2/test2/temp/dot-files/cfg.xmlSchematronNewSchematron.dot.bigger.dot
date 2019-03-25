@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchematronNewSchematron' function" {
+	label="CFG for 'xmlSchematronNewSchematron' function";
+
+	Node0x5617dc5cc540 [shape=record,label="{schematron.c:540:|{<s0>T|<s1>F}}"];
+	Node0x5617dc5cc540:s0 -> Node0x5617dc5cd180;
+	Node0x5617dc5cc540:s1 -> Node0x5617dc5cd1d0;
+	Node0x5617dc5cd180 [shape=record,label="{schematron.c:546:}"];
+	Node0x5617dc5cd180 -> Node0x5617dc5cc590;
+	Node0x5617dc5cd1d0 [shape=record,label="{schematron.c:549:}"];
+	Node0x5617dc5cd1d0 -> Node0x5617dc5cc590;
+	Node0x5617dc5cc590 [shape=record,label="{schematron.c:554:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParseSDDecl' function" {
+	label="CFG for 'libxml_xmlParseSDDecl' function";
+
+	Node0x55afb8bbfb80 [shape=record,label="{libxml2-py.c:5336:|{<s0>T|<s1>F}}"];
+	Node0x55afb8bbfb80:s0 -> Node0x55afb8bc1640;
+	Node0x55afb8bbfb80:s1 -> Node0x55afb8bc15f0;
+	Node0x55afb8bc15f0 [shape=record,label="{libxml2-py.c:5343:}"];
+	Node0x55afb8bc15f0 -> Node0x55afb8bbfd60;
+	Node0x55afb8bc1640 [shape=record,label="{libxml2-py.c:5344:|{<s0>T|<s1>F}}"];
+	Node0x55afb8bc1640:s0 -> Node0x55afb8bc1e20;
+	Node0x55afb8bc1640:s1 -> Node0x55afb8bc1e70;
+	Node0x55afb8bc1e20 [shape=record,label="{libxml2-py.c:5344:}"];
+	Node0x55afb8bc1e20 -> Node0x55afb8bc1ec0;
+	Node0x55afb8bc1e70 [shape=record,label="{libxml2-py.c:5344:}"];
+	Node0x55afb8bc1e70 -> Node0x55afb8bc1ec0;
+	Node0x55afb8bc1ec0 [shape=record,label="{libxml2-py.c:5344:}"];
+	Node0x55afb8bc1ec0 -> Node0x55afb8bbfd60;
+	Node0x55afb8bbfd60 [shape=record,label="{libxml2-py.c:5349:}"];
+}

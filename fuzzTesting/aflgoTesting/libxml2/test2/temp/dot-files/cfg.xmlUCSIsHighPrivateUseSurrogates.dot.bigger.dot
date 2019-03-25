@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsHighPrivateUseSurrogates' function" {
+	label="CFG for 'xmlUCSIsHighPrivateUseSurrogates' function";
+
+	Node0x56123dd0f230 [shape=record,label="{xmlunicode.c:1704:|{<s0>T|<s1>F}}"];
+	Node0x56123dd0f230:s0 -> Node0x56123dcebcd0;
+	Node0x56123dd0f230:s1 -> Node0x56123dcebf60;
+	Node0x56123dcebcd0 [shape=record,label="{xmlunicode.c:1705:}"];
+	Node0x56123dcebcd0 -> Node0x56123dcebf60;
+	Node0x56123dcebf60 [shape=record,label="{xmlunicode.c:1705:}"];
+}

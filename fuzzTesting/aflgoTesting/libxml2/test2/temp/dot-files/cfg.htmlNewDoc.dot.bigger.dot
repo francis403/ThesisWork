@@ -1,0 +1,15 @@
+digraph "CFG for 'htmlNewDoc' function" {
+	label="CFG for 'htmlNewDoc' function";
+
+	Node0x5651a5a821d0 [shape=record,label="{HTMLparser.c:2355:|{<s0>T|<s1>F}}"];
+	Node0x5651a5a821d0:s0 -> Node0x5651a5a944b0;
+	Node0x5651a5a821d0:s1 -> Node0x5651a5a94460;
+	Node0x5651a5a944b0 [shape=record,label="{HTMLparser.c:2356:|{<s0>T|<s1>F}}"];
+	Node0x5651a5a944b0:s0 -> Node0x5651a5a94410;
+	Node0x5651a5a944b0:s1 -> Node0x5651a5a94460;
+	Node0x5651a5a94410 [shape=record,label="{HTMLparser.c:2357:}"];
+	Node0x5651a5a94410 -> Node0x5651a5a939e0;
+	Node0x5651a5a94460 [shape=record,label="{HTMLparser.c:2361:}"];
+	Node0x5651a5a94460 -> Node0x5651a5a939e0;
+	Node0x5651a5a939e0 [shape=record,label="{HTMLparser.c:2362:}"];
+}

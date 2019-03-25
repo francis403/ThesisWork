@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathVariableLookup' function" {
+	label="CFG for 'libxml_xmlXPathVariableLookup' function";
+
+	Node0x55afb966fe90 [shape=record,label="{libxml2-py.c:14575:|{<s0>T|<s1>F}}"];
+	Node0x55afb966fe90:s0 -> Node0x55afb9673570;
+	Node0x55afb966fe90:s1 -> Node0x55afb9673520;
+	Node0x55afb9673520 [shape=record,label="{libxml2-py.c:14583:}"];
+	Node0x55afb9673520 -> Node0x55afb9670120;
+	Node0x55afb9673570 [shape=record,label="{libxml2-py.c:14584:|{<s0>T|<s1>F}}"];
+	Node0x55afb9673570:s0 -> Node0x55afb9673dd0;
+	Node0x55afb9673570:s1 -> Node0x55afb9673e20;
+	Node0x55afb9673dd0 [shape=record,label="{libxml2-py.c:14584:}"];
+	Node0x55afb9673dd0 -> Node0x55afb9673e70;
+	Node0x55afb9673e20 [shape=record,label="{libxml2-py.c:14584:}"];
+	Node0x55afb9673e20 -> Node0x55afb9673e70;
+	Node0x55afb9673e70 [shape=record,label="{libxml2-py.c:14584:}"];
+	Node0x55afb9673e70 -> Node0x55afb9670120;
+	Node0x55afb9670120 [shape=record,label="{libxml2-py.c:14589:}"];
+}

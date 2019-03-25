@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlFreeRef' function" {
+	label="CFG for 'xmlFreeRef' function";
+
+	Node0x556e5f95e990 [shape=record,label="{valid.c:2860:|{<s0>T|<s1>F}}"];
+	Node0x556e5f95e990:s0 -> Node0x556e5f961710;
+	Node0x556e5f95e990:s1 -> Node0x556e5f961760;
+	Node0x556e5f961710 [shape=record,label="{valid.c:2862:}"];
+	Node0x556e5f961710 -> Node0x556e5f95e9e0;
+	Node0x556e5f961760 [shape=record,label="{valid.c:2863:|{<s0>T|<s1>F}}"];
+	Node0x556e5f961760:s0 -> Node0x556e5f961ab0;
+	Node0x556e5f961760:s1 -> Node0x556e5f961b00;
+	Node0x556e5f961ab0 [shape=record,label="{valid.c:2864:}"];
+	Node0x556e5f961ab0 -> Node0x556e5f961b00;
+	Node0x556e5f961b00 [shape=record,label="{valid.c:2865:|{<s0>T|<s1>F}}"];
+	Node0x556e5f961b00:s0 -> Node0x556e5f962180;
+	Node0x556e5f961b00:s1 -> Node0x556e5f9621d0;
+	Node0x556e5f962180 [shape=record,label="{valid.c:2866:}"];
+	Node0x556e5f962180 -> Node0x556e5f9621d0;
+	Node0x556e5f9621d0 [shape=record,label="{valid.c:2867:}"];
+	Node0x556e5f9621d0 -> Node0x556e5f95e9e0;
+	Node0x556e5f95e9e0 [shape=record,label="{valid.c:2868:}"];
+}
