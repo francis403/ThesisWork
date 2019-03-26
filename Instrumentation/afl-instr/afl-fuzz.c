@@ -87,6 +87,7 @@
 EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
           *out_file,                  /* File to fuzz, if any             */
           *out_dir,                   /* Working & output directory       */
+          *out_dir_delta[MAX_AMOUNT_OF_PROGS], /* Each program should have their own out dir, this so far is only for testing*/
           *sync_dir,                  /* Synchronization directory        */
           *sync_id,                   /* Fuzzer ID                        */
           *use_banner,                /* Display banner                   */
@@ -142,7 +143,9 @@ static s32 out_fd,                    /* Persistent fd for out_file       */
 
 static s32 forksrv_pid[MAX_AMOUNT_OF_PROGS],               /* PID of the fork server           */
            child_pid = -1,            /* PID of the fuzzed program, maybe I'll need more than one        */
+           out_dirs_fd[MAX_AMOUNT_OF_PROGS], /*FD of the lock files per program*/
            out_dir_fd = -1;           /* FD of the lock file              */
+
 
 
 /*Program corrently under test*/
@@ -307,6 +310,8 @@ struct queue_entry {
                      *next_100;       /* 100 elements ahead               */
 
 };
+
+// ter isto para cada prog
 
 static struct queue_entry *queue,     /* Fuzzing queue (linked list)      */
                           *queue_cur, /* Current offset within the queue  */
@@ -3077,17 +3082,21 @@ static u8* describe_op(u8 hnb) {
 static void write_crash_readme(void) {
 
   u8* fn = alloc_printf("%s/crashes/README.txt", out_dir);
-  s32 fd;
-  FILE* f;
+  u8* fn_delta = alloc_printf("%s/crashes/README.txt", out_dir_delta[CUR_PROG]);
+  s32 fd, fd_delta;
+  FILE* f, *f_delta;
 
   fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+  fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
   ck_free(fn);
+  ck_free(fn_delta);
 
   /* Do not die on errors here - that would be impolite. */
 
   if (fd < 0) return;
 
   f = fdopen(fd, "w");
+  f_delta = fdopen(fd_delta, "w");
 
   if (!f) {
     close(fd);
@@ -3114,7 +3123,28 @@ static void write_crash_readme(void) {
 
              orig_cmdline, DMS(mem_limit << 20)); /* ignore errors */
 
+  fprintf(f_delta, "Command line used to find this crash:\n\n"
+
+             "%s\n\n"
+
+             "If you can't reproduce a bug outside of afl-fuzz, be sure to set the same\n"
+             "memory limit. The limit used for this fuzzing session was %s.\n\n"
+
+             "Need a tool to minimize test cases before investigating the crashes or sending\n"
+             "them to a vendor? Check out the afl-tmin that comes with the fuzzer!\n\n"
+
+             "Found any cool bugs in open-source tools using afl-fuzz? If yes, please drop\n"
+             "me a mail at <lcamtuf@coredump.cx> once the issues are fixed - I'd love to\n"
+             "add your finds to the gallery at:\n\n"
+
+             "  http://lcamtuf.coredump.cx/afl/\n\n"
+
+             "Thanks :-)\n",
+
+             orig_cmdline, DMS(mem_limit << 20)); /* ignore errors */
+
   fclose(f);
+  fclose(f_delta);
 
 }
 
@@ -3876,6 +3906,251 @@ static void maybe_delete_out_dir(void) {
 		"    output location for the tool.\n", fn);
 
 	FATAL("Output directory cleanup failed");
+
+}
+
+/* Delete fuzzer output directory if we recognize it as ours, if the fuzzer
+   is not currently running, and if the last run time isn't too great. */
+
+static void maybe_delete_specific_out_dir(int i) {
+
+  FILE* f;
+  u8 *fn = alloc_printf("%s/fuzzer_stats", out_dir_delta[i]);
+
+  /* See if the output directory is locked. If yes, bail out. If not,
+     create a lock that will persist for the lifetime of the process
+     (this requires leaving the descriptor open).*/
+
+  out_dirs_fd[i] = open(out_dir_delta[i], O_RDONLY);
+  if (out_dir_fd < 0) PFATAL("Unable to open '%s'", out_dir_delta[i]);
+
+#ifndef __sun
+
+  if (flock(out_dir_fd, LOCK_EX | LOCK_NB) && errno == EWOULDBLOCK) {
+
+    SAYF("\n" cLRD "[-] " cRST
+      "Looks like the job output directory is being actively used by another\n"
+      "    instance of afl-fuzz. You will need to choose a different %s\n"
+      "    or stop the other process first.\n",
+      sync_id ? "fuzzer ID" : "output location");
+
+    FATAL("Directory '%s' is in use", out_dir_delta[i]);
+
+  }
+
+#endif /* !__sun */
+
+  f = fopen(fn, "r");
+
+  if (f) {
+
+    u64 start_time, last_update;
+
+    if (fscanf(f, "start_time     : %llu\n"
+      "last_update    : %llu\n", &start_time, &last_update) != 2)
+      FATAL("Malformed data in '%s'", fn);
+
+    fclose(f);
+
+    /* Let's see how much work is at stake. */
+
+    if (!in_place_resume && last_update - start_time > OUTPUT_GRACE * 60) {
+
+      SAYF("\n" cLRD "[-] " cRST
+        "The job output directory already exists and contains the results of more\n"
+        "    than %u minutes worth of fuzzing. To avoid data loss, afl-fuzz will *NOT*\n"
+        "    automatically delete this data for you.\n\n"
+
+        "    If you wish to start a new session, remove or rename the directory manually,\n"
+        "    or specify a different output location for this job. To resume the old\n"
+        "    session, put '-' as the input directory in the command line ('-i -') and\n"
+        "    try again.\n", OUTPUT_GRACE);
+
+      FATAL("At-risk data found in '%s'", out_dir_delta[i]);
+
+    }
+
+  }
+
+  ck_free(fn);
+
+  /* The idea for in-place resume is pretty simple: we temporarily move the old
+     queue/ to a new location that gets deleted once import to the new queue/
+     is finished. If _resume/ already exists, the current queue/ may be
+     incomplete due to an earlier abort, so we want to use the old _resume/
+     dir instead, and we let rename() fail silently. */
+
+  if (in_place_resume) {
+
+    u8* orig_q = alloc_printf("%s/queue", out_dir_delta[i]);
+
+    in_dir = alloc_printf("%s/_resume", out_dir_delta[i]);
+
+    rename(orig_q, in_dir); /* Ignore errors */
+
+    OKF("Output directory exists, will attempt session resume.");
+
+    ck_free(orig_q);
+
+  } else {
+
+    OKF("Output directory exists but deemed OK to reuse.");
+
+  }
+
+  ACTF("Deleting old session data...");
+
+  /* Okay, let's get the ball rolling! First, we need to get rid of the entries
+     in <out_dir>/.synced/.../id:*, if any are present. */
+
+  if (!in_place_resume) {
+
+    fn = alloc_printf("%s/.synced", out_dir_delta[i]);
+    if (delete_files(fn, NULL)) goto dir_cleanup_failed;
+    ck_free(fn);
+
+  }
+
+  /* Next, we need to clean up <out_dir>/queue/.state/ subdirectories: */
+
+  fn = alloc_printf("%s/queue/.state/deterministic_done", out_dir_delta[i]);
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/queue/.state/auto_extras", out_dir_delta[i]);
+  if (delete_files(fn, "auto_")) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/queue/.state/redundant_edges", out_dir_delta[i]);
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/queue/.state/variable_behavior", out_dir_delta[i]);
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  /* Then, get rid of the .state subdirectory itself (should be empty by now)
+     and everything matching <out_dir>/queue/id:*. */
+
+  fn = alloc_printf("%s/queue/.state", out_dir_delta[i]);
+  if (rmdir(fn) && errno != ENOENT) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/queue", out_dir_delta[i]);
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  /* All right, let's do <out_dir>/crashes/id:* and <out_dir>/hangs/id:*. */
+
+  if (!in_place_resume) {
+
+    fn = alloc_printf("%s/crashes/README.txt", out_dir_delta[i]);
+    unlink(fn); /* Ignore errors */
+    ck_free(fn);
+
+  }
+
+  fn = alloc_printf("%s/crashes", out_dir_delta[i]);
+
+  /* Make backup of the crashes directory if it's not empty and if we're
+     doing in-place resume. */
+
+  if (in_place_resume && rmdir(fn)) {
+
+    time_t cur_t = time(0);
+    struct tm* t = localtime(&cur_t);
+
+#ifndef SIMPLE_FILES
+
+    u8* nfn = alloc_printf("%s.%04u-%02u-%02u-%02u:%02u:%02u", fn,
+      t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+      t->tm_hour, t->tm_min, t->tm_sec);
+
+#else
+
+    u8* nfn = alloc_printf("%s_%04u%02u%02u%02u%02u%02u", fn,
+      t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+      t->tm_hour, t->tm_min, t->tm_sec);
+
+#endif /* ^!SIMPLE_FILES */
+
+    rename(fn, nfn); /* Ignore errors. */
+    ck_free(nfn);
+
+  }
+
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/hangs", out_dir_delta[i]);
+
+  /* Backup hangs, too. */
+
+  if (in_place_resume && rmdir(fn)) {
+
+    time_t cur_t = time(0);
+    struct tm* t = localtime(&cur_t);
+
+#ifndef SIMPLE_FILES
+
+    u8* nfn = alloc_printf("%s.%04u-%02u-%02u-%02u:%02u:%02u", fn,
+      t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+      t->tm_hour, t->tm_min, t->tm_sec);
+
+#else
+
+    u8* nfn = alloc_printf("%s_%04u%02u%02u%02u%02u%02u", fn,
+      t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+      t->tm_hour, t->tm_min, t->tm_sec);
+
+#endif /* ^!SIMPLE_FILES */
+
+    rename(fn, nfn); /* Ignore errors. */
+    ck_free(nfn);
+
+  }
+
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  /* And now, for some finishing touches. */
+
+  fn = alloc_printf("%s/.cur_input", out_dir_delta[i]);
+  if (unlink(fn) && errno != ENOENT) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/fuzz_bitmap", out_dir_delta[i]);
+  if (unlink(fn) && errno != ENOENT) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  if (!in_place_resume) {
+    fn  = alloc_printf("%s/fuzzer_stats", out_dir_delta[i]);
+    if (unlink(fn) && errno != ENOENT) goto dir_cleanup_failed;
+    ck_free(fn);
+  }
+
+  fn = alloc_printf("%s/plot_data", out_dir_delta[i]);
+  if (unlink(fn) && errno != ENOENT) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  OKF("Output dir cleanup successful.");
+
+  /* Wow... is that all? If yes, celebrate! */
+
+  return;
+
+  dir_cleanup_failed:
+
+  SAYF("\n" cLRD "[-] " cRST
+    "Whoops, the fuzzer tried to reuse your output directory, but bumped into\n"
+    "    some files that shouldn't be there or that couldn't be removed - so it\n"
+    "    decided to abort! This happened while processing this path:\n\n"
+
+    "    %s\n\n"
+    "    Please examine and manually delete the files, or specify a different\n"
+    "    output location for the tool.\n", fn);
+
+  FATAL("Output directory cleanup failed");
 
 }
 
@@ -5269,6 +5544,7 @@ static u8 fuzz_one(char** argv) {
   	//	return 1;
   	//}
 	
+    //is_interesting
 
     /* If we have any favored, non-fuzzed new arrivals in the queue,
        possibly skip to them at the expense of already-fuzzed or non-favored
@@ -7083,6 +7359,10 @@ static void handle_stop_sig(int sig) {
 		if (forksrv_pid[i] >= 0) kill(forksrv_pid[i], SIGKILL);
 	}
 
+  for(int i = 0; i < numbr_of_progs_under_test; i++ )
+    free(out_dir_delta[i]);
+  
+
 }
 
 
@@ -7466,6 +7746,8 @@ EXP_ST void setup_dirs_fds(void) {
 	if (sync_id && mkdir(sync_dir, 0700) && errno != EEXIST)
 		PFATAL("Unable to create '%s'", sync_dir);
 
+  //for(int i = 0; i < numbr_of_progs_under_test; i++){}
+
 	if (mkdir(out_dir, 0700)) {
 
 		if (errno != EEXIST) PFATAL("Unable to create '%s'", out_dir);
@@ -7573,6 +7855,132 @@ EXP_ST void setup_dirs_fds(void) {
 		"pending_total, pending_favs, map_size, unique_crashes, "
 		"unique_hangs, max_depth, execs_per_sec\n");
                      /* ignore errors */
+
+}
+
+/* Prepare all output directories and fds. */
+
+EXP_ST void setup_all_dirs_fds(void) {
+
+  u8* tmp;
+  s32 fd;
+
+  ACTF("Setting up output directories...");
+
+  if (sync_id && mkdir(sync_dir, 0700) && errno != EEXIST)
+    PFATAL("Unable to create '%s'", sync_dir);
+  //printf("out_dir = %s\n", out_dir);
+
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+
+    if (mkdir(out_dir_delta[i], 0700)) {
+
+      if (errno != EEXIST) PFATAL("Unable to create '%s'", out_dir_delta[i]);
+
+      maybe_delete_specific_out_dir(i);
+
+    } else {
+
+      if (in_place_resume)
+        FATAL("Resume attempted but old output directory not found");
+
+      out_dirs_fd[i] = open(out_dir_delta[i], O_RDONLY);
+
+  #ifndef __sun
+
+      if (out_dirs_fd[i] < 0 || flock(out_dirs_fd[i], LOCK_EX | LOCK_NB))
+        PFATAL("Unable to flock() output directory.");
+
+  #endif /* !__sun */
+
+    }
+
+    /* Queue directory for any starting & discovered paths. */
+
+    tmp = alloc_printf("%s/queue", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Top-level directory for queue metadata used for session
+       resume and related tasks. */
+
+    tmp = alloc_printf("%s/queue/.state/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Directory for flagging queue entries that went through
+       deterministic fuzzing in the past. */
+
+    tmp = alloc_printf("%s/queue/.state/deterministic_done/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Directory with the auto-selected dictionary entries. */
+
+    tmp = alloc_printf("%s/queue/.state/auto_extras/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* The set of paths currently deemed redundant. */
+
+    tmp = alloc_printf("%s/queue/.state/redundant_edges/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* The set of paths showing variable behavior. */
+
+    tmp = alloc_printf("%s/queue/.state/variable_behavior/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Sync directory for keeping track of cooperating fuzzers. */
+
+    if (sync_id) {
+
+      tmp = alloc_printf("%s/.synced/", out_dir_delta[i]);
+
+      if (mkdir(tmp, 0700) && (!in_place_resume || errno != EEXIST))
+        PFATAL("Unable to create '%s'", tmp);
+
+      ck_free(tmp);
+
+    }
+
+    /* All recorded crashes. */
+
+    tmp = alloc_printf("%s/crashes", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* All recorded hangs. */
+
+    tmp = alloc_printf("%s/hangs", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Generally useful file descriptors. */
+
+    dev_null_fd = open("/dev/null", O_RDWR);
+    if (dev_null_fd < 0) PFATAL("Unable to open /dev/null");
+
+    dev_urandom_fd = open("/dev/urandom", O_RDONLY);
+    if (dev_urandom_fd < 0) PFATAL("Unable to open /dev/urandom");
+
+    /* Gnuplot output file. */
+
+    tmp = alloc_printf("%s/plot_data", out_dir_delta[i]);
+    fd = open(tmp, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd < 0) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    plot_file = fdopen(fd, "w");
+    if (!plot_file) PFATAL("fdopen() failed");
+
+    fprintf(plot_file, "# unix_time, cycles_done, cur_path, paths_total, "
+      "pending_total, pending_favs, map_size, unique_crashes, "
+      "unique_hangs, max_depth, execs_per_sec\n");
+                       /* ignore errors */
+  }
 
 }
 
@@ -8018,6 +8426,15 @@ int main(int argc, char** argv) {
 
 	doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
 
+  // pass through every arg and get the number of programs and their names
+  int index = 0;
+  while( *(argv + index) ){
+      if(strcmp(*(argv + index), "-p") == 0){
+        prog_names[numbr_of_progs_under_test] =*(argv + index + 1);
+        numbr_of_progs_under_test ++;
+      }
+    index ++;
+  }
 
 	while ((opt = getopt(argc, argv, "+i:o:q:m:p")) > 0){
 
@@ -8034,6 +8451,7 @@ int main(int argc, char** argv) {
 
   			if (out_dir) FATAL("Multiple -o options not supported");
   			out_dir = optarg;
+        
   			break;
 
     case 'q': 
@@ -8084,24 +8502,22 @@ int main(int argc, char** argv) {
 
 		}
 	}
+
   //printf("progs = %d\n", numbr_of_progs_under_test);
 
   //printf("optind = %d\n", optind);
   //printf("argc = %d\n", argc);
   if ( optind == argc || !in_dir || !out_dir ){ printf("here in this option of ours\n");usage(argv[0]);}
 
+  for(int i = 0; i < numbr_of_progs_under_test; i++ ){
+    out_dir_delta[i] = malloc(sizeof(char) * 40 + 1);
+    sprintf(out_dir_delta[i], "%s%d", out_dir, i);
+  }
+
+  //printf("out dir will be %s for %d\n", out_dir_delta[0], 0);
+
   //numbr_of_progs_under_test = 0;
   //numbr_of_progs_under_test = argc - optind;
-
-  // pass through every arg and get the number of programs and their names
-  int index = 0;
-  while( *(argv + index) ){
-	    if(strcmp(*(argv + index), "-p") == 0){
-	    	prog_names[numbr_of_progs_under_test] =*(argv + index + 1);
-	    	numbr_of_progs_under_test ++;
-	    }
-		index ++;
-	}
 
   //numbr_of_progs_under_test = getenv(FORKSRV_AMOUNT_ENV) == NULL ? 1 : getenv(FORKSRV_AMOUNT_ENV); // get number of programs under test
 
@@ -8127,7 +8543,9 @@ int main(int argc, char** argv) {
   setup_shm();
   init_count_class16(); //-> needed
 
-  setup_dirs_fds(); // -> needed but not for the forkserer
+
+  setup_dirs_fds();
+  setup_all_dirs_fds(); // -> TODO-> need to add queue per program
   read_testcases();
   load_auto();
 
@@ -8199,7 +8617,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
     }
 
     if (!queue_cur) {
-
+ 
       queue_cycle++;
       current_entry     = 0;
       cur_skipped_paths = 0;
