@@ -150,7 +150,7 @@ int CUR_PROG = 0;
 
 static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
 
-static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
+static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found for run*/
 
 /*Stores all the blocks of a specific programs*/
 static u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
@@ -181,7 +181,9 @@ EXP_ST u8  virgin_bits[MAX_AMOUNT_OF_PROGS][MAP_SIZE],     /* Regions yet untouc
 
 static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
 
-//TODO -> probably need an array here as well
+//Question -> probably need an array here as well
+//  -> no since the shared memory returns to default value every run we only need one 
+//      since it wouldn't make a difference
 static s32 shm_id;                    /* ID of the SHM region             */
 
 static volatile u8 stop_soon,         /* Ctrl-C pressed?                  */
@@ -266,7 +268,10 @@ static FILE* plot_file;               /* Gnuplot output file              */
 
 static int numbr_of_progs_under_test = 0;
 
-// TODO -> we need to keep our best estimation (maybe worst too) maybe?
+// TODO -> maybe have one for each program (*next, *next_100) and then we
+//         simulate as having a queue for each program, when changing progs, we
+//         run the interesting inputs and if it's interesting we save for fuzzing later
+//         otherwise skip, always starts with the original input
 
 struct queue_entry {
 
@@ -275,7 +280,7 @@ struct queue_entry {
 
   u8  cal_failed,                     /* Calibration failed?              */
       trim_done,                      /* Trimmed?                         */
-      was_fuzzed[MAX_AMOUNT_OF_PROGS],/* Had any fuzzing done yet?       */ // TODO -> add information about specific program
+      was_fuzzed[MAX_AMOUNT_OF_PROGS],/* Had any fuzzing done yet?        */ // TODO -> check if when we have multiple queue we need this
 	  been_fuzzed,					  /* Has it been fuzzed at all?		  */
       passed_det,                     /* Deterministic stages passed?     */
       has_new_cov,                    /* Triggers new coverage?           */
@@ -440,6 +445,123 @@ static void shuffle_ptrs(void** ptrs, u32 cnt) {
 	}
 
 }
+
+
+#ifdef HAVE_AFFINITY
+
+/* Build a list of processes bound to specific cores. Returns -1 if nothing
+   can be found. Assumes an upper bound of 4k CPUs. */
+
+static void bind_to_free_cpu(void) {
+
+  DIR* d;
+  struct dirent* de;
+  cpu_set_t c;
+
+  u8 cpu_used[4096] = { 0 };
+  u32 i;
+
+  if (cpu_core_count < 2) return;
+
+  if (getenv("AFL_NO_AFFINITY")) {
+
+    WARNF("Not binding to a CPU core (AFL_NO_AFFINITY set).");
+    return;
+
+  }
+
+  d = opendir("/proc");
+
+  if (!d) {
+
+    WARNF("Unable to access /proc - can't scan for free CPU cores.");
+    return;
+
+  }
+
+  ACTF("Checking CPU core loadout...");
+
+  /* Introduce some jitter, in case multiple AFL tasks are doing the same
+     thing at the same time... */
+
+  usleep(R(1000) * 250);
+
+  /* Scan all /proc/<pid>/status entries, checking for Cpus_allowed_list.
+     Flag all processes bound to a specific CPU using cpu_used[]. This will
+     fail for some exotic binding setups, but is likely good enough in almost
+     all real-world use cases. */
+
+  while ((de = readdir(d))) {
+
+    u8* fn;
+    FILE* f;
+    u8 tmp[MAX_LINE];
+    u8 has_vmsize = 0;
+
+    if (!isdigit(de->d_name[0])) continue;
+
+    fn = alloc_printf("/proc/%s/status", de->d_name);
+
+    if (!(f = fopen(fn, "r"))) {
+      ck_free(fn);
+      continue;
+    }
+
+    while (fgets(tmp, MAX_LINE, f)) {
+
+      u32 hval;
+
+      /* Processes without VmSize are probably kernel tasks. */
+
+      if (!strncmp(tmp, "VmSize:\t", 8)) has_vmsize = 1;
+
+      if (!strncmp(tmp, "Cpus_allowed_list:\t", 19) &&
+          !strchr(tmp, '-') && !strchr(tmp, ',') &&
+          sscanf(tmp + 19, "%u", &hval) == 1 && hval < sizeof(cpu_used) &&
+          has_vmsize) {
+
+        cpu_used[hval] = 1;
+        break;
+
+      }
+
+    }
+
+    ck_free(fn);
+    fclose(f);
+
+  }
+
+  closedir(d);
+
+  for (i = 0; i < cpu_core_count; i++) if (!cpu_used[i]) break;
+
+  if (i == cpu_core_count) {
+
+    SAYF("\n" cLRD "[-] " cRST
+         "Uh-oh, looks like all %u CPU cores on your system are allocated to\n"
+         "    other instances of afl-fuzz (or similar CPU-locked tasks). Starting\n"
+         "    another fuzzer on this machine is probably a bad plan, but if you are\n"
+         "    absolutely sure, you can set AFL_NO_AFFINITY and try again.\n",
+         cpu_core_count);
+
+    FATAL("No more free CPU cores");
+
+  }
+
+  OKF("Found a free CPU core, binding to #%u.", i);
+
+  cpu_aff = i;
+
+  CPU_ZERO(&c);
+  CPU_SET(i, &c);
+
+  if (sched_setaffinity(0, sizeof(c), &c))
+    PFATAL("sched_setaffinity failed");
+
+}
+
+#endif /* HAVE_AFFINITY */
 
 #ifndef IGNORE_FINDS
 
@@ -784,6 +906,21 @@ EXP_ST void write_bitmap(void) {
 	ck_free(fname);
 
 }
+
+/* Read bitmap from file. This is for the -B option again. */
+
+EXP_ST void read_bitmap(u8* fname) {
+
+  s32 fd = open(fname, O_RDONLY);
+
+  if (fd < 0) PFATAL("Unable to open '%s'", fname);
+
+  ck_read(fd, virgin_bits, MAP_SIZE, fname);
+
+  close(fd);
+
+}
+
 
 
 /* Checks if the current execution path passes through any new block */
@@ -1229,7 +1366,6 @@ static void update_bitmap_score(struct queue_entry* q) {
    previously-unseen bytes (temp_v) and marks them as favored, at least
    until the next run. The favored entries are given more air time during
    all fuzzing steps. */
-// TODO -> this function is important, probably best ot write about it
 
 static void cull_queue(void) {
 
@@ -1297,6 +1433,8 @@ EXP_ST void setup_shm(void) {
 	 memset(virgin_tmout[i], 255, MAP_SIZE);
 	 memset(virgin_crash[i], 255, MAP_SIZE);
   }
+
+  if(shm_id != 0) return; // se já fizemos isto antes
 
 	shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
 	//printf("shm_id = %d\n", shm_id);
@@ -1474,6 +1612,244 @@ static int compare_extras_use_d(const void* p1, const void* p2) {
 
   return e2->hit_cnt - e1->hit_cnt;
 }
+
+
+/* Read extras from a file, sort by size. */
+
+static void load_extras_file(u8* fname, u32* min_len, u32* max_len,
+                             u32 dict_level) {
+
+  FILE* f;
+  u8  buf[MAX_LINE];
+  u8  *lptr;
+  u32 cur_line = 0;
+
+  f = fopen(fname, "r");
+
+  if (!f) PFATAL("Unable to open '%s'", fname);
+
+  while ((lptr = fgets(buf, MAX_LINE, f))) {
+
+    u8 *rptr, *wptr;
+    u32 klen = 0;
+
+    cur_line++;
+
+    /* Trim on left and right. */
+
+    while (isspace(*lptr)) lptr++;
+
+    rptr = lptr + strlen(lptr) - 1;
+    while (rptr >= lptr && isspace(*rptr)) rptr--;
+    rptr++;
+    *rptr = 0;
+
+    /* Skip empty lines and comments. */
+
+    if (!*lptr || *lptr == '#') continue;
+
+    /* All other lines must end with '"', which we can consume. */
+
+    rptr--;
+
+    if (rptr < lptr || *rptr != '"')
+      FATAL("Malformed name=\"value\" pair in line %u.", cur_line);
+
+    *rptr = 0;
+
+    /* Skip alphanumerics and dashes (label). */
+
+    while (isalnum(*lptr) || *lptr == '_') lptr++;
+
+    /* If @number follows, parse that. */
+
+    if (*lptr == '@') {
+
+      lptr++;
+      if (atoi(lptr) > dict_level) continue;
+      while (isdigit(*lptr)) lptr++;
+
+    }
+
+    /* Skip whitespace and = signs. */
+
+    while (isspace(*lptr) || *lptr == '=') lptr++;
+
+    /* Consume opening '"'. */
+
+    if (*lptr != '"')
+      FATAL("Malformed name=\"keyword\" pair in line %u.", cur_line);
+
+    lptr++;
+
+    if (!*lptr) FATAL("Empty keyword in line %u.", cur_line);
+
+    /* Okay, let's allocate memory and copy data between "...", handling
+       \xNN escaping, \\, and \". */
+
+    extras = ck_realloc_block(extras, (extras_cnt + 1) *
+               sizeof(struct extra_data));
+
+    wptr = extras[extras_cnt].data = ck_alloc(rptr - lptr);
+
+    while (*lptr) {
+
+      char* hexdigits = "0123456789abcdef";
+
+      switch (*lptr) {
+
+        case 1 ... 31:
+        case 128 ... 255:
+          FATAL("Non-printable characters in line %u.", cur_line);
+
+        case '\\':
+
+          lptr++;
+
+          if (*lptr == '\\' || *lptr == '"') {
+            *(wptr++) = *(lptr++);
+            klen++;
+            break;
+          }
+
+          if (*lptr != 'x' || !isxdigit(lptr[1]) || !isxdigit(lptr[2]))
+            FATAL("Invalid escaping (not \\xNN) in line %u.", cur_line);
+
+          *(wptr++) =
+            ((strchr(hexdigits, tolower(lptr[1])) - hexdigits) << 4) |
+            (strchr(hexdigits, tolower(lptr[2])) - hexdigits);
+
+          lptr += 3;
+          klen++;
+
+          break;
+
+        default:
+
+          *(wptr++) = *(lptr++);
+          klen++;
+
+      }
+
+    }
+
+    extras[extras_cnt].len = klen;
+
+    if (extras[extras_cnt].len > MAX_DICT_FILE)
+      FATAL("Keyword too big in line %u (%s, limit is %s)", cur_line,
+            DMS(klen), DMS(MAX_DICT_FILE));
+
+    if (*min_len > klen) *min_len = klen;
+    if (*max_len < klen) *max_len = klen;
+
+    extras_cnt++;
+
+  }
+
+  fclose(f);
+
+}
+
+
+/* Read extras from the extras directory and sort them by size. */
+
+static void load_extras(u8* dir) {
+
+  DIR* d;
+  struct dirent* de;
+  u32 min_len = MAX_DICT_FILE, max_len = 0, dict_level = 0;
+  u8* x;
+
+  /* If the name ends with @, extract level and continue. */
+
+  if ((x = strchr(dir, '@'))) {
+
+    *x = 0;
+    dict_level = atoi(x + 1);
+
+  }
+
+  ACTF("Loading extra dictionary from '%s' (level %u)...", dir, dict_level);
+
+  d = opendir(dir);
+
+  if (!d) {
+
+    if (errno == ENOTDIR) {
+      load_extras_file(dir, &min_len, &max_len, dict_level);
+      goto check_and_sort;
+    }
+
+    PFATAL("Unable to open '%s'", dir);
+
+  }
+
+  if (x) FATAL("Dictionary levels not supported for directories.");
+
+  while ((de = readdir(d))) {
+
+    struct stat st;
+    u8* fn = alloc_printf("%s/%s", dir, de->d_name);
+    s32 fd;
+
+    if (lstat(fn, &st) || access(fn, R_OK))
+      PFATAL("Unable to access '%s'", fn);
+
+    /* This also takes care of . and .. */
+    if (!S_ISREG(st.st_mode) || !st.st_size) {
+
+      ck_free(fn);
+      continue;
+
+    }
+
+    if (st.st_size > MAX_DICT_FILE)
+      FATAL("Extra '%s' is too big (%s, limit is %s)", fn,
+            DMS(st.st_size), DMS(MAX_DICT_FILE));
+
+    if (min_len > st.st_size) min_len = st.st_size;
+    if (max_len < st.st_size) max_len = st.st_size;
+
+    extras = ck_realloc_block(extras, (extras_cnt + 1) *
+               sizeof(struct extra_data));
+
+    extras[extras_cnt].data = ck_alloc(st.st_size);
+    extras[extras_cnt].len  = st.st_size;
+
+    fd = open(fn, O_RDONLY);
+
+    if (fd < 0) PFATAL("Unable to open '%s'", fn);
+
+    ck_read(fd, extras[extras_cnt].data, st.st_size, fn);
+
+    close(fd);
+    ck_free(fn);
+
+    extras_cnt++;
+
+  }
+
+  closedir(d);
+
+check_and_sort:
+
+  if (!extras_cnt) FATAL("No usable files in '%s'", dir);
+
+  qsort(extras, extras_cnt, sizeof(struct extra_data), compare_extras_len);
+
+  OKF("Loaded %u extra tokens, size range %s to %s.", extras_cnt,
+      DMS(min_len), DMS(max_len));
+
+  if (max_len > 32)
+    WARNF("Some tokens are relatively large (%s) - consider trimming.",
+          DMS(max_len));
+
+  if (extras_cnt > MAX_DET_EXTRAS)
+    WARNF("More than %u tokens - will use them probabilistically.",
+          MAX_DET_EXTRAS);
+
+}
+
 
 /* Helper function for maybe_add_auto() */
 
@@ -1999,7 +2375,6 @@ FATAL("Fork server handshake failed");
 * Stores the amount of blocks found in hit
 **/ 
 
-// TODO -> tentar perceber como o input é passado
 int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
 	static struct itimerval it;
@@ -2139,15 +2514,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       i++;  
 
   }
-
-  /* TODO -> this can't be here, once we set that it passes through new blocks it cannot be changed */
-  /* will go on two places calibrate_case (so it treats the first ones) and save_if_interesting (to check the new ones) */
-  /*
-  if( queue_cur != NULL ){ 
-  	queue_cur->shared_blocks = shared_blocks_in_runs; 
-  	queue_cur ->uni_blcks = unique_blocks;
-  }
-  */
 
   //status = message;
 
@@ -2355,7 +2721,7 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
    to warn about flaky or otherwise problematic test cases early on; and when
    new paths are discovered to detect variable behavior and so on. */
 
-// TODO -> the thins in the queue entry that change must be changed here
+// NOTE/TODO -> the things in the queue entry that change must be changed here
 
 static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
                          u32 handicap, u8 from_queue) {
@@ -2411,7 +2777,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
     //fault = run_target(argv, use_tmout); // TODO -> change this
 
 
-    run_target(use_tmout);
+    fault = run_target(use_tmout); //TODO > check if correct
 
     //printf("\tfault = %d\n", fault);
 
@@ -4897,7 +5263,6 @@ static u8 fuzz_one(char** argv) {
 
   	// verificar que funcionar
   	// se não foi fuzzed no programa a ser testado e não temos blocos nenhuns em comum não vale a pena
-  	// TODO -> verificar se já foi fuzzed de todo
   	
   	//if (( !queue_cur->was_fuzzed[CUR_PROG] && queue_cur->been_fuzzed && !num_blocks_shared(queue_cur,CUR_PROG) )){ 
   	//	printf("\tFOUND ONE!\n");
@@ -6568,6 +6933,144 @@ abandon_entry:
 
 }
 
+/* Grab interesting test cases from other fuzzers. */
+
+static void sync_fuzzers(char** argv) {
+
+  DIR* sd;
+  struct dirent* sd_ent;
+  u32 sync_cnt = 0;
+
+  sd = opendir(sync_dir);
+  if (!sd) PFATAL("Unable to open '%s'", sync_dir);
+
+  stage_max = stage_cur = 0;
+  cur_depth = 0;
+
+  /* Look at the entries created for every other fuzzer in the sync directory. */
+
+  while ((sd_ent = readdir(sd))) {
+
+    static u8 stage_tmp[128];
+
+    DIR* qd;
+    struct dirent* qd_ent;
+    u8 *qd_path, *qd_synced_path;
+    u32 min_accept = 0, next_min_accept;
+
+    s32 id_fd;
+
+    /* Skip dot files and our own output directory. */
+
+    if (sd_ent->d_name[0] == '.' || !strcmp(sync_id, sd_ent->d_name)) continue;
+
+    /* Skip anything that doesn't have a queue/ subdirectory. */
+
+    qd_path = alloc_printf("%s/%s/queue", sync_dir, sd_ent->d_name);
+
+    if (!(qd = opendir(qd_path))) {
+      ck_free(qd_path);
+      continue;
+    }
+
+    /* Retrieve the ID of the last seen test case. */
+
+    qd_synced_path = alloc_printf("%s/.synced/%s", out_dir, sd_ent->d_name);
+
+    id_fd = open(qd_synced_path, O_RDWR | O_CREAT, 0600);
+
+    if (id_fd < 0) PFATAL("Unable to create '%s'", qd_synced_path);
+
+    if (read(id_fd, &min_accept, sizeof(u32)) > 0) 
+      lseek(id_fd, 0, SEEK_SET);
+
+    next_min_accept = min_accept;
+
+    /* Show stats */    
+
+    sprintf(stage_tmp, "sync %u", ++sync_cnt);
+    stage_name = stage_tmp;
+    stage_cur  = 0;
+    stage_max  = 0;
+
+    /* For every file queued by this fuzzer, parse ID and see if we have looked at
+       it before; exec a test case if not. */
+
+    while ((qd_ent = readdir(qd))) {
+
+      u8* path;
+      s32 fd;
+      struct stat st;
+
+      if (qd_ent->d_name[0] == '.' ||
+          sscanf(qd_ent->d_name, CASE_PREFIX "%06u", &syncing_case) != 1 || 
+          syncing_case < min_accept) continue;
+
+      /* OK, sounds like a new one. Let's give it a try. */
+
+      if (syncing_case >= next_min_accept)
+        next_min_accept = syncing_case + 1;
+
+      path = alloc_printf("%s/%s", qd_path, qd_ent->d_name);
+
+      /* Allow this to fail in case the other fuzzer is resuming or so... */
+
+      fd = open(path, O_RDONLY);
+
+      if (fd < 0) {
+         ck_free(path);
+         continue;
+      }
+
+      if (fstat(fd, &st)) PFATAL("fstat() failed");
+
+      /* Ignore zero-sized or oversized files. */
+
+      if (st.st_size && st.st_size <= MAX_FILE) {
+
+        u8  fault;
+        u8* mem = mmap(0, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+
+        if (mem == MAP_FAILED) PFATAL("Unable to mmap '%s'", path);
+
+        /* See what happens. We rely on save_if_interesting() to catch major
+           errors and save the test case. */
+
+        write_to_testcase(mem, st.st_size);
+
+        fault = run_target(exec_tmout);
+
+        if (stop_soon) return;
+
+        syncing_party = sd_ent->d_name;
+        queued_imported += save_if_interesting(argv, mem, st.st_size, fault);
+        syncing_party = 0;
+
+        munmap(mem, st.st_size);
+
+        if (!(stage_cur++ % stats_update_freq)) show_stats();
+
+      }
+
+      ck_free(path);
+      close(fd);
+
+    }
+
+    ck_write(id_fd, &next_min_accept, sizeof(u32), qd_synced_path);
+
+    close(id_fd);
+    closedir(qd);
+    ck_free(qd_path);
+    ck_free(qd_synced_path);
+    
+  }  
+
+  closedir(sd);
+
+}
+
+
 /* Handle stop signal (Ctrl-C, etc). */
 
 static void handle_stop_sig(int sig) {
@@ -6575,9 +7078,9 @@ static void handle_stop_sig(int sig) {
 	stop_soon = 1; 
 
 	if (child_pid > 0) kill(child_pid, SIGKILL);
-	//todo need to pass through all of them
+
 	for( int i = 0; i < numbr_of_progs_under_test; i++){
-		if (forksrv_pid[i] > 0) kill(forksrv_pid[i], SIGKILL);
+		if (forksrv_pid[i] >= 0) kill(forksrv_pid[i], SIGKILL);
 	}
 
 }
@@ -6751,7 +7254,7 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 
 static void getProgsBlockList(){
   printf("\t in getProgsBlockList\n");
-	//shostatic rt PROG_BLOCKS[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
+
 	char *line = NULL, *block = NULL;
 	size_t len = 0;
 	int prog = 0;
@@ -6893,6 +7396,8 @@ static void fix_up_banner(u8* name) {
   }
 
 }
+
+
 
 /* Check terminal dimensions after resize. */
 
@@ -7611,11 +8116,15 @@ int main(int argc, char** argv) {
 
   get_core_count(); // -> not needed, but might as well have it
 
+  #ifdef HAVE_AFFINITY
+    bind_to_free_cpu();
+  #endif /* HAVE_AFFINITY */
+
   check_crash_handling();
   check_cpu_governor();
 
   setup_post();
-  setup_shm(); // -> TODO -> need to add the specific ID that I want to set up
+  setup_shm();
   init_count_class16(); //-> needed
 
   setup_dirs_fds(); // -> needed but not for the forkserer
@@ -7725,7 +8234,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
     }
 
     
-    skipped_fuzz = fuzz_one(use_argv); // this is where the work will be done //TODO
+    skipped_fuzz = fuzz_one(use_argv); // this is where the work will be done //NOTE
 
     if (!stop_soon && sync_id && !skipped_fuzz) {
       
