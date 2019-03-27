@@ -760,15 +760,22 @@ static u8* DTD(u64 cur_ms, u64 event_ms) {
 static void mark_as_det_done(struct queue_entry* q) {
 
 	u8* fn = strrchr(q->fname, '/');
-	s32 fd;
+  u8* fn_delta = strrchr(q->fname, '/');
+	s32 fd, fd_delta;
 
 	fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
+  fn_delta = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
 	fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
 	if (fd < 0) PFATAL("Unable to create '%s'", fn);
 	close(fd);
 
+  fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+  if (fd_delta < 0) PFATAL("Unable to create '%s'", fn);
+  close(fd_delta);
+
 	ck_free(fn);
+  ck_free(fn_delta);
 
 	q->passed_det = 1;
 
@@ -780,9 +787,12 @@ static void mark_as_det_done(struct queue_entry* q) {
 static void mark_as_variable(struct queue_entry* q) {
 
   u8 *fn = strrchr(q->fname, '/') + 1, *ldest;
+  u8 *fn_delta = strrchr(q->fname, '/') + 1, *ldest_delta;
 
   ldest = alloc_printf("../../%s", fn);
+  ldest_delta = alloc_printf("../../%s", fn_delta);
   fn = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir, fn);
+  fn_delta = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir_delta[CUR_PROG], fn_delta);
 
   if (symlink(ldest, fn)) {
 
@@ -792,8 +802,20 @@ static void mark_as_variable(struct queue_entry* q) {
 
   }
 
+  if (symlink(ldest_delta, fn_delta)) {
+
+    s32 fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+    close(fd_delta);
+
+  }
+
+
   ck_free(ldest);
   ck_free(fn);
+
+  ck_free(ldest_delta);
+  ck_free(fn_delta);
 
   q->var_behavior = 1;
 
@@ -805,15 +827,18 @@ static void mark_as_variable(struct queue_entry* q) {
 
 static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
-  u8* fn;
-  s32 fd;
+  u8* fn, fn_delta;
+  s32 fd, fd_delta;
 
   if (state == q->fs_redundant) return;
 
   q->fs_redundant = state;
 
   fn = strrchr(q->fname, '/');
+  fn_delta = strrchr(q->fname, '/');
+
   fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
+  fn_delta = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
   if (state) {
 
@@ -821,13 +846,20 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
     if (fd < 0) PFATAL("Unable to create '%s'", fn);
     close(fd);
 
+    fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn);
+    close(fd_delta);
+
+
   } else {
 
     if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
+    if (unlink(fn_delta)) PFATAL("Unable to remove '%s'", fn_delta);
 
   }
 
   ck_free(fn);
+  ck_free(fn_delta);
 
 }
 
@@ -1983,16 +2015,26 @@ static void save_auto(void) {
 	for (i = 0; i < MIN(USE_AUTO_EXTRAS, a_extras_cnt); i++) {
 
 		u8* fn = alloc_printf("%s/queue/.state/auto_extras/auto_%06u", out_dir, i);
-		s32 fd;
+    u8* fn_delta = alloc_printf("%s/queue/.state/auto_extras/auto_%06u", out_dir_delta, i);
+		s32 fd, fd_delta;
+
 
 		fd = open(fn, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 		if (fd < 0) PFATAL("Unable to create '%s'", fn);
 
+    fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+
 		ck_write(fd, a_extras[i].data, a_extras[i].len, fn);
+    ck_write(fd_delta, a_extras[i].data, a_extras[i].len, fn_delta);
 
 		close(fd);
 		ck_free(fn);
+
+    close(fd_delta);
+    ck_free(fn_delta);
 
 	}
 
@@ -3450,18 +3492,26 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
 	static double last_bcvg, last_stab, last_eps;
 
 	u8* fn = alloc_printf("%s/fuzzer_stats", out_dir);
-	s32 fd;
-	FILE* f;
+  u8* fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[CUR_PROG]);
+	s32 fd, fd_delta;
+	FILE *f, *f_delta;
 
 	fd = open(fn, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 	if (fd < 0) PFATAL("Unable to create '%s'", fn);
 
+  fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+
+  if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+
 	ck_free(fn);
+  ck_free(fn_delta);
 
 	f = fdopen(fd, "w");
+  f_delta = fdopen(fd_delta, "w");
 
 	if (!f) PFATAL("fdopen() failed");
+  if (!f_delta) PFATAL("fdopen() failed");
 
   /* Keep last values in case we're called from another context
      where exec/sec stats and such are not readily available. */
@@ -3519,8 +3569,52 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
 			persistent_mode || deferred_mode) ? "" : "default",
 		orig_cmdline);
              /* ignore errors */
+    fprintf(f_delta, "start_time        : %llu\n"
+    "last_update       : %llu\n"
+    "fuzzer_pid        : %u\n"
+    "cycles_done       : %llu\n"
+    "execs_done        : %llu\n"
+    "execs_per_sec     : %0.02f\n"
+    "paths_total       : %u\n"
+    "paths_favored     : %u\n"
+    "paths_found       : %u\n"
+    "paths_imported    : %u\n"
+    "max_depth         : %u\n"
+             "cur_path          : %u\n" /* Must match find_start_position() */
+    "pending_favs      : %u\n"
+    "pending_total     : %u\n"
+    "variable_paths    : %u\n"
+    "stability         : %0.02f%%\n"
+    "bitmap_cvg        : %0.02f%%\n"
+    "unique_crashes    : %llu\n"
+    "unique_hangs      : %llu\n"
+    "last_path         : %llu\n"
+    "last_crash        : %llu\n"
+    "last_hang         : %llu\n"
+    "execs_since_crash : %llu\n"
+    "exec_timeout      : %u\n"
+    "afl_banner        : %s\n"
+    "afl_version       : " VERSION "\n"
+    "target_mode       : %s%s%s%s%s%s%s\n"
+    "command_line      : %s\n",
+    start_time / 1000, get_cur_time() / 1000, getpid(),
+    queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
+    queued_paths, queued_favored, queued_discovered, queued_imported,
+    max_depth, current_entry, pending_favored, pending_not_fuzzed,
+    queued_variable, stability, bitmap_cvg, unique_crashes,
+    unique_hangs, last_path_time / 1000, last_crash_time / 1000,
+    last_hang_time / 1000, total_execs - last_crash_execs,
+    exec_tmout, use_banner,
+    qemu_mode ? "qemu " : "", dumb_mode ? " dumb " : "",
+    no_forkserver ? "no_forksrv " : "", crash_mode ? "crash " : "",
+    persistent_mode ? "persistent " : "", deferred_mode ? "deferred " : "",
+    (qemu_mode || dumb_mode || no_forkserver || crash_mode ||
+      persistent_mode || deferred_mode) ? "" : "default",
+    orig_cmdline);
+             /* ignore errors */
 
 	fclose(f);
+  fclose(f_delta);
 
 }
 
@@ -7383,8 +7477,9 @@ static void handle_stop_sig(int sig) {
 		if (forksrv_pid[i] >= 0) kill(forksrv_pid[i], SIGKILL);
 	}
 
-  for(int i = 0; i < numbr_of_progs_under_test; i++ )
-    free(out_dir_delta[i]);
+  // TODO -> do we need to free this?
+  //for(int i = 0; i < numbr_of_progs_under_test; i++ )
+    //free(out_dir_delta[i]);
   
 
 }
@@ -8726,6 +8821,11 @@ while (1) { //main fuzzing loop //FUZZ LOP
   alloc_report();
 
   OKF("We're done here. Have a nice day!\n");
+
+
+  // TODO -> do we need to free this?
+  for(int i = 0; i < numbr_of_progs_under_test; i++ )
+    free(out_dir_delta[i]);
 
   exit(0);
 
