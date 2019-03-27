@@ -3161,9 +3161,9 @@ static void write_crash_readme(void) {
 
 static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
-  u8  *fn = "";
+  u8  *fn = "", *fn_delta;
   u8  hnb;
-  s32 fd;
+  s32 fd, fd_delta;
   u8  keeping = 0, res;
 
   if (fault == crash_mode) {
@@ -3186,14 +3186,18 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
     fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths,
                       describe_op(hnb));
+    fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], queued_paths,
+                      describe_op(hnb));
 
 #else
 
     fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths);
+    fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], queued_paths);
 
 #endif /* ^!SIMPLE_FILES */
 
     add_to_queue(fn, len, 0);
+    //add_to_queue(fn_delta, len, 0); //(This adds to the specific queue) - TODO: either create a new queue or make the existing one with more complex info 
 
     if (hnb == 2 || has_new_blocks()) {
       queue_top->has_new_cov = 1;
@@ -3211,9 +3215,13 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
       FATAL("Unable to execute target application");
 
     fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
     if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
     ck_write(fd, mem, len, fn);
     close(fd);
+    ck_write(fd_delta, mem, len, fn_delta);
+    close(fd_delta);
 
     keeping = 1;
 
@@ -3270,10 +3278,14 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
       fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
                         unique_hangs, describe_op(0));
+      fn_delta = alloc_printf("%s/hangs/id:%06llu,%s", out_dir_delta[CUR_PROG],
+                        unique_hangs, describe_op(0));
 
 #else
 
       fn = alloc_printf("%s/hangs/id_%06llu", out_dir,
+                        unique_hangs);
+      fn_delta = alloc_printf("%s/hangs/id_%06llu", out_dir_delta[CUR_PROG],
                         unique_hangs);
 
 #endif /* ^!SIMPLE_FILES */
@@ -3314,10 +3326,14 @@ keep_as_crash:
 
       fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
                         unique_crashes, kill_signal, describe_op(0));
+      fn_delta = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir_delta[CUR_PROG],
+                        unique_crashes, kill_signal, describe_op(0));
 
 #else
 
       fn = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir, unique_crashes,
+                        kill_signal);
+      fn_delta = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir_delta[CUR_PROG], unique_crashes,
                         kill_signal);
 
 #endif /* ^!SIMPLE_FILES */
@@ -3344,6 +3360,14 @@ keep_as_crash:
   close(fd);
 
   ck_free(fn);
+
+  fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+  if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+  ck_write(fd_delta, mem, len, fn_delta);
+  close(fd_delta);
+
+  ck_free(fn_delta);
+
 
   return keeping;
 
