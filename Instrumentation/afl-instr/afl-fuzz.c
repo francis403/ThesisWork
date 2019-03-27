@@ -134,6 +134,7 @@ EXP_ST u8  skip_deterministic,        /* Skip deterministic stages?       */
            fast_cal;                  /* Try to calibrate faster?         */
 
 static s32 out_fd,                    /* Persistent fd for out_file       */
+           out_fd_delta[MAX_AMOUNT_OF_PROGS],
            dev_urandom_fd = -1,       /* Persistent fd for /dev/urandom   */
            dev_null_fd = -1,          /* Persistent fd for /dev/null      */
            fsrv_write_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
@@ -284,7 +285,7 @@ struct queue_entry {
   u8  cal_failed,                     /* Calibration failed?              */
       trim_done,                      /* Trimmed?                         */
       was_fuzzed[MAX_AMOUNT_OF_PROGS],/* Had any fuzzing done yet?        */ // TODO -> check if when we have multiple queue we need this
-	  been_fuzzed,					  /* Has it been fuzzed at all?		  */
+	    been_fuzzed,					  /* Has it been fuzzed at all?		  */
       passed_det,                     /* Deterministic stages passed?     */
       has_new_cov,                    /* Triggers new coverage?           */
       var_behavior,                   /* Variable behavior?               */
@@ -298,10 +299,10 @@ struct queue_entry {
       handicap,                       /* Number of queue cycles behind    */
       depth;                          /* Path depth                       */
 
-  int shared_blocks;			  	  /* Number of the shared blocks found*/
-  int uni_blcks;					  /* total blocks passed 			  */
+  int shared_blocks;			  	        /* Number of the shared blocks found*/
+  int uni_blcks;					            /* total blocks passed 			  */
 
-  u8 blocks_hit[MAP_SIZE];			  /* Saves all blocks found, during run and fuzz */
+  u8 blocks_hit[MAP_SIZE];			      /* Saves all blocks found, during run and fuzz */
 
   u8* trace_mini;                     /* Trace bytes, if kept             */
   u32 tc_ref;                         /* Trace bytes ref count            */
@@ -926,21 +927,29 @@ EXP_ST void destroy_queue(void) {
 
 EXP_ST void write_bitmap(void) {
 
-	u8* fname;
-	s32 fd;
+	u8* fname, *fname_delta;
+	s32 fd, fd_delta;
 
 	if (!bitmap_changed) return;
 	bitmap_changed = 0;
 
 	fname = alloc_printf("%s/fuzz_bitmap", out_dir);
+  fname_delta = alloc_printf("%s/fuzz_bitmap", out_dir_delta[CUR_PROG]);
+
 	fd = open(fname, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+  fd_delta = open(fname_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 	if (fd < 0) PFATAL("Unable to open '%s'", fname);
+  if (fd_delta < 0) PFATAL("Unable to open '%s'", fname_delta);
 
 	ck_write(fd, virgin_bits[CUR_PROG], MAP_SIZE, fname);
+  ck_write(fd_delta, virgin_bits[CUR_PROG], MAP_SIZE, fname_delta);
 
 	close(fd);
+  close(fd_delta);
+
 	ck_free(fname);
+  ck_free(fname_delta);
 
 }
 
@@ -2997,7 +3006,7 @@ abort_calibration:
 
 		while (q) {
 
-			u8  *nfn, *rsl = strrchr(q->fname, '/');
+			u8  *nfn, *nfn_delta, *rsl = strrchr(q->fname, '/');
 			u32 orig_id;
 
 			if (!rsl) rsl = q->fname; else rsl++;
@@ -3020,6 +3029,8 @@ abort_calibration:
 
 			resuming_fuzz = 1;
 			nfn = alloc_printf("%s/queue/%s", out_dir, rsl);
+
+      //nfn_delta = alloc_printf("%s/queue/%s", out_dir_delta[i], rsl);
 
       /* Since we're at it, let's also try to find parent and figure out the
          appropriate depth for this entry. */
@@ -3747,7 +3758,7 @@ return res;
 
 static void nuke_resume_dir(void) {
 
-	u8* fn;
+	u8* fn, fn_delta;
 
 	fn = alloc_printf("%s/_resume/.state/deterministic_done", out_dir);
 	if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
@@ -3773,6 +3784,33 @@ static void nuke_resume_dir(void) {
 	if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
 	ck_free(fn);
 
+
+  // delta
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+    fn_delta = alloc_printf("%s/_resume/.state/deterministic_done", out_dir_delta[i]);
+    if (delete_files(fn_delta, CASE_PREFIX)) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume/.state/auto_extras", out_dir_delta[i]);
+    if (delete_files(fn_delta, "auto_")) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume/.state/redundant_edges", out_dir_delta[i]);
+    if (delete_files(fn_delta, CASE_PREFIX)) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume/.state/variable_behavior", out_dir_delta[i]);
+    if (delete_files(fn_delta, CASE_PREFIX)) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume/.state", out_dir_delta[i]);
+    if (rmdir(fn_delta) && errno != ENOENT) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume", out_dir_delta[i]);
+    if (delete_files(fn_delta, CASE_PREFIX)) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+  }
 	return;
 
 	dir_cleanup_failed:
@@ -3784,11 +3822,12 @@ static void nuke_resume_dir(void) {
 
 /* Delete fuzzer output directory if we recognize it as ours, if the fuzzer
    is not currently running, and if the last run time isn't too great. */
-
+//TODO -> maybe we need to pass through all of them not just the CUR
 static void maybe_delete_out_dir(void) {
 
-	FILE* f;
+	FILE* f, *f_delta[numbr_of_progs_under_test];
 	u8 *fn = alloc_printf("%s/fuzzer_stats", out_dir);
+  //u8 *fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[CUR_PROG]);
 
   /* See if the output directory is locked. If yes, bail out. If not,
      create a lock that will persist for the lifetime of the process
@@ -3796,6 +3835,9 @@ static void maybe_delete_out_dir(void) {
 
 	out_dir_fd = open(out_dir, O_RDONLY);
 	if (out_dir_fd < 0) PFATAL("Unable to open '%s'", out_dir);
+
+  out_dirs_fd[CUR_PROG] = open(out_dir_delta[CUR_PROG], O_RDONLY);
+  if (out_dirs_fd[CUR_PROG] < 0) PFATAL("Unable to open '%s'", out_dir_delta[CUR_PROG]);
 
 #ifndef __sun
 
@@ -3810,6 +3852,21 @@ static void maybe_delete_out_dir(void) {
 		FATAL("Directory '%s' is in use", out_dir);
 
 	}
+
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+    if (flock(out_dirs_fd[i], LOCK_EX | LOCK_NB) && errno == EWOULDBLOCK) {
+
+      SAYF("\n" cLRD "[-] " cRST
+        "Looks like the job output directory is being actively used by another\n"
+        "    instance of afl-fuzz. You will need to choose a different %s\n"
+        "    or stop the other process first.\n",
+        sync_id ? "fuzzer ID" : "output location");
+
+      FATAL("Directory '%s' is in use", out_dir_delta[i]);
+
+    }
+  }
+
 
 #endif /* !__sun */
 
@@ -3846,6 +3903,43 @@ static void maybe_delete_out_dir(void) {
 	}
 
 	ck_free(fn);
+
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+    u8 *fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[i]);
+    f_delta[i] = fopen(fn_delta, "r");
+
+    if ( f_delta[i] ) {
+
+      u64 start_time, last_update;
+
+      if (fscanf(f_delta[i], "start_time     : %llu\n"
+        "last_update    : %llu\n", &start_time, &last_update) != 2)
+        FATAL("Malformed data in '%s'", fn_delta);
+
+      fclose( f_delta[i] );
+
+      /* Let's see how much work is at stake. */
+
+      if (!in_place_resume && last_update - start_time > OUTPUT_GRACE * 60) {
+
+        SAYF("\n" cLRD "[-] " cRST
+          "The job output directory already exists and contains the results of more\n"
+          "    than %u minutes worth of fuzzing. To avoid data loss, afl-fuzz will *NOT*\n"
+          "    automatically delete this data for you.\n\n"
+
+          "    If you wish to start a new session, remove or rename the directory manually,\n"
+          "    or specify a different output location for this job. To resume the old\n"
+          "    session, put '-' as the input directory in the command line ('-i -') and\n"
+          "    try again.\n", OUTPUT_GRACE);
+
+        FATAL("At-risk data found in '%s'", out_dir_delta[i]);
+
+      }
+
+    }
+
+    ck_free(fn_delta);
+  }
 
   /* The idea for in-place resume is pretty simple: we temporarily move the old
      queue/ to a new location that gets deleted once import to the new queue/
@@ -8120,6 +8214,20 @@ EXP_ST void setup_stdio_file(void) {
 
 	ck_free(fn);
 
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+    printf("\t-> in setup_stdio_file out_dir -> %s\n", out_dir_delta[i]);
+
+    fn = alloc_printf("%s/.cur_input", out_dir_delta[i]);
+
+    unlink(fn); /* Ignore errors */
+
+    out_fd_delta[i] = open(fn, O_RDWR | O_CREAT | O_EXCL, 0600);
+
+    if (out_fd_delta[i] < 0) PFATAL("Unable to create '%s'", fn);
+
+    ck_free(fn);
+  }
+
 }
 
 
@@ -8529,6 +8637,22 @@ static void save_cmdline(u32 argc, char** argv) {
 
 #ifndef AFL_LIB
 
+/*
+  Called to check if the prog is changed and if it is
+  does what needs to be done
+  TODO -> need to pass through all elements of the previous queue that have yet to pass through this program
+    if its condired interesting we save them to the specific queue (unless it passes through the targets we marked them has arleady fuzzed)
+    otherwise do nothing
+    mark it has passed seen in the program
+*/
+
+void prog_change(){
+
+  //change the program we are fuzzing
+  CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test;
+
+}
+
 /* Main entry point */
 
 int main(int argc, char** argv) {
@@ -8715,9 +8839,6 @@ int main(int argc, char** argv) {
 
 u64 init_time = get_cur_time(), end_t;
 
-
-
-
 while (1) { //main fuzzing loop //FUZZ LOP
 
     u8 skipped_fuzz;
@@ -8730,7 +8851,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
       //printf("Gonna switch programs\n");
       init_time = get_cur_time();
       
-      CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test; 
+      prog_change();
       //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
     }
