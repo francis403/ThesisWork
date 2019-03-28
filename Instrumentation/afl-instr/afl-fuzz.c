@@ -317,7 +317,7 @@ struct queue_entry {
 //TODO -> probably need at least two queues
 
 static struct queue_entry *queue[MAX_AMOUNT_OF_PROGS],     /* Fuzzing queue (linked list)      */
-                          *queue_cur[0], /* Current offset within the queue  */
+                          *queue_cur[MAX_AMOUNT_OF_PROGS], /* Current offset within the queue  */
                           *queue_top[MAX_AMOUNT_OF_PROGS], /* Top of the list                  */
                           *q_prev100[MAX_AMOUNT_OF_PROGS]; /* Previous 100 marker              */
 
@@ -760,8 +760,9 @@ static u8* DTD(u64 cur_ms, u64 event_ms) {
 /* Mark deterministic checks as done for a particular queue entry. We use the
    .state file to avoid repeating deterministic fuzzing when resuming aborted
    scans. */
-
+// TODO -> tenho que fazer um caso especial para os origins
 static void mark_as_det_done(struct queue_entry* q) {
+
 
 	u8* fn = strrchr(q->fname, '/');
   u8* fn_delta = strrchr(q->fname, '/');
@@ -885,7 +886,7 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 		queue_top[0]->next = q;
 		queue_top[0] = q;
 
-	} else q_prev100[0] = queue[0] = queue_top[0] = q;
+	} else q_prev100[CUR_PROG] = queue[0] = queue_top[0] = q;
 
 	queued_paths++;
 	pending_not_fuzzed++;
@@ -894,8 +895,8 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 
 	if (!(queued_paths % 100)) {
 
-		q_prev100[0]->next_100 = q;
-		q_prev100[0] = q;
+		q_prev100[CUR_PROG]->next_100 = q;
+		q_prev100[CUR_PROG] = q;
 
 	}
 
@@ -1623,7 +1624,7 @@ static void read_testcases(void) {
 		if (!access(dfn, F_OK)) passed_det = 1;
 		ck_free(dfn);
 
-		add_to_queue(fn, st.st_size, passed_det);
+		add_to_queue(fn, st.st_size, passed_det); // add to all file
 
 	}
 
@@ -2994,22 +2995,51 @@ abort_calibration:
 
 	}
 
+  /* Helper function: copy file. */
+
+  static void copy_file(u8* old_path, u8* new_path) {
+
+    s32 i;
+    s32 sfd, dfd;
+    u8* tmp;
+
+    if (!i) return;
+
+    sfd = open(old_path, O_RDONLY);
+    if (sfd < 0) PFATAL("Unable to open '%s'", old_path);
+
+    dfd = open(new_path, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (dfd < 0) PFATAL("Unable to create '%s'", new_path);
+
+    tmp = ck_alloc(64 * 1024);
+
+    while ((i = read(sfd, tmp, 64 * 1024)) > 0) 
+      ck_write(dfd, tmp, i, new_path);
+
+    if (i < 0) PFATAL("read() failed");
+
+    ck_free(tmp);
+    close(sfd);
+    close(dfd);
+
+  }
+
 
 	static void nuke_resume_dir(void);
 
 /* Create hard links for input test cases in the output directory, choosing
    good names and pivoting accordingly. */
-
+  // TODO -> each queue needs to have the original inputs
 	static void pivot_inputs(void) {
 
-		struct queue_entry* q = queue[0];
+		struct queue_entry* q = queue[0]; // apanhamos os inputs originais
 		u32 id = 0;
 
 		ACTF("Creating hard links for all input files...");
-
+    // passamos por todos e metemos no file da queue (os inputs originais já estão na queue)
 		while (q) {
 
-			u8  *nfn, *nfn_delta, *rsl = strrchr(q->fname, '/');
+			u8  *nfn, *nfn_delta[numbr_of_progs_under_test], *rsl = strrchr(q->fname, '/');
 			u32 orig_id;
 
 			if (!rsl) rsl = q->fname; else rsl++;
@@ -3032,6 +3062,9 @@ abort_calibration:
 
 			resuming_fuzz = 1;
 			nfn = alloc_printf("%s/queue/%s", out_dir, rsl);
+
+      for(int i = 0; i < numbr_of_progs_under_test; i++)
+        nfn_delta[i] = alloc_printf("%s/queue/%s", out_dir_delta[i], rsl);
 
       //nfn_delta = alloc_printf("%s/queue/%s", out_dir_delta[i], rsl);
 
@@ -3062,9 +3095,15 @@ abort_calibration:
 			if (use_name) use_name += 6; else use_name = rsl;
 			nfn = alloc_printf("%s/queue/id:%06u,orig:%s", out_dir, id, use_name);
 
+      for(int i = 0; i < numbr_of_progs_under_test; i++)
+        nfn_delta[i] = alloc_printf("%s/queue/id:%06u,orig:%s", out_dir_delta[i], id, use_name);
+      
+
 #else
 
 			nfn = alloc_printf("%s/queue/id_%06u", out_dir, id);
+      for(int i = 0; i < numbr_of_progs_under_test; i++)
+        nfn_delta[i] = alloc_printf("%s/queue/id_%06u", out_dir_delta[i], id);
 
 #endif /* ^!SIMPLE_FILES */
 
@@ -3072,7 +3111,13 @@ abort_calibration:
 
     /* Pivot to the new queue entry. */
 
-		link_or_copy(q->fname, nfn);
+		link_or_copy(q->fname, nfn); // talvez tenha que fazer isto para cada um das queues, mas só a parte do copy
+
+    for(int i = 0; i < numbr_of_progs_under_test; i++){
+      //copy_file(q->fname, nfn_delta[i]);
+      link_or_copy(q->fname, nfn_delta[i]); // works
+    }
+
 		ck_free(q->fname);
 		q->fname = nfn;
 
@@ -3083,11 +3128,16 @@ abort_calibration:
 		q = q->next;
 		id++;
 
-	}
+	} // end of while
+
+  //copy_orig_testfiles_to_queues();
 
 	if (in_place_resume) nuke_resume_dir();
 
 }
+
+
+
 
 #ifndef SIMPLE_FILES
 
@@ -8793,11 +8843,11 @@ int main(int argc, char** argv) {
 
 
   setup_dirs_fds();
-  setup_all_dirs_fds(); // -> TODO-> need to add queue per program
+  setup_all_dirs_fds();
   read_testcases();
   load_auto();
 
-  pivot_inputs(); //not needed, but might as well have it
+  pivot_inputs();
 
   //if (extras_dir) load_extras(extras_dir);
 
