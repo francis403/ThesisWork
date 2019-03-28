@@ -871,7 +871,7 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
 /* Append new test case to the queue. */
 
 static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
-
+	//printf("add to queue\n");
 	struct queue_entry* q = ck_alloc(sizeof(struct queue_entry));
 
 	q->fname        = fname;
@@ -2562,7 +2562,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
       if( !blocks_from_run[id] ){
       	blocks_from_run[id] = 1; // mark it has seen
-      	if(queue_cur[0] != NULL )	queue_cur[0]->blocks_hit[id] = 1; // mark the block as hit
+      	if(queue_cur[CUR_PROG] != NULL )	queue_cur[CUR_PROG]->blocks_hit[id] = 1; // mark the block as hit
 
       	unique_blocks ++;
       }
@@ -4873,12 +4873,12 @@ static void show_stats(void) {
      put them in a temporary buffer first. */
 
   sprintf(tmp, "%s%s (%0.02f%%)", DI(current_entry),
-          queue_cur[0]->favored ? "" : "*",
+          queue_cur[CUR_PROG]->favored ? "" : "*",
           ((double)current_entry * 100) / queued_paths);
 
   SAYF(bV bSTOP "  now processing : " cRST "%-17s " bSTG bV bSTOP, tmp);
 
-  sprintf(tmp, "%0.02f%% / %0.02f%%", ((double)queue_cur[0]->bitmap_size) * 
+  sprintf(tmp, "%0.02f%% / %0.02f%%", ((double)queue_cur[CUR_PROG]->bitmap_size) * 
           100 / MAP_SIZE, t_byte_ratio);
 
   SAYF("    map density : %s%-21s " bSTG bV "\n", t_byte_ratio > 70 ? cLRD : 
@@ -5413,12 +5413,11 @@ EXP_ST u8 common_fuzz_stuff(char** argv, u8* out_buf, u32 len) {
   }
 
   /* This handles FAULT_ERROR for us: */
-
   queued_discovered += save_if_interesting(argv, out_buf, len, fault);
-
+  //printf("after save_if_interesting in common_stuff\n");
   if (!(stage_cur % stats_update_freq) || stage_cur + 1 == stage_max)
     show_stats();
-
+  //printf("after show stats\n");
   return 0;
 
 }
@@ -5520,12 +5519,12 @@ static u32 calculate_score(struct queue_entry* q) {
   // added by fc45701
   /* Adjust score based on number of known blocks found when compared with total number of blocks*/
   // TODO -> tenho que melhorar estes valores
-  double score_mult = (double)queue_cur[0]->shared_blocks/(double)queue_cur[0]->uni_blcks; // TODO -> meter isto na struct queue maybe?
+  double score_mult = (double)queue_cur[CUR_PROG]->shared_blocks/(double)queue_cur[CUR_PROG]->uni_blcks; // TODO -> meter isto na struct queue maybe?
   score_mult *= 100;
 
-  //printf("fname = %s\n", queue_cur[0]->fname);
-  //printf("total blocks = %d\n", queue_cur[0]->uni_blcks);
-  //printf("shared blocks = %d\n", queue_cur[0]->shared_blocks);
+  //printf("fname = %s\n", queue_cur[CUR_PROG]->fname);
+  //printf("total blocks = %d\n", queue_cur[CUR_PROG]->uni_blcks);
+  //printf("shared blocks = %d\n", queue_cur[CUR_PROG]->shared_blocks);
   //printf("score_mult = %f\n", score_mult);
 
   if( score_mult <= 10.0 ){
@@ -5543,9 +5542,9 @@ static u32 calculate_score(struct queue_entry* q) {
   }
   else {
   	perf_score *= 0.25;
-  	//double score_mult = (double)queue_cur[0]->shared_blocks/(double)queue_cur[0]->uni_blcks;
+  	//double score_mult = (double)queue_cur[CUR_PROG]->shared_blocks/(double)queue_cur[CUR_PROG]->uni_blcks;
   }
-  //perf_score *= (double)queue_cur[0]->uni_blcks/(double)queue_cur[0]->shared_blocks; 
+  //perf_score *= (double)queue_cur[CUR_PROG]->uni_blcks/(double)queue_cur[CUR_PROG]->shared_blocks; 
 
 
   /* Final adjustment based on input depth, under the assumption that fuzzing
@@ -5770,8 +5769,10 @@ static u8 could_be_interest(u32 old_val, u32 new_val, u8 blen, u8 check_le) {
    skipped or bailed out. */
 static u8 fuzz_one(char** argv) {
 
+  //printf("in fuzz one\n");
+
   s32 len, fd, temp_len, i, j;
-  u8  *in_buf, *out_buf, *orig_in, *ex_tmp, *eff_map = 0;
+  u8  *in_buf, *out_buf, *out_buf_delta, *orig_in, *ex_tmp, *eff_map = 0;
   u64 havoc_queued,  orig_hit_cnt, new_hit_cnt;
   u32 splice_cycle = 0, perf_score = 100, orig_perf, prev_cksum, eff_cnt = 1;
 
@@ -5785,7 +5786,7 @@ static u8 fuzz_one(char** argv) {
   /* In IGNORE_FINDS mode, skip any entries that weren't in the
      initial data set. */
 
-  if (queue_cur[0]->depth > 1) return 1;
+  if (queue_cur[CUR_PROG]->depth > 1) return 1;
 
 #else
 
@@ -5804,7 +5805,7 @@ static u8 fuzz_one(char** argv) {
   	// verificar que funcionar
   	// se não foi fuzzed no programa a ser testado e não temos blocos nenhuns em comum não vale a pena
   	
-  	//if (( !queue_cur[0]->was_fuzzed[CUR_PROG] && queue_cur[0]->been_fuzzed && !num_blocks_shared(queue_cur[0],CUR_PROG) )){ 
+  	//if (( !queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] && queue_cur[CUR_PROG]->been_fuzzed && !num_blocks_shared(queue_cur[CUR_PROG],CUR_PROG) )){ 
   	//	printf("\tFOUND ONE!\n");
   	//	return 1;
   	//}
@@ -5815,16 +5816,16 @@ static u8 fuzz_one(char** argv) {
        possibly skip to them at the expense of already-fuzzed or non-favored
        cases. */
 
-    if ((queue_cur[0]->was_fuzzed[CUR_PROG] || !queue_cur[0]->favored) &&
+    if ((queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || !queue_cur[CUR_PROG]->favored) &&
         UR(100) < SKIP_TO_NEW_PROB) return 1;
 
-  } else if (!dumb_mode && !queue_cur[0]->favored && queued_paths > 10) {
+  } else if (!dumb_mode && !queue_cur[CUR_PROG]->favored && queued_paths > 10) {
 
     /* Otherwise, still possibly skip non-favored cases, albeit less often.
        The odds of skipping stuff are higher for already-fuzzed inputs and
        lower for never-fuzzed entries. */
 
-    if (queue_cycle > 1 && !queue_cur[0]->was_fuzzed[CUR_PROG]) {
+    if (queue_cycle > 1 && !queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG]) {
 
       if (UR(100) < SKIP_NFAV_NEW_PROB) return 1;
 
@@ -5846,15 +5847,15 @@ static u8 fuzz_one(char** argv) {
 
   /* Map the test case into memory. */
 
-  fd = open(queue_cur[0]->fname, O_RDONLY);
+  fd = open(queue_cur[CUR_PROG]->fname, O_RDONLY);
 
-  if (fd < 0) PFATAL("Unable to open '%s'", queue_cur[0]->fname);
+  if (fd < 0) PFATAL("Unable to open '%s'", queue_cur[CUR_PROG]->fname);
 
-  len = queue_cur[0]->len;
+  len = queue_cur[CUR_PROG]->len;
 
   orig_in = in_buf = mmap(0, len, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
 
-  if (orig_in == MAP_FAILED) PFATAL("Unable to mmap '%s'", queue_cur[0]->fname);
+  if (orig_in == MAP_FAILED) PFATAL("Unable to mmap '%s'", queue_cur[CUR_PROG]->fname);
 
   close(fd);
 
@@ -5866,19 +5867,19 @@ static u8 fuzz_one(char** argv) {
 
   subseq_tmouts = 0;
 
-  cur_depth = queue_cur[0]->depth;
+  cur_depth = queue_cur[CUR_PROG]->depth;
 
   /*******************************************
    * CALIBRATION (only if failed earlier on) *
    *******************************************/
 
-  if (queue_cur[0]->cal_failed) {
+  if (queue_cur[CUR_PROG]->cal_failed) {
 
     u8 res = FAULT_TMOUT;
 
-    if (queue_cur[0]->cal_failed < CAL_CHANCES) {
+    if (queue_cur[CUR_PROG]->cal_failed < CAL_CHANCES) {
 
-      res = calibrate_case(argv, queue_cur[0], in_buf, queue_cycle - 1, 0);
+      res = calibrate_case(argv, queue_cur[CUR_PROG], in_buf, queue_cycle - 1, 0);
 
       if (res == FAULT_ERROR)
         FATAL("Unable to execute target application");
@@ -5896,9 +5897,9 @@ static u8 fuzz_one(char** argv) {
    * TRIMMING *
    ************/
 
-  if (!dumb_mode && !queue_cur[0]->trim_done) {
+  if (!dumb_mode && !queue_cur[CUR_PROG]->trim_done) {
 
-    u8 res = trim_case(argv, queue_cur[0], in_buf);
+    u8 res = trim_case(argv, queue_cur[CUR_PROG], in_buf);
 
     if (res == FAULT_ERROR)
       FATAL("Unable to execute target application");
@@ -5910,9 +5911,9 @@ static u8 fuzz_one(char** argv) {
 
     /* Don't retry trimming, even if it failed. */
 
-    queue_cur[0]->trim_done = 1;
+    queue_cur[CUR_PROG]->trim_done = 1;
 
-    if (len != queue_cur[0]->len) len = queue_cur[0]->len;
+    if (len != queue_cur[CUR_PROG]->len) len = queue_cur[CUR_PROG]->len;
 
   }
 
@@ -5922,19 +5923,19 @@ static u8 fuzz_one(char** argv) {
    * PERFORMANCE SCORE *
    *********************/
 
-  orig_perf = perf_score = calculate_score(queue_cur[0]);
+  orig_perf = perf_score = calculate_score(queue_cur[CUR_PROG]);
 
   /* Skip right away if -d is given, if we have done deterministic fuzzing on
      this entry ourselves (was_fuzzed), or if it has gone through deterministic
      testing in earlier, resumed runs (passed_det). */
 
-  if (skip_deterministic || queue_cur[0]->was_fuzzed[CUR_PROG] || queue_cur[0]->passed_det)
+  if (skip_deterministic || queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || queue_cur[CUR_PROG]->passed_det)
     goto havoc_stage;
 
   /* Skip deterministic fuzzing if exec path checksum puts this out of scope
      for this master instance. */
 
-  if (master_max && (queue_cur[0]->exec_cksum % master_max) != master_id - 1)
+  if (master_max && (queue_cur[CUR_PROG]->exec_cksum % master_max) != master_id - 1)
     goto havoc_stage;
 
   doing_det = 1;
@@ -5961,7 +5962,7 @@ static u8 fuzz_one(char** argv) {
 
   orig_hit_cnt = queued_paths + unique_crashes;
 
-  prev_cksum = queue_cur[0]->exec_cksum;
+  prev_cksum = queue_cur[CUR_PROG]->exec_cksum;
 
   for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
@@ -5970,6 +5971,7 @@ static u8 fuzz_one(char** argv) {
     FLIP_BIT(out_buf, stage_cur);
 
     if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
+
 
     FLIP_BIT(out_buf, stage_cur);
 
@@ -6031,7 +6033,7 @@ static u8 fuzz_one(char** argv) {
       /* Continue collecting string, but only if the bit flip actually made
          any difference - we don't want no-op tokens. */
 
-      if (cksum != queue_cur[0]->exec_cksum) {
+      if (cksum != queue_cur[CUR_PROG]->exec_cksum) {
 
         if (a_len < MAX_AUTO_EXTRA) a_collect[a_len] = out_buf[stage_cur >> 3];        
         a_len++;
@@ -6160,9 +6162,9 @@ static u8 fuzz_one(char** argv) {
       if (!dumb_mode && len >= EFF_MIN_LEN)
         cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
       else
-        cksum = ~queue_cur[0]->exec_cksum;
+        cksum = ~queue_cur[CUR_PROG]->exec_cksum;
 
-      if (cksum != queue_cur[0]->exec_cksum) {
+      if (cksum != queue_cur[CUR_PROG]->exec_cksum) {
         eff_map[EFF_APOS(stage_cur)] = 1;
         eff_cnt++;
       }
@@ -6894,7 +6896,7 @@ skip_extras:
      we're properly done with deterministic steps and can mark it as such
      in the .state/ directory. */
 
-  if (!queue_cur[0]->passed_det) mark_as_det_done(queue_cur[0]);
+  if (!queue_cur[CUR_PROG]->passed_det) mark_as_det_done(queue_cur[CUR_PROG]);
 
   /****************
    * RANDOM HAVOC *
@@ -7368,7 +7370,7 @@ havoc_stage:
 retry_splicing:
 
   if (use_splicing && splice_cycle++ < SPLICE_CYCLES &&
-      queued_paths > 1 && queue_cur[0]->len > 1) {
+      queued_paths > 1 && queue_cur[CUR_PROG]->len > 1) {
 
     struct queue_entry* target;
     u32 tid, split_at;
@@ -7381,7 +7383,7 @@ retry_splicing:
     if (in_buf != orig_in) {
       ck_free(in_buf);
       in_buf = orig_in;
-      len = queue_cur[0]->len;
+      len = queue_cur[CUR_PROG]->len;
     }
 
     /* Pick a random queue entry and seek to it. Don't splice with yourself. */
@@ -7396,7 +7398,7 @@ retry_splicing:
 
     /* Make sure that the target has a reasonable length. */
 
-    while (target && (target->len < 2 || target == queue_cur[0])) {
+    while (target && (target->len < 2 || target == queue_cur[CUR_PROG])) {
       target = target->next;
       splicing_with++;
     }
@@ -7455,14 +7457,14 @@ abandon_entry:
   /* Update pending_not_fuzzed count if we made it through the calibration
      cycle and have not seen this entry before. */
 
-  if (!stop_soon && !queue_cur[0]->cal_failed && !queue_cur[0]->was_fuzzed[CUR_PROG]) {
-    queue_cur[0]->was_fuzzed[CUR_PROG] = 1;
-    queue_cur[0]->been_fuzzed = 1;
+  if (!stop_soon && !queue_cur[CUR_PROG]->cal_failed && !queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG]) {
+    queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] = 1;
+    queue_cur[CUR_PROG]->been_fuzzed = 1;
     pending_not_fuzzed--;
-    if (queue_cur[0]->favored) pending_favored--;
+    if (queue_cur[CUR_PROG]->favored) pending_favored--;
   }
 
-  munmap(orig_in, queue_cur[0]->len);
+  munmap(orig_in, queue_cur[CUR_PROG]->len);
 
   if (in_buf != orig_in) ck_free(in_buf);
   ck_free(out_buf);
@@ -8911,18 +8913,18 @@ while (1) { //main fuzzing loop //FUZZ LOP
       prog_start_time = get_cur_time();
     }
 
-    if (!queue_cur[0]) {
+    if (!queue_cur[CUR_PROG]) {
  
       queue_cycle++;
       current_entry     = 0;
       cur_skipped_paths = 0;
-      queue_cur[0]         = queue[0];
+      queue_cur[CUR_PROG]         = queue[0];
     
 
       while (seek_to) {
         current_entry++;
         seek_to--;
-        queue_cur[0] = queue_cur[0]->next;
+        queue_cur[CUR_PROG] = queue_cur[CUR_PROG]->next;
       }
 
       show_stats();
@@ -8960,14 +8962,14 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
     if (stop_soon) break;
 
-    queue_cur[0] = queue_cur[0]->next;
+    queue_cur[CUR_PROG] = queue_cur[CUR_PROG]->next;
     current_entry++;
     
 	
   } //end of the main fuzzing loop
 
 
- if (queue_cur[0]) show_stats();
+ if (queue_cur[CUR_PROG]) show_stats();
 
 
   write_bitmap();
