@@ -79,6 +79,9 @@
 #  define EXP_ST static
 #endif /* ^AFL_LIB */
 
+//remove before release
+short test_bool = 0;
+
 
 /* Lots of globals, but mostly for the status UI and other things where it
    really makes no sense to haul them around as function parameters. */
@@ -832,7 +835,7 @@ static void mark_as_variable(struct queue_entry* q) {
 
 static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
-  u8* fn, fn_delta;
+  u8* fn, *fn_delta;
   s32 fd, fd_delta;
 
   if (state == q->fs_redundant) return;
@@ -842,11 +845,13 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
   fn = strrchr(q->fname, '/');
   fn_delta = strrchr(q->fname, '/');
 
+  printf("1\n");
+
   fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
   fn_delta = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
   if (state) {
-
+    printf("2\n");
     fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
     if (fd < 0) PFATAL("Unable to create '%s'", fn);
     close(fd);
@@ -857,7 +862,7 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
 
   } else {
-
+    printf("3\n");
     if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
     if (unlink(fn_delta)) PFATAL("Unable to remove '%s'", fn_delta);
 
@@ -868,7 +873,7 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
 }
 
-/* Append new test case to the queue. */
+/* Append new test case to the current program queue. */
 
 static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 	//printf("add to queue\n");
@@ -881,12 +886,14 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 
 	if (q->depth > max_depth) max_depth = q->depth;
 
+
+  // explodes when inside here
 	if (queue_top[0]) {
 
 		queue_top[0]->next = q;
-		queue_top[0] = q;
+		queue_top[0] = q; 
 
-	} else q_prev100[CUR_PROG] = queue[0] = queue_top[0] = q;
+	} else q_prev100[CUR_PROG] = queue[CUR_PROG] = queue_top[0] = q;
 
 	queued_paths++;
 	pending_not_fuzzed++;
@@ -904,12 +911,51 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 
 }
 
+/* Append new test case to all program queues. */
+
+static void add_to_queues(u8* fname, u32 len, u8 passed_det) {
+  //printf("add to queue\n");
+  struct queue_entry* q = ck_alloc(sizeof(struct queue_entry));
+
+  printf("\tfname = %s\n", fname);
+
+  q->fname        = fname;
+  q->len          = len;
+  q->depth        = cur_depth + 1;
+  q->passed_det   = passed_det;
+
+  if (q->depth > max_depth) max_depth = q->depth;
+
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+
+    if (queue_top[i]) {
+
+      queue_top[i]->next = q;
+      queue_top[i] = q;
+
+    } else q_prev100[i] = queue[i] = queue_top[i] = q;
+
+    queued_paths++;
+    pending_not_fuzzed++;
+
+    cycles_wo_finds = 0;
+
+    if (!(queued_paths % 100)) {
+
+      q_prev100[i]->next_100 = q;
+      q_prev100[i] = q;
+
+    }
+  }
+  last_path_time = get_cur_time();
+
+}
 
 /* Destroy the entire queue. */
 
 EXP_ST void destroy_queue(void) {
 
-	struct queue_entry *q = queue[0], *n;
+	struct queue_entry *q = queue[CUR_PROG], *n;
 
 	while (q) {
 
@@ -1432,12 +1478,13 @@ static void cull_queue(void) {
   queued_favored  = 0;
   pending_favored = 0;
 
-  q = queue[0];
+  q = queue[CUR_PROG];
 
   while (q) {
     q->favored = 0;
     q = q->next;
   }
+
 
   /* Let's see if anything in the bitmap isn't captured in temp_v.
      If yes, and if it has a top_rated[] contender, let's use it. */
@@ -1460,7 +1507,7 @@ static void cull_queue(void) {
 
     } // end of if and for
 
-  q = queue[0];
+  q = queue[CUR_PROG];
 
   while (q) {
     mark_as_redundant(q, !q->favored);
@@ -1587,7 +1634,7 @@ static void read_testcases(void) {
 		shuffle_ptrs((void**)nl, nl_cnt);
 
 	}
-
+  
 	for (i = 0; i < nl_cnt; i++) {
 
 		struct stat st;
@@ -1624,7 +1671,7 @@ static void read_testcases(void) {
 		if (!access(dfn, F_OK)) passed_det = 1;
 		ck_free(dfn);
 
-		add_to_queue(fn, st.st_size, passed_det); // add to all file
+		add_to_queues(fn, st.st_size, 0);
 
 	}
 
@@ -2028,7 +2075,7 @@ static void save_auto(void) {
 	for (i = 0; i < MIN(USE_AUTO_EXTRAS, a_extras_cnt); i++) {
 
 		u8* fn = alloc_printf("%s/queue/.state/auto_extras/auto_%06u", out_dir, i);
-    u8* fn_delta = alloc_printf("%s/queue/.state/auto_extras/auto_%06u", out_dir_delta, i);
+    u8* fn_delta = alloc_printf("%s/queue/.state/auto_extras/auto_%06u", out_dir_delta[CUR_PROG], i);
 		s32 fd, fd_delta;
 
 
@@ -2788,6 +2835,8 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
   //printf("in calibrate case\n");
 
+  if(!q) FATAL("Queue entry is null!");
+
   static u8 first_trace[MAP_SIZE];
 
   u8  fault = 0, new_bits = 0, var_detected = 0,
@@ -2905,7 +2954,6 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   /*Added by fc45701*/
   q->shared_blocks = shared_blocks_in_runs; 
   q->uni_blcks = unique_blocks;
-  
 
   total_bitmap_size += q->bitmap_size;
   total_bitmap_entries++;
@@ -3032,7 +3080,7 @@ abort_calibration:
   // TODO -> each queue needs to have the original inputs
 	static void pivot_inputs(void) {
 
-		struct queue_entry* q = queue[0]; // apanhamos os inputs originais
+		struct queue_entry* q = queue[CUR_PROG]; // apanhamos os inputs originais
 		u32 id = 0;
 
 		ACTF("Creating hard links for all input files...");
@@ -3075,7 +3123,7 @@ abort_calibration:
 
 			if (src_str && sscanf(src_str + 1, "%06u", &src_id) == 1) {
 
-				struct queue_entry* s = queue[0];
+				struct queue_entry* s = queue[CUR_PROG];
 				while (src_id-- && s) s = s->next;
 				if (s) q->depth = s->depth + 1;
 
@@ -3306,16 +3354,16 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     //add_to_queue(fn_delta, len, 0); //(This adds to the specific queue) - TODO: either create a new queue or make the existing one with more complex info 
 
     if (hnb == 2 || has_new_blocks()) {
-      queue_top[0]->has_new_cov = 1;
+      queue_top[CUR_PROG]->has_new_cov = 1;
       queued_with_cov++;
     }
 
-    queue_top[0]->exec_cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
+    queue_top[CUR_PROG]->exec_cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
 
     /* Try to calibrate inline; this also calls update_bitmap_score() when
        successful. */
 
-    res = calibrate_case(argv, queue_top[0], mem, queue_cycle - 1, 0);
+    res = calibrate_case(argv, queue_top[CUR_PROG], mem, queue_cycle - 1, 0); // the error appears to be here
 
     if (res == FAULT_ERROR)
       FATAL("Unable to execute target application");
@@ -3336,7 +3384,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
   switch (fault) {
 
     case FAULT_TMOUT:
-
+        printf("fault tmout\n");
       /* Timeouts are not very interesting, but we're still obliged to keep
          a handful of samples. We use the presence of new bits in the
          hang-specific bitmap as a signal of uniqueness. In "dumb" mode, we
@@ -3403,7 +3451,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
       break;
 
     case FAULT_CRASH:
-
+        printf("fault crash\n");
 keep_as_crash:
 
       /* This is handled in a manner roughly similar to timeouts,
@@ -3457,6 +3505,8 @@ keep_as_crash:
 
   }
 
+  printf("after switch\n");
+
   /* If we're here, we apparently want to save the crash or hang
      test case, too. */
 
@@ -3474,6 +3524,7 @@ keep_as_crash:
 
   ck_free(fn_delta);
 
+  printf("before ending\n");
 
   return keeping;
 
@@ -4427,7 +4478,7 @@ static void perform_dry_run(char** argv) {
 
   printf("In perform_dry_run\n");
 
-  struct queue_entry* q = queue[0];
+  struct queue_entry* q = queue[CUR_PROG];
   u32 cal_failures = 0;
   u8* skip_crashes = getenv("AFL_SKIP_CRASHES");
 
@@ -4467,7 +4518,7 @@ static void perform_dry_run(char** argv) {
 
       case FAULT_NONE:
 
-        if (q == queue[0]) check_map_coverage();
+        if (q == queue[CUR_PROG]) check_map_coverage();
 
         if (crash_mode) FATAL("Test case '%s' does *NOT* crash", fn);
 
@@ -5120,7 +5171,7 @@ static void show_stats(void) {
 
 static void show_init_stats(void) {
 
-	struct queue_entry* q = queue[0];
+	struct queue_entry* q = queue[CUR_PROG];
 	u32 min_bits = 0, max_bits = 0;
 	u64 min_us = 0, max_us = 0;
 	u64 avg_us = 0;
@@ -5771,6 +5822,8 @@ static u8 fuzz_one(char** argv) {
 
   //printf("in fuzz one\n");
 
+  if(test_bool) printf("init fuzz_one\n");
+
   s32 len, fd, temp_len, i, j;
   u8  *in_buf, *out_buf, *out_buf_delta, *orig_in, *ex_tmp, *eff_map = 0;
   u64 havoc_queued,  orig_hit_cnt, new_hit_cnt;
@@ -5893,6 +5946,8 @@ static u8 fuzz_one(char** argv) {
 
   }
 
+  if(test_bool) printf("before trimming\n");
+
   /************
    * TRIMMING *
    ************/
@@ -5919,18 +5974,31 @@ static u8 fuzz_one(char** argv) {
 
   memcpy(out_buf, in_buf, len);
 
+  if(test_bool) printf("before perfomance score\n");
+
   /*********************
    * PERFORMANCE SCORE *
    *********************/
 
   orig_perf = perf_score = calculate_score(queue_cur[CUR_PROG]);
 
+  if(test_bool) printf("after calculate score\n");
+
   /* Skip right away if -d is given, if we have done deterministic fuzzing on
      this entry ourselves (was_fuzzed), or if it has gone through deterministic
      testing in earlier, resumed runs (passed_det). */
 
+   if(test_bool){
+    printf("queue_cur = %s\n", queue_cur[CUR_PROG]->fname);
+    printf("has been fuzzed by prog: %d\n", queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG]);
+    printf("passed deterministic: %d\n", queue_cur[CUR_PROG]->passed_det);
+   }
+
   if (skip_deterministic || queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || queue_cur[CUR_PROG]->passed_det)
     goto havoc_stage;
+
+  if(test_bool) printf("after first if\n");
+
 
   /* Skip deterministic fuzzing if exec path checksum puts this out of scope
      for this master instance. */
@@ -5940,7 +6008,11 @@ static u8 fuzz_one(char** argv) {
 
   doing_det = 1;
 
+   if(test_bool) printf("after second if\n");
+
   // Deterministic
+
+  if(test_bool) printf("before flip bit\n");
 
   /*********************************************
    * SIMPLE BITFLIP (+dictionary construction) *
@@ -6131,6 +6203,8 @@ static u8 fuzz_one(char** argv) {
     eff_cnt++;
   }
 
+  if(test_bool) printf("before walking byte\n");
+
   /* Walking byte. */
 
   stage_name  = "bitflip 8/8";
@@ -6276,6 +6350,7 @@ skip_bitflip:
 
   if (no_arith) goto skip_arith;
 
+  if(test_bool) printf("before arithm\n");
   /**********************
    * ARITHMETIC INC/DEC *
    **********************/
@@ -6531,6 +6606,8 @@ skip_bitflip:
   stage_cycles[STAGE_ARITH32] += stage_max;
 
 skip_arith:
+
+  if(test_bool) printf("before interesting values\n");
 
   /**********************
    * INTERESTING VALUES *
@@ -6903,6 +6980,9 @@ skip_extras:
    ****************/
 
 havoc_stage:
+  
+  if(test_bool) printf("before havoc stage\n");
+
 
   stage_cur_byte = -1;
 
@@ -6929,6 +7009,8 @@ havoc_stage:
 
   }
 
+  if(test_bool) printf("after first if\n");
+
   if (stage_max < HAVOC_MIN) stage_max = HAVOC_MIN;
 
   temp_len = len;
@@ -6939,6 +7021,8 @@ havoc_stage:
 
   /* We essentially just do several thousand runs (depending on perf_score)
      where we take the input file and make random stacked tweaks. */
+
+  if(test_bool) printf("before for\n");
 
   for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
@@ -7345,6 +7429,7 @@ havoc_stage:
     }
 
   }
+  if(test_bool) printf("after for\n");
 
   new_hit_cnt = queued_paths + unique_crashes;
 
@@ -7357,6 +7442,8 @@ havoc_stage:
   }
 
 #ifndef IGNORE_FINDS
+
+  if(test_bool) printf("before splicing\n");
 
   /************
    * SPLICING *
@@ -7380,22 +7467,25 @@ retry_splicing:
     /* First of all, if we've modified in_buf for havoc, let's clean that
        up... */
 
+    
+
     if (in_buf != orig_in) {
       ck_free(in_buf);
       in_buf = orig_in;
       len = queue_cur[CUR_PROG]->len;
     }
-
+    
     /* Pick a random queue entry and seek to it. Don't splice with yourself. */
 
     do { tid = UR(queued_paths); } while (tid == current_entry);
 
     splicing_with = tid;
-    target = queue[0];
-
+    target = queue[CUR_PROG];
+    
     while (tid >= 100) { target = target->next_100; tid -= 100; }
-    while (tid--) target = target->next;
-
+    
+    while (tid--) target = target->next; // TODO > prog 1 explodes here
+  
     /* Make sure that the target has a reasonable length. */
 
     while (target && (target->len < 2 || target == queue_cur[CUR_PROG])) {
@@ -7445,6 +7535,8 @@ retry_splicing:
     goto havoc_stage;
 
   }
+
+  if(test_bool) printf("after big if\n");
 
 #endif /* !IGNORE_FINDS */
 
@@ -8707,7 +8799,8 @@ void prog_change(){
   CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test;
 
   // pass through all the queue values that have yet to be seen and originated from the one we are seeing
-
+  //printf("CUR_PROG = %d\n", CUR_PROG);
+  //printf("queue[CUR_PROG] = %s\n", queue[CUR_PROG]->fname);
 }
 
 /* Main entry point */
@@ -8896,9 +8989,12 @@ int main(int argc, char** argv) {
 
 u64 init_time = get_cur_time(), end_t;
 
+
 while (1) { //main fuzzing loop //FUZZ LOP
 
     u8 skipped_fuzz;
+
+    if(test_bool) printf("beggin of while\n");
 
     cull_queue();
     end_t = get_cur_time();
@@ -8911,14 +9007,16 @@ while (1) { //main fuzzing loop //FUZZ LOP
       prog_change();
       //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
+      //printf("changed prog\n");
+      //test_bool = 0;
     }
 
     if (!queue_cur[CUR_PROG]) {
- 
+      
       queue_cycle++;
       current_entry     = 0;
       cur_skipped_paths = 0;
-      queue_cur[CUR_PROG]         = queue[0];
+      queue_cur[CUR_PROG]         = queue[CUR_PROG];
     
 
       while (seek_to) {
@@ -8929,6 +9027,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
       show_stats();
       
+
       if (not_on_tty) {
         ACTF("Entering queue cycle %llu.", queue_cycle);
         fflush(stdout);
@@ -8948,8 +9047,11 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
     }
 
-    
+    if (test_bool) printf("before fuzz one\n");
+
     skipped_fuzz = fuzz_one(use_argv); // this is where the work will be done //NOTE
+
+    if (test_bool) printf("after fuzz one\n");
 
     if (!stop_soon && sync_id && !skipped_fuzz) {
       
@@ -8965,7 +9067,8 @@ while (1) { //main fuzzing loop //FUZZ LOP
     queue_cur[CUR_PROG] = queue_cur[CUR_PROG]->next;
     current_entry++;
     
-	
+    if(test_bool) printf("end of while\n");
+
   } //end of the main fuzzing loop
 
 

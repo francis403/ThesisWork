@@ -1376,6 +1376,8 @@ leaq (128+24)(%rsp), %rsp
 	.string	"_offset"
 .LASF50:
 	.string	"__fd"
+.LASF65:
+	.string	"/home/francis/Documents/ThesisWork/Instrumentation/afl-instr"
 .LASF18:
 	.string	"_IO_write_ptr"
 .LASF13:
@@ -1404,8 +1406,6 @@ leaq (128+24)(%rsp), %rsp
 	.string	"printf"
 .LASF30:
 	.string	"_cur_column"
-.LASF65:
-	.string	"/home/francis/Documents/work/git/ThesisWork/Instrumentation/afl-instr"
 .LASF46:
 	.string	"_pos"
 .LASF57:
@@ -1498,7 +1498,7 @@ leaq (128+24)(%rsp), %rsp
 	.string	"stdout"
 .LASF66:
 	.string	"_IO_lock_t"
-	.ident	"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.11) 5.4.0 20160609"
+	.ident	"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.10) 5.4.0 20160609"
 	.section	.note.GNU-stack,"",@progbits
 
 /* --- AFL MAIN PAYLOAD (64-BIT) --- */
@@ -1665,3 +1665,4 @@ __afl_fork_wait_loop:
 
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
+  movq __
