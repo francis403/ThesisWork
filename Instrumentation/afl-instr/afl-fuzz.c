@@ -197,12 +197,12 @@ static volatile u8 stop_soon,         /* Ctrl-C pressed?                  */
                    clear_screen = 1,  /* Window resized?                  */
                    child_timed_out;   /* Traced process timed out?        */
 
-EXP_ST u32 queued_paths,              /* Total number of queued testcases */
-           queued_variable,           /* Testcases with variable behavior */
+EXP_ST u32 queued_paths[MAX_AMOUNT_OF_PROGS],              /* Total number of queued testcases */
+           queued_variable[MAX_AMOUNT_OF_PROGS],           /* Testcases with variable behavior */
            queued_at_start,           /* Total number of initial inputs   */
            queued_discovered,         /* Items discovered during this run */
            queued_imported,           /* Items imported via -S            */
-           queued_favored,            /* Paths deemed favorable           */
+           queued_favored[MAX_AMOUNT_OF_PROGS],            /* Paths deemed favorable           */
            queued_with_cov,           /* Paths with new coverage bytes    */
            pending_not_fuzzed,        /* Queued but not done yet          */
            pending_favored,           /* Pending favored paths            */
@@ -293,6 +293,7 @@ struct queue_entry {
       has_new_cov,                    /* Triggers new coverage?           */
       var_behavior,                   /* Variable behavior?               */
       favored,                        /* Currently favored?               */
+      added_from_queue,                /*was added from another queue?*/
       fs_redundant;                   /* Marked as redundant in the fs?   */ // TODO -> maybe add information about specific program
 
   u32 bitmap_size,                    /* Number of bits set in bitmap     */
@@ -875,7 +876,7 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
 /* Append new test case to the current program queue. */
 
-static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
+static void add_to_queue(u8* fname, u32 len, u8 passed_det, u8 added_from_queue) {
 	//printf("add to queue\n");
 	struct queue_entry* q = ck_alloc(sizeof(struct queue_entry));
 
@@ -883,24 +884,25 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 	q->len          = len;
 	q->depth        = cur_depth + 1;
 	q->passed_det   = passed_det;
+  q->added_from_queue = added_from_queue;
 
 	if (q->depth > max_depth) max_depth = q->depth;
 
 
   // explodes when inside here
-	if (queue_top[0]) {
+	if (queue_top[CUR_PROG]) {
 
-		queue_top[0]->next = q;
-		queue_top[0] = q; 
+		queue_top[CUR_PROG]->next = q;
+		queue_top[CUR_PROG] = q; 
 
-	} else q_prev100[CUR_PROG] = queue[CUR_PROG] = queue_top[0] = q;
+	} else q_prev100[CUR_PROG] = queue[CUR_PROG] = queue_top[CUR_PROG] = q;
 
-	queued_paths++;
+	queued_paths[CUR_PROG]++;
 	pending_not_fuzzed++;
 
 	cycles_wo_finds = 0;
 
-	if (!(queued_paths % 100)) {
+	if (!(queued_paths[CUR_PROG] % 100)) {
 
 		q_prev100[CUR_PROG]->next_100 = q;
 		q_prev100[CUR_PROG] = q;
@@ -908,6 +910,45 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 	}
 
 	last_path_time = get_cur_time();
+
+}
+
+/* Append new test case to the current program queue. */
+
+static void add_to_queue_teste(u8* fname, u32 len, u8 passed_det, u8 added_from_queue) {
+  //printf("add to queue\n");
+  struct queue_entry* q = ck_alloc(sizeof(struct queue_entry));
+
+  q->fname        = fname;
+  q->len          = len;
+  q->depth        = cur_depth + 1;
+  q->passed_det   = passed_det;
+  q->added_from_queue = added_from_queue;
+
+  if (q->depth > max_depth) max_depth = q->depth;
+
+
+  // explodes when inside here
+  if (queue_top[CUR_PROG]) {
+
+    queue_top[CUR_PROG]->next = q;
+    queue_top[CUR_PROG] = q; 
+
+  } else q_prev100[CUR_PROG] = queue[CUR_PROG] = queue_top[CUR_PROG] = q;
+
+  queued_paths[CUR_PROG]++;
+  pending_not_fuzzed++;
+
+  cycles_wo_finds = 0;
+
+  if (!(queued_paths[CUR_PROG] % 100)) {
+
+    q_prev100[CUR_PROG]->next_100 = q;
+    q_prev100[CUR_PROG] = q;
+
+  }
+
+  last_path_time = get_cur_time();
 
 }
 
@@ -935,12 +976,13 @@ static void add_to_queues(u8* fname, u32 len, u8 passed_det) {
 
     } else q_prev100[i] = queue[i] = queue_top[i] = q;
 
-    queued_paths++;
+
+    queued_paths[i]++;
     pending_not_fuzzed++;
 
     cycles_wo_finds = 0;
 
-    if (!(queued_paths % 100)) {
+    if (!(queued_paths[i] % 100)) {
 
       q_prev100[i]->next_100 = q;
       q_prev100[i] = q;
@@ -1475,7 +1517,7 @@ static void cull_queue(void) {
 
   memset(temp_v, 255, MAP_SIZE >> 3);
 
-  queued_favored  = 0;
+  queued_favored[CUR_PROG]  = 0;
   pending_favored = 0;
 
   q = queue[CUR_PROG];
@@ -1501,7 +1543,7 @@ static void cull_queue(void) {
           temp_v[j] &= ~top_rated[i]->trace_mini[j];
 
       top_rated[i]->favored = 1;
-      queued_favored++;
+      queued_favored[CUR_PROG]++;
 
       if (!top_rated[i]->was_fuzzed[CUR_PROG]) pending_favored++;
 
@@ -1671,13 +1713,13 @@ static void read_testcases(void) {
 		if (!access(dfn, F_OK)) passed_det = 1;
 		ck_free(dfn);
 
-		add_to_queues(fn, st.st_size, 0);
+		add_to_queues(fn, st.st_size, passed_det);
 
 	}
 
   free(nl); /* not tracked */
 
-	if (!queued_paths) {
+	if (!queued_paths[CUR_PROG]) {
 
 		SAYF("\n" cLRD "[-] " cRST
 			"Looks like there are no valid test cases in the input directory! The fuzzer\n"
@@ -1690,7 +1732,7 @@ static void read_testcases(void) {
 	}
 
 	last_path_time = 0;
-	queued_at_start = queued_paths;
+	queued_at_start = queued_paths[CUR_PROG];
 
 }
 
@@ -2981,7 +3023,7 @@ abort_calibration:
 
     if (!q->var_behavior) {
       mark_as_variable(q);
-      queued_variable++;
+      queued_variable[CUR_PROG]++;
     }
 
   }
@@ -3338,19 +3380,19 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifndef SIMPLE_FILES
 
-    fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths,
+    fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths[CUR_PROG],
                       describe_op(hnb));
-    fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], queued_paths,
+    fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], queued_paths[CUR_PROG],
                       describe_op(hnb));
 
 #else
 
-    fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths);
-    fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], queued_paths);
+    fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths[CUR_PROG]);
+    fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], queued_paths[CUR_PROG]);
 
 #endif /* ^!SIMPLE_FILES */
 
-    add_to_queue(fn, len, 0);
+    add_to_queue(fn, len, 0, 0); // TODO -> add a special case for begginer ones? Or just do the actual pass through every element and run it once
     //add_to_queue(fn_delta, len, 0); //(This adds to the specific queue) - TODO: either create a new queue or make the existing one with more complex info 
 
     if (hnb == 2 || has_new_blocks()) {
@@ -3558,7 +3600,7 @@ static u32 find_start_position(void) {
   if (!off) return 0;
 
   ret = atoi(off + 20);
-  if (ret >= queued_paths) ret = 0;
+  if (ret >= queued_paths[CUR_PROG]) ret = 0;
   return ret;
 
 }
@@ -3671,9 +3713,9 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
 		"command_line      : %s\n",
 		start_time / 1000, get_cur_time() / 1000, getpid(),
 		queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
-		queued_paths, queued_favored, queued_discovered, queued_imported,
+		queued_paths[CUR_PROG], queued_favored[CUR_PROG], queued_discovered, queued_imported,
 		max_depth, current_entry, pending_favored, pending_not_fuzzed,
-		queued_variable, stability, bitmap_cvg, unique_crashes,
+		queued_variable[CUR_PROG], stability, bitmap_cvg, unique_crashes,
 		unique_hangs, last_path_time / 1000, last_crash_time / 1000,
 		last_hang_time / 1000, total_execs - last_crash_execs,
 		exec_tmout, use_banner,
@@ -3714,9 +3756,9 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
     "command_line      : %s\n",
     start_time / 1000, get_cur_time() / 1000, getpid(),
     queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
-    queued_paths, queued_favored, queued_discovered, queued_imported,
+    queued_paths[CUR_PROG], queued_favored[CUR_PROG], queued_discovered, queued_imported,
     max_depth, current_entry, pending_favored, pending_not_fuzzed,
-    queued_variable, stability, bitmap_cvg, unique_crashes,
+    queued_variable[CUR_PROG], stability, bitmap_cvg, unique_crashes,
     unique_hangs, last_path_time / 1000, last_crash_time / 1000,
     last_hang_time / 1000, total_execs - last_crash_execs,
     exec_tmout, use_banner,
@@ -3741,12 +3783,12 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
 	static u32 prev_qp, prev_pf, prev_pnf, prev_ce, prev_md;
 	static u64 prev_qc, prev_uc, prev_uh;
 
-	if (prev_qp == queued_paths && prev_pf == pending_favored && 
+	if (prev_qp == queued_paths[CUR_PROG] && prev_pf == pending_favored && 
 		prev_pnf == pending_not_fuzzed && prev_ce == current_entry &&
 		prev_qc == queue_cycle && prev_uc == unique_crashes &&
 		prev_uh == unique_hangs && prev_md == max_depth) return;
 
-		prev_qp  = queued_paths;
+		prev_qp  = queued_paths[CUR_PROG];
 	prev_pf  = pending_favored;
 	prev_pnf = pending_not_fuzzed;
 	prev_ce  = current_entry;
@@ -3763,7 +3805,7 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
 
 	fprintf(plot_file, 
 		"%llu, %llu, %u, %u, %u, %u, %0.02f%%, %llu, %llu, %u, %0.02f\n",
-		get_cur_time() / 1000, queue_cycle - 1, current_entry, queued_paths,
+		get_cur_time() / 1000, queue_cycle - 1, current_entry, queued_paths[CUR_PROG],
 		pending_not_fuzzed, pending_favored, bitmap_cvg, unique_crashes,
           unique_hangs, max_depth, eps); /* ignore errors */
 
@@ -4664,15 +4706,15 @@ static void perform_dry_run(char** argv) {
 
   if (cal_failures) {
 
-    if (cal_failures == queued_paths)
+    if (cal_failures == queued_paths[CUR_PROG])
       FATAL("All test cases time out%s, giving up!",
             skip_crashes ? " or crash" : "");
 
     WARNF("Skipped %u test cases (%0.02f%%) due to timeouts%s.", cal_failures,
-          ((double)cal_failures) * 100 / queued_paths,
+          ((double)cal_failures) * 100 / queued_paths[CUR_PROG],
           skip_crashes ? " or crashes" : "");
 
-    if (cal_failures * 5 > queued_paths)
+    if (cal_failures * 5 > queued_paths[CUR_PROG])
       WARNF(cLRD "High percentage of rejected test cases, check settings!");
 
   }
@@ -4893,7 +4935,7 @@ static void show_stats(void) {
   }
 
   SAYF(bSTG bV bSTOP "  total paths : " cRST "%-5s  " bSTG bV "\n",
-       DI(queued_paths));
+       DI(queued_paths[CUR_PROG]));
 
   /* Highlight crashes in red if found, denote going over the KEEP_UNIQUE_CRASH
      limit with a '+' appended to the count. */
@@ -4925,7 +4967,7 @@ static void show_stats(void) {
 
   sprintf(tmp, "%s%s (%0.02f%%)", DI(current_entry),
           queue_cur[CUR_PROG]->favored ? "" : "*",
-          ((double)current_entry * 100) / queued_paths);
+          ((double)current_entry * 100) / queued_paths[CUR_PROG]);
 
   SAYF(bV bSTOP "  now processing : " cRST "%-17s " bSTG bV bSTOP, tmp);
 
@@ -4936,7 +4978,7 @@ static void show_stats(void) {
        ((t_bytes < 200 && !dumb_mode) ? cPIN : cRST), tmp);
 
   sprintf(tmp, "%s (%0.02f%%)", DI(cur_skipped_paths),
-          ((double)cur_skipped_paths * 100) / queued_paths);
+          ((double)cur_skipped_paths * 100) / queued_paths[CUR_PROG]);
 
   SAYF(bV bSTOP " paths timed out : " cRST "%-17s " bSTG bV, tmp);
 
@@ -4948,8 +4990,8 @@ static void show_stats(void) {
   SAYF(bVR bH bSTOP cCYA " stage progress " bSTG bH20 bX bH bSTOP cCYA
        " findings in depth " bSTG bH20 bVL "\n");
 
-  sprintf(tmp, "%s (%0.02f%%)", DI(queued_favored),
-          ((double)queued_favored) * 100 / queued_paths);
+  sprintf(tmp, "%s (%0.02f%%)", DI(queued_favored[CUR_PROG]),
+          ((double)queued_favored[CUR_PROG]) * 100 / queued_paths[CUR_PROG]);
 
   /* Yeah... it's still going on... halp? */
 
@@ -4970,7 +5012,7 @@ static void show_stats(void) {
   SAYF(bV bSTOP " stage execs : " cRST "%-21s " bSTG bV bSTOP, tmp);
 
   sprintf(tmp, "%s (%0.02f%%)", DI(queued_with_cov),
-          ((double)queued_with_cov) * 100 / queued_paths);
+          ((double)queued_with_cov) * 100 / queued_paths[CUR_PROG]);
 
   SAYF("  new edges on : " cRST "%-22s " bSTG bV "\n", tmp);
 
@@ -5080,7 +5122,7 @@ static void show_stats(void) {
     else strcpy(tmp, "n/a");
 
   SAYF(" stability : %s%-10s " bSTG bV "\n", (stab_ratio < 85 && var_byte_count > 40) 
-       ? cLRD : ((queued_variable && (!persistent_mode || var_byte_count > 20))
+       ? cLRD : ((queued_variable[CUR_PROG] && (!persistent_mode || var_byte_count > 20))
        ? cMGN : cRST), tmp);
 
   if (!bytes_trim_out) {
@@ -5217,9 +5259,9 @@ static void show_init_stats(void) {
 		if (useless_at_start && !in_bitmap)
 			WARNF(cLRD "Some test cases look useless. Consider using a smaller set.");
 
-		if (queued_paths > 100)
+		if (queued_paths[CUR_PROG] > 100)
 			WARNF(cLRD "You probably have far too many input files! Consider trimming down.");
-		else if (queued_paths > 20)
+		else if (queued_paths[CUR_PROG] > 20)
 			WARNF("You have lots of input files; try starting small.");
 
 	}
@@ -5229,7 +5271,7 @@ static void show_init_stats(void) {
 		cGRA "    Test case count : " cRST "%u favored, %u variable, %u total\n"
 		cGRA "       Bitmap range : " cRST "%u to %u bits (average: %0.02f bits)\n"
 		cGRA "        Exec timing : " cRST "%s to %s us (average: %s us)\n",
-		queued_favored, queued_variable, queued_paths, min_bits, max_bits, 
+		queued_favored[CUR_PROG], queued_variable[CUR_PROG], queued_paths[CUR_PROG], min_bits, max_bits, 
 		((double)total_bitmap_size) / (total_bitmap_entries ? total_bitmap_entries : 1),
 		DI(min_us), DI(max_us), DI(avg_us));
 
@@ -5872,7 +5914,7 @@ static u8 fuzz_one(char** argv) {
     if ((queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || !queue_cur[CUR_PROG]->favored) &&
         UR(100) < SKIP_TO_NEW_PROB) return 1;
 
-  } else if (!dumb_mode && !queue_cur[CUR_PROG]->favored && queued_paths > 10) {
+  } else if (!dumb_mode && !queue_cur[CUR_PROG]->favored && queued_paths[CUR_PROG] > 10) {
 
     /* Otherwise, still possibly skip non-favored cases, albeit less often.
        The odds of skipping stuff are higher for already-fuzzed inputs and
@@ -5894,7 +5936,7 @@ static u8 fuzz_one(char** argv) {
 
   if (not_on_tty) {
     ACTF("Fuzzing test case #%u (%u total, %llu uniq crashes found)...",
-         current_entry, queued_paths, unique_crashes);
+         current_entry, queued_paths[CUR_PROG], unique_crashes);
     fflush(stdout);
   }
 
@@ -5994,18 +6036,20 @@ static u8 fuzz_one(char** argv) {
     printf("passed deterministic: %d\n", queue_cur[CUR_PROG]->passed_det);
    }
 
-  if (skip_deterministic || queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || queue_cur[CUR_PROG]->passed_det)
-    goto havoc_stage;
+   // this big if is kinda cheating -> added by fc45701
+  
+    if (skip_deterministic || queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || queue_cur[CUR_PROG]->passed_det)
+      goto havoc_stage;
 
-  if(test_bool) printf("after first if\n");
+    if(test_bool) printf("after first if\n");
 
 
-  /* Skip deterministic fuzzing if exec path checksum puts this out of scope
-     for this master instance. */
+    /* Skip deterministic fuzzing if exec path checksum puts this out of scope
+       for this master instance. */
 
-  if (master_max && (queue_cur[CUR_PROG]->exec_cksum % master_max) != master_id - 1)
-    goto havoc_stage;
-
+    if (master_max && (queue_cur[CUR_PROG]->exec_cksum % master_max) != master_id - 1)
+      goto havoc_stage;
+  
   doing_det = 1;
 
    if(test_bool) printf("after second if\n");
@@ -6032,7 +6076,7 @@ static u8 fuzz_one(char** argv) {
 
   stage_val_type = STAGE_VAL_NONE;
 
-  orig_hit_cnt = queued_paths + unique_crashes;
+  orig_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   prev_cksum = queue_cur[CUR_PROG]->exec_cksum;
 
@@ -6116,7 +6160,7 @@ static u8 fuzz_one(char** argv) {
 
   } // end of single bit bit_flip
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP1]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP1] += stage_max;
@@ -6143,7 +6187,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP2]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP2] += stage_max;
@@ -6174,7 +6218,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP4]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP4] += stage_max;
@@ -6268,7 +6312,7 @@ static u8 fuzz_one(char** argv) {
 
   blocks_eff_total += EFF_ALEN(len);
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP8] += stage_max;
@@ -6305,7 +6349,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP16] += stage_max;
@@ -6341,7 +6385,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP32] += stage_max;
@@ -6414,7 +6458,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_ARITH8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH8] += stage_max;
@@ -6508,7 +6552,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_ARITH16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH16] += stage_max;
@@ -6600,7 +6644,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_ARITH32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH32] += stage_max;
@@ -6659,7 +6703,7 @@ skip_arith:
 
   } // end of for len
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_INTEREST8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST8] += stage_max;
@@ -6727,7 +6771,7 @@ skip_arith:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_INTEREST16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST16] += stage_max;
@@ -6796,7 +6840,7 @@ skip_arith:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_INTEREST32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST32] += stage_max;
@@ -6862,7 +6906,7 @@ skip_interest:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_EXTRAS_UO]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_UO] += stage_max;
@@ -6911,7 +6955,7 @@ skip_interest:
 
   ck_free(ex_tmp);
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_EXTRAS_UI]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_UI] += stage_max;
@@ -6962,7 +7006,7 @@ skip_user_extras:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_EXTRAS_AO]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_AO] += stage_max;
@@ -7015,9 +7059,9 @@ havoc_stage:
 
   temp_len = len;
 
-  orig_hit_cnt = queued_paths + unique_crashes;
+  orig_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
-  havoc_queued = queued_paths;
+  havoc_queued = queued_paths[CUR_PROG];
 
   /* We essentially just do several thousand runs (depending on perf_score)
      where we take the input file and make random stacked tweaks. */
@@ -7417,21 +7461,21 @@ havoc_stage:
     /* If we're finding new stuff, let's run for a bit longer, limits
        permitting. */
 
-    if (queued_paths != havoc_queued) {
+    if (queued_paths[CUR_PROG] != havoc_queued) {
 
       if (perf_score <= HAVOC_MAX_MULT * 100) {
         stage_max  *= 2;
         perf_score *= 2;
       }
 
-      havoc_queued = queued_paths;
+      havoc_queued = queued_paths[CUR_PROG];
 
     }
 
   }
   if(test_bool) printf("after for\n");
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   if (!splice_cycle) {
     stage_finds[STAGE_HAVOC]  += new_hit_cnt - orig_hit_cnt;
@@ -7457,7 +7501,7 @@ havoc_stage:
 retry_splicing:
 
   if (use_splicing && splice_cycle++ < SPLICE_CYCLES &&
-      queued_paths > 1 && queue_cur[CUR_PROG]->len > 1) {
+      queued_paths[CUR_PROG] > 1 && queue_cur[CUR_PROG]->len > 1) {
 
     struct queue_entry* target;
     u32 tid, split_at;
@@ -7476,15 +7520,18 @@ retry_splicing:
     }
     
     /* Pick a random queue entry and seek to it. Don't splice with yourself. */
-
-    do { tid = UR(queued_paths); } while (tid == current_entry);
+    // O erro está aqui, tenho de ter um personalizado para cada queue
+    do { tid = UR(queued_paths[CUR_PROG]); } while (tid == current_entry);
 
     splicing_with = tid;
     target = queue[CUR_PROG];
     
-    while (tid >= 100) { target = target->next_100; tid -= 100; }
-    
-    while (tid--) target = target->next; // TODO > prog 1 explodes here
+    while (tid >= 100) { target = target->next_100; tid -= 100; }  
+    while (tid--){ 
+      //if(target ) printf("not null\n");
+      if(!target) FATAL("target is null with tid = %d", tid);
+      target = target->next;
+    }// TODO > ERROR IS HERE
   
     /* Make sure that the target has a reasonable length. */
 
@@ -8795,12 +8842,28 @@ static void save_cmdline(u32 argc, char** argv) {
 
 void prog_change(){
 
+  u8 old = CUR_PROG;
   //change the program we are fuzzing
   CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test;
 
   // pass through all the queue values that have yet to be seen and originated from the one we are seeing
   //printf("CUR_PROG = %d\n", CUR_PROG);
   //printf("queue[CUR_PROG] = %s\n", queue[CUR_PROG]->fname);
+  //printf("teste\n");
+
+  /*
+  struct queue_entry *q=queue[old];
+
+  while(q){
+    
+    //check if interesting to run and has yet to be added to a queue from another queue
+    if( !q->added_from_queue ){
+      add_to_queue_teste(q->fname, q->len, 1, 1); 
+    }
+
+    q=q->next;
+  }
+  */
 }
 
 /* Main entry point */
@@ -9008,7 +9071,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
       //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
       //printf("changed prog\n");
-      //test_bool = 0;
+      test_bool = 0;
     }
 
     if (!queue_cur[CUR_PROG]) {
@@ -9034,13 +9097,13 @@ while (1) { //main fuzzing loop //FUZZ LOP
       }
 
      
-      if (queued_paths == prev_queued) {
+      if (queued_paths[CUR_PROG] == prev_queued) {
 
         if (use_splicing) cycles_wo_finds++; else use_splicing = 1;
 
       } else cycles_wo_finds = 0;
 
-      prev_queued = queued_paths;
+      prev_queued = queued_paths[CUR_PROG];
 
       if (sync_id && queue_cycle == 1 && getenv("AFL_IMPORT_FIRST"))
         sync_fuzzers(use_argv);
