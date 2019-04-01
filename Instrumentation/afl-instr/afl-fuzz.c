@@ -298,7 +298,7 @@ struct queue_entry {
       var_behavior,                   /* Variable behavior?               */
       favored,                        /* Currently favored?               */
       added_from_queue,                /*was added from another queue?*/
-	  hit_target,					  /*number of targets hit*/
+	  					  /*number of targets hit*/
       fs_redundant;                   /* Marked as redundant in the fs?   */ // TODO -> maybe add information about specific program
 
   u32 bitmap_size,                    /* Number of bits set in bitmap     */
@@ -310,6 +310,8 @@ struct queue_entry {
 
   int shared_blocks;			  	        /* Number of the shared blocks found*/
   int uni_blcks;					            /* total blocks passed 			  */
+
+  short hit_target;
 
   u8 blocks_hit[MAP_SIZE];			      /* Saves all blocks found, during run and fuzz */
 
@@ -586,11 +588,13 @@ static void bind_to_free_cpu(void) {
 /*checks the blocks of each program and adds the differences*/
 
 static void get_prog_targets(u8 prog1, u8 prog2){
-
+	//printf("\n\tGonna get the targets!\n");
 	for(int i = 0; i < MAP_SIZE; i++){
 		// if one has the block and the other does not
-		if(PROG_BLOCKS[prog1][i] != PROG_BLOCKS[prog2][i])
+		if(PROG_BLOCKS[prog1][i] != PROG_BLOCKS[prog2][i]){
 			BLOCK_TO_HIT[i] = 1;	
+			//printf("target = %d\n", i);
+		}
 	}
 
 }
@@ -2519,6 +2523,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 	     territory. */
 
 	memset(trace_bits, 0, MAP_SIZE);
+
 	MEM_BARRIER();
 
 	s32 res;
@@ -2635,8 +2640,10 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	unique_blocks ++;
       }
 
-      if(BLOCK_TO_HIT[id] != 0){
-      	queue_cur[CUR_PROG]->hit_target++;
+
+      if( BLOCK_TO_HIT[id] != 0 ){
+      	if(queue_cur[CUR_PROG] != NULL)
+      		queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
       }
       BLOCKS_FOUND[id] ++;
 
@@ -2894,6 +2901,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   	//init_all_forkservers(argv);
   }
 
+
   if (q->exec_cksum) memcpy(first_trace, trace_bits, MAP_SIZE);
 
   start_us = get_cur_time_us();
@@ -2908,8 +2916,8 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     //fault = run_target(argv, use_tmout); // TODO -> change this
 
-
     fault = run_target(use_tmout); //TODO > check if correct
+
 
     //printf("\tfault = %d\n", fault);
 
@@ -4577,8 +4585,8 @@ static void perform_dry_run(char** argv) {
     close(fd);
 
     //printf("\tuse_mem = %s\n", use_mem);
-
    	res = calibrate_case(argv, q, use_mem, 0, 1);
+   	printf("after calibrate\n");
    	//res = FAULT_TMOUT;
     ck_free(use_mem);
 
@@ -8082,7 +8090,7 @@ int index = optind - 1, prog = -1, i = 0;
   free(prog_args);
 
 
-	getProgsBlockList();
+  getProgsBlockList();
 }
 
 
@@ -9033,7 +9041,6 @@ int main(int argc, char** argv) {
     sprintf(out_dir_delta[i], "%s%d", out_dir, i);
   }
 
-  get_prog_targets(0,1); // get the targets between this programs
 
   //printf("out dir will be %s for %d\n", out_dir_delta[0], 0);
 
@@ -9089,7 +9096,7 @@ int main(int argc, char** argv) {
 
   /*we start forkservers here*/
   init_all_forkservers(argv);
-
+  get_prog_targets(0,1); //TODO - not working
   //TODO -> make it perform a dry runon every program
   perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
 
