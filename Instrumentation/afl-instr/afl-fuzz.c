@@ -162,6 +162,9 @@ static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found for run*/
 /*Stores all the blocks of a specific programs*/
 static u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
+/*Saves all the prefered blocks to hit*/
+static u8 BLOCK_TO_HIT[MAP_SIZE];
+
 static u8 *prog_names[MAX_AMOUNT_OF_PROGS];
 
 /*The following data is important between runs so we can check if it should be saved
@@ -271,7 +274,7 @@ static s32 cpu_aff = -1;       	      /* Selected CPU core                */
 
 #endif /* HAVE_AFFINITY */
 
-static FILE* plot_file;               /* Gnuplot output file              */
+static FILE* plot_file[MAX_AMOUNT_OF_PROGS];               /* Gnuplot output file              */
 
 static int numbr_of_progs_under_test = 0;
 
@@ -3761,13 +3764,13 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
      favored_not_fuzzed, unique_crashes, unique_hangs, max_depth,
      execs_per_sec */
 
-	fprintf(plot_file, 
+	fprintf(plot_file[CUR_PROG], 
 		"%llu, %llu, %u, %u, %u, %u, %0.02f%%, %llu, %llu, %u, %0.02f\n",
 		get_cur_time() / 1000, queue_cycle - 1, current_entry, queued_paths[CUR_PROG],
 		pending_not_fuzzed, pending_favored, bitmap_cvg, unique_crashes,
           unique_hangs, max_depth, eps); /* ignore errors */
 
-		fflush(plot_file);
+		fflush(plot_file[CUR_PROG]);
 
 	}
 
@@ -8268,10 +8271,10 @@ EXP_ST void setup_dirs_fds(void) {
 	if (fd < 0) PFATAL("Unable to create '%s'", tmp);
 	ck_free(tmp);
 
-	plot_file = fdopen(fd, "w");
-	if (!plot_file) PFATAL("fdopen() failed");
+	plot_file[CUR_PROG] = fdopen(fd, "w");
+	if (!plot_file[CUR_PROG]) PFATAL("fdopen() failed");
 
-	fprintf(plot_file, "# unix_time, cycles_done, cur_path, paths_total, "
+	fprintf(plot_file[CUR_PROG], "# unix_time, cycles_done, cur_path, paths_total, "
 		"pending_total, pending_favs, map_size, unique_crashes, "
 		"unique_hangs, max_depth, execs_per_sec\n");
                      /* ignore errors */
@@ -8393,10 +8396,10 @@ EXP_ST void setup_all_dirs_fds(void) {
     if (fd < 0) PFATAL("Unable to create '%s'", tmp);
     ck_free(tmp);
 
-    plot_file = fdopen(fd, "w");
-    if (!plot_file) PFATAL("fdopen() failed");
+    plot_file[i] = fdopen(fd, "w");
+    if (!plot_file[i]) PFATAL("fdopen() failed");
 
-    fprintf(plot_file, "# unix_time, cycles_done, cur_path, paths_total, "
+    fprintf(plot_file[i], "# unix_time, cycles_done, cur_path, paths_total, "
       "pending_total, pending_favs, map_size, unique_crashes, "
       "unique_hangs, max_depth, execs_per_sec\n");
                        /* ignore errors */
@@ -9198,8 +9201,8 @@ while (1) { //main fuzzing loop //FUZZ LOP
            "    (For info on resuming, see %s/README.)\n", doc_path);
 
   }
-  
-  fclose(plot_file);
+  for(int i = 0; i < numbr_of_progs_under_test; i++)
+  	fclose(plot_file[i]);
   destroy_queue();
   destroy_extras();
   //ck_free(target_path);
