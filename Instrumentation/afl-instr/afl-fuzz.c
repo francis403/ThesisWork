@@ -163,6 +163,7 @@ static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found for run*/
 static u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
 /*Saves all the prefered blocks to hit*/
+//TODO
 static u8 BLOCK_TO_HIT[MAP_SIZE];
 
 static u8 *prog_names[MAX_AMOUNT_OF_PROGS];
@@ -330,7 +331,7 @@ static struct queue_entry *queue[MAX_AMOUNT_OF_PROGS],     /* Fuzzing queue (lin
 
 //TODO -> we'll need a top_rated for every progs
 static struct queue_entry*
-  top_rated[MAP_SIZE];                /* Top entries for bitmap bytes     */
+  top_rated[MAX_AMOUNT_OF_PROGS][MAP_SIZE];                /* Top entries for bitmap bytes     */
 
 struct extra_data {
   u8* data;                           /* Dictionary token data            */
@@ -1432,25 +1433,25 @@ static void update_bitmap_score(struct queue_entry* q) {
 
     if (trace_bits[i]) {
 
-       if (top_rated[i]) {
+       if (top_rated[CUR_PROG][i]) {
 
          /* Faster-executing or smaller test cases are favored. */
 
-         if (fav_factor > top_rated[i]->exec_us * top_rated[i]->len) continue;
+         if (fav_factor > top_rated[CUR_PROG][i]->exec_us * top_rated[CUR_PROG][i]->len) continue;
 
          /* Looks like we're going to win. Decrease ref count for the
             previous winner, discard its trace_bits[] if necessary. */
 
-         if (!--top_rated[i]->tc_ref) {
-           ck_free(top_rated[i]->trace_mini);
-           top_rated[i]->trace_mini = 0;
+         if (!--top_rated[CUR_PROG][i]->tc_ref) {
+           ck_free(top_rated[CUR_PROG][i]->trace_mini);
+           top_rated[CUR_PROG][i]->trace_mini = 0;
          }
 
        }
 
        /* Insert ourselves as the new winner. */
 
-       top_rated[i] = q;
+       top_rated[CUR_PROG][i] = q;
        q->tc_ref++;
 
        if (!q->trace_mini) {
@@ -1497,20 +1498,20 @@ static void cull_queue(void) {
      If yes, and if it has a top_rated[] contender, let's use it. */
 
   for (i = 0; i < MAP_SIZE; i++)
-    if (top_rated[i] && (temp_v[i >> 3] & (1 << (i & 7)))) {
+    if (top_rated[CUR_PROG][i] && (temp_v[i >> 3] & (1 << (i & 7)))) {
 
       u32 j = MAP_SIZE >> 3;
 
       /* Remove all bits belonging to the current entry from temp_v. */
 
       while (j--) 
-        if (top_rated[i]->trace_mini[j])
-          temp_v[j] &= ~top_rated[i]->trace_mini[j];
+        if (top_rated[CUR_PROG][i]->trace_mini[j])
+          temp_v[j] &= ~top_rated[CUR_PROG][i]->trace_mini[j];
 
-      top_rated[i]->favored = 1;
+      top_rated[CUR_PROG][i]->favored = 1;
       queued_favored[CUR_PROG]++;
 
-      if (!top_rated[i]->was_fuzzed[CUR_PROG]) pending_favored++;
+      if (!top_rated[CUR_PROG][i]->was_fuzzed[CUR_PROG]) pending_favored++;
 
     } // end of if and for
 
