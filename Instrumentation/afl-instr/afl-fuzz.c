@@ -298,6 +298,7 @@ struct queue_entry {
       var_behavior,                   /* Variable behavior?               */
       favored,                        /* Currently favored?               */
       added_from_queue,                /*was added from another queue?*/
+	  hit_target,					  /*number of targets hit*/
       fs_redundant;                   /* Marked as redundant in the fs?   */ // TODO -> maybe add information about specific program
 
   u32 bitmap_size,                    /* Number of bits set in bitmap     */
@@ -581,6 +582,18 @@ static void bind_to_free_cpu(void) {
 #endif /* HAVE_AFFINITY */
 
 #ifndef IGNORE_FINDS
+
+/*checks the blocks of each program and adds the differences*/
+
+static void get_prog_targets(u8 prog1, u8 prog2){
+
+	for(int i = 0; i < MAP_SIZE; i++){
+		// if one has the block and the other does not
+		if(PROG_BLOCKS[prog1][i] != PROG_BLOCKS[prog2][i])
+			BLOCK_TO_HIT[i] = 1;	
+	}
+
+}
 
 /* Helper function to compare buffers; returns first and last differing offset. We
    use this to find reasonable locations for splicing two files. */
@@ -2622,7 +2635,9 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	unique_blocks ++;
       }
 
-
+      if(BLOCK_TO_HIT[id] != 0){
+      	queue_cur[CUR_PROG]->hit_target++;
+      }
       BLOCKS_FOUND[id] ++;
 
       //printf("*block_hit = 0x%08x\n", *(blocks + i));
@@ -5625,17 +5640,15 @@ static u32 calculate_score(struct queue_entry* q) {
     q->handicap--;
 
   }
+  if(q->hit_target > 0)
+  	perf_score = perf_score * (q->hit_target % 10);
 
   // added by fc45701
   /* Adjust score based on number of known blocks found when compared with total number of blocks*/
   // TODO -> tenho que melhorar estes valores
+  /*
   double score_mult = (double)queue_cur[CUR_PROG]->shared_blocks/(double)queue_cur[CUR_PROG]->uni_blcks; // TODO -> meter isto na struct queue maybe?
   score_mult *= 100;
-
-  //printf("fname = %s\n", queue_cur[CUR_PROG]->fname);
-  //printf("total blocks = %d\n", queue_cur[CUR_PROG]->uni_blcks);
-  //printf("shared blocks = %d\n", queue_cur[CUR_PROG]->shared_blocks);
-  //printf("score_mult = %f\n", score_mult);
 
   if( score_mult <= 10.0 ){
   	// performance score should be best
@@ -5654,6 +5667,7 @@ static u32 calculate_score(struct queue_entry* q) {
   	perf_score *= 0.25;
   	//double score_mult = (double)queue_cur[CUR_PROG]->shared_blocks/(double)queue_cur[CUR_PROG]->uni_blcks;
   }
+  */
   //perf_score *= (double)queue_cur[CUR_PROG]->uni_blcks/(double)queue_cur[CUR_PROG]->shared_blocks; 
 
 
@@ -9018,6 +9032,8 @@ int main(int argc, char** argv) {
     out_dir_delta[i] = malloc(sizeof(char) * 40 + 1);
     sprintf(out_dir_delta[i], "%s%d", out_dir, i);
   }
+
+  get_prog_targets(0,1); // get the targets between this programs
 
   //printf("out dir will be %s for %d\n", out_dir_delta[0], 0);
 
