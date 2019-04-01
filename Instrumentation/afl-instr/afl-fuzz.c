@@ -769,22 +769,22 @@ static void mark_as_det_done(struct queue_entry* q) {
 
 
 	u8* fn = strrchr(q->fname, '/');
-  u8* fn_delta = strrchr(q->fname, '/');
+  	u8* fn_delta = strrchr(q->fname, '/');
 	s32 fd, fd_delta;
 
-	fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
-  fn_delta = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
+  	fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
+  	fn_delta = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
-	fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-	if (fd < 0) PFATAL("Unable to create '%s'", fn);
-	close(fd);
+	//fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+	//if (fd < 0) PFATAL("Unable to create '%s'", fn);
+	//close(fd);
 
-  fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
-  if (fd_delta < 0) PFATAL("Unable to create '%s'", fn);
-  close(fd_delta);
+	fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+	if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+	close(fd_delta);
 
 	ck_free(fn);
-  ck_free(fn_delta);
+	ck_free(fn_delta);
 
 	q->passed_det = 1;
 
@@ -795,14 +795,15 @@ static void mark_as_det_done(struct queue_entry* q) {
 
 static void mark_as_variable(struct queue_entry* q) {
 
-  u8 *fn = strrchr(q->fname, '/') + 1, *ldest;
+  //u8 *fn = strrchr(q->fname, '/') + 1, *ldest;
   u8 *fn_delta = strrchr(q->fname, '/') + 1, *ldest_delta;
 
-  ldest = alloc_printf("../../%s", fn);
+  //ldest = alloc_printf("../../%s", fn);
   ldest_delta = alloc_printf("../../%s", fn_delta);
-  fn = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir, fn);
+  //fn = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir, fn);
   fn_delta = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir_delta[CUR_PROG], fn_delta);
 
+  /*
   if (symlink(ldest, fn)) {
 
     s32 fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
@@ -810,6 +811,7 @@ static void mark_as_variable(struct queue_entry* q) {
     close(fd);
 
   }
+  */
 
   if (symlink(ldest_delta, fn_delta)) {
 
@@ -820,8 +822,8 @@ static void mark_as_variable(struct queue_entry* q) {
   }
 
 
-  ck_free(ldest);
-  ck_free(fn);
+  //ck_free(ldest);
+  //ck_free(fn);
 
   ck_free(ldest_delta);
   ck_free(fn_delta);
@@ -846,16 +848,16 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
   fn = strrchr(q->fname, '/');
   fn_delta = strrchr(q->fname, '/');
 
-  printf("1\n");
+ 
 
   fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
   fn_delta = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
   if (state) {
-    printf("2\n");
-    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (fd < 0) PFATAL("Unable to create '%s'", fn);
-    close(fd);
+    
+    //fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    //if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    //close(fd);
 
     fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
     if (fd_delta < 0) PFATAL("Unable to create '%s'", fn);
@@ -863,7 +865,7 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
 
   } else {
-    printf("3\n");
+    
     if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
     if (unlink(fn_delta)) PFATAL("Unable to remove '%s'", fn_delta);
 
@@ -884,12 +886,10 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det, u8 added_from_queue)
 	q->len          = len;
 	q->depth        = cur_depth + 1;
 	q->passed_det   = passed_det;
-  q->added_from_queue = added_from_queue;
+  	q->added_from_queue = added_from_queue;
 
 	if (q->depth > max_depth) max_depth = q->depth;
 
-
-  // explodes when inside here
 	if (queue_top[CUR_PROG]) {
 
 		queue_top[CUR_PROG]->next = q;
@@ -952,64 +952,26 @@ static void add_to_queue_teste(u8* fname, u32 len, u8 passed_det, u8 added_from_
 
 }
 
-/* Append new test case to all program queues. */
-
-static void add_to_queues(u8* fname, u32 len, u8 passed_det) {
-  //printf("add to queue\n");
-  struct queue_entry* q = ck_alloc(sizeof(struct queue_entry));
-
-  printf("\tfname = %s\n", fname);
-
-  q->fname        = fname;
-  q->len          = len;
-  q->depth        = cur_depth + 1;
-  q->passed_det   = passed_det;
-
-  if (q->depth > max_depth) max_depth = q->depth;
-
-  for(int i = 0; i < numbr_of_progs_under_test; i++){
-
-    if (queue_top[i]) {
-
-      queue_top[i]->next = q;
-      queue_top[i] = q;
-
-    } else q_prev100[i] = queue[i] = queue_top[i] = q;
-
-
-    queued_paths[i]++;
-    pending_not_fuzzed++;
-
-    cycles_wo_finds = 0;
-
-    if (!(queued_paths[i] % 100)) {
-
-      q_prev100[i]->next_100 = q;
-      q_prev100[i] = q;
-
-    }
-  }
-  last_path_time = get_cur_time();
-
-}
-
 /* Destroy the entire queue. */
-
+// o erro acontece porque estamos a fazer free de algo que já foi feito free
 EXP_ST void destroy_queue(void) {
 
-	struct queue_entry *q = queue[CUR_PROG], *n;
+	for(int i = 0; i < numbr_of_progs_under_test; i++){
+		struct queue_entry *q = queue[i], *n;
 
-	while (q) {
+		while (q) {
+			n = q->next;
+			if(!q->added_from_queue){
 
-		n = q->next;
-		ck_free(q->fname);
-		ck_free(q->trace_mini);
-		//free(q->blocks_hit);
-		ck_free(q);
-		q = n;
+				ck_free(q->fname);
+				ck_free(q->trace_mini);
+				//free(q->blocks_hit);
 
+				ck_free(q);
+			}
+			q = n;
+		}
 	}
-
 }
 
 
@@ -1713,7 +1675,7 @@ static void read_testcases(void) {
 		if (!access(dfn, F_OK)) passed_det = 1;
 		ck_free(dfn);
 
-		add_to_queues(fn, st.st_size, passed_det);
+		add_to_queue(fn, st.st_size, passed_det,0);
 
 	}
 
@@ -2807,7 +2769,7 @@ static void run_programs_once(u32 timeout){
    is unlinked and a new one is created. Otherwise, out_fd is rewound and
    truncated. */
 
-	static void write_to_testcase(void* mem, u32 len) {
+static void write_to_testcase(void* mem, u32 len) {
 
 		s32 fd = out_fd;
 
@@ -2906,7 +2868,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   /* Make sure the forkserver is up before we do anything, and let's not
      count its spin-up time toward binary calibration. */
   // TODO -> Need to check all of them
-  if( !forksrv_pid[0] ){
+  if( !forksrv_pid[CUR_PROG] ){
   	//TODO _> init all forkservers
   	//init_forkserver(argv);
   	FATAL("Forkservers aren't up!");
@@ -3093,8 +3055,6 @@ abort_calibration:
     s32 sfd, dfd;
     u8* tmp;
 
-    if (!i) return;
-
     sfd = open(old_path, O_RDONLY);
     if (sfd < 0) PFATAL("Unable to open '%s'", old_path);
 
@@ -3205,7 +3165,7 @@ abort_calibration:
 
     for(int i = 0; i < numbr_of_progs_under_test; i++){
       //copy_file(q->fname, nfn_delta[i]);
-      link_or_copy(q->fname, nfn_delta[i]); // works
+      //link_or_copy(q->fname, nfn_delta[i]); // works
     }
 
 		ck_free(q->fname);
@@ -3373,7 +3333,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
   	// TODO -> we need to check every virgin_bits and if it has new coverage there its good
   	// se não encontramos edges novas ou não encontramos blocs blocos nunca antes vistos
   	// TODO -> não é redundate ver se temos blocos novos? Visto que se tivermos uma edge nova é porque ou a ordem trocou ou porque temos novos blocos nela?
-  	if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) || !(has_new_blocks())) {
+  	if (!(hnb = has_new_bits(virgin_bits[CUR_PROG]))) {
       if (crash_mode) total_crashes++;
       return 0;
     }    
@@ -3392,7 +3352,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #endif /* ^!SIMPLE_FILES */
 
-    add_to_queue(fn, len, 0, 0); // TODO -> add a special case for begginer ones? Or just do the actual pass through every element and run it once
+    add_to_queue(fn_delta, len, 0, 0);
     //add_to_queue(fn_delta, len, 0); //(This adds to the specific queue) - TODO: either create a new queue or make the existing one with more complex info 
 
     if (hnb == 2 || has_new_blocks()) {
@@ -3426,7 +3386,6 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
   switch (fault) {
 
     case FAULT_TMOUT:
-        printf("fault tmout\n");
       /* Timeouts are not very interesting, but we're still obliged to keep
          a handful of samples. We use the presence of new bits in the
          hang-specific bitmap as a signal of uniqueness. In "dumb" mode, we
@@ -3493,7 +3452,6 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
       break;
 
     case FAULT_CRASH:
-        printf("fault crash\n");
 keep_as_crash:
 
       /* This is handled in a manner roughly similar to timeouts,
@@ -4512,6 +4470,57 @@ static void maybe_delete_specific_out_dir(int i) {
 
 }
 
+/*Add the elem to the actual dir*/
+
+static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add){
+
+	u8  *fn=malloc(sizeof(u8) * 500 + 1);
+  	u8  hnb;
+  	s32 fd, fd_delta;
+  	u8  keeping = 0, res;
+
+
+  	u8* fn_tmp = strrchr(q->fname, '/') + 1;
+  	sprintf(fn, "out%d/queue/%s", dir_to_add, fn_tmp);
+  	//printf("\tis going to add fn = %s\n", fn);
+
+  	copy_file(q->fname, fn);
+    //add to specific queue
+
+    add_to_queue(fn, q->len, 0, 1);
+    //free(fn);
+    //printf("after adding entry to dir\n");
+
+}
+
+/*Run elem queue_entry*/
+
+static void run_queue_entry(struct queue_entry *q){
+	u8 *use_mem;
+	u8 res;
+	s32 fd;
+
+	u8* fn = strrchr(q->fname, '/') + 1;
+
+
+	add_entry_to_dir(q, CUR_PROG);
+    //ACTF("Attempting run with '%s'...", fn);
+
+    fd = open(q->fname, O_RDONLY);
+    if (fd < 0) PFATAL("Unable to open '%s'", q->fname);
+
+    use_mem = ck_alloc_nozero(q->len);
+
+    if (read(fd, use_mem, q->len) != q->len)
+      FATAL("Short read from '%s'", q->fname);
+
+    close(fd);
+
+    //res = calibrate_case(argv, q, use_mem, 0, 1);
+   	//res = FAULT_TMOUT;
+    ck_free(use_mem);
+}
+
 
 /* Perform dry run of all test cases to confirm that the app is working as
    expected. This is done only for the initial inputs, and only once. */
@@ -4534,6 +4543,8 @@ static void perform_dry_run(char** argv) {
 
     u8* fn = strrchr(q->fname, '/') + 1;
 
+    //printf("attempting to run with %s\n", fn );
+
     ACTF("Attempting dry run with '%s'...", fn);
 
     fd = open(q->fname, O_RDONLY);
@@ -4545,6 +4556,8 @@ static void perform_dry_run(char** argv) {
       FATAL("Short read from '%s'", q->fname);
 
     close(fd);
+
+    //printf("\tuse_mem = %s\n", use_mem);
 
    	res = calibrate_case(argv, q, use_mem, 0, 1);
    	//res = FAULT_TMOUT;
@@ -7949,7 +7962,7 @@ static void getProgsBlockList(){
   char cwd[1000];
   getcwd( cwd, sizeof(cwd) );
   
-  char *path_instr = malloc (sizeof(char) * 1500 + 1);
+  char *path_instr = malloc (sizeof(char) * 500 + 1);
   sprintf(path_instr, "%s/progs_blocks.txt", cwd);
 
 	FILE *fblocks;
@@ -8831,6 +8844,28 @@ static void save_cmdline(u32 argc, char** argv) {
 
 #ifndef AFL_LIB
 
+
+// TODO -> check if queue entry should be saved in prog queue 
+static u8 is_interesting_for_prog(struct queue_entry *q, u8 prog_index){
+
+	u8  *fn=malloc(sizeof(u8) * 500 + 1);
+  	u8  hnb;
+
+
+  	// check if prog exists in outdir
+  	u8* fn_tmp = strrchr(q->fname, '/') + 1;
+  	sprintf(fn, "out%d/queue/%s", prog_index, fn_tmp);
+  	if( access(fn, F_OK) != -1 ){
+  		free(fn);
+  		return 0;
+  	}
+
+  	free(fn);
+
+	return q->added_from_queue ? 0 : 1;
+
+}
+
 /*
   Called to check if the prog is changed and if it is
   does what needs to be done
@@ -8851,19 +8886,29 @@ void prog_change(){
   //printf("queue[CUR_PROG] = %s\n", queue[CUR_PROG]->fname);
   //printf("teste\n");
 
-  /*
-  struct queue_entry *q=queue[old];
+  
+  struct queue_entry *q = queue[old],
+  		 *q_o = queue[old],
+  		 *q_n = queue[CUR_PROG];
+
+
+  //printf("\nqueue 0\n");
+  //while(q_o){printf("%s\n", q_o->fname); q_o=q_o->next;}
+  //printf("\nqueue 1\n");
+  //while(q_n){printf("%s\n", q_n->fname); q_n=q_n->next;}
 
   while(q){
     
     //check if interesting to run and has yet to be added to a queue from another queue
-    if( !q->added_from_queue ){
-      add_to_queue_teste(q->fname, q->len, 1, 1); 
+    if( is_interesting_for_prog(q, CUR_PROG) ){
+      //add_to_queue_teste(q->fname, q->len, 1, 1);
+      //printf("is going to add %s\n", q->fname);
+      add_entry_to_dir(q,CUR_PROG);
+      //sleep(5);
     }
 
     q=q->next;
   }
-  */
 }
 
 /* Main entry point */
@@ -9028,7 +9073,6 @@ int main(int argc, char** argv) {
   //TODO -> make it perform a dry runon every program
   perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
 
-
   cull_queue();
 
   show_init_stats(); //-> not needed but usefull
@@ -9161,6 +9205,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
   //ck_free(target_path);
   for(int i = 0; i < numbr_of_progs_under_test; i++) ck_free(target_path[i]);
   ck_free(sync_id);
+
 
   alloc_report();
 
