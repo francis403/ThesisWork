@@ -140,8 +140,8 @@ static s32 out_fd,                    /* Persistent fd for out_file       */
            out_fd_delta[MAX_AMOUNT_OF_PROGS],
            dev_urandom_fd = -1,       /* Persistent fd for /dev/urandom   */
            dev_null_fd = -1,          /* Persistent fd for /dev/null      */
-           fsrv_write_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
-           fsrv_read_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
+           //fsrv_write_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
+           //fsrv_read_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
            fsrv_ctl_fd[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
            fsrv_st_fd[MAX_AMOUNT_OF_PROGS];				  /* Fork server status pipe (read)   */ 
 
@@ -789,11 +789,11 @@ static u8* DTD(u64 cur_ms, u64 event_ms) {
 static void mark_as_det_done(struct queue_entry* q) {
 
 
-	u8* fn = strrchr(q->fname, '/');
+	//u8* fn = strrchr(q->fname, '/');
   	u8* fn_delta = strrchr(q->fname, '/');
-	s32 fd, fd_delta;
+	s32 fd_delta;
 
-  	fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
+  	//fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
   	fn_delta = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
 	//fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
@@ -804,7 +804,7 @@ static void mark_as_det_done(struct queue_entry* q) {
 	if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
 	close(fd_delta);
 
-	ck_free(fn);
+	//ck_free(fn);
 	ck_free(fn_delta);
 
 	q->passed_det = 1;
@@ -859,19 +859,19 @@ static void mark_as_variable(struct queue_entry* q) {
 
 static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
-  u8* fn, *fn_delta;
-  s32 fd, fd_delta;
+  u8 *fn_delta;
+  s32 fd_delta;
 
   if (state == q->fs_redundant) return;
 
   q->fs_redundant = state;
 
-  fn = strrchr(q->fname, '/');
+  //fn = strrchr(q->fname, '/');
   fn_delta = strrchr(q->fname, '/');
 
  
 
-  fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
+  //fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
   fn_delta = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
   if (state) {
@@ -881,18 +881,18 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
     //close(fd);
 
     fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn);
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
     close(fd_delta);
 
 
   } else {
     
-    if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
+    //if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
     if (unlink(fn_delta)) PFATAL("Unable to remove '%s'", fn_delta);
 
   }
 
-  ck_free(fn);
+  //ck_free(fn);
   ck_free(fn_delta);
 
 }
@@ -931,45 +931,6 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det, u8 added_from_queue)
 	}
 
 	last_path_time = get_cur_time();
-
-}
-
-/* Append new test case to the current program queue. */
-
-static void add_to_queue_teste(u8* fname, u32 len, u8 passed_det, u8 added_from_queue) {
-  //printf("add to queue\n");
-  struct queue_entry* q = ck_alloc(sizeof(struct queue_entry));
-
-  q->fname        = fname;
-  q->len          = len;
-  q->depth        = cur_depth + 1;
-  q->passed_det   = passed_det;
-  q->added_from_queue = added_from_queue;
-
-  if (q->depth > max_depth) max_depth = q->depth;
-
-
-  // explodes when inside here
-  if (queue_top[CUR_PROG]) {
-
-    queue_top[CUR_PROG]->next = q;
-    queue_top[CUR_PROG] = q; 
-
-  } else q_prev100[CUR_PROG] = queue[CUR_PROG] = queue_top[CUR_PROG] = q;
-
-  queued_paths[CUR_PROG]++;
-  pending_not_fuzzed++;
-
-  cycles_wo_finds = 0;
-
-  if (!(queued_paths[CUR_PROG] % 100)) {
-
-    q_prev100[CUR_PROG]->next_100 = q;
-    q_prev100[CUR_PROG] = q;
-
-  }
-
-  last_path_time = get_cur_time();
 
 }
 
@@ -1378,7 +1339,7 @@ EXP_ST void init_count_class16(void) {
 
 		u32 i = MAP_SIZE >> 2;
 
-		printf("i = %d\n", i);
+		//printf("i = %d\n", i);
 
 		while (i--) {
 
@@ -2220,7 +2181,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 	if (!*forksrv_pid) {
 
-		printf("not forksrv_pid\n");
+		//printf("not forksrv_pid\n");
 
 
 		struct rlimit r;
@@ -2268,7 +2229,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 		setsid();
 
-		printf("before redirecting standard output\n");
+		//printf("before redirecting standard output\n");
 
     dup2(dev_null_fd, 1); // redirect standard output to dev_null_fd
     dup2(dev_null_fd, 2); // redirect the standard error to the dev_null_fd
@@ -2308,7 +2269,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     close(out_dir_fd);
     close(dev_null_fd);
     close(dev_urandom_fd);
-    close(fileno(plot_file));
+    close(fileno(plot_file[CUR_PROG]));
 
     /* This should improve performance a bit, since it stops the linker from
        doing extra work post-fork(). */
@@ -2549,7 +2510,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
     //printf("child pid = 0x%08x\n", child_pid);
 
     if (child_pid <= 0){
-      printf("child pid = %d\n", child_pid);
+      //printf("child pid = %d\n", child_pid);
       FATAL("Fork server is misbehaving (OOM?)");
     }
 
@@ -2598,7 +2559,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	if (re != 0)
           RPFATAL(-1, "Unable to read block_id from fork server (OOM?) %d", re);
       	if (stop_soon) return 0;
-      	return 1;
+      	return NULL;
       }
 
       // code that we're getting the status next
@@ -2778,6 +2739,7 @@ static u8 run_target(u32 timeout) {
 *
 * Also sets in size the number of blocks in each program
 **/
+/*
 static void run_programs_once(u32 timeout){
 	u8 fault;
 	int *size[numbr_of_progs_under_test];
@@ -2790,7 +2752,7 @@ static void run_programs_once(u32 timeout){
 	}
 
 }
-
+*/
 /* Write modified data to file for testing. If out_file is set, the old file
    is unlinked and a new one is created. Otherwise, out_fd is rewound and
    truncated. */
@@ -3116,7 +3078,7 @@ abort_calibration:
     // passamos por todos e metemos no file da queue (os inputs originais já estão na queue)
 		while (q) {
 
-			u8  *nfn, *nfn_delta[numbr_of_progs_under_test], *rsl = strrchr(q->fname, '/');
+			u8  *nfn, *rsl = strrchr(q->fname, '/');
 			u32 orig_id;
 
 			if (!rsl) rsl = q->fname; else rsl++;
@@ -3140,8 +3102,8 @@ abort_calibration:
 			resuming_fuzz = 1;
 			nfn = alloc_printf("%s/queue/%s", out_dir, rsl);
 
-      for(int i = 0; i < numbr_of_progs_under_test; i++)
-        nfn_delta[i] = alloc_printf("%s/queue/%s", out_dir_delta[i], rsl);
+    //  for(int i = 0; i < numbr_of_progs_under_test; i++)
+    //    nfn_delta[i] = alloc_printf("%s/queue/%s", out_dir_delta[i], rsl);
 
       //nfn_delta = alloc_printf("%s/queue/%s", out_dir_delta[i], rsl);
 
@@ -3172,15 +3134,15 @@ abort_calibration:
 			if (use_name) use_name += 6; else use_name = rsl;
 			nfn = alloc_printf("%s/queue/id:%06u,orig:%s", out_dir, id, use_name);
 
-      for(int i = 0; i < numbr_of_progs_under_test; i++)
-        nfn_delta[i] = alloc_printf("%s/queue/id:%06u,orig:%s", out_dir_delta[i], id, use_name);
+    //  for(int i = 0; i < numbr_of_progs_under_test; i++)
+    //    nfn_delta[i] = alloc_printf("%s/queue/id:%06u,orig:%s", out_dir_delta[i], id, use_name);
       
 
 #else
 
 			nfn = alloc_printf("%s/queue/id_%06u", out_dir, id);
-      for(int i = 0; i < numbr_of_progs_under_test; i++)
-        nfn_delta[i] = alloc_printf("%s/queue/id_%06u", out_dir_delta[i], id);
+      //for(int i = 0; i < numbr_of_progs_under_test; i++)
+      //  nfn_delta[i] = alloc_printf("%s/queue/id_%06u", out_dir_delta[i], id);
 
 #endif /* ^!SIMPLE_FILES */
 
@@ -3532,7 +3494,7 @@ keep_as_crash:
 
   }
 
-  printf("after switch\n");
+  //printf("after switch\n");
 
   /* If we're here, we apparently want to save the crash or hang
      test case, too. */
@@ -3551,7 +3513,7 @@ keep_as_crash:
 
   ck_free(fn_delta);
 
-  printf("before ending\n");
+  //printf("before ending\n");
 
   return keeping;
 
@@ -3889,7 +3851,7 @@ return res;
 
 static void nuke_resume_dir(void) {
 
-	u8* fn, fn_delta;
+	u8 *fn, *fn_delta;
 
 	fn = alloc_printf("%s/_resume/.state/deterministic_done", out_dir);
 	if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
@@ -4502,10 +4464,6 @@ static void maybe_delete_specific_out_dir(int i) {
 static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add){
 
 	u8  *fn=malloc(sizeof(u8) * 500 + 1);
-  	u8  hnb;
-  	s32 fd, fd_delta;
-  	u8  keeping = 0, res;
-
 
   	u8* fn_tmp = strrchr(q->fname, '/') + 1;
   	sprintf(fn, "out%d/queue/%s", dir_to_add, fn_tmp);
@@ -4524,10 +4482,10 @@ static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add){
 
 static void run_queue_entry(struct queue_entry *q){
 	u8 *use_mem;
-	u8 res;
+	//u8 res;
 	s32 fd;
 
-	u8* fn = strrchr(q->fname, '/') + 1;
+	//u8* fn = strrchr(q->fname, '/') + 1;
 
 
 	add_entry_to_dir(q, CUR_PROG);
@@ -4554,7 +4512,7 @@ static void run_queue_entry(struct queue_entry *q){
 
 static void perform_dry_run(char** argv) {
 
-  printf("In perform_dry_run\n");
+  //printf("In perform_dry_run\n");
 
   struct queue_entry* q = queue[CUR_PROG];
   u32 cal_failures = 0;
@@ -4586,7 +4544,7 @@ static void perform_dry_run(char** argv) {
 
     //printf("\tuse_mem = %s\n", use_mem);
    	res = calibrate_case(argv, q, use_mem, 0, 1);
-   	printf("after calibrate\n");
+   	//printf("after calibrate\n");
    	//res = FAULT_TMOUT;
     ck_free(use_mem);
 
@@ -5906,7 +5864,7 @@ static u8 fuzz_one(char** argv) {
   if(test_bool) printf("init fuzz_one\n");
 
   s32 len, fd, temp_len, i, j;
-  u8  *in_buf, *out_buf, *out_buf_delta, *orig_in, *ex_tmp, *eff_map = 0;
+  u8  *in_buf, *out_buf, *orig_in, *ex_tmp, *eff_map = 0;
   u64 havoc_queued,  orig_hit_cnt, new_hit_cnt;
   u32 splice_cycle = 0, perf_score = 100, orig_perf, prev_cksum, eff_cnt = 1;
 
@@ -7979,19 +7937,18 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 **/
 
 static void getProgsBlockList(){
-  printf("\t in getProgsBlockList\n");
 
-	char *line = NULL, *block = NULL;
-	size_t len = 0;
-	int prog = 0;
+  char *line = NULL, *block = NULL;
+  size_t len = 0;
+  int prog = 0;
 
   char cwd[1000];
-  getcwd( cwd, sizeof(cwd) );
+  if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't get path to dir!");
   
   char *path_instr = malloc (sizeof(char) * 500 + 1);
   sprintf(path_instr, "%s/progs_blocks.txt", cwd);
 
-	FILE *fblocks;
+  FILE *fblocks;
 	//fblocks = fopen("./progs_blocks.txt","r");
   fblocks = fopen(path_instr,"r");
 
@@ -8044,17 +8001,17 @@ int index = optind - 1, prog = -1, i = 0;
 	          
 	        // found a new -p
 	        if( is_recording ){
-	          printf("prog title = %s\n", prog_args[0]);
-	          printf("prog num = %d\n", prog);
+	          //printf("prog title = %s\n", prog_args[0]);
+	          //printf("prog num = %d\n", prog);
 	          check_binary(prog_args[0], &(target_path[prog]));
 	          init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
 	          	 prog, FORKSRV_FD + (prog * 2));
 	          prog_args = malloc(sizeof(char*) * size);
 	          i = 0;
-            printf("after init\n");
+            //printf("after init\n");
 	        }
 	        //printf("did not enter \n");
-          printf("outside if init\n");
+          //printf("outside if init\n");
 	        //prog_args = malloc(sizeof(char*) * size); // reset
 	        is_recording = 1;
 
@@ -8435,7 +8392,7 @@ EXP_ST void setup_all_dirs_fds(void) {
 
 EXP_ST void setup_stdio_file(void) {
 
-	printf("\t-> in setup_stdio_file out_dir -> %s\n", out_dir);
+	//printf("\t-> in setup_stdio_file out_dir -> %s\n", out_dir);
 
 	u8* fn = alloc_printf("%s/.cur_input", out_dir);
 
@@ -8448,7 +8405,7 @@ EXP_ST void setup_stdio_file(void) {
 	ck_free(fn);
 
   for(int i = 0; i < numbr_of_progs_under_test; i++){
-    printf("\t-> in setup_stdio_file out_dir -> %s\n", out_dir_delta[i]);
+    //printf("\t-> in setup_stdio_file out_dir -> %s\n", out_dir_delta[i]);
 
     fn = alloc_printf("%s/.cur_input", out_dir_delta[i]);
 
@@ -8875,7 +8832,7 @@ static void save_cmdline(u32 argc, char** argv) {
 static u8 is_interesting_for_prog(struct queue_entry *q, u8 prog_index){
 
 	u8  *fn=malloc(sizeof(u8) * 500 + 1);
-  	u8  hnb;
+  	//u8  hnb;
 
 
   	// check if prog exists in outdir
@@ -8913,9 +8870,9 @@ void prog_change(){
   //printf("teste\n");
 
   
-  struct queue_entry *q = queue[old],
-  		 *q_o = queue[old],
-  		 *q_n = queue[CUR_PROG];
+  struct queue_entry *q = queue[old];
+  		 //*q_o = queue[old],
+  		 //*q_n = queue[CUR_PROG];
 
 
   //printf("\nqueue 0\n");
@@ -8945,10 +8902,10 @@ int main(int argc, char** argv) {
 	u8  mem_limit_given = 0;
 	u64 prev_queued = 0;
   	u32 sync_interval_cnt = 0, seek_to;
+  	u8  *extras_dir = 0;
   	u8  exit_1 = !!getenv("AFL_BENCH_JUST_ONE");
 	char** use_argv;
 
-	int path_index = 0;
 	//SAYF(cCYA "afl-fuzz " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
 
 	doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
@@ -9079,7 +9036,7 @@ int main(int argc, char** argv) {
 
   pivot_inputs();
 
-  //if (extras_dir) load_extras(extras_dir);
+  if (extras_dir) load_extras(extras_dir);
 
   if (!timeout_given) find_timeout();
 

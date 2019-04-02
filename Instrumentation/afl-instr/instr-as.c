@@ -71,6 +71,7 @@ int numbr_inst = 0;
      Affects what forksrv we are communicating*/
 int program_version;
 
+char cwd[1000];
 
 /*File of prog blocks*/
 FILE *fblocks;
@@ -412,9 +413,6 @@ static void add_instrumentation(void) {
 
   //added by Francisco Araujo: keeps the lines to be instrumented
   FILE *instr_lines, *instr_lines_after;
-
-  char cwd[1000];
-  getcwd( cwd, sizeof(cwd) );
   
   char *fname = malloc (sizeof(char) * 1500 + 1);
   sprintf(fname, "%s/instr_lines.txt", cwd);
@@ -754,12 +752,6 @@ static void add_instrumentation(void) {
   //rewind(inf);
   FILE *original_changed = fopen(input_file, "wb+");
   FILE *read_modified = fopen(fname_after, "r");
-  if(original_changed == NULL){
-    printf("Null file in original\n");
-  }
-  if (read_modified == NULL) {
-    printf("Null file in the read modified\n");
-  }
 
   copy(read_modified, original_changed);
   fclose(read_modified);
@@ -808,8 +800,7 @@ int main(int argc, char** argv) {
 
   // Open file to save blocks
 
-  char cwd[1000];
-  getcwd( cwd, sizeof(cwd) );
+  if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't find path to dir!");
   
   char *path_instr = malloc (sizeof(char) * 1500 + 1);
   sprintf(path_instr, "%s/progs_blocks.txt", cwd);
