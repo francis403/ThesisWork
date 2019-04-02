@@ -82,6 +82,8 @@
 //remove before release
 short test_bool = 0;
 
+//unsigned short *blocks_passed;
+
 
 /* Lots of globals, but mostly for the status UI and other things where it
    really makes no sense to haul them around as function parameters. */
@@ -153,7 +155,7 @@ static s32 forksrv_pid[MAX_AMOUNT_OF_PROGS],               /* PID of the fork se
 
 
 /*Program corrently under test*/
-int CUR_PROG = 0;
+static int CUR_PROG = 0;
 
 static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
 
@@ -800,6 +802,8 @@ static void mark_as_det_done(struct queue_entry* q) {
 	//if (fd < 0) PFATAL("Unable to create '%s'", fn);
 	//close(fd);
 
+  	if(test_bool)	printf("cur prog = %d\n", CUR_PROG);
+
 	fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
 	if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
 	close(fd_delta);
@@ -950,6 +954,12 @@ EXP_ST void destroy_queue(void) {
 				//free(q->blocks_hit);
 
 				ck_free(q);
+			}
+			else{ 
+				free(q->fname);
+				free(q->trace_mini);
+				ck_free(q);
+				//free(q);
 			}
 			q = n;
 		}
@@ -2722,7 +2732,7 @@ static u8 run_target(u32 timeout) {
   u8 fault;
   int hit;
   int *blocks = run_forkserver_on_target(timeout, &hit, CUR_PROG, &fault);
-  free (blocks);
+  if(blocks)	free (blocks);
 
   /*
   int i = 0;
@@ -3306,7 +3316,7 @@ static void write_crash_readme(void) {
 
 static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
-  u8  *fn = "", *fn_delta;
+  u8  *fn_delta="";
   u8  hnb;
   s32 fd, fd_delta;
   u8  keeping = 0, res;
@@ -3329,14 +3339,14 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifndef SIMPLE_FILES
 
-    fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths[CUR_PROG],
-                      describe_op(hnb));
+    //fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths[CUR_PROG],
+    //                  describe_op(hnb));
     fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], queued_paths[CUR_PROG],
                       describe_op(hnb));
 
 #else
 
-    fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths[CUR_PROG]);
+    //fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths[CUR_PROG]);
     fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], queued_paths[CUR_PROG]);
 
 #endif /* ^!SIMPLE_FILES */
@@ -3359,12 +3369,12 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     if (res == FAULT_ERROR)
       FATAL("Unable to execute target application");
 
-    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    //fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
     fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    //if (fd < 0) PFATAL("Unable to create '%s'", fn);
     if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
-    ck_write(fd, mem, len, fn);
-    close(fd);
+    //ck_write(fd, mem, len, fn);
+    //close(fd);
     ck_write(fd_delta, mem, len, fn_delta);
     close(fd_delta);
 
@@ -3420,15 +3430,15 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifndef SIMPLE_FILES
 
-      fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
-                        unique_hangs, describe_op(0));
+      //fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
+      //                  unique_hangs, describe_op(0));
       fn_delta = alloc_printf("%s/hangs/id:%06llu,%s", out_dir_delta[CUR_PROG],
                         unique_hangs, describe_op(0));
 
 #else
 
-      fn = alloc_printf("%s/hangs/id_%06llu", out_dir,
-                        unique_hangs);
+      //fn = alloc_printf("%s/hangs/id_%06llu", out_dir,
+      //                  unique_hangs);
       fn_delta = alloc_printf("%s/hangs/id_%06llu", out_dir_delta[CUR_PROG],
                         unique_hangs);
 
@@ -3467,15 +3477,15 @@ keep_as_crash:
 
 #ifndef SIMPLE_FILES
 
-      fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
-                        unique_crashes, kill_signal, describe_op(0));
+      //fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
+      //                  unique_crashes, kill_signal, describe_op(0));
       fn_delta = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir_delta[CUR_PROG],
                         unique_crashes, kill_signal, describe_op(0));
 
 #else
 
-      fn = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir, unique_crashes,
-                        kill_signal);
+      //fn = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir, unique_crashes,
+      //                  kill_signal);
       fn_delta = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir_delta[CUR_PROG], unique_crashes,
                         kill_signal);
 
@@ -3499,12 +3509,12 @@ keep_as_crash:
   /* If we're here, we apparently want to save the crash or hang
      test case, too. */
 
-  fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-  if (fd < 0) PFATAL("Unable to create '%s'", fn);
-  ck_write(fd, mem, len, fn);
-  close(fd);
+  //fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+  //if (fd < 0) PFATAL("Unable to create '%s'", fn);
+  //ck_write(fd, mem, len, fn);
+  //close(fd);
 
-  ck_free(fn);
+  //ck_free(fn);
 
   fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
   if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
@@ -4463,7 +4473,7 @@ static void maybe_delete_specific_out_dir(int i) {
 
 static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add){
 
-	u8  *fn=malloc(sizeof(u8) * 500 + 1);
+	u8  *fn = malloc(sizeof(u8) * 500 + 1);
 
   	u8* fn_tmp = strrchr(q->fname, '/') + 1;
   	sprintf(fn, "out%d/queue/%s", dir_to_add, fn_tmp);
@@ -7979,16 +7989,15 @@ static void getProgsBlockList(){
 
 /**
 * Start all forkserver in the program and check their binary
-* TODO -> tem um bug se qualquer um dos programs tiver argumentos que precisa de passar
 **/
 static void init_all_forkservers(char **argv){
 
-int index = optind - 1, prog = -1, i = 0;
-  short size = 25;
-  char **prog_args = malloc(sizeof(char*) * size); 
-  u8 is_recording = 0;
+	int index = optind - 1, prog = -1, i = 0;
+  	short size = 25;
+  	char **prog_args = malloc(sizeof(char*) * size); 
+  	u8 is_recording = 0;
 
-	printf("Enters init_all_forkservers!!!\n");
+	//printf("Enters init_all_forkservers!!!\n");
   
   
 	while( *(argv + index) ){
@@ -8006,7 +8015,7 @@ int index = optind - 1, prog = -1, i = 0;
 	          check_binary(prog_args[0], &(target_path[prog]));
 	          init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
 	          	 prog, FORKSRV_FD + (prog * 2));
-	          prog_args = malloc(sizeof(char*) * size);
+	          //prog_args = malloc(sizeof(char*) * size);
 	          i = 0;
             //printf("after init\n");
 	        }
@@ -8036,14 +8045,20 @@ int index = optind - 1, prog = -1, i = 0;
 
   // initiate the last one
   if(is_recording){
-    printf("\tlast one\n");
-  	printf("prog title = %s\n", prog_args[0]);
-    printf("prog num = %d\n", prog);
+    //printf("\tlast one\n");
+  	//printf("prog title = %s\n", prog_args[0]);
+    //printf("prog num = %d\n", prog);
     check_binary(prog_args[0], &(target_path[prog]));
     init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
       	prog, FORKSRV_FD + (prog * 2));
   }
-
+  /*
+  i = 0;
+  while( *(prog_args + i) ){
+  	free( *(prog_args + i) );
+  	i++;
+  }
+  */
   free(prog_args);
 
 
@@ -8863,7 +8878,7 @@ void prog_change(){
   u8 old = CUR_PROG;
   //change the program we are fuzzing
   CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test;
-
+  //FATAL("ran past prog_change CUR_PROG = %d and numbr_of_progs_under_test %d", CUR_PROG, numbr_of_progs_under_test);
   // pass through all the queue values that have yet to be seen and originated from the one we are seeing
   //printf("CUR_PROG = %d\n", CUR_PROG);
   //printf("queue[CUR_PROG] = %s\n", queue[CUR_PROG]->fname);
@@ -8874,7 +8889,7 @@ void prog_change(){
   		 //*q_o = queue[old],
   		 //*q_n = queue[CUR_PROG];
 
-
+  test_bool = 1;
   //printf("\nqueue 0\n");
   //while(q_o){printf("%s\n", q_o->fname); q_o=q_o->next;}
   //printf("\nqueue 1\n");
