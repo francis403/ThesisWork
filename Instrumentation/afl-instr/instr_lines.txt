@@ -24,25 +24,6 @@ main:
 	.loc 1 21 0
 	.cfi_startproc
 .LVL0:
-
-/* --- AFL TRAMPOLINE (64-BIT) --- */
-
-.align 4
-
-leaq -(128+24)(%rsp), %rsp
-movq %rdx,  0(%rsp)
-movq %rcx,  8(%rsp)
-movq %rax, 16(%rsp)
-movq $0x0000a1d9, %rcx
-movl $0x0000a1d9, __afl_block_temp
-call __afl_maybe_log
-movq 16(%rsp), %rax
-movq  8(%rsp), %rcx
-movq  0(%rsp), %rdx
-leaq (128+24)(%rsp), %rsp
-
-/* --- END --- */
-
 	subq	$24, %rsp
 	.cfi_def_cfa_offset 32
 .LBB10:
@@ -71,47 +52,9 @@ leaq (128+24)(%rsp), %rsp
 	.loc 1 25 0
 	testq	%rax, %rax
 	jle	.L8
-
-/* --- AFL TRAMPOLINE (64-BIT) --- */
-
-.align 4
-
-leaq -(128+24)(%rsp), %rsp
-movq %rdx,  0(%rsp)
-movq %rcx,  8(%rsp)
-movq %rax, 16(%rsp)
-movq $0x00000870, %rcx
-movl $0x00000870, __afl_block_temp
-call __afl_maybe_log
-movq 16(%rsp), %rax
-movq  8(%rsp), %rcx
-movq  0(%rsp), %rdx
-leaq (128+24)(%rsp), %rsp
-
-/* --- END --- */
-
 	.loc 1 30 0
 	cmpb	$48, (%rsp)
 	je	.L9
-
-/* --- AFL TRAMPOLINE (64-BIT) --- */
-
-.align 4
-
-leaq -(128+24)(%rsp), %rsp
-movq %rdx,  0(%rsp)
-movq %rcx,  8(%rsp)
-movq %rax, 16(%rsp)
-movq $0x0000217a, %rcx
-movl $0x0000217a, __afl_block_temp
-call __afl_maybe_log
-movq 16(%rsp), %rax
-movq  8(%rsp), %rcx
-movq  0(%rsp), %rdx
-leaq (128+24)(%rsp), %rsp
-
-/* --- END --- */
-
 .LVL5:
 .LBB14:
 .LBB15:
@@ -124,25 +67,6 @@ leaq (128+24)(%rsp), %rsp
 .LBE15:
 .LBE14:
 	.loc 1 35 0
-
-/* --- AFL TRAMPOLINE (64-BIT) --- */
-
-.align 4
-
-leaq -(128+24)(%rsp), %rsp
-movq %rdx,  0(%rsp)
-movq %rcx,  8(%rsp)
-movq %rax, 16(%rsp)
-movq $0x000020c7, %rcx
-movl $0x000020c7, __afl_block_temp
-call __afl_maybe_log
-movq 16(%rsp), %rax
-movq  8(%rsp), %rcx
-movq  0(%rsp), %rdx
-leaq (128+24)(%rsp), %rsp
-
-/* --- END --- */
-
 	xorl	%edi, %edi
 	call	exit
 .LVL7:
@@ -150,25 +74,6 @@ leaq (128+24)(%rsp), %rsp
 .LBB16:
 .LBB17:
 	.loc 3 104 0
-
-/* --- AFL TRAMPOLINE (64-BIT) --- */
-
-.align 4
-
-leaq -(128+24)(%rsp), %rsp
-movq %rdx,  0(%rsp)
-movq %rcx,  8(%rsp)
-movq %rax, 16(%rsp)
-movq $0x00003338, %rcx
-movl $0x00003338, __afl_block_temp
-call __afl_maybe_log
-movq 16(%rsp), %rax
-movq  8(%rsp), %rcx
-movq  0(%rsp), %rdx
-leaq (128+24)(%rsp), %rsp
-
-/* --- END --- */
-
 	movl	$.LC1, %edi
 	call	puts
 .LVL8:
@@ -179,25 +84,6 @@ leaq (128+24)(%rsp), %rsp
 .LBE16:
 .LBB18:
 .LBB19:
-
-/* --- AFL TRAMPOLINE (64-BIT) --- */
-
-.align 4
-
-leaq -(128+24)(%rsp), %rsp
-movq %rdx,  0(%rsp)
-movq %rcx,  8(%rsp)
-movq %rax, 16(%rsp)
-movq $0x00007ea2, %rcx
-movl $0x00007ea2, __afl_block_temp
-call __afl_maybe_log
-movq 16(%rsp), %rax
-movq  8(%rsp), %rcx
-movq  0(%rsp), %rdx
-leaq (128+24)(%rsp), %rsp
-
-/* --- END --- */
-
 	movl	$.LC0, %edi
 	call	puts
 .LVL10:
@@ -1500,168 +1386,3 @@ leaq (128+24)(%rsp), %rsp
 	.string	"_IO_lock_t"
 	.ident	"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.11) 5.4.0 20160609"
 	.section	.note.GNU-stack,"",@progbits
-
-/* --- AFL MAIN PAYLOAD (64-BIT) --- */
-
-.text
-.att_syntax
-.code64
-.align 8
-
-__afl_maybe_log:
-
-  lahf
-  seto  %al
-
-  /* Check if SHM region is already mapped. */
-
-  movq  __afl_area_ptr(%rip), %rdx
-  testq %rdx, %rdx
-  je    __afl_setup
-
-__afl_store:
-
-  /* Calculate and store hit for the code location specified in rcx. */
-
-  xorq __afl_prev_loc(%rip), %rcx
-  xorq %rcx, __afl_prev_loc(%rip)
-  shrq $1, __afl_prev_loc(%rip)
-
-  incb (%rdx, %rcx, 1)
-  
-/* Write home and tell them the id of the block */
-  movq $4, %rdx               /* length    */
-  leaq __afl_block_temp(%rip), %rsi
-  movq __fsrv_write, %rdi       /* file desc */
-call write@PLT
-
-  /* In child process: close fds, resume execution. */
-
-  movq __afl_block_temp, %rdi       /* file desc */
-
-  movq __fsrv_read, %rdi       /* file desc */
-__afl_return:
-
-  addb $127, %al
-  sahf
-  ret
-
-.align 8
-
-__afl_setup:
-
-  /* Do not retry setup if we had previous failures. */
-
-  cmpb $0, __afl_setup_failure(%rip)
-  jne __afl_return
-
-  /* Check out if we have a global pointer on file. */
-
-  movq  __afl_global_area_ptr@GOTPCREL(%rip), %rdx
-  movq  (%rdx), %rdx
-  testq %rdx, %rdx
-  je    __afl_setup_first
-
-  movq %rdx, __afl_area_ptr(%rip)
-  jmp  __afl_store
-
-__afl_setup_first:
-
-  /* Save everything that is not yet saved and that may be touched by
-     getenv() and several other libcalls we'll be relying on. */
-
-  leaq -352(%rsp), %rsp
-
-  movq %rax,   0(%rsp)
-  movq %rcx,   8(%rsp)
-  movq %rdi,  16(%rsp)
-  movq %rsi,  32(%rsp)
-  movq %r8,   40(%rsp)
-  movq %r9,   48(%rsp)
-  movq %r10,  56(%rsp)
-  movq %r11,  64(%rsp)
-
-  movq %xmm0,  96(%rsp)
-  movq %xmm1,  112(%rsp)
-  movq %xmm2,  128(%rsp)
-  movq %xmm3,  144(%rsp)
-  movq %xmm4,  160(%rsp)
-  movq %xmm5,  176(%rsp)
-  movq %xmm6,  192(%rsp)
-  movq %xmm7,  208(%rsp)
-  movq %xmm8,  224(%rsp)
-  movq %xmm9,  240(%rsp)
-  movq %xmm10, 256(%rsp)
-  movq %xmm11, 272(%rsp)
-  movq %xmm12, 288(%rsp)
-  movq %xmm13, 304(%rsp)
-  movq %xmm14, 320(%rsp)
-  movq %xmm15, 336(%rsp)
-
-  /* Map SHM, jumping to __afl_setup_abort if something goes wrong. */
-
-  /* The 64-bit ABI requires 16-byte stack alignment. We'll keep the
-     original stack ptr in the callee-saved r12. */
-
-  pushq %r12
-  movq  %rsp, %r12
-  subq  $16, %rsp
-  andq  $0xfffffffffffffff0, %rsp
-
-  leaq .AFL_SHM_ENV(%rip), %rdi
-call getenv@PLT
-
-  testq %rax, %rax
-  je    __afl_setup_abort
-
-  movq  %rax, %rdi
-call atoi@PLT
-
-  xorq %rdx, %rdx   /* shmat flags    */
-  xorq %rsi, %rsi   /* requested addr */
-  movq %rax, %rdi   /* SHM ID         */
-call shmat@PLT
-
-  cmpq $-1, %rax
-  je   __afl_setup_abort
-
-  /* Store the address of the SHM region. */
-
-  movq %rax, %rdx
-  movq %rax, __afl_area_ptr(%rip)
-
-  movq __afl_global_area_ptr@GOTPCREL(%rip), %rdx
-  movq %rax, (%rdx)
-  movq %rax, %rdx
-
-__afl_forkserver:
-
-  /* Enter the fork server mode to avoid the overhead of execve() calls. We
-     push rdx (area ptr) twice to keep stack alignment neat. */
-
-  pushq %rdx
-  pushq %rdx
-
-/*   Save the important information first  */
-  movl $198, __fsrv_read
-  movl $199, __fsrv_write
-  /* Phone home and tell the parent that we're OK. (Note that signals with
-     no SA_RESTART will mess it up). If this fails, assume that the fd is
-     closed because we were execve()d from an instrumented binary, or because
-     the parent doesn't want to use the fork server. */
-
-  movq $4, %rdx               /* length    */
-  leaq __afl_temp(%rip), %rsi /* data      */
-  movq __fsrv_write, %rdi       /* file desc */
-call write@PLT
-
-  cmpq $4, %rax
-  jne  __afl_fork_resume
-
-__afl_fork_wait_loop:
-
-  /* Wait for parent by reading from the pipe. Abort if read fails. */
-
-  movq $4, %rdx               /* length    */
-  leaq __afl_temp(%rip), %rsi /* data      */
- 

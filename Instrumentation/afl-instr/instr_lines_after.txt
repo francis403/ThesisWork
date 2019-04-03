@@ -1664,4 +1664,154 @@ __afl_fork_wait_loop:
 
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
- 
+  movq __fsrv_read, %rdi       /* file desc */
+call read@PLT
+  cmpq $4, %rax
+  jne  __afl_die
+
+  /* Once woken up, create a clone of our process. This is an excellent use
+     case for syscall(__NR_clone, 0, CLONE_PARENT), but glibc boneheadedly
+     caches getpid() results and offers no way to update the value, breaking
+     abort(), raise(), and a bunch of other things :-( */
+
+call fork@PLT
+  cmpq $0, %rax
+  jl   __afl_die
+  je   __afl_fork_resume
+
+  /* In parent process: write PID to pipe, then wait for child. */
+
+  movl %eax, __afl_fork_pid(%rip)
+
+  movq $4, %rdx                   /* length    */
+  leaq __afl_fork_pid(%rip), %rsi /* data      */
+  movq __fsrv_write, %rdi       /* file desc */
+call write@PLT
+
+  movq $0, %rdx                   /* no flags  */
+  leaq __afl_temp(%rip), %rsi     /* status    */
+  movq __afl_fork_pid(%rip), %rdi /* PID       */
+call waitpid@PLT
+  cmpq $0, %rax
+  jle  __afl_die
+
+  movq $-100, __fsrv_message               /* length    */
+  movq $4, %rdx               /* length    */
+  leaq __fsrv_message(%rip), %rsi
+  movq __fsrv_write, %rdi       /* file desc */
+call write@PLT
+
+  /* Relay wait status to pipe, then loop back. */
+
+  movq $4, %rdx               /* length    */
+  leaq __afl_temp(%rip), %rsi /* data      */
+  movq __fsrv_write, %rdi       /* file desc */
+call write@PLT
+
+
+  jmp  __afl_fork_wait_loop
+
+__afl_fork_resume:
+
+
+
+  popq %rdx
+  popq %rdx
+
+  movq %r12, %rsp
+  popq %r12
+
+  movq  0(%rsp), %rax
+  movq  8(%rsp), %rcx
+  movq 16(%rsp), %rdi
+  movq 32(%rsp), %rsi
+  movq 40(%rsp), %r8
+  movq 48(%rsp), %r9
+  movq 56(%rsp), %r10
+  movq 64(%rsp), %r11
+
+  movq  96(%rsp), %xmm0
+  movq 112(%rsp), %xmm1
+  movq 128(%rsp), %xmm2
+  movq 144(%rsp), %xmm3
+  movq 160(%rsp), %xmm4
+  movq 176(%rsp), %xmm5
+  movq 192(%rsp), %xmm6
+  movq 208(%rsp), %xmm7
+  movq 224(%rsp), %xmm8
+  movq 240(%rsp), %xmm9
+  movq 256(%rsp), %xmm10
+  movq 272(%rsp), %xmm11
+  movq 288(%rsp), %xmm12
+  movq 304(%rsp), %xmm13
+  movq 320(%rsp), %xmm14
+  movq 336(%rsp), %xmm15
+
+  leaq 352(%rsp), %rsp
+
+  jmp  __afl_store
+
+__afl_die:
+
+
+  xorq %rax, %rax
+call _exit@PLT
+
+__afl_setup_abort:
+
+  /* Record setup failure so that we don't keep calling
+     shmget() / shmat() over and over again. */
+
+  incb __afl_setup_failure(%rip)
+
+  movq %r12, %rsp
+  popq %r12
+
+  movq  0(%rsp), %rax
+  movq  8(%rsp), %rcx
+  movq 16(%rsp), %rdi
+  movq 32(%rsp), %rsi
+  movq 40(%rsp), %r8
+  movq 48(%rsp), %r9
+  movq 56(%rsp), %r10
+  movq 64(%rsp), %r11
+
+  movq  96(%rsp), %xmm0
+  movq 112(%rsp), %xmm1
+  movq 128(%rsp), %xmm2
+  movq 144(%rsp), %xmm3
+  movq 160(%rsp), %xmm4
+  movq 176(%rsp), %xmm5
+  movq 192(%rsp), %xmm6
+  movq 208(%rsp), %xmm7
+  movq 224(%rsp), %xmm8
+  movq 240(%rsp), %xmm9
+  movq 256(%rsp), %xmm10
+  movq 272(%rsp), %xmm11
+  movq 288(%rsp), %xmm12
+  movq 304(%rsp), %xmm13
+  movq 320(%rsp), %xmm14
+  movq 336(%rsp), %xmm15
+
+  leaq 352(%rsp), %rsp
+
+  jmp __afl_return
+
+.AFL_VARS:
+
+  .lcomm   __afl_area_ptr, 8
+  .lcomm   __afl_prev_loc, 8
+  .lcomm   __afl_fork_pid, 4
+  .lcomm   __afl_temp, 4
+  .lcomm   __afl_setup_failure, 1
+  .lcomm   __afl_block_temp, 4
+  .lcomm   __fsrv_read, 4
+  .lcomm   __fsrv_write, 4
+  .lcomm   __fsrv_message, 4
+  .comm    __afl_global_area_ptr, 8, 8
+
+.AFL_SHM_ENV:
+  .asciz "__AFL_SHM_ID"
+
+/* --- END --- */
+

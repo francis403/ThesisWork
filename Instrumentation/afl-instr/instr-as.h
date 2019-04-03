@@ -218,13 +218,13 @@ static const u8* main_payload_64 =
 #else
   "  incb (%%rdx, %%rcx, 1)\n"
 #endif /* ^SKIP_COUNTS */
-  "\n"
+  //"\n"
   "  \n/* Write home and tell them the id of the block */\n"
   "  movq $4, %%rdx               /* length    */\n"
   "  leaq __afl_block_temp(%%rip), %%rsi\n"
   //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
   "  movq __fsrv_write, %%rdi       /* file desc */\n"
-  CALL_L64("write") //a write that is not catched results in a crash
+  CALL_L64("write")
   "\n"
   "  /* In child process: close fds, resume execution. */\n"
   "\n"

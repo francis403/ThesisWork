@@ -2479,7 +2479,7 @@ FATAL("Fork server handshake failed");
 **/ 
 
 int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
-
+	//printf("run_forkserver_on_target\n");
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
 	u32 tb4;
@@ -2550,7 +2550,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   unique_blocks = 0;
 
   //printf("run_forkserver_on_target\n");
-
+  //printf("before while\n");
   while( 1 ){
 
     //printf("poll\n");
@@ -2572,7 +2572,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	return NULL;
       }
 
-      // code that we're getting the status next
+      // code that we're getting the status next and we should break from the while
       if( id == -100 ) {break;}
 
       *hit = *hit + 1;
@@ -2616,13 +2616,14 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	if(queue_cur[CUR_PROG] != NULL)
       		queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
       }
+      //printf("block found = %d\n", id);
       BLOCKS_FOUND[id] ++;
 
       //printf("*block_hit = 0x%08x\n", *(blocks + i));
       i++;  
 
   }
-
+  //printf("after while\n");
   //status = message;
 
 	/* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
@@ -2633,7 +2634,10 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 		RPFATAL(res, "Unable to communicate with fork server (OOM?)");
 
 	}
-  
+  	
+  	// TODO -> I think the program is resulting in a segfault
+	//printf("status = %d\n", status);
+
   //printf("status = %d\n", status);
 
 
@@ -2693,12 +2697,12 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   classify_counts((u32*)trace_bits);
 #endif /* ^__x86_64__ */
 
-
+  //printf("after classify counts\n");
 
   /* Report outcome to caller. */
 
   if (WIFSIGNALED(status) && !stop_soon) {
-
+  	//printf("in if\n");
   	//printf("status = %d\n", status);
   	//printf("signal status = %d\n", WIFSIGNALED(status) );
 
@@ -2708,7 +2712,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
     if (child_timed_out && kill_signal == SIGKILL) *fault = FAULT_TMOUT;
 
-    else *fault = FAULT_CRASH;
+    else{ *fault = FAULT_CRASH; }
   }
 
   /* A somewhat nasty hack for MSAN, which doesn't support abort_on_error and
@@ -4865,7 +4869,7 @@ static void show_stats(void) {
 
   sprintf(tmp + banner_pad, "%s " cLCY VERSION cLGN
           " (%s)",  crash_mode ? cPIN "peruvian were-rabbit" : 
-          cYEL "american fuzzy lop", use_banner);
+          cYEL "american fuzzy lop - (delta-fuzzer)", use_banner);
 
   SAYF("\n%s\n\n", tmp);
 
@@ -7957,7 +7961,7 @@ static void getProgsBlockList(){
   	
   	for(int prog = 0; prog < numbr_of_progs_under_test; prog++){
 	  	char *path_instr = malloc (sizeof(char) * 250 + 1);
-	  	sprintf(path_instr, "%s/%s_blocks.txt", cwd, prog_names[prog]);
+	  	sprintf(path_instr, "%s_blocks.txt", prog_names[prog]);
 
 	  	FILE *fblocks;
 		//fblocks = fopen("./progs_blocks.txt","r");
@@ -7967,7 +7971,7 @@ static void getProgsBlockList(){
 
 		if( fblocks == NULL ){
 			// no list of blocks
-			FATAL("No blocks list found");
+			FATAL("No blocks list found with name %s", path_instr);
 		}
 		
 
@@ -8742,9 +8746,9 @@ static void check_asan_opts(void) {
 EXP_ST void detect_file_args(char** argv) {
 
   u32 i = 0;
-  u8* cwd = getcwd(NULL, 0);
+  u8* cwd2 = getcwd(NULL, 0);
 
-  if (!cwd) PFATAL("getcwd() failed");
+  if (!cwd2) PFATAL("getcwd() failed");
 
   while (argv[i]) {
 
@@ -8762,7 +8766,7 @@ EXP_ST void detect_file_args(char** argv) {
       /* Be sure that we're always using fully-qualified paths. */
 
       if (out_file[0] == '/') aa_subst = out_file;
-      else aa_subst = alloc_printf("%s/%s", cwd, out_file);
+      else aa_subst = alloc_printf("%s/%s", cwd2, out_file);
 
       /* Construct a replacement argv value. */
 
@@ -8779,7 +8783,7 @@ EXP_ST void detect_file_args(char** argv) {
 
   }
 
-  free(cwd); /* not tracked */
+  free(cwd2); /* not tracked */
 
 }
 
@@ -8824,6 +8828,78 @@ EXP_ST void setup_signal_handlers(void) {
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGTSTP, &sa, NULL);
 	sigaction(SIGPIPE, &sa, NULL);
+
+}
+
+/* Rewrite argv for QEMU. */
+
+static char** get_qemu_argv(u8* own_loc, char** argv, int argc) {
+
+  char** new_argv = ck_alloc(sizeof(char*) * (argc + 4));
+  u8 *tmp, *cp, *rsl, *own_copy;
+
+  /* Workaround for a QEMU stability glitch. */
+
+  setenv("QEMU_LOG", "nochain", 1);
+
+  memcpy(new_argv + 3, argv + 1, sizeof(char*) * argc);
+
+  new_argv[2] = target_path[CUR_PROG];
+  new_argv[1] = "--";
+
+  /* Now we need to actually find the QEMU binary to put in argv[0]. */
+
+  tmp = getenv("AFL_PATH");
+
+  if (tmp) {
+
+    cp = alloc_printf("%s/afl-qemu-trace", tmp);
+
+    if (access(cp, X_OK))
+      FATAL("Unable to find '%s'", tmp);
+
+    target_path[CUR_PROG] = new_argv[0] = cp;
+    return new_argv;
+
+  }
+
+  own_copy = ck_strdup(own_loc);
+  rsl = strrchr(own_copy, '/');
+
+  if (rsl) {
+
+    *rsl = 0;
+
+    cp = alloc_printf("%s/afl-qemu-trace", own_copy);
+    ck_free(own_copy);
+
+    if (!access(cp, X_OK)) {
+
+      target_path[CUR_PROG] = new_argv[0] = cp;
+      return new_argv;
+
+    }
+
+  } else ck_free(own_copy);
+
+  if (!access(BIN_PATH "/afl-qemu-trace", X_OK)) {
+
+    target_path[CUR_PROG] = new_argv[0] = ck_strdup(BIN_PATH "/afl-qemu-trace");
+    return new_argv;
+
+  }
+
+  SAYF("\n" cLRD "[-] " cRST
+       "Oops, unable to find the 'afl-qemu-trace' binary. The binary must be built\n"
+       "    separately by following the instructions in qemu_mode/README.qemu. If you\n"
+       "    already have the binary installed, you may need to specify AFL_PATH in the\n"
+       "    environment.\n\n"
+
+       "    Of course, even without QEMU, afl-fuzz can still work with binaries that are\n"
+       "    instrumented at compile time with afl-gcc. It is also possible to use it as a\n"
+       "    traditional \"dumb\" fuzzer by specifying '-n' in the command line.\n");
+
+  FATAL("Failed to locate 'afl-qemu-trace'.");
 
 }
 
@@ -9084,6 +9160,12 @@ int main(int argc, char** argv) {
   /*we start forkservers here*/
   init_all_forkservers(argv);
   get_prog_targets(0,1); //TODO - not working
+
+  if (qemu_mode)
+    use_argv = get_qemu_argv(argv[0], argv + optind, argc - optind);
+  else
+    use_argv = argv + optind;
+
   //TODO -> make it perform a dry runon every program
   perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
 

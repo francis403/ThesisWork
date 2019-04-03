@@ -752,6 +752,8 @@ static void add_instrumentation(void) {
     fprintf(instr_lines_after, (use_64bit ? main_payload_64 : main_payload_32), FORKSRV_FD + (program_version * 2),  FORKSRV_FD + (program_version * 2) + 1); //write 
   }
   
+  printf("forkserver id = %d\n", (FORKSRV_FD + (program_version * 2)) );
+
   //rewind(inf);
   FILE *original_changed = fopen(input_file, "wb+");
   FILE *read_modified = fopen(fname_after, "r");
@@ -805,26 +807,15 @@ int main(int argc, char** argv) {
   // Open file to save blocks
 
   if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't find path to dir!");
-  
-  printf("args\n");
-  int p = 0;
-  while( *(argv + p) ){
-      //if(strcmp(*(argv + p), "-p") == 0){
-        //prog_names[numbr_of_progs_under_test] =*(argv + p + 1);
-      //  prog_name[num_prog_found] = *(argv + p + 1);
-      //  num_prog_found ++;
-      //}
-    //printf("%s\n", *(argv + p));
-    p ++;
-  }
 
   char *path_instr = malloc (sizeof(char) * 1500 + 1);
 
 
   program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
+
   prog_title = getenv(FORKSRV_ENV_TITLE);
 
-  if(prog_title == NULL){
+  if( prog_title == NULL ){
     // set default value
     sprintf(path_instr, "%s/progs_blocks.txt", cwd);
   }
@@ -832,7 +823,8 @@ int main(int argc, char** argv) {
     sprintf(path_instr, "%s/%s_blocks.txt", cwd, prog_title);
   }
   //printf("path_instr = %s\n", path_instr);
-  //printf("prog_title = %s\n", prog_title);
+  printf("prog_title = %s\n", prog_title);
+  printf("program version = %d\n", program_version);
 
   fblocks = fopen(path_instr,"w");
 
