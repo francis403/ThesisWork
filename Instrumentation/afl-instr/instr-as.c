@@ -795,6 +795,7 @@ static void add_instrumentation(void) {
 
 
 /* Main entry point */
+// TODO -> make this develop a target like aflgo does so it's easier to test
 
 int main(int argc, char** argv) {
 
@@ -802,6 +803,10 @@ int main(int argc, char** argv) {
 
   if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't find path to dir!");
   
+  printf("args passed\n");
+  int index = 0;
+  while( argv[index] ){ printf("%s ", argv[index]); index ++;}
+
   char *path_instr = malloc (sizeof(char) * 1500 + 1);
   sprintf(path_instr, "%s/progs_blocks.txt", cwd);
 
@@ -883,6 +888,10 @@ int main(int argc, char** argv) {
   //printf("as_params[0] = %s\n", as_params[0]);
 
   if (!(pid = fork())) {
+
+    //printf("arguments are: \n");
+
+    //while( as_params[index] ){ printf("arg = %s ", as_params[index]); index ++;}
 
     execvp(as_params[0], (char**)as_params);
     FATAL("Oops, failed to execute '%s' - check your PATH", as_params[0]);

@@ -7944,47 +7944,56 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 * Get the list of blocks availabe in all programs
 * Used once in the beginning
 *TODO -> working but will probably be improved
+* TODO -> make this get the target, if there is one
 **/
 
 static void getProgsBlockList(){
 
-  char *line = NULL, *block = NULL;
-  size_t len = 0;
-  int prog = 0;
+  	char *line = NULL, *block = NULL;
+  	size_t len = 0;
+  	int prog = 0;
 
-  char cwd[1000];
-  if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't get path to dir!");
+  	char cwd[1000];
+  	if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't get path to dir!");
   
-  char *path_instr = malloc (sizeof(char) * 500 + 1);
-  sprintf(path_instr, "%s/progs_blocks.txt", cwd);
+  	char *path_instr = malloc (sizeof(char) * 500 + 1);
+  	sprintf(path_instr, "%s/progs_blocks.txt", cwd);
 
-  FILE *fblocks;
+  	FILE *fblocks;
 	//fblocks = fopen("./progs_blocks.txt","r");
-  fblocks = fopen(path_instr,"r");
+  	fblocks = fopen(path_instr,"r");
 
-  free(path_instr);
+  	free(path_instr);
 
 	if( fblocks == NULL ){
 		// no list of blocks
 		FATAL("No blocks list found");
 	}
+	
 	while ( getline(&line, &len, fblocks) != -1 ){
+		//printf("beggin\n");
 		block = strtok(line," ");
     //printf("prog = %d\n", prog);
 		// Get the blocks from the file
 		while ( block != NULL ){
+			//printf("beggin2\n");
 			unsigned short block_id = atoi(block);
+
 			//printf("block = %s\n", block);
  			PROG_BLOCKS[prog][block_id] = 1;
 			block = strtok(NULL," ");
+			//printf("end2\n");
 		}
 
 		prog ++;
+		printf("end\n");
 	}
+
+	printf("ends while\n");
 
 	if( line ) free(line);
 
-	fclose(fblocks);
+	if(fblocks)	fclose(fblocks);
 }
 
 /**
@@ -8934,6 +8943,7 @@ int main(int argc, char** argv) {
       }
     index ++;
   }
+  	if(numbr_of_progs_under_test > MAX_AMOUNT_OF_PROGS) FATAL("Number of progs under test exceed the max amount of %d", MAX_AMOUNT_OF_PROGS);
 
 	while ((opt = getopt(argc, argv, "+i:o:q:m:p")) > 0){
 
