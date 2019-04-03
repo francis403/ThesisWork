@@ -165,7 +165,7 @@ static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found for run*/
 static u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
 /*Saves all the prefered blocks to hit*/
-//TODO
+
 static u8 BLOCK_TO_HIT[MAP_SIZE];
 
 static u8 *prog_names[MAX_AMOUNT_OF_PROGS];
@@ -7951,49 +7951,54 @@ static void getProgsBlockList(){
 
   	char *line = NULL, *block = NULL;
   	size_t len = 0;
-  	int prog = 0;
 
   	char cwd[1000];
   	if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't get path to dir!");
-  
-  	char *path_instr = malloc (sizeof(char) * 500 + 1);
-  	sprintf(path_instr, "%s/progs_blocks.txt", cwd);
+  	
+  	for(int prog = 0; prog < numbr_of_progs_under_test; prog++){
+	  	char *path_instr = malloc (sizeof(char) * 250 + 1);
+	  	sprintf(path_instr, "%s/%s_blocks.txt", cwd, prog_names[prog]);
 
-  	FILE *fblocks;
-	//fblocks = fopen("./progs_blocks.txt","r");
-  	fblocks = fopen(path_instr,"r");
+	  	FILE *fblocks;
+		//fblocks = fopen("./progs_blocks.txt","r");
+	  	fblocks = fopen(path_instr,"r");
 
-  	free(path_instr);
+	  	free(path_instr);
 
-	if( fblocks == NULL ){
-		// no list of blocks
-		FATAL("No blocks list found");
-	}
-	
-	while ( getline(&line, &len, fblocks) != -1 ){
-		//printf("beggin\n");
-		block = strtok(line," ");
-    //printf("prog = %d\n", prog);
-		// Get the blocks from the file
-		while ( block != NULL ){
-			//printf("beggin2\n");
-			unsigned short block_id = atoi(block);
-
-			//printf("block = %s\n", block);
- 			PROG_BLOCKS[prog][block_id] = 1;
-			block = strtok(NULL," ");
-			//printf("end2\n");
+		if( fblocks == NULL ){
+			// no list of blocks
+			FATAL("No blocks list found");
 		}
+		
 
-		prog ++;
-		printf("end\n");
+		while ( getline(&line, &len, fblocks) != -1 ){
+			//printf("beggin\n");
+	    	unsigned short block_id = atoi(line);
+	    	PROG_BLOCKS[prog][block_id] = 1;
+	    	//printf("block_id = %d\n", block_id);
+	    	/*
+			while ( block != NULL ){
+				//printf("beggin2\n");
+				unsigned short block_id = atoi(block);
+
+				//printf("block = %s\n", block);
+	 			PROG_BLOCKS[prog][block_id] = 1;
+				block = strtok(NULL," ");
+				//printf("end2\n");
+			}
+
+			prog ++;
+			//printf("end\n");
+			*/
+		}
+		if(fblocks)	fclose(fblocks);
 	}
 
-	printf("ends while\n");
+	//printf("ends while\n");
 
 	if( line ) free(line);
 
-	if(fblocks)	fclose(fblocks);
+	
 }
 
 /**

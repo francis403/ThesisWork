@@ -79,6 +79,9 @@ FILE *fblocks;
 u8 blocks_hit[MAP_SIZE];
 int num_shared_blocks = 0;
 
+/* Prog title to be fuzzed */
+char *prog_title;
+
 /* If we don't find --32 or --64 in the command line, default to 
    instrumentation for whichever mode we were compiled with. This is not
    perfect, but should do the trick for almost all use cases. */
@@ -391,7 +394,7 @@ void addToAllFiles(FILE *file, FILE *file2, char *lines){
   //first time seing this block
   if( !blocks_hit[block_id]) {
     blocks_hit[block_id] = 1;
-    if(fblocks)   fprintf(fblocks, " %d", block_id);
+    if(fblocks)   fprintf(fblocks, "%d\n", block_id);
   }
   else{
     num_shared_blocks ++;
@@ -803,18 +806,35 @@ int main(int argc, char** argv) {
 
   if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't find path to dir!");
   
-  printf("args passed\n");
-  int index = 0;
-  while( argv[index] ){ printf("%s ", argv[index]); index ++;}
+  printf("args\n");
+  int p = 0;
+  while( *(argv + p) ){
+      //if(strcmp(*(argv + p), "-p") == 0){
+        //prog_names[numbr_of_progs_under_test] =*(argv + p + 1);
+      //  prog_name[num_prog_found] = *(argv + p + 1);
+      //  num_prog_found ++;
+      //}
+    //printf("%s\n", *(argv + p));
+    p ++;
+  }
 
   char *path_instr = malloc (sizeof(char) * 1500 + 1);
-  sprintf(path_instr, "%s/progs_blocks.txt", cwd);
 
-  //fblocks = fopen("./progs_blocks.txt","a");
-  fblocks = fopen(path_instr,"a");
 
   program_version = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
+  prog_title = getenv(FORKSRV_ENV_TITLE);
 
+  if(prog_title == NULL){
+    // set default value
+    sprintf(path_instr, "%s/progs_blocks.txt", cwd);
+  }
+  else{
+    sprintf(path_instr, "%s/%s_blocks.txt", cwd, prog_title);
+  }
+  //printf("path_instr = %s\n", path_instr);
+  //printf("prog_title = %s\n", prog_title);
+
+  fblocks = fopen(path_instr,"w");
 
   s32 pid;
   u32 rand_seed;
@@ -882,7 +902,7 @@ int main(int argc, char** argv) {
 
   if (!just_version) add_instrumentation();
 
-  if(fblocks) fprintf(fblocks, "\n");
+  //if(fblocks) fprintf(fblocks, "\n");
 
   if(fblocks) fclose(fblocks);
   //printf("as_params[0] = %s\n", as_params[0]);

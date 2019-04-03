@@ -290,6 +290,9 @@
 /* Version of the forkserver being instrumentalized*/
 #define FORKSRV_ENV	    "__FORKSRV_ENV_VAR"
 
+/* Title of the prog being instrumentalized in the forkserver */
+#define FORKSRV_ENV_TITLE "__FORKSRV_ENV_TITLE"
+
 /*   Amount of forkservers needed, or number of programs under test	*/
 #define FORKSRV_AMOUNT_ENV "__FORKSRV_AMOUNT_ENV_VAR"
 

@@ -16,6 +16,7 @@
 #include "types.h"
 #include "debug.h"
 #include "alloc-inl.h"
+#include <sys/wait.h>
 
 #include <stdio.h>
 #include <unistd.h>
@@ -304,6 +305,7 @@ static void compile_prog( int *index, char ***tmp, int vers ){
   if(!pid){
     // send the program nmbr
     setenv(FORKSRV_ENV, snum, 1);
+    setenv(FORKSRV_ENV_TITLE, prog_name[vers], 1);
     execvp(cc_params[0], (char**)cc_params);
     FATAL("Failed to execute!");
   }
@@ -335,17 +337,18 @@ int main(int argc, char** argv) {
     exit(1);
 
   }
-  /*
+  
   int p = 0;
   while( *(argv + p) ){
-      if(strcmp(*(argv + p), "-p") == 0){
+      if(strcmp(*(argv + p), "-o") == 0){
         //prog_names[numbr_of_progs_under_test] =*(argv + p + 1);
         prog_name[num_prog_found] = *(argv + p + 1);
+        printf("prog_name = %s\n", prog_name[num_prog_found]);
         num_prog_found ++;
       }
     p ++;
   }
-  */
+  
   find_as(argv[0]);
 
   //edit_params(argc, argv);
@@ -370,9 +373,9 @@ int main(int argc, char** argv) {
   char snum[5];
 
   // Opens the file and clears the contents
-  FILE *fblocks;
-  fblocks = fopen("./progs_blocks.txt","w");
-  if(fblocks) fclose(fblocks);
+  //FILE *fblocks;
+  //fblocks = fopen("./progs_blocks.txt","w");
+  //if(fblocks) fclose(fblocks);
 
   //while( *argv ){
   while( 1 ) {

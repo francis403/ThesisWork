@@ -66,7 +66,7 @@ factorial:
 
 fuzz:
 	#$(RUN) -m none -i input -o out ./fact ./simple2
-	$(RUN) -m none -i input -o out -q 2 -p ./simple 2 3 4 -p ./simple2 2
+	$(RUN) -m none -i input -o out -q 1 -p ./simple 2 3 4 -p ./simple2 2
 	#$(RUN) -m none -i input -o out ./fact ./simple2
 	#$(RUN) -m none -i input -o out ./simple
 	#$(RUN) -m none -i input -o out ./fact
@@ -95,7 +95,7 @@ test_as:
 
 
 test_memory:
-	valgrind --leak-check=full --track-origins=yes -v afl-instr/afl-fuzz -m none -i input -o out -q 1 -p ./simple ./simple2
+	valgrind --leak-check=full --track-origins=yes -v afl-instr/afl-fuzz -m none -i input -o out -q 1 -p ./simple -p ./simple2
 
 
 #-------------------- Compare Programs ------------------------#
