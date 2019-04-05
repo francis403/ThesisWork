@@ -36,6 +36,7 @@ movq %rax, 16(%rsp)
 movq $0x0000a1d9, %rcx
 movl $0x0000a1d9, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -83,6 +84,7 @@ movq %rax, 16(%rsp)
 movq $0x00000870, %rcx
 movl $0x00000870, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -105,6 +107,7 @@ movq %rax, 16(%rsp)
 movq $0x0000217a, %rcx
 movl $0x0000217a, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -136,6 +139,7 @@ movq %rax, 16(%rsp)
 movq $0x000020c7, %rcx
 movl $0x000020c7, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -162,6 +166,7 @@ movq %rax, 16(%rsp)
 movq $0x00003338, %rcx
 movl $0x00003338, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -191,6 +196,7 @@ movq %rax, 16(%rsp)
 movq $0x00007ea2, %rcx
 movl $0x00007ea2, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -1520,7 +1526,6 @@ __afl_maybe_log:
   je    __afl_setup
 
 __afl_store:
-
   /* Calculate and store hit for the code location specified in rcx. */
 
   xorq __afl_prev_loc(%rip), %rcx
@@ -1535,11 +1540,6 @@ __afl_store:
   movq __fsrv_write, %rdi       /* file desc */
 call write@PLT
 
-  /* In child process: close fds, resume execution. */
-
-  movq __afl_block_temp, %rdi       /* file desc */
-
-  movq __fsrv_read, %rdi       /* file desc */
 __afl_return:
 
   addb $127, %al
@@ -1634,6 +1634,8 @@ call shmat@PLT
   movq %rax, (%rdx)
   movq %rax, %rdx
 
+ movq %rdx, %r14
+
 __afl_forkserver:
 
   /* Enter the fork server mode to avoid the overhead of execve() calls. We
@@ -1664,4 +1666,9 @@ __afl_fork_wait_loop:
 
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
- 
+  movq __fsrv_read, %rdi /* file desc */
+call read@PLT
+  cmpq $4, %rax
+  jne  __afl_die
+
+  /* Once woken up, create a clone of our pro
