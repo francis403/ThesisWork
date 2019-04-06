@@ -1161,6 +1161,8 @@ static u32 count_bytes(u8* mem) {
 
 		u32 v = *(ptr++);
 
+		//if(trace_bits[i]) printf("trace_bits[%d] = %d\n", i, trace_bits[i]);
+
 		if (!v) continue;
 		if (v & FF(0)) ret++;
 		if (v & FF(1)) ret++;
@@ -1325,8 +1327,8 @@ EXP_ST void init_count_class16(void) {
     /* Optimize for sparse bitmaps. */
 
 			if (unlikely(*mem)) {
-
-      //printf("0x%08x\n", *mem);
+				//printf("MEM = %d\n i = 0x%08x\n", *mem, i);
+      			//printf("0x%08x\n", *mem);
 
 				count ++;
 
@@ -2254,6 +2256,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 		//printf("before redirecting standard output\n");
 
+    
     dup2(dev_null_fd, 1); // redirect standard output to dev_null_fd
     dup2(dev_null_fd, 2); // redirect the standard error to the dev_null_fd
 
@@ -2498,9 +2501,9 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 	//printf("run_forkserver_on_target\n");
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
-	u32 tb4;
+	u32 tb4, tblocks4;
 
-	int status = 0;
+	unsigned int status = 0;
 	//u32 tb4;
 
 	child_timed_out = 0;
@@ -2569,11 +2572,9 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   //printf("run_forkserver_on_target\n");
   //printf("before while\n");
   
-  blocks_found_during_run = malloc(sizeof(u8) * 100);
-  free(blocks_found_during_run);
   while( 1 ){
 
-    //printf("poll\n");
+    //printf("while\n");
     // check if there are things to read
     //if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 10) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
     //   break;
@@ -2584,6 +2585,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   	  // O erro está aqui, talvez ao fazermos ctrl+c ele ainda continue e depois como morre dá o erro?
   	  int re = 10;
+  	  
       if ( (re = read(fsrv_st_fd[prog_index], &id, 4)) != 4) { 
 
       	if (re != 0)
@@ -2591,6 +2593,8 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	if (stop_soon) return 0;
       	return NULL;
       }
+		
+      //printf("id = %d\n", id);
 
       // code that we're getting the status next and we should break from the while
       if( id == -100 ) {break;}
@@ -2627,13 +2631,12 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	if(queue_cur[CUR_PROG] != NULL)
       		queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
       }
-      printf("block found = %d\n", id);
       BLOCKS_FOUND[id] ++;
 
       //printf("*block_hit = 0x%08x\n", *(blocks + i));
       i++;  
 
-  }
+  } // end of while
   
   //printf("after while\n");
   //status = message;
@@ -2648,7 +2651,10 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 	}
   	
   	// TODO -> I think the program is resulting in a segfault
-	//printf("status = %d\n", status);
+  	if( WEXITSTATUS(status) ){
+   		//printf("exit succ status = %d\n", status);
+  	}
+   	//else printf("didnt exit successfully status = %d\n", status);
 
   //printf("status = %d\n", status);
 
@@ -2702,14 +2708,25 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   MEM_BARRIER();
 
   tb4 = *(u32*)trace_bits;
+  tblocks4 = *(u32*)trace_blocks;
 
 #ifdef __x86_64__
   classify_counts((u64*)trace_bits);
+  classify_counts((u64*)trace_blocks);
 #else
   classify_counts((u32*)trace_bits);
+  classify_counts((u32*)trace_blocks);
 #endif /* ^__x86_64__ */
 
   //printf("after classify counts\n");
+
+  u64  t   = (MAP_SIZE >> 3);
+  u32  ret = 0;
+
+	while (t--) {
+		if(trace_bits[t]) printf("trace_bits[%d] = %d\n", t, trace_bits[t]);
+		if(trace_blocks[t]) printf("trace_blocks[%d] = %d\n", t, trace_blocks[t]);
+	}
 
   /* Report outcome to caller. */
 

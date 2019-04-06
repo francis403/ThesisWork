@@ -61,7 +61,7 @@
      push-call-ret-pop.
 
    - There is also not a whole lot to be gained by doing SHM attach at a
-     fixed address instead of retrieving __afl_area_ptr. Although it allows us
+     fixed address instead of retrieving __afl_area_ptr/__afl_block_ptr. Although it allows us
      to have a shorter log routine inserted for conditional jumps and jump
      labels (for a ~10% perf gain), there is a risk of bumping into other
      allocations created by the program or by tools such as ASAN.
@@ -85,7 +85,7 @@
 
    Perhaps of note: in the 64-bit version for all platforms except for Apple,
    the instrumentation is done slightly differently than on 32-bit, with
-   __afl_prev_loc and __afl_area_ptr being local to the object file (.lcomm),
+   __afl_prev_loc and __afl_area_ptr/__afl_block_ptr being local to the object file (.lcomm),
    rather than global (.comm). This is to avoid GOTRELPC lookups in the critical
    code path, which AFAICT, are otherwise unavoidable if we want gcc -shared to
    work; simple relocations between .bss and .text won't work on most 64-bit
@@ -129,15 +129,19 @@ static const u8* trampoline_fmt_64 =
   "movq %%rdx,  0(%%rsp)\n"
   "movq %%rcx,  8(%%rsp)\n"
   "movq %%rax, 16(%%rsp)\n"
+  "movq %%rsi, 24(%%rsp)\n"
   "movq $0x%08x, %%rcx\n"
   //"incl __afl_block_temp\n"
   //"movq %%rcx, __afl_block_temp(%rip)\n"
   //"movl $4, __afl_block_temp\n"
   //"movq $0x%08x, %%r13\n" //id of the block
   "movl $0x%08x, __afl_block_temp\n"
+  //"  leaq __afl_block_temp, %%r15\n"
+  //"  pushq %%r15\n"
   //"movq $0x%08x, %%rcx\n"
   "call __afl_maybe_log\n"
   "\n"
+  //"  popq %%r15\n"
   "movq 16(%%rsp), %%rax\n"
   "movq  8(%%rsp), %%rcx\n"
   "movq  0(%%rsp), %%rdx\n"
@@ -166,15 +170,6 @@ static const u8* main_payload_32 =
 
 //static const u8 *end_of_program_64_todo = 
 
-//"\n"
-//"/* --- WRITE HOME AND SAY THE PROGRAM IS DONE (64-BIT) --- */\n"
-// "  movl $-1, __afl_block_temp\n"
-// "  movq $4, %rdx               /* length    */\n"
-// "  leaq __afl_block_temp, %rsi\n"
-//) "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %rdi       /* file desc */\n"
-//CALL_L64("write")
-//"/* --- END --- */\n"
-//"\n";
 
 
 
@@ -207,6 +202,20 @@ static const u8* main_payload_64 =
   "__afl_store:\n"
   "  /* Calculate and store hit for the code location specified in rcx. */\n"
   "\n"
+  //"  leaq __afl_block_temp, %%r15\n"
+  //"  pushq %%r15\n"
+  //"  addq $1, %%r14\n"
+  //"  popq %%r15\n"
+  //"  movq %%rdx, %%r14\n" // save value of rdx// this line here crashes
+  "   pushq %%rdx\n"
+  "   movq %%r15, %%rdx\n"
+  "   inc %%rdx\n" // does not crash
+    //"   incb (%%rdx, %%rcx, 1)\n"
+  //"   incb (%%rdx, %%rcx, 1)\n"
+  //"   incb (%%rdx, %%rcx, 1)\n" // this line here crashes
+  "   popq %%rdx\n"
+  //"  movq %%r14, %%rdx\n"
+  //"  movq %%r15, %%rdx\n"
 #ifndef COVERAGE_ONLY
   "  xorq __afl_prev_loc(%%rip), %%rcx\n"
   "  xorq %%rcx, __afl_prev_loc(%%rip)\n"
@@ -218,11 +227,16 @@ static const u8* main_payload_64 =
 #else
   "  incb (%%rdx, %%rcx, 1)\n"
 #endif /* ^SKIP_COUNTS */
-  "  \n/* Write home and tell them the id of the block */\n"
-  "  movq $4, %%rdx               /* length    */\n"
-  "  leaq __afl_block_temp(%%rip), %%rsi\n"
-  "  movq __fsrv_write, %%rdi       /* file desc */\n"
-  CALL_L64("write")
+  //"/*Tell the user we found this block */\n"
+  //"  incb (%%rdx, %%rcx, 1)\n"
+  //"  movq $4, %%rdx               /* length    */\n"
+  //"movq %%rsi, 24(%%rsp)\n"
+  //"movq 24(%%rsp), %%rsi\n"
+  //"  movq 32(%%rsp), %%r15\n"
+  //"  leaq __afl_block_temp(%%rip), %%rsi\n"
+  //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
+  //"  movq __fsrv_write, %%rdi      /* file desc */\n"
+  //CALL_L64("write")
   "\n"
   "__afl_return:\n"
   "\n"
@@ -255,6 +269,16 @@ static const u8* main_payload_64 =
   "  je    __afl_setup_first\n"
   "\n"
   "  movq %%rdx, __afl_area_ptr(%%rip)\n"
+
+// now do this for the other one
+#ifndef __APPLE__
+  "  movq  __afl_global_block_area_ptr@GOTPCREL(%%rip), %%rdx\n"
+  "  movq  (%%rdx), %%rdx\n"
+#else
+  "  movq  __afl_global_block_area_ptr(%%rip), %%rdx\n"
+#endif /* !^__APPLE__ */
+  "  movq %%rdx, __afl_block_ptr(%%rip)\n"
+// end
   "  jmp  __afl_store\n" 
   "\n"
   "__afl_setup_first:\n"
@@ -330,46 +354,48 @@ static const u8* main_payload_64 =
 #endif /* ^__APPLE__ */
   "  movq %%rax, %%rdx\n"
   "\n"
-  " movq %%rdx, %%r14\n"
-  //TODO -> instead f writing all the time add it to shared memory (this bit here works)
+
+  " movq %%rdx, %%r14\n" // save the value of rdx
+  // Initiliaze the block shared memory
   // missing the part where we write it
-  //"  pushq %%r13\n"
-  //"  movq  %%rsp, %%r13\n"
-  //"  subq  $16, %%rsp\n"
-  //"  andq  $0xfffffffffffffff0, %%rsp\n"
-  //"\n"
-  //"  leaq .AFL_SHM_BLOCKS(%%rip), %%rdi\n"
-  //CALL_L64("getenv")
-  //"\n"
-  //"  testq %%rax, %%rax\n"
-  //"  je    __afl_setup_abort\n"
-  //"\n"
-  //"  movq  %%rax, %%rdi\n"
-  //CALL_L64("atoi")
-  //"\n"
-  //"  xorq %%rdx, %%rdx   /* shmat flags    */\n"
-  //"  xorq %%rsi, %%rsi   /* requested addr */\n"
-  //"  movq %%rax, %%rdi   /* SHM ID         */\n"
-  //CALL_L64("shmat")
-  //"\n"
-  //"  cmpq $-1, %%rax\n"
-  //"  je   __afl_setup_abort\n"
-  //"\n"
-  //"  /* Store the address of the SHM region. */\n"
-  //"\n"
-  //"  movq %%rax, %%rdx\n"
-  //"  movq %%rax, __afl_block_temp(%%rip)\n"
-  //"\n"
-  //#ifdef __APPLE__
-  //"  movq %%rax, __afl_global_block_area_ptr(%%rip)\n"
-  //#else
-  //"  movq __afl_global_block_area_ptr@GOTPCREL(%%rip), %%rdx\n"
-  //"  movq %%rax, (%%rdx)\n"
-  //#endif /* ^__APPLE__ */
-  //"  movq %%rax, %%rdx\n"
+  "  pushq %%r13\n"
+  "  movq  %%rsp, %%r13\n"
+  "  subq  $16, %%rsp\n"
+  "  andq  $0xfffffffffffffff0, %%rsp\n"
+  "\n"
+  // can get here
+  "  leaq .AFL_SHM_BLOCKS(%%rip), %%rdi\n"
+  CALL_L64("getenv")
+  "\n"
+  "  testq %%rax, %%rax\n"
+  "  je    __afl_setup_abort\n"
+  "\n"
+  "  movq  %%rax, %%rdi\n"
+  CALL_L64("atoi")
+  "\n"
+  "  xorq %%rdx, %%rdx   /* shmat flags    */\n"
+  "  xorq %%rsi, %%rsi   /* requested addr */\n"
+  "  movq %%rax, %%rdi   /* SHM ID         */\n"
+  CALL_L64("shmat")
+  "\n"
+  "  cmpq $-1, %%rax\n"
+  "  je   __afl_setup_abort\n"
+  "\n"
+  "  /* Store the address of the SHM region. */\n"
+  "\n"
+  "  movq %%rax, %%rdx\n"
+  "  movq %%rax, __afl_block_ptr(%%rip)\n"
+  "\n"
+  #ifdef __APPLE__
+  "  movq %%rax, __afl_global_block_area_ptr(%%rip)\n"
+  #else
+  "  movq __afl_global_block_area_ptr@GOTPCREL(%%rip), %%rdx\n"
+  "  movq %%rax, (%%rdx)\n"
+  #endif /* ^__APPLE__ */
+  "  movq %%rax, %%rdx\n"
   // till here
-  //" movq %%rdx, %%r15\n" // save the value of the address to write the blocks in r15
-  //" movq %%r14, %%rdx\n" // set back normal file descriptor
+  " movq %%rdx, %%r15\n" // save the value of the address to write the blocks in r15
+  " movq %%r14, %%rdx\n" // set back normal file descriptor
   "\n"
   "__afl_forkserver:\n"
   "\n"
@@ -436,6 +462,8 @@ static const u8* main_payload_64 =
   "  cmpq $0, %%rax\n"
   "  jle  __afl_die\n"
    "\n"
+  //"  call __afl_loop\n"
+  // send over message
   "  movq $-100, __fsrv_message               /* length    */\n"
   "  movq $4, %%rdx               /* length    */\n"
   "  leaq __fsrv_message(%%rip), %%rsi\n"
@@ -447,6 +475,8 @@ static const u8* main_payload_64 =
   "\n"
   "  movq $4, %%rdx               /* length    */\n"
   "  leaq __afl_temp(%%rip), %%rsi /* data      */\n"
+  //"  movq $0, __fsrv_message               /* length    */\n"
+  //"  leaq __fsrv_message(%%rip), %%rsi\n"
   //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi         /* file desc */\n"
   "  movq __fsrv_write, %%rdi /* file desc */\n"
   CALL_L64("write")
@@ -455,13 +485,14 @@ static const u8* main_payload_64 =
   "\n"
   "__afl_fork_resume:\n"
   "\n"
+  //"  movq $0, %%r15\n" //start counter
   "  /* In child process: close fds, resume execution. */\n"
   "\n"
   "  movq $" STRINGIFY(FORKSRV_FD) ", %%rdi\n"
-  CALL_L64("close")
+  //CALL_L64("close")
   "\n"
   "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi\n"
-  CALL_L64("close")
+  //CALL_L64("close")
   "\n"
   "  popq %%rdx\n"
   "  popq %%rdx\n"
@@ -555,7 +586,7 @@ static const u8* main_payload_64 =
   "  .comm   __afl_prev_loc, 8\n"
 #endif /* !COVERAGE_ONLY */
   "  .comm   __afl_fork_pid, 4\n"
-  "  .comm   __afl_temp, 4\n"
+  "  .comm   __afl_temp, 8\n"
   "  .comm   __afl_setup_failure, 1\n"
 
 #else
@@ -566,7 +597,7 @@ static const u8* main_payload_64 =
   "  .lcomm   __afl_prev_loc, 8\n"
 #endif /* !COVERAGE_ONLY */
   "  .lcomm   __afl_fork_pid, 4\n"
-  "  .lcomm   __afl_temp, 4\n"
+  "  .lcomm   __afl_temp, 8\n"
   "  .lcomm   __afl_setup_failure, 1\n"
 
 #endif /* ^__APPLE__ */
