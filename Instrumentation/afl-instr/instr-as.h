@@ -198,29 +198,47 @@ static const u8* main_payload_64 =
   "  movq  __afl_area_ptr(%%rip), %%rdx\n"
   "  testq %%rdx, %%rdx\n"
   "  je    __afl_setup\n"
+  // test the block pointer
+  "  pushq %%rdx\n"
+  "  movq  __afl_block_ptr(%%rip), %%rdx\n"
+  "  testq %%rdx, %%rdx\n"
+  "  je    __afl_setup_first_block\n"
+  "  popq %%rdx\n"
   "\n"
   "__afl_store:\n"
   "  /* Calculate and store hit for the code location specified in rcx. */\n"
   "\n"
-  //"  leaq __afl_block_temp, %%r15\n"
-  //"  pushq %%r15\n"
-  //"  addq $1, %%r14\n"
-  //"  popq %%r15\n"
-  //"  movq %%rdx, %%r14\n" // save value of rdx// this line here crashes
-  "   pushq %%rdx\n"
-  "   movq %%r15, %%rdx\n"
-  "   inc %%rdx\n" // does not crash
-    //"   incb (%%rdx, %%rcx, 1)\n"
+
+  //"   pushq %%rdx\n"
+  //"   pushq %%rcx\n"
+  //"   movq %%r13, %%rdx\n"
+  //"  leaq __address_temp, %%rdx\n"
+  //"   leaq __afl_block_temp(%%rip), %%rcx\n"
+  //__afl_area_ptr(%%rip)
+  //"  movq __afl_global_area_ptr(%%rip), %%rdx\n" // this works
+  //"  movq %%r15, %%rdx\n" // this, does not works
+  //"   movq $8, %%rcx\n"
+  //"  movq __afl_area_ptr(%%rip), %%rdx\n" // this here works
+  //"   inc %%rdx\n" // does not crash
+  //"  incb (%%rdx, %%rcx, 1)\n" // does crash
+  //´"   incb (%%rdx, %%rcx, 1)\n"
   //"   incb (%%rdx, %%rcx, 1)\n"
   //"   incb (%%rdx, %%rcx, 1)\n" // this line here crashes
-  "   popq %%rdx\n"
-  //"  movq %%r14, %%rdx\n"
-  //"  movq %%r15, %%rdx\n"
-#ifndef COVERAGE_ONLY
-  "  xorq __afl_prev_loc(%%rip), %%rcx\n"
-  "  xorq %%rcx, __afl_prev_loc(%%rip)\n"
-  "  shrq $1, __afl_prev_loc(%%rip)\n"
-#endif /* ^!COVERAGE_ONLY */
+  //"   popq %%rdx\n"
+
+  //"   popq %%rdx\n"
+  //"  movq __afl_area_ptr(%%rip), %%rdx\n" // this here works
+
+  // this bit here works but does not write to shm
+  //"  movq __afl_block_ptr(%%rip), %%rdx\n" 
+  //"  incb (%%rdx, %%rcx, 1)\n"
+  //"  inc %%rdx\n"
+ // "  movq __afl_area_ptr(%%rip), %%rdx\n" 
+//#ifndef COVERAGE_ONLY
+//  "  xorq __afl_prev_loc(%%rip), %%rcx\n"
+//  "  xorq %%rcx, __afl_prev_loc(%%rip)\n"
+//  "  shrq $1, __afl_prev_loc(%%rip)\n"
+//#endif /* ^!COVERAGE_ONLY */
   "\n"
 #ifdef SKIP_COUNTS
   "  orb  $1, (%%rdx, %%rcx, 1)\n"
@@ -233,7 +251,7 @@ static const u8* main_payload_64 =
   //"movq %%rsi, 24(%%rsp)\n"
   //"movq 24(%%rsp), %%rsi\n"
   //"  movq 32(%%rsp), %%r15\n"
-  //"  leaq __afl_block_temp(%%rip), %%rsi\n"
+  //"  leaq __afl_area_ptr(%%rip), %%rsi\n"
   //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
   //"  movq __fsrv_write, %%rdi      /* file desc */\n"
   //CALL_L64("write")
@@ -271,6 +289,8 @@ static const u8* main_payload_64 =
   "  movq %%rdx, __afl_area_ptr(%%rip)\n"
 
 // now do this for the other one
+"  /* Check out if we have a global pointer on block file. */\n"
+//"  pushq %%rdx\n"
 #ifndef __APPLE__
   "  movq  __afl_global_block_area_ptr@GOTPCREL(%%rip), %%rdx\n"
   "  movq  (%%rdx), %%rdx\n"
@@ -278,9 +298,12 @@ static const u8* main_payload_64 =
   "  movq  __afl_global_block_area_ptr(%%rip), %%rdx\n"
 #endif /* !^__APPLE__ */
   "  movq %%rdx, __afl_block_ptr(%%rip)\n"
+//  "  popq %%rdx\n"
 // end
+
   "  jmp  __afl_store\n" 
   "\n"
+
   "__afl_setup_first:\n"
   "\n"
   "  /* Save everything that is not yet saved and that may be touched by\n"
@@ -354,14 +377,10 @@ static const u8* main_payload_64 =
 #endif /* ^__APPLE__ */
   "  movq %%rax, %%rdx\n"
   "\n"
-
-  " movq %%rdx, %%r14\n" // save the value of rdx
-  // Initiliaze the block shared memory
+  "__afl_setup_first_block:\n"
+  // Initiliaze the block shared memory - not working properly
   // missing the part where we write it
-  "  pushq %%r13\n"
-  "  movq  %%rsp, %%r13\n"
-  "  subq  $16, %%rsp\n"
-  "  andq  $0xfffffffffffffff0, %%rsp\n"
+  "  pushq %%rdx\n"
   "\n"
   // can get here
   "  leaq .AFL_SHM_BLOCKS(%%rip), %%rdi\n"
@@ -393,9 +412,11 @@ static const u8* main_payload_64 =
   "  movq %%rax, (%%rdx)\n"
   #endif /* ^__APPLE__ */
   "  movq %%rax, %%rdx\n"
+  "  movq %%rdx, __address_temp\n" // teste
   // till here
   " movq %%rdx, %%r15\n" // save the value of the address to write the blocks in r15
-  " movq %%r14, %%rdx\n" // set back normal file descriptor
+  "  popq %%rdx\n"
+  //" movq %%r14, %%rdx\n" // set back normal file descriptor
   "\n"
   "__afl_forkserver:\n"
   "\n"
@@ -464,12 +485,12 @@ static const u8* main_payload_64 =
    "\n"
   //"  call __afl_loop\n"
   // send over message
-  "  movq $-100, __fsrv_message               /* length    */\n"
-  "  movq $4, %%rdx               /* length    */\n"
-  "  leaq __fsrv_message(%%rip), %%rsi\n"
+  //"  movq $-100, __fsrv_message               /* length    */\n"
+  //"  movq $4, %%rdx               /* length    */\n"
+  //"  leaq __fsrv_message(%%rip), %%rsi\n"
   //"  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi       /* file desc */\n"
-  "  movq __fsrv_write, %%rdi       /* file desc */\n"
-  CALL_L64("write")
+  //"  movq __fsrv_write, %%rdi       /* file desc */\n"
+  //CALL_L64("write")
   "\n"
   "  /* Relay wait status to pipe, then loop back. */\n"
   "\n"
@@ -489,16 +510,18 @@ static const u8* main_payload_64 =
   "  /* In child process: close fds, resume execution. */\n"
   "\n"
   "  movq $" STRINGIFY(FORKSRV_FD) ", %%rdi\n"
-  //CALL_L64("close")
+  CALL_L64("close")
   "\n"
   "  movq $" STRINGIFY((FORKSRV_FD + 1)) ", %%rdi\n"
-  //CALL_L64("close")
+  CALL_L64("close")
   "\n"
   "  popq %%rdx\n"
   "  popq %%rdx\n"
   "\n"
   "  movq %%r12, %%rsp\n"
   "  popq %%r12\n"
+  //"  popq %%r12\n"
+  //"  popq %%r13\n"
   "\n"
   "  movq  0(%%rsp), %%rax\n"
   "  movq  8(%%rsp), %%rcx\n"

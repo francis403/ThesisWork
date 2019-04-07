@@ -1530,17 +1530,15 @@ __afl_maybe_log:
   movq  __afl_area_ptr(%rip), %rdx
   testq %rdx, %rdx
   je    __afl_setup
+  pushq %rdx
+  movq  __afl_block_ptr(%rip), %rdx
+  testq %rdx, %rdx
+  je    __afl_setup_first_block
+  popq %rdx
 
 __afl_store:
   /* Calculate and store hit for the code location specified in rcx. */
 
-   pushq %rdx
-   movq %r15, %rdx
-   inc %rdx
-   popq %rdx
-  xorq __afl_prev_loc(%rip), %rcx
-  xorq %rcx, __afl_prev_loc(%rip)
-  shrq $1, __afl_prev_loc(%rip)
 
   incb (%rdx, %rcx, 1)
 
@@ -1567,6 +1565,7 @@ __afl_setup:
   je    __afl_setup_first
 
   movq %rdx, __afl_area_ptr(%rip)
+  /* Check out if we have a global pointer on block file. */
   movq  __afl_global_block_area_ptr@GOTPCREL(%rip), %rdx
   movq  (%rdx), %rdx
   movq %rdx, __afl_block_ptr(%rip)
@@ -1641,11 +1640,8 @@ call shmat@PLT
   movq %rax, (%rdx)
   movq %rax, %rdx
 
- movq %rdx, %r14
-  pushq %r13
-  movq  %rsp, %r13
-  subq  $16, %rsp
-  andq  $0xfffffffffffffff0, %rsp
+__afl_setup_first_block:
+  pushq %rdx
 
   leaq .AFL_SHM_BLOCKS(%rip), %rdi
 call getenv@PLT
@@ -1672,8 +1668,9 @@ call shmat@PLT
   movq __afl_global_block_area_ptr@GOTPCREL(%rip), %rdx
   movq %rax, (%rdx)
   movq %rax, %rdx
+  movq %rdx, __address_temp
  movq %rdx, %r15
- movq %r14, %rdx
+  popq %rdx
 
 __afl_forkserver:
 
@@ -1687,4 +1684,4 @@ __afl_forkserver:
   movl $198, __fsrv_read
   movl $199, __fsrv_write
   /* Phone home and tell the parent that we're OK. (Note that signals with
-     no S
+     no SA_RESTART will mess it up
