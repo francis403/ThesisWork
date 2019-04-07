@@ -265,7 +265,10 @@
 /* Environment variable used to pass SHM ID to the called program. */
 
 #define SHM_ENV_VAR         "__AFL_SHM_ID"
-#define SHM_ENV_VAR_SECOND  "__AFL_SHM_ID_2"
+
+/* Environmental variable used to pass the ID where we get the blocks */
+
+#define SHM_BLOCKS  "__AFL_SHM_BLOCKS"
 
 /* Other less interesting, internal-only variables. */
 
@@ -343,6 +346,8 @@
 #define  CTEST_TARGET_MS    5000
 #define  CTEST_CORE_TRG_MS  1000
 #define  CTEST_BUSY_CYCLES  (10 * 1000 * 1000)
+
+static u8 *blocks_found_during_run;
 
 /* Uncomment this to use inferior block-coverage-based instrumentation. Note
    that you need to recompile the target binary for this to have any effect: */

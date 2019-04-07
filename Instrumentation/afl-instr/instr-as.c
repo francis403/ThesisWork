@@ -746,9 +746,11 @@ static void add_instrumentation(void) {
 
   if (ins_lines){
     //fputs(use_64bit ? main_payload_64 : main_payload_32, outf);
-    //fprintf(outf, end_of_program_64_todo);
+    //fprintf(outf, main_payload_64); //read - write (test)
     fprintf(outf, main_payload_64, FORKSRV_FD + (program_version * 2), FORKSRV_FD + (program_version * 2) + 1); //read - write
+
     //fputs((use_64bit ? main_payload_64 : main_payload_32), instr_lines_after);
+    //fprintf(instr_lines_after, main_payload_64); //read - write (test)
     fprintf(instr_lines_after, (use_64bit ? main_payload_64 : main_payload_32), FORKSRV_FD + (program_version * 2),  FORKSRV_FD + (program_version * 2) + 1); //write 
   }
   

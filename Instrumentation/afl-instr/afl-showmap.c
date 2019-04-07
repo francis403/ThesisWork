@@ -49,6 +49,7 @@
 static s32 child_pid;                 /* PID of the tested program         */
 
 static u8* trace_bits;                /* SHM with instrumentation bitmap   */
+static u8* trace_blocks;                /* SHM with instrumentation bitmap   */
 
 static u8 *out_file,                  /* Trace output file                 */
           *doc_path,                  /* Path to docs                      */
@@ -60,6 +61,7 @@ static u32 exec_tmout;                /* Exec timeout (ms)                 */
 static u64 mem_limit = MEM_LIMIT;     /* Memory limit (MB)                 */
 
 static s32 shm_id;                    /* ID of the SHM region              */
+static s32 shm_id_delta;                    /* ID of the SHM region              */
 
 static u8  quiet_mode,                /* Hide non-essential messages?      */
            edges_only,                /* Ignore hit counts?                */
@@ -131,7 +133,7 @@ static void classify_counts(u8* mem, const u8* map) {
 static void remove_shm(void) {
 
   shmctl(shm_id, IPC_RMID, NULL);
-
+  shmctl(shm_id_delta, IPC_RMID, NULL);
 }
 
 
@@ -139,23 +141,29 @@ static void remove_shm(void) {
 
 static void setup_shm(void) {
 
-  u8* shm_str;
+  u8* shm_str, *shm_str_delta;
 
   shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
+  shm_id_delta = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
 
-  if (shm_id < 0) PFATAL("shmget() failed");
+  if (shm_id < 0 || shm_id_delta < 0) PFATAL("shmget() failed");
 
   atexit(remove_shm);
 
   shm_str = alloc_printf("%d", shm_id);
+  shm_str_delta = alloc_printf("%d", shm_id_delta);
 
   setenv(SHM_ENV_VAR, shm_str, 1);
+  setenv(SHM_BLOCKS, shm_str_delta, 1);
 
   ck_free(shm_str);
+  ck_free(shm_str_delta);
+
 
   trace_bits = shmat(shm_id, NULL, 0);
+  trace_blocks = shmat(shm_id_delta, NULL, 0);
   
-  if (!trace_bits) PFATAL("shmat() failed");
+  if (!trace_bits || !trace_blocks ) PFATAL("shmat() failed");
 
 }
 

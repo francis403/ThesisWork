@@ -33,9 +33,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
+movq %rsi, 24(%rsp)
 movq $0x0000a1d9, %rcx
 movl $0x0000a1d9, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -80,9 +82,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
+movq %rsi, 24(%rsp)
 movq $0x00000870, %rcx
 movl $0x00000870, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -102,9 +106,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
+movq %rsi, 24(%rsp)
 movq $0x0000217a, %rcx
 movl $0x0000217a, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -133,9 +139,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
+movq %rsi, 24(%rsp)
 movq $0x000020c7, %rcx
 movl $0x000020c7, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -159,9 +167,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
+movq %rsi, 24(%rsp)
 movq $0x00003338, %rcx
 movl $0x00003338, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -188,9 +198,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
+movq %rsi, 24(%rsp)
 movq $0x00007ea2, %rcx
 movl $0x00007ea2, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -1518,28 +1530,18 @@ __afl_maybe_log:
   movq  __afl_area_ptr(%rip), %rdx
   testq %rdx, %rdx
   je    __afl_setup
+  pushq %rdx
+  movq  __afl_block_ptr(%rip), %rdx
+  testq %rdx, %rdx
+  je    __afl_setup_first_block
+  popq %rdx
 
 __afl_store:
-
   /* Calculate and store hit for the code location specified in rcx. */
 
-  xorq __afl_prev_loc(%rip), %rcx
-  xorq %rcx, __afl_prev_loc(%rip)
-  shrq $1, __afl_prev_loc(%rip)
 
   incb (%rdx, %rcx, 1)
-  
-/* Write home and tell them the id of the block */
-  movq $4, %rdx               /* length    */
-  leaq __afl_block_temp(%rip), %rsi
-  movq __fsrv_write, %rdi       /* file desc */
-call write@PLT
 
-  /* In child process: close fds, resume execution. */
-
-  movq __afl_block_temp, %rdi       /* file desc */
-
-  movq __fsrv_read, %rdi       /* file desc */
 __afl_return:
 
   addb $127, %al
@@ -1563,6 +1565,10 @@ __afl_setup:
   je    __afl_setup_first
 
   movq %rdx, __afl_area_ptr(%rip)
+  /* Check out if we have a global pointer on block file. */
+  movq  __afl_global_block_area_ptr@GOTPCREL(%rip), %rdx
+  movq  (%rdx), %rdx
+  movq %rdx, __afl_block_ptr(%rip)
   jmp  __afl_store
 
 __afl_setup_first:
@@ -1634,6 +1640,38 @@ call shmat@PLT
   movq %rax, (%rdx)
   movq %rax, %rdx
 
+__afl_setup_first_block:
+  pushq %rdx
+
+  leaq .AFL_SHM_BLOCKS(%rip), %rdi
+call getenv@PLT
+
+  testq %rax, %rax
+  je    __afl_setup_abort
+
+  movq  %rax, %rdi
+call atoi@PLT
+
+  xorq %rdx, %rdx   /* shmat flags    */
+  xorq %rsi, %rsi   /* requested addr */
+  movq %rax, %rdi   /* SHM ID         */
+call shmat@PLT
+
+  cmpq $-1, %rax
+  je   __afl_setup_abort
+
+  /* Store the address of the SHM region. */
+
+  movq %rax, %rdx
+  movq %rax, __afl_block_ptr(%rip)
+
+  movq __afl_global_block_area_ptr@GOTPCREL(%rip), %rdx
+  movq %rax, (%rdx)
+  movq %rax, %rdx
+  movq %rdx, __address_temp
+ movq %rdx, %r15
+  popq %rdx
+
 __afl_forkserver:
 
   /* Enter the fork server mode to avoid the overhead of execve() calls. We
@@ -1646,22 +1684,4 @@ __afl_forkserver:
   movl $198, __fsrv_read
   movl $199, __fsrv_write
   /* Phone home and tell the parent that we're OK. (Note that signals with
-     no SA_RESTART will mess it up). If this fails, assume that the fd is
-     closed because we were execve()d from an instrumented binary, or because
-     the parent doesn't want to use the fork server. */
-
-  movq $4, %rdx               /* length    */
-  leaq __afl_temp(%rip), %rsi /* data      */
-  movq __fsrv_write, %rdi       /* file desc */
-call write@PLT
-
-  cmpq $4, %rax
-  jne  __afl_fork_resume
-
-__afl_fork_wait_loop:
-
-  /* Wait for parent by reading from the pipe. Abort if read fails. */
-
-  movq $4, %rdx               /* length    */
-  leaq __afl_temp(%rip), %rsi /* data      */
- 
+     no SA_RESTART will mess it up

@@ -179,7 +179,7 @@ unsigned short shared_blocks_in_runs; /* Stores the number of shared blocks betw
 unsigned short unique_blocks; 		  /*Stores the total unique blocks between runs*/
 
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
-
+EXP_ST u8* trace_blocks;
 
 //EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
 //           virgin_tmout[MAP_SIZE],    /* Bits we haven't seen in tmouts   */
@@ -194,10 +194,7 @@ EXP_ST u8  virgin_bits[MAX_AMOUNT_OF_PROGS][MAP_SIZE],     /* Regions yet untouc
 
 static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
 
-//Question -> probably need an array here as well
-//  -> no since the shared memory returns to default value every run we only need one 
-//      since it wouldn't make a difference
-static s32 shm_id;                    /* ID of the SHM region             */
+static s32 shm_id, shm_blocks_id;                    /* ID of the SHM region             */
 
 static volatile u8 stop_soon,         /* Ctrl-C pressed?                  */
                    clear_screen = 1,  /* Window resized?                  */
@@ -1060,6 +1057,8 @@ static inline u8 has_new_bits(u8* virgin_map) {
 
 	while (i--) {
 
+	//if (trace_bits[i]) printf("found one i = %d\n", i);
+
     /* Optimize for (*current & *virgin) == 0 - i.e., no bits in current bitmap
        that have not been already cleared from the virgin map - since this will
        almost always be the case. */
@@ -1158,6 +1157,8 @@ static u32 count_bytes(u8* mem) {
 	while (i--) {
 
 		u32 v = *(ptr++);
+
+		//if(trace_bits[i]) printf("trace_bits[%d] = %d\n", i, trace_bits[i]);
 
 		if (!v) continue;
 		if (v & FF(0)) ret++;
@@ -1323,8 +1324,8 @@ EXP_ST void init_count_class16(void) {
     /* Optimize for sparse bitmaps. */
 
 			if (unlikely(*mem)) {
-
-      //printf("0x%08x\n", *mem);
+				//printf("MEM = %d\n i = 0x%08x\n", *mem, i);
+      			//printf("0x%08x\n", *mem);
 
 				count ++;
 
@@ -1338,6 +1339,15 @@ EXP_ST void init_count_class16(void) {
 			}
 
 			mem++;
+
+			if(trace_bits[i]){
+				//printf("trace_bits[0x%08x] = %d\n", i, trace_bits[i]);
+				BLOCKS_FOUND[i] += trace_bits[i];
+				if( BLOCK_TO_HIT[i] != 0 ){
+      				if(queue_cur[CUR_PROG] != NULL)
+      					queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
+      			}
+			}	
 
 		}
 
@@ -1366,6 +1376,16 @@ EXP_ST void init_count_class16(void) {
 
 			mem++;
 
+			if(trace_bits[t]){
+				printf("trace_bits[0x%08x] = %d\n", t, trace_bits[t]);
+				BLOCKS_FOUND[t] = trace_bits[t];
+				if( BLOCK_TO_HIT[t] != 0 ){
+      				if(queue_cur[CUR_PROG] != NULL)
+      					queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
+      			}
+			}	
+		//if(trace_blocks[t]) printf("trace_blocks[%d] = %d\n", t, trace_blocks[t]);
+
 		}
 
 	}
@@ -1378,7 +1398,8 @@ EXP_ST void init_count_class16(void) {
 	static void remove_shm(void) {
 
 		shmctl(shm_id, IPC_RMID, NULL);
-  //shmctl(shm_id2, IPC_RMID, NULL);
+		shmctl(shm_blocks_id, IPC_RMID, NULL);
+
 	}
 
 
@@ -1515,7 +1536,7 @@ static void cull_queue(void) {
 /* Configure shared memory and virgin_bits. This is called at startup. */
 EXP_ST void setup_shm(void) {
 
-	u8* shm_str;
+	u8* shm_str, *shm_str_blocks;
 
 	if (!in_bitmap){ 
     for(int i = 0; i < numbr_of_progs_under_test; i++)
@@ -1527,21 +1548,19 @@ EXP_ST void setup_shm(void) {
 	 memset(virgin_crash[i], 255, MAP_SIZE);
   }
 
-  if(shm_id != 0) return; // se já fizemos isto antes
+ 	if(shm_id != 0 || shm_blocks_id != 0) return; // se já fizemos isto antes
 
-	shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
-	//printf("shm_id = %d\n", shm_id);
-	//shm_id2 = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
-	//printf("shm_id2 = %d\n", shm_id2);
+  	shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
+  	shm_blocks_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
 		
 
 
-	if ( shm_id < 0 ) PFATAL("shmget() failed");
+	if ( shm_id < 0 || shm_blocks_id < 0 ) PFATAL("shmget() failed");
 
 	atexit(remove_shm);
 
 	shm_str = alloc_printf("%d", shm_id);
-	 
+	shm_str_blocks = alloc_printf("%d", shm_blocks_id);
 
 	  /* If somebody is asking us to fuzz instrumented binaries in dumb mode,
 	     we don't want them to detect instrumentation, since we won't be sending
@@ -1549,14 +1568,25 @@ EXP_ST void setup_shm(void) {
 	     later on, perhaps? */
 
 	if (!dumb_mode){ 
+		//char tmp2[100];
+		//sprintf(tmp2, "%s=%s", SHM_ENV_VAR, shm_str);
+		//putenv(tmp2);
 		setenv(SHM_ENV_VAR, shm_str, 1);
+		//setenv(SHM_BLOCKS, shm_str_blocks, 1);
+		char tmp[100];
+		sprintf(tmp, "%s=%s", SHM_BLOCKS, shm_str);
+		putenv(tmp);
 	}
 
 	ck_free(shm_str);
+	ck_free(shm_str_blocks);
+
+	//char *teste = malloc(sizeof(char) * 1000 + 1);
 
 	trace_bits = shmat(shm_id, NULL, 0); //attach the shared memory address segment to trace_bits
+	trace_blocks = shmat(shm_blocks_id, NULL, 0); // get the blocks from the run using this
 	  
-	if (!trace_bits) PFATAL("shmat() failed");
+	if ( !trace_bits || !trace_blocks ) PFATAL("shmat() failed");
 
 }
 
@@ -2171,7 +2201,13 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 								int prog_index, int fork_srv) {
 
 	//printf("\t-> init_forkserver\n");
-
+	/*
+	int k = 0;
+	while(*(path + k)){
+		printf("path = %s\n",  *(path + k) );
+		k ++;
+	}
+	*/
 	static struct itimerval it;
 	//int st_pipe[2], ctl_pipe[2];
   int st_pipe[4], ctl_pipe[4];
@@ -2241,6 +2277,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 		//printf("before redirecting standard output\n");
 
+    
     dup2(dev_null_fd, 1); // redirect standard output to dev_null_fd
     dup2(dev_null_fd, 2); // redirect the standard error to the dev_null_fd
 
@@ -2255,6 +2292,8 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     	close(out_fd);
 
     }
+
+
 
     // end points
     /* Set up control and status pipes, close the unneeded original fds. */
@@ -2301,6 +2340,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     	"abort_on_error=1:"
     	"allocator_may_return_null=1:"
     	"msan_track_origins=0", 0);
+
 
     execv(*path, argv);
 
@@ -2482,9 +2522,9 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 	//printf("run_forkserver_on_target\n");
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
-	u32 tb4;
+	u32 tb4, tblocks4;
 
-	int status = 0;
+	unsigned int status = 0;
 	//u32 tb4;
 
 	child_timed_out = 0;
@@ -2494,6 +2534,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 	     territory. */
 
 	memset(trace_bits, 0, MAP_SIZE);
+	memset(trace_blocks, 0, MAP_SIZE);
 
 	MEM_BARRIER();
 
@@ -2551,9 +2592,11 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   //printf("run_forkserver_on_target\n");
   //printf("before while\n");
+  
+  /*
   while( 1 ){
 
-    //printf("poll\n");
+    //printf("while\n");
     // check if there are things to read
     //if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 10) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
     //   break;
@@ -2564,6 +2607,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   	  // O erro está aqui, talvez ao fazermos ctrl+c ele ainda continue e depois como morre dá o erro?
   	  int re = 10;
+  	  
       if ( (re = read(fsrv_st_fd[prog_index], &id, 4)) != 4) { 
 
       	if (re != 0)
@@ -2571,6 +2615,8 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	if (stop_soon) return 0;
       	return NULL;
       }
+		
+      //printf("id = %d\n", id);
 
       // code that we're getting the status next and we should break from the while
       if( id == -100 ) {break;}
@@ -2590,15 +2636,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
       *(blocks + i) = id;
 
-      // has it been seen before and not on this run?
-      /*
-      if(  BLOCKS_FOUND[id] && !blocks_from_run[id]){
-      	// add it to the in common
-      	//(*nbr_in_common) = (*nbr_in_common) + 1;
-      	//count ++;
-      	//printf("*block_hit = 0x%08x has been seen before\n", id);
-      }
-     */
 
       // something is not working here
       shared_blocks_in_runs =  BLOCKS_FOUND[id] && !blocks_from_run[id] ? 
@@ -2616,13 +2653,14 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
       	if(queue_cur[CUR_PROG] != NULL)
       		queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
       }
-      //printf("block found = %d\n", id);
       BLOCKS_FOUND[id] ++;
 
       //printf("*block_hit = 0x%08x\n", *(blocks + i));
       i++;  
 
-  }
+  } // end of while
+  */
+  
   //printf("after while\n");
   //status = message;
 
@@ -2636,7 +2674,10 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 	}
   	
   	// TODO -> I think the program is resulting in a segfault
-	//printf("status = %d\n", status);
+  	if( WEXITSTATUS(status) ){
+   		//printf("exit succ status = %d\n", status);
+  	}
+   	//else printf("didnt exit successfully status = %d\n", status);
 
   //printf("status = %d\n", status);
 
@@ -2683,27 +2724,47 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   total_execs++;
   
 
-  /* Any subsequent operations on trace_bits must not be moved by the
-     compiler below this point. Past this location, trace_bits[] behave
+  /* Any subsequent operations on trace_bits/trace_blocks must not be moved by the
+     compiler below this point. Past this location, trace_bits[]/trace_blocks[] behave
      very normally and do not have to be treated as volatile. */
 
   MEM_BARRIER();
 
   tb4 = *(u32*)trace_bits;
+  tblocks4 = *(u32*)trace_blocks;
 
 #ifdef __x86_64__
   classify_counts((u64*)trace_bits);
+  //classify_counts((u64*)trace_blocks);
 #else
   classify_counts((u32*)trace_bits);
+  //classify_counts((u32*)trace_blocks);
 #endif /* ^__x86_64__ */
 
   //printf("after classify counts\n");
+
+  /*
+  u64  t   = MAP_SIZE;
+  u32  ret = 0;
+
+	while (t--) {
+		if(trace_bits[t]){
+			//printf("trace_bits[0x%08x] = %d\n", t, trace_bits[t]);
+			BLOCKS_FOUND[t] = trace_bits[t];
+			if( BLOCK_TO_HIT[t] != 0 ){
+      			if(queue_cur[CUR_PROG] != NULL)
+      				queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
+      		}
+		}
+		if(trace_blocks[t]) printf("trace_blocks[%d] = %d\n", t, trace_blocks[t]);
+	}
+*/
 
   /* Report outcome to caller. */
 
   if (WIFSIGNALED(status) && !stop_soon) {
   	//printf("in if\n");
-  	//printf("status = %d\n", status);
+  	printf("status = %d\n", status);
   	//printf("signal status = %d\n", WIFSIGNALED(status) );
 
   	//printf("\treported outcome is a crash!\n");
@@ -3012,8 +3073,10 @@ abort_calibration:
 
 		if (count_bytes(trace_bits) < 100) return;
 
-		for (i = (1 << (MAP_SIZE_POW2 - 1)); i < MAP_SIZE; i++)
+		for (i = (1 << (MAP_SIZE_POW2 - 1)); i < MAP_SIZE; i++){
+			//if (trace_bits[i]) printf("set one\n");
 			if (trace_bits[i]) return;
+		}
 
 		WARNF("Recompile binary with newer version of afl to improve coverage!");
 
@@ -3402,8 +3465,10 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifdef __x86_64__
         simplify_trace((u64*)trace_bits);
+        simplify_trace((u64*)trace_blocks);
 #else
         simplify_trace((u32*)trace_bits);
+        simplify_trace((u32*)trace_blocks);
 #endif /* ^__x86_64__ */
 
         if (!has_new_bits(virgin_tmout[CUR_PROG])) return keeping;
@@ -7822,9 +7887,9 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 	u8* env_path = 0;
 	struct stat st;
 
-	s32 fd;
-	u8* f_data;
-	u32 f_len = 0;
+	s32 fd, fd_delta;
+	u8* f_data, *f_data_delta;
+	u32 f_len = 0, f_len_delta;
 
 	ACTF("Validating target binary...");
 
@@ -7832,6 +7897,7 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 
 		*path = ck_strdup(fname);
 
+		//printf("path = %s\n", *path);
 
 		if (stat(*path, &st) || !S_ISREG(st.st_mode) ||
 			!(st.st_mode & 0111) || (f_len = st.st_size) < 4)
@@ -7842,6 +7908,8 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 		while (env_path) {
 
 			u8 *cur_elem, *delim = strchr(env_path, ':');
+
+			printf("cur_elem = %s\n", cur_elem);
 
 			if (delim) {
 
@@ -7885,6 +7953,7 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 	if (fd < 0) PFATAL("Unable to open '%s'", *path);
 
 	f_data = mmap(0, f_len, PROT_READ, MAP_PRIVATE, fd, 0);
+	f_data_delta = mmap(0, f_len, PROT_READ, MAP_PRIVATE, fd, 0);
 
 	if (f_data == MAP_FAILED) PFATAL("Unable to mmap file '%s'", *path);
 
@@ -7918,7 +7987,8 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 
 #endif /* ^!__APPLE__ */
 
-	if ( !memmem(f_data, f_len, SHM_ENV_VAR, strlen(SHM_ENV_VAR) + 1)) {
+	if ( !memmem(f_data, f_len, SHM_ENV_VAR, strlen(SHM_ENV_VAR) + 1) || 
+		!memmem(f_data, f_len, SHM_BLOCKS, strlen(SHM_BLOCKS) + 1)) {
 
 		SAYF("\n" cLRD "[-] " cRST
 			"Looks like the target binary is not instrumented! The fuzzer depends on\n"
@@ -8031,6 +8101,7 @@ static void init_all_forkservers(char **argv){
 	          //printf("prog title = %s\n", prog_args[0]);
 	          //printf("prog num = %d\n", prog);
 	          check_binary(prog_args[0], &(target_path[prog]));
+
 	          init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
 	          	 prog, FORKSRV_FD + (prog * 2));
 	          //prog_args = malloc(sizeof(char*) * size);
@@ -8964,6 +9035,8 @@ static u8 is_interesting_for_prog(struct queue_entry *q, u8 prog_index){
 */
 
 void prog_change(){
+
+  if (numbr_of_progs_under_test < 2 ) return; // do nothing
 
   u8 old = CUR_PROG;
   //change the program we are fuzzing
