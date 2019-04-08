@@ -1530,11 +1530,6 @@ __afl_maybe_log:
   movq  __afl_area_ptr(%rip), %rdx
   testq %rdx, %rdx
   je    __afl_setup
-  pushq %rdx
-  movq  __afl_block_ptr(%rip), %rdx
-  testq %rdx, %rdx
-  je    __afl_setup_first_block
-  popq %rdx
 
 __afl_store:
   /* Calculate and store hit for the code location specified in rcx. */
@@ -1565,10 +1560,6 @@ __afl_setup:
   je    __afl_setup_first
 
   movq %rdx, __afl_area_ptr(%rip)
-  /* Check out if we have a global pointer on block file. */
-  movq  __afl_global_block_area_ptr@GOTPCREL(%rip), %rdx
-  movq  (%rdx), %rdx
-  movq %rdx, __afl_block_ptr(%rip)
   jmp  __afl_store
 
 __afl_setup_first:
@@ -1640,37 +1631,6 @@ call shmat@PLT
   movq %rax, (%rdx)
   movq %rax, %rdx
 
-__afl_setup_first_block:
-  pushq %rdx
-
-  leaq .AFL_SHM_BLOCKS(%rip), %rdi
-call getenv@PLT
-
-  testq %rax, %rax
-  je    __afl_setup_abort
-
-  movq  %rax, %rdi
-call atoi@PLT
-
-  xorq %rdx, %rdx   /* shmat flags    */
-  xorq %rsi, %rsi   /* requested addr */
-  movq %rax, %rdi   /* SHM ID         */
-call shmat@PLT
-
-  cmpq $-1, %rax
-  je   __afl_setup_abort
-
-  /* Store the address of the SHM region. */
-
-  movq %rax, %rdx
-  movq %rax, __afl_block_ptr(%rip)
-
-  movq __afl_global_block_area_ptr@GOTPCREL(%rip), %rdx
-  movq %rax, (%rdx)
-  movq %rax, %rdx
-  movq %rdx, __address_temp
- movq %rdx, %r15
-  popq %rdx
 
 __afl_forkserver:
 
@@ -1684,4 +1644,30 @@ __afl_forkserver:
   movl $198, __fsrv_read
   movl $199, __fsrv_write
   /* Phone home and tell the parent that we're OK. (Note that signals with
-     no SA_RESTART will mess it up
+     no SA_RESTART will mess it up). If this fails, assume that the fd is
+     closed because we were execve()d from an instrumented binary, or because
+     the parent doesn't want to use the fork server. */
+
+  movq $4, %rdx               /* length    */
+  leaq __afl_temp(%rip), %rsi /* data      */
+  movq __fsrv_write, %rdi       /* file desc */
+call write@PLT
+
+  cmpq $4, %rax
+  jne  __afl_fork_resume
+
+__afl_fork_wait_loop:
+
+  /* Wait for parent by reading from the pipe. Abort if read fails. */
+
+  movq $4, %rdx               /* length    */
+  leaq __afl_temp(%rip), %rsi /* data      */
+  movq __fsrv_read, %rdi /* file desc */
+call read@PLT
+  cmpq $4, %rax
+  jne  __afl_die
+
+  /* Once woken up, create a clone of our process. This is an excellent use
+     case for syscall(__NR_clone, 0, CLONE_PARENT), but glibc boneheadedly
+     caches getpid() results and offers no way to update the value, breaking
+     abort(),

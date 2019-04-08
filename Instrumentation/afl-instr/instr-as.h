@@ -199,11 +199,11 @@ static const u8* main_payload_64 =
   "  testq %%rdx, %%rdx\n"
   "  je    __afl_setup\n"
   // test the block pointer
-  "  pushq %%rdx\n"
-  "  movq  __afl_block_ptr(%%rip), %%rdx\n"
-  "  testq %%rdx, %%rdx\n"
-  "  je    __afl_setup_first_block\n"
-  "  popq %%rdx\n"
+  //"  pushq %%rdx\n"
+  //"  movq  __afl_block_ptr(%%rip), %%rdx\n"
+  //"  testq %%rdx, %%rdx\n"
+  //"  je    __afl_setup_first_block\n"
+  //"  popq %%rdx\n"
   "\n"
   "__afl_store:\n"
   "  /* Calculate and store hit for the code location specified in rcx. */\n"
@@ -289,15 +289,15 @@ static const u8* main_payload_64 =
   "  movq %%rdx, __afl_area_ptr(%%rip)\n"
 
 // now do this for the other one
-"  /* Check out if we have a global pointer on block file. */\n"
+//"  /* Check out if we have a global pointer on block file. */\n"
 //"  pushq %%rdx\n"
-#ifndef __APPLE__
-  "  movq  __afl_global_block_area_ptr@GOTPCREL(%%rip), %%rdx\n"
-  "  movq  (%%rdx), %%rdx\n"
-#else
-  "  movq  __afl_global_block_area_ptr(%%rip), %%rdx\n"
-#endif /* !^__APPLE__ */
-  "  movq %%rdx, __afl_block_ptr(%%rip)\n"
+//#ifndef __APPLE__
+//  "  movq  __afl_global_block_area_ptr@GOTPCREL(%%rip), %%rdx\n"
+//  "  movq  (%%rdx), %%rdx\n"
+//#else
+//  "  movq  __afl_global_block_area_ptr(%%rip), %%rdx\n"
+//#endif /* !^__APPLE__ */
+//  "  movq %%rdx, __afl_block_ptr(%%rip)\n"
 //  "  popq %%rdx\n"
 // end
 
@@ -377,45 +377,45 @@ static const u8* main_payload_64 =
 #endif /* ^__APPLE__ */
   "  movq %%rax, %%rdx\n"
   "\n"
-  "__afl_setup_first_block:\n"
+  //"__afl_setup_first_block:\n"
   // Initiliaze the block shared memory - not working properly
   // missing the part where we write it
-  "  pushq %%rdx\n"
-  "\n"
+  //"  pushq %%rdx\n"
+  //"\n"
   // can get here
-  "  leaq .AFL_SHM_BLOCKS(%%rip), %%rdi\n"
-  CALL_L64("getenv")
-  "\n"
-  "  testq %%rax, %%rax\n"
-  "  je    __afl_setup_abort\n"
-  "\n"
-  "  movq  %%rax, %%rdi\n"
-  CALL_L64("atoi")
-  "\n"
-  "  xorq %%rdx, %%rdx   /* shmat flags    */\n"
-  "  xorq %%rsi, %%rsi   /* requested addr */\n"
-  "  movq %%rax, %%rdi   /* SHM ID         */\n"
-  CALL_L64("shmat")
-  "\n"
-  "  cmpq $-1, %%rax\n"
-  "  je   __afl_setup_abort\n"
-  "\n"
-  "  /* Store the address of the SHM region. */\n"
-  "\n"
-  "  movq %%rax, %%rdx\n"
-  "  movq %%rax, __afl_block_ptr(%%rip)\n"
-  "\n"
-  #ifdef __APPLE__
-  "  movq %%rax, __afl_global_block_area_ptr(%%rip)\n"
-  #else
-  "  movq __afl_global_block_area_ptr@GOTPCREL(%%rip), %%rdx\n"
-  "  movq %%rax, (%%rdx)\n"
-  #endif /* ^__APPLE__ */
-  "  movq %%rax, %%rdx\n"
-  "  movq %%rdx, __address_temp\n" // teste
+  //"  leaq .AFL_SHM_BLOCKS(%%rip), %%rdi\n"
+  //CALL_L64("getenv")
+  //"\n"
+  //"  testq %%rax, %%rax\n"
+  //"  je    __afl_setup_abort\n"
+  //"\n"
+  //"  movq  %%rax, %%rdi\n"
+  //CALL_L64("atoi")
+  //"\n"
+  //"  xorq %%rdx, %%rdx   /* shmat flags    */\n"
+  //"  xorq %%rsi, %%rsi   /* requested addr */\n"
+  //"  movq %%rax, %%rdi   /* SHM ID         */\n"
+  //CALL_L64("shmat")
+  //"\n"
+  //"  cmpq $-1, %%rax\n"
+  //"  je   __afl_setup_abort\n"
+  //"\n"
+  //"  /* Store the address of the SHM region. */\n"
+  //"\n"
+  //"  movq %%rax, %%rdx\n"
+  //"  movq %%rax, __afl_block_ptr(%%rip)\n"
+  //"\n"
+  //#ifdef __APPLE__
+  //"  movq %%rax, __afl_global_block_area_ptr(%%rip)\n"
+  //#else
+  //"  movq __afl_global_block_area_ptr@GOTPCREL(%%rip), %%rdx\n"
+  //"  movq %%rax, (%%rdx)\n"
+  //#endif /* ^__APPLE__ */
+  //"  movq %%rax, %%rdx\n"
+  //"  movq %%rdx, __address_temp\n" // teste
   // till here
-  " movq %%rdx, %%r15\n" // save the value of the address to write the blocks in r15
-  "  popq %%rdx\n"
+  //" movq %%rdx, %%r15\n" // save the value of the address to write the blocks in r15
+  //"  popq %%rdx\n"
   //" movq %%r14, %%rdx\n" // set back normal file descriptor
   "\n"
   "__afl_forkserver:\n"

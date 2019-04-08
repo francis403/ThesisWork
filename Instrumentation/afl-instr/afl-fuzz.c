@@ -300,6 +300,8 @@ struct queue_entry {
 	  					  /*number of targets hit*/
       fs_redundant;                   /* Marked as redundant in the fs?   */ // TODO -> maybe add information about specific program
 
+  u8 has_been_run;                    /* Has the next prog ran this entry? */
+
   u32 bitmap_size,                    /* Number of bits set in bitmap     */
       exec_cksum;                     /* Checksum of the execution trace  */
 
@@ -909,6 +911,7 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det, u8 added_from_queue)
 	q->depth        = cur_depth + 1;
 	q->passed_det   = passed_det;
   	q->added_from_queue = added_from_queue;
+  	q->has_been_run = added_from_queue;
 
 	if (q->depth > max_depth) max_depth = q->depth;
 
@@ -1340,13 +1343,17 @@ EXP_ST void init_count_class16(void) {
 
 			mem++;
 
+			if(queue_cur[CUR_PROG] == NULL) continue;
+
 			if(trace_bits[i]){
 				//printf("trace_bits[0x%08x] = %d\n", i, trace_bits[i]);
 				BLOCKS_FOUND[i] += trace_bits[i];
 				if( BLOCK_TO_HIT[i] != 0 ){
-      				if(queue_cur[CUR_PROG] != NULL)
-      					queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
+      				
+      				queue_cur[CUR_PROG]->hit_target =
+      					queue_cur[CUR_PROG]->hit_target + 1; // add the number of targets hit
       			}
+      			queue_cur[CUR_PROG]->blocks_hit[i] = 1; // mark the block as hit
 			}	
 
 		}
@@ -2764,7 +2771,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   if (WIFSIGNALED(status) && !stop_soon) {
   	//printf("in if\n");
-  	printf("status = %d\n", status);
+  	//printf("status = %d\n", status);
   	//printf("signal status = %d\n", WIFSIGNALED(status) );
 
   	//printf("\treported outcome is a crash!\n");
@@ -2953,7 +2960,7 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     //fault = run_target(argv, use_tmout); // TODO -> change this
 
-    fault = run_target(use_tmout); //TODO > check if correct
+    fault = run_target(use_tmout);
 
 
     //printf("\tfault = %d\n", fault);
@@ -3376,10 +3383,6 @@ static void write_crash_readme(void) {
    save or queue the input test case for further analysis if so. Returns 1 if
    entry is saved, 0 otherwise. */
 
-/*
-*	TODO -> add to check if it found new blocks
-*
-*/
 
 static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
@@ -4542,13 +4545,19 @@ static void maybe_delete_specific_out_dir(int i) {
 
 static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add){
 
+	//printf("in add_entry to dir\n");
+
 	u8  *fn = malloc(sizeof(u8) * 500 + 1);
+
+	if( !fn ) FATAL("Malloc failed!");
 
   	u8* fn_tmp = strrchr(q->fname, '/') + 1;
   	sprintf(fn, "out%d/queue/%s", dir_to_add, fn_tmp);
   	//printf("\tis going to add fn = %s\n", fn);
 
+  	//printf("before copy_file\n");
   	copy_file(q->fname, fn);
+  	//printf("after copy_file\n");
     //add to specific queue
 
     add_to_queue(fn, q->len, 0, 1);
@@ -9022,6 +9031,7 @@ static u8 is_interesting_for_prog(struct queue_entry *q, u8 prog_index){
   	free(fn);
 
 	return q->added_from_queue ? 0 : 1;
+	//return q->has_been_run;
 
 }
 
@@ -9034,14 +9044,14 @@ static u8 is_interesting_for_prog(struct queue_entry *q, u8 prog_index){
     mark it has passed seen in the program
 */
 
-void prog_change(){
+void on_prog_change(){
 
-  if (numbr_of_progs_under_test < 2 ) return; // do nothing
+  if (numbr_of_progs_under_test < 2 ) return; // no prog to switch to? Do nothing!
 
   u8 old = CUR_PROG;
   //change the program we are fuzzing
   CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test;
-  //FATAL("ran past prog_change CUR_PROG = %d and numbr_of_progs_under_test %d", CUR_PROG, numbr_of_progs_under_test);
+  //FATAL("ran past on_prog_change CUR_PROG = %d and numbr_of_progs_under_test %d", CUR_PROG, numbr_of_progs_under_test);
   // pass through all the queue values that have yet to be seen and originated from the one we are seeing
   //printf("CUR_PROG = %d\n", CUR_PROG);
   //printf("queue[CUR_PROG] = %s\n", queue[CUR_PROG]->fname);
@@ -9057,17 +9067,25 @@ void prog_change(){
   //while(q_o){printf("%s\n", q_o->fname); q_o=q_o->next;}
   //printf("\nqueue 1\n");
   //while(q_n){printf("%s\n", q_n->fname); q_n=q_n->next;}
-
-  while(q){
+  //printf("before while\n");
+  while(q){	
     
     //check if interesting to run and has yet to be added to a queue from another queue
-    if( is_interesting_for_prog(q, CUR_PROG) ){
+    //if( is_interesting_for_prog(q, CUR_PROG) ){
+  	//printf("before if\n");
+  	if( !q->has_been_run ){
       //add_to_queue_teste(q->fname, q->len, 1, 1);
       //printf("is going to add %s\n", q->fname);
       add_entry_to_dir(q,CUR_PROG);
       //sleep(5);
     }
 
+    // check if elem has been run - done
+    // if it has get the next elem and loop back - done
+    // run the elem and see if it covers anything new
+    // if it does add the elem to the queue and to the prog_dir
+    // grab the next elem and loop back - done
+    q->has_been_run=1; // mark the queue elem as seen    
     q=q->next;
   }
 }
@@ -9280,7 +9298,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
       //printf("Gonna switch programs\n");
       init_time = get_cur_time();
       
-      prog_change();
+      on_prog_change();
       //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
       //printf("changed prog\n");

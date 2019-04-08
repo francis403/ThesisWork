@@ -1530,11 +1530,6 @@ __afl_maybe_log:
   movq  __afl_area_ptr(%rip), %rdx
   testq %rdx, %rdx
   je    __afl_setup
-  pushq %rdx
-  movq  __afl_block_ptr(%rip), %rdx
-  testq %rdx, %rdx
-  je    __afl_setup_first_block
-  popq %rdx
 
 __afl_store:
   /* Calculate and store hit for the code location specified in rcx. */
@@ -1565,10 +1560,6 @@ __afl_setup:
   je    __afl_setup_first
 
   movq %rdx, __afl_area_ptr(%rip)
-  /* Check out if we have a global pointer on block file. */
-  movq  __afl_global_block_area_ptr@GOTPCREL(%rip), %rdx
-  movq  (%rdx), %rdx
-  movq %rdx, __afl_block_ptr(%rip)
   jmp  __afl_store
 
 __afl_setup_first:
@@ -1640,37 +1631,6 @@ call shmat@PLT
   movq %rax, (%rdx)
   movq %rax, %rdx
 
-__afl_setup_first_block:
-  pushq %rdx
-
-  leaq .AFL_SHM_BLOCKS(%rip), %rdi
-call getenv@PLT
-
-  testq %rax, %rax
-  je    __afl_setup_abort
-
-  movq  %rax, %rdi
-call atoi@PLT
-
-  xorq %rdx, %rdx   /* shmat flags    */
-  xorq %rsi, %rsi   /* requested addr */
-  movq %rax, %rdi   /* SHM ID         */
-call shmat@PLT
-
-  cmpq $-1, %rax
-  je   __afl_setup_abort
-
-  /* Store the address of the SHM region. */
-
-  movq %rax, %rdx
-  movq %rax, __afl_block_ptr(%rip)
-
-  movq __afl_global_block_area_ptr@GOTPCREL(%rip), %rdx
-  movq %rax, (%rdx)
-  movq %rax, %rdx
-  movq %rdx, __address_temp
- movq %rdx, %r15
-  popq %rdx
 
 __afl_forkserver:
 
