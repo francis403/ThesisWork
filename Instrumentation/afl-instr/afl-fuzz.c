@@ -276,6 +276,9 @@ static s32 cpu_aff = -1;       	      /* Selected CPU core                */
 
 static FILE* plot_file[MAX_AMOUNT_OF_PROGS];               /* Gnuplot output file              */
 
+/* Arguments for each program */
+static char **prog_args[MAX_AMOUNT_OF_PROGS];
+
 static int numbr_of_progs_under_test = 0;
 
 // TODO -> maybe have one for each program (*next, *next_100) and then we
@@ -4601,6 +4604,7 @@ static void perform_dry_run(char** argv) {
     close(fd);
 
     //printf("\tuse_mem = %s\n", use_mem);
+  
    	res = calibrate_case(argv, q, use_mem, 0, 1);
    	//printf("after calibrate\n");
    	//res = FAULT_TMOUT;
@@ -9094,21 +9098,47 @@ int main(int argc, char** argv) {
   	u32 sync_interval_cnt = 0, seek_to;
   	u8  *extras_dir = 0;
   	u8  exit_1 = !!getenv("AFL_BENCH_JUST_ONE");
-	char** use_argv;
-
+	char **use_argv;
+	//char ***p_args = malloc( sizeof(char **) * MAX_AMOUNT_OF_PROGS );
 	//SAYF(cCYA "afl-fuzz " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
 
 	doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
 
   // pass through every arg and get the number of programs and their names
-  int index = 0;
-  while( *(argv + index) ){
-      if(strcmp(*(argv + index), "-p") == 0){
-        prog_names[numbr_of_progs_under_test] =*(argv + index + 1);
-        numbr_of_progs_under_test ++;
-      }
-    index ++;
-  }
+  // TODO -> get the arguments from here
+    int index = 0;
+    //prog_args[]
+    int arg_index = 0;
+  	while( *(argv + index) ){
+  		//printf("arg = %s\n", *(argv + index));
+      	if(strcmp(*(argv + index), "-p") == 0){
+        	prog_names[numbr_of_progs_under_test] = *(argv + index + 1);
+
+        	if( prog_args[numbr_of_progs_under_test - 1] ){
+        		printf("prog_args = %s\n", *prog_args[numbr_of_progs_under_test - 1]);
+        	}
+
+        	prog_args[numbr_of_progs_under_test] = malloc( sizeof(char*) * 100 );
+        	numbr_of_progs_under_test ++;
+        	arg_index = 0;
+      	}
+      	else if(numbr_of_progs_under_test > 0){
+      		//p_args[numbr_of_progs_under_test - 1][arg_index] = *(argv + index);
+      		*(prog_args[numbr_of_progs_under_test - 1] + arg_index) = *(argv + index);
+      		arg_index ++;
+      	}
+      	
+    	index ++;
+  	}
+
+  	//if(p_args) free(p_args);
+  	/*
+  	int re = 0;
+  	while ( *(prog_args[0] + re) ){
+  		printf("re = %s\n", *prog_args[0] );
+  		re ++;
+  	}
+	*/
   	if(numbr_of_progs_under_test > MAX_AMOUNT_OF_PROGS) FATAL("Number of progs under test exceed the max amount of %d", MAX_AMOUNT_OF_PROGS);
 
 	while ((opt = getopt(argc, argv, "+i:o:q:m:p")) > 0){
@@ -9189,14 +9219,6 @@ int main(int argc, char** argv) {
     sprintf(out_dir_delta[i], "%s%d", out_dir, i);
   }
 
-
-  //printf("out dir will be %s for %d\n", out_dir_delta[0], 0);
-
-  //numbr_of_progs_under_test = 0;
-  //numbr_of_progs_under_test = argc - optind;
-
-  //numbr_of_progs_under_test = getenv(FORKSRV_AMOUNT_ENV) == NULL ? 1 : getenv(FORKSRV_AMOUNT_ENV); // get number of programs under test
-
   setup_signal_handlers(); // not needed to execture the forkserver, but might as well have it
   check_asan_opts();
 
@@ -9251,8 +9273,9 @@ int main(int argc, char** argv) {
   else
     use_argv = argv + optind;
 
+  //printf("use_argv = %s\n", *use_argv);
 
-  perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
+  perform_dry_run(prog_args[0]); //this will be where most of the work will be done for this iteration
 
   cull_queue();
 
@@ -9290,7 +9313,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
       //printf("Gonna switch programs\n");
       init_time = get_cur_time();
       
-      on_prog_change(use_argv);
+      on_prog_change(prog_args[CUR_PROG]);
       //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
       //printf("changed prog\n");
@@ -9329,7 +9352,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
       prev_queued = queued_paths[CUR_PROG];
 
       if (sync_id && queue_cycle == 1 && getenv("AFL_IMPORT_FIRST"))
-        sync_fuzzers(use_argv);
+        sync_fuzzers(use_argv); // TODO -> need to be able to sync fuzzers
 
     }
 
@@ -9337,7 +9360,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
     if (test_bool) printf("before fuzz one\n");
 
-    skipped_fuzz = fuzz_one(use_argv); // this is where the work will be done //NOTE
+    skipped_fuzz = fuzz_one(prog_args[CUR_PROG]); // this is where the work will be done //NOTE
 
     if (test_bool) printf("after fuzz one\n");
 
@@ -9384,18 +9407,17 @@ while (1) { //main fuzzing loop //FUZZ LOP
   destroy_queue();
   destroy_extras();
   //ck_free(target_path);
-  for(int i = 0; i < numbr_of_progs_under_test; i++) ck_free(target_path[i]);
+  for(int i = 0; i < numbr_of_progs_under_test; i++){ 
+  	ck_free(target_path[i]);
+  	if( prog_args[i] ) free(prog_args[i]);
+  	free(out_dir_delta[i]);
+  }
   ck_free(sync_id);
-
+	
 
   alloc_report();
 
   OKF("We're done here. Have a nice day!\n");
-
-
-  // TODO -> do we need to free this?
-  for(int i = 0; i < numbr_of_progs_under_test; i++ )
-    free(out_dir_delta[i]);
 
   exit(0);
 
