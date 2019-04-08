@@ -980,22 +980,22 @@ EXP_ST void write_bitmap(void) {
 	bitmap_changed = 0;
 
 	fname = alloc_printf("%s/fuzz_bitmap", out_dir);
-  fname_delta = alloc_printf("%s/fuzz_bitmap", out_dir_delta[CUR_PROG]);
+  	fname_delta = alloc_printf("%s/fuzz_bitmap", out_dir_delta[CUR_PROG]);
 
 	fd = open(fname, O_WRONLY | O_CREAT | O_TRUNC, 0600);
-  fd_delta = open(fname_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+  	fd_delta = open(fname_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 	if (fd < 0) PFATAL("Unable to open '%s'", fname);
-  if (fd_delta < 0) PFATAL("Unable to open '%s'", fname_delta);
+  	if (fd_delta < 0) PFATAL("Unable to open '%s'", fname_delta);
 
 	ck_write(fd, virgin_bits[CUR_PROG], MAP_SIZE, fname);
-  ck_write(fd_delta, virgin_bits[CUR_PROG], MAP_SIZE, fname_delta);
+  	ck_write(fd_delta, virgin_bits[CUR_PROG], MAP_SIZE, fname_delta);
 
 	close(fd);
-  close(fd_delta);
+  	close(fd_delta);
 
 	ck_free(fname);
-  ck_free(fname_delta);
+  	ck_free(fname_delta);
 
 }
 
@@ -1017,6 +1017,7 @@ EXP_ST void read_bitmap(u8* fname) {
 
 /* Checks if the current execution path passes through any new block */
 /* Not sure if working */
+
 static u8 has_new_blocks(){
 	// blocks shared not all the blocks passed implies there are new blocks
 	return shared_blocks_in_runs < unique_blocks;
@@ -1030,10 +1031,6 @@ static u8 has_new_blocks(){
    This function is called after every exec() on a fairly large buffer, so
    it needs to be fast. We do this in 32-bit and 64-bit flavors. */
 
-// TODO -> we need to check every virgin map right?
-//		-> maybe its not in this function but in the function that calls it?
-//		-> This might be a bit expensive, maybe just check the ones that have changed and check 
-//		 the other virgin_maps for the specific bits.
 
 static inline u8 has_new_bits(u8* virgin_map) {
 
@@ -1546,8 +1543,9 @@ EXP_ST void setup_shm(void) {
 	u8* shm_str, *shm_str_blocks;
 
 	if (!in_bitmap){ 
-    for(int i = 0; i < numbr_of_progs_under_test; i++)
-     memset(virgin_bits[i], 255, MAP_SIZE);
+    for(int i = 0; i < numbr_of_progs_under_test; i++){
+    	memset(virgin_bits[i], 255, MAP_SIZE);
+    }
   }
 
   for(int i = 0; i < numbr_of_progs_under_test; i++){
@@ -3402,7 +3400,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
   	// TODO -> we need to check every virgin_bits and if it has new coverage there its good
   	// se não encontramos edges novas ou não encontramos blocs blocos nunca antes vistos
   	// TODO -> não é redundate ver se temos blocos novos? Visto que se tivermos uma edge nova é porque ou a ordem trocou ou porque temos novos blocos nela?
-  	if (!(hnb = has_new_bits(virgin_bits[CUR_PROG]))) {
+  	if (!(hnb = has_new_bits( virgin_bits[CUR_PROG] ))) {
       if (crash_mode) total_crashes++;
       return 0;
     }    
@@ -3424,7 +3422,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
     add_to_queue(fn_delta, len, 0, 0);
     //add_to_queue(fn_delta, len, 0); //(This adds to the specific queue) - TODO: either create a new queue or make the existing one with more complex info 
 
-    if (hnb == 2 || has_new_blocks()) {
+    if ( hnb == 2 ) {
       queue_top[CUR_PROG]->has_new_cov = 1;
       queued_with_cov++;
     }
@@ -3468,10 +3466,10 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifdef __x86_64__
         simplify_trace((u64*)trace_bits);
-        simplify_trace((u64*)trace_blocks);
+        //simplify_trace((u64*)trace_blocks);
 #else
         simplify_trace((u32*)trace_bits);
-        simplify_trace((u32*)trace_blocks);
+        //simplify_trace((u32*)trace_blocks);
 #endif /* ^__x86_64__ */
 
         if (!has_new_bits(virgin_tmout[CUR_PROG])) return keeping;
@@ -4543,11 +4541,11 @@ static void maybe_delete_specific_out_dir(int i) {
 
 /*Add the elem to the actual dir*/
 
-static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add){
+static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add, u8 to_fuzz){
 
 	//printf("in add_entry to dir\n");
 
-	u8  *fn = malloc(sizeof(u8) * 500 + 1);
+	u8  *fn = malloc(sizeof(u8) * 200 + 1);
 
 	if( !fn ) FATAL("Malloc failed!");
 
@@ -4560,38 +4558,10 @@ static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add){
   	//printf("after copy_file\n");
     //add to specific queue
 
-    add_to_queue(fn, q->len, 0, 1);
+    add_to_queue(fn, q->len, to_fuzz ? 0 : 1, 1);
     //free(fn);
     //printf("after adding entry to dir\n");
 
-}
-
-/*Run elem queue_entry*/
-
-static void run_queue_entry(struct queue_entry *q){
-	u8 *use_mem;
-	//u8 res;
-	s32 fd;
-
-	//u8* fn = strrchr(q->fname, '/') + 1;
-
-
-	add_entry_to_dir(q, CUR_PROG);
-    //ACTF("Attempting run with '%s'...", fn);
-
-    fd = open(q->fname, O_RDONLY);
-    if (fd < 0) PFATAL("Unable to open '%s'", q->fname);
-
-    use_mem = ck_alloc_nozero(q->len);
-
-    if (read(fd, use_mem, q->len) != q->len)
-      FATAL("Short read from '%s'", q->fname);
-
-    close(fd);
-
-    //res = calibrate_case(argv, q, use_mem, 0, 1);
-   	//res = FAULT_TMOUT;
-    ck_free(use_mem);
 }
 
 
@@ -6071,7 +6041,7 @@ static u8 fuzz_one(char** argv) {
       goto abandon_entry;
     }
 
-  }
+  } // end of calibrate
 
   if(test_bool) printf("before trimming\n");
 
@@ -9035,6 +9005,44 @@ static u8 is_interesting_for_prog(struct queue_entry *q, u8 prog_index){
 
 }
 
+static void save_entry_in_prog_if_interesting(struct queue_entry *q, char **argv){
+
+	s32 fd, len;
+	u8 *mem;
+	u8  hnb, fault;
+
+  	fd = open(q->fname, O_RDONLY);
+  	if (fd < 0) PFATAL("Unable to open '%s'", q->fname);
+
+  	len = q->len;
+
+  	memset(trace_bits, 0, MAP_SIZE); // make sure trace_bits are clear
+
+	mem = ck_alloc_nozero(len);
+	if ( read(fd, mem, len) != len ) 
+    	FATAL("Short read from '%s'", q->fname);
+    //if (mem == MAP_FAILED) PFATAL("Unable to mmap '%s'", q->fname);
+
+    write_to_testcase(mem, len);
+	fault = run_target(exec_tmout);
+
+	
+	if ( !(hnb = has_new_bits(virgin_bits[CUR_PROG])) ) {
+      if (crash_mode) total_crashes++;
+      //not interesting, do something
+    }
+    else{
+    	add_entry_to_dir(q,CUR_PROG, 1);
+    	//printf("after add entry\n");
+    }
+
+    close(fd);
+    //printf("after close fd\n");
+    memset(trace_bits, 0, MAP_SIZE);
+    ck_free(mem);
+    //free(in_buf);
+}
+
 /*
   Called to check if the prog is changed and if it is
   does what needs to be done
@@ -9044,50 +9052,36 @@ static u8 is_interesting_for_prog(struct queue_entry *q, u8 prog_index){
     mark it has passed seen in the program
 */
 
-void on_prog_change(){
+void on_prog_change(char **argv){
+
 
   if (numbr_of_progs_under_test < 2 ) return; // no prog to switch to? Do nothing!
 
   u8 old = CUR_PROG;
   //change the program we are fuzzing
   CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test;
-  //FATAL("ran past on_prog_change CUR_PROG = %d and numbr_of_progs_under_test %d", CUR_PROG, numbr_of_progs_under_test);
-  // pass through all the queue values that have yet to be seen and originated from the one we are seeing
-  //printf("CUR_PROG = %d\n", CUR_PROG);
-  //printf("queue[CUR_PROG] = %s\n", queue[CUR_PROG]->fname);
-  //printf("teste\n");
-
   
   struct queue_entry *q = queue[old];
   		 //*q_o = queue[old],
   		 //*q_n = queue[CUR_PROG];
 
   test_bool = 1;
-  //printf("\nqueue 0\n");
-  //while(q_o){printf("%s\n", q_o->fname); q_o=q_o->next;}
-  //printf("\nqueue 1\n");
-  //while(q_n){printf("%s\n", q_n->fname); q_n=q_n->next;}
-  //printf("before while\n");
+  	
+
   while(q){	
-    
-    //check if interesting to run and has yet to be added to a queue from another queue
-    //if( is_interesting_for_prog(q, CUR_PROG) ){
-  	//printf("before if\n");
+ 
   	if( !q->has_been_run ){
-      //add_to_queue_teste(q->fname, q->len, 1, 1);
-      //printf("is going to add %s\n", q->fname);
-      add_entry_to_dir(q,CUR_PROG);
-      //sleep(5);
+  	  //printf( " first time running %s\n", q->fname );
+      //add_entry_to_dir(q,CUR_PROG, 0);
+  	  save_entry_in_prog_if_interesting(q, argv); // error: saying most inputs aren't interesting
     }
 
-    // check if elem has been run - done
-    // if it has get the next elem and loop back - done
-    // run the elem and see if it covers anything new
-    // if it does add the elem to the queue and to the prog_dir
-    // grab the next elem and loop back - done
     q->has_been_run=1; // mark the queue elem as seen    
     q=q->next;
+
   }
+
+  //sleep(4);
 }
 
 /* Main entry point */
@@ -9257,7 +9251,7 @@ int main(int argc, char** argv) {
   else
     use_argv = argv + optind;
 
-  //TODO -> make it perform a dry runon every program
+
   perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
 
   cull_queue();
@@ -9288,17 +9282,15 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
     u8 skipped_fuzz;
 
-    if(test_bool) printf("beggin of while\n");
-
     cull_queue();
     end_t = get_cur_time();
 
-    // Shoulw we switch programs?
+    // Should we switch programs?
     if( (end_t - init_time) >= switch_program_timer ){
       //printf("Gonna switch programs\n");
       init_time = get_cur_time();
       
-      on_prog_change();
+      on_prog_change(use_argv);
       //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
       //printf("changed prog\n");
@@ -9340,6 +9332,8 @@ while (1) { //main fuzzing loop //FUZZ LOP
         sync_fuzzers(use_argv);
 
     }
+
+    //printf("queue entry under test is: %s\n", queue_cur[CUR_PROG]->fname);
 
     if (test_bool) printf("before fuzz one\n");
 
