@@ -200,7 +200,8 @@ static volatile u8 stop_soon,         /* Ctrl-C pressed?                  */
                    clear_screen = 1,  /* Window resized?                  */
                    child_timed_out;   /* Traced process timed out?        */
 
-EXP_ST u32 queued_paths[MAX_AMOUNT_OF_PROGS],              /* Total number of queued testcases */
+EXP_ST u32 queued_paths[MAX_AMOUNT_OF_PROGS],              /* Total number of queued testcases per program*/
+		   total_nmbr_queued_paths,
            queued_variable[MAX_AMOUNT_OF_PROGS],           /* Testcases with variable behavior */
            queued_at_start,           /* Total number of initial inputs   */
            queued_discovered,         /* Items discovered during this run */
@@ -800,12 +801,6 @@ static void mark_as_det_done(struct queue_entry* q) {
   	//fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
   	fn_delta = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
-	//fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-	//if (fd < 0) PFATAL("Unable to create '%s'", fn);
-	//close(fd);
-
-  	if(test_bool)	printf("cur prog = %d\n", CUR_PROG);
-
 	fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
 	if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
 	close(fd_delta);
@@ -926,6 +921,7 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det, u8 added_from_queue)
 	} else q_prev100[CUR_PROG] = queue[CUR_PROG] = queue_top[CUR_PROG] = q;
 
 	queued_paths[CUR_PROG]++;
+	total_nmbr_queued_paths ++;
 	pending_not_fuzzed++;
 
 	cycles_wo_finds = 0;
@@ -3412,13 +3408,13 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
     //fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths[CUR_PROG],
     //                  describe_op(hnb));
-    fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], queued_paths[CUR_PROG],
+    fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], total_nmbr_queued_paths,
                       describe_op(hnb));
 
 #else
 
     //fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths[CUR_PROG]);
-    fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], queued_paths[CUR_PROG]);
+    fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], total_nmbr_queued_paths);
 
 #endif /* ^!SIMPLE_FILES */
 
@@ -5921,10 +5917,6 @@ static u8 could_be_interest(u32 old_val, u32 new_val, u8 blen, u8 check_le) {
    skipped or bailed out. */
 static u8 fuzz_one(char** argv) {
 
-  //printf("in fuzz one\n");
-
-  if(test_bool) printf("init fuzz_one\n");
-
   s32 len, fd, temp_len, i, j;
   u8  *in_buf, *out_buf, *orig_in, *ex_tmp, *eff_map = 0;
   u64 havoc_queued,  orig_hit_cnt, new_hit_cnt;
@@ -6047,8 +6039,6 @@ static u8 fuzz_one(char** argv) {
 
   } // end of calibrate
 
-  if(test_bool) printf("before trimming\n");
-
   /************
    * TRIMMING *
    ************/
@@ -6075,32 +6065,20 @@ static u8 fuzz_one(char** argv) {
 
   memcpy(out_buf, in_buf, len);
 
-  if(test_bool) printf("before perfomance score\n");
-
   /*********************
    * PERFORMANCE SCORE *
    *********************/
 
   orig_perf = perf_score = calculate_score(queue_cur[CUR_PROG]);
 
-  if(test_bool) printf("after calculate score\n");
-
   /* Skip right away if -d is given, if we have done deterministic fuzzing on
      this entry ourselves (was_fuzzed), or if it has gone through deterministic
      testing in earlier, resumed runs (passed_det). */
-
-   if(test_bool){
-    printf("queue_cur = %s\n", queue_cur[CUR_PROG]->fname);
-    printf("has been fuzzed by prog: %d\n", queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG]);
-    printf("passed deterministic: %d\n", queue_cur[CUR_PROG]->passed_det);
-   }
 
    // this big if is kinda cheating -> added by fc45701
   
     if (skip_deterministic || queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || queue_cur[CUR_PROG]->passed_det)
       goto havoc_stage;
-
-    if(test_bool) printf("after first if\n");
 
 
     /* Skip deterministic fuzzing if exec path checksum puts this out of scope
@@ -6111,11 +6089,7 @@ static u8 fuzz_one(char** argv) {
   
   doing_det = 1;
 
-   if(test_bool) printf("after second if\n");
-
   // Deterministic
-
-  if(test_bool) printf("before flip bit\n");
 
   /*********************************************
    * SIMPLE BITFLIP (+dictionary construction) *
@@ -6306,8 +6280,6 @@ static u8 fuzz_one(char** argv) {
     eff_cnt++;
   }
 
-  if(test_bool) printf("before walking byte\n");
-
   /* Walking byte. */
 
   stage_name  = "bitflip 8/8";
@@ -6453,7 +6425,6 @@ skip_bitflip:
 
   if (no_arith) goto skip_arith;
 
-  if(test_bool) printf("before arithm\n");
   /**********************
    * ARITHMETIC INC/DEC *
    **********************/
@@ -6709,8 +6680,6 @@ skip_bitflip:
   stage_cycles[STAGE_ARITH32] += stage_max;
 
 skip_arith:
-
-  if(test_bool) printf("before interesting values\n");
 
   /**********************
    * INTERESTING VALUES *
@@ -7083,9 +7052,6 @@ skip_extras:
    ****************/
 
 havoc_stage:
-  
-  if(test_bool) printf("before havoc stage\n");
-
 
   stage_cur_byte = -1;
 
@@ -7112,8 +7078,6 @@ havoc_stage:
 
   }
 
-  if(test_bool) printf("after first if\n");
-
   if (stage_max < HAVOC_MIN) stage_max = HAVOC_MIN;
 
   temp_len = len;
@@ -7124,8 +7088,6 @@ havoc_stage:
 
   /* We essentially just do several thousand runs (depending on perf_score)
      where we take the input file and make random stacked tweaks. */
-
-  if(test_bool) printf("before for\n");
 
   for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
@@ -7532,7 +7494,6 @@ havoc_stage:
     }
 
   }
-  if(test_bool) printf("after for\n");
 
   new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
@@ -7545,8 +7506,6 @@ havoc_stage:
   }
 
 #ifndef IGNORE_FINDS
-
-  if(test_bool) printf("before splicing\n");
 
   /************
    * SPLICING *
@@ -7641,8 +7600,6 @@ retry_splicing:
     goto havoc_stage;
 
   }
-
-  if(test_bool) printf("after big if\n");
 
 #endif /* !IGNORE_FINDS */
 
@@ -9071,20 +9028,19 @@ void on_prog_change(char **argv){
 
   test_bool = 1;
   	
-
+  int do_it_once = 0;
   while(q){	
  
   	if( !q->has_been_run ){
   	  //printf( " first time running %s\n", q->fname );
       //add_entry_to_dir(q,CUR_PROG, 0);
-  	  save_entry_in_prog_if_interesting(q, argv); // error: saying most inputs aren't interesting
+  	  save_entry_in_prog_if_interesting(q, argv);
     }
 
     q->has_been_run=1; // mark the queue elem as seen    
     q=q->next;
 
   }
-
   //sleep(4);
 }
 
@@ -9120,25 +9076,17 @@ int main(int argc, char** argv) {
 
         	prog_args[numbr_of_progs_under_test] = malloc( sizeof(char*) * 100 );
         	numbr_of_progs_under_test ++;
-        	arg_index = 0;
+        	arg_index = -1;
       	}
       	else if(numbr_of_progs_under_test > 0){
       		//p_args[numbr_of_progs_under_test - 1][arg_index] = *(argv + index);
-      		*(prog_args[numbr_of_progs_under_test - 1] + arg_index) = *(argv + index);
+      		if(arg_index >= 0)*(prog_args[numbr_of_progs_under_test - 1] + arg_index) = *(argv + index);
       		arg_index ++;
       	}
       	
     	index ++;
   	}
 
-  	//if(p_args) free(p_args);
-  	/*
-  	int re = 0;
-  	while ( *(prog_args[0] + re) ){
-  		printf("re = %s\n", *prog_args[0] );
-  		re ++;
-  	}
-	*/
   	if(numbr_of_progs_under_test > MAX_AMOUNT_OF_PROGS) FATAL("Number of progs under test exceed the max amount of %d", MAX_AMOUNT_OF_PROGS);
 
 	while ((opt = getopt(argc, argv, "+i:o:q:m:p")) > 0){
@@ -9356,13 +9304,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
     }
 
-    //printf("queue entry under test is: %s\n", queue_cur[CUR_PROG]->fname);
-
-    if (test_bool) printf("before fuzz one\n");
-
     skipped_fuzz = fuzz_one(prog_args[CUR_PROG]); // this is where the work will be done //NOTE
-
-    if (test_bool) printf("after fuzz one\n");
 
     if (!stop_soon && sync_id && !skipped_fuzz) {
       
@@ -9377,8 +9319,6 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
     queue_cur[CUR_PROG] = queue_cur[CUR_PROG]->next;
     current_entry++;
-    
-    if(test_bool) printf("end of while\n");
 
   } //end of the main fuzzing loop
 
