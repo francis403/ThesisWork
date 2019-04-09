@@ -91,6 +91,7 @@ short test_bool = 0;
 
 EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
           *out_file,                  /* File to fuzz, if any             */
+		  *out_file_delta[MAX_AMOUNT_OF_PROGS],
           *out_dir,                   /* Working & output directory       */
           *out_dir_delta[MAX_AMOUNT_OF_PROGS], /* Each program should have their own out dir, this so far is only for testing*/
           *sync_dir,                  /* Synchronization directory        */
@@ -2296,7 +2297,17 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     	close(out_fd);
 
     }
-
+    /*
+    for(int i = 0; i < numbr_of_progs_under_test; i++){
+    	if (out_file_delta[i]) {
+    		dup2(dev_null_fd, 0);
+    	} else {
+      		//enters here
+    		dup2(out_fd_delta[i], 0);
+    		close(out_fd_delta[i]);
+    	}
+    }
+	*/
 
 
     // end points
@@ -2838,11 +2849,12 @@ static void run_programs_once(u32 timeout){
 
 static void write_to_testcase(void* mem, u32 len) {
 
+		
 		s32 fd = out_fd;
 
 		if (out_file) {
 
-    		unlink(out_file); /* Ignore errors. */
+    		unlink(out_file);
 
 			fd = open(out_file, O_WRONLY | O_CREAT | O_EXCL, 0600);
 
@@ -2858,7 +2870,29 @@ static void write_to_testcase(void* mem, u32 len) {
 			lseek(fd, 0, SEEK_SET);
 
 		} else close(fd);
+		
+		/*
+		s32 fd = out_fd_delta[CUR_PROG];
 
+		if (out_file_delta[CUR_PROG]) {
+
+    		unlink(out_file_delta[CUR_PROG]);
+
+			fd = open(out_file_delta[CUR_PROG], O_WRONLY | O_CREAT | O_EXCL, 0600);
+
+			if (fd < 0) PFATAL("Unable to create '%s'", out_file_delta[CUR_PROG]);
+
+		} else lseek(fd, 0, SEEK_SET);
+
+		ck_write(fd, mem, len, out_file_delta[CUR_PROG]);
+
+		if (!out_file_delta[CUR_PROG]) {
+
+			if (ftruncate(fd, len)) PFATAL("ftruncate() failed");
+			lseek(fd, 0, SEEK_SET);
+
+		} else close(fd);
+		*/
 	}
 
 /* The same, but with an adjustable gap. Used for trimming. */
@@ -2866,11 +2900,12 @@ static void write_to_testcase(void* mem, u32 len) {
 static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
 
   s32 fd = out_fd;
+  //s32 fd = out_fd_delta[CUR_PROG];
   u32 tail_len = len - skip_at - skip_len;
 
   if (out_file) {
 
-    unlink(out_file); /* Ignore errors. */
+    unlink(out_file);
 
     fd = open(out_file, O_WRONLY | O_CREAT | O_EXCL, 0600);
 
@@ -2888,7 +2923,29 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
     lseek(fd, 0, SEEK_SET);
 
   } else close(fd);
+  
+  /*
+  if (out_file_delta[CUR_PROG]) {
 
+    unlink(out_file_delta[CUR_PROG]);
+
+    fd = open(out_file_delta[CUR_PROG], O_WRONLY | O_CREAT | O_EXCL, 0600);
+
+    if (fd < 0) PFATAL("Unable to create '%s'", out_file_delta[CUR_PROG]);
+
+  } else lseek(fd, 0, SEEK_SET);
+
+  if (skip_at) ck_write(fd, mem, skip_at, out_file_delta[CUR_PROG]);
+
+  if (tail_len) ck_write(fd, mem + skip_at + skip_len, tail_len, out_file_delta[CUR_PROG]);
+
+  if (!out_file_delta[CUR_PROG]) {
+
+    if (ftruncate(fd, len - skip_len)) PFATAL("ftruncate() failed");
+    lseek(fd, 0, SEEK_SET);
+
+  } else close(fd);
+  */
 }
 
 
@@ -8440,7 +8497,7 @@ EXP_ST void setup_stdio_file(void) {
 
 	u8* fn = alloc_printf("%s/.cur_input", out_dir);
 
-    unlink(fn); /* Ignore errors */
+  unlink(fn); /* Ignore errors */
 
 	out_fd = open(fn, O_RDWR | O_CREAT | O_EXCL, 0600);
 
@@ -8754,7 +8811,7 @@ static void check_asan_opts(void) {
 /* Detect @@ in args. */
 /* Marks where the file must go*/
 /*TODO -> need to make sure that if one has @@ all of them have it*/
-EXP_ST void detect_file_args(char** argv, short prog) {
+EXP_ST void detect_file_args(char** argv, int prog) {
 
   u32 i = 0;
   u8* cwd2 = getcwd(NULL, 0);
@@ -8771,27 +8828,29 @@ EXP_ST void detect_file_args(char** argv, short prog) {
 
       /* If we don't have a file name chosen yet, use a safe default. */
 
-      // acho que o bug está na maneira como metemos o out_dir!
-      // talvez ter um outfile por programa? Porque parece-me que quanto temos um ficheiro ele mete lá automaticamente
-     
-	if (!out_file)
-		out_file = alloc_printf("%s/.cur_input", out_dir);
-      
-  
+      if (!out_file)
+        out_file = alloc_printf("%s/.cur_input", out_dir);
+
+      //if (!out_file_delta[prog])
+      //  out_file_delta[prog] = alloc_printf("%s/.cur_input", out_dir_delta[prog]);
 
       /* Be sure that we're always using fully-qualified paths. */
 
       if (out_file[0] == '/') aa_subst = out_file;
       else aa_subst = alloc_printf("%s/%s", cwd2, out_file);
 
+      //if (out_file_delta[prog][0] == '/') aa_subst = out_file_delta[prog];
+      //else aa_subst = alloc_printf("%s/%s", cwd2, out_file_delta[prog]);
+
       /* Construct a replacement argv value. */
 
       *aa_loc = 0;
       n_arg = alloc_printf("%s%s%s", argv[i], aa_subst, aa_loc + 2);
-      argv[i] = n_arg; // this is where it tells them
+      argv[i] = n_arg;
       *aa_loc = '@';
 
       if (out_file[0] != '/') ck_free(aa_subst);
+      //if (out_file_delta[prog][0] != '/') ck_free(aa_subst);
 
     }
 
@@ -8971,7 +9030,7 @@ static u8 is_interesting_for_prog(struct queue_entry *q, u8 prog_index){
 
 }
 
-static void save_entry_in_prog_if_interesting(struct queue_entry *q){
+static void save_entry_in_prog_if_interesting(struct queue_entry *q, char **argv){
 
 	s32 fd, len;
 	u8 *mem;
@@ -9018,7 +9077,7 @@ static void save_entry_in_prog_if_interesting(struct queue_entry *q){
     mark it has passed seen in the program
 */
 
-void on_prog_change(){
+void on_prog_change(char **argv){
 
 
   if (numbr_of_progs_under_test < 2 ) return; // no prog to switch to? Do nothing!
@@ -9039,7 +9098,7 @@ void on_prog_change(){
   	if( !q->has_been_run ){
   	  //printf( " first time running %s\n", q->fname );
       //add_entry_to_dir(q,CUR_PROG, 0);
-  	  save_entry_in_prog_if_interesting(q);
+  	  save_entry_in_prog_if_interesting(q, argv);
     }
 
     q->has_been_run=1; // mark the queue elem as seen    
@@ -9200,32 +9259,16 @@ int main(int argc, char** argv) {
   read_testcases();
   load_auto();
 
-
-  printf("before pivot-inputs\n");
   pivot_inputs();
- printf("after pivot-inputs\n");
+
   if (extras_dir) load_extras(extras_dir);
 
   if (!timeout_given) find_timeout();
 
+  detect_file_args(argv, 0);
+  for(int i = 0; i < numbr_of_progs_under_test; i++)
+  	detect_file_args(prog_args[i], i);	
 
-  // TODO -> tem um bug, essencialmente só funciona se só tivermos um programa com @@
-  //      -> com dois programas e os dois têm @@ -> não sei
-  //      -> com dois programas e um tem @@ dá bug
-  //      -> só com um programa no total com @@ funciona
-  //      -> com dois programas no total com 0 @@ nos argumentos fucniona
-  detect_file_args(argv, -1); // não sei porque é necessario mas é
-  for(int i = 0; i < numbr_of_progs_under_test; i++){
-  	detect_file_args(prog_args[i], i);
-  }
-
-  for(int i = 0; i < numbr_of_progs_under_test; i++){
-    	printf("prog: %d\n", i);
-    	for(int j = 0; *(prog_args[i] + j); j++){
-    		printf("arg = %s\n", *(prog_args[i] + j));
-    	}
-   }
-  
   if (!out_file) setup_stdio_file();
   //printf("%s\n", tmp_test);
 
@@ -9236,14 +9279,13 @@ int main(int argc, char** argv) {
   init_prog_args = optind;
 
   /*we start forkservers here*/
-  printf("before init_forkserver\n");
   init_all_forkservers(argv);
   get_prog_targets(0,1); //TODO - not working
 
   if (qemu_mode)
     use_argv = get_qemu_argv(argv[0], argv + optind, argc - optind);
   else
-    use_argv = argv + optind + 1;
+    use_argv = argv + optind;
 
   //printf("use_argv = %s\n", *use_argv);
 
@@ -9259,6 +9301,7 @@ int main(int argc, char** argv) {
   save_auto(); //-> not needed, but important
 
   if (stop_soon) goto stop_fuzzing;
+
 
   /* Woop woop woop */
   
@@ -9284,7 +9327,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
       //printf("Gonna switch programs\n");
       init_time = get_cur_time();
       
-      on_prog_change();
+      on_prog_change(prog_args[CUR_PROG]);
       //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
       //printf("changed prog\n");
@@ -9327,7 +9370,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
     }
 
-    skipped_fuzz = fuzz_one(prog_args[CUR_PROG]);
+    skipped_fuzz = fuzz_one(prog_args[CUR_PROG]); // this is where the work will be done //NOTE
 
     if (!stop_soon && sync_id && !skipped_fuzz) {
       
