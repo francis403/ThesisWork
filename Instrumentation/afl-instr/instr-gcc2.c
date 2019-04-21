@@ -2,7 +2,8 @@
    Changed applied toamerican fuzzy lop - wrapper for GCC and clang 
    ----------------------------------------------
 	
-	The idea is to be able to save the instrumentation and compare two programs after they run
+	This is a temporary solution to allow two programs that are hard to instrumentalize when isolated to be instrumentalized 
+  With different forkserver pids, so they can be more easily tested
  
  */
 
@@ -316,11 +317,13 @@ int main(int argc, char** argv) {
     p ++;
   }
 
+
   char snum[5];
-  sprintf(snum, "%d", 0);
+  sprintf(snum, "%d", 1);
 
   //char *param = "valgrind --leak-check=full gcc";
   setenv(FORKSRV_ENV, snum, 1);
+  //char *param = "valgrind --leak-check=full gcc";
   setenv(FORKSRV_ENV_TITLE, prog_name, 1);
   execvp(cc_params[0], (char**)cc_params); 
   //execvp(param, (char**)cc_params); 

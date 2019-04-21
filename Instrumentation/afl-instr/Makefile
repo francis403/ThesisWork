@@ -10,7 +10,7 @@ MISC_PATH   = $(PREFIX)/share/afl
 
 # PROGS intentionally omit instr-as, which gets installed elsewhere.
 
-PROGS       = instr-gcc instr-all-gcc instr-all-clang afl-fuzz afl-showmap
+PROGS       = instr-gcc instr-gcc2 instr-all-gcc instr-all-clang afl-fuzz afl-showmap
 
 CFLAGS     ?= -O3 -funroll-loops
 CFLAGS     += -Wall -D_FORTIFY_SOURCE=2 -g -Wno-pointer-sign \
@@ -52,6 +52,9 @@ instr-gcc: instr-gcc.c $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 	set -e; for i in afl-g++ afl-clang afl-clang++; do ln -sf instr-gcc $$i; done
 
+instr-gcc2: instr-gcc2.c $(COMM_HDR) | test_x86
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
+	set -e; for i in afl-g++ afl-clang afl-clang++; do ln -sf instr-gcc2 $$i; done
 
 instr-all-gcc: instr-all-gcc $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
