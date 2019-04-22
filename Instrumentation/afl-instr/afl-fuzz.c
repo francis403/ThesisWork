@@ -7722,8 +7722,7 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 
 #endif /* ^!__APPLE__ */
 
-	if ( !memmem(f_data, f_len, SHM_ENV_VAR, strlen(SHM_ENV_VAR) + 1) || 
-		!memmem(f_data, f_len, SHM_BLOCKS, strlen(SHM_BLOCKS) + 1)) {
+	if ( !memmem(f_data, f_len, SHM_ENV_VAR, strlen(SHM_ENV_VAR) + 1) ) {
 
 		SAYF("\n" cLRD "[-] " cRST
 			"Looks like the target binary is not instrumented! The fuzzer depends on\n"
@@ -8812,7 +8811,7 @@ static void save_entry_in_prog_if_interesting(struct queue_entry *q, char **argv
 
 /*
   Called when the program is supposed to be changed
-  If it is: change it, and check if any interesting test was done previously
+  If it is: change it, and check if any interesting test was done previouslydoes what needs to be done
 */
 
 void on_prog_change(char **argv){

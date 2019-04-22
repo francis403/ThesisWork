@@ -286,14 +286,6 @@ int main(int argc, char** argv) {
 
   }
 
-  /*
-  printf("\nINSTR_GCC\n\n");
-  printf("argv = ");
-  for(int i = 0; argv[i]; i++){
-    printf("%s ", argv[i]);
-  }
-  */
-
   printf("\n");
 
   find_as(argv[0]);
