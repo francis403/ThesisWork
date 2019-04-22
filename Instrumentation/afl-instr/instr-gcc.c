@@ -321,7 +321,7 @@ int main(int argc, char** argv) {
 
   //char *param = "valgrind --leak-check=full gcc";
   setenv(FORKSRV_ENV, snum, 1);
-  setenv(FORKSRV_ENV_TITLE, prog_name, 1);
+  if(prog_name) setenv(FORKSRV_ENV_TITLE, prog_name, 1);
   execvp(cc_params[0], (char**)cc_params); 
   //execvp(param, (char**)cc_params); 
 

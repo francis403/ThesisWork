@@ -370,8 +370,6 @@ int main(int argc, char** argv) {
   short first = 1;
   int numb_instr = 0;
 
-  char snum[5];
-
   // Opens the file and clears the contents
   //FILE *fblocks;
   //fblocks = fopen("./progs_blocks.txt","w");
@@ -397,29 +395,6 @@ int main(int argc, char** argv) {
        
         if(is_recording){
             
-            /*
-            u8** cc_params = edit_params(index, tmp);
-            index = 0;
-
-            tmp = malloc(sizeof(char*) * numbr_lines); //clear the pointer
-            if(!tmp) FATAL("malloc failed to work");
-
-            sprintf(snum, "%d", numb_instr);
-            numb_instr ++; //leave this here so we don't have race conditions
-
-            // in case we are runnign out of space create more
-            if( index >= 0.75 * numbr_lines){
-                numbr_lines *= 2;
-                tmp = realloc( tmp, sizeof(char*) * numbr_lines );
-            }
-
-            pid_t pid = fork();
-            if(!pid){
-                // send the program nmbr
-                setenv(FORKSRV_ENV, snum, 1);
-                execvp(cc_params[0], (char**)cc_params);
-            }
-            */
             compile_prog(&index, &tmp, numb_instr);
             numb_instr ++;
             
@@ -434,22 +409,6 @@ int main(int argc, char** argv) {
     index++;
     
   }
-  /*
-  if(is_recording){
-    //printf("\t is gonna instrumentalize the program\n");
-        //printf("CC_PARAMS IS null\n");
-    u8** cc_params = edit_params(index, tmp);
-  
-    sprintf(snum, "%d", numb_instr);
-    setenv(FORKSRV_ENV, snum, 1); // total number of instr
-    //printf("even should be = %d\n", numb_instr);
-    numb_instr ++;
-    
-    execvp(cc_params[0], (char**)cc_params);
-  }
-  */
-
-
 
   FATAL("Oops, failed to execute");
 
