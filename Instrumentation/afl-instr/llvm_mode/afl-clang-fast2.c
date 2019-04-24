@@ -47,7 +47,7 @@ static void find_obj(u8* argv0) {
 
   if (afl_path) {
 
-    tmp = alloc_printf("%s/afl-llvm-rt.o", afl_path);
+    tmp = alloc_printf("%s/afl-llvm2-rt.o", afl_path);
 
     if (!access(tmp, R_OK)) {
       obj_path = afl_path;
@@ -69,7 +69,7 @@ static void find_obj(u8* argv0) {
     dir = ck_strdup(argv0);
     *slash = '/';
 
-    tmp = alloc_printf("%s/afl-llvm-rt.o", dir);
+    tmp = alloc_printf("%s/afl-llvm2-rt.o", dir);
 
     if (!access(tmp, R_OK)) {
       obj_path = dir;
@@ -82,12 +82,12 @@ static void find_obj(u8* argv0) {
 
   }
 
-  if (!access(AFL_PATH "/afl-llvm-rt.o", R_OK)) {
+  if (!access(AFL_PATH "/afl-llvm2-rt.o", R_OK)) {
     obj_path = AFL_PATH;
     return;
   }
 
-  FATAL("Unable to find 'afl-llvm-rt.o' or 'afl-llvm-pass.so'. Please set AFL_PATH");
+  FATAL("Unable to find 'afl-llvm2-rt.o' or 'afl-llvm-pass.so'. Please set AFL_PATH");
  
 }
 
@@ -281,11 +281,11 @@ static void edit_params(u32 argc, char** argv) {
     switch (bit_mode) {
 
       case 0:
-        cc_params[cc_par_cnt++] = alloc_printf("%s/afl-llvm-rt.o", obj_path);
+        cc_params[cc_par_cnt++] = alloc_printf("%s/afl-llvm2-rt.o", obj_path);
         break;
 
       case 32:
-        cc_params[cc_par_cnt++] = alloc_printf("%s/afl-llvm-rt-32.o", obj_path);
+        cc_params[cc_par_cnt++] = alloc_printf("%s/afl-llvm2-rt-32.o", obj_path);
 
         if (access(cc_params[cc_par_cnt - 1], R_OK))
           FATAL("-m32 is not supported by your compiler");
@@ -293,7 +293,7 @@ static void edit_params(u32 argc, char** argv) {
         break;
 
       case 64:
-        cc_params[cc_par_cnt++] = alloc_printf("%s/afl-llvm-rt-64.o", obj_path);
+        cc_params[cc_par_cnt++] = alloc_printf("%s/afl-llvm2-rt-64.o", obj_path);
 
         if (access(cc_params[cc_par_cnt - 1], R_OK))
           FATAL("-m64 is not supported by your compiler");
@@ -344,9 +344,6 @@ int main(int argc, char** argv) {
 
   }
 
-  char snum[5];
-  sprintf(snum, "%d", 0);
-  setenv(FORKSRV_ENV, snum, 1);
 
   find_obj(argv[0]);
 
@@ -355,7 +352,7 @@ int main(int argc, char** argv) {
   //printf("\n\tbefore execvp in afl-clang-fast\n");
   //printf("\n\tcc_params[0] = %s\n", cc_params[0]);
 
-  char *prog_name = "test";
+  char *prog_name;
   int p = 0;
   while( *(argv + p) ){
       if(strcmp(*(argv + p), "-o") == 0){
@@ -367,7 +364,10 @@ int main(int argc, char** argv) {
     p ++;
   }
 
-
+  char snum[5];
+  sprintf(snum, "%d", 1);
+  setenv(FORKSRV_ENV, snum, 1);
+  
   if(prog_name) setenv(FORKSRV_ENV_TITLE, prog_name, 1);
 
   execvp(cc_params[0], (char**)cc_params);

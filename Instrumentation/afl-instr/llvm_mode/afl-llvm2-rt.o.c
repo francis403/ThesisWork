@@ -103,7 +103,7 @@ static void __afl_start_forkserver(void) {
   //FORKSRV_FD + (program_version * 2), FORKSRV_FD + (program_version * 2) + 1
 
   // está a fazer default para o zero
-  int srv = getenv(FORKSRV_ENV) == NULL ? 0: atoi(getenv(FORKSRV_ENV));
+  int srv = getenv(FORKSRV_ENV) == NULL ? 1: atoi(getenv(FORKSRV_ENV));
 
   //printf("srv = %d\n", srv);
 
