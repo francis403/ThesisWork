@@ -16,7 +16,7 @@ int main (int argc, char* argv[]){
 	
 	int val;
 	
-	val = (rand() % 50) + 1;
+	scanf("%d",&val);
 
 	printf("val = %d\n", val);
 

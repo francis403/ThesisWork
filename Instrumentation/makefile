@@ -5,6 +5,8 @@ CC=afl-instr/instr-gcc
 CC_AFL=afl-gcc
 ALF_FUZZ=afl-fuzz
 RUN=afl-instr/afl-fuzz
+RUN_CLANG_FAST=afl-instr/afl-clang-fast
+RUN_CLANG_FAST2=afl-instr/afl-clang-fast2
 FLAGS= -static
 EFLAGS=-fsanitize=address,undefined -fno-sanitize-recover=undefined -g -O0
 BASE_FLAGS= -fsanitize=address -g
@@ -66,14 +68,22 @@ factorial:
 
 fuzz:
 	#$(RUN) -m none -i input -o out ./fact ./simple2
-	$(RUN) -m none -i input -o out -q 1 -p ./simple 2 3 4 -p ./simple2 2
+	$(RUN) -m none -i input -o out -q 1 -p ./simple 1 2 3 -p ./simple2 2
+	#$(RUN) -m none -i input -o out -q 1 -p ./simple @@
+	#$(RUN) -m none -i input -o out -q 1 -p ./simple @@ -p ./simple2 @@
 	#$(RUN) -m none -i input -o out ./fact ./simple2
 	#$(RUN) -m none -i input -o out ./simple
 	#$(RUN) -m none -i input -o out ./fact
 	#$(RUN) -m none -i input -o out ./is_prime
 
-vul_afl_fuzz:
-	$(ALF_FUZZ) -m none -i input -o out ./vul
+fuzz_afl:
+	$(ALF_FUZZ) -m none -i input -o out -p ./simple 
+
+inst_afl_simple: clean
+	afl-gcc ./simple_program.c -o $(EXE) -w
+
+vul_afl_fuzz:	inst_afl_simple
+	$(ALF_FUZZ) -m none -i input -o out ./simple
 
 simple_fuzz: instr-all fuzz
 
@@ -86,6 +96,20 @@ instr-all: clean
 	#$(ALL) -p ./find_factorial.c -save-temps -o $(FACT) -w
 	#$(ALL) -p ./is_prime.c -save-temps -o is_prime -w
 
+
+instr-afl-fast:
+	$(RUN_CLANG_FAST) ./simple_program.c  -save-temps -o $(EXE) -w
+instr-afl-fast2: 
+	$(RUN_CLANG_FAST2) ./simple_program2.c  -save-temps -o $(EXE2) -w
+
+afl-fast-delta:	clean instr-afl-fast
+	$(RUN) -m none -i input -o out -q 1 -p ./simple
+
+afl-fast-delta2: clean instr-afl-fast instr-afl-fast2
+	$(RUN) -m none -i input -o out -q 1 -p ./simple -p ./simple2
+
+afl-fast-old:	instr-afl-fast 
+	$(ALF_FUZZ) -m none -i input -o out ./simple
 
 valgrind:
 	valgrind --leak-check=full ./$(CC) ./simple_program.c -o $(EXE) -w
