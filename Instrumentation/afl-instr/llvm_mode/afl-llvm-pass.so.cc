@@ -309,6 +309,31 @@ bool AFLCoverage::runOnModule(Module &M) {
 
   printf("\n\tprogram to instrumentalize =  %d\n", srv);
 
+
+  char cwd[1000];
+
+  if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't find path to dir!");
+
+  /*File of prog blocks*/
+  FILE *fblocks;
+
+  char* prog_title = getenv(FORKSRV_ENV_TITLE);
+  char *path_instr = (char*)  malloc (sizeof(char) * 1500 + 1);
+
+  
+  if( prog_title == NULL ){
+    // set default value
+    sprintf(path_instr, "%s/progs_blocks.txt", cwd);
+  }
+  else{
+    sprintf(path_instr, "%s/%s_blocks.txt", cwd, prog_title);
+  }
+  
+  fblocks = fopen(path_instr,"w");
+
+  //printf("prog_title = %s\n", prog_title);
+  printf("prog_path = %s\n", path_instr);
+  free(path_instr);
   /* Decide instrumentation ratio */
 
   char* inst_ratio_str = getenv("AFL_INST_RATIO");
@@ -390,7 +415,7 @@ bool AFLCoverage::runOnModule(Module &M) {
       const unsigned int res = test;
       u32 test2 = hash_string(basic_block);
       //unsigned int test = 4230;
-
+      if(fblocks)   fprintf(fblocks, "%d\n", test);
       //printf("gonna be creating with: %d\n", test);
 
       ConstantInt *CurLoc = ConstantInt::get(Int32Ty, test );
@@ -426,12 +451,15 @@ bool AFLCoverage::runOnModule(Module &M) {
       Store->setMetadata(M.getMDKindID("nosanitize"), MDNode::get(C, None));
 
       inst_blocks++;
+
       free( basic_block );
     } // end of for
     //printf("No new BB!\n");
   }
   //printf("No new FF!\n");
   /* Say something nice. */
+
+  if(fblocks) fclose(fblocks);
 
   if (!be_quiet) {
 
