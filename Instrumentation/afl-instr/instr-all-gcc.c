@@ -16,6 +16,7 @@
 #include "types.h"
 #include "debug.h"
 #include "alloc-inl.h"
+#include <sys/wait.h>
 
 #include <stdio.h>
 #include <unistd.h>
@@ -27,9 +28,10 @@ static u32  cc_par_cnt = 1;         /* Param count, including argv0      */
 static u8   be_quiet,               /* Quiet mode                        */
             clang_mode;             /* Invoked as afl-clang*?            */
 
+static char *prog_name[MAX_AMOUNT_OF_PROGS];
+static unsigned short numbr_lines = 100;
 char **instr_programs;
 int head_of_program = 0;
-int max_amount_of_programs = 100;
 
 /* Try to find our "fake" GNU assembler in AFL_PATH or at the location derived
    from argv[0]. If that fails, abort. */
@@ -121,13 +123,13 @@ static u8 **edit_params(u32 argc, char** argv) {
  
   if (!name) name = argv[0]; else name++;
   
-  if (!strncmp(name, "afl-clang", 9)) {
+  if (!strcmp(name, "afl-all-clang")) {
 
     clang_mode = 1;
 
     setenv(CLANG_ENV_VAR, "1", 1);
 
-    if (!strcmp(name, "afl-clang++")) {
+    if (!strcmp(name, "afl-all-clang++")) {
       u8* alt_cxx = getenv("AFL_CXX");
       cc_params[0] = alt_cxx ? alt_cxx : (u8*)"clang++";
     } else {
@@ -284,12 +286,39 @@ static u8 **edit_params(u32 argc, char** argv) {
 
 }
 
+static void compile_prog( int *index, char ***tmp, int vers ){
+  u8** cc_params = edit_params(*index, *tmp);
+  *index = 0;
+  char snum[5];
+  *tmp = malloc(sizeof(char*) * numbr_lines); //clear the pointer
+  if(!*tmp) FATAL("malloc failed to work");
+
+  sprintf(snum, "%d", vers);
+
+  // in case we are runnign out of space create more
+  if( *index >= 0.75 * numbr_lines){
+    numbr_lines *= 2;
+    *tmp = realloc( *tmp, sizeof(char*) * numbr_lines );
+  }
+
+  pid_t pid = fork();
+  if(!pid){
+    // send the program nmbr
+    setenv(FORKSRV_ENV, snum, 1);
+    setenv(FORKSRV_ENV_TITLE, prog_name[vers], 1);
+    execvp(cc_params[0], (char**)cc_params);
+    FATAL("Failed to execute!");
+  }
+  wait(NULL);
+}
+
 /* Main entry point */
 // TODO -> improve code, can be greatly improved
 int main(int argc, char** argv) {
 
   //SAYF("\n\t-----In instr-all-gcc -------\n");
-
+  unsigned short num_prog_found = 0;
+  //printf("\nargs in instr-all-gcc\n");
 
   if (argc < 2) {
 
@@ -308,11 +337,21 @@ int main(int argc, char** argv) {
     exit(1);
 
   }
-
+  
+  int p = 0;
+  while( *(argv + p) ){
+      if(strcmp(*(argv + p), "-o") == 0){
+        //prog_names[numbr_of_progs_under_test] =*(argv + p + 1);
+        prog_name[num_prog_found] = *(argv + p + 1);
+        printf("prog_name = %s\n", prog_name[num_prog_found]);
+        num_prog_found ++;
+      }
+    p ++;
+  }
+  
   find_as(argv[0]);
 
   //edit_params(argc, argv);
-  short numbr_lines = 100;
   int index = 0;
 
   char **tmp = malloc(sizeof(char*) * numbr_lines);
@@ -321,53 +360,44 @@ int main(int argc, char** argv) {
     FATAL("malloc failed in instrumentalizing all programs");
   }
 
-  instr_programs = malloc( sizeof(char*) * max_amount_of_programs);
+  instr_programs = malloc( sizeof(char*) * MAX_AMOUNT_OF_PROGS);
 
   if(!instr_programs) FATAL("malloc failed to work");
+
+
 
   short is_recording = 0;
   short first = 1;
   int numb_instr = 0;
 
-  char snum[5];
-
   // Opens the file and clears the contents
-  FILE *fblocks;
-  fblocks = fopen("./progs_blocks.txt","w");
-  if(fblocks) fclose(fblocks);
+  //FILE *fblocks;
+  //fblocks = fopen("./progs_blocks.txt","w");
+  //if(fblocks) fclose(fblocks);
 
-  while( *argv ){
+  //while( *argv ){
+  while( 1 ) {
+    
+    if( !*argv ){
+      if(is_recording){
+        compile_prog(&index, &tmp, numb_instr);
+        numb_instr ++;
+        return 0;
+      }
+    }
+  
     char *line = *argv++;
     //printf("line = %s\n", line);
     
     if( first ){first = 0; continue;}
 
-    if( strcmp(line, "-p") == 0){
+    if( strcmp(line, "-p") == 0 ){
        
         if(is_recording){
             
-
-            u8** cc_params = edit_params(index, tmp);
-            index = 0;
+            compile_prog(&index, &tmp, numb_instr);
+            numb_instr ++;
             
-            tmp = malloc(sizeof(char*) * numbr_lines); //clear the pointer
-            if(!tmp) FATAL("malloc failed to work");
-
-            sprintf(snum, "%d", numb_instr);
-            numb_instr ++; //leave this here so we don't have race conditions
-
-            // in case we are runnign out of space create more
-            if( index >= 0.75 * numbr_lines){
-                numbr_lines *= 2;
-                tmp = realloc( tmp, sizeof(char*) * numbr_lines );
-            }
-
-            pid_t pid = fork();
-            if(pid){
-                // send the program nmbr
-                setenv(FORKSRV_ENV, snum, 1);
-                execvp(cc_params[0], (char**)cc_params);
-            }
         }
         else is_recording = 1;
 
@@ -379,22 +409,6 @@ int main(int argc, char** argv) {
     index++;
     
   }
-
-  if(is_recording){
-    //printf("\t is gonna instrumentalize the program\n");
-        //printf("CC_PARAMS IS null\n");
-    u8** cc_params = edit_params(index, tmp);
-  
-    sprintf(snum, "%d", numb_instr);
-    setenv(FORKSRV_ENV, snum, 1); // total number of instr
-    printf("even should be = %d\n", numb_instr);
-    numb_instr ++;
-    
-    execvp(cc_params[0], (char**)cc_params);
-  }
-  
-
-
 
   FATAL("Oops, failed to execute");
 

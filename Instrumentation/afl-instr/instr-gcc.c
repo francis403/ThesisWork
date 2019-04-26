@@ -99,7 +99,7 @@ static void edit_params(u32 argc, char** argv) {
   cc_params = ck_alloc((argc + 128) * sizeof(u8*));
 
   name = strrchr(argv[0], '/');
-  printf("NAME = %s\n", name);
+  //printf("NAME = %s\n", name);
   if (!name) name = argv[0]; else name++;
 
   if (!strncmp(name, "afl-clang", 9)) {
@@ -118,7 +118,7 @@ static void edit_params(u32 argc, char** argv) {
 
   } else {
 
-    printf("its not in clang\n");
+    //printf("its not in clang\n");
 
     if (!strcmp(name, "afl-g++")) {
       u8* alt_cxx = getenv("AFL_CXX");
@@ -127,7 +127,7 @@ static void edit_params(u32 argc, char** argv) {
       u8* alt_cc = getenv("AFL_GCJ");
       cc_params[0] = alt_cc ? alt_cc : (u8*)"gcj";
     } else {
-      printf("in gcc\n");
+      //printf("in gcc\n");
       u8* alt_cc = getenv("AFL_CC");
       cc_params[0] = alt_cc ? alt_cc : (u8*)"gcc";
     }
@@ -177,6 +177,7 @@ static void edit_params(u32 argc, char** argv) {
       cc_params[cc_par_cnt++] = "-D_FORTIFY_SOURCE=2";
 
   }
+
 
   if (asan_set) {
 
@@ -249,6 +250,8 @@ static void edit_params(u32 argc, char** argv) {
 
   }
 
+  //printf("VAI ACABAR\n");
+
   cc_params[cc_par_cnt] = NULL;
 
 }
@@ -258,11 +261,10 @@ static void edit_params(u32 argc, char** argv) {
 
 int main(int argc, char** argv) {
 
-  //SAYF("\n\t-----instr-gcc -------\n");
 
   if (isatty(2) && !getenv("AFL_QUIET")) {
 
-    SAYF(cCYA "afl-cc " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
+    SAYF(cCYA "afl-delta " cBRI VERSION cRST " by fc45701 based on the work by <lcamtuf@google.com>\n");
 
   } else be_quiet = 1;
 
@@ -284,15 +286,36 @@ int main(int argc, char** argv) {
 
   }
 
+  printf("\n");
+
   find_as(argv[0]);
+
 
   edit_params(argc, argv);
 
+
   //printf("cc_params[0] = %s\n", cc_params[0]);
   //printf("cc_params = %s\n", cc_params);
+  char *prog_name;
+  int p = 0;
+  while( *(argv + p) ){
+      if(strcmp(*(argv + p), "-o") == 0){
+        //prog_names[numbr_of_progs_under_test] =*(argv + p + 1);
+        prog_name = *(argv + p + 1);
+        //printf("prog_name = %s\n", prog_name);
+        break;
+      }
+    p ++;
+  }
 
-  execvp(cc_params[0], (char**)cc_params);
-  //execvp(cc_params[1], (char**)cc_params);
+  char snum[5];
+  sprintf(snum, "%d", 0);
+
+  //char *param = "valgrind --leak-check=full gcc";
+  setenv(FORKSRV_ENV, snum, 1);
+  if(prog_name) setenv(FORKSRV_ENV_TITLE, prog_name, 1);
+  execvp(cc_params[0], (char**)cc_params); 
+  //execvp(param, (char**)cc_params); 
 
   FATAL("Oops, failed to execute '%s' - check your PATH", cc_params[0]);
 

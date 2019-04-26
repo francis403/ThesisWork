@@ -33,9 +33,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x0000a1da, %rcx
-movl $0x0000a1da, __afl_block_temp
+movq %rsi, 24(%rsp)
+movq $0x0000a1d9, %rcx
+movl $0x0000a1d9, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -80,9 +82,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x00000871, %rcx
-movl $0x00000871, __afl_block_temp
+movq %rsi, 24(%rsp)
+movq $0x00000870, %rcx
+movl $0x00000870, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -102,9 +106,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x0000217b, %rcx
-movl $0x0000217b, __afl_block_temp
+movq %rsi, 24(%rsp)
+movq $0x0000217a, %rcx
+movl $0x0000217a, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -133,9 +139,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x000020c8, %rcx
-movl $0x000020c8, __afl_block_temp
+movq %rsi, 24(%rsp)
+movq $0x000020c7, %rcx
+movl $0x000020c7, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -159,9 +167,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x00003339, %rcx
-movl $0x00003339, __afl_block_temp
+movq %rsi, 24(%rsp)
+movq $0x00003338, %rcx
+movl $0x00003338, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -188,9 +198,11 @@ leaq -(128+24)(%rsp), %rsp
 movq %rdx,  0(%rsp)
 movq %rcx,  8(%rsp)
 movq %rax, 16(%rsp)
-movq $0x00007ea3, %rcx
-movl $0x00007ea3, __afl_block_temp
+movq %rsi, 24(%rsp)
+movq $0x00007ea2, %rcx
+movl $0x00007ea2, __afl_block_temp
 call __afl_maybe_log
+
 movq 16(%rsp), %rax
 movq  8(%rsp), %rcx
 movq  0(%rsp), %rdx
@@ -1376,8 +1388,6 @@ leaq (128+24)(%rsp), %rsp
 	.string	"_offset"
 .LASF50:
 	.string	"__fd"
-.LASF65:
-	.string	"/home/francis/Documents/ThesisWork/Instrumentation/afl-instr"
 .LASF18:
 	.string	"_IO_write_ptr"
 .LASF13:
@@ -1406,6 +1416,8 @@ leaq (128+24)(%rsp), %rsp
 	.string	"printf"
 .LASF30:
 	.string	"_cur_column"
+.LASF65:
+	.string	"/home/francis/Documents/work/git/ThesisWork/Instrumentation/afl-instr"
 .LASF46:
 	.string	"_pos"
 .LASF57:
@@ -1498,7 +1510,7 @@ leaq (128+24)(%rsp), %rsp
 	.string	"stdout"
 .LASF66:
 	.string	"_IO_lock_t"
-	.ident	"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.10) 5.4.0 20160609"
+	.ident	"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.11) 5.4.0 20160609"
 	.section	.note.GNU-stack,"",@progbits
 
 /* --- AFL MAIN PAYLOAD (64-BIT) --- */
@@ -1520,27 +1532,11 @@ __afl_maybe_log:
   je    __afl_setup
 
 __afl_store:
-
   /* Calculate and store hit for the code location specified in rcx. */
 
-  xorq __afl_prev_loc(%rip), %rcx
-  xorq %rcx, __afl_prev_loc(%rip)
-  shrq $1, __afl_prev_loc(%rip)
 
   incb (%rdx, %rcx, 1)
 
-  
-/* Write home and tell them the id of the block */
-  movq $4, %rdx               /* length    */
-  leaq __afl_block_temp(%rip), %rsi
-  movq __fsrv_write, %rdi       /* file desc */
-call write@PLT
-
-  /* In child process: close fds, resume execution. */
-
-  movq __afl_block_temp, %rdi       /* file desc */
-
-  movq __fsrv_read, %rdi       /* file desc */
 __afl_return:
 
   addb $127, %al
@@ -1635,6 +1631,7 @@ call shmat@PLT
   movq %rax, (%rdx)
   movq %rax, %rdx
 
+
 __afl_forkserver:
 
   /* Enter the fork server mode to avoid the overhead of execve() calls. We
@@ -1665,4 +1662,12 @@ __afl_fork_wait_loop:
 
   movq $4, %rdx               /* length    */
   leaq __afl_temp(%rip), %rsi /* data      */
-  movq __
+  movq __fsrv_read, %rdi /* file desc */
+call read@PLT
+  cmpq $4, %rax
+  jne  __afl_die
+
+  /* Once woken up, create a clone of our process. This is an excellent use
+     case for syscall(__NR_clone, 0, CLONE_PARENT), but glibc boneheadedly
+     caches getpid() results and offers no way to update the value, breaking
+     abort(),

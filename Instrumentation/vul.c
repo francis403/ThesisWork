@@ -1,6 +1,5 @@
 // A C program to demonstrate sumple erros
 
-#include "vul.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -124,7 +123,10 @@ void out_of_bounds(int a){
 }
 
 int division_by_zero(int a){
-	return 2/(100 - a);
+	if( a > 50 )
+		return 2/(100 - a);
+	else
+		return 2/(a +1);
 }
 
 unsigned int unsigned_int(int a){
@@ -164,3 +166,34 @@ void double_free(int i){
 	}
 	free(ptr);
 }
+
+int main(){
+
+	int a;
+	scanf("%d", &a);
+	//printf("value = %d\n", integer_overflow(a));
+	
+	//division_by_zero(a);
+	out_of_bounds(a);
+
+	printf("after out of bounds\n");
+
+	/*
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t read;
+	if ( (read = getline(&line, &len, stdin)) != -1 ){
+		// do something
+	}
+	char buff[len];
+	strcpy(&buff, line);
+	free(line);
+	*/
+	//stack_overflow(buff); // new fuzz -> finds fast -> < 2 secs -> no need for asac
+	//heap_overflow(buff); // new fuzz -> finds fast -> < 2 secs -> no need for asac
+	//buffer_overflow(buff); // new fuzz -> finds fast -> < 2 secs -> no need for asac
+	//global_buffer_overflow(buff); // new fuzz -> finds fast -> < 2 secs -> no need for asac
+
+	return 1;
+}
+

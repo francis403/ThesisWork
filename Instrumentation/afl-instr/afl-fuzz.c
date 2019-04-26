@@ -79,6 +79,11 @@
 #  define EXP_ST static
 #endif /* ^AFL_LIB */
 
+//remove before release
+short test_bool = 0;
+
+//unsigned short *blocks_passed;
+
 
 /* Lots of globals, but mostly for the status UI and other things where it
    really makes no sense to haul them around as function parameters. */
@@ -87,6 +92,7 @@
 EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
           *out_file,                  /* File to fuzz, if any             */
           *out_dir,                   /* Working & output directory       */
+          *out_dir_delta[MAX_AMOUNT_OF_PROGS], /* Each program should have their own out dir, this so far is only for testing*/
           *sync_dir,                  /* Synchronization directory        */
           *sync_id,                   /* Fuzzer ID                        */
           *use_banner,                /* Display banner                   */
@@ -95,7 +101,6 @@ EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
 		  *target_path[MAX_AMOUNT_OF_PROGS],
           //*target_path[MAX_AMOUNT_OF_PROGS],               /* Path to target binary            */
 		  //*target_path,
-          *cur_prog_title,           /* Current Program being fuzzed     */
           *orig_cmdline;              /* Original command line            */
 
 static short init_prog_args;
@@ -136,26 +141,33 @@ EXP_ST u8  skip_deterministic,        /* Skip deterministic stages?       */
 static s32 out_fd,                    /* Persistent fd for out_file       */
            dev_urandom_fd = -1,       /* Persistent fd for /dev/urandom   */
            dev_null_fd = -1,          /* Persistent fd for /dev/null      */
-           fsrv_write_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
-           fsrv_read_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
+           //fsrv_write_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
+           //fsrv_read_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
            fsrv_ctl_fd[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
            fsrv_st_fd[MAX_AMOUNT_OF_PROGS];				  /* Fork server status pipe (read)   */ 
 
 static s32 forksrv_pid[MAX_AMOUNT_OF_PROGS],               /* PID of the fork server           */
            child_pid = -1,            /* PID of the fuzzed program, maybe I'll need more than one        */
+           out_dirs_fd[MAX_AMOUNT_OF_PROGS], /*FD of the lock files per program*/
            out_dir_fd = -1;           /* FD of the lock file              */
 
 
+
 /*Program corrently under test*/
-int CUR_PROG = 0;
+static int CUR_PROG = 0;
 
 static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
 
-static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found*/
+static u8 BLOCKS_FOUND[MAP_SIZE]; 	/* Stores all values found for run*/
 
 /*Stores all the blocks of a specific programs*/
 static u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
+/*Saves all the prefered blocks to hit*/
+
+static u8 BLOCK_TO_HIT[MAP_SIZE];
+
+static u8 *prog_names[MAX_AMOUNT_OF_PROGS];
 
 /*The following data is important between runs so we can check if it should be saved
 * It can't go to the queue since if it went there we would be evaluating the queue input it self and not the mutation applied to it.*/
@@ -166,7 +178,7 @@ unsigned short shared_blocks_in_runs; /* Stores the number of shared blocks betw
 unsigned short unique_blocks; 		  /*Stores the total unique blocks between runs*/
 
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
-
+EXP_ST u8* trace_blocks;
 
 //EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
 //           virgin_tmout[MAP_SIZE],    /* Bits we haven't seen in tmouts   */
@@ -181,19 +193,19 @@ EXP_ST u8  virgin_bits[MAX_AMOUNT_OF_PROGS][MAP_SIZE],     /* Regions yet untouc
 
 static u8  var_bytes[MAP_SIZE];       /* Bytes that appear to be variable */
 
-//TODO -> probably need an array here as well
-static s32 shm_id;                    /* ID of the SHM region             */
+static s32 shm_id, shm_blocks_id;                    /* ID of the SHM region             */
 
 static volatile u8 stop_soon,         /* Ctrl-C pressed?                  */
                    clear_screen = 1,  /* Window resized?                  */
                    child_timed_out;   /* Traced process timed out?        */
 
-EXP_ST u32 queued_paths,              /* Total number of queued testcases */
-           queued_variable,           /* Testcases with variable behavior */
+EXP_ST u32 queued_paths[MAX_AMOUNT_OF_PROGS],              /* Total number of queued testcases per program*/
+		   total_nmbr_queued_paths,
+           queued_variable[MAX_AMOUNT_OF_PROGS],           /* Testcases with variable behavior */
            queued_at_start,           /* Total number of initial inputs   */
            queued_discovered,         /* Items discovered during this run */
            queued_imported,           /* Items imported via -S            */
-           queued_favored,            /* Paths deemed favorable           */
+           queued_favored[MAX_AMOUNT_OF_PROGS],            /* Paths deemed favorable           */
            queued_with_cov,           /* Paths with new coverage bytes    */
            pending_not_fuzzed,        /* Queued but not done yet          */
            pending_favored,           /* Pending favored paths            */
@@ -262,11 +274,12 @@ static s32 cpu_aff = -1;       	      /* Selected CPU core                */
 
 #endif /* HAVE_AFFINITY */
 
-static FILE* plot_file;               /* Gnuplot output file              */
+static FILE* plot_file[MAX_AMOUNT_OF_PROGS];               /* Gnuplot output file              */
+
+/* Arguments for each program */
+static char **prog_args[MAX_AMOUNT_OF_PROGS];
 
 static int numbr_of_progs_under_test = 0;
-
-// TODO -> we need to keep our best estimation (maybe worst too) maybe?
 
 struct queue_entry {
 
@@ -275,13 +288,17 @@ struct queue_entry {
 
   u8  cal_failed,                     /* Calibration failed?              */
       trim_done,                      /* Trimmed?                         */
-      was_fuzzed[MAX_AMOUNT_OF_PROGS],/* Had any fuzzing done yet?       */ // TODO -> add information about specific program
-	  been_fuzzed,					  /* Has it been fuzzed at all?		  */
+      was_fuzzed[MAX_AMOUNT_OF_PROGS],/* Had any fuzzing done yet?        */ // TODO -> check if when we have multiple queue we need this
+	    been_fuzzed,					  /* Has it been fuzzed at all?		  */
       passed_det,                     /* Deterministic stages passed?     */
       has_new_cov,                    /* Triggers new coverage?           */
       var_behavior,                   /* Variable behavior?               */
       favored,                        /* Currently favored?               */
+      added_from_queue,                /*was added from another queue?*/
+	  					  /*number of targets hit*/
       fs_redundant;                   /* Marked as redundant in the fs?   */ // TODO -> maybe add information about specific program
+
+  u8 has_been_run;                    /* Has the next prog ran this entry? */
 
   u32 bitmap_size,                    /* Number of bits set in bitmap     */
       exec_cksum;                     /* Checksum of the execution trace  */
@@ -290,10 +307,12 @@ struct queue_entry {
       handicap,                       /* Number of queue cycles behind    */
       depth;                          /* Path depth                       */
 
-  int shared_blocks;			  	  /* Number of the shared blocks found*/
-  int uni_blcks;					  /* total blocks passed 			  */
+  //int shared_blocks;			  	        /* Number of the shared blocks found*/
+  //int uni_blcks;					            /* total blocks passed 			  */
 
-  u8 blocks_hit[MAP_SIZE];			  /* Saves all blocks found, during run and fuzz */
+  short hit_target;
+
+  u8 blocks_hit[MAP_SIZE];			      /* Saves all blocks found, during run and fuzz */
 
   u8* trace_mini;                     /* Trace bytes, if kept             */
   u32 tc_ref;                         /* Trace bytes ref count            */
@@ -303,13 +322,15 @@ struct queue_entry {
 
 };
 
-static struct queue_entry *queue,     /* Fuzzing queue (linked list)      */
-                          *queue_cur, /* Current offset within the queue  */
-                          *queue_top, /* Top of the list                  */
-                          *q_prev100; /* Previous 100 marker              */
+// ter isto para cada prog
+
+static struct queue_entry *queue[MAX_AMOUNT_OF_PROGS],     /* Fuzzing queue (linked list)      */
+                          *queue_cur[MAX_AMOUNT_OF_PROGS], /* Current offset within the queue  */
+                          *queue_top[MAX_AMOUNT_OF_PROGS], /* Top of the list                  */
+                          *q_prev100[MAX_AMOUNT_OF_PROGS]; /* Previous 100 marker              */
 
 static struct queue_entry*
-  top_rated[MAP_SIZE];                /* Top entries for bitmap bytes     */
+  top_rated[MAX_AMOUNT_OF_PROGS][MAP_SIZE];                /* Top entries for bitmap bytes     */
 
 struct extra_data {
   u8* data;                           /* Dictionary token data            */
@@ -441,7 +462,138 @@ static void shuffle_ptrs(void** ptrs, u32 cnt) {
 
 }
 
+
+#ifdef HAVE_AFFINITY
+
+/* Build a list of processes bound to specific cores. Returns -1 if nothing
+   can be found. Assumes an upper bound of 4k CPUs. */
+
+static void bind_to_free_cpu(void) {
+
+  DIR* d;
+  struct dirent* de;
+  cpu_set_t c;
+
+  u8 cpu_used[4096] = { 0 };
+  u32 i;
+
+  if (cpu_core_count < 2) return;
+
+  if (getenv("AFL_NO_AFFINITY")) {
+
+    WARNF("Not binding to a CPU core (AFL_NO_AFFINITY set).");
+    return;
+
+  }
+
+  d = opendir("/proc");
+
+  if (!d) {
+
+    WARNF("Unable to access /proc - can't scan for free CPU cores.");
+    return;
+
+  }
+
+  ACTF("Checking CPU core loadout...");
+
+  /* Introduce some jitter, in case multiple AFL tasks are doing the same
+     thing at the same time... */
+
+  usleep(R(1000) * 250);
+
+  /* Scan all /proc/<pid>/status entries, checking for Cpus_allowed_list.
+     Flag all processes bound to a specific CPU using cpu_used[]. This will
+     fail for some exotic binding setups, but is likely good enough in almost
+     all real-world use cases. */
+
+  while ((de = readdir(d))) {
+
+    u8* fn;
+    FILE* f;
+    u8 tmp[MAX_LINE];
+    u8 has_vmsize = 0;
+
+    if (!isdigit(de->d_name[0])) continue;
+
+    fn = alloc_printf("/proc/%s/status", de->d_name);
+
+    if (!(f = fopen(fn, "r"))) {
+      ck_free(fn);
+      continue;
+    }
+
+    while (fgets(tmp, MAX_LINE, f)) {
+
+      u32 hval;
+
+      /* Processes without VmSize are probably kernel tasks. */
+
+      if (!strncmp(tmp, "VmSize:\t", 8)) has_vmsize = 1;
+
+      if (!strncmp(tmp, "Cpus_allowed_list:\t", 19) &&
+          !strchr(tmp, '-') && !strchr(tmp, ',') &&
+          sscanf(tmp + 19, "%u", &hval) == 1 && hval < sizeof(cpu_used) &&
+          has_vmsize) {
+
+        cpu_used[hval] = 1;
+        break;
+
+      }
+
+    }
+
+    ck_free(fn);
+    fclose(f);
+
+  }
+
+  closedir(d);
+
+  for (i = 0; i < cpu_core_count; i++) if (!cpu_used[i]) break;
+
+  if (i == cpu_core_count) {
+
+    SAYF("\n" cLRD "[-] " cRST
+         "Uh-oh, looks like all %u CPU cores on your system are allocated to\n"
+         "    other instances of afl-fuzz (or similar CPU-locked tasks). Starting\n"
+         "    another fuzzer on this machine is probably a bad plan, but if you are\n"
+         "    absolutely sure, you can set AFL_NO_AFFINITY and try again.\n",
+         cpu_core_count);
+
+    FATAL("No more free CPU cores");
+
+  }
+
+  OKF("Found a free CPU core, binding to #%u.", i);
+
+  cpu_aff = i;
+
+  CPU_ZERO(&c);
+  CPU_SET(i, &c);
+
+  if (sched_setaffinity(0, sizeof(c), &c))
+    PFATAL("sched_setaffinity failed");
+
+}
+
+#endif /* HAVE_AFFINITY */
+
 #ifndef IGNORE_FINDS
+
+/*checks the blocks of each program and adds the differences*/
+
+static void get_prog_targets(u8 prog1, u8 prog2){
+
+	for(int i = 0; i < MAP_SIZE; i++){
+		// if one has the block and the other does not
+		if(PROG_BLOCKS[prog1][i] != PROG_BLOCKS[prog2][i]){
+			BLOCK_TO_HIT[i] = 1;	
+			//printf("target = %d\n", i);
+		}
+	}
+
+}
 
 /* Helper function to compare buffers; returns first and last differing offset. We
    use this to find reasonable locations for splicing two files. */
@@ -632,16 +784,20 @@ static u8* DTD(u64 cur_ms, u64 event_ms) {
 
 static void mark_as_det_done(struct queue_entry* q) {
 
-	u8* fn = strrchr(q->fname, '/');
-	s32 fd;
 
-	fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
+	//u8* fn = strrchr(q->fname, '/');
+  	u8* fn_delta = strrchr(q->fname, '/');
+	s32 fd_delta;
 
-	fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-	if (fd < 0) PFATAL("Unable to create '%s'", fn);
-	close(fd);
+  	//fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
+  	fn_delta = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
-	ck_free(fn);
+	fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+	if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+	close(fd_delta);
+
+	//ck_free(fn);
+	ck_free(fn_delta);
 
 	q->passed_det = 1;
 
@@ -652,11 +808,15 @@ static void mark_as_det_done(struct queue_entry* q) {
 
 static void mark_as_variable(struct queue_entry* q) {
 
-  u8 *fn = strrchr(q->fname, '/') + 1, *ldest;
+  //u8 *fn = strrchr(q->fname, '/') + 1, *ldest;
+  u8 *fn_delta = strrchr(q->fname, '/') + 1, *ldest_delta;
 
-  ldest = alloc_printf("../../%s", fn);
-  fn = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir, fn);
+  //ldest = alloc_printf("../../%s", fn);
+  ldest_delta = alloc_printf("../../%s", fn_delta);
+  //fn = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir, fn);
+  fn_delta = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir_delta[CUR_PROG], fn_delta);
 
+  /*
   if (symlink(ldest, fn)) {
 
     s32 fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
@@ -664,9 +824,22 @@ static void mark_as_variable(struct queue_entry* q) {
     close(fd);
 
   }
+  */
 
-  ck_free(ldest);
-  ck_free(fn);
+  if (symlink(ldest_delta, fn_delta)) {
+
+    s32 fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+    close(fd_delta);
+
+  }
+
+
+  //ck_free(ldest);
+  //ck_free(fn);
+
+  ck_free(ldest_delta);
+  ck_free(fn_delta);
 
   q->var_behavior = 1;
 
@@ -678,61 +851,76 @@ static void mark_as_variable(struct queue_entry* q) {
 
 static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
-  u8* fn;
-  s32 fd;
+  u8 *fn_delta;
+  s32 fd_delta;
 
   if (state == q->fs_redundant) return;
 
   q->fs_redundant = state;
 
-  fn = strrchr(q->fname, '/');
-  fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
+  //fn = strrchr(q->fname, '/');
+  fn_delta = strrchr(q->fname, '/');
+
+ 
+
+  //fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
+  fn_delta = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
   if (state) {
+    
+    //fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    //if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    //close(fd);
 
-    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (fd < 0) PFATAL("Unable to create '%s'", fn);
-    close(fd);
+    fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+    close(fd_delta);
+
 
   } else {
-
-    if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
+    
+    //if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
+    if (unlink(fn_delta)) PFATAL("Unable to remove '%s'", fn_delta);
 
   }
 
-  ck_free(fn);
+  //ck_free(fn);
+  ck_free(fn_delta);
 
 }
 
-/* Append new test case to the queue. */
+/* Append new test case to the current program queue. */
 
-static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
-
+static void add_to_queue(u8* fname, u32 len, u8 passed_det, u8 added_from_queue) {
+	//printf("add to queue\n");
 	struct queue_entry* q = ck_alloc(sizeof(struct queue_entry));
 
 	q->fname        = fname;
 	q->len          = len;
 	q->depth        = cur_depth + 1;
 	q->passed_det   = passed_det;
+  	q->added_from_queue = added_from_queue;
+  	q->has_been_run = added_from_queue;
 
 	if (q->depth > max_depth) max_depth = q->depth;
 
-	if (queue_top) {
+	if (queue_top[CUR_PROG]) {
 
-		queue_top->next = q;
-		queue_top = q;
+		queue_top[CUR_PROG]->next = q;
+		queue_top[CUR_PROG] = q; 
 
-	} else q_prev100 = queue = queue_top = q;
+	} else q_prev100[CUR_PROG] = queue[CUR_PROG] = queue_top[CUR_PROG] = q;
 
-	queued_paths++;
+	queued_paths[CUR_PROG]++;
+	total_nmbr_queued_paths ++;
 	pending_not_fuzzed++;
 
 	cycles_wo_finds = 0;
 
-	if (!(queued_paths % 100)) {
+	if (!(queued_paths[CUR_PROG] % 100)) {
 
-		q_prev100->next_100 = q;
-		q_prev100 = q;
+		q_prev100[CUR_PROG]->next_100 = q;
+		q_prev100[CUR_PROG] = q;
 
 	}
 
@@ -740,24 +928,32 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 
 }
 
-
 /* Destroy the entire queue. */
-
+// o erro acontece porque estamos a fazer free de algo que já foi feito free
 EXP_ST void destroy_queue(void) {
 
-	struct queue_entry *q = queue, *n;
+	for(int i = 0; i < numbr_of_progs_under_test; i++){
+		struct queue_entry *q = queue[i], *n;
 
-	while (q) {
+		while (q) {
+			n = q->next;
+			if(!q->added_from_queue){
 
-		n = q->next;
-		ck_free(q->fname);
-		ck_free(q->trace_mini);
-		//free(q->blocks_hit);
-		ck_free(q);
-		q = n;
+				ck_free(q->fname);
+				ck_free(q->trace_mini);
+				//free(q->blocks_hit);
 
+				ck_free(q);
+			}
+			else{ 
+				free(q->fname);
+				free(q->trace_mini);
+				ck_free(q);
+				//free(q);
+			}
+			q = n;
+		}
 	}
-
 }
 
 
@@ -767,30 +963,30 @@ EXP_ST void destroy_queue(void) {
 
 EXP_ST void write_bitmap(void) {
 
-	u8* fname;
-	s32 fd;
+	u8* fname, *fname_delta;
+	s32 fd, fd_delta;
 
 	if (!bitmap_changed) return;
 	bitmap_changed = 0;
 
 	fname = alloc_printf("%s/fuzz_bitmap", out_dir);
+  	fname_delta = alloc_printf("%s/fuzz_bitmap", out_dir_delta[CUR_PROG]);
+
 	fd = open(fname, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+  	fd_delta = open(fname_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 	if (fd < 0) PFATAL("Unable to open '%s'", fname);
+  	if (fd_delta < 0) PFATAL("Unable to open '%s'", fname_delta);
 
 	ck_write(fd, virgin_bits[CUR_PROG], MAP_SIZE, fname);
+  	ck_write(fd_delta, virgin_bits[CUR_PROG], MAP_SIZE, fname_delta);
 
 	close(fd);
+  	close(fd_delta);
+
 	ck_free(fname);
+  	ck_free(fname_delta);
 
-}
-
-
-/* Checks if the current execution path passes through any new block */
-/* Not sure if working */
-static u8 has_new_blocks(){
-	// blocks shared not all the blocks passed implies there are new blocks
-	return shared_blocks_in_runs < unique_blocks;
 }
 
 /* Check if the current execution path brings anything new to the table.
@@ -801,10 +997,6 @@ static u8 has_new_blocks(){
    This function is called after every exec() on a fairly large buffer, so
    it needs to be fast. We do this in 32-bit and 64-bit flavors. */
 
-// TODO -> we need to check every virgin map right?
-//		-> maybe its not in this function but in the function that calls it?
-//		-> This might be a bit expensive, maybe just check the ones that have changed and check 
-//		 the other virgin_maps for the specific bits.
 
 static inline u8 has_new_bits(u8* virgin_map) {
 
@@ -830,6 +1022,8 @@ static inline u8 has_new_bits(u8* virgin_map) {
   // are we passing through the entire map and check if anything changed???
 
 	while (i--) {
+
+	//if (trace_bits[i]) printf("found one i = %d\n", i);
 
     /* Optimize for (*current & *virgin) == 0 - i.e., no bits in current bitmap
        that have not been already cleared from the virgin map - since this will
@@ -929,6 +1123,8 @@ static u32 count_bytes(u8* mem) {
 	while (i--) {
 
 		u32 v = *(ptr++);
+
+		//if(trace_bits[i]) printf("trace_bits[%d] = %d\n", i, trace_bits[i]);
 
 		if (!v) continue;
 		if (v & FF(0)) ret++;
@@ -1094,8 +1290,8 @@ EXP_ST void init_count_class16(void) {
     /* Optimize for sparse bitmaps. */
 
 			if (unlikely(*mem)) {
-
-      //printf("0x%08x\n", *mem);
+				//printf("MEM = %d\n i = 0x%08x\n", *mem, i);
+      			//printf("0x%08x\n", *mem);
 
 				count ++;
 
@@ -1110,6 +1306,19 @@ EXP_ST void init_count_class16(void) {
 
 			mem++;
 
+			if(queue_cur[CUR_PROG] == NULL) continue;
+
+			if(trace_bits[i]){
+				//printf("trace_bits[0x%08x] = %d\n", i, trace_bits[i]);
+				BLOCKS_FOUND[i] += trace_bits[i];
+				if( BLOCK_TO_HIT[i] != 0 ){
+      				
+      				queue_cur[CUR_PROG]->hit_target =
+      					queue_cur[CUR_PROG]->hit_target + 1; // add the number of targets hit
+      			}
+      			queue_cur[CUR_PROG]->blocks_hit[i] = 1; // mark the block as hit
+			}	
+
 		}
 
 	}
@@ -1120,7 +1329,7 @@ EXP_ST void init_count_class16(void) {
 
 		u32 i = MAP_SIZE >> 2;
 
-		printf("i = %d\n", i);
+		//printf("i = %d\n", i);
 
 		while (i--) {
 
@@ -1137,6 +1346,16 @@ EXP_ST void init_count_class16(void) {
 
 			mem++;
 
+			if(trace_bits[t]){
+				printf("trace_bits[0x%08x] = %d\n", t, trace_bits[t]);
+				BLOCKS_FOUND[t] = trace_bits[t];
+				if( BLOCK_TO_HIT[t] != 0 ){
+      				if(queue_cur[CUR_PROG] != NULL)
+      					queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
+      			}
+			}	
+		//if(trace_blocks[t]) printf("trace_blocks[%d] = %d\n", t, trace_blocks[t]);
+
 		}
 
 	}
@@ -1149,7 +1368,8 @@ EXP_ST void init_count_class16(void) {
 	static void remove_shm(void) {
 
 		shmctl(shm_id, IPC_RMID, NULL);
-  //shmctl(shm_id2, IPC_RMID, NULL);
+		shmctl(shm_blocks_id, IPC_RMID, NULL);
+
 	}
 
 
@@ -1192,25 +1412,25 @@ static void update_bitmap_score(struct queue_entry* q) {
 
     if (trace_bits[i]) {
 
-       if (top_rated[i]) {
+       if (top_rated[CUR_PROG][i]) {
 
          /* Faster-executing or smaller test cases are favored. */
 
-         if (fav_factor > top_rated[i]->exec_us * top_rated[i]->len) continue;
+         if (fav_factor > top_rated[CUR_PROG][i]->exec_us * top_rated[CUR_PROG][i]->len) continue;
 
          /* Looks like we're going to win. Decrease ref count for the
             previous winner, discard its trace_bits[] if necessary. */
 
-         if (!--top_rated[i]->tc_ref) {
-           ck_free(top_rated[i]->trace_mini);
-           top_rated[i]->trace_mini = 0;
+         if (!--top_rated[CUR_PROG][i]->tc_ref) {
+           ck_free(top_rated[CUR_PROG][i]->trace_mini);
+           top_rated[CUR_PROG][i]->trace_mini = 0;
          }
 
        }
 
        /* Insert ourselves as the new winner. */
 
-       top_rated[i] = q;
+       top_rated[CUR_PROG][i] = q;
        q->tc_ref++;
 
        if (!q->trace_mini) {
@@ -1229,7 +1449,6 @@ static void update_bitmap_score(struct queue_entry* q) {
    previously-unseen bytes (temp_v) and marks them as favored, at least
    until the next run. The favored entries are given more air time during
    all fuzzing steps. */
-// TODO -> this function is important, probably best ot write about it
 
 static void cull_queue(void) {
 
@@ -1243,38 +1462,39 @@ static void cull_queue(void) {
 
   memset(temp_v, 255, MAP_SIZE >> 3);
 
-  queued_favored  = 0;
+  queued_favored[CUR_PROG]  = 0;
   pending_favored = 0;
 
-  q = queue;
+  q = queue[CUR_PROG];
 
   while (q) {
     q->favored = 0;
     q = q->next;
   }
 
+
   /* Let's see if anything in the bitmap isn't captured in temp_v.
      If yes, and if it has a top_rated[] contender, let's use it. */
 
   for (i = 0; i < MAP_SIZE; i++)
-    if (top_rated[i] && (temp_v[i >> 3] & (1 << (i & 7)))) {
+    if (top_rated[CUR_PROG][i] && (temp_v[i >> 3] & (1 << (i & 7)))) {
 
       u32 j = MAP_SIZE >> 3;
 
       /* Remove all bits belonging to the current entry from temp_v. */
 
       while (j--) 
-        if (top_rated[i]->trace_mini[j])
-          temp_v[j] &= ~top_rated[i]->trace_mini[j];
+        if (top_rated[CUR_PROG][i]->trace_mini[j])
+          temp_v[j] &= ~top_rated[CUR_PROG][i]->trace_mini[j];
 
-      top_rated[i]->favored = 1;
-      queued_favored++;
+      top_rated[CUR_PROG][i]->favored = 1;
+      queued_favored[CUR_PROG]++;
 
-      if (!top_rated[i]->was_fuzzed[CUR_PROG]) pending_favored++;
+      if (!top_rated[CUR_PROG][i]->was_fuzzed[CUR_PROG]) pending_favored++;
 
     } // end of if and for
 
-  q = queue;
+  q = queue[CUR_PROG];
 
   while (q) {
     mark_as_redundant(q, !q->favored);
@@ -1286,11 +1506,12 @@ static void cull_queue(void) {
 /* Configure shared memory and virgin_bits. This is called at startup. */
 EXP_ST void setup_shm(void) {
 
-	u8* shm_str;
+	u8* shm_str, *shm_str_blocks;
 
 	if (!in_bitmap){ 
-    for(int i = 0; i < numbr_of_progs_under_test; i++)
-     memset(virgin_bits[i], 255, MAP_SIZE);
+    for(int i = 0; i < numbr_of_progs_under_test; i++){
+    	memset(virgin_bits[i], 255, MAP_SIZE);
+    }
   }
 
   for(int i = 0; i < numbr_of_progs_under_test; i++){
@@ -1298,19 +1519,19 @@ EXP_ST void setup_shm(void) {
 	 memset(virgin_crash[i], 255, MAP_SIZE);
   }
 
-	shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
-	//printf("shm_id = %d\n", shm_id);
-	//shm_id2 = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
-	//printf("shm_id2 = %d\n", shm_id2);
+ 	if(shm_id != 0 || shm_blocks_id != 0) return; // se já fizemos isto antes
+
+  	shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
+  	shm_blocks_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | 0600);
 		
 
 
-	if ( shm_id < 0 ) PFATAL("shmget() failed");
+	if ( shm_id < 0 || shm_blocks_id < 0 ) PFATAL("shmget() failed");
 
 	atexit(remove_shm);
 
 	shm_str = alloc_printf("%d", shm_id);
-	 
+	shm_str_blocks = alloc_printf("%d", shm_blocks_id);
 
 	  /* If somebody is asking us to fuzz instrumented binaries in dumb mode,
 	     we don't want them to detect instrumentation, since we won't be sending
@@ -1318,14 +1539,25 @@ EXP_ST void setup_shm(void) {
 	     later on, perhaps? */
 
 	if (!dumb_mode){ 
+		//char tmp2[100];
+		//sprintf(tmp2, "%s=%s", SHM_ENV_VAR, shm_str);
+		//putenv(tmp2);
 		setenv(SHM_ENV_VAR, shm_str, 1);
+		//setenv(SHM_BLOCKS, shm_str_blocks, 1);
+		char tmp[100];
+		sprintf(tmp, "%s=%s", SHM_BLOCKS, shm_str);
+		putenv(tmp);
 	}
 
 	ck_free(shm_str);
+	ck_free(shm_str_blocks);
+
+	//char *teste = malloc(sizeof(char) * 1000 + 1);
 
 	trace_bits = shmat(shm_id, NULL, 0); //attach the shared memory address segment to trace_bits
+	trace_blocks = shmat(shm_blocks_id, NULL, 0); // get the blocks from the run using this
 	  
-	if (!trace_bits) PFATAL("shmat() failed");
+	if ( !trace_bits || !trace_blocks ) PFATAL("shmat() failed");
 
 }
 
@@ -1399,7 +1631,7 @@ static void read_testcases(void) {
 		shuffle_ptrs((void**)nl, nl_cnt);
 
 	}
-
+  
 	for (i = 0; i < nl_cnt; i++) {
 
 		struct stat st;
@@ -1436,13 +1668,13 @@ static void read_testcases(void) {
 		if (!access(dfn, F_OK)) passed_det = 1;
 		ck_free(dfn);
 
-		add_to_queue(fn, st.st_size, passed_det);
+		add_to_queue(fn, st.st_size, passed_det,0);
 
 	}
 
   free(nl); /* not tracked */
 
-	if (!queued_paths) {
+	if (!queued_paths[CUR_PROG]) {
 
 		SAYF("\n" cLRD "[-] " cRST
 			"Looks like there are no valid test cases in the input directory! The fuzzer\n"
@@ -1455,7 +1687,7 @@ static void read_testcases(void) {
 	}
 
 	last_path_time = 0;
-	queued_at_start = queued_paths;
+	queued_at_start = queued_paths[CUR_PROG];
 
 }
 
@@ -1474,6 +1706,244 @@ static int compare_extras_use_d(const void* p1, const void* p2) {
 
   return e2->hit_cnt - e1->hit_cnt;
 }
+
+
+/* Read extras from a file, sort by size. */
+
+static void load_extras_file(u8* fname, u32* min_len, u32* max_len,
+                             u32 dict_level) {
+
+  FILE* f;
+  u8  buf[MAX_LINE];
+  u8  *lptr;
+  u32 cur_line = 0;
+
+  f = fopen(fname, "r");
+
+  if (!f) PFATAL("Unable to open '%s'", fname);
+
+  while ((lptr = fgets(buf, MAX_LINE, f))) {
+
+    u8 *rptr, *wptr;
+    u32 klen = 0;
+
+    cur_line++;
+
+    /* Trim on left and right. */
+
+    while (isspace(*lptr)) lptr++;
+
+    rptr = lptr + strlen(lptr) - 1;
+    while (rptr >= lptr && isspace(*rptr)) rptr--;
+    rptr++;
+    *rptr = 0;
+
+    /* Skip empty lines and comments. */
+
+    if (!*lptr || *lptr == '#') continue;
+
+    /* All other lines must end with '"', which we can consume. */
+
+    rptr--;
+
+    if (rptr < lptr || *rptr != '"')
+      FATAL("Malformed name=\"value\" pair in line %u.", cur_line);
+
+    *rptr = 0;
+
+    /* Skip alphanumerics and dashes (label). */
+
+    while (isalnum(*lptr) || *lptr == '_') lptr++;
+
+    /* If @number follows, parse that. */
+
+    if (*lptr == '@') {
+
+      lptr++;
+      if (atoi(lptr) > dict_level) continue;
+      while (isdigit(*lptr)) lptr++;
+
+    }
+
+    /* Skip whitespace and = signs. */
+
+    while (isspace(*lptr) || *lptr == '=') lptr++;
+
+    /* Consume opening '"'. */
+
+    if (*lptr != '"')
+      FATAL("Malformed name=\"keyword\" pair in line %u.", cur_line);
+
+    lptr++;
+
+    if (!*lptr) FATAL("Empty keyword in line %u.", cur_line);
+
+    /* Okay, let's allocate memory and copy data between "...", handling
+       \xNN escaping, \\, and \". */
+
+    extras = ck_realloc_block(extras, (extras_cnt + 1) *
+               sizeof(struct extra_data));
+
+    wptr = extras[extras_cnt].data = ck_alloc(rptr - lptr);
+
+    while (*lptr) {
+
+      char* hexdigits = "0123456789abcdef";
+
+      switch (*lptr) {
+
+        case 1 ... 31:
+        case 128 ... 255:
+          FATAL("Non-printable characters in line %u.", cur_line);
+
+        case '\\':
+
+          lptr++;
+
+          if (*lptr == '\\' || *lptr == '"') {
+            *(wptr++) = *(lptr++);
+            klen++;
+            break;
+          }
+
+          if (*lptr != 'x' || !isxdigit(lptr[1]) || !isxdigit(lptr[2]))
+            FATAL("Invalid escaping (not \\xNN) in line %u.", cur_line);
+
+          *(wptr++) =
+            ((strchr(hexdigits, tolower(lptr[1])) - hexdigits) << 4) |
+            (strchr(hexdigits, tolower(lptr[2])) - hexdigits);
+
+          lptr += 3;
+          klen++;
+
+          break;
+
+        default:
+
+          *(wptr++) = *(lptr++);
+          klen++;
+
+      }
+
+    }
+
+    extras[extras_cnt].len = klen;
+
+    if (extras[extras_cnt].len > MAX_DICT_FILE)
+      FATAL("Keyword too big in line %u (%s, limit is %s)", cur_line,
+            DMS(klen), DMS(MAX_DICT_FILE));
+
+    if (*min_len > klen) *min_len = klen;
+    if (*max_len < klen) *max_len = klen;
+
+    extras_cnt++;
+
+  }
+
+  fclose(f);
+
+}
+
+
+/* Read extras from the extras directory and sort them by size. */
+
+static void load_extras(u8* dir) {
+
+  DIR* d;
+  struct dirent* de;
+  u32 min_len = MAX_DICT_FILE, max_len = 0, dict_level = 0;
+  u8* x;
+
+  /* If the name ends with @, extract level and continue. */
+
+  if ((x = strchr(dir, '@'))) {
+
+    *x = 0;
+    dict_level = atoi(x + 1);
+
+  }
+
+  ACTF("Loading extra dictionary from '%s' (level %u)...", dir, dict_level);
+
+  d = opendir(dir);
+
+  if (!d) {
+
+    if (errno == ENOTDIR) {
+      load_extras_file(dir, &min_len, &max_len, dict_level);
+      goto check_and_sort;
+    }
+
+    PFATAL("Unable to open '%s'", dir);
+
+  }
+
+  if (x) FATAL("Dictionary levels not supported for directories.");
+
+  while ((de = readdir(d))) {
+
+    struct stat st;
+    u8* fn = alloc_printf("%s/%s", dir, de->d_name);
+    s32 fd;
+
+    if (lstat(fn, &st) || access(fn, R_OK))
+      PFATAL("Unable to access '%s'", fn);
+
+    /* This also takes care of . and .. */
+    if (!S_ISREG(st.st_mode) || !st.st_size) {
+
+      ck_free(fn);
+      continue;
+
+    }
+
+    if (st.st_size > MAX_DICT_FILE)
+      FATAL("Extra '%s' is too big (%s, limit is %s)", fn,
+            DMS(st.st_size), DMS(MAX_DICT_FILE));
+
+    if (min_len > st.st_size) min_len = st.st_size;
+    if (max_len < st.st_size) max_len = st.st_size;
+
+    extras = ck_realloc_block(extras, (extras_cnt + 1) *
+               sizeof(struct extra_data));
+
+    extras[extras_cnt].data = ck_alloc(st.st_size);
+    extras[extras_cnt].len  = st.st_size;
+
+    fd = open(fn, O_RDONLY);
+
+    if (fd < 0) PFATAL("Unable to open '%s'", fn);
+
+    ck_read(fd, extras[extras_cnt].data, st.st_size, fn);
+
+    close(fd);
+    ck_free(fn);
+
+    extras_cnt++;
+
+  }
+
+  closedir(d);
+
+check_and_sort:
+
+  if (!extras_cnt) FATAL("No usable files in '%s'", dir);
+
+  qsort(extras, extras_cnt, sizeof(struct extra_data), compare_extras_len);
+
+  OKF("Loaded %u extra tokens, size range %s to %s.", extras_cnt,
+      DMS(min_len), DMS(max_len));
+
+  if (max_len > 32)
+    WARNF("Some tokens are relatively large (%s) - consider trimming.",
+          DMS(max_len));
+
+  if (extras_cnt > MAX_DET_EXTRAS)
+    WARNF("More than %u tokens - will use them probabilistically.",
+          MAX_DET_EXTRAS);
+
+}
+
 
 /* Helper function for maybe_add_auto() */
 
@@ -1602,16 +2072,26 @@ static void save_auto(void) {
 	for (i = 0; i < MIN(USE_AUTO_EXTRAS, a_extras_cnt); i++) {
 
 		u8* fn = alloc_printf("%s/queue/.state/auto_extras/auto_%06u", out_dir, i);
-		s32 fd;
+    u8* fn_delta = alloc_printf("%s/queue/.state/auto_extras/auto_%06u", out_dir_delta[CUR_PROG], i);
+		s32 fd, fd_delta;
+
 
 		fd = open(fn, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 		if (fd < 0) PFATAL("Unable to create '%s'", fn);
 
+    fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+
 		ck_write(fd, a_extras[i].data, a_extras[i].len, fn);
+    ck_write(fd_delta, a_extras[i].data, a_extras[i].len, fn_delta);
 
 		close(fd);
 		ck_free(fn);
+
+    close(fd_delta);
+    ck_free(fn_delta);
 
 	}
 
@@ -1691,8 +2171,14 @@ static void destroy_extras(void) {
 EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid, 
 								int prog_index, int fork_srv) {
 
-	printf("\t-> init_forkserver\n");
-
+	//printf("\t-> init_forkserver\n");
+	/*
+	int k = 0;
+	while(*(path + k)){
+		printf("path = %s\n",  *(path + k) );
+		k ++;
+	}
+	*/
 	static struct itimerval it;
 	//int st_pipe[2], ctl_pipe[2];
   int st_pipe[4], ctl_pipe[4];
@@ -1712,7 +2198,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 	if (!*forksrv_pid) {
 
-		printf("not forksrv_pid\n");
+		//printf("not forksrv_pid\n");
 
 
 		struct rlimit r;
@@ -1760,8 +2246,9 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 		setsid();
 
-		printf("before redirecting standard output\n");
+		//printf("before redirecting standard output\n");
 
+    
     dup2(dev_null_fd, 1); // redirect standard output to dev_null_fd
     dup2(dev_null_fd, 2); // redirect the standard error to the dev_null_fd
 
@@ -1776,6 +2263,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     	close(out_fd);
 
     }
+
 
     // end points
     /* Set up control and status pipes, close the unneeded original fds. */
@@ -1800,7 +2288,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     close(out_dir_fd);
     close(dev_null_fd);
     close(dev_urandom_fd);
-    close(fileno(plot_file));
+    close(fileno(plot_file[CUR_PROG]));
 
     /* This should improve performance a bit, since it stops the linker from
        doing extra work post-fork(). */
@@ -1823,6 +2311,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     	"allocator_may_return_null=1:"
     	"msan_track_origins=0", 0);
 
+
     execv(*path, argv);
 
     /* Use a distinctive bitmap signature to tell the parent about execv()
@@ -1838,8 +2327,8 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 close(ctl_pipe[0]);
 close(st_pipe[1]);
 
-close(ctl_pipe[2]);
-close(st_pipe[3]);
+//close(ctl_pipe[2]);
+//close(st_pipe[3]);
 
 //close(ctl_pipe[2]);
 //close(st_pipe[3]);
@@ -1998,13 +2487,16 @@ FATAL("Fork server handshake failed");
 * Stores the reason the program crashed in fault, if it does not crash FAULT_NONE
 * Stores the amount of blocks found in hit
 **/ 
-int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
+int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
+	//printf("run_forkserver_on_target\n");
 	static struct itimerval it;
 	static u32 prev_timed_out = 0;
+	// TODO -> tblocks will be used to try and get the edges as well
+	// u32 tblocks4;
 	u32 tb4;
 
-	int status = 0;
+	unsigned int status = 0;
 	//u32 tb4;
 
 	child_timed_out = 0;
@@ -2014,6 +2506,8 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 	     territory. */
 
 	memset(trace_bits, 0, MAP_SIZE);
+	memset(trace_blocks, 0, MAP_SIZE);
+
 	MEM_BARRIER();
 
 	s32 res;
@@ -2039,7 +2533,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
     //printf("child pid = 0x%08x\n", child_pid);
 
     if (child_pid <= 0){
-      printf("child pid = %d\n", child_pid);
+      //printf("child pid = %d\n", child_pid);
       FATAL("Fork server is misbehaving (OOM?)");
     }
 
@@ -2052,99 +2546,13 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   // relays the wait status and then should leave
   //read blocks
-  unsigned int id = 0, i = 0;
   unsigned int size = 100;
   *hit = 0;
 
-  int *blocks = malloc( sizeof(int) * size );
-
-  if(!blocks){
-    FATAL("malloc failed in run_forkserver_on_target");
-  }
-
-  // tells us which blocks have been found
-  short blocks_from_run[MAP_SIZE] = {};
-
+  // TODO: Might be able to remove this
   shared_blocks_in_runs = 0;
   unique_blocks = 0;
 
-  //printf("run_forkserver_on_target\n");
-
-  while( 1 ){
-
-    //printf("poll\n");
-    // check if there are things to read
-    //if( poll(&(struct pollfd){ .fd=fsrv_st_fd, .events = POLLIN }, 1, 10) != 1) //especialmente aqui, tentar arranjar uma maneira melhor (Isto é muito caro)
-    //   break;
-
-    
-      //there's something to read
-      //printf("gonna try and read something\n");
-
-  	  // O erro está aqui, talvez ao fazermos ctrl+c ele ainda continue e depois como morre dá o erro?
-  	  int re = 10;
-      if ( (re = read(fsrv_st_fd[prog_index], &id, 4)) != 4) { 
-      	if(re == 0) return 1;
-        else 	RPFATAL(-1, "Unable to read block_id from fork server (OOM?) %d", re);
-      }
-
-      // code that we're getting the status next
-      if( id == -100 ) {break;}
-
-      *hit = *hit + 1;
-
-      //check if we have enough memory allocated for the array
-      if( *hit >= size * 0.75 ){
-        size *= 2;
-        blocks = realloc(blocks, sizeof(int) * size );
-
-        if(!blocks){
-          free( blocks );
-          RPFATAL(-1, "Something went wrong when increasing the size of the block");
-        }
-      }
-
-      *(blocks + i) = id;
-
-      // has it been seen before and not on this run?
-      /*
-      if(  BLOCKS_FOUND[id] && !blocks_from_run[id]){
-      	// add it to the in common
-      	//(*nbr_in_common) = (*nbr_in_common) + 1;
-      	//count ++;
-      	//printf("*block_hit = 0x%08x has been seen before\n", id);
-      }
-     */
-
-      // something is not working here
-      shared_blocks_in_runs =  BLOCKS_FOUND[id] && !blocks_from_run[id] ? 
-      	shared_blocks_in_runs + 1 : shared_blocks_in_runs;
-
-      if( !blocks_from_run[id] ){
-      	blocks_from_run[id] = 1; // mark it has seen
-      	if(queue_cur != NULL )	queue_cur->blocks_hit[id] = 1; // mark the block as hit
-
-      	unique_blocks ++;
-      }
-
-
-      BLOCKS_FOUND[id] ++;
-
-      //printf("*block_hit = 0x%08x\n", *(blocks + i));
-      i++;  
-
-  }
-
-  /* TODO -> this can't be here, once we set that it passes through new blocks it cannot be changed */
-  /* will go on two places calibrate_case (so it treats the first ones) and save_if_interesting (to check the new ones) */
-  /*
-  if( queue_cur != NULL ){ 
-  	queue_cur->shared_blocks = shared_blocks_in_runs; 
-  	queue_cur ->uni_blcks = unique_blocks;
-  }
-  */
-
-  //status = message;
 
 	/* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
   
@@ -2154,7 +2562,12 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 		RPFATAL(res, "Unable to communicate with fork server (OOM?)");
 
 	}
-  
+  	
+  	if( WEXITSTATUS(status) ){
+   		//printf("exit succ status = %d\n", status);
+  	}
+   	//else printf("didnt exit successfully status = %d\n", status);
+
   //printf("status = %d\n", status);
 
 
@@ -2169,27 +2582,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   	total_execs++;
 	*/
 
-  //start running the blocks
-  /*
-  if ((res = write(fsrv_ctl_fd, &prev_timed_out, 4)) != 4) { //-WRITE
-    if (stop_soon) return 0;
-    RPFATAL(res, "Unable to request new process from fork server (OOM?)");
-  }
-  */
-
-      //if(WIFSTOPPED(status)){ break;}
-  //if(WIFEXITED(status)){ printf("WIFEXITED\n");/*break;*/}
-  //if(WIFSIGNALED(status)){  printf("WIFSIGNALED\n"); /*break;*/}
-	
-
-	//printf("left while\n");
-
-
-	//if( blocks == NULL ) printf("blocks is null\n");
-	//else printf("is not null\n");
-		//exit(0);
-	//}
-
   
   //if (!WIFSTOPPED(status)) child_pid = 0;
 
@@ -2200,36 +2592,34 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   total_execs++;
   
 
-  /* Any subsequent operations on trace_bits must not be moved by the
-     compiler below this point. Past this location, trace_bits[] behave
+  /* Any subsequent operations on trace_bits/trace_blocks must not be moved by the
+     compiler below this point. Past this location, trace_bits[]/trace_blocks[] behave
      very normally and do not have to be treated as volatile. */
 
   MEM_BARRIER();
 
   tb4 = *(u32*)trace_bits;
+  //tblocks4 = *(u32*)trace_blocks;
 
 #ifdef __x86_64__
   classify_counts((u64*)trace_bits);
+  //classify_counts((u64*)trace_blocks);
 #else
   classify_counts((u32*)trace_bits);
+  //classify_counts((u32*)trace_blocks);
 #endif /* ^__x86_64__ */
 
-
+  //printf("after classify counts\n");
 
   /* Report outcome to caller. */
 
   if (WIFSIGNALED(status) && !stop_soon) {
 
-  	//printf("status = %d\n", status);
-  	//printf("signal status = %d\n", WIFSIGNALED(status) );
-
-  	//printf("\treported outcome is a crash!\n");
-
     kill_signal = WTERMSIG(status);
 
     if (child_timed_out && kill_signal == SIGKILL) *fault = FAULT_TMOUT;
 
-    else *fault = FAULT_CRASH;
+    else{ *fault = FAULT_CRASH; }
   }
 
   /* A somewhat nasty hack for MSAN, which doesn't support abort_on_error and
@@ -2244,7 +2634,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   //printf("\tfault = %d\n", *fault);
 
-  return blocks;
+  return NULL;
 }
 
 /*Runs the current target and returns its fault*/
@@ -2252,34 +2642,9 @@ static u8 run_target(u32 timeout) {
 
   u8 fault;
   int hit;
-  int *blocks = run_forkserver_on_target(timeout, &hit, CUR_PROG, &fault);
-  free (blocks);
+  run_forkserver_on_target(timeout, &hit, CUR_PROG, &fault);
 
-  /*
-  int i = 0;
-  while( (*blocks + i) ){}
-  */
   return fault;
-
-}
-
-/**
-* NOTES: the array size must be the lenght of the number of programs passed
-* Runs fall programs passed only once  returning the blocks hit
-* Used to check out if the instrumentation is correct in all programs
-*
-* Also sets in size the number of blocks in each program
-**/
-static void run_programs_once(u32 timeout){
-	u8 fault;
-	int *size[numbr_of_progs_under_test];
-
-	// Get all the blocks of all programs under	test
-	for(int i = 0 ; i < numbr_of_progs_under_test; i++){
-		//blocks[i] = malloc( sizeof(int) );
-		int *blocks = run_forkserver_on_target(timeout, &(size[i]), i, &fault);
-		free(blocks);
-	}
 
 }
 
@@ -2287,13 +2652,14 @@ static void run_programs_once(u32 timeout){
    is unlinked and a new one is created. Otherwise, out_fd is rewound and
    truncated. */
 
-	static void write_to_testcase(void* mem, u32 len) {
+static void write_to_testcase(void* mem, u32 len) {
 
+		
 		s32 fd = out_fd;
 
 		if (out_file) {
 
-    unlink(out_file); /* Ignore errors. */
+    		unlink(out_file);
 
 			fd = open(out_file, O_WRONLY | O_CREAT | O_EXCL, 0600);
 
@@ -2309,7 +2675,7 @@ static void run_programs_once(u32 timeout){
 			lseek(fd, 0, SEEK_SET);
 
 		} else close(fd);
-
+		
 	}
 
 /* The same, but with an adjustable gap. Used for trimming. */
@@ -2318,10 +2684,10 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
 
   s32 fd = out_fd;
   u32 tail_len = len - skip_at - skip_len;
-
+  
   if (out_file) {
 
-    unlink(out_file); /* Ignore errors. */
+    unlink(out_file);
 
     fd = open(out_file, O_WRONLY | O_CREAT | O_EXCL, 0600);
 
@@ -2339,7 +2705,29 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
     lseek(fd, 0, SEEK_SET);
 
   } else close(fd);
+  
+  /*
+  if (out_file_delta[CUR_PROG]) {
 
+    unlink(out_file_delta[CUR_PROG]);
+
+    fd = open(out_file_delta[CUR_PROG], O_WRONLY | O_CREAT | O_EXCL, 0600);
+
+    if (fd < 0) PFATAL("Unable to create '%s'", out_file_delta[CUR_PROG]);
+
+  } else lseek(fd, 0, SEEK_SET);
+
+  if (skip_at) ck_write(fd, mem, skip_at, out_file_delta[CUR_PROG]);
+
+  if (tail_len) ck_write(fd, mem + skip_at + skip_len, tail_len, out_file_delta[CUR_PROG]);
+
+  if (!out_file_delta[CUR_PROG]) {
+
+    if (ftruncate(fd, len - skip_len)) PFATAL("ftruncate() failed");
+    lseek(fd, 0, SEEK_SET);
+
+  } else close(fd);
+  */
 }
 
 
@@ -2350,12 +2738,13 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
    to warn about flaky or otherwise problematic test cases early on; and when
    new paths are discovered to detect variable behavior and so on. */
 
-// TODO -> the thins in the queue entry that change must be changed here
 
 static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
                          u32 handicap, u8 from_queue) {
 
   //printf("in calibrate case\n");
+
+  if(!q) FATAL("Queue entry is null!");
 
   static u8 first_trace[MAP_SIZE];
 
@@ -2384,12 +2773,12 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   /* Make sure the forkserver is up before we do anything, and let's not
      count its spin-up time toward binary calibration. */
   // TODO -> Need to check all of them
-  if( !forksrv_pid[0] ){
-  	//TODO _> init all forkservers
+  if( !forksrv_pid[CUR_PROG] ){
   	//init_forkserver(argv);
   	FATAL("Forkservers aren't up!");
   	//init_all_forkservers(argv);
   }
+
 
   if (q->exec_cksum) memcpy(first_trace, trace_bits, MAP_SIZE);
 
@@ -2403,10 +2792,8 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     write_to_testcase(use_mem, q->len);
 
-    //fault = run_target(argv, use_tmout); // TODO -> change this
+    fault = run_target(use_tmout);
 
-
-    run_target(use_tmout);
 
     //printf("\tfault = %d\n", fault);
 
@@ -2426,7 +2813,6 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     if (q->exec_cksum != cksum) {
 
-      // todo -> need to check all of the virgin_bits?
       u8 hnb = has_new_bits(virgin_bits[CUR_PROG]);
       if (hnb > new_bits) new_bits = hnb;
 
@@ -2471,11 +2857,6 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   q->handicap    = handicap;
   q->cal_failed  = 0;
 
-  /*Added by fc45701*/
-  q->shared_blocks = shared_blocks_in_runs; 
-  q->uni_blcks = unique_blocks;
-  
-
   total_bitmap_size += q->bitmap_size;
   total_bitmap_entries++;
 
@@ -2502,7 +2883,7 @@ abort_calibration:
 
     if (!q->var_behavior) {
       mark_as_variable(q);
-      queued_variable++;
+      queued_variable[CUR_PROG]++;
     }
 
   }
@@ -2526,8 +2907,10 @@ abort_calibration:
 
 		if (count_bytes(trace_bits) < 100) return;
 
-		for (i = (1 << (MAP_SIZE_POW2 - 1)); i < MAP_SIZE; i++)
+		for (i = (1 << (MAP_SIZE_POW2 - 1)); i < MAP_SIZE; i++){
+			//if (trace_bits[i]) printf("set one\n");
 			if (trace_bits[i]) return;
+		}
 
 		WARNF("Recompile binary with newer version of afl to improve coverage!");
 
@@ -2564,19 +2947,46 @@ abort_calibration:
 
 	}
 
+  /* Helper function: copy file. */
+
+  static void copy_file(u8* old_path, u8* new_path) {
+
+    s32 i;
+    s32 sfd, dfd;
+    u8* tmp;
+
+    sfd = open(old_path, O_RDONLY);
+    if (sfd < 0) PFATAL("Unable to open '%s'", old_path);
+
+    dfd = open(new_path, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (dfd < 0) PFATAL("Unable to create '%s'", new_path);
+
+    tmp = ck_alloc(64 * 1024);
+
+    while ((i = read(sfd, tmp, 64 * 1024)) > 0) 
+      ck_write(dfd, tmp, i, new_path);
+
+    if (i < 0) PFATAL("read() failed");
+
+    ck_free(tmp);
+    close(sfd);
+    close(dfd);
+
+  }
+
 
 	static void nuke_resume_dir(void);
 
 /* Create hard links for input test cases in the output directory, choosing
    good names and pivoting accordingly. */
-
+ 
 	static void pivot_inputs(void) {
 
-		struct queue_entry* q = queue;
+		struct queue_entry* q = queue[CUR_PROG]; // apanhamos os inputs originais
 		u32 id = 0;
 
 		ACTF("Creating hard links for all input files...");
-
+    // passamos por todos e metemos no file da queue (os inputs originais já estão na queue)
 		while (q) {
 
 			u8  *nfn, *rsl = strrchr(q->fname, '/');
@@ -2603,6 +3013,11 @@ abort_calibration:
 			resuming_fuzz = 1;
 			nfn = alloc_printf("%s/queue/%s", out_dir, rsl);
 
+    //  for(int i = 0; i < numbr_of_progs_under_test; i++)
+    //    nfn_delta[i] = alloc_printf("%s/queue/%s", out_dir_delta[i], rsl);
+
+      //nfn_delta = alloc_printf("%s/queue/%s", out_dir_delta[i], rsl);
+
       /* Since we're at it, let's also try to find parent and figure out the
          appropriate depth for this entry. */
 
@@ -2610,7 +3025,7 @@ abort_calibration:
 
 			if (src_str && sscanf(src_str + 1, "%06u", &src_id) == 1) {
 
-				struct queue_entry* s = queue;
+				struct queue_entry* s = queue[CUR_PROG];
 				while (src_id-- && s) s = s->next;
 				if (s) q->depth = s->depth + 1;
 
@@ -2630,9 +3045,15 @@ abort_calibration:
 			if (use_name) use_name += 6; else use_name = rsl;
 			nfn = alloc_printf("%s/queue/id:%06u,orig:%s", out_dir, id, use_name);
 
+    //  for(int i = 0; i < numbr_of_progs_under_test; i++)
+    //    nfn_delta[i] = alloc_printf("%s/queue/id:%06u,orig:%s", out_dir_delta[i], id, use_name);
+      
+
 #else
 
 			nfn = alloc_printf("%s/queue/id_%06u", out_dir, id);
+      //for(int i = 0; i < numbr_of_progs_under_test; i++)
+      //  nfn_delta[i] = alloc_printf("%s/queue/id_%06u", out_dir_delta[i], id);
 
 #endif /* ^!SIMPLE_FILES */
 
@@ -2640,7 +3061,13 @@ abort_calibration:
 
     /* Pivot to the new queue entry. */
 
-		link_or_copy(q->fname, nfn);
+		link_or_copy(q->fname, nfn); // talvez tenha que fazer isto para cada um das queues, mas só a parte do copy
+
+    for(int i = 0; i < numbr_of_progs_under_test; i++){
+      //copy_file(q->fname, nfn_delta[i]);
+      //link_or_copy(q->fname, nfn_delta[i]); // works
+    }
+
 		ck_free(q->fname);
 		q->fname = nfn;
 
@@ -2651,11 +3078,16 @@ abort_calibration:
 		q = q->next;
 		id++;
 
-	}
+	} // end of while
+
+  //copy_orig_testfiles_to_queues();
 
 	if (in_place_resume) nuke_resume_dir();
 
 }
+
+
+
 
 #ifndef SIMPLE_FILES
 
@@ -2706,17 +3138,21 @@ static u8* describe_op(u8 hnb) {
 static void write_crash_readme(void) {
 
   u8* fn = alloc_printf("%s/crashes/README.txt", out_dir);
-  s32 fd;
-  FILE* f;
+  u8* fn_delta = alloc_printf("%s/crashes/README.txt", out_dir_delta[CUR_PROG]);
+  s32 fd, fd_delta;
+  FILE* f, *f_delta;
 
   fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+  fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
   ck_free(fn);
+  ck_free(fn_delta);
 
   /* Do not die on errors here - that would be impolite. */
 
   if (fd < 0) return;
 
   f = fdopen(fd, "w");
+  f_delta = fdopen(fd_delta, "w");
 
   if (!f) {
     close(fd);
@@ -2743,7 +3179,28 @@ static void write_crash_readme(void) {
 
              orig_cmdline, DMS(mem_limit << 20)); /* ignore errors */
 
+  fprintf(f_delta, "Command line used to find this crash:\n\n"
+
+             "%s\n\n"
+
+             "If you can't reproduce a bug outside of afl-fuzz, be sure to set the same\n"
+             "memory limit. The limit used for this fuzzing session was %s.\n\n"
+
+             "Need a tool to minimize test cases before investigating the crashes or sending\n"
+             "them to a vendor? Check out the afl-tmin that comes with the fuzzer!\n\n"
+
+             "Found any cool bugs in open-source tools using afl-fuzz? If yes, please drop\n"
+             "me a mail at <lcamtuf@coredump.cx> once the issues are fixed - I'd love to\n"
+             "add your finds to the gallery at:\n\n"
+
+             "  http://lcamtuf.coredump.cx/afl/\n\n"
+
+             "Thanks :-)\n",
+
+             orig_cmdline, DMS(mem_limit << 20)); /* ignore errors */
+
   fclose(f);
+  fclose(f_delta);
 
 }
 
@@ -2753,66 +3210,65 @@ static void write_crash_readme(void) {
    save or queue the input test case for further analysis if so. Returns 1 if
    entry is saved, 0 otherwise. */
 
-/*
-*	TODO -> add to check if it found new blocks
-*
-*/
 
 static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
-  u8  *fn = "";
+  u8  *fn_delta="";
   u8  hnb;
-  s32 fd;
+  s32 fd_delta;
   u8  keeping = 0, res;
 
   if (fault == crash_mode) {
-
-  	// TODO -> I feel like it still does not work properly
 
     /* Keep only if there are new bits in the map, add to queue for
        future fuzzing, etc. */
 
     //if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) || !(has_new_blocks()) ) {
-  	// TODO -> we need to check every virgin_bits and if it has new coverage there its good
-  	// se não encontramos edges novas ou não encontramos blocs blocos nunca antes vistos
-  	// TODO -> não é redundate ver se temos blocos novos? Visto que se tivermos uma edge nova é porque ou a ordem trocou ou porque temos novos blocos nela?
-  	if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) || !(has_new_blocks())) {
+  	
+  	if (!(hnb = has_new_bits( virgin_bits[CUR_PROG] ))) {
       if (crash_mode) total_crashes++;
       return 0;
     }    
 
 #ifndef SIMPLE_FILES
 
-    fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths,
+    //fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths[CUR_PROG],
+    //                  describe_op(hnb));
+    fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], total_nmbr_queued_paths,
                       describe_op(hnb));
 
 #else
 
-    fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths);
+    //fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths[CUR_PROG]);
+    fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], total_nmbr_queued_paths);
 
 #endif /* ^!SIMPLE_FILES */
 
-    add_to_queue(fn, len, 0);
+    add_to_queue(fn_delta, len, 0, 0);
 
-    if (hnb == 2 || has_new_blocks()) {
-      queue_top->has_new_cov = 1;
+    if ( hnb == 2 ) {
+      queue_top[CUR_PROG]->has_new_cov = 1;
       queued_with_cov++;
     }
 
-    queue_top->exec_cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
+    queue_top[CUR_PROG]->exec_cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
 
     /* Try to calibrate inline; this also calls update_bitmap_score() when
        successful. */
 
-    res = calibrate_case(argv, queue_top, mem, queue_cycle - 1, 0);
+    res = calibrate_case(argv, queue_top[CUR_PROG], mem, queue_cycle - 1, 0); // the error appears to be here
 
     if (res == FAULT_ERROR)
       FATAL("Unable to execute target application");
 
-    fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (fd < 0) PFATAL("Unable to create '%s'", fn);
-    ck_write(fd, mem, len, fn);
-    close(fd);
+    //fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    //if (fd < 0) PFATAL("Unable to create '%s'", fn);
+    if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+    //ck_write(fd, mem, len, fn);
+    //close(fd);
+    ck_write(fd_delta, mem, len, fn_delta);
+    close(fd_delta);
 
     keeping = 1;
 
@@ -2821,7 +3277,6 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
   switch (fault) {
 
     case FAULT_TMOUT:
-
       /* Timeouts are not very interesting, but we're still obliged to keep
          a handful of samples. We use the presence of new bits in the
          hang-specific bitmap as a signal of uniqueness. In "dumb" mode, we
@@ -2835,8 +3290,10 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifdef __x86_64__
         simplify_trace((u64*)trace_bits);
+        //simplify_trace((u64*)trace_blocks);
 #else
         simplify_trace((u32*)trace_bits);
+        //simplify_trace((u32*)trace_blocks);
 #endif /* ^__x86_64__ */
 
         if (!has_new_bits(virgin_tmout[CUR_PROG])) return keeping;
@@ -2867,12 +3324,16 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #ifndef SIMPLE_FILES
 
-      fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
+      //fn = alloc_printf("%s/hangs/id:%06llu,%s", out_dir,
+      //                  unique_hangs, describe_op(0));
+      fn_delta = alloc_printf("%s/hangs/id:%06llu,%s", out_dir_delta[CUR_PROG],
                         unique_hangs, describe_op(0));
 
 #else
 
-      fn = alloc_printf("%s/hangs/id_%06llu", out_dir,
+      //fn = alloc_printf("%s/hangs/id_%06llu", out_dir,
+      //                  unique_hangs);
+      fn_delta = alloc_printf("%s/hangs/id_%06llu", out_dir_delta[CUR_PROG],
                         unique_hangs);
 
 #endif /* ^!SIMPLE_FILES */
@@ -2884,7 +3345,6 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
       break;
 
     case FAULT_CRASH:
-
 keep_as_crash:
 
       /* This is handled in a manner roughly similar to timeouts,
@@ -2911,12 +3371,16 @@ keep_as_crash:
 
 #ifndef SIMPLE_FILES
 
-      fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
+      //fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
+      //                  unique_crashes, kill_signal, describe_op(0));
+      fn_delta = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir_delta[CUR_PROG],
                         unique_crashes, kill_signal, describe_op(0));
 
 #else
 
-      fn = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir, unique_crashes,
+      //fn = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir, unique_crashes,
+      //                  kill_signal);
+      fn_delta = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir_delta[CUR_PROG], unique_crashes,
                         kill_signal);
 
 #endif /* ^!SIMPLE_FILES */
@@ -2934,15 +3398,26 @@ keep_as_crash:
 
   }
 
+  //printf("after switch\n");
+
   /* If we're here, we apparently want to save the crash or hang
      test case, too. */
 
-  fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-  if (fd < 0) PFATAL("Unable to create '%s'", fn);
-  ck_write(fd, mem, len, fn);
-  close(fd);
+  //fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
+  //if (fd < 0) PFATAL("Unable to create '%s'", fn);
+  //ck_write(fd, mem, len, fn);
+  //close(fd);
 
-  ck_free(fn);
+  //ck_free(fn);
+
+  fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
+  if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+  ck_write(fd_delta, mem, len, fn_delta);
+  close(fd_delta);
+
+  ck_free(fn_delta);
+
+  //printf("before ending\n");
 
   return keeping;
 
@@ -2976,7 +3451,7 @@ static u32 find_start_position(void) {
   if (!off) return 0;
 
   ret = atoi(off + 20);
-  if (ret >= queued_paths) ret = 0;
+  if (ret >= queued_paths[CUR_PROG]) ret = 0;
   return ret;
 
 }
@@ -3025,18 +3500,26 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
 	static double last_bcvg, last_stab, last_eps;
 
 	u8* fn = alloc_printf("%s/fuzzer_stats", out_dir);
-	s32 fd;
-	FILE* f;
+  u8* fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[CUR_PROG]);
+	s32 fd, fd_delta;
+	FILE *f, *f_delta;
 
 	fd = open(fn, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 	if (fd < 0) PFATAL("Unable to create '%s'", fn);
 
+  fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+
+  if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
+
 	ck_free(fn);
+  ck_free(fn_delta);
 
 	f = fdopen(fd, "w");
+  f_delta = fdopen(fd_delta, "w");
 
 	if (!f) PFATAL("fdopen() failed");
+  if (!f_delta) PFATAL("fdopen() failed");
 
   /* Keep last values in case we're called from another context
      where exec/sec stats and such are not readily available. */
@@ -3081,9 +3564,9 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
 		"command_line      : %s\n",
 		start_time / 1000, get_cur_time() / 1000, getpid(),
 		queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
-		queued_paths, queued_favored, queued_discovered, queued_imported,
+		queued_paths[CUR_PROG], queued_favored[CUR_PROG], queued_discovered, queued_imported,
 		max_depth, current_entry, pending_favored, pending_not_fuzzed,
-		queued_variable, stability, bitmap_cvg, unique_crashes,
+		queued_variable[CUR_PROG], stability, bitmap_cvg, unique_crashes,
 		unique_hangs, last_path_time / 1000, last_crash_time / 1000,
 		last_hang_time / 1000, total_execs - last_crash_execs,
 		exec_tmout, use_banner,
@@ -3094,8 +3577,52 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
 			persistent_mode || deferred_mode) ? "" : "default",
 		orig_cmdline);
              /* ignore errors */
+    fprintf(f_delta, "start_time        : %llu\n"
+    "last_update       : %llu\n"
+    "fuzzer_pid        : %u\n"
+    "cycles_done       : %llu\n"
+    "execs_done        : %llu\n"
+    "execs_per_sec     : %0.02f\n"
+    "paths_total       : %u\n"
+    "paths_favored     : %u\n"
+    "paths_found       : %u\n"
+    "paths_imported    : %u\n"
+    "max_depth         : %u\n"
+             "cur_path          : %u\n" /* Must match find_start_position() */
+    "pending_favs      : %u\n"
+    "pending_total     : %u\n"
+    "variable_paths    : %u\n"
+    "stability         : %0.02f%%\n"
+    "bitmap_cvg        : %0.02f%%\n"
+    "unique_crashes    : %llu\n"
+    "unique_hangs      : %llu\n"
+    "last_path         : %llu\n"
+    "last_crash        : %llu\n"
+    "last_hang         : %llu\n"
+    "execs_since_crash : %llu\n"
+    "exec_timeout      : %u\n"
+    "afl_banner        : %s\n"
+    "afl_version       : " VERSION "\n"
+    "target_mode       : %s%s%s%s%s%s%s\n"
+    "command_line      : %s\n",
+    start_time / 1000, get_cur_time() / 1000, getpid(),
+    queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
+    queued_paths[CUR_PROG], queued_favored[CUR_PROG], queued_discovered, queued_imported,
+    max_depth, current_entry, pending_favored, pending_not_fuzzed,
+    queued_variable[CUR_PROG], stability, bitmap_cvg, unique_crashes,
+    unique_hangs, last_path_time / 1000, last_crash_time / 1000,
+    last_hang_time / 1000, total_execs - last_crash_execs,
+    exec_tmout, use_banner,
+    qemu_mode ? "qemu " : "", dumb_mode ? " dumb " : "",
+    no_forkserver ? "no_forksrv " : "", crash_mode ? "crash " : "",
+    persistent_mode ? "persistent " : "", deferred_mode ? "deferred " : "",
+    (qemu_mode || dumb_mode || no_forkserver || crash_mode ||
+      persistent_mode || deferred_mode) ? "" : "default",
+    orig_cmdline);
+             /* ignore errors */
 
 	fclose(f);
+  fclose(f_delta);
 
 }
 
@@ -3107,12 +3634,12 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
 	static u32 prev_qp, prev_pf, prev_pnf, prev_ce, prev_md;
 	static u64 prev_qc, prev_uc, prev_uh;
 
-	if (prev_qp == queued_paths && prev_pf == pending_favored && 
+	if (prev_qp == queued_paths[CUR_PROG] && prev_pf == pending_favored && 
 		prev_pnf == pending_not_fuzzed && prev_ce == current_entry &&
 		prev_qc == queue_cycle && prev_uc == unique_crashes &&
 		prev_uh == unique_hangs && prev_md == max_depth) return;
 
-		prev_qp  = queued_paths;
+		prev_qp  = queued_paths[CUR_PROG];
 	prev_pf  = pending_favored;
 	prev_pnf = pending_not_fuzzed;
 	prev_ce  = current_entry;
@@ -3127,13 +3654,13 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
      favored_not_fuzzed, unique_crashes, unique_hangs, max_depth,
      execs_per_sec */
 
-	fprintf(plot_file, 
+	fprintf(plot_file[CUR_PROG], 
 		"%llu, %llu, %u, %u, %u, %u, %0.02f%%, %llu, %llu, %u, %0.02f\n",
-		get_cur_time() / 1000, queue_cycle - 1, current_entry, queued_paths,
+		get_cur_time() / 1000, queue_cycle - 1, current_entry, queued_paths[CUR_PROG],
 		pending_not_fuzzed, pending_favored, bitmap_cvg, unique_crashes,
           unique_hangs, max_depth, eps); /* ignore errors */
 
-		fflush(plot_file);
+		fflush(plot_file[CUR_PROG]);
 
 	}
 
@@ -3228,7 +3755,7 @@ return res;
 
 static void nuke_resume_dir(void) {
 
-	u8* fn;
+	u8 *fn, *fn_delta;
 
 	fn = alloc_printf("%s/_resume/.state/deterministic_done", out_dir);
 	if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
@@ -3254,6 +3781,33 @@ static void nuke_resume_dir(void) {
 	if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
 	ck_free(fn);
 
+
+  // delta
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+    fn_delta = alloc_printf("%s/_resume/.state/deterministic_done", out_dir_delta[i]);
+    if (delete_files(fn_delta, CASE_PREFIX)) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume/.state/auto_extras", out_dir_delta[i]);
+    if (delete_files(fn_delta, "auto_")) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume/.state/redundant_edges", out_dir_delta[i]);
+    if (delete_files(fn_delta, CASE_PREFIX)) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume/.state/variable_behavior", out_dir_delta[i]);
+    if (delete_files(fn_delta, CASE_PREFIX)) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume/.state", out_dir_delta[i]);
+    if (rmdir(fn_delta) && errno != ENOENT) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+
+    fn_delta = alloc_printf("%s/_resume", out_dir_delta[i]);
+    if (delete_files(fn_delta, CASE_PREFIX)) goto dir_cleanup_failed;
+    ck_free(fn_delta);
+  }
 	return;
 
 	dir_cleanup_failed:
@@ -3268,8 +3822,9 @@ static void nuke_resume_dir(void) {
 
 static void maybe_delete_out_dir(void) {
 
-	FILE* f;
+	FILE* f, *f_delta[numbr_of_progs_under_test];
 	u8 *fn = alloc_printf("%s/fuzzer_stats", out_dir);
+  //u8 *fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[CUR_PROG]);
 
   /* See if the output directory is locked. If yes, bail out. If not,
      create a lock that will persist for the lifetime of the process
@@ -3277,6 +3832,9 @@ static void maybe_delete_out_dir(void) {
 
 	out_dir_fd = open(out_dir, O_RDONLY);
 	if (out_dir_fd < 0) PFATAL("Unable to open '%s'", out_dir);
+
+  out_dirs_fd[CUR_PROG] = open(out_dir_delta[CUR_PROG], O_RDONLY);
+  if (out_dirs_fd[CUR_PROG] < 0) PFATAL("Unable to open '%s'", out_dir_delta[CUR_PROG]);
 
 #ifndef __sun
 
@@ -3291,6 +3849,21 @@ static void maybe_delete_out_dir(void) {
 		FATAL("Directory '%s' is in use", out_dir);
 
 	}
+
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+    if (flock(out_dirs_fd[i], LOCK_EX | LOCK_NB) && errno == EWOULDBLOCK) {
+
+      SAYF("\n" cLRD "[-] " cRST
+        "Looks like the job output directory is being actively used by another\n"
+        "    instance of afl-fuzz. You will need to choose a different %s\n"
+        "    or stop the other process first.\n",
+        sync_id ? "fuzzer ID" : "output location");
+
+      FATAL("Directory '%s' is in use", out_dir_delta[i]);
+
+    }
+  }
+
 
 #endif /* !__sun */
 
@@ -3327,6 +3900,43 @@ static void maybe_delete_out_dir(void) {
 	}
 
 	ck_free(fn);
+
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+    u8 *fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[i]);
+    f_delta[i] = fopen(fn_delta, "r");
+
+    if ( f_delta[i] ) {
+
+      u64 start_time, last_update;
+
+      if (fscanf(f_delta[i], "start_time     : %llu\n"
+        "last_update    : %llu\n", &start_time, &last_update) != 2)
+        FATAL("Malformed data in '%s'", fn_delta);
+
+      fclose( f_delta[i] );
+
+      /* Let's see how much work is at stake. */
+
+      if (!in_place_resume && last_update - start_time > OUTPUT_GRACE * 60) {
+
+        SAYF("\n" cLRD "[-] " cRST
+          "The job output directory already exists and contains the results of more\n"
+          "    than %u minutes worth of fuzzing. To avoid data loss, afl-fuzz will *NOT*\n"
+          "    automatically delete this data for you.\n\n"
+
+          "    If you wish to start a new session, remove or rename the directory manually,\n"
+          "    or specify a different output location for this job. To resume the old\n"
+          "    session, put '-' as the input directory in the command line ('-i -') and\n"
+          "    try again.\n", OUTPUT_GRACE);
+
+        FATAL("At-risk data found in '%s'", out_dir_delta[i]);
+
+      }
+
+    }
+
+    ck_free(fn_delta);
+  }
 
   /* The idea for in-place resume is pretty simple: we temporarily move the old
      queue/ to a new location that gets deleted once import to the new queue/
@@ -3508,15 +4118,285 @@ static void maybe_delete_out_dir(void) {
 
 }
 
+/* Delete fuzzer output directory if we recognize it as ours, if the fuzzer
+   is not currently running, and if the last run time isn't too great. */
+
+static void maybe_delete_specific_out_dir(int i) {
+
+  FILE* f;
+  u8 *fn = alloc_printf("%s/fuzzer_stats", out_dir_delta[i]);
+
+  /* See if the output directory is locked. If yes, bail out. If not,
+     create a lock that will persist for the lifetime of the process
+     (this requires leaving the descriptor open).*/
+
+  out_dirs_fd[i] = open(out_dir_delta[i], O_RDONLY);
+  if (out_dir_fd < 0) PFATAL("Unable to open '%s'", out_dir_delta[i]);
+
+#ifndef __sun
+
+  if (flock(out_dir_fd, LOCK_EX | LOCK_NB) && errno == EWOULDBLOCK) {
+
+    SAYF("\n" cLRD "[-] " cRST
+      "Looks like the job output directory is being actively used by another\n"
+      "    instance of afl-fuzz. You will need to choose a different %s\n"
+      "    or stop the other process first.\n",
+      sync_id ? "fuzzer ID" : "output location");
+
+    FATAL("Directory '%s' is in use", out_dir_delta[i]);
+
+  }
+
+#endif /* !__sun */
+
+  f = fopen(fn, "r");
+
+  if (f) {
+
+    u64 start_time, last_update;
+
+    if (fscanf(f, "start_time     : %llu\n"
+      "last_update    : %llu\n", &start_time, &last_update) != 2)
+      FATAL("Malformed data in '%s'", fn);
+
+    fclose(f);
+
+    /* Let's see how much work is at stake. */
+
+    if (!in_place_resume && last_update - start_time > OUTPUT_GRACE * 60) {
+
+      SAYF("\n" cLRD "[-] " cRST
+        "The job output directory already exists and contains the results of more\n"
+        "    than %u minutes worth of fuzzing. To avoid data loss, afl-fuzz will *NOT*\n"
+        "    automatically delete this data for you.\n\n"
+
+        "    If you wish to start a new session, remove or rename the directory manually,\n"
+        "    or specify a different output location for this job. To resume the old\n"
+        "    session, put '-' as the input directory in the command line ('-i -') and\n"
+        "    try again.\n", OUTPUT_GRACE);
+
+      FATAL("At-risk data found in '%s'", out_dir_delta[i]);
+
+    }
+
+  }
+
+  ck_free(fn);
+
+  /* The idea for in-place resume is pretty simple: we temporarily move the old
+     queue/ to a new location that gets deleted once import to the new queue/
+     is finished. If _resume/ already exists, the current queue/ may be
+     incomplete due to an earlier abort, so we want to use the old _resume/
+     dir instead, and we let rename() fail silently. */
+
+  if (in_place_resume) {
+
+    u8* orig_q = alloc_printf("%s/queue", out_dir_delta[i]);
+
+    in_dir = alloc_printf("%s/_resume", out_dir_delta[i]);
+
+    rename(orig_q, in_dir); /* Ignore errors */
+
+    OKF("Output directory exists, will attempt session resume.");
+
+    ck_free(orig_q);
+
+  } else {
+
+    OKF("Output directory exists but deemed OK to reuse.");
+
+  }
+
+  ACTF("Deleting old session data...");
+
+  /* Okay, let's get the ball rolling! First, we need to get rid of the entries
+     in <out_dir>/.synced/.../id:*, if any are present. */
+
+  if (!in_place_resume) {
+
+    fn = alloc_printf("%s/.synced", out_dir_delta[i]);
+    if (delete_files(fn, NULL)) goto dir_cleanup_failed;
+    ck_free(fn);
+
+  }
+
+  /* Next, we need to clean up <out_dir>/queue/.state/ subdirectories: */
+
+  fn = alloc_printf("%s/queue/.state/deterministic_done", out_dir_delta[i]);
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/queue/.state/auto_extras", out_dir_delta[i]);
+  if (delete_files(fn, "auto_")) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/queue/.state/redundant_edges", out_dir_delta[i]);
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/queue/.state/variable_behavior", out_dir_delta[i]);
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  /* Then, get rid of the .state subdirectory itself (should be empty by now)
+     and everything matching <out_dir>/queue/id:*. */
+
+  fn = alloc_printf("%s/queue/.state", out_dir_delta[i]);
+  if (rmdir(fn) && errno != ENOENT) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/queue", out_dir_delta[i]);
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  /* All right, let's do <out_dir>/crashes/id:* and <out_dir>/hangs/id:*. */
+
+  if (!in_place_resume) {
+
+    fn = alloc_printf("%s/crashes/README.txt", out_dir_delta[i]);
+    unlink(fn); /* Ignore errors */
+    ck_free(fn);
+
+  }
+
+  fn = alloc_printf("%s/crashes", out_dir_delta[i]);
+
+  /* Make backup of the crashes directory if it's not empty and if we're
+     doing in-place resume. */
+
+  if (in_place_resume && rmdir(fn)) {
+
+    time_t cur_t = time(0);
+    struct tm* t = localtime(&cur_t);
+
+#ifndef SIMPLE_FILES
+
+    u8* nfn = alloc_printf("%s.%04u-%02u-%02u-%02u:%02u:%02u", fn,
+      t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+      t->tm_hour, t->tm_min, t->tm_sec);
+
+#else
+
+    u8* nfn = alloc_printf("%s_%04u%02u%02u%02u%02u%02u", fn,
+      t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+      t->tm_hour, t->tm_min, t->tm_sec);
+
+#endif /* ^!SIMPLE_FILES */
+
+    rename(fn, nfn); /* Ignore errors. */
+    ck_free(nfn);
+
+  }
+
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/hangs", out_dir_delta[i]);
+
+  /* Backup hangs, too. */
+
+  if (in_place_resume && rmdir(fn)) {
+
+    time_t cur_t = time(0);
+    struct tm* t = localtime(&cur_t);
+
+#ifndef SIMPLE_FILES
+
+    u8* nfn = alloc_printf("%s.%04u-%02u-%02u-%02u:%02u:%02u", fn,
+      t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+      t->tm_hour, t->tm_min, t->tm_sec);
+
+#else
+
+    u8* nfn = alloc_printf("%s_%04u%02u%02u%02u%02u%02u", fn,
+      t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+      t->tm_hour, t->tm_min, t->tm_sec);
+
+#endif /* ^!SIMPLE_FILES */
+
+    rename(fn, nfn); /* Ignore errors. */
+    ck_free(nfn);
+
+  }
+
+  if (delete_files(fn, CASE_PREFIX)) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  /* And now, for some finishing touches. */
+
+  fn = alloc_printf("%s/.cur_input", out_dir_delta[i]);
+  if (unlink(fn) && errno != ENOENT) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  fn = alloc_printf("%s/fuzz_bitmap", out_dir_delta[i]);
+  if (unlink(fn) && errno != ENOENT) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  if (!in_place_resume) {
+    fn  = alloc_printf("%s/fuzzer_stats", out_dir_delta[i]);
+    if (unlink(fn) && errno != ENOENT) goto dir_cleanup_failed;
+    ck_free(fn);
+  }
+
+  fn = alloc_printf("%s/plot_data", out_dir_delta[i]);
+  if (unlink(fn) && errno != ENOENT) goto dir_cleanup_failed;
+  ck_free(fn);
+
+  OKF("Output dir cleanup successful.");
+
+  /* Wow... is that all? If yes, celebrate! */
+
+  return;
+
+  dir_cleanup_failed:
+
+  SAYF("\n" cLRD "[-] " cRST
+    "Whoops, the fuzzer tried to reuse your output directory, but bumped into\n"
+    "    some files that shouldn't be there or that couldn't be removed - so it\n"
+    "    decided to abort! This happened while processing this path:\n\n"
+
+    "    %s\n\n"
+    "    Please examine and manually delete the files, or specify a different\n"
+    "    output location for the tool.\n", fn);
+
+  FATAL("Output directory cleanup failed");
+
+}
+
+/*Add the elem to the actual dir*/
+
+static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add, u8 to_fuzz){
+
+	//printf("in add_entry to dir\n");
+
+	u8  *fn = malloc(sizeof(u8) * 200 + 1);
+
+	if( !fn ) FATAL("Malloc failed!");
+
+  	u8* fn_tmp = strrchr(q->fname, '/') + 1;
+  	sprintf(fn, "out%d/queue/%s", dir_to_add, fn_tmp);
+  	//printf("\tis going to add fn = %s\n", fn);
+
+  	//printf("before copy_file\n");
+  	copy_file(q->fname, fn);
+  	//printf("after copy_file\n");
+    //add to specific queue
+
+    add_to_queue(fn, q->len, to_fuzz ? 0 : 1, 1);
+    //free(fn);
+    //printf("after adding entry to dir\n");
+
+}
+
 
 /* Perform dry run of all test cases to confirm that the app is working as
    expected. This is done only for the initial inputs, and only once. */
 
 static void perform_dry_run(char** argv) {
 
-  printf("In perform_dry_run\n");
+  //printf("In perform_dry_run\n");
 
-  struct queue_entry* q = queue;
+  struct queue_entry* q = queue[CUR_PROG];
   u32 cal_failures = 0;
   u8* skip_crashes = getenv("AFL_SKIP_CRASHES");
 
@@ -3530,6 +4410,8 @@ static void perform_dry_run(char** argv) {
 
     u8* fn = strrchr(q->fname, '/') + 1;
 
+    //printf("attempting to run with %s\n", fn );
+
     ACTF("Attempting dry run with '%s'...", fn);
 
     fd = open(q->fname, O_RDONLY);
@@ -3542,7 +4424,10 @@ static void perform_dry_run(char** argv) {
 
     close(fd);
 
+    //printf("\tuse_mem = %s\n", use_mem);
+  
    	res = calibrate_case(argv, q, use_mem, 0, 1);
+   	//printf("after calibrate\n");
    	//res = FAULT_TMOUT;
     ck_free(use_mem);
 
@@ -3556,7 +4441,7 @@ static void perform_dry_run(char** argv) {
 
       case FAULT_NONE:
 
-        if (q == queue) check_map_coverage();
+        if (q == queue[CUR_PROG]) check_map_coverage();
 
         if (crash_mode) FATAL("Test case '%s' does *NOT* crash", fn);
 
@@ -3702,15 +4587,15 @@ static void perform_dry_run(char** argv) {
 
   if (cal_failures) {
 
-    if (cal_failures == queued_paths)
+    if (cal_failures == queued_paths[CUR_PROG])
       FATAL("All test cases time out%s, giving up!",
             skip_crashes ? " or crash" : "");
 
     WARNF("Skipped %u test cases (%0.02f%%) due to timeouts%s.", cal_failures,
-          ((double)cal_failures) * 100 / queued_paths,
+          ((double)cal_failures) * 100 / queued_paths[CUR_PROG],
           skip_crashes ? " or crashes" : "");
 
-    if (cal_failures * 5 > queued_paths)
+    if (cal_failures * 5 > queued_paths[CUR_PROG])
       WARNF(cLRD "High percentage of rejected test cases, check settings!");
 
   }
@@ -3853,7 +4738,7 @@ static void show_stats(void) {
 
   sprintf(tmp + banner_pad, "%s " cLCY VERSION cLGN
           " (%s)",  crash_mode ? cPIN "peruvian were-rabbit" : 
-          cYEL "american fuzzy lop", use_banner);
+          cYEL "american fuzzy lop - (delta-fuzzer)", use_banner);
 
   SAYF("\n%s\n\n", tmp);
 
@@ -3902,8 +4787,8 @@ static void show_stats(void) {
        DTD(cur_ms, start_time), tmp, DI(queue_cycle - 1));
 
    SAYF(bV bSTOP "    cur run time : " cRST "%-34s " bSTG bV bSTOP
-       "  cur prog : %s  " bSTG bV "\n",
-       DTD(cur_ms, prog_start_time), cur_prog_title );
+       "  cur prog : %d  " bSTG bV "\n",
+       DTD(cur_ms, prog_start_time), CUR_PROG );
 
   //SAYF(bV bSTOP "   current program : " cRST  "%-34s\n" bSTG bV bSTOP, cur_prog_title);
 
@@ -3931,7 +4816,7 @@ static void show_stats(void) {
   }
 
   SAYF(bSTG bV bSTOP "  total paths : " cRST "%-5s  " bSTG bV "\n",
-       DI(queued_paths));
+       DI(queued_paths[CUR_PROG]));
 
   /* Highlight crashes in red if found, denote going over the KEEP_UNIQUE_CRASH
      limit with a '+' appended to the count. */
@@ -3962,19 +4847,19 @@ static void show_stats(void) {
      put them in a temporary buffer first. */
 
   sprintf(tmp, "%s%s (%0.02f%%)", DI(current_entry),
-          queue_cur->favored ? "" : "*",
-          ((double)current_entry * 100) / queued_paths);
+          queue_cur[CUR_PROG]->favored ? "" : "*",
+          ((double)current_entry * 100) / queued_paths[CUR_PROG]);
 
   SAYF(bV bSTOP "  now processing : " cRST "%-17s " bSTG bV bSTOP, tmp);
 
-  sprintf(tmp, "%0.02f%% / %0.02f%%", ((double)queue_cur->bitmap_size) * 
+  sprintf(tmp, "%0.02f%% / %0.02f%%", ((double)queue_cur[CUR_PROG]->bitmap_size) * 
           100 / MAP_SIZE, t_byte_ratio);
 
   SAYF("    map density : %s%-21s " bSTG bV "\n", t_byte_ratio > 70 ? cLRD : 
        ((t_bytes < 200 && !dumb_mode) ? cPIN : cRST), tmp);
 
   sprintf(tmp, "%s (%0.02f%%)", DI(cur_skipped_paths),
-          ((double)cur_skipped_paths * 100) / queued_paths);
+          ((double)cur_skipped_paths * 100) / queued_paths[CUR_PROG]);
 
   SAYF(bV bSTOP " paths timed out : " cRST "%-17s " bSTG bV, tmp);
 
@@ -3986,8 +4871,8 @@ static void show_stats(void) {
   SAYF(bVR bH bSTOP cCYA " stage progress " bSTG bH20 bX bH bSTOP cCYA
        " findings in depth " bSTG bH20 bVL "\n");
 
-  sprintf(tmp, "%s (%0.02f%%)", DI(queued_favored),
-          ((double)queued_favored) * 100 / queued_paths);
+  sprintf(tmp, "%s (%0.02f%%)", DI(queued_favored[CUR_PROG]),
+          ((double)queued_favored[CUR_PROG]) * 100 / queued_paths[CUR_PROG]);
 
   /* Yeah... it's still going on... halp? */
 
@@ -4008,7 +4893,7 @@ static void show_stats(void) {
   SAYF(bV bSTOP " stage execs : " cRST "%-21s " bSTG bV bSTOP, tmp);
 
   sprintf(tmp, "%s (%0.02f%%)", DI(queued_with_cov),
-          ((double)queued_with_cov) * 100 / queued_paths);
+          ((double)queued_with_cov) * 100 / queued_paths[CUR_PROG]);
 
   SAYF("  new edges on : " cRST "%-22s " bSTG bV "\n", tmp);
 
@@ -4118,7 +5003,7 @@ static void show_stats(void) {
     else strcpy(tmp, "n/a");
 
   SAYF(" stability : %s%-10s " bSTG bV "\n", (stab_ratio < 85 && var_byte_count > 40) 
-       ? cLRD : ((queued_variable && (!persistent_mode || var_byte_count > 20))
+       ? cLRD : ((queued_variable[CUR_PROG] && (!persistent_mode || var_byte_count > 20))
        ? cMGN : cRST), tmp);
 
   if (!bytes_trim_out) {
@@ -4209,7 +5094,7 @@ static void show_stats(void) {
 
 static void show_init_stats(void) {
 
-	struct queue_entry* q = queue;
+	struct queue_entry* q = queue[CUR_PROG];
 	u32 min_bits = 0, max_bits = 0;
 	u64 min_us = 0, max_us = 0;
 	u64 avg_us = 0;
@@ -4255,9 +5140,9 @@ static void show_init_stats(void) {
 		if (useless_at_start && !in_bitmap)
 			WARNF(cLRD "Some test cases look useless. Consider using a smaller set.");
 
-		if (queued_paths > 100)
+		if (queued_paths[CUR_PROG] > 100)
 			WARNF(cLRD "You probably have far too many input files! Consider trimming down.");
-		else if (queued_paths > 20)
+		else if (queued_paths[CUR_PROG] > 20)
 			WARNF("You have lots of input files; try starting small.");
 
 	}
@@ -4267,7 +5152,7 @@ static void show_init_stats(void) {
 		cGRA "    Test case count : " cRST "%u favored, %u variable, %u total\n"
 		cGRA "       Bitmap range : " cRST "%u to %u bits (average: %0.02f bits)\n"
 		cGRA "        Exec timing : " cRST "%s to %s us (average: %s us)\n",
-		queued_favored, queued_variable, queued_paths, min_bits, max_bits, 
+		queued_favored[CUR_PROG], queued_variable[CUR_PROG], queued_paths[CUR_PROG], min_bits, max_bits, 
 		((double)total_bitmap_size) / (total_bitmap_entries ? total_bitmap_entries : 1),
 		DI(min_us), DI(max_us), DI(avg_us));
 
@@ -4502,12 +5387,11 @@ EXP_ST u8 common_fuzz_stuff(char** argv, u8* out_buf, u32 len) {
   }
 
   /* This handles FAULT_ERROR for us: */
-
   queued_discovered += save_if_interesting(argv, out_buf, len, fault);
-
+  //printf("after save_if_interesting in common_stuff\n");
   if (!(stage_cur % stats_update_freq) || stage_cur + 1 == stage_max)
     show_stats();
-
+  //printf("after show stats\n");
   return 0;
 
 }
@@ -4606,35 +5490,10 @@ static u32 calculate_score(struct queue_entry* q) {
 
   }
 
-  // added by fc45701
-  /* Adjust score based on number of known blocks found when compared with total number of blocks*/
-  // TODO -> tenho que melhorar estes valores
-  double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->uni_blcks; // TODO -> meter isto na struct queue maybe?
-  score_mult *= 100;
+  // Did we hit a target
+  if(q->hit_target > 0)
+  	perf_score = perf_score * (q->hit_target % 10);
 
-  //printf("fname = %s\n", queue_cur->fname);
-  //printf("total blocks = %d\n", queue_cur->uni_blcks);
-  //printf("shared blocks = %d\n", queue_cur->shared_blocks);
-  //printf("score_mult = %f\n", score_mult);
-
-  if( score_mult <= 10.0 ){
-  	// performance score should be best
-  	perf_score *= 3;
-  }
-  else if (score_mult <= 33.3){
-  	perf_score *= 2;
-  }
-  else if(score_mult <= 66.6){
-  	perf_score *= 1;
-  }
-  else if(score_mult <= 95.0){
-  	perf_score *= 0.5;
-  }
-  else {
-  	perf_score *= 0.25;
-  	//double score_mult = (double)queue_cur->shared_blocks/(double)queue_cur->uni_blcks;
-  }
-  //perf_score *= (double)queue_cur->uni_blcks/(double)queue_cur->shared_blocks; 
 
 
   /* Final adjustment based on input depth, under the assumption that fuzzing
@@ -4874,7 +5733,7 @@ static u8 fuzz_one(char** argv) {
   /* In IGNORE_FINDS mode, skip any entries that weren't in the
      initial data set. */
 
-  if (queue_cur->depth > 1) return 1;
+  if (queue_cur[CUR_PROG]->depth > 1) return 1;
 
 #else
 
@@ -4891,31 +5750,29 @@ static u8 fuzz_one(char** argv) {
   		// se não, vemos as seeds do ultimo run e vemos se'tem acima de uma dada percentagem
 
   	// verificar que funcionar
-  	// se tivermos um que seja favored
-  	// se não foi fuzzed no programa a ser testado mas já foi fuzzed em algum e não temos blocos nenhuns em comum com o programa a ser testado -> não vale a pena
-  	// TODO -> verificar se já foi fuzzed de todo
-  	// deviamos verificar se eh favored?
-  	if (( !queue_cur->was_fuzzed[CUR_PROG] && queue_cur->been_fuzzed 
-  			&& !num_blocks_shared(queue_cur,CUR_PROG) )){ 
-  		printf("\tFOUND ONE!\n");
-  		return 1;
-  	}
+  	// se não foi fuzzed no programa a ser testado e não temos blocos nenhuns em comum não vale a pena
+  	
+  	//if (( !queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] && queue_cur[CUR_PROG]->been_fuzzed && !num_blocks_shared(queue_cur[CUR_PROG],CUR_PROG) )){ 
+  	//	printf("\tFOUND ONE!\n");
+  	//	return 1;
+  	//}
 	
+    //is_interesting
 
     /* If we have any favored, non-fuzzed new arrivals in the queue,
        possibly skip to them at the expense of already-fuzzed or non-favored
        cases. */
 
-    if ((queue_cur->was_fuzzed[CUR_PROG] || !queue_cur->favored) &&
+    if ((queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || !queue_cur[CUR_PROG]->favored) &&
         UR(100) < SKIP_TO_NEW_PROB) return 1;
 
-  } else if (!dumb_mode && !queue_cur->favored && queued_paths > 10) {
+  } else if (!dumb_mode && !queue_cur[CUR_PROG]->favored && queued_paths[CUR_PROG] > 10) {
 
     /* Otherwise, still possibly skip non-favored cases, albeit less often.
        The odds of skipping stuff are higher for already-fuzzed inputs and
        lower for never-fuzzed entries. */
 
-    if (queue_cycle > 1 && !queue_cur->was_fuzzed[CUR_PROG]) {
+    if (queue_cycle > 1 && !queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG]) {
 
       if (UR(100) < SKIP_NFAV_NEW_PROB) return 1;
 
@@ -4931,21 +5788,21 @@ static u8 fuzz_one(char** argv) {
 
   if (not_on_tty) {
     ACTF("Fuzzing test case #%u (%u total, %llu uniq crashes found)...",
-         current_entry, queued_paths, unique_crashes);
+         current_entry, queued_paths[CUR_PROG], unique_crashes);
     fflush(stdout);
   }
 
   /* Map the test case into memory. */
 
-  fd = open(queue_cur->fname, O_RDONLY);
+  fd = open(queue_cur[CUR_PROG]->fname, O_RDONLY);
 
-  if (fd < 0) PFATAL("Unable to open '%s'", queue_cur->fname);
+  if (fd < 0) PFATAL("Unable to open '%s'", queue_cur[CUR_PROG]->fname);
 
-  len = queue_cur->len;
+  len = queue_cur[CUR_PROG]->len;
 
   orig_in = in_buf = mmap(0, len, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
 
-  if (orig_in == MAP_FAILED) PFATAL("Unable to mmap '%s'", queue_cur->fname);
+  if (orig_in == MAP_FAILED) PFATAL("Unable to mmap '%s'", queue_cur[CUR_PROG]->fname);
 
   close(fd);
 
@@ -4957,19 +5814,19 @@ static u8 fuzz_one(char** argv) {
 
   subseq_tmouts = 0;
 
-  cur_depth = queue_cur->depth;
+  cur_depth = queue_cur[CUR_PROG]->depth;
 
   /*******************************************
    * CALIBRATION (only if failed earlier on) *
    *******************************************/
 
-  if (queue_cur->cal_failed) {
+  if (queue_cur[CUR_PROG]->cal_failed) {
 
     u8 res = FAULT_TMOUT;
 
-    if (queue_cur->cal_failed < CAL_CHANCES) {
+    if (queue_cur[CUR_PROG]->cal_failed < CAL_CHANCES) {
 
-      res = calibrate_case(argv, queue_cur, in_buf, queue_cycle - 1, 0);
+      res = calibrate_case(argv, queue_cur[CUR_PROG], in_buf, queue_cycle - 1, 0);
 
       if (res == FAULT_ERROR)
         FATAL("Unable to execute target application");
@@ -4981,15 +5838,15 @@ static u8 fuzz_one(char** argv) {
       goto abandon_entry;
     }
 
-  }
+  } // end of calibrate
 
   /************
    * TRIMMING *
    ************/
 
-  if (!dumb_mode && !queue_cur->trim_done) {
+  if (!dumb_mode && !queue_cur[CUR_PROG]->trim_done) {
 
-    u8 res = trim_case(argv, queue_cur, in_buf);
+    u8 res = trim_case(argv, queue_cur[CUR_PROG], in_buf);
 
     if (res == FAULT_ERROR)
       FATAL("Unable to execute target application");
@@ -5001,9 +5858,9 @@ static u8 fuzz_one(char** argv) {
 
     /* Don't retry trimming, even if it failed. */
 
-    queue_cur->trim_done = 1;
+    queue_cur[CUR_PROG]->trim_done = 1;
 
-    if (len != queue_cur->len) len = queue_cur->len;
+    if (len != queue_cur[CUR_PROG]->len) len = queue_cur[CUR_PROG]->len;
 
   }
 
@@ -5013,21 +5870,24 @@ static u8 fuzz_one(char** argv) {
    * PERFORMANCE SCORE *
    *********************/
 
-  orig_perf = perf_score = calculate_score(queue_cur);
+  orig_perf = perf_score = calculate_score(queue_cur[CUR_PROG]);
 
   /* Skip right away if -d is given, if we have done deterministic fuzzing on
      this entry ourselves (was_fuzzed), or if it has gone through deterministic
      testing in earlier, resumed runs (passed_det). */
 
-  if (skip_deterministic || queue_cur->was_fuzzed[CUR_PROG] || queue_cur->passed_det)
-    goto havoc_stage;
+   // this big if is kinda cheating -> added by fc45701
+  
+    if (skip_deterministic || queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || queue_cur[CUR_PROG]->passed_det)
+      goto havoc_stage;
 
-  /* Skip deterministic fuzzing if exec path checksum puts this out of scope
-     for this master instance. */
 
-  if (master_max && (queue_cur->exec_cksum % master_max) != master_id - 1)
-    goto havoc_stage;
+    /* Skip deterministic fuzzing if exec path checksum puts this out of scope
+       for this master instance. */
 
+    if (master_max && (queue_cur[CUR_PROG]->exec_cksum % master_max) != master_id - 1)
+      goto havoc_stage;
+  
   doing_det = 1;
 
   // Deterministic
@@ -5050,9 +5910,9 @@ static u8 fuzz_one(char** argv) {
 
   stage_val_type = STAGE_VAL_NONE;
 
-  orig_hit_cnt = queued_paths + unique_crashes;
+  orig_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
-  prev_cksum = queue_cur->exec_cksum;
+  prev_cksum = queue_cur[CUR_PROG]->exec_cksum;
 
   for (stage_cur = 0; stage_cur < stage_max; stage_cur++) {
 
@@ -5061,6 +5921,7 @@ static u8 fuzz_one(char** argv) {
     FLIP_BIT(out_buf, stage_cur);
 
     if (common_fuzz_stuff(argv, out_buf, len)) goto abandon_entry;
+
 
     FLIP_BIT(out_buf, stage_cur);
 
@@ -5122,7 +5983,7 @@ static u8 fuzz_one(char** argv) {
       /* Continue collecting string, but only if the bit flip actually made
          any difference - we don't want no-op tokens. */
 
-      if (cksum != queue_cur->exec_cksum) {
+      if (cksum != queue_cur[CUR_PROG]->exec_cksum) {
 
         if (a_len < MAX_AUTO_EXTRA) a_collect[a_len] = out_buf[stage_cur >> 3];        
         a_len++;
@@ -5133,7 +5994,7 @@ static u8 fuzz_one(char** argv) {
 
   } // end of single bit bit_flip
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP1]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP1] += stage_max;
@@ -5160,7 +6021,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP2]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP2] += stage_max;
@@ -5191,7 +6052,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP4]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP4] += stage_max;
@@ -5251,9 +6112,9 @@ static u8 fuzz_one(char** argv) {
       if (!dumb_mode && len >= EFF_MIN_LEN)
         cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);
       else
-        cksum = ~queue_cur->exec_cksum;
+        cksum = ~queue_cur[CUR_PROG]->exec_cksum;
 
-      if (cksum != queue_cur->exec_cksum) {
+      if (cksum != queue_cur[CUR_PROG]->exec_cksum) {
         eff_map[EFF_APOS(stage_cur)] = 1;
         eff_cnt++;
       }
@@ -5283,7 +6144,7 @@ static u8 fuzz_one(char** argv) {
 
   blocks_eff_total += EFF_ALEN(len);
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP8] += stage_max;
@@ -5320,7 +6181,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP16] += stage_max;
@@ -5356,7 +6217,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_FLIP32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP32] += stage_max;
@@ -5428,7 +6289,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_ARITH8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH8] += stage_max;
@@ -5522,7 +6383,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_ARITH16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH16] += stage_max;
@@ -5614,7 +6475,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_ARITH32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH32] += stage_max;
@@ -5671,7 +6532,7 @@ skip_arith:
 
   } // end of for len
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_INTEREST8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST8] += stage_max;
@@ -5739,7 +6600,7 @@ skip_arith:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_INTEREST16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST16] += stage_max;
@@ -5808,7 +6669,7 @@ skip_arith:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_INTEREST32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST32] += stage_max;
@@ -5874,7 +6735,7 @@ skip_interest:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_EXTRAS_UO]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_UO] += stage_max;
@@ -5923,7 +6784,7 @@ skip_interest:
 
   ck_free(ex_tmp);
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_EXTRAS_UI]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_UI] += stage_max;
@@ -5974,7 +6835,7 @@ skip_user_extras:
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   stage_finds[STAGE_EXTRAS_AO]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_AO] += stage_max;
@@ -5985,7 +6846,7 @@ skip_extras:
      we're properly done with deterministic steps and can mark it as such
      in the .state/ directory. */
 
-  if (!queue_cur->passed_det) mark_as_det_done(queue_cur);
+  if (!queue_cur[CUR_PROG]->passed_det) mark_as_det_done(queue_cur[CUR_PROG]);
 
   /****************
    * RANDOM HAVOC *
@@ -6022,9 +6883,9 @@ havoc_stage:
 
   temp_len = len;
 
-  orig_hit_cnt = queued_paths + unique_crashes;
+  orig_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
-  havoc_queued = queued_paths;
+  havoc_queued = queued_paths[CUR_PROG];
 
   /* We essentially just do several thousand runs (depending on perf_score)
      where we take the input file and make random stacked tweaks. */
@@ -6422,20 +7283,20 @@ havoc_stage:
     /* If we're finding new stuff, let's run for a bit longer, limits
        permitting. */
 
-    if (queued_paths != havoc_queued) {
+    if (queued_paths[CUR_PROG] != havoc_queued) {
 
       if (perf_score <= HAVOC_MAX_MULT * 100) {
         stage_max  *= 2;
         perf_score *= 2;
       }
 
-      havoc_queued = queued_paths;
+      havoc_queued = queued_paths[CUR_PROG];
 
     }
 
   }
 
-  new_hit_cnt = queued_paths + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
 
   if (!splice_cycle) {
     stage_finds[STAGE_HAVOC]  += new_hit_cnt - orig_hit_cnt;
@@ -6459,7 +7320,7 @@ havoc_stage:
 retry_splicing:
 
   if (use_splicing && splice_cycle++ < SPLICE_CYCLES &&
-      queued_paths > 1 && queue_cur->len > 1) {
+      queued_paths[CUR_PROG] > 1 && queue_cur[CUR_PROG]->len > 1) {
 
     struct queue_entry* target;
     u32 tid, split_at;
@@ -6469,25 +7330,31 @@ retry_splicing:
     /* First of all, if we've modified in_buf for havoc, let's clean that
        up... */
 
+    
+
     if (in_buf != orig_in) {
       ck_free(in_buf);
       in_buf = orig_in;
-      len = queue_cur->len;
+      len = queue_cur[CUR_PROG]->len;
     }
-
+    
     /* Pick a random queue entry and seek to it. Don't splice with yourself. */
-
-    do { tid = UR(queued_paths); } while (tid == current_entry);
+    // O erro está aqui, tenho de ter um personalizado para cada queue
+    do { tid = UR(queued_paths[CUR_PROG]); } while (tid == current_entry);
 
     splicing_with = tid;
-    target = queue;
-
-    while (tid >= 100) { target = target->next_100; tid -= 100; }
-    while (tid--) target = target->next;
-
+    target = queue[CUR_PROG];
+    
+    while (tid >= 100) { target = target->next_100; tid -= 100; }  
+    while (tid--){ 
+      //if(target ) printf("not null\n");
+      if(!target) FATAL("target is null with tid = %d", tid);
+      target = target->next;
+    }
+  
     /* Make sure that the target has a reasonable length. */
 
-    while (target && (target->len < 2 || target == queue_cur)) {
+    while (target && (target->len < 2 || target == queue_cur[CUR_PROG])) {
       target = target->next;
       splicing_with++;
     }
@@ -6546,14 +7413,14 @@ abandon_entry:
   /* Update pending_not_fuzzed count if we made it through the calibration
      cycle and have not seen this entry before. */
 
-  if (!stop_soon && !queue_cur->cal_failed && !queue_cur->was_fuzzed[CUR_PROG]) {
-    queue_cur->was_fuzzed[CUR_PROG] = 1;
-    queue_cur->been_fuzzed = 1;
+  if (!stop_soon && !queue_cur[CUR_PROG]->cal_failed && !queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG]) {
+    queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] = 1;
+    queue_cur[CUR_PROG]->been_fuzzed = 1;
     pending_not_fuzzed--;
-    if (queue_cur->favored) pending_favored--;
+    if (queue_cur[CUR_PROG]->favored) pending_favored--;
   }
 
-  munmap(orig_in, queue_cur->len);
+  munmap(orig_in, queue_cur[CUR_PROG]->len);
 
   if (in_buf != orig_in) ck_free(in_buf);
   ck_free(out_buf);
@@ -6565,6 +7432,144 @@ abandon_entry:
 
 }
 
+/* Grab interesting test cases from other fuzzers. */
+
+static void sync_fuzzers(char** argv) {
+
+  DIR* sd;
+  struct dirent* sd_ent;
+  u32 sync_cnt = 0;
+
+  sd = opendir(sync_dir);
+  if (!sd) PFATAL("Unable to open '%s'", sync_dir);
+
+  stage_max = stage_cur = 0;
+  cur_depth = 0;
+
+  /* Look at the entries created for every other fuzzer in the sync directory. */
+
+  while ((sd_ent = readdir(sd))) {
+
+    static u8 stage_tmp[128];
+
+    DIR* qd;
+    struct dirent* qd_ent;
+    u8 *qd_path, *qd_synced_path;
+    u32 min_accept = 0, next_min_accept;
+
+    s32 id_fd;
+
+    /* Skip dot files and our own output directory. */
+
+    if (sd_ent->d_name[0] == '.' || !strcmp(sync_id, sd_ent->d_name)) continue;
+
+    /* Skip anything that doesn't have a queue/ subdirectory. */
+
+    qd_path = alloc_printf("%s/%s/queue", sync_dir, sd_ent->d_name);
+
+    if (!(qd = opendir(qd_path))) {
+      ck_free(qd_path);
+      continue;
+    }
+
+    /* Retrieve the ID of the last seen test case. */
+
+    qd_synced_path = alloc_printf("%s/.synced/%s", out_dir, sd_ent->d_name);
+
+    id_fd = open(qd_synced_path, O_RDWR | O_CREAT, 0600);
+
+    if (id_fd < 0) PFATAL("Unable to create '%s'", qd_synced_path);
+
+    if (read(id_fd, &min_accept, sizeof(u32)) > 0) 
+      lseek(id_fd, 0, SEEK_SET);
+
+    next_min_accept = min_accept;
+
+    /* Show stats */    
+
+    sprintf(stage_tmp, "sync %u", ++sync_cnt);
+    stage_name = stage_tmp;
+    stage_cur  = 0;
+    stage_max  = 0;
+
+    /* For every file queued by this fuzzer, parse ID and see if we have looked at
+       it before; exec a test case if not. */
+
+    while ((qd_ent = readdir(qd))) {
+
+      u8* path;
+      s32 fd;
+      struct stat st;
+
+      if (qd_ent->d_name[0] == '.' ||
+          sscanf(qd_ent->d_name, CASE_PREFIX "%06u", &syncing_case) != 1 || 
+          syncing_case < min_accept) continue;
+
+      /* OK, sounds like a new one. Let's give it a try. */
+
+      if (syncing_case >= next_min_accept)
+        next_min_accept = syncing_case + 1;
+
+      path = alloc_printf("%s/%s", qd_path, qd_ent->d_name);
+
+      /* Allow this to fail in case the other fuzzer is resuming or so... */
+
+      fd = open(path, O_RDONLY);
+
+      if (fd < 0) {
+         ck_free(path);
+         continue;
+      }
+
+      if (fstat(fd, &st)) PFATAL("fstat() failed");
+
+      /* Ignore zero-sized or oversized files. */
+
+      if (st.st_size && st.st_size <= MAX_FILE) {
+
+        u8  fault;
+        u8* mem = mmap(0, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+
+        if (mem == MAP_FAILED) PFATAL("Unable to mmap '%s'", path);
+
+        /* See what happens. We rely on save_if_interesting() to catch major
+           errors and save the test case. */
+
+        write_to_testcase(mem, st.st_size);
+
+        fault = run_target(exec_tmout);
+
+        if (stop_soon) return;
+
+        syncing_party = sd_ent->d_name;
+        queued_imported += save_if_interesting(argv, mem, st.st_size, fault);
+        syncing_party = 0;
+
+        munmap(mem, st.st_size);
+
+        if (!(stage_cur++ % stats_update_freq)) show_stats();
+
+      }
+
+      ck_free(path);
+      close(fd);
+
+    }
+
+    ck_write(id_fd, &next_min_accept, sizeof(u32), qd_synced_path);
+
+    close(id_fd);
+    closedir(qd);
+    ck_free(qd_path);
+    ck_free(qd_synced_path);
+    
+  }  
+
+  closedir(sd);
+
+}
+
+
 /* Handle stop signal (Ctrl-C, etc). */
 
 static void handle_stop_sig(int sig) {
@@ -6572,10 +7577,10 @@ static void handle_stop_sig(int sig) {
 	stop_soon = 1; 
 
 	if (child_pid > 0) kill(child_pid, SIGKILL);
-	//todo need to pass through all of them
+
 	for( int i = 0; i < numbr_of_progs_under_test; i++){
-		if (forksrv_pid[i] > 0) kill(forksrv_pid[i], SIGKILL);
-	}
+		if (forksrv_pid[i] >= 0) kill(forksrv_pid[i], SIGKILL);
+	} 
 
 }
 
@@ -6628,6 +7633,7 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 
 		*path = ck_strdup(fname);
 
+		//printf("path = %s\n", *path);
 
 		if (stat(*path, &st) || !S_ISREG(st.st_mode) ||
 			!(st.st_mode & 0111) || (f_len = st.st_size) < 4)
@@ -6638,6 +7644,8 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 		while (env_path) {
 
 			u8 *cur_elem, *delim = strchr(env_path, ':');
+
+			printf("cur_elem = %s\n", cur_elem);
 
 			if (delim) {
 
@@ -6714,7 +7722,7 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 
 #endif /* ^!__APPLE__ */
 
-	if ( !memmem(f_data, f_len, SHM_ENV_VAR, strlen(SHM_ENV_VAR) + 1)) {
+	if ( !memmem(f_data, f_len, SHM_ENV_VAR, strlen(SHM_ENV_VAR) + 1) ) {
 
 		SAYF("\n" cLRD "[-] " cRST
 			"Looks like the target binary is not instrumented! The fuzzer depends on\n"
@@ -6741,59 +7749,127 @@ EXP_ST void check_binary(u8* fname, u8** path) {
 }
 
 /**
-* Get the list of blocks for all programs
+* Get the list of blocks availabe in all programs
 * Used once in the beginning
-*TODO
+*TODO -> working but will probably be improved
 **/
 
 static void getProgsBlockList(){
 
-	//shostatic rt PROG_BLOCKS[numbr_of_progs_under_test][MAP_SIZE]; // TODO -> preciso de meter isto global ou devolver e pronto
-	char *line = NULL, *block = NULL;
-	size_t len = 0;
-	int prog = 0;
-	FILE *fblocks;
-	fblocks = fopen("./progs_blocks.txt","r");
+  	char *line = NULL;
+  	size_t len = 0;
 
-	if( fblocks == NULL ){
-		// no list of blocks
-		FATAL("No blocks list found");
-	}
-	while ( getline(&line, &len, fblocks) != -1 ){
-		block = strtok(line," ");
+  	char cwd[1000];
+  	if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't get path to dir!");
+  	
+  	for(int prog = 0; prog < numbr_of_progs_under_test; prog++){
+	  	char *path_instr = malloc (sizeof(char) * 250 + 1);
+	  	sprintf(path_instr, "%s_blocks.txt", prog_names[prog]);
 
-		// Get the blocks from the file
-		while ( block != NULL ){
-			unsigned short block_id = atoi(block);
-			//printf("block = %s\n", block);
- 			PROG_BLOCKS[prog][block_id] = 1;
-			block = strtok(NULL," ");
+	  	FILE *fblocks;
+		//fblocks = fopen("./progs_blocks.txt","r");
+	  	fblocks = fopen(path_instr,"r");
+
+
+		if( fblocks == NULL ){
+			// no list of blocks
+			FATAL("No blocks list found with name %s", path_instr);
 		}
-
-		prog ++;
+		
+		free(path_instr);
+		while ( getline(&line, &len, fblocks) != -1 ){
+			//printf("beggin\n");
+	    	unsigned short block_id = atoi(line);
+	    	PROG_BLOCKS[prog][block_id] = 1;
+	    	//printf("block_id = %d\n", block_id);
+		}
+		if(fblocks)	fclose(fblocks);
 	}
 
 	if( line ) free(line);
 
-	fclose(fblocks);
+	
 }
 
 /**
 * Start all forkserver in the program and check their binary
 **/
 static void init_all_forkservers(char **argv){
-	int index = optind, prog = 0;
 
-	while (*(argv + index)){
-	  	printf("%s\n", (*(argv + index)));
-	  	check_binary(*(argv + index), &(target_path[prog]));
-	 	
-	  	init_forkserver_special(argv, &target_path[prog], &forksrv_pid[prog], prog, FORKSRV_FD + (prog * 2));
-	  	index ++;
-	  	prog ++;
+	int index = optind - 1, prog = -1, i = 0;
+  	short size = 25;
+  	char **prog_args = malloc(sizeof(char*) * size); 
+  	u8 is_recording = 0;
+
+	//printf("Enters init_all_forkservers!!!\n");
+  
+  
+	while( *(argv + index) ){
+	    //printf("argv = %s\n", *(argv + index));
+		  	//printf("%s\n", (*(argv + index)));
+	     
+
+	      // if it's a new program
+	    if(strcmp(*(argv + index), "-p") == 0){
+	          
+	        // found a new -p
+	        if( is_recording ){
+	          //printf("prog title = %s\n", prog_args[0]);
+	          //printf("prog num = %d\n", prog);
+	          check_binary(prog_args[0], &(target_path[prog]));
+
+	          init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
+	          	 prog, FORKSRV_FD + (prog * 2));
+	          //prog_args = malloc(sizeof(char*) * size);
+	          i = 0;
+            //printf("after init\n");
+	        }
+	        //printf("did not enter \n");
+          //printf("outside if init\n");
+	        //prog_args = malloc(sizeof(char*) * size); // reset
+	        is_recording = 1;
+
+	           // printf("prog = %s\n", prog_args[0]);
+	           
+	      //printf("leaves init_forkserver_special\n");
+	        prog ++;
+	        index++;
+	        continue;
+	    }
+	    
+	      
+	      //if(!prog_args) prog_args = malloc(sizeof(char*) * size);
+	    if( !prog_args) FATAL("Programs must have -p behind them!");
+
+	    *(prog_args + i) = *(argv + index);
+	      //printf("%s\n", (prog_args + i));
+
+	      i++;
+		  index ++;
 	}
-	getProgsBlockList();
+
+  // initiate the last one
+  if(is_recording){
+    //printf("\tlast one\n");
+  	//printf("prog title = %s\n", prog_args[0]);
+    //printf("prog num = %d\n", prog);
+    check_binary(prog_args[0], &(target_path[prog]));
+    init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
+      	prog, FORKSRV_FD + (prog * 2));
+  }
+  /*
+  i = 0;
+  while( *(prog_args + i) ){
+  	free( *(prog_args + i) );
+  	i++;
+  }
+  */
+  free(prog_args);
+
+
+  getProgsBlockList();
 }
+
 
 /* Trim and possibly create a banner for the run. */
 
@@ -6823,6 +7899,8 @@ static void fix_up_banner(u8* name) {
   }
 
 }
+
+
 
 /* Check terminal dimensions after resize. */
 
@@ -6890,6 +7968,8 @@ EXP_ST void setup_dirs_fds(void) {
 
 	if (sync_id && mkdir(sync_dir, 0700) && errno != EEXIST)
 		PFATAL("Unable to create '%s'", sync_dir);
+
+  //for(int i = 0; i < numbr_of_progs_under_test; i++){}
 
 	if (mkdir(out_dir, 0700)) {
 
@@ -6991,13 +8071,139 @@ EXP_ST void setup_dirs_fds(void) {
 	if (fd < 0) PFATAL("Unable to create '%s'", tmp);
 	ck_free(tmp);
 
-	plot_file = fdopen(fd, "w");
-	if (!plot_file) PFATAL("fdopen() failed");
+	plot_file[CUR_PROG] = fdopen(fd, "w");
+	if (!plot_file[CUR_PROG]) PFATAL("fdopen() failed");
 
-	fprintf(plot_file, "# unix_time, cycles_done, cur_path, paths_total, "
+	fprintf(plot_file[CUR_PROG], "# unix_time, cycles_done, cur_path, paths_total, "
 		"pending_total, pending_favs, map_size, unique_crashes, "
 		"unique_hangs, max_depth, execs_per_sec\n");
                      /* ignore errors */
+
+}
+
+/* Prepare all output directories and fds. */
+
+EXP_ST void setup_all_dirs_fds(void) {
+
+  u8* tmp;
+  s32 fd;
+
+  ACTF("Setting up output directories...");
+
+  if (sync_id && mkdir(sync_dir, 0700) && errno != EEXIST)
+    PFATAL("Unable to create '%s'", sync_dir);
+  //printf("out_dir = %s\n", out_dir);
+
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+
+    if (mkdir(out_dir_delta[i], 0700)) {
+
+      if (errno != EEXIST) PFATAL("Unable to create '%s'", out_dir_delta[i]);
+
+      maybe_delete_specific_out_dir(i);
+
+    } else {
+
+      if (in_place_resume)
+        FATAL("Resume attempted but old output directory not found");
+
+      out_dirs_fd[i] = open(out_dir_delta[i], O_RDONLY);
+
+  #ifndef __sun
+
+      if (out_dirs_fd[i] < 0 || flock(out_dirs_fd[i], LOCK_EX | LOCK_NB))
+        PFATAL("Unable to flock() output directory.");
+
+  #endif /* !__sun */
+
+    }
+
+    /* Queue directory for any starting & discovered paths. */
+
+    tmp = alloc_printf("%s/queue", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Top-level directory for queue metadata used for session
+       resume and related tasks. */
+
+    tmp = alloc_printf("%s/queue/.state/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Directory for flagging queue entries that went through
+       deterministic fuzzing in the past. */
+
+    tmp = alloc_printf("%s/queue/.state/deterministic_done/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Directory with the auto-selected dictionary entries. */
+
+    tmp = alloc_printf("%s/queue/.state/auto_extras/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* The set of paths currently deemed redundant. */
+
+    tmp = alloc_printf("%s/queue/.state/redundant_edges/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* The set of paths showing variable behavior. */
+
+    tmp = alloc_printf("%s/queue/.state/variable_behavior/", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Sync directory for keeping track of cooperating fuzzers. */
+
+    if (sync_id) {
+
+      tmp = alloc_printf("%s/.synced/", out_dir_delta[i]);
+
+      if (mkdir(tmp, 0700) && (!in_place_resume || errno != EEXIST))
+        PFATAL("Unable to create '%s'", tmp);
+
+      ck_free(tmp);
+
+    }
+
+    /* All recorded crashes. */
+
+    tmp = alloc_printf("%s/crashes", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* All recorded hangs. */
+
+    tmp = alloc_printf("%s/hangs", out_dir_delta[i]);
+    if (mkdir(tmp, 0700)) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    /* Generally useful file descriptors. */
+
+    dev_null_fd = open("/dev/null", O_RDWR);
+    if (dev_null_fd < 0) PFATAL("Unable to open /dev/null");
+
+    dev_urandom_fd = open("/dev/urandom", O_RDONLY);
+    if (dev_urandom_fd < 0) PFATAL("Unable to open /dev/urandom");
+
+    /* Gnuplot output file. */
+
+    tmp = alloc_printf("%s/plot_data", out_dir_delta[i]);
+    fd = open(tmp, O_WRONLY | O_CREAT | O_EXCL, 0600);
+    if (fd < 0) PFATAL("Unable to create '%s'", tmp);
+    ck_free(tmp);
+
+    plot_file[i] = fdopen(fd, "w");
+    if (!plot_file[i]) PFATAL("fdopen() failed");
+
+    fprintf(plot_file[i], "# unix_time, cycles_done, cur_path, paths_total, "
+      "pending_total, pending_favs, map_size, unique_crashes, "
+      "unique_hangs, max_depth, execs_per_sec\n");
+                       /* ignore errors */
+  }
 
 }
 
@@ -7006,17 +8212,18 @@ EXP_ST void setup_dirs_fds(void) {
 
 EXP_ST void setup_stdio_file(void) {
 
-	printf("\t-> in setup_stdio_file out_dir -> %s\n", out_dir);
+	//printf("\t-> in setup_stdio_file out_dir -> %s\n", out_dir);
+	if( !out_file ){
+		u8* fn = alloc_printf("%s/.cur_input", out_dir);
 
-	u8* fn = alloc_printf("%s/.cur_input", out_dir);
+	  unlink(fn); /* Ignore errors */
 
-  unlink(fn); /* Ignore errors */
+		out_fd = open(fn, O_RDWR | O_CREAT | O_EXCL, 0600);
 
-	out_fd = open(fn, O_RDWR | O_CREAT | O_EXCL, 0600);
+		if (out_fd < 0) PFATAL("Unable to create '%s'", fn);
 
-	if (out_fd < 0) PFATAL("Unable to create '%s'", fn);
-
-	ck_free(fn);
+		ck_free(fn);
+	}
 
 }
 
@@ -7308,13 +8515,14 @@ static void check_asan_opts(void) {
 } 
 
 /* Detect @@ in args. */
-// TODO -> will we allow this? If so we need to allow it for every file or only specific ones?
-EXP_ST void detect_file_args(char** argv) {
+/* Marks where the file must go*/
+
+EXP_ST void detect_file_args(char** argv, int prog) {
 
   u32 i = 0;
-  u8* cwd = getcwd(NULL, 0);
+  u8* cwd2 = getcwd(NULL, 0);
 
-  if (!cwd) PFATAL("getcwd() failed");
+  if (!cwd2) PFATAL("getcwd() failed");
 
   while (argv[i]) {
 
@@ -7329,10 +8537,16 @@ EXP_ST void detect_file_args(char** argv) {
       if (!out_file)
         out_file = alloc_printf("%s/.cur_input", out_dir);
 
+      //if ( !out_file_delta[prog] )
+      //  out_file_delta[prog] = alloc_printf("%s/.cur_input", out_dir_delta[prog]);
+
       /* Be sure that we're always using fully-qualified paths. */
 
       if (out_file[0] == '/') aa_subst = out_file;
-      else aa_subst = alloc_printf("%s/%s", cwd, out_file);
+      else aa_subst = alloc_printf("%s/%s", cwd2, out_file);
+
+      //if (out_file_delta[prog][0] == '/') aa_subst = out_file_delta[prog];
+      //else aa_subst = alloc_printf("%s/%s", cwd2, out_file_delta[prog]);
 
       /* Construct a replacement argv value. */
 
@@ -7342,14 +8556,67 @@ EXP_ST void detect_file_args(char** argv) {
       *aa_loc = '@';
 
       if (out_file[0] != '/') ck_free(aa_subst);
+      //if ( out_file_delta[prog][0] != '/' && aa_subst ) ck_free(aa_subst);
 
-    }
+    } // end of if found @@
 
     i++;
 
   }
 
-  free(cwd); /* not tracked */
+  free(cwd2); /* not tracked */
+
+}
+
+/* Detect @@ in args. */
+/* Marks where the file must go*/
+
+EXP_ST void detect_file_args_delta(char** argv, int prog) {
+
+  u32 i = 0;
+  u8* cwd2 = getcwd(NULL, 0);
+
+  u8 *change;
+
+  if (!cwd2) PFATAL("getcwd() failed");
+
+  while ( argv[i] ) {
+
+    u8* aa_loc = strstr(argv[i], "@@");
+
+    if (aa_loc) {
+
+      printf("prog %d has @@\n", prog);
+
+      u8 *aa_subst, *n_arg;
+
+      /* If we don't have a file name chosen yet, use a safe default. */
+
+      
+      change = alloc_printf("%s/.cur_input", out_dir_delta[prog]);
+
+      /* Be sure that we're always using fully-qualified paths. */
+
+      if (change[0] == '/') aa_subst = change;
+      else aa_subst = alloc_printf("%s/%s", cwd2, change );
+
+      /* Construct a replacement argv value. */
+
+      *aa_loc = 0;
+      n_arg = alloc_printf("%s%s%s", argv[i], aa_subst, aa_loc + 2);
+      argv[i] = n_arg;
+      *aa_loc = '@';
+
+      //if (out_file[0] != '/') ck_free(aa_subst);
+      if ( change[0] != '/' && aa_subst ) ck_free(aa_subst);
+
+    } // end of if found @@
+
+    i++;
+
+  }
+
+  free(cwd2); /* not tracked */
 
 }
 
@@ -7397,6 +8664,78 @@ EXP_ST void setup_signal_handlers(void) {
 
 }
 
+/* Rewrite argv for QEMU. */
+
+static char** get_qemu_argv(u8* own_loc, char** argv, int argc) {
+
+  char** new_argv = ck_alloc(sizeof(char*) * (argc + 4));
+  u8 *tmp, *cp, *rsl, *own_copy;
+
+  /* Workaround for a QEMU stability glitch. */
+
+  setenv("QEMU_LOG", "nochain", 1);
+
+  memcpy(new_argv + 3, argv + 1, sizeof(char*) * argc);
+
+  new_argv[2] = target_path[CUR_PROG];
+  new_argv[1] = "--";
+
+  /* Now we need to actually find the QEMU binary to put in argv[0]. */
+
+  tmp = getenv("AFL_PATH");
+
+  if (tmp) {
+
+    cp = alloc_printf("%s/afl-qemu-trace", tmp);
+
+    if (access(cp, X_OK))
+      FATAL("Unable to find '%s'", tmp);
+
+    target_path[CUR_PROG] = new_argv[0] = cp;
+    return new_argv;
+
+  }
+
+  own_copy = ck_strdup(own_loc);
+  rsl = strrchr(own_copy, '/');
+
+  if (rsl) {
+
+    *rsl = 0;
+
+    cp = alloc_printf("%s/afl-qemu-trace", own_copy);
+    ck_free(own_copy);
+
+    if (!access(cp, X_OK)) {
+
+      target_path[CUR_PROG] = new_argv[0] = cp;
+      return new_argv;
+
+    }
+
+  } else ck_free(own_copy);
+
+  if (!access(BIN_PATH "/afl-qemu-trace", X_OK)) {
+
+    target_path[CUR_PROG] = new_argv[0] = ck_strdup(BIN_PATH "/afl-qemu-trace");
+    return new_argv;
+
+  }
+
+  SAYF("\n" cLRD "[-] " cRST
+       "Oops, unable to find the 'afl-qemu-trace' binary. The binary must be built\n"
+       "    separately by following the instructions in qemu_mode/README.qemu. If you\n"
+       "    already have the binary installed, you may need to specify AFL_PATH in the\n"
+       "    environment.\n\n"
+
+       "    Of course, even without QEMU, afl-fuzz can still work with binaries that are\n"
+       "    instrumented at compile time with afl-gcc. It is also possible to use it as a\n"
+       "    traditional \"dumb\" fuzzer by specifying '-n' in the command line.\n");
+
+  FATAL("Failed to locate 'afl-qemu-trace'.");
+
+}
+
 /* Make a copy of the current command line. */
 
 static void save_cmdline(u32 argc, char** argv) {
@@ -7426,26 +8765,127 @@ static void save_cmdline(u32 argc, char** argv) {
 
 #ifndef AFL_LIB
 
+
+static void save_entry_in_prog_if_interesting(struct queue_entry *q, char **argv){
+
+	s32 fd, len;
+	u8 *mem;
+	u8  hnb, fault;
+
+  	fd = open(q->fname, O_RDONLY);
+  	if (fd < 0) PFATAL("Unable to open '%s'", q->fname);
+
+  	len = q->len;
+
+  	memset(trace_bits, 0, MAP_SIZE); // make sure trace_bits are clear
+
+	mem = ck_alloc_nozero(len);
+	if ( read(fd, mem, len) != len ) 
+    	FATAL("Short read from '%s'", q->fname);
+    //if (mem == MAP_FAILED) PFATAL("Unable to mmap '%s'", q->fname);
+
+    write_to_testcase(mem, len);
+	fault = run_target(exec_tmout);
+
+	
+	if ( !(hnb = has_new_bits(virgin_bits[CUR_PROG])) ) {
+      if (crash_mode) total_crashes++;
+      //not interesting, do something
+    }
+    else{
+    	add_entry_to_dir(q,CUR_PROG, 1);
+    }
+
+    // TODO
+    switch (fault) {
+    	case FAULT_TMOUT:
+    		break;
+    }
+
+    close(fd);
+    //printf("after close fd\n");
+    memset(trace_bits, 0, MAP_SIZE);
+    ck_free(mem);
+    //free(in_buf);
+}
+
+/*
+  Called when the program is supposed to be changed
+  If it is: change it, and check if any interesting test was done previouslydoes what needs to be done
+*/
+
+void on_prog_change(char **argv){
+
+
+  if (numbr_of_progs_under_test < 2 ) return; // no prog to switch to? Do nothing!
+
+  u8 old = CUR_PROG;
+  //change the program we are fuzzing
+  CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test;
+  
+  struct queue_entry *q = queue[old];
+  		 //*q_o = queue[old],
+  		 //*q_n = queue[CUR_PROG];
+
+  test_bool = 1;
+  	
+  while(q){	
+ 
+  	if( !q->has_been_run ){
+  	  //printf( " first time running %s\n", q->fname );
+      //add_entry_to_dir(q,CUR_PROG, 0);
+  	  save_entry_in_prog_if_interesting(q, argv);
+    }
+
+    q->has_been_run=1; // mark the queue elem as seen    
+    q=q->next;
+
+  }
+  //sleep(4);
+}
+
 /* Main entry point */
 
 int main(int argc, char** argv) {
-
-	printf("\nMain entry point of AFL FUzz\n");
 
 	s32 opt;
 	u8  mem_limit_given = 0;
 	u64 prev_queued = 0;
   	u32 sync_interval_cnt = 0, seek_to;
+  	u8  *extras_dir = 0;
   	u8  exit_1 = !!getenv("AFL_BENCH_JUST_ONE");
-	char** use_argv;
-
-	int path_index = 0;
+	char **use_argv;
+	//char ***p_args = malloc( sizeof(char **) * MAX_AMOUNT_OF_PROGS );
 	//SAYF(cCYA "afl-fuzz " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
 
 	doc_path = access(DOC_PATH, F_OK) ? "docs" : DOC_PATH;
 
+  	// pass through every arg and get the number of programs and their names
+  	
+    int index = 0;
+    //prog_args[]
+    int arg_index = 0;
+  	while( *(argv + index) ){
+  		//printf("arg = %s\n", *(argv + index));
+      	if(strcmp(*(argv + index), "-p") == 0){
+        	prog_names[numbr_of_progs_under_test] = *(argv + index + 1);
 
-	while ((opt = getopt(argc, argv, "+i:o:q:m:")) > 0){
+        	prog_args[numbr_of_progs_under_test] = malloc( sizeof(char*) * 100 );
+        	numbr_of_progs_under_test ++;
+        	arg_index = -1;
+      	}
+      	else if(numbr_of_progs_under_test > 0){
+      		//p_args[numbr_of_progs_under_test - 1][arg_index] = *(argv + index);
+      		if(arg_index >= 0)*(prog_args[numbr_of_progs_under_test - 1] + arg_index) = *(argv + index);
+      		arg_index ++;
+      	}
+      	
+    	index ++;
+  	}
+
+  	if(numbr_of_progs_under_test > MAX_AMOUNT_OF_PROGS) FATAL("Number of progs under test exceed the max amount of %d", MAX_AMOUNT_OF_PROGS);
+
+	while ((opt = getopt(argc, argv, "+i:o:q:m:p")) > 0){
 
 		switch (opt) {
 
@@ -7460,6 +8900,7 @@ int main(int argc, char** argv) {
 
   			if (out_dir) FATAL("Multiple -o options not supported");
   			out_dir = optarg;
+        
   			break;
 
     case 'q': 
@@ -7467,7 +8908,8 @@ int main(int argc, char** argv) {
       // receive the value in minutes
       switch_program_timer = 1000 * 60 * atoi(optarg);
       break;
-	 
+	 case 'p':
+    break;
     case 'm': { /* mem limit */
 
 			u8 suffix = 'M';
@@ -7509,13 +8951,17 @@ int main(int argc, char** argv) {
 
 		}
 	}
+
+  //printf("progs = %d\n", numbr_of_progs_under_test);
+
   //printf("optind = %d\n", optind);
   //printf("argc = %d\n", argc);
   if ( optind == argc || !in_dir || !out_dir ){ printf("here in this option of ours\n");usage(argv[0]);}
 
-  numbr_of_progs_under_test = argc - optind;
-
-  //numbr_of_progs_under_test = getenv(FORKSRV_AMOUNT_ENV) == NULL ? 1 : getenv(FORKSRV_AMOUNT_ENV); // get number of programs under test
+  for(int i = 0; i < numbr_of_progs_under_test; i++ ){
+    out_dir_delta[i] = malloc(sizeof(char) * 40 + 1);
+    sprintf(out_dir_delta[i], "%s%d", out_dir, i);
+  }
 
   setup_signal_handlers(); // not needed to execture the forkserver, but might as well have it
   check_asan_opts();
@@ -7528,26 +8974,37 @@ int main(int argc, char** argv) {
 
   get_core_count(); // -> not needed, but might as well have it
 
+  #ifdef HAVE_AFFINITY
+    bind_to_free_cpu();
+  #endif /* HAVE_AFFINITY */
+
   check_crash_handling();
   check_cpu_governor();
 
   setup_post();
-  setup_shm(); // -> TODO -> need to add the specific ID that I want to set up
+  setup_shm();
   init_count_class16(); //-> needed
 
-  setup_dirs_fds(); // -> needed but not for the forkserer
+
+  setup_dirs_fds();
+  setup_all_dirs_fds();
   read_testcases();
   load_auto();
 
-  pivot_inputs(); //not needed, but might as well have it
+  pivot_inputs();
 
-  //if (extras_dir) load_extras(extras_dir);
+  if (extras_dir) load_extras(extras_dir);
 
   if (!timeout_given) find_timeout();
 
-  //detect_file_args(argv + optind + 1);
+  detect_file_args(argv, 0);
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+  	detect_file_args_delta(prog_args[i], i);	
+  }
 
-  if (!out_file) setup_stdio_file();
+  //if (!out_file) setup_stdio_file();
+  setup_stdio_file();
+
   //printf("%s\n", tmp_test);
 
   start_time = get_cur_time();
@@ -7556,14 +9013,18 @@ int main(int argc, char** argv) {
   use_argv = argv + optind;
   init_prog_args = optind;
 
-  cur_prog_title = argv[init_prog_args];
-
   /*we start forkservers here*/
   init_all_forkservers(argv);
+  get_prog_targets(0,1); 
 
-  //TODO -> make it perform a dry runon every program
-  perform_dry_run(use_argv); //this will be where most of the work will be done for this iteration
+  if (qemu_mode)
+    use_argv = get_qemu_argv(argv[0], argv + optind, argc - optind);
+  else
+    use_argv = argv + optind;
 
+  //printf("use_argv = %s\n", *use_argv);
+
+  perform_dry_run(prog_args[0]); //this will be where most of the work will be done for this iteration
 
   cull_queue();
 
@@ -7576,7 +9037,15 @@ int main(int argc, char** argv) {
 
   if (stop_soon) goto stop_fuzzing;
 
-
+  /*
+  for(int pgr = 0; pgr < numbr_of_progs_under_test; pgr++){
+    printf("args %d = ", pgr);
+    for(int i = 0; prog_args[pgr][i] ; i++){
+    	printf("%s ", prog_args[pgr][i]);
+    }
+    printf("\n");
+  }
+  */
   /* Woop woop woop */
   
   if (!not_on_tty) {
@@ -7588,6 +9057,7 @@ int main(int argc, char** argv) {
 
 u64 init_time = get_cur_time(), end_t;
 
+
 while (1) { //main fuzzing loop //FUZZ LOP
 
     u8 skipped_fuzz;
@@ -7595,53 +9065,55 @@ while (1) { //main fuzzing loop //FUZZ LOP
     cull_queue();
     end_t = get_cur_time();
 
-    // Shoulw we switch programs?
+    // Should we switch programs?
     if( (end_t - init_time) >= switch_program_timer ){
       //printf("Gonna switch programs\n");
       init_time = get_cur_time();
       
-      CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test; 
-      cur_prog_title = argv[init_prog_args + CUR_PROG];
+      on_prog_change(prog_args[CUR_PROG]);
+      //cur_prog_title = argv[init_prog_args + CUR_PROG];
       prog_start_time = get_cur_time();
+      //printf("changed prog\n");
+      test_bool = 0;
     }
 
-    if (!queue_cur) {
-
+    if (!queue_cur[CUR_PROG]) {
+      
       queue_cycle++;
       current_entry     = 0;
       cur_skipped_paths = 0;
-      queue_cur         = queue;
+      queue_cur[CUR_PROG]         = queue[CUR_PROG];
     
 
       while (seek_to) {
         current_entry++;
         seek_to--;
-        queue_cur = queue_cur->next;
+        queue_cur[CUR_PROG] = queue_cur[CUR_PROG]->next;
       }
 
       show_stats();
       
+
       if (not_on_tty) {
         ACTF("Entering queue cycle %llu.", queue_cycle);
         fflush(stdout);
       }
 
      
-      if (queued_paths == prev_queued) {
+      if (queued_paths[CUR_PROG] == prev_queued) {
 
         if (use_splicing) cycles_wo_finds++; else use_splicing = 1;
 
       } else cycles_wo_finds = 0;
 
-      prev_queued = queued_paths;
+      prev_queued = queued_paths[CUR_PROG];
 
       if (sync_id && queue_cycle == 1 && getenv("AFL_IMPORT_FIRST"))
-        sync_fuzzers(use_argv);
+        sync_fuzzers(use_argv); // TODO -> need to be able to sync fuzzers
 
     }
 
-    
-    skipped_fuzz = fuzz_one(use_argv); // this is where the work will be done //TODO
+    skipped_fuzz = fuzz_one(prog_args[CUR_PROG]); // this is where the work will be done //NOTE
 
     if (!stop_soon && sync_id && !skipped_fuzz) {
       
@@ -7654,14 +9126,13 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
     if (stop_soon) break;
 
-    queue_cur = queue_cur->next;
+    queue_cur[CUR_PROG] = queue_cur[CUR_PROG]->next;
     current_entry++;
-    
-	
+
   } //end of the main fuzzing loop
 
 
- if (queue_cur) show_stats();
+ if (queue_cur[CUR_PROG]) show_stats();
 
 
   write_bitmap();
@@ -7680,13 +9151,18 @@ while (1) { //main fuzzing loop //FUZZ LOP
            "    (For info on resuming, see %s/README.)\n", doc_path);
 
   }
-  
-  fclose(plot_file);
+  for(int i = 0; i < numbr_of_progs_under_test; i++)
+  	fclose(plot_file[i]);
   destroy_queue();
   destroy_extras();
   //ck_free(target_path);
-  for(int i = 0; i < numbr_of_progs_under_test; i++) ck_free(target_path[i]);
+  for(int i = 0; i < numbr_of_progs_under_test; i++){ 
+  	ck_free(target_path[i]);
+  	if( prog_args[i] ) free(prog_args[i]);
+  	free(out_dir_delta[i]);
+  }
   ck_free(sync_id);
+	
 
   alloc_report();
 

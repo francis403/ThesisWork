@@ -265,7 +265,10 @@
 /* Environment variable used to pass SHM ID to the called program. */
 
 #define SHM_ENV_VAR         "__AFL_SHM_ID"
-#define SHM_ENV_VAR_SECOND  "__AFL_SHM_ID_2"
+
+/* Environmental variable used to pass the ID where we get the blocks */
+
+#define SHM_BLOCKS  "__AFL_SHM_BLOCKS"
 
 /* Other less interesting, internal-only variables. */
 
@@ -290,11 +293,14 @@
 /* Version of the forkserver being instrumentalized*/
 #define FORKSRV_ENV	    "__FORKSRV_ENV_VAR"
 
+/* Title of the prog being instrumentalized in the forkserver */
+#define FORKSRV_ENV_TITLE "__FORKSRV_ENV_TITLE"
+
 /*   Amount of forkservers needed, or number of programs under test	*/
 #define FORKSRV_AMOUNT_ENV "__FORKSRV_AMOUNT_ENV_VAR"
 
 /*Defines the maximum amount of programs that can be tested at once*/
-#define MAX_AMOUNT_OF_PROGS		100
+#define MAX_AMOUNT_OF_PROGS		5
 
 /* Designated file descriptors base for forkserver commands (the application will
    use FORKSRV_FD and FORKSRV_FD + 1): */
