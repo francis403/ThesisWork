@@ -259,8 +259,8 @@ void concatInto( char **dest, char *line ){
 * Multiplies the position (i + 1) by the ASCII of 
 * the character found in that position
 */
-int hash_string(char *input){
-  int hash = 0;
+unsigned int hash_string(char *input){
+  unsigned int hash = 0;
   //printf("gonna hash = %s\n", input);
   for( int i = 0; i < strlen(input); i++ ){
     hash += (i +1) * (input[i] - 1);
