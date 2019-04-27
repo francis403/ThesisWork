@@ -146,7 +146,7 @@ remExecutable:
 	rm -f a.out $(EXE) $(EXE2) $(FACT) $(HARN) vul
 
 remDir:
-	rm -f -r crash-* out* a.out *.i *.o *.s
+	rm -f -r crash-* out* a.out *.i *.o *.s *bc *.txt
 
 # ASAN_OPTIONS COMMANDS
 #export ASAN_OPTIONS="detect_leaks=0:abort_on_error=1:symbolize=0:allocator_may_return_null=1"

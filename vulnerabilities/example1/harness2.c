@@ -95,17 +95,19 @@ int main (int argc, char* argv[]){
 		//heap_overflow(buff);
 		//buffer_overflow(buff);
 		//global_buffer_overflow(buff);
-
+		
 		int a;
 		scanf("%d", &a);
-		printf("gonna call double_free\n");
+		//printf("gonna call double_free\n");
 		//double_free(a);
+		//printf("value = %d\n", integer_overflow(a)); //finds
 		if(a != 0){
-			printf("value = %d\n", integer_overflow(a)); //finds
+			//printf("value = %d\n", integer_overflow(a)); //finds
 			//printf("%d\n",integer_underflow(a)); //finds
 		}
 		else
 			printf("is zero\n");
+		
 		//memory_leak();
 		/**
 		void *pointer = malloc(sizeof(void) * 45);
@@ -116,7 +118,7 @@ int main (int argc, char* argv[]){
 		//dangling_pointer(a);
 		//use_after_free(a);
 		//negative_memory_allocation();
-		//out_of_bounds(a);
+		out_of_bounds(a); // finds
 		//division_by_zero(a); //finds
 
 		//INT TESTING

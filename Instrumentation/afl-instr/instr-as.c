@@ -278,7 +278,7 @@ unsigned int hash_string(char *input){
 *   - The number of actually important lines
 *   - 
 **/
-char * blockIDGenerator(char *block){
+unsigned int blockIDGenerator(char *block){
    
   char *string_to_hash = calloc(0, sizeof(char)); //string to eventually hash
 
