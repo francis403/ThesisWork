@@ -10,7 +10,7 @@ MISC_PATH   = $(PREFIX)/share/afl
 
 # PROGS intentionally omit instr-as, which gets installed elsewhere.
 
-PROGS       = instr-gcc instr-gcc2 instr-all-gcc instr-all-clang afl-fuzz afl-showmap
+PROGS       = instr-gcc instr-gcc2 instr-all-gcc instr-all-clang afl-fuzz afl-showmap afl-tmin afl-gotcpu afl-analyze
 
 CFLAGS     ?= -O3 -funroll-loops
 CFLAGS     += -Wall -D_FORTIFY_SOURCE=2 -g -Wno-pointer-sign \
@@ -75,11 +75,18 @@ afl-showmap: afl-showmap.c $(COMM_HDR) | test_x86
 afl-tmin: afl-tmin.c $(COMM_HDR) | test_x86
 	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
 
+afl-analyze: afl-analyze.c $(COMM_HDR) | test_x86
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
+
+afl-gotcpu: afl-gotcpu.c $(COMM_HDR) | test_x86
+	$(CC) $(CFLAGS) $@.c -o $@ $(LDFLAGS)
+
+
 ifndef AFL_NO_X86
 
 test_build: instr-gcc instr-as afl-showmap
 	@echo "[*] Testing the CC wrapper and instrumentation output..."
-	unset AFL_USE_ASAN AFL_USE_MSAN; AFL_QUIET=1 AFL_INST_RATIO=100 AFL_PATH=. ./$(TEST_CC) $(CFLAGS) test-instr.c -o test-instr $(LDFLAGS) -save-temps
+	unset AFL_USE_ASAN AFL_USE_MSAN; AFL_QUIET=1 AFL_INST_RATIO=100 AFL_PATH=. ./$(TEST_CC) $(CFLAGS) test-instr.c -o test-instr $(LDFLAGS)
 	echo 0 | ./afl-showmap -m none -q -o .test-instr0 ./test-instr
 	echo 1 | ./afl-showmap -m none -q -o .test-instr1 ./test-instr
 	@rm -f test-instr
@@ -102,7 +109,7 @@ all_done: test_build
 .NOTPARALLEL: clean
 
 clean:
-	rm -f $(PROGS) instr-as as afl-g++ afl-clang afl-clang++ afl-clang-fast afl-clang-fast++ *.i *.s *.o *~ a.out core core.[1-9][0-9]* *.stackdump test .test test-instr .test-instr0 .test-instr1 qemu_mode/qemu-2.10.0.tar.bz2 afl-qemu-trace
+	rm -f $(PROGS) afl-clang-fast2* instr-as as afl-g++ afl-tmin afl-clang afl-clang++ afl-clang-fast afl-clang-fast++ *.i *.s *.o *~ a.out core core.[1-9][0-9]* *.stackdump test .test test-instr .test-instr0 .test-instr1 qemu_mode/qemu-2.10.0.tar.bz2 afl-qemu-trace
 
 #TODO -> provavelmente vou ter de mudar os nomes no install#
 
