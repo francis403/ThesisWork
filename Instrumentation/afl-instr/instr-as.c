@@ -825,8 +825,8 @@ int main(int argc, char** argv) {
     sprintf(path_instr, "%s/%s_blocks.txt", cwd, prog_title);
   }
   //printf("path_instr = %s\n", path_instr);
-  printf("prog_title = %s\n", prog_title);
-  printf("program version = %d\n", program_version);
+  //printf("prog_title = %s\n", prog_title);
+  //printf("program version = %d\n", program_version);
 
   fblocks = fopen(path_instr,"w");
 
