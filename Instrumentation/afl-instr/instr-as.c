@@ -110,6 +110,8 @@ static void edit_params(int argc, char** argv) {
   u8 *tmp_dir = getenv("TMPDIR"), *afl_as = getenv("AFL_AS");
   u32 i;
 
+  short found = 1;
+
 #ifdef __APPLE__
 
   u8 use_clang_as = 0;
@@ -178,7 +180,7 @@ static void edit_params(int argc, char** argv) {
 #endif /* __APPLE__ */
 
     as_params[as_par_cnt++] = argv[i];
-
+    //if(found){ as_params[as_par_cnt++] = "-PIC"; found = 0;}
   }
 
 #ifdef __APPLE__
@@ -359,19 +361,7 @@ void copy(FILE *source, FILE *target){
 
 /*Adds the lines to file*/
 void addToOutFile(FILE *file, char *lines, int block_id){
-  // get the id to add to the block
-  //int block_id = blockIDGenerator(lines);
-  //int block_id = R(MAP_SIZE);
-  /*
-  if(!blocks_hit[block_id]){
-    blocks_hit[block_id] = 1;
-    fprintf(fblocks, " %d", block_id);
-  }
-  else{
-    blocks_hit[block_id] = 2;
-    num_shared_blocks ++;
-  }
-  */
+
   fprintf(file, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32,
               block_id, block_id); 
 
@@ -766,6 +756,9 @@ static void add_instrumentation(void) {
   
   free(lines_to_instrument);
 
+  free(fname);
+  free(fname_after);
+
   fclose(instr_lines);
   fclose(instr_lines_after); //end of added by Francisco Araujo
 
@@ -806,7 +799,6 @@ static void add_instrumentation(void) {
 
 int main(int argc, char** argv) {
 
-  // Open file to save blocks
 
   if( !getcwd( cwd, sizeof(cwd) ) ) FATAL("Can't find path to dir!");
 
@@ -861,13 +853,6 @@ int main(int argc, char** argv) {
 
   }
 
-  gettimeofday(&tv, &tz);
-
-  rand_seed = tv.tv_sec ^ tv.tv_usec ^ getpid();
-
-  srandom(rand_seed); // sets the random seed to generate the ids later
-
-
 
   edit_params(argc, argv);
 
@@ -906,7 +891,6 @@ int main(int argc, char** argv) {
     //printf("arguments are: \n");
 
     //while( as_params[index] ){ printf("arg = %s ", as_params[index]); index ++;}
-
     execvp(as_params[0], (char**)as_params);
     FATAL("Oops, failed to execute '%s' - check your PATH", as_params[0]);
 

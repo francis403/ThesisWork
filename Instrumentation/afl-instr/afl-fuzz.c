@@ -2168,7 +2168,7 @@ static void destroy_extras(void) {
 * Puts the initial ID as fork_srv
 *
 */
-EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid, 
+EXP_ST void init_forkserver_special(char** argv, u8 *path, s32 *forksrv_pid, 
 								int prog_index, int fork_srv) {
 
 	//printf("\t-> init_forkserver\n");
@@ -2248,6 +2248,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 		//printf("before redirecting standard output\n");
 
+     printf("\tpath -> %s\n", path);
     
     dup2(dev_null_fd, 1); // redirect standard output to dev_null_fd
     dup2(dev_null_fd, 2); // redirect the standard error to the dev_null_fd
@@ -2263,6 +2264,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     	close(out_fd);
 
     }
+
 
 
     // end points
@@ -2311,8 +2313,7 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     	"allocator_may_return_null=1:"
     	"msan_track_origins=0", 0);
 
-
-    execv(*path, argv);
+    execv(path, argv);
 
     /* Use a distinctive bitmap signature to tell the parent about execv()
        falling through. */
@@ -7818,7 +7819,7 @@ static void init_all_forkservers(char **argv){
 	          //printf("prog num = %d\n", prog);
 	          check_binary(prog_args[0], &(target_path[prog]));
 
-	          init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
+	          init_forkserver_special(prog_args, target_path[prog], &forksrv_pid[prog],
 	          	 prog, FORKSRV_FD + (prog * 2));
 	          //prog_args = malloc(sizeof(char*) * size);
 	          i = 0;
@@ -7854,7 +7855,7 @@ static void init_all_forkservers(char **argv){
   	//printf("prog title = %s\n", prog_args[0]);
     //printf("prog num = %d\n", prog);
     check_binary(prog_args[0], &(target_path[prog]));
-    init_forkserver_special(prog_args, &target_path[prog], &forksrv_pid[prog],
+    init_forkserver_special(prog_args, target_path[prog], &forksrv_pid[prog],
       	prog, FORKSRV_FD + (prog * 2));
   }
   /*
@@ -8851,9 +8852,9 @@ int main(int argc, char** argv) {
 	s32 opt;
 	u8  mem_limit_given = 0;
 	u64 prev_queued = 0;
-  	u32 sync_interval_cnt = 0, seek_to;
-  	u8  *extras_dir = 0;
-  	u8  exit_1 = !!getenv("AFL_BENCH_JUST_ONE");
+  u32 sync_interval_cnt = 0, seek_to;
+  u8  *extras_dir = 0;
+  u8  exit_1 = !!getenv("AFL_BENCH_JUST_ONE");
 	char **use_argv;
 	//char ***p_args = malloc( sizeof(char **) * MAX_AMOUNT_OF_PROGS );
 	//SAYF(cCYA "afl-fuzz " cBRI VERSION cRST " by <lcamtuf@google.com>\n");
@@ -8862,9 +8863,9 @@ int main(int argc, char** argv) {
 
   	// pass through every arg and get the number of programs and their names
   	
-    int index = 0;
-    //prog_args[]
-    int arg_index = 0;
+  int index = 0;
+  //prog_args[]
+  int arg_index = 0;
   	while( *(argv + index) ){
   		//printf("arg = %s\n", *(argv + index));
       	if(strcmp(*(argv + index), "-p") == 0){
@@ -9002,8 +9003,8 @@ int main(int argc, char** argv) {
   	detect_file_args_delta(prog_args[i], i);	
   }
 
-  //if (!out_file) setup_stdio_file();
-  setup_stdio_file();
+  if (!out_file) setup_stdio_file();
+  //setup_stdio_file();
 
   //printf("%s\n", tmp_test);
 
