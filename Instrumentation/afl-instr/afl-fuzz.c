@@ -154,7 +154,7 @@ static s32 forksrv_pid[MAX_AMOUNT_OF_PROGS],               /* PID of the fork se
 
 
 /*Program corrently under test*/
-static int CUR_PROG = 0;
+int CUR_PROG = 0;
 
 static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
 
@@ -2937,7 +2937,7 @@ abort_calibration:
     if (sfd < 0) PFATAL("Unable to open '%s'", old_path);
 
     dfd = open(new_path, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (dfd < 0) PFATAL("Unable to create '%s'", new_path);
+    if (dfd < 0) PFATAL("Unable to create '%s with old path %s\n'", new_path, old_path);
 
     tmp = ck_alloc(64 * 1024);
 
@@ -4352,7 +4352,7 @@ static void add_entry_to_dir(struct queue_entry *q, u8 dir_to_add, u8 to_fuzz){
   if( !fn ) FATAL("Malloc failed!");
 
     u8* fn_tmp = strrchr(q->fname, '/') + 1;
-    sprintf(fn, "out%d/queue/%s", dir_to_add, fn_tmp);
+    sprintf(fn, "%s/queue/%s", out_dir_delta[dir_to_add], fn_tmp);
     //printf("\tis going to add fn = %s\n", fn);
 
     //printf("before copy_file\n");

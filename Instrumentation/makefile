@@ -2,6 +2,7 @@
 #CC=afl-clang-fast
 #CC=afl-instr/instr-gcc
 CC=afl-instr/instr-gcc
+CC2=afl-instr/instr-gcc2
 CC_AFL=afl-gcc
 ALF_FUZZ=afl-fuzz
 RUN=afl-instr/afl-fuzz
@@ -45,7 +46,7 @@ simple:
 	$(CC) ./simple_program.c -save-temps -o $(EXE) -w
 
 simple2:
-	$(CC) ./simple_program2.c -save-temps -o $(EXE2) -w
+	$(CC2) ./simple_program2.c -save-temps -o $(EXE2) -w
 
 vul_afl_instr:
 	$(CC_AFL) ./vul.c -o vul -w 
