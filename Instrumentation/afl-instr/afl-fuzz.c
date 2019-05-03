@@ -8775,12 +8775,13 @@ int main(int argc, char** argv) {
           prog_names[numbr_of_progs_under_test] = *(argv + index + 1);
 
           prog_args[numbr_of_progs_under_test] = malloc( sizeof(char*) * 100 );
+          prog_args[numbr_of_progs_under_test][0] = *(argv + index + 1);
           numbr_of_progs_under_test ++;
-          arg_index = -1;
+          arg_index = 1;
         }
         else if(numbr_of_progs_under_test > 0){
           //p_args[numbr_of_progs_under_test - 1][arg_index] = *(argv + index);
-          if(arg_index >= 0)*(prog_args[numbr_of_progs_under_test - 1] + arg_index) = *(argv + index);
+          *(prog_args[numbr_of_progs_under_test - 1] + arg_index) = *(argv + index);
           arg_index ++;
         }
         
@@ -8856,10 +8857,6 @@ int main(int argc, char** argv) {
     }
   }
 
-  //printf("progs = %d\n", numbr_of_progs_under_test);
-
-  //printf("optind = %d\n", optind);
-  //printf("argc = %d\n", argc);
   if ( optind == argc || !in_dir || !out_dir ){ printf("here in this option of ours\n");usage(argv[0]);}
 
   for(int i = 0; i < numbr_of_progs_under_test; i++ ){
@@ -8901,13 +8898,11 @@ int main(int argc, char** argv) {
 
   if (!timeout_given) find_timeout();
 
-  printf("Is changing!\n");
-
   // TODO -> need to improve this here
-  detect_file_args(argv, 0);
+  detect_file_args( prog_args[0], 0);
   if(out_file){ // se um tem todos têm de ter
     for(int i = 0; i < numbr_of_progs_under_test; i++){
-     detect_file_args_delta(prog_args[i], i); 
+     detect_file_args_delta( prog_args[i] , i); 
     }
   }
   if (!out_file) setup_stdio_file();
@@ -8932,28 +8927,19 @@ int main(int argc, char** argv) {
 
   //printf("use_argv = %s\n", *use_argv);
 
-  perform_dry_run(prog_args[0]); //this will be where most of the work will be done for this iteration
+  perform_dry_run( prog_args[0]) ; //this will be where most of the work will be done for this iteration
 
   cull_queue();
 
-  show_init_stats(); //-> not needed but usefull
+  show_init_stats();
 
   seek_to = find_start_position();
 
-  write_stats_file(0, 0, 0); //-> not needed, but important
-  save_auto(); //-> not needed, but important
+  write_stats_file(0, 0, 0);
+  save_auto();
 
   if (stop_soon) goto stop_fuzzing;
 
-  /*
-  for(int pgr = 0; pgr < numbr_of_progs_under_test; pgr++){
-    printf("args %d = ", pgr);
-    for(int i = 0; prog_args[pgr][i] ; i++){
-      printf("%s ", prog_args[pgr][i]);
-    }
-    printf("\n");
-  }
-  */
   /* Woop woop woop */
   
   if (!not_on_tty) {
@@ -8974,14 +8960,15 @@ while (1) { //main fuzzing loop //FUZZ LOP
     end_t = get_cur_time();
 
     // Should we switch programs?
-    if( (end_t - init_time) >= switch_program_timer ){
-      //printf("Gonna switch programs\n");
+    if( numbr_of_progs_under_test > 1 
+        && (end_t - init_time) >= switch_program_timer ){
+
       init_time = get_cur_time();
       
-      on_prog_change(prog_args[CUR_PROG]);
-      //cur_prog_title = argv[init_prog_args + CUR_PROG];
+      on_prog_change( prog_args[CUR_PROG] );
+
       prog_start_time = get_cur_time();
-      //printf("changed prog\n");
+
       test_bool = 0;
     }
 
