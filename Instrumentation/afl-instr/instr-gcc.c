@@ -296,7 +296,7 @@ int main(int argc, char** argv) {
 
   //printf("cc_params[0] = %s\n", cc_params[0]);
   //printf("cc_params = %s\n", cc_params);
-  char *prog_name;
+  char *prog_name = NULL;
   int p = 0;
   while( *(argv + p) ){
       if(strcmp(*(argv + p), "-o") == 0){
