@@ -288,7 +288,7 @@ struct queue_entry {
 
   u8  cal_failed,                     /* Calibration failed?              */
       trim_done,                      /* Trimmed?                         */
-      was_fuzzed[MAX_AMOUNT_OF_PROGS],/* Had any fuzzing done yet?        */ // TODO -> check if when we have multiple queue we need this
+      was_fuzzed,/* Had any fuzzing done yet?        */ // TODO -> check if when we have multiple queue we need this
       been_fuzzed,            /* Has it been fuzzed at all?     */
       passed_det,                     /* Deterministic stages passed?     */
       has_new_cov,                    /* Triggers new coverage?           */
@@ -1490,7 +1490,7 @@ static void cull_queue(void) {
       top_rated[CUR_PROG][i]->favored = 1;
       queued_favored[CUR_PROG]++;
 
-      if (!top_rated[CUR_PROG][i]->was_fuzzed[CUR_PROG]) pending_favored++;
+      if (!top_rated[CUR_PROG][i]->was_fuzzed) pending_favored++;
 
     } // end of if and for
 
@@ -2546,7 +2546,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   // relays the wait status and then should leave
   //read blocks
-  unsigned int size = 100;
   *hit = 0;
 
   // TODO: Might be able to remove this
@@ -5741,7 +5740,7 @@ static u8 fuzz_one(char** argv) {
        possibly skip to them at the expense of already-fuzzed or non-favored
        cases. */
 
-    if ((queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || !queue_cur[CUR_PROG]->favored) &&
+    if ((queue_cur[CUR_PROG]->was_fuzzed || !queue_cur[CUR_PROG]->favored) &&
         UR(100) < SKIP_TO_NEW_PROB) return 1;
 
   } else if (!dumb_mode && !queue_cur[CUR_PROG]->favored && queued_paths[CUR_PROG] > 10) {
@@ -5750,7 +5749,7 @@ static u8 fuzz_one(char** argv) {
        The odds of skipping stuff are higher for already-fuzzed inputs and
        lower for never-fuzzed entries. */
 
-    if (queue_cycle > 1 && !queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG]) {
+    if (queue_cycle > 1 && !queue_cur[CUR_PROG]->was_fuzzed) {
 
       if (UR(100) < SKIP_NFAV_NEW_PROB) return 1;
 
@@ -5856,7 +5855,7 @@ static u8 fuzz_one(char** argv) {
 
    // this big if is kinda cheating -> added by fc45701
   
-    if (skip_deterministic || queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] || queue_cur[CUR_PROG]->passed_det)
+    if (skip_deterministic || queue_cur[CUR_PROG]->was_fuzzed || queue_cur[CUR_PROG]->passed_det)
       goto havoc_stage;
 
 
@@ -7391,8 +7390,8 @@ abandon_entry:
   /* Update pending_not_fuzzed count if we made it through the calibration
      cycle and have not seen this entry before. */
 
-  if (!stop_soon && !queue_cur[CUR_PROG]->cal_failed && !queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG]) {
-    queue_cur[CUR_PROG]->was_fuzzed[CUR_PROG] = 1;
+  if (!stop_soon && !queue_cur[CUR_PROG]->cal_failed && !queue_cur[CUR_PROG]->was_fuzzed) {
+    queue_cur[CUR_PROG]->was_fuzzed = 1;
     queue_cur[CUR_PROG]->been_fuzzed = 1;
     pending_not_fuzzed--;
     if (queue_cur[CUR_PROG]->favored) pending_favored--;
