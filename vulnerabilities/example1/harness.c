@@ -101,7 +101,7 @@ int main (int argc, char* argv[]){
 		printf("gonna call double_free\n");
 		//double_free(a);
 		if(a != 0){
-			printf("value = %d\n", integer_overflow(a)); //finds
+			//printf("value = %d\n", integer_overflow(a)); //finds
 			//printf("%d\n",integer_underflow(a)); //finds
 		}
 		else
@@ -116,7 +116,7 @@ int main (int argc, char* argv[]){
 		//dangling_pointer(a);
 		//use_after_free(a);
 		//negative_memory_allocation();
-		//out_of_bounds(a);
+		out_of_bounds(a);
 		//division_by_zero(a); //finds
 
 		//INT TESTING
