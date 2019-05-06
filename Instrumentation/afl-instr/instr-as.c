@@ -110,8 +110,6 @@ static void edit_params(int argc, char** argv) {
   u8 *tmp_dir = getenv("TMPDIR"), *afl_as = getenv("AFL_AS");
   u32 i;
 
-  short found = 1;
-
 #ifdef __APPLE__
 
   u8 use_clang_as = 0;
@@ -823,12 +821,8 @@ int main(int argc, char** argv) {
   fblocks = fopen(path_instr,"w");
 
   s32 pid;
-  u32 rand_seed;
   int status;
   u8* inst_ratio_str = getenv("AFL_INST_RATIO");
-
-  struct timeval tv;
-  struct timezone tz;
 
   clang_mode = !!getenv(CLANG_ENV_VAR);
 

@@ -56,9 +56,6 @@
 #include <sys/ioctl.h>
 #include <sys/file.h>
 
-//added by me
-#include <poll.h>
-
 #if defined(__APPLE__) || defined(__FreeBSD__) || defined (__OpenBSD__)
 #  include <sys/sysctl.h>
 #endif /* __APPLE__ || __FreeBSD__ || __OpenBSD__ */
@@ -92,18 +89,14 @@ short test_bool = 0;
 EXP_ST u8 *in_dir,                    /* Input directory with test cases  */
           *out_file,                  /* File to fuzz, if any             */
           *out_dir,                   /* Working & output directory       */
-          *out_dir_delta[MAX_AMOUNT_OF_PROGS], /* Each program should have their own out dir, this so far is only for testing*/
+          *out_dir_delta[MAX_AMOUNT_OF_PROGS], /* Each program should have their own out dir*/
           *sync_dir,                  /* Synchronization directory        */
           *sync_id,                   /* Fuzzer ID                        */
           *use_banner,                /* Display banner                   */
           *in_bitmap,                 /* Input bitmap                     */
           *doc_path,                  /* Path to documentation dir        */
-      *target_path[MAX_AMOUNT_OF_PROGS],
-          //*target_path[MAX_AMOUNT_OF_PROGS],               /* Path to target binary            */
-      //*target_path,
+     	  *target_path[MAX_AMOUNT_OF_PROGS],
           *orig_cmdline;              /* Original command line            */
-
-static short init_prog_args;
 
 EXP_ST u32 exec_tmout = EXEC_TIMEOUT; /* Configurable exec timeout (ms)   */
 static u32 hang_tmout = EXEC_TIMEOUT; /* Timeout used for hang det (ms)   */
@@ -141,8 +134,6 @@ EXP_ST u8  skip_deterministic,        /* Skip deterministic stages?       */
 static s32 out_fd,                    /* Persistent fd for out_file       */
            dev_urandom_fd = -1,       /* Persistent fd for /dev/urandom   */
            dev_null_fd = -1,          /* Persistent fd for /dev/null      */
-           //fsrv_write_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
-           //fsrv_read_blocks[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
            fsrv_ctl_fd[MAX_AMOUNT_OF_PROGS],        /* Fork server control pipe (write) */
            fsrv_st_fd[MAX_AMOUNT_OF_PROGS];         /* Fork server status pipe (read)   */ 
 
@@ -154,39 +145,33 @@ static s32 forksrv_pid[MAX_AMOUNT_OF_PROGS],               /* PID of the fork se
 
 
 /*Program corrently under test*/
-int CUR_PROG = 0;
+short CUR_PROG = 0;
 
-static unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
+unsigned int switch_program_timer = 1000 * 60 * 5; /* Time each program should be given before switching to the next one      */
 
-static u8 BLOCKS_FOUND[MAP_SIZE];   /* Stores all values found for run*/
+/*Blocks found this run, not sure if needed*/
+//u8 BLOCKS_FOUND[MAP_SIZE];   /* Stores all values found for run*/
 
 /*Stores all the blocks of a specific programs*/
-static u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
+u8 PROG_BLOCKS[MAX_AMOUNT_OF_PROGS][MAP_SIZE]; /*TODO -> try and use less memory here*/
 
 /*Saves all the prefered blocks to hit*/
 
-static u8 BLOCK_TO_HIT[MAP_SIZE];
+u8 BLOCK_TO_HIT[MAP_SIZE];
 
+/* All prog names, not sure if needed */
 static u8 *prog_names[MAX_AMOUNT_OF_PROGS];
 
 /*The following data is important between runs so we can check if it should be saved
 * It can't go to the queue since if it went there we would be evaluating the queue input it self and not the mutation applied to it.*/
 
-/*TODO -> it might be smart to get the average of this thing?*/
-
-unsigned short shared_blocks_in_runs; /* Stores the number of shared blocks between current run and last run */
-unsigned short unique_blocks;       /*Stores the total unique blocks between runs*/
-
 EXP_ST u8* trace_bits;                /* SHM with instrumentation bitmap, changes between each run (not permanet)  */ // this is fine, since it's only temporary, we can have only one for all programs
-EXP_ST u8* trace_blocks;
+//EXP_ST u8* trace_blocks;
 
 //EXP_ST u8  virgin_bits[MAP_SIZE],     /* Regions yet untouched by fuzzing */
 //           virgin_tmout[MAP_SIZE],    /* Bits we haven't seen in tmouts   */
 //           virgin_crash[MAP_SIZE];    /* Bits we haven't seen in crashes  */
 
-
-// TODO -> switch to main to have better control of memory
-// TO THINK -> Maybe we only need one? This will hold all the edges, if two programs have the same edge it's probably because It's the same two blocks
 EXP_ST u8  virgin_bits[MAX_AMOUNT_OF_PROGS][MAP_SIZE],     /* Regions yet untouched by fuzzing */
            virgin_tmout[MAX_AMOUNT_OF_PROGS][MAP_SIZE],    /* Bits we haven't seen in tmouts   */
            virgin_crash[MAX_AMOUNT_OF_PROGS][MAP_SIZE];    /* Bits we haven't seen in crashes  */
@@ -277,9 +262,10 @@ static s32 cpu_aff = -1;              /* Selected CPU core                */
 static FILE* plot_file[MAX_AMOUNT_OF_PROGS];               /* Gnuplot output file              */
 
 /* Arguments for each program */
-static char **prog_args[MAX_AMOUNT_OF_PROGS];
 
-static int numbr_of_progs_under_test = 0;
+char **prog_args[MAX_AMOUNT_OF_PROGS];
+
+short numbr_of_progs_under_test = 0;
 
 struct queue_entry {
 
@@ -307,12 +293,9 @@ struct queue_entry {
       handicap,                       /* Number of queue cycles behind    */
       depth;                          /* Path depth                       */
 
-  //int shared_blocks;                  /* Number of the shared blocks found*/
-  //int uni_blcks;                      /* total blocks passed        */
-
   short hit_target;
 
-  u8 blocks_hit[MAP_SIZE];            /* Saves all blocks found, during run and fuzz */
+  //u8 blocks_hit[MAP_SIZE];            /* Saves all blocks found, during run and fuzz */
 
   u8* trace_mini;                     /* Trace bytes, if kept             */
   u32 tc_ref;                         /* Trace bytes ref count            */
@@ -982,10 +965,10 @@ EXP_ST void write_bitmap(void) {
     ck_write(fd_delta, virgin_bits[CUR_PROG], MAP_SIZE, fname_delta);
 
   close(fd);
-    close(fd_delta);
+  close(fd_delta);
 
   ck_free(fname);
-    ck_free(fname_delta);
+  ck_free(fname_delta);
 
 }
 
@@ -1310,13 +1293,13 @@ EXP_ST void init_count_class16(void) {
 
       if(trace_bits[i]){
         //printf("trace_bits[0x%08x] = %d\n", i, trace_bits[i]);
-        BLOCKS_FOUND[i] += trace_bits[i];
+       // BLOCKS_FOUND[i] += trace_bits[i];
         if( BLOCK_TO_HIT[i] != 0 ){
               
               queue_cur[CUR_PROG]->hit_target =
                 queue_cur[CUR_PROG]->hit_target + 1; // add the number of targets hit
             }
-            queue_cur[CUR_PROG]->blocks_hit[i] = 1; // mark the block as hit
+            //queue_cur[CUR_PROG]->blocks_hit[i] = 1; // mark the block as hit
       } 
 
     }
@@ -1347,8 +1330,8 @@ EXP_ST void init_count_class16(void) {
       mem++;
 
       if(trace_bits[t]){
-        printf("trace_bits[0x%08x] = %d\n", t, trace_bits[t]);
-        BLOCKS_FOUND[t] = trace_bits[t];
+        //printf("trace_bits[0x%08x] = %d\n", t, trace_bits[t]);
+        //BLOCKS_FOUND[t] += trace_bits[t];
         if( BLOCK_TO_HIT[t] != 0 ){
               if(queue_cur[CUR_PROG] != NULL)
                 queue_cur[CUR_PROG]->hit_target = queue_cur[CUR_PROG]->hit_target + 1;
@@ -1454,7 +1437,7 @@ static void cull_queue(void) {
 
   struct queue_entry* q;
   static u8 temp_v[MAP_SIZE >> 3];
-  u32 i;\
+  u32 i;
 
   if (dumb_mode || !score_changed) return;
 
@@ -1555,9 +1538,9 @@ EXP_ST void setup_shm(void) {
   //char *teste = malloc(sizeof(char) * 1000 + 1);
 
   trace_bits = shmat(shm_id, NULL, 0); //attach the shared memory address segment to trace_bits
-  trace_blocks = shmat(shm_blocks_id, NULL, 0); // get the blocks from the run using this
+  //trace_blocks = shmat(shm_blocks_id, NULL, 0); // get the blocks from the run using this
     
-  if ( !trace_bits || !trace_blocks ) PFATAL("shmat() failed");
+  if ( !trace_bits ) PFATAL("shmat() failed");
 
 }
 
@@ -2298,8 +2281,8 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
     /* Set sane defaults for ASAN if nothing else specified. */
 
     setenv("ASAN_OPTIONS", "abort_on_error=1:"
-                           "detect_leaks=1:" //changed this part here
-                           "symbolize=1:" //changed this part here
+                           "detect_leaks=0:" //changed this part here
+                           "symbolize=0:" //changed this part here
                            "allocator_may_return_null=1", 0);
 
     /* MSAN is tricky, because it doesn't support abort_on_error=1 at this
@@ -2506,7 +2489,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
        territory. */
 
   memset(trace_bits, 0, MAP_SIZE);
-  memset(trace_blocks, 0, MAP_SIZE);
+  //memset(trace_blocks, 0, MAP_SIZE);
 
   MEM_BARRIER();
 
@@ -2547,11 +2530,6 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   // relays the wait status and then should leave
   //read blocks
   *hit = 0;
-
-  // TODO: Might be able to remove this
-  shared_blocks_in_runs = 0;
-  unique_blocks = 0;
-
 
   /* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
   
@@ -3199,8 +3177,6 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
     /* Keep only if there are new bits in the map, add to queue for
        future fuzzing, etc. */
-
-    //if (!(hnb = has_new_bits(virgin_bits[CUR_PROG])) || !(has_new_blocks()) ) {
     
     if (!(hnb = has_new_bits( virgin_bits[CUR_PROG] ))) {
       if (crash_mode) total_crashes++;
@@ -4763,12 +4739,14 @@ static void show_stats(void) {
        "  cycles done : %s%-5s  " bSTG bV "\n",
        DTD(cur_ms, start_time), tmp, DI(queue_cycle - 1));
 
+
+  /*
    SAYF(bV bSTOP "    cur run time : " cRST "%-34s " bSTG bV bSTOP
        "  cur prog : %d  " bSTG bV "\n",
        DTD(cur_ms, prog_start_time), CUR_PROG );
 
   //SAYF(bV bSTOP "   current program : " cRST  "%-34s\n" bSTG bV bSTOP, cur_prog_title);
-
+	*/
   /* We want to warn people about not seeing new paths after a full cycle,
      except when resuming fuzzing or running in non-instrumented mode. */
 
@@ -5305,21 +5283,6 @@ abort_trimming:
   bytes_trim_out += q->len;
   return fault;
 
-}
-
-/*Returns the number of blocks shared between a seed in the queue
-* (found during the fuzzing process) and a given program
-* O(MAP_SIZE) -> todo: tentar melhorar isto
-*/
-int num_blocks_shared(struct queue_entry *q, u8 prog_index){
-  int result = 0;
-
-  for(int id = 1; id < MAP_SIZE; id++){
-    if( q->blocks_hit[id] && PROG_BLOCKS[prog_index][id] )
-      result ++;
-  }
-
-  return result;
 }
 
 /* Write a modified test case, run program, process results. Handle
@@ -8719,7 +8682,6 @@ static void save_entry_in_prog_if_interesting(struct queue_entry *q, char **argv
 
 void on_prog_change(char **argv){
 
-
   if (numbr_of_progs_under_test < 2 ) return; // no prog to switch to? Do nothing!
 
   u8 old = CUR_PROG;
@@ -8727,8 +8689,6 @@ void on_prog_change(char **argv){
   CUR_PROG = (CUR_PROG + 1) % numbr_of_progs_under_test;
   
   struct queue_entry *q = queue[old];
-       //*q_o = queue[old],
-       //*q_n = queue[CUR_PROG];
 
   test_bool = 1;
     
@@ -8897,23 +8857,19 @@ int main(int argc, char** argv) {
 
   if (!timeout_given) find_timeout();
 
-  // TODO -> need to improve this here
   detect_file_args( prog_args[0], 0);
-  if(out_file){ // se um tem todos têm de ter
-    for(int i = 0; i < numbr_of_progs_under_test; i++){
-     detect_file_args_delta( prog_args[i] , i); 
-    }
-  }
-  if (!out_file) setup_stdio_file();
-  //setup_stdio_file();
 
-  //printf("%s\n", tmp_test);
+  for(int i = 0; i < numbr_of_progs_under_test && out_file; i++){
+    detect_file_args_delta( prog_args[i] , i); 
+  }
+
+  if (!out_file) setup_stdio_file();
+
 
   start_time = get_cur_time();
   prog_start_time = start_time;
 
   use_argv = argv + optind;
-  init_prog_args = optind;
 
   /*we start forkservers here*/
   init_all_forkservers(argv);
@@ -8924,7 +8880,6 @@ int main(int argc, char** argv) {
   else
     use_argv = argv + optind;
 
-  //printf("use_argv = %s\n", *use_argv);
 
   perform_dry_run( prog_args[0]) ; //this will be where most of the work will be done for this iteration
 
@@ -9045,19 +9000,18 @@ while (1) { //main fuzzing loop //FUZZ LOP
            "    (For info on resuming, see %s/README.)\n", doc_path);
 
   }
-  for(int i = 0; i < numbr_of_progs_under_test; i++)
-    fclose(plot_file[i]);
+
   destroy_queue();
   destroy_extras();
-  //ck_free(target_path);
+
   for(int i = 0; i < numbr_of_progs_under_test; i++){ 
+  	fclose(plot_file[i]);
     ck_free(target_path[i]);
     if( prog_args[i] ) free(prog_args[i]);
     free(out_dir_delta[i]);
   }
   ck_free(sync_id);
   
-
   alloc_report();
 
   OKF("We're done here. Have a nice day!\n");
