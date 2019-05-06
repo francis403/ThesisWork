@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlXPathCmpNodes' function" {
+	label="CFG for 'libxml_xmlXPathCmpNodes' function";
+
+	Node0x55f931235660 [shape=record,label="{libxml2-py.c:12971:|{<s0>T|<s1>F}}"];
+	Node0x55f931235660:s0 -> Node0x55f931239150;
+	Node0x55f931235660:s1 -> Node0x55f931239100;
+	Node0x55f931239100 [shape=record,label="{libxml2-py.c:12980:}"];
+	Node0x55f931239100 -> Node0x55f9312353f0;
+	Node0x55f931239150 [shape=record,label="{libxml2-py.c:12981:|{<s0>T|<s1>F}}"];
+	Node0x55f931239150:s0 -> Node0x55f931239940;
+	Node0x55f931239150:s1 -> Node0x55f931239990;
+	Node0x55f931239940 [shape=record,label="{libxml2-py.c:12981:}"];
+	Node0x55f931239940 -> Node0x55f9312399e0;
+	Node0x55f931239990 [shape=record,label="{libxml2-py.c:12981:}"];
+	Node0x55f931239990 -> Node0x55f9312399e0;
+	Node0x55f9312399e0 [shape=record,label="{libxml2-py.c:12981:|{<s0>T|<s1>F}}"];
+	Node0x55f9312399e0:s0 -> Node0x55f931239f70;
+	Node0x55f9312399e0:s1 -> Node0x55f931239fc0;
+	Node0x55f931239f70 [shape=record,label="{libxml2-py.c:12982:}"];
+	Node0x55f931239f70 -> Node0x55f93123a010;
+	Node0x55f931239fc0 [shape=record,label="{libxml2-py.c:12982:}"];
+	Node0x55f931239fc0 -> Node0x55f93123a010;
+	Node0x55f93123a010 [shape=record,label="{libxml2-py.c:12982:}"];
+	Node0x55f93123a010 -> Node0x55f9312353f0;
+	Node0x55f9312353f0 [shape=record,label="{libxml2-py.c:12987:}"];
+}

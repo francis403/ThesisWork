@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlNewDocTextLen' function" {
+	label="CFG for 'xmlNewDocTextLen' function";
+
+	Node0x55ad0bb071f0 [shape=record,label="{tree.c:2705:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bb071f0:s0 -> Node0x55ad0bb08820;
+	Node0x55ad0bb071f0:s1 -> Node0x55ad0bb08870;
+	Node0x55ad0bb08820 [shape=record,label="{tree.c:2709:}"];
+	Node0x55ad0bb08820 -> Node0x55ad0bb08870;
+	Node0x55ad0bb08870 [shape=record,label="{tree.c:2710:}"];
+}

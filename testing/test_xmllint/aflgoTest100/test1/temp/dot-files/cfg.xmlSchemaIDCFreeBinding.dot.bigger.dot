@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaIDCFreeBinding' function" {
+	label="CFG for 'xmlSchemaIDCFreeBinding' function";
+
+	Node0x55d026708a30 [shape=record,label="{xmlschemas.c:22287:|{<s0>T|<s1>F}}"];
+	Node0x55d026708a30:s0 -> Node0x55d026701490;
+	Node0x55d026708a30:s1 -> Node0x55d0267014e0;
+	Node0x55d026701490 [shape=record,label="{xmlschemas.c:22290:}"];
+	Node0x55d026701490 -> Node0x55d0267014e0;
+	Node0x55d0267014e0 [shape=record,label="{xmlschemas.c:22291:|{<s0>T|<s1>F}}"];
+	Node0x55d0267014e0:s0 -> Node0x55d02670ab40;
+	Node0x55d0267014e0:s1 -> Node0x55d02670ab90;
+	Node0x55d02670ab40 [shape=record,label="{xmlschemas.c:22292:}"];
+	Node0x55d02670ab40 -> Node0x55d02670ab90;
+	Node0x55d02670ab90 [shape=record,label="{xmlschemas.c:22293:}"];
+}

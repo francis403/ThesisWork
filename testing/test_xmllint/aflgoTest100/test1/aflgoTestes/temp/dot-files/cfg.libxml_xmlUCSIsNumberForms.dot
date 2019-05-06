@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsNumberForms' function" {
+	label="CFG for 'libxml_xmlUCSIsNumberForms' function";
+
+	Node0x55f9316205b0 [shape=record,label="{libxml2-py.c:11067:|{<s0>T|<s1>F}}"];
+	Node0x55f9316205b0:s0 -> Node0x55f931623530;
+	Node0x55f9316205b0:s1 -> Node0x55f9316234e0;
+	Node0x55f9316234e0 [shape=record,label="{libxml2-py.c:11073:}"];
+	Node0x55f9316234e0 -> Node0x55f931620840;
+	Node0x55f931623530 [shape=record,label="{libxml2-py.c:11075:}"];
+	Node0x55f931623530 -> Node0x55f931620840;
+	Node0x55f931620840 [shape=record,label="{libxml2-py.c:11078:}"];
+}

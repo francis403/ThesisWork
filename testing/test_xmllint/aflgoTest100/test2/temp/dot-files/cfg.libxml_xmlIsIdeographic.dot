@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlIsIdeographic' function" {
+	label="CFG for 'libxml_xmlIsIdeographic' function";
+
+	Node0x55d6cba10b30 [shape=record,label="{libxml2-py.c:3426:|{<s0>T|<s1>F}}"];
+	Node0x55d6cba10b30:s0 -> Node0x55d6cba15da0;
+	Node0x55d6cba10b30:s1 -> Node0x55d6cba15d50;
+	Node0x55d6cba15d50 [shape=record,label="{libxml2-py.c:3432:}"];
+	Node0x55d6cba15d50 -> Node0x55d6cba10980;
+	Node0x55d6cba15da0 [shape=record,label="{libxml2-py.c:3434:}"];
+	Node0x55d6cba15da0 -> Node0x55d6cba10980;
+	Node0x55d6cba10980 [shape=record,label="{libxml2-py.c:3437:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlListClear' function" {
+	label="CFG for 'xmlListClear' function";
+
+	Node0x5577c166c180 [shape=record,label="{list.c:422:|{<s0>T|<s1>F}}"];
+	Node0x5577c166c180 -> Node0x5577c1669b20;
+	Node0x5577c166c180 -> Node0x5577c1672150;
+	Node0x5577c1669b20 [shape=record,label="{list.c:427:}"];
+	Node0x5577c1669b20 -> Node0x5577c1673120;
+	Node0x5577c1672150 [shape=record,label="{list.c:428:}"];
+	Node0x5577c1672150 -> Node0x5577c1672f40;
+	Node0x5577c1672f40 [shape=record,label="{list.c:429:|{<s0>T|<s1>F}}"];
+	Node0x5577c1672f40 -> Node0x5577c16733b0;
+	Node0x5577c1672f40 -> Node0x5577c1673120;
+	Node0x5577c16733b0 [shape=record,label="{list.c:430:}"];
+	Node0x5577c16733b0 -> Node0x5577c1672f40;
+	Node0x5577c1673120 [shape=record,label="{list.c:435:}"];
+}

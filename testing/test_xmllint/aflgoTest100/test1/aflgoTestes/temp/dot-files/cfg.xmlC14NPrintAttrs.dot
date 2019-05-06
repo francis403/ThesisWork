@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlC14NPrintAttrs' function" {
+	label="CFG for 'xmlC14NPrintAttrs' function";
+
+	Node0x55fe83c70120 [shape=record,label="{c14n.c:944:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c70120 -> Node0x55fe83c7d590;
+	Node0x55fe83c70120 -> Node0x55fe83c7d630;
+	Node0x55fe83c7d630 [shape=record,label="{c14n.c:951:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c7d630 -> Node0x55fe83c7d590;
+	Node0x55fe83c7d630 -> Node0x55fe83c7d5e0;
+	Node0x55fe83c7d590 [shape=record,label="{c14n.c:952:}"];
+	Node0x55fe83c7d590 -> Node0x55fe83c70170;
+	Node0x55fe83c7d5e0 [shape=record,label="{c14n.c:956:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c7d5e0 -> Node0x55fe83c7e270;
+	Node0x55fe83c7d5e0 -> Node0x55fe83c7e220;
+	Node0x55fe83c7e270 [shape=record,label="{c14n.c:957:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c7e270 -> Node0x55fe83c7e1d0;
+	Node0x55fe83c7e270 -> Node0x55fe83c7e220;
+	Node0x55fe83c7e1d0 [shape=record,label="{c14n.c:958:}"];
+	Node0x55fe83c7e1d0 -> Node0x55fe83c7e220;
+	Node0x55fe83c7e220 [shape=record,label="{c14n.c:962:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c7e220 -> Node0x55fe83c80310;
+	Node0x55fe83c7e220 -> Node0x55fe83c80360;
+	Node0x55fe83c80310 [shape=record,label="{c14n.c:968:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c80310 -> Node0x55fe83c80a80;
+	Node0x55fe83c80310 -> Node0x55fe83c80b20;
+	Node0x55fe83c80a80 [shape=record,label="{c14n.c:971:}"];
+	Node0x55fe83c80a80 -> Node0x55fe83c80ad0;
+	Node0x55fe83c80b20 [shape=record,label="{c14n.c:974:}"];
+	Node0x55fe83c80b20 -> Node0x55fe83c70170;
+	Node0x55fe83c80ad0 [shape=record,label="{c14n.c:977:}"];
+	Node0x55fe83c80ad0 -> Node0x55fe83c80360;
+	Node0x55fe83c80360 [shape=record,label="{c14n.c:978:}"];
+	Node0x55fe83c80360 -> Node0x55fe83c70170;
+	Node0x55fe83c70170 [shape=record,label="{c14n.c:980:}"];
+}

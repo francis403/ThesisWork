@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_htmlGetMetaEncoding' function" {
+	label="CFG for 'libxml_htmlGetMetaEncoding' function";
+
+	Node0x55f930c04d10 [shape=record,label="{libxml2-py.c:294:|{<s0>T|<s1>F}}"];
+	Node0x55f930c04d10:s0 -> Node0x55f930c08310;
+	Node0x55f930c04d10:s1 -> Node0x55f930c082c0;
+	Node0x55f930c082c0 [shape=record,label="{libxml2-py.c:301:}"];
+	Node0x55f930c082c0 -> Node0x55f930c04fa0;
+	Node0x55f930c08310 [shape=record,label="{libxml2-py.c:302:|{<s0>T|<s1>F}}"];
+	Node0x55f930c08310:s0 -> Node0x55f930c08ac0;
+	Node0x55f930c08310:s1 -> Node0x55f930c08b10;
+	Node0x55f930c08ac0 [shape=record,label="{libxml2-py.c:302:}"];
+	Node0x55f930c08ac0 -> Node0x55f930c08b60;
+	Node0x55f930c08b10 [shape=record,label="{libxml2-py.c:302:}"];
+	Node0x55f930c08b10 -> Node0x55f930c08b60;
+	Node0x55f930c08b60 [shape=record,label="{libxml2-py.c:302:}"];
+	Node0x55f930c08b60 -> Node0x55f930c04fa0;
+	Node0x55f930c04fa0 [shape=record,label="{libxml2-py.c:307:}"];
+}

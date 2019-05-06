@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlNextElementSibling' function" {
+	label="CFG for 'libxml_xmlNextElementSibling' function";
+
+	Node0x55f930e05ff0 [shape=record,label="{libxml2-py.c:4376:|{<s0>T|<s1>F}}"];
+	Node0x55f930e05ff0:s0 -> Node0x55f930e09410;
+	Node0x55f930e05ff0:s1 -> Node0x55f930e093c0;
+	Node0x55f930e093c0 [shape=record,label="{libxml2-py.c:4383:}"];
+	Node0x55f930e093c0 -> Node0x55f930e06280;
+	Node0x55f930e09410 [shape=record,label="{libxml2-py.c:4384:|{<s0>T|<s1>F}}"];
+	Node0x55f930e09410:s0 -> Node0x55f930e09c00;
+	Node0x55f930e09410:s1 -> Node0x55f930e09c50;
+	Node0x55f930e09c00 [shape=record,label="{libxml2-py.c:4384:}"];
+	Node0x55f930e09c00 -> Node0x55f930e09ca0;
+	Node0x55f930e09c50 [shape=record,label="{libxml2-py.c:4384:}"];
+	Node0x55f930e09c50 -> Node0x55f930e09ca0;
+	Node0x55f930e09ca0 [shape=record,label="{libxml2-py.c:4384:}"];
+	Node0x55f930e09ca0 -> Node0x55f930e06280;
+	Node0x55f930e06280 [shape=record,label="{libxml2-py.c:4389:}"];
+}

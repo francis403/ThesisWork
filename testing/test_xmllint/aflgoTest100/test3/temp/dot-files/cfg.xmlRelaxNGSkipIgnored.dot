@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlRelaxNGSkipIgnored' function" {
+	label="CFG for 'xmlRelaxNGSkipIgnored' function";
+
+	Node0x559d0c16eb70 [shape=record,label="{relaxng.c:8533:}"];
+	Node0x559d0c16eb70 -> Node0x559d0c16ffe0;
+	Node0x559d0c16ffe0 [shape=record,label="{relaxng.c:8539:|{<s0>T|<s1>F}}"];
+	Node0x559d0c16ffe0 -> Node0x559d0c174760;
+	Node0x559d0c16ffe0 -> Node0x559d0c174710;
+	Node0x559d0c174760 [shape=record,label="{relaxng.c:8540:|{<s0>T|<s1>F}}"];
+	Node0x559d0c174760 -> Node0x559d0c174a80;
+	Node0x559d0c174760 -> Node0x559d0c174c20;
+	Node0x559d0c174c20 [shape=record,label="{relaxng.c:8541:|{<s0>T|<s1>F}}"];
+	Node0x559d0c174c20 -> Node0x559d0c174a80;
+	Node0x559d0c174c20 -> Node0x559d0c174ba0;
+	Node0x559d0c174ba0 [shape=record,label="{relaxng.c:8542:|{<s0>T|<s1>F}}"];
+	Node0x559d0c174ba0 -> Node0x559d0c174a80;
+	Node0x559d0c174ba0 -> Node0x559d0c174b20;
+	Node0x559d0c174b20 [shape=record,label="{relaxng.c:8543:|{<s0>T|<s1>F}}"];
+	Node0x559d0c174b20 -> Node0x559d0c174a80;
+	Node0x559d0c174b20 -> Node0x559d0c174ad0;
+	Node0x559d0c174ad0 [shape=record,label="{relaxng.c:8544:|{<s0>T|<s1>F}}"];
+	Node0x559d0c174ad0 -> Node0x559d0c1758a0;
+	Node0x559d0c174ad0 -> Node0x559d0c1758f0;
+	Node0x559d0c1758f0 [shape=record,label="{relaxng.c:8545:|{<s0>T|<s1>F}}"];
+	Node0x559d0c1758f0 -> Node0x559d0c1758a0;
+	Node0x559d0c1758f0 -> Node0x559d0c175760;
+	Node0x559d0c1758a0 [shape=record,label="{relaxng.c:8546:|{<s0>T|<s1>F}}"];
+	Node0x559d0c1758a0 -> Node0x559d0c1760e0;
+	Node0x559d0c1758a0 -> Node0x559d0c176130;
+	Node0x559d0c176130 [shape=record,label="{relaxng.c:8547:}"];
+	Node0x559d0c176130 -> Node0x559d0c1760e0;
+	Node0x559d0c1760e0 [shape=record,label="{%40}"];
+	Node0x559d0c1760e0 -> Node0x559d0c175760;
+	Node0x559d0c175760 [shape=record,label="{relaxng.c:8543:}"];
+	Node0x559d0c175760 -> Node0x559d0c174a80;
+	Node0x559d0c174a80 [shape=record,label="{%43}"];
+	Node0x559d0c174a80 -> Node0x559d0c174710;
+	Node0x559d0c174710 [shape=record,label="{relaxng.c:8539:|{<s0>T|<s1>F}}"];
+	Node0x559d0c174710 -> Node0x559d0c176b60;
+	Node0x559d0c174710 -> Node0x559d0c174690;
+	Node0x559d0c176b60 [shape=record,label="{relaxng.c:8548:}"];
+	Node0x559d0c176b60 -> Node0x559d0c16ffe0;
+	Node0x559d0c174690 [shape=record,label="{relaxng.c:8550:}"];
+}

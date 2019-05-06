@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathModValues' function" {
+	label="CFG for 'libxml_xmlXPathModValues' function";
+
+	Node0x55f931845c70 [shape=record,label="{libxml2-py.c:13489:|{<s0>T|<s1>F}}"];
+	Node0x55f931845c70:s0 -> Node0x55f931848cc0;
+	Node0x55f931845c70:s1 -> Node0x55f931848c70;
+	Node0x55f931848c70 [shape=record,label="{libxml2-py.c:13494:}"];
+	Node0x55f931848c70 -> Node0x55f931845990;
+	Node0x55f931848cc0 [shape=record,label="{libxml2-py.c:13495:|{<s0>T|<s1>F}}"];
+	Node0x55f931848cc0:s0 -> Node0x55f9318494a0;
+	Node0x55f931848cc0:s1 -> Node0x55f9318494f0;
+	Node0x55f9318494a0 [shape=record,label="{libxml2-py.c:13495:}"];
+	Node0x55f9318494a0 -> Node0x55f931849540;
+	Node0x55f9318494f0 [shape=record,label="{libxml2-py.c:13495:}"];
+	Node0x55f9318494f0 -> Node0x55f931849540;
+	Node0x55f931849540 [shape=record,label="{libxml2-py.c:13495:}"];
+	Node0x55f931849540 -> Node0x55f931845990;
+	Node0x55f931845990 [shape=record,label="{libxml2-py.c:13500:}"];
+}

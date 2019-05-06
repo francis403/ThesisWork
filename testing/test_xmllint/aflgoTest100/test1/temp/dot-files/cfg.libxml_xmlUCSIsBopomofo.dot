@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsBopomofo' function" {
+	label="CFG for 'libxml_xmlUCSIsBopomofo' function";
+
+	Node0x55f931511070 [shape=record,label="{libxml2-py.c:9210:|{<s0>T|<s1>F}}"];
+	Node0x55f931511070:s0 -> Node0x55f9315150b0;
+	Node0x55f931511070:s1 -> Node0x55f931515060;
+	Node0x55f931515060 [shape=record,label="{libxml2-py.c:9216:}"];
+	Node0x55f931515060 -> Node0x55f931512990;
+	Node0x55f9315150b0 [shape=record,label="{libxml2-py.c:9218:}"];
+	Node0x55f9315150b0 -> Node0x55f931512990;
+	Node0x55f931512990 [shape=record,label="{libxml2-py.c:9221:}"];
+}

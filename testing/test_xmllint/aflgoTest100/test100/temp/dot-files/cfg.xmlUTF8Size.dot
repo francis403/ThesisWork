@@ -1,0 +1,36 @@
+digraph "CFG for 'xmlUTF8Size' function" {
+	label="CFG for 'xmlUTF8Size' function";
+
+	Node0x55b6096200f0 [shape=record,label="{xmlstring.c:615:|{<s0>T|<s1>F}}"];
+	Node0x55b6096200f0 -> Node0x55b60961faf0;
+	Node0x55b6096200f0 -> Node0x55b60961c060;
+	Node0x55b60961faf0 [shape=record,label="{xmlstring.c:620:}"];
+	Node0x55b60961faf0 -> Node0x55b60961fef0;
+	Node0x55b60961c060 [shape=record,label="{xmlstring.c:621:|{<s0>T|<s1>F}}"];
+	Node0x55b60961c060 -> Node0x55b6096234c0;
+	Node0x55b60961c060 -> Node0x55b609623510;
+	Node0x55b6096234c0 [shape=record,label="{xmlstring.c:622:}"];
+	Node0x55b6096234c0 -> Node0x55b60961fef0;
+	Node0x55b609623510 [shape=record,label="{xmlstring.c:624:|{<s0>T|<s1>F}}"];
+	Node0x55b609623510 -> Node0x55b609623af0;
+	Node0x55b609623510 -> Node0x55b609623aa0;
+	Node0x55b609623aa0 [shape=record,label="{xmlstring.c:625:}"];
+	Node0x55b609623aa0 -> Node0x55b60961fef0;
+	Node0x55b609623af0 [shape=record,label="{xmlstring.c:627:}"];
+	Node0x55b609623af0 -> Node0x55b609624460;
+	Node0x55b609624460 [shape=record,label="{xmlstring.c:628:|{<s0>T|<s1>F}}"];
+	Node0x55b609624460 -> Node0x55b609624740;
+	Node0x55b609624460 -> Node0x55b609624240;
+	Node0x55b609624740 [shape=record,label="{xmlstring.c:629:|{<s0>T|<s1>F}}"];
+	Node0x55b609624740 -> Node0x55b609624b30;
+	Node0x55b609624740 -> Node0x55b609624ae0;
+	Node0x55b609624ae0 [shape=record,label="{xmlstring.c:630:}"];
+	Node0x55b609624ae0 -> Node0x55b60961fef0;
+	Node0x55b609624b30 [shape=record,label="{xmlstring.c:631:}"];
+	Node0x55b609624b30 -> Node0x55b6096246b0;
+	Node0x55b6096246b0 [shape=record,label="{xmlstring.c:628:}"];
+	Node0x55b6096246b0 -> Node0x55b609624460;
+	Node0x55b609624240 [shape=record,label="{xmlstring.c:633:}"];
+	Node0x55b609624240 -> Node0x55b60961fef0;
+	Node0x55b60961fef0 [shape=record,label="{xmlstring.c:634:}"];
+}

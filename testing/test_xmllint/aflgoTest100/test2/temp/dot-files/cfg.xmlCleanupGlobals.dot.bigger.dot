@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlCleanupGlobals' function" {
+	label="CFG for 'xmlCleanupGlobals' function";
+
+	Node0x55f2a2ade280 [shape=record,label="{globals.c:60:|{<s0>T|<s1>F}}"];
+	Node0x55f2a2ade280:s0 -> Node0x55f2a2ade6e0;
+	Node0x55f2a2ade280:s1 -> Node0x55f2a2ade730;
+	Node0x55f2a2ade6e0 [shape=record,label="{globals.c:61:}"];
+	Node0x55f2a2ade6e0 -> Node0x55f2a2ade730;
+	Node0x55f2a2ade730 [shape=record,label="{globals.c:64:}"];
+}

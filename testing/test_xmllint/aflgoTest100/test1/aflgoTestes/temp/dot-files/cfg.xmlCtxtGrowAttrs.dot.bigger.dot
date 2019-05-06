@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlCtxtGrowAttrs' function" {
+	label="CFG for 'xmlCtxtGrowAttrs' function";
+
+	Node0x55d73c1f4280 [shape=record,label="{parser.c:1666:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f4280:s0 -> Node0x55d73c1f58d0;
+	Node0x55d73c1f4280:s1 -> Node0x55d73c1f5970;
+	Node0x55d73c1f58d0 [shape=record,label="{parser.c:1672:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f58d0:s0 -> Node0x55d73c1f62d0;
+	Node0x55d73c1f58d0:s1 -> Node0x55d73c1f6320;
+	Node0x55d73c1f62d0 [shape=record,label="{parser.c:1675:}"];
+	Node0x55d73c1f62d0 -> Node0x55d73c1f6e50;
+	Node0x55d73c1f6320 [shape=record,label="{parser.c:1676:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f6320:s0 -> Node0x55d73c1f76a0;
+	Node0x55d73c1f6320:s1 -> Node0x55d73c1f76f0;
+	Node0x55d73c1f76a0 [shape=record,label="{parser.c:1678:}"];
+	Node0x55d73c1f76a0 -> Node0x55d73c1f6e50;
+	Node0x55d73c1f76f0 [shape=record,label="{parser.c:1679:}"];
+	Node0x55d73c1f76f0 -> Node0x55d73c1f5920;
+	Node0x55d73c1f5970 [shape=record,label="{parser.c:1681:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f5970:s0 -> Node0x55d73c1f8000;
+	Node0x55d73c1f5970:s1 -> Node0x55d73c1f8050;
+	Node0x55d73c1f8000 [shape=record,label="{parser.c:1682:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f8000:s0 -> Node0x55d73c1f9040;
+	Node0x55d73c1f8000:s1 -> Node0x55d73c1f9090;
+	Node0x55d73c1f9040 [shape=record,label="{parser.c:1685:}"];
+	Node0x55d73c1f9040 -> Node0x55d73c1f6e50;
+	Node0x55d73c1f9090 [shape=record,label="{parser.c:1686:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f9090:s0 -> Node0x55d73c1f9eb0;
+	Node0x55d73c1f9090:s1 -> Node0x55d73c1f9f00;
+	Node0x55d73c1f9eb0 [shape=record,label="{parser.c:1689:}"];
+	Node0x55d73c1f9eb0 -> Node0x55d73c1f6e50;
+	Node0x55d73c1f9f00 [shape=record,label="{parser.c:1690:}"];
+	Node0x55d73c1f9f00 -> Node0x55d73c1f8050;
+	Node0x55d73c1f8050 [shape=record,label="{%81}"];
+	Node0x55d73c1f8050 -> Node0x55d73c1f5920;
+	Node0x55d73c1f5920 [shape=record,label="{parser.c:1693:}"];
+	Node0x55d73c1f5920 -> Node0x55d73c1f2060;
+	Node0x55d73c1f6e50 [shape=record,label="{parser.c:1695:}"];
+	Node0x55d73c1f6e50 -> Node0x55d73c1f2060;
+	Node0x55d73c1f2060 [shape=record,label="{parser.c:1697:}"];
+}

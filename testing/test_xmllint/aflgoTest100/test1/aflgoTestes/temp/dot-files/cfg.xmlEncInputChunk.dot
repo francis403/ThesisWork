@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlEncInputChunk' function" {
+	label="CFG for 'xmlEncInputChunk' function";
+
+	Node0x5557bd94e910 [shape=record,label="{encoding.c:1916:|{<s0>T|<s1>F}}"];
+	Node0x5557bd94e910 -> Node0x5557bda485b0;
+	Node0x5557bd94e910 -> Node0x5557bda48650;
+	Node0x5557bda485b0 [shape=record,label="{encoding.c:1922:}"];
+	Node0x5557bda485b0 -> Node0x5557bda48600;
+	Node0x5557bda48650 [shape=record,label="{encoding.c:1925:|{<s0>T|<s1>F}}"];
+	Node0x5557bda48650 -> Node0x5557bda49010;
+	Node0x5557bda48650 -> Node0x5557bda490b0;
+	Node0x5557bda49010 [shape=record,label="{encoding.c:1926:}"];
+	Node0x5557bda49010 -> Node0x5557bda49060;
+	Node0x5557bda490b0 [shape=record,label="{encoding.c:1936:}"];
+	Node0x5557bda490b0 -> Node0x5557bda49060;
+	Node0x5557bda49060 [shape=record,label="{%40}"];
+	Node0x5557bda49060 -> Node0x5557bda48600;
+	Node0x5557bda48600 [shape=record,label="{encoding.c:1941:}"];
+}

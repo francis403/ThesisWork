@@ -1,0 +1,28 @@
+digraph "CFG for 'xmlXPathTrailingSorted' function" {
+	label="CFG for 'xmlXPathTrailingSorted' function";
+
+	Node0x5621ee769430 [shape=record,label="{xpath.c:4801:|{<s0>T|<s1>F}}"];
+	Node0x5621ee769430:s0 -> Node0x5621ee76ec30;
+	Node0x5621ee769430:s1 -> Node0x5621ee55f4a0;
+	Node0x5621ee55f4a0 [shape=record,label="{xpath.c:4802:|{<s0>T|<s1>F}}"];
+	Node0x5621ee55f4a0:s0 -> Node0x5621ee76ec30;
+	Node0x5621ee55f4a0:s1 -> Node0x5621ee55f420;
+	Node0x5621ee55f420 [shape=record,label="{xpath.c:4802:|{<s0>T|<s1>F}}"];
+	Node0x5621ee55f420:s0 -> Node0x5621ee76ec30;
+	Node0x5621ee55f420:s1 -> Node0x5621ee55f3d0;
+	Node0x5621ee76ec30 [shape=record,label="{xpath.c:4803:}"];
+	Node0x5621ee76ec30 -> Node0x5621ee76ee00;
+	Node0x5621ee55f3d0 [shape=record,label="{xpath.c:4804:|{<s0>T|<s1>F}}"];
+	Node0x5621ee55f3d0:s0 -> Node0x5621ee775e80;
+	Node0x5621ee55f3d0:s1 -> Node0x5621ee775de0;
+	Node0x5621ee775e80 [shape=record,label="{xpath.c:4805:|{<s0>T|<s1>F}}"];
+	Node0x5621ee775e80:s0 -> Node0x5621ee5639f0;
+	Node0x5621ee775e80:s1 -> Node0x5621ee775de0;
+	Node0x5621ee5639f0 [shape=record,label="{xpath.c:4805:}"];
+	Node0x5621ee5639f0 -> Node0x5621ee775e30;
+	Node0x5621ee775de0 [shape=record,label="{xpath.c:4805:}"];
+	Node0x5621ee775de0 -> Node0x5621ee775e30;
+	Node0x5621ee775e30 [shape=record,label="{xpath.c:4805:}"];
+	Node0x5621ee775e30 -> Node0x5621ee76ee00;
+	Node0x5621ee76ee00 [shape=record,label="{xpath.c:4806:}"];
+}

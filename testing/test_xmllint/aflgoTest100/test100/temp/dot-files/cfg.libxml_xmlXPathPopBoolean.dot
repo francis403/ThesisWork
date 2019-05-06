@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathPopBoolean' function" {
+	label="CFG for 'libxml_xmlXPathPopBoolean' function";
+
+	Node0x55d6cc3b0940 [shape=record,label="{libxml2-py.c:14146:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc3b0940:s0 -> Node0x55d6cc3b1f80;
+	Node0x55d6cc3b0940:s1 -> Node0x55d6cc3b1f30;
+	Node0x55d6cc3b1f30 [shape=record,label="{libxml2-py.c:14153:}"];
+	Node0x55d6cc3b1f30 -> Node0x55d6cc3ae640;
+	Node0x55d6cc3b1f80 [shape=record,label="{libxml2-py.c:14154:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc3b1f80:s0 -> Node0x55d6cc3b2760;
+	Node0x55d6cc3b1f80:s1 -> Node0x55d6cc3b27b0;
+	Node0x55d6cc3b2760 [shape=record,label="{libxml2-py.c:14154:}"];
+	Node0x55d6cc3b2760 -> Node0x55d6cc3b2800;
+	Node0x55d6cc3b27b0 [shape=record,label="{libxml2-py.c:14154:}"];
+	Node0x55d6cc3b27b0 -> Node0x55d6cc3b2800;
+	Node0x55d6cc3b2800 [shape=record,label="{libxml2-py.c:14154:}"];
+	Node0x55d6cc3b2800 -> Node0x55d6cc3ae640;
+	Node0x55d6cc3ae640 [shape=record,label="{libxml2-py.c:14159:}"];
+}

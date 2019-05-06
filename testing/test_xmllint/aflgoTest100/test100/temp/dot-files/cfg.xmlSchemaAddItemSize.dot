@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchemaAddItemSize' function" {
+	label="CFG for 'xmlSchemaAddItemSize' function";
+
+	Node0x558353609b60 [shape=record,label="{xmlschemas.c:3709:|{<s0>T|<s1>F}}"];
+	Node0x558353609b60 -> Node0x55835360a9a0;
+	Node0x558353609b60 -> Node0x55835360a9f0;
+	Node0x55835360a9a0 [shape=record,label="{xmlschemas.c:3712:|{<s0>T|<s1>F}}"];
+	Node0x55835360a9a0 -> Node0x55835360af80;
+	Node0x55835360a9a0 -> Node0x55835360afd0;
+	Node0x55835360af80 [shape=record,label="{xmlschemas.c:3714:}"];
+	Node0x55835360af80 -> Node0x558353609bb0;
+	Node0x55835360afd0 [shape=record,label="{xmlschemas.c:3715:}"];
+	Node0x55835360afd0 -> Node0x55835360a9f0;
+	Node0x55835360a9f0 [shape=record,label="{xmlschemas.c:3716:}"];
+	Node0x55835360a9f0 -> Node0x558353609bb0;
+	Node0x558353609bb0 [shape=record,label="{xmlschemas.c:3718:}"];
+}

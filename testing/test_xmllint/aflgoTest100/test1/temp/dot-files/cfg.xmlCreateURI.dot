@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlCreateURI' function" {
+	label="CFG for 'xmlCreateURI' function";
+
+	Node0x5561d673cec0 [shape=record,label="{uri.c:1013:|{<s0>T|<s1>F}}"];
+	Node0x5561d673cec0 -> Node0x5561d673da90;
+	Node0x5561d673cec0 -> Node0x5561d673dae0;
+	Node0x5561d673da90 [shape=record,label="{uri.c:1017:}"];
+	Node0x5561d673da90 -> Node0x5561d673d0b0;
+	Node0x5561d673dae0 [shape=record,label="{uri.c:1020:}"];
+	Node0x5561d673dae0 -> Node0x5561d673d0b0;
+	Node0x5561d673d0b0 [shape=record,label="{uri.c:1022:}"];
+}

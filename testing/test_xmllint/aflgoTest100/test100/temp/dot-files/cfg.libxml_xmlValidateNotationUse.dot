@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlValidateNotationUse' function" {
+	label="CFG for 'libxml_xmlValidateNotationUse' function";
+
+	Node0x55d6cc21f2f0 [shape=record,label="{libxml2-py.c:12504:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc21f2f0:s0 -> Node0x55d6cc222d90;
+	Node0x55d6cc21f2f0:s1 -> Node0x55d6cc222d40;
+	Node0x55d6cc222d40 [shape=record,label="{libxml2-py.c:12514:}"];
+	Node0x55d6cc222d40 -> Node0x55d6cc21f580;
+	Node0x55d6cc222d90 [shape=record,label="{libxml2-py.c:12515:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc222d90:s0 -> Node0x55d6cc223670;
+	Node0x55d6cc222d90:s1 -> Node0x55d6cc2236c0;
+	Node0x55d6cc223670 [shape=record,label="{libxml2-py.c:12515:}"];
+	Node0x55d6cc223670 -> Node0x55d6cc223710;
+	Node0x55d6cc2236c0 [shape=record,label="{libxml2-py.c:12515:}"];
+	Node0x55d6cc2236c0 -> Node0x55d6cc223710;
+	Node0x55d6cc223710 [shape=record,label="{libxml2-py.c:12515:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc223710:s0 -> Node0x55d6cc223ca0;
+	Node0x55d6cc223710:s1 -> Node0x55d6cc223cf0;
+	Node0x55d6cc223ca0 [shape=record,label="{libxml2-py.c:12516:}"];
+	Node0x55d6cc223ca0 -> Node0x55d6cc223d40;
+	Node0x55d6cc223cf0 [shape=record,label="{libxml2-py.c:12516:}"];
+	Node0x55d6cc223cf0 -> Node0x55d6cc223d40;
+	Node0x55d6cc223d40 [shape=record,label="{libxml2-py.c:12516:}"];
+	Node0x55d6cc223d40 -> Node0x55d6cc21f580;
+	Node0x55d6cc21f580 [shape=record,label="{libxml2-py.c:12521:}"];
+}

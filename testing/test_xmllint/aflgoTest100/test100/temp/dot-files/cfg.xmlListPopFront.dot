@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlListPopFront' function" {
+	label="CFG for 'xmlListPopFront' function";
+
+	Node0x5577c16787b0 [shape=record,label="{list.c:513:|{<s0>T|<s1>F}}"];
+	Node0x5577c16787b0 -> Node0x5577c16788c0;
+	Node0x5577c16787b0 -> Node0x5577c167a680;
+	Node0x5577c167a680 [shape=record,label="{list.c:516:}"];
+	Node0x5577c167a680 -> Node0x5577c16788c0;
+	Node0x5577c16788c0 [shape=record,label="{list.c:517:}"];
+}

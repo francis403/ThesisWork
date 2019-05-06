@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlRelaxNGParseInclude' function" {
+	label="CFG for 'xmlRelaxNGParseInclude' function";
+
+	Node0x559d0be65e70 [shape=record,label="{relaxng.c:4565:|{<s0>T|<s1>F}}"];
+	Node0x559d0be65e70:s0 -> Node0x559d0bf2b2d0;
+	Node0x559d0be65e70:s1 -> Node0x559d0bf2b320;
+	Node0x559d0bf2b2d0 [shape=record,label="{relaxng.c:4573:}"];
+	Node0x559d0bf2b2d0 -> Node0x559d0bf29c30;
+	Node0x559d0bf2b320 [shape=record,label="{relaxng.c:4577:|{<s0>T|<s1>F}}"];
+	Node0x559d0bf2b320:s0 -> Node0x559d0bf2c070;
+	Node0x559d0bf2b320:s1 -> Node0x559d0bf2c0c0;
+	Node0x559d0bf2c070 [shape=record,label="{relaxng.c:4579:}"];
+	Node0x559d0bf2c070 -> Node0x559d0bf29c30;
+	Node0x559d0bf2c0c0 [shape=record,label="{relaxng.c:4583:|{<s0>T|<s1>F}}"];
+	Node0x559d0bf2c0c0:s0 -> Node0x559d0bf2cb60;
+	Node0x559d0bf2c0c0:s1 -> Node0x559d0bf2cb10;
+	Node0x559d0bf2cb10 [shape=record,label="{relaxng.c:4584:}"];
+	Node0x559d0bf2cb10 -> Node0x559d0bf29c30;
+	Node0x559d0bf2cb60 [shape=record,label="{relaxng.c:4592:|{<s0>T|<s1>F}}"];
+	Node0x559d0bf2cb60:s0 -> Node0x559d0bf2d750;
+	Node0x559d0bf2cb60:s1 -> Node0x559d0bf2d7a0;
+	Node0x559d0bf2d750 [shape=record,label="{relaxng.c:4593:|{<s0>T|<s1>F}}"];
+	Node0x559d0bf2d750:s0 -> Node0x559d0bf2e030;
+	Node0x559d0bf2d750:s1 -> Node0x559d0bf2e080;
+	Node0x559d0bf2e030 [shape=record,label="{relaxng.c:4595:}"];
+	Node0x559d0bf2e030 -> Node0x559d0bf2e080;
+	Node0x559d0bf2e080 [shape=record,label="{relaxng.c:4596:}"];
+	Node0x559d0bf2e080 -> Node0x559d0bf2d7a0;
+	Node0x559d0bf2d7a0 [shape=record,label="{relaxng.c:4597:|{<s0>T|<s1>F}}"];
+	Node0x559d0bf2d7a0:s0 -> Node0x559d0bf2e630;
+	Node0x559d0bf2d7a0:s1 -> Node0x559d0bf2e680;
+	Node0x559d0bf2e630 [shape=record,label="{relaxng.c:4598:|{<s0>T|<s1>F}}"];
+	Node0x559d0bf2e630:s0 -> Node0x559d0bf2ef10;
+	Node0x559d0bf2e630:s1 -> Node0x559d0bf2ef60;
+	Node0x559d0bf2ef10 [shape=record,label="{relaxng.c:4600:}"];
+	Node0x559d0bf2ef10 -> Node0x559d0bf2ef60;
+	Node0x559d0bf2ef60 [shape=record,label="{relaxng.c:4601:}"];
+	Node0x559d0bf2ef60 -> Node0x559d0bf2e680;
+	Node0x559d0bf2e680 [shape=record,label="{relaxng.c:4602:}"];
+	Node0x559d0bf2e680 -> Node0x559d0bf29c30;
+	Node0x559d0bf29c30 [shape=record,label="{relaxng.c:4603:}"];
+}

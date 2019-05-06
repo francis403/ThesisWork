@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaGetNamedComponent' function" {
+	label="CFG for 'xmlSchemaGetNamedComponent' function";
+
+	Node0x55d026325f80 [shape=record,label="{xmlschemas.c:5005:|{<s0>def|<s1>17|<s2>14}}"];
+	Node0x55d026325f80 -> Node0x55d026327130;
+	Node0x55d026325f80 -> Node0x55d026327470;
+	Node0x55d026325f80 -> Node0x55d0263281b0;
+	Node0x55d026327470 [shape=record,label="{xmlschemas.c:5012:}"];
+	Node0x55d026327470 -> Node0x55d026325fd0;
+	Node0x55d0263281b0 [shape=record,label="{xmlschemas.c:5015:}"];
+	Node0x55d0263281b0 -> Node0x55d026325fd0;
+	Node0x55d026327130 [shape=record,label="{xmlschemas.c:5018:}"];
+	Node0x55d026327130 -> Node0x55d026325fd0;
+	Node0x55d026325fd0 [shape=record,label="{xmlschemas.c:5021:}"];
+}

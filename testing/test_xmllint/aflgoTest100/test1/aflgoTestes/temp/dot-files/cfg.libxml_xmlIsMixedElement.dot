@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlIsMixedElement' function" {
+	label="CFG for 'libxml_xmlIsMixedElement' function";
+
+	Node0x55f930f4b740 [shape=record,label="{libxml2-py.c:3454:|{<s0>T|<s1>F}}"];
+	Node0x55f930f4b740:s0 -> Node0x55f930f4ebf0;
+	Node0x55f930f4b740:s1 -> Node0x55f930f4eba0;
+	Node0x55f930f4eba0 [shape=record,label="{libxml2-py.c:3462:}"];
+	Node0x55f930f4eba0 -> Node0x55f930f4b9d0;
+	Node0x55f930f4ebf0 [shape=record,label="{libxml2-py.c:3463:|{<s0>T|<s1>F}}"];
+	Node0x55f930f4ebf0:s0 -> Node0x55f930f4f440;
+	Node0x55f930f4ebf0:s1 -> Node0x55f930f4f490;
+	Node0x55f930f4f440 [shape=record,label="{libxml2-py.c:3463:}"];
+	Node0x55f930f4f440 -> Node0x55f930f4f4e0;
+	Node0x55f930f4f490 [shape=record,label="{libxml2-py.c:3463:}"];
+	Node0x55f930f4f490 -> Node0x55f930f4f4e0;
+	Node0x55f930f4f4e0 [shape=record,label="{libxml2-py.c:3463:}"];
+	Node0x55f930f4f4e0 -> Node0x55f930f4b9d0;
+	Node0x55f930f4b9d0 [shape=record,label="{libxml2-py.c:3468:}"];
+}

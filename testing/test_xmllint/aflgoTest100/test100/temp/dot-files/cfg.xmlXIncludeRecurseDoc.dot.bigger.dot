@@ -1,0 +1,33 @@
+digraph "CFG for 'xmlXIncludeRecurseDoc' function" {
+	label="CFG for 'xmlXIncludeRecurseDoc' function";
+
+	Node0x560832afec50 [shape=record,label="{xinclude.c:664:|{<s0>T|<s1>F}}"];
+	Node0x560832afec50:s0 -> Node0x560832b044f0;
+	Node0x560832afec50:s1 -> Node0x560832b04540;
+	Node0x560832b044f0 [shape=record,label="{xinclude.c:689:|{<s0>T|<s1>F}}"];
+	Node0x560832b044f0:s0 -> Node0x560832b058f0;
+	Node0x560832b044f0:s1 -> Node0x560832b05940;
+	Node0x560832b058f0 [shape=record,label="{xinclude.c:698:}"];
+	Node0x560832b058f0 -> Node0x560832b04540;
+	Node0x560832b05940 [shape=record,label="{xinclude.c:705:}"];
+	Node0x560832b05940 -> Node0x560832b07a40;
+	Node0x560832b07a40 [shape=record,label="{xinclude.c:718:|{<s0>T|<s1>F}}"];
+	Node0x560832b07a40:s0 -> Node0x560832b07d20;
+	Node0x560832b07a40:s1 -> Node0x560832b078a0;
+	Node0x560832b07d20 [shape=record,label="{xinclude.c:719:}"];
+	Node0x560832b07d20 -> Node0x560832b07c90;
+	Node0x560832b07c90 [shape=record,label="{xinclude.c:718:}"];
+	Node0x560832b07c90 -> Node0x560832b07a40;
+	Node0x560832b078a0 [shape=record,label="{xinclude.c:727:}"];
+	Node0x560832b078a0 -> Node0x560832b09a10;
+	Node0x560832b09a10 [shape=record,label="{xinclude.c:729:|{<s0>T|<s1>F}}"];
+	Node0x560832b09a10:s0 -> Node0x560832b09cf0;
+	Node0x560832b09a10:s1 -> Node0x560832b09870;
+	Node0x560832b09cf0 [shape=record,label="{xinclude.c:730:}"];
+	Node0x560832b09cf0 -> Node0x560832b09c60;
+	Node0x560832b09c60 [shape=record,label="{xinclude.c:729:}"];
+	Node0x560832b09c60 -> Node0x560832b09a10;
+	Node0x560832b09870 [shape=record,label="{xinclude.c:735:}"];
+	Node0x560832b09870 -> Node0x560832b04540;
+	Node0x560832b04540 [shape=record,label="{xinclude.c:747:}"];
+}

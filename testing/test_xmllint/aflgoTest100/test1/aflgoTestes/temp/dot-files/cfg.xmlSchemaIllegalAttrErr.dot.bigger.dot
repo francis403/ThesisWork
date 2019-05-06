@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaIllegalAttrErr' function" {
+	label="CFG for 'xmlSchemaIllegalAttrErr' function";
+
+	Node0x55d02686c800 [shape=record,label="{xmlschemas.c:2530:|{<s0>T|<s1>F}}"];
+	Node0x55d02686c800:s0 -> Node0x55d02686f2c0;
+	Node0x55d02686c800:s1 -> Node0x55d02686f310;
+	Node0x55d02686f2c0 [shape=record,label="{xmlschemas.c:2542:}"];
+	Node0x55d02686f2c0 -> Node0x55d02686f310;
+	Node0x55d02686f310 [shape=record,label="{xmlschemas.c:2543:|{<s0>T|<s1>F}}"];
+	Node0x55d02686f310:s0 -> Node0x55d02686f780;
+	Node0x55d02686f310:s1 -> Node0x55d02686f7d0;
+	Node0x55d02686f780 [shape=record,label="{xmlschemas.c:2543:}"];
+	Node0x55d02686f780 -> Node0x55d02686f7d0;
+	Node0x55d02686f7d0 [shape=record,label="{xmlschemas.c:2544:}"];
+}

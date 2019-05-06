@@ -1,0 +1,40 @@
+digraph "CFG for 'htmlInitAutoClose' function" {
+	label="CFG for 'htmlInitAutoClose' function";
+
+	Node0x5630c5b53110 [shape=record,label="{HTMLparser.c:1232:|{<s0>T|<s1>F}}"];
+	Node0x5630c5b53110:s0 -> Node0x5630c5b61d10;
+	Node0x5630c5b53110:s1 -> Node0x5630c5b61d60;
+	Node0x5630c5b61d10 [shape=record,label="{HTMLparser.c:1234:}"];
+	Node0x5630c5b61d10 -> Node0x5630c5b531c0;
+	Node0x5630c5b61d60 [shape=record,label="{HTMLparser.c:1236:}"];
+	Node0x5630c5b61d60 -> Node0x5630c5b62670;
+	Node0x5630c5b62670 [shape=record,label="{HTMLparser.c:1236:|{<s0>T|<s1>F}}"];
+	Node0x5630c5b62670:s0 -> Node0x5630c5b629a0;
+	Node0x5630c5b62670:s1 -> Node0x5630c5b62510;
+	Node0x5630c5b629a0 [shape=record,label="{HTMLparser.c:1236:}"];
+	Node0x5630c5b629a0 -> Node0x5630c5b62910;
+	Node0x5630c5b62910 [shape=record,label="{HTMLparser.c:1236:}"];
+	Node0x5630c5b62910 -> Node0x5630c5b62670;
+	Node0x5630c5b62510 [shape=record,label="{HTMLparser.c:1237:}"];
+	Node0x5630c5b62510 -> Node0x5630c5b64c70;
+	Node0x5630c5b64c70 [shape=record,label="{HTMLparser.c:1238:|{<s0>T|<s1>F}}"];
+	Node0x5630c5b64c70:s0 -> Node0x5630c5b64f60;
+	Node0x5630c5b64c70:s1 -> Node0x5630c5b64f10;
+	Node0x5630c5b64f60 [shape=record,label="{HTMLparser.c:1238:}"];
+	Node0x5630c5b64f60 -> Node0x5630c5b64f10;
+	Node0x5630c5b64f10 [shape=record,label="{HTMLparser.c:1238:|{<s0>T|<s1>F}}"];
+	Node0x5630c5b64f10:s0 -> Node0x5630c5b65860;
+	Node0x5630c5b64f10:s1 -> Node0x5630c5b64e90;
+	Node0x5630c5b65860 [shape=record,label="{HTMLparser.c:1239:}"];
+	Node0x5630c5b65860 -> Node0x5630c5b66350;
+	Node0x5630c5b66350 [shape=record,label="{HTMLparser.c:1240:|{<s0>T|<s1>F}}"];
+	Node0x5630c5b66350:s0 -> Node0x5630c5b668e0;
+	Node0x5630c5b66350:s1 -> Node0x5630c5b628c0;
+	Node0x5630c5b668e0 [shape=record,label="{HTMLparser.c:1240:}"];
+	Node0x5630c5b668e0 -> Node0x5630c5b66350;
+	Node0x5630c5b628c0 [shape=record,label="{HTMLparser.c:1241:}"];
+	Node0x5630c5b628c0 -> Node0x5630c5b64c70;
+	Node0x5630c5b64e90 [shape=record,label="{HTMLparser.c:1243:}"];
+	Node0x5630c5b64e90 -> Node0x5630c5b531c0;
+	Node0x5630c5b531c0 [shape=record,label="{HTMLparser.c:1244:}"];
+}

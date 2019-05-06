@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlIsPubidChar' function" {
+	label="CFG for 'libxml_xmlIsPubidChar' function";
+
+	Node0x55d6cba19940 [shape=record,label="{libxml2-py.c:3471:|{<s0>T|<s1>F}}"];
+	Node0x55d6cba19940:s0 -> Node0x55d6cba1d3b0;
+	Node0x55d6cba19940:s1 -> Node0x55d6cba1d360;
+	Node0x55d6cba1d360 [shape=record,label="{libxml2-py.c:3477:}"];
+	Node0x55d6cba1d360 -> Node0x55d6cba19660;
+	Node0x55d6cba1d3b0 [shape=record,label="{libxml2-py.c:3479:}"];
+	Node0x55d6cba1d3b0 -> Node0x55d6cba19660;
+	Node0x55d6cba19660 [shape=record,label="{libxml2-py.c:3482:}"];
+}

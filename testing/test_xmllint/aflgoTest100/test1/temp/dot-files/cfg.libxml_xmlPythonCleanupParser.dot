@@ -1,0 +1,44 @@
+digraph "CFG for 'libxml_xmlPythonCleanupParser' function" {
+	label="CFG for 'libxml_xmlPythonCleanupParser' function";
+
+	Node0x55ea37269200 [shape=record,label="{libxml.c:186:|{<s0>T|<s1>F}}"];
+	Node0x55ea37269200:s0 -> Node0x55ea372757b0;
+	Node0x55ea37269200:s1 -> Node0x55ea37275800;
+	Node0x55ea372757b0 [shape=record,label="{libxml.c:193:}"];
+	Node0x55ea372757b0 -> Node0x55ea37275800;
+	Node0x55ea37275800 [shape=record,label="{libxml.c:196:|{<s0>T|<s1>F}}"];
+	Node0x55ea37275800:s0 -> Node0x55ea372712d0;
+	Node0x55ea37275800:s1 -> Node0x55ea37271320;
+	Node0x55ea372712d0 [shape=record,label="{libxml.c:203:}"];
+	Node0x55ea372712d0 -> Node0x55ea3727d460;
+	Node0x55ea3727d460 [shape=record,label="{libxml.c:203:|{<s0>T|<s1>F}}"];
+	Node0x55ea3727d460:s0 -> Node0x55ea37281ae0;
+	Node0x55ea3727d460:s1 -> Node0x55ea3723d530;
+	Node0x55ea37281ae0 [shape=record,label="{libxml.c:204:|{<s0>T|<s1>F}}"];
+	Node0x55ea37281ae0:s0 -> Node0x55ea37281de0;
+	Node0x55ea37281ae0:s1 -> Node0x55ea37281e30;
+	Node0x55ea37281de0 [shape=record,label="{libxml.c:205:}"];
+	Node0x55ea37281de0 -> Node0x55ea37281e30;
+	Node0x55ea37281e30 [shape=record,label="{libxml.c:206:|{<s0>T|<s1>F}}"];
+	Node0x55ea37281e30:s0 -> Node0x55ea37282740;
+	Node0x55ea37281e30:s1 -> Node0x55ea37282790;
+	Node0x55ea37282740 [shape=record,label="{libxml.c:207:}"];
+	Node0x55ea37282740 -> Node0x55ea37282790;
+	Node0x55ea37282790 [shape=record,label="{libxml.c:208:}"];
+	Node0x55ea37282790 -> Node0x55ea37281a50;
+	Node0x55ea37281a50 [shape=record,label="{libxml.c:203:}"];
+	Node0x55ea37281a50 -> Node0x55ea3727d460;
+	Node0x55ea3723d530 [shape=record,label="{libxml.c:209:}"];
+	Node0x55ea3723d530 -> Node0x55ea37271320;
+	Node0x55ea37271320 [shape=record,label="{libxml.c:214:|{<s0>T|<s1>F}}"];
+	Node0x55ea37271320:s0 -> Node0x55ea3726abe0;
+	Node0x55ea37271320:s1 -> Node0x55ea37284a30;
+	Node0x55ea3726abe0 [shape=record,label="{libxml.c:215:|{<s0>T|<s1>F}}"];
+	Node0x55ea3726abe0:s0 -> Node0x55ea372851d0;
+	Node0x55ea3726abe0:s1 -> Node0x55ea37285220;
+	Node0x55ea372851d0 [shape=record,label="{libxml.c:218:}"];
+	Node0x55ea372851d0 -> Node0x55ea37285220;
+	Node0x55ea37285220 [shape=record,label="{libxml.c:219:}"];
+	Node0x55ea37285220 -> Node0x55ea37284a30;
+	Node0x55ea37284a30 [shape=record,label="{libxml.c:221:}"];
+}

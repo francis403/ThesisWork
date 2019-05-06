@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlParserHandleReference' function" {
+	label="CFG for 'xmlParserHandleReference' function";
+
+	Node0x55f3b47c4210 [shape=record,label="{legacy.c:631:|{<s0>T|<s1>F}}"];
+	Node0x55f3b47c4210:s0 -> Node0x55f3b47c8470;
+	Node0x55f3b47c4210:s1 -> Node0x55f3b47c97a0;
+	Node0x55f3b47c97a0 [shape=record,label="{legacy.c:636:}"];
+	Node0x55f3b47c97a0 -> Node0x55f3b47c8470;
+	Node0x55f3b47c8470 [shape=record,label="{legacy.c:641:}"];
+}

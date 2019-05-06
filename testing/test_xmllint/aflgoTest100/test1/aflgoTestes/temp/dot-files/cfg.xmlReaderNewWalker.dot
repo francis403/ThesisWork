@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlReaderNewWalker' function" {
+	label="CFG for 'xmlReaderNewWalker' function";
+
+	Node0x55e449511c40 [shape=record,label="{xmlreader.c:5552:|{<s0>T|<s1>F}}"];
+	Node0x55e449511c40 -> Node0x55e44951af60;
+	Node0x55e449511c40 -> Node0x55e44951afb0;
+	Node0x55e44951af60 [shape=record,label="{xmlreader.c:5555:}"];
+	Node0x55e44951af60 -> Node0x55e449513b20;
+	Node0x55e44951afb0 [shape=record,label="{xmlreader.c:5556:|{<s0>T|<s1>F}}"];
+	Node0x55e44951afb0 -> Node0x55e44951b3e0;
+	Node0x55e44951afb0 -> Node0x55e44951b430;
+	Node0x55e44951b3e0 [shape=record,label="{xmlreader.c:5557:}"];
+	Node0x55e44951b3e0 -> Node0x55e449513b20;
+	Node0x55e44951b430 [shape=record,label="{xmlreader.c:5559:|{<s0>T|<s1>F}}"];
+	Node0x55e44951b430 -> Node0x55e44951b8f0;
+	Node0x55e44951b430 -> Node0x55e44951b940;
+	Node0x55e44951b8f0 [shape=record,label="{xmlreader.c:5560:}"];
+	Node0x55e44951b8f0 -> Node0x55e44951b940;
+	Node0x55e44951b940 [shape=record,label="{xmlreader.c:5562:|{<s0>T|<s1>F}}"];
+	Node0x55e44951b940 -> Node0x55e44951c000;
+	Node0x55e44951b940 -> Node0x55e44951c050;
+	Node0x55e44951c000 [shape=record,label="{xmlreader.c:5563:}"];
+	Node0x55e44951c000 -> Node0x55e44951c050;
+	Node0x55e44951c050 [shape=record,label="{xmlreader.c:5566:|{<s0>T|<s1>F}}"];
+	Node0x55e44951c050 -> Node0x55e44951dc10;
+	Node0x55e44951c050 -> Node0x55e44951dc60;
+	Node0x55e44951dc10 [shape=record,label="{xmlreader.c:5577:|{<s0>T|<s1>F}}"];
+	Node0x55e44951dc10 -> Node0x55e44951e240;
+	Node0x55e44951dc10 -> Node0x55e44951e1f0;
+	Node0x55e44951e240 [shape=record,label="{xmlreader.c:5577:|{<s0>T|<s1>F}}"];
+	Node0x55e44951e240 -> Node0x55e44951e150;
+	Node0x55e44951e240 -> Node0x55e44951e1f0;
+	Node0x55e44951e150 [shape=record,label="{xmlreader.c:5578:}"];
+	Node0x55e44951e150 -> Node0x55e44951e1a0;
+	Node0x55e44951e1f0 [shape=record,label="{xmlreader.c:5580:}"];
+	Node0x55e44951e1f0 -> Node0x55e44951e1a0;
+	Node0x55e44951e1a0 [shape=record,label="{xmlreader.c:5581:}"];
+	Node0x55e44951e1a0 -> Node0x55e44951dc60;
+	Node0x55e44951dc60 [shape=record,label="{xmlreader.c:5582:}"];
+	Node0x55e44951dc60 -> Node0x55e449513b20;
+	Node0x55e449513b20 [shape=record,label="{xmlreader.c:5583:}"];
+}

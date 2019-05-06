@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlXPtrNewRange' function" {
+	label="CFG for 'libxml_xmlXPtrNewRange' function";
+
+	Node0x55f93195c450 [shape=record,label="{libxml2-py.c:14731:|{<s0>T|<s1>F}}"];
+	Node0x55f93195c450:s0 -> Node0x55f931966d30;
+	Node0x55f93195c450:s1 -> Node0x55f931966ce0;
+	Node0x55f931966ce0 [shape=record,label="{libxml2-py.c:14742:}"];
+	Node0x55f931966ce0 -> Node0x55f93195c630;
+	Node0x55f931966d30 [shape=record,label="{libxml2-py.c:14743:|{<s0>T|<s1>F}}"];
+	Node0x55f931966d30:s0 -> Node0x55f931967670;
+	Node0x55f931966d30:s1 -> Node0x55f9319676c0;
+	Node0x55f931967670 [shape=record,label="{libxml2-py.c:14743:}"];
+	Node0x55f931967670 -> Node0x55f931967710;
+	Node0x55f9319676c0 [shape=record,label="{libxml2-py.c:14743:}"];
+	Node0x55f9319676c0 -> Node0x55f931967710;
+	Node0x55f931967710 [shape=record,label="{libxml2-py.c:14743:|{<s0>T|<s1>F}}"];
+	Node0x55f931967710:s0 -> Node0x55f931967ca0;
+	Node0x55f931967710:s1 -> Node0x55f931967cf0;
+	Node0x55f931967ca0 [shape=record,label="{libxml2-py.c:14744:}"];
+	Node0x55f931967ca0 -> Node0x55f931967d40;
+	Node0x55f931967cf0 [shape=record,label="{libxml2-py.c:14744:}"];
+	Node0x55f931967cf0 -> Node0x55f931967d40;
+	Node0x55f931967d40 [shape=record,label="{libxml2-py.c:14744:}"];
+	Node0x55f931967d40 -> Node0x55f93195c630;
+	Node0x55f93195c630 [shape=record,label="{libxml2-py.c:14749:}"];
+}

@@ -1,0 +1,37 @@
+digraph "CFG for 'libxml_children' function" {
+	label="CFG for 'libxml_children' function";
+
+	Node0x55ea375801f0 [shape=record,label="{libxml.c:2611:|{<s0>T|<s1>F}}"];
+	Node0x55ea375801f0:s0 -> Node0x55ea376851b0;
+	Node0x55ea375801f0:s1 -> Node0x55ea37685160;
+	Node0x55ea37685160 [shape=record,label="{libxml.c:2618:}"];
+	Node0x55ea37685160 -> Node0x55ea37580240;
+	Node0x55ea376851b0 [shape=record,label="{libxml.c:2619:|{<s0>T|<s1>F}}"];
+	Node0x55ea376851b0:s0 -> Node0x55ea37685920;
+	Node0x55ea376851b0:s1 -> Node0x55ea37685970;
+	Node0x55ea37685920 [shape=record,label="{libxml.c:2619:}"];
+	Node0x55ea37685920 -> Node0x55ea376859c0;
+	Node0x55ea37685970 [shape=record,label="{libxml.c:2619:}"];
+	Node0x55ea37685970 -> Node0x55ea376859c0;
+	Node0x55ea376859c0 [shape=record,label="{libxml.c:2619:|{<s0>def|<s1>1|<s2>5|<s3>6|<s4>7|<s5>8|<s6>9|<s7>21|<s8>13|<s9>14|<s10>2}}"];
+	Node0x55ea376859c0:s0 -> Node0x55ea37686070;
+	Node0x55ea376859c0:s1 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s2 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s3 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s4 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s5 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s6 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s7 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s8 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s9 -> Node0x55ea37686150;
+	Node0x55ea376859c0:s10 -> Node0x55ea374f0ce0;
+	Node0x55ea37686150 [shape=record,label="{libxml.c:2637:}"];
+	Node0x55ea37686150 -> Node0x55ea37685f00;
+	Node0x55ea374f0ce0 [shape=record,label="{libxml.c:2640:}"];
+	Node0x55ea374f0ce0 -> Node0x55ea37685f00;
+	Node0x55ea37686070 [shape=record,label="{libxml.c:2646:}"];
+	Node0x55ea37686070 -> Node0x55ea37685f00;
+	Node0x55ea37685f00 [shape=record,label="{libxml.c:2649:}"];
+	Node0x55ea37685f00 -> Node0x55ea37580240;
+	Node0x55ea37580240 [shape=record,label="{libxml.c:2651:}"];
+}

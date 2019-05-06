@@ -1,0 +1,36 @@
+digraph "CFG for 'xmlPopInput' function" {
+	label="CFG for 'xmlPopInput' function";
+
+	Node0x5557ddab5040 [shape=record,label="{parser.c:2216:|{<s0>T|<s1>F}}"];
+	Node0x5557ddab5040 -> Node0x5557ddab7170;
+	Node0x5557ddab5040 -> Node0x5557ddaaed60;
+	Node0x5557ddaaed60 [shape=record,label="{parser.c:2217:|{<s0>T|<s1>F}}"];
+	Node0x5557ddaaed60 -> Node0x5557ddab7170;
+	Node0x5557ddaaed60 -> Node0x5557ddab9f80;
+	Node0x5557ddab7170 [shape=record,label="{parser.c:2217:}"];
+	Node0x5557ddab7170 -> Node0x5557ddaaee70;
+	Node0x5557ddab9f80 [shape=record,label="{parser.c:2218:|{<s0>T|<s1>F}}"];
+	Node0x5557ddab9f80 -> Node0x5557ddabc4d0;
+	Node0x5557ddab9f80 -> Node0x5557ddabc520;
+	Node0x5557ddabc4d0 [shape=record,label="{parser.c:2219:}"];
+	Node0x5557ddabc4d0 -> Node0x5557ddabc520;
+	Node0x5557ddabc520 [shape=record,label="{parser.c:2221:|{<s0>T|<s1>F}}"];
+	Node0x5557ddabc520 -> Node0x5557ddabdb80;
+	Node0x5557ddabc520 -> Node0x5557ddabdab0;
+	Node0x5557ddabdb80 [shape=record,label="{parser.c:2221:|{<s0>T|<s1>F}}"];
+	Node0x5557ddabdb80 -> Node0x5557ddabdb00;
+	Node0x5557ddabdb80 -> Node0x5557ddabdab0;
+	Node0x5557ddabdb00 [shape=record,label="{parser.c:2222:|{<s0>T|<s1>F}}"];
+	Node0x5557ddabdb00 -> Node0x5557ddabda60;
+	Node0x5557ddabdb00 -> Node0x5557ddabdab0;
+	Node0x5557ddabda60 [shape=record,label="{parser.c:2223:}"];
+	Node0x5557ddabda60 -> Node0x5557ddabdab0;
+	Node0x5557ddabdab0 [shape=record,label="{parser.c:2225:|{<s0>T|<s1>F}}"];
+	Node0x5557ddabdab0 -> Node0x5557ddabec50;
+	Node0x5557ddabdab0 -> Node0x5557ddabeca0;
+	Node0x5557ddabec50 [shape=record,label="{parser.c:2227:}"];
+	Node0x5557ddabec50 -> Node0x5557ddabeca0;
+	Node0x5557ddabeca0 [shape=record,label="{parser.c:2228:}"];
+	Node0x5557ddabeca0 -> Node0x5557ddaaee70;
+	Node0x5557ddaaee70 [shape=record,label="{parser.c:2229:}"];
+}

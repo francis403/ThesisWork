@@ -1,0 +1,36 @@
+digraph "CFG for 'xmlXPathCacheObjectCopy' function" {
+	label="CFG for 'xmlXPathCacheObjectCopy' function";
+
+	Node0x5621eec63b10 [shape=record,label="{xpath.c:2697:|{<s0>T|<s1>F}}"];
+	Node0x5621eec63b10 -> Node0x5621eec644e0;
+	Node0x5621eec63b10 -> Node0x5621eec64530;
+	Node0x5621eec644e0 [shape=record,label="{xpath.c:2700:}"];
+	Node0x5621eec644e0 -> Node0x5621eec63b60;
+	Node0x5621eec64530 [shape=record,label="{xpath.c:2702:|{<s0>T|<s1>F}}"];
+	Node0x5621eec64530 -> Node0x5621eec64a30;
+	Node0x5621eec64530 -> Node0x5621eec649e0;
+	Node0x5621eec64a30 [shape=record,label="{xpath.c:2702:|{<s0>T|<s1>F}}"];
+	Node0x5621eec64a30 -> Node0x5621eec64990;
+	Node0x5621eec64a30 -> Node0x5621eec649e0;
+	Node0x5621eec64990 [shape=record,label="{xpath.c:2703:|{<s0>def|<s1>1|<s2>4|<s3>2|<s4>3}}"];
+	Node0x5621eec64990 -> Node0x5621eec65000;
+	Node0x5621eec64990 -> Node0x5621eec65340;
+	Node0x5621eec64990 -> Node0x5621eec65850;
+	Node0x5621eec64990 -> Node0x5621eec65d00;
+	Node0x5621eec64990 -> Node0x5621eec661b0;
+	Node0x5621eec65340 [shape=record,label="{xpath.c:2705:}"];
+	Node0x5621eec65340 -> Node0x5621eec63b60;
+	Node0x5621eec65850 [shape=record,label="{xpath.c:2708:}"];
+	Node0x5621eec65850 -> Node0x5621eec63b60;
+	Node0x5621eec65d00 [shape=record,label="{xpath.c:2710:}"];
+	Node0x5621eec65d00 -> Node0x5621eec63b60;
+	Node0x5621eec661b0 [shape=record,label="{xpath.c:2712:}"];
+	Node0x5621eec661b0 -> Node0x5621eec63b60;
+	Node0x5621eec65000 [shape=record,label="{xpath.c:2714:}"];
+	Node0x5621eec65000 -> Node0x5621eec64ef0;
+	Node0x5621eec64ef0 [shape=record,label="{xpath.c:2716:}"];
+	Node0x5621eec64ef0 -> Node0x5621eec649e0;
+	Node0x5621eec649e0 [shape=record,label="{xpath.c:2717:}"];
+	Node0x5621eec649e0 -> Node0x5621eec63b60;
+	Node0x5621eec63b60 [shape=record,label="{xpath.c:2718:}"];
+}

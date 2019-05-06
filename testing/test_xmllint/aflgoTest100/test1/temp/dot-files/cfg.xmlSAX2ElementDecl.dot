@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlSAX2ElementDecl' function" {
+	label="CFG for 'xmlSAX2ElementDecl' function";
+
+	Node0x55f4ae6a0880 [shape=record,label="{SAX2.c:802:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6a0880 -> Node0x55f4ae6b3810;
+	Node0x55f4ae6a0880 -> Node0x55f4ae6b38b0;
+	Node0x55f4ae6b38b0 [shape=record,label="{SAX2.c:808:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6b38b0 -> Node0x55f4ae6b3810;
+	Node0x55f4ae6b38b0 -> Node0x55f4ae6b3860;
+	Node0x55f4ae6b3810 [shape=record,label="{SAX2.c:809:}"];
+	Node0x55f4ae6b3810 -> Node0x55f4ae6b6d20;
+	Node0x55f4ae6b3860 [shape=record,label="{SAX2.c:816:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6b3860 -> Node0x55f4ae6b3f50;
+	Node0x55f4ae6b3860 -> Node0x55f4ae6b3ff0;
+	Node0x55f4ae6b3f50 [shape=record,label="{SAX2.c:817:}"];
+	Node0x55f4ae6b3f50 -> Node0x55f4ae6b3fa0;
+	Node0x55f4ae6b3ff0 [shape=record,label="{SAX2.c:819:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6b3ff0 -> Node0x55f4ae6b5350;
+	Node0x55f4ae6b3ff0 -> Node0x55f4ae6b53f0;
+	Node0x55f4ae6b5350 [shape=record,label="{SAX2.c:820:}"];
+	Node0x55f4ae6b5350 -> Node0x55f4ae6b53a0;
+	Node0x55f4ae6b53f0 [shape=record,label="{SAX2.c:823:}"];
+	Node0x55f4ae6b53f0 -> Node0x55f4ae6b6d20;
+	Node0x55f4ae6b53a0 [shape=record,label="{%50}"];
+	Node0x55f4ae6b53a0 -> Node0x55f4ae6b3fa0;
+	Node0x55f4ae6b3fa0 [shape=record,label="{SAX2.c:829:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6b3fa0 -> Node0x55f4ae6b66c0;
+	Node0x55f4ae6b3fa0 -> Node0x55f4ae6b6710;
+	Node0x55f4ae6b66c0 [shape=record,label="{SAX2.c:830:}"];
+	Node0x55f4ae6b66c0 -> Node0x55f4ae6b6710;
+	Node0x55f4ae6b6710 [shape=record,label="{SAX2.c:831:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6b6710 -> Node0x55f4ae6b6e70;
+	Node0x55f4ae6b6710 -> Node0x55f4ae6b6d20;
+	Node0x55f4ae6b6e70 [shape=record,label="{SAX2.c:831:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6b6e70 -> Node0x55f4ae6b6df0;
+	Node0x55f4ae6b6e70 -> Node0x55f4ae6b6d20;
+	Node0x55f4ae6b6df0 [shape=record,label="{SAX2.c:832:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6b6df0 -> Node0x55f4ae6b6d70;
+	Node0x55f4ae6b6df0 -> Node0x55f4ae6b6d20;
+	Node0x55f4ae6b6d70 [shape=record,label="{SAX2.c:832:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae6b6d70 -> Node0x55f4ae6b6cd0;
+	Node0x55f4ae6b6d70 -> Node0x55f4ae6b6d20;
+	Node0x55f4ae6b6cd0 [shape=record,label="{SAX2.c:834:}"];
+	Node0x55f4ae6b6cd0 -> Node0x55f4ae6b6d20;
+	Node0x55f4ae6b6d20 [shape=record,label="{SAX2.c:836:}"];
+}

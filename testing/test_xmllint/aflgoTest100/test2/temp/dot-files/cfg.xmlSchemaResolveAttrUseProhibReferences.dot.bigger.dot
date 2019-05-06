@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaResolveAttrUseProhibReferences' function" {
+	label="CFG for 'xmlSchemaResolveAttrUseProhibReferences' function";
+
+	Node0x55835390f910 [shape=record,label="{xmlschemas.c:20465:|{<s0>T|<s1>F}}"];
+	Node0x55835390f910:s0 -> Node0x55835390f4e0;
+	Node0x55835390f910:s1 -> Node0x558353911f70;
+	Node0x55835390f4e0 [shape=record,label="{xmlschemas.c:20471:}"];
+	Node0x55835390f4e0 -> Node0x55835390f960;
+	Node0x558353911f70 [shape=record,label="{xmlschemas.c:20478:}"];
+	Node0x558353911f70 -> Node0x55835390f960;
+	Node0x55835390f960 [shape=record,label="{xmlschemas.c:20479:}"];
+}

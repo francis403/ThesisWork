@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlSetupParserForBuffer' function" {
+	label="CFG for 'xmlSetupParserForBuffer' function";
+
+	Node0x55d73bf0b5d0 [shape=record,label="{parser.c:14282:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf0b5d0:s0 -> Node0x55d73bf0e050;
+	Node0x55d73bf0b5d0:s1 -> Node0x55d73bf0e0f0;
+	Node0x55d73bf0e0f0 [shape=record,label="{parser.c:14287:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf0e0f0:s0 -> Node0x55d73bf0e050;
+	Node0x55d73bf0e0f0:s1 -> Node0x55d73bf0e0a0;
+	Node0x55d73bf0e050 [shape=record,label="{parser.c:14288:}"];
+	Node0x55d73bf0e050 -> Node0x55d73bf0c140;
+	Node0x55d73bf0e0a0 [shape=record,label="{parser.c:14290:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf0e0a0:s0 -> Node0x55d73bf0e930;
+	Node0x55d73bf0e0a0:s1 -> Node0x55d73bf0e980;
+	Node0x55d73bf0e930 [shape=record,label="{parser.c:14292:}"];
+	Node0x55d73bf0e930 -> Node0x55d73bf0c140;
+	Node0x55d73bf0e980 [shape=record,label="{parser.c:14297:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf0e980:s0 -> Node0x55d73bf0f910;
+	Node0x55d73bf0e980:s1 -> Node0x55d73bf0f960;
+	Node0x55d73bf0f910 [shape=record,label="{parser.c:14299:}"];
+	Node0x55d73bf0f910 -> Node0x55d73bf0f960;
+	Node0x55d73bf0f960 [shape=record,label="{parser.c:14300:}"];
+	Node0x55d73bf0f960 -> Node0x55d73bf0c140;
+	Node0x55d73bf0c140 [shape=record,label="{parser.c:14304:}"];
+}

@@ -1,0 +1,13 @@
+digraph "CFG for 'xmlTextReaderCharacters' function" {
+	label="CFG for 'xmlTextReaderCharacters' function";
+
+	Node0x5619bd64cea0 [shape=record,label="{xmlreader.c:787:|{<s0>T|<s1>F}}"];
+	Node0x5619bd64cea0 -> Node0x5619bd64e3d0;
+	Node0x5619bd64cea0 -> Node0x5619bd64e380;
+	Node0x5619bd64e3d0 [shape=record,label="{xmlreader.c:795:|{<s0>T|<s1>F}}"];
+	Node0x5619bd64e3d0 -> Node0x5619bd64e330;
+	Node0x5619bd64e3d0 -> Node0x5619bd64e380;
+	Node0x5619bd64e330 [shape=record,label="{xmlreader.c:796:}"];
+	Node0x5619bd64e330 -> Node0x5619bd64e380;
+	Node0x5619bd64e380 [shape=record,label="{xmlreader.c:798:}"];
+}

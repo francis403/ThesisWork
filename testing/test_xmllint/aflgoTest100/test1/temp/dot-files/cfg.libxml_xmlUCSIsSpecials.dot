@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsSpecials' function" {
+	label="CFG for 'libxml_xmlUCSIsSpecials' function";
+
+	Node0x55f931648d00 [shape=record,label="{libxml2-py.c:11291:|{<s0>T|<s1>F}}"];
+	Node0x55f931648d00:s0 -> Node0x55f93164bca0;
+	Node0x55f931648d00:s1 -> Node0x55f93164bc50;
+	Node0x55f93164bc50 [shape=record,label="{libxml2-py.c:11297:}"];
+	Node0x55f93164bc50 -> Node0x55f931649000;
+	Node0x55f93164bca0 [shape=record,label="{libxml2-py.c:11299:}"];
+	Node0x55f93164bca0 -> Node0x55f931649000;
+	Node0x55f931649000 [shape=record,label="{libxml2-py.c:11302:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaDupVal' function" {
+	label="CFG for 'xmlSchemaDupVal' function";
+
+	Node0x557b21b7d5b0 [shape=record,label="{xmlschemastypes.c:3669:|{<s0>T|<s1>F}}"];
+	Node0x557b21b7d5b0:s0 -> Node0x557b21b7db20;
+	Node0x557b21b7d5b0:s1 -> Node0x557b21b81870;
+	Node0x557b21b7db20 [shape=record,label="{xmlschemastypes.c:3673:}"];
+	Node0x557b21b7db20 -> Node0x557b21b7d600;
+	Node0x557b21b81870 [shape=record,label="{xmlschemastypes.c:3675:}"];
+	Node0x557b21b81870 -> Node0x557b21b7d600;
+	Node0x557b21b7d600 [shape=record,label="{xmlschemastypes.c:3678:}"];
+}

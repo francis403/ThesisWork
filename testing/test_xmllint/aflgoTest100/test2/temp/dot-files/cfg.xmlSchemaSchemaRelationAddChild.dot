@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlSchemaSchemaRelationAddChild' function" {
+	label="CFG for 'xmlSchemaSchemaRelationAddChild' function";
+
+	Node0x558353479fc0 [shape=record,label="{xmlschemas.c:10262:|{<s0>T|<s1>F}}"];
+	Node0x558353479fc0 -> Node0x55835347c990;
+	Node0x558353479fc0 -> Node0x55835347c9e0;
+	Node0x55835347c990 [shape=record,label="{xmlschemas.c:10268:}"];
+	Node0x55835347c990 -> Node0x55835347bb50;
+	Node0x55835347c9e0 [shape=record,label="{xmlschemas.c:10271:}"];
+	Node0x55835347c9e0 -> Node0x55835347cff0;
+	Node0x55835347cff0 [shape=record,label="{xmlschemas.c:10271:|{<s0>T|<s1>F}}"];
+	Node0x55835347cff0 -> Node0x55835347d480;
+	Node0x55835347cff0 -> Node0x55835347d210;
+	Node0x55835347d480 [shape=record,label="{xmlschemas.c:10272:}"];
+	Node0x55835347d480 -> Node0x55835347cff0;
+	Node0x55835347d210 [shape=record,label="{xmlschemas.c:10273:}"];
+	Node0x55835347d210 -> Node0x55835347bb50;
+	Node0x55835347bb50 [shape=record,label="{xmlschemas.c:10274:}"];
+}

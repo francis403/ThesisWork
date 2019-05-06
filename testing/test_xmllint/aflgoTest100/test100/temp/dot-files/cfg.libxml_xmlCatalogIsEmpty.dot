@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlCatalogIsEmpty' function" {
+	label="CFG for 'libxml_xmlCatalogIsEmpty' function";
+
+	Node0x55d6cb7f8390 [shape=record,label="{libxml2-py.c:1359:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb7f8390:s0 -> Node0x55d6cb7ff1c0;
+	Node0x55d6cb7f8390:s1 -> Node0x55d6cb7ff170;
+	Node0x55d6cb7ff170 [shape=record,label="{libxml2-py.c:1366:}"];
+	Node0x55d6cb7ff170 -> Node0x55d6cb7f97c0;
+	Node0x55d6cb7ff1c0 [shape=record,label="{libxml2-py.c:1367:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb7ff1c0:s0 -> Node0x55d6cb7ff970;
+	Node0x55d6cb7ff1c0:s1 -> Node0x55d6cb7ff9c0;
+	Node0x55d6cb7ff970 [shape=record,label="{libxml2-py.c:1367:}"];
+	Node0x55d6cb7ff970 -> Node0x55d6cb7ffa10;
+	Node0x55d6cb7ff9c0 [shape=record,label="{libxml2-py.c:1367:}"];
+	Node0x55d6cb7ff9c0 -> Node0x55d6cb7ffa10;
+	Node0x55d6cb7ffa10 [shape=record,label="{libxml2-py.c:1367:}"];
+	Node0x55d6cb7ffa10 -> Node0x55d6cb7f97c0;
+	Node0x55d6cb7f97c0 [shape=record,label="{libxml2-py.c:1372:}"];
+}

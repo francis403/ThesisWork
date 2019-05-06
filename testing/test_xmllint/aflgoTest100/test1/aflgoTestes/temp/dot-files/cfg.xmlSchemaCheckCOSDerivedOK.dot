@@ -1,0 +1,18 @@
+digraph "CFG for 'xmlSchemaCheckCOSDerivedOK' function" {
+	label="CFG for 'xmlSchemaCheckCOSDerivedOK' function";
+
+	Node0x55d0265adf50 [shape=record,label="{xmlschemas.c:16140:|{<s0>T|<s1>F}}"];
+	Node0x55d0265adf50 -> Node0x55d0265aeea0;
+	Node0x55d0265adf50 -> Node0x55d0265aef90;
+	Node0x55d0265aef90 [shape=record,label="{xmlschemas.c:16145:|{<s0>T|<s1>F}}"];
+	Node0x55d0265aef90 -> Node0x55d0265af240;
+	Node0x55d0265aef90 -> Node0x55d0265aef40;
+	Node0x55d0265af240 [shape=record,label="{xmlschemas.c:16145:|{<s0>T|<s1>F}}"];
+	Node0x55d0265af240 -> Node0x55d0265aeea0;
+	Node0x55d0265af240 -> Node0x55d0265aef40;
+	Node0x55d0265aeea0 [shape=record,label="{xmlschemas.c:16146:}"];
+	Node0x55d0265aeea0 -> Node0x55d0265adfa0;
+	Node0x55d0265aef40 [shape=record,label="{xmlschemas.c:16148:}"];
+	Node0x55d0265aef40 -> Node0x55d0265adfa0;
+	Node0x55d0265adfa0 [shape=record,label="{xmlschemas.c:16149:}"];
+}

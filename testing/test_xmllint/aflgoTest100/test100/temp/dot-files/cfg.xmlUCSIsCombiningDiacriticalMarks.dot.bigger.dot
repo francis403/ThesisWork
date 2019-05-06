@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsCombiningDiacriticalMarks' function" {
+	label="CFG for 'xmlUCSIsCombiningDiacriticalMarks' function";
+
+	Node0x55ca9b19dcb0 [shape=record,label="{xmlunicode.c:1314:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b19dcb0:s0 -> Node0x55ca9b1f6410;
+	Node0x55ca9b19dcb0:s1 -> Node0x55ca9b1f66a0;
+	Node0x55ca9b1f6410 [shape=record,label="{xmlunicode.c:1315:}"];
+	Node0x55ca9b1f6410 -> Node0x55ca9b1f66a0;
+	Node0x55ca9b1f66a0 [shape=record,label="{xmlunicode.c:1315:}"];
+}

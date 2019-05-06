@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlCheckVersion' function" {
+	label="CFG for 'xmlCheckVersion' function";
+
+	Node0x5581cbb93a40 [shape=record,label="{parserInternals.c:77:|{<s0>T|<s1>F}}"];
+	Node0x5581cbb93a40:s0 -> Node0x5581cbde4d00;
+	Node0x5581cbb93a40:s1 -> Node0x5581cbde4d50;
+	Node0x5581cbde4d00 [shape=record,label="{parserInternals.c:83:}"];
+	Node0x5581cbde4d00 -> Node0x5581cbde4d50;
+	Node0x5581cbde4d50 [shape=record,label="{parserInternals.c:90:|{<s0>T|<s1>F}}"];
+	Node0x5581cbde4d50:s0 -> Node0x5581cbdeb4f0;
+	Node0x5581cbde4d50:s1 -> Node0x5581cbdeb540;
+	Node0x5581cbdeb4f0 [shape=record,label="{parserInternals.c:91:}"];
+	Node0x5581cbdeb4f0 -> Node0x5581cbdeb540;
+	Node0x5581cbdeb540 [shape=record,label="{parserInternals.c:95:}"];
+}

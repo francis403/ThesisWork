@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathGetContextNode' function" {
+	label="CFG for 'libxml_xmlXPathGetContextNode' function";
+
+	Node0x55d6cc2eb000 [shape=record,label="{libxml2-py.c:13273:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc2eb000:s0 -> Node0x55d6cc2ec640;
+	Node0x55d6cc2eb000:s1 -> Node0x55d6cc2ec5f0;
+	Node0x55d6cc2ec5f0 [shape=record,label="{libxml2-py.c:13280:}"];
+	Node0x55d6cc2ec5f0 -> Node0x55d6cc2e8c80;
+	Node0x55d6cc2ec640 [shape=record,label="{libxml2-py.c:13281:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc2ec640:s0 -> Node0x55d6cc2ece30;
+	Node0x55d6cc2ec640:s1 -> Node0x55d6cc2ece80;
+	Node0x55d6cc2ece30 [shape=record,label="{libxml2-py.c:13281:}"];
+	Node0x55d6cc2ece30 -> Node0x55d6cc2eced0;
+	Node0x55d6cc2ece80 [shape=record,label="{libxml2-py.c:13281:}"];
+	Node0x55d6cc2ece80 -> Node0x55d6cc2eced0;
+	Node0x55d6cc2eced0 [shape=record,label="{libxml2-py.c:13281:}"];
+	Node0x55d6cc2eced0 -> Node0x55d6cc2e8c80;
+	Node0x55d6cc2e8c80 [shape=record,label="{libxml2-py.c:13286:}"];
+}

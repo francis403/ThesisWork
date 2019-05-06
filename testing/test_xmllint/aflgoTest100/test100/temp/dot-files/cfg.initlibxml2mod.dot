@@ -1,0 +1,12 @@
+digraph "CFG for 'initlibxml2mod' function" {
+	label="CFG for 'initlibxml2mod' function";
+
+	Node0x55fa6c3275c0 [shape=record,label="{libxml.c:3909:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c3275c0:s0 -> Node0x55fa6c375260;
+	Node0x55fa6c3275c0:s1 -> Node0x55fa6c3ab4e0;
+	Node0x55fa6c375260 [shape=record,label="{libxml.c:3918:}"];
+	Node0x55fa6c375260 -> Node0x55fa6c34da40;
+	Node0x55fa6c3ab4e0 [shape=record,label="{libxml.c:3921:}"];
+	Node0x55fa6c3ab4e0 -> Node0x55fa6c34da40;
+	Node0x55fa6c34da40 [shape=record,label="{libxml.c:3934:}"];
+}

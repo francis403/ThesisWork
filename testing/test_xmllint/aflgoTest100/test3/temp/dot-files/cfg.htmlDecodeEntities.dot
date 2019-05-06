@@ -1,0 +1,10 @@
+digraph "CFG for 'htmlDecodeEntities' function" {
+	label="CFG for 'htmlDecodeEntities' function";
+
+	Node0x55adc8990b00 [shape=record,label="{legacy.c:50:|{<s0>T|<s1>F}}"];
+	Node0x55adc8990b00:s0 -> Node0x55adc8b01f00;
+	Node0x55adc8990b00:s1 -> Node0x55adc8b01eb0;
+	Node0x55adc8b01eb0 [shape=record,label="{legacy.c:58:}"];
+	Node0x55adc8b01eb0 -> Node0x55adc8b01f00;
+	Node0x55adc8b01f00 [shape=record,label="{legacy.c:62:}"];
+}

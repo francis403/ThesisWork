@@ -1,0 +1,25 @@
+digraph "CFG for 'libxml_xmlCreateOutputBuffer' function" {
+	label="CFG for 'libxml_xmlCreateOutputBuffer' function";
+
+	Node0x55fa6c1bf330 [shape=record,label="{libxml.c:501:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1bf330:s0 -> Node0x55fa6c195620;
+	Node0x55fa6c1bf330:s1 -> Node0x55fa6c1955d0;
+	Node0x55fa6c1955d0 [shape=record,label="{libxml.c:511:}"];
+	Node0x55fa6c1955d0 -> Node0x55fa6c1d30a0;
+	Node0x55fa6c195620 [shape=record,label="{libxml.c:512:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c195620:s0 -> Node0x55fa6c1a2c30;
+	Node0x55fa6c195620:s1 -> Node0x55fa6c1a2be0;
+	Node0x55fa6c1a2c30 [shape=record,label="{libxml.c:512:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1a2c30:s0 -> Node0x55fa6c1a2b90;
+	Node0x55fa6c1a2c30:s1 -> Node0x55fa6c1a2be0;
+	Node0x55fa6c1a2b90 [shape=record,label="{libxml.c:513:}"];
+	Node0x55fa6c1a2b90 -> Node0x55fa6c1a2be0;
+	Node0x55fa6c1a2be0 [shape=record,label="{libxml.c:515:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1a2be0:s0 -> Node0x55fa6c1dd870;
+	Node0x55fa6c1a2be0:s1 -> Node0x55fa6c1dd8c0;
+	Node0x55fa6c1dd870 [shape=record,label="{libxml.c:517:}"];
+	Node0x55fa6c1dd870 -> Node0x55fa6c1dd8c0;
+	Node0x55fa6c1dd8c0 [shape=record,label="{libxml.c:518:}"];
+	Node0x55fa6c1dd8c0 -> Node0x55fa6c1d30a0;
+	Node0x55fa6c1d30a0 [shape=record,label="{libxml.c:520:}"];
+}

@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlTextReaderStartElement' function" {
+	label="CFG for 'xmlTextReaderStartElement' function";
+
+	Node0x5619bd7cf2e0 [shape=record,label="{xmlreader.c:667:|{<s0>T|<s1>F}}"];
+	Node0x5619bd7cf2e0:s0 -> Node0x5619bd63f2b0;
+	Node0x5619bd7cf2e0:s1 -> Node0x5619bd63f260;
+	Node0x5619bd63f2b0 [shape=record,label="{xmlreader.c:675:|{<s0>T|<s1>F}}"];
+	Node0x5619bd63f2b0:s0 -> Node0x5619bd63f210;
+	Node0x5619bd63f2b0:s1 -> Node0x5619bd63f260;
+	Node0x5619bd63f210 [shape=record,label="{xmlreader.c:676:|{<s0>T|<s1>F}}"];
+	Node0x5619bd63f210:s0 -> Node0x5619bd63feb0;
+	Node0x5619bd63f210:s1 -> Node0x5619bd63fce0;
+	Node0x5619bd63feb0 [shape=record,label="{xmlreader.c:677:|{<s0>T|<s1>F}}"];
+	Node0x5619bd63feb0:s0 -> Node0x5619bd63fe30;
+	Node0x5619bd63feb0:s1 -> Node0x5619bd63fce0;
+	Node0x5619bd63fe30 [shape=record,label="{xmlreader.c:678:|{<s0>T|<s1>F}}"];
+	Node0x5619bd63fe30:s0 -> Node0x5619bd63fdb0;
+	Node0x5619bd63fe30:s1 -> Node0x5619bd63fce0;
+	Node0x5619bd63fdb0 [shape=record,label="{xmlreader.c:678:|{<s0>T|<s1>F}}"];
+	Node0x5619bd63fdb0:s0 -> Node0x5619bd63fd30;
+	Node0x5619bd63fdb0:s1 -> Node0x5619bd63fce0;
+	Node0x5619bd63fd30 [shape=record,label="{xmlreader.c:679:|{<s0>T|<s1>F}}"];
+	Node0x5619bd63fd30:s0 -> Node0x5619bd63fc90;
+	Node0x5619bd63fd30:s1 -> Node0x5619bd63fce0;
+	Node0x5619bd63fc90 [shape=record,label="{xmlreader.c:680:}"];
+	Node0x5619bd63fc90 -> Node0x5619bd63fce0;
+	Node0x5619bd63fce0 [shape=record,label="{xmlreader.c:681:}"];
+	Node0x5619bd63fce0 -> Node0x5619bd63f260;
+	Node0x5619bd63f260 [shape=record,label="{xmlreader.c:682:|{<s0>T|<s1>F}}"];
+	Node0x5619bd63f260:s0 -> Node0x5619bd641c60;
+	Node0x5619bd63f260:s1 -> Node0x5619bd641cb0;
+	Node0x5619bd641c60 [shape=record,label="{xmlreader.c:683:}"];
+	Node0x5619bd641c60 -> Node0x5619bd641cb0;
+	Node0x5619bd641cb0 [shape=record,label="{xmlreader.c:684:}"];
+}

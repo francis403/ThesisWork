@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlExpandCatalog' function" {
+	label="CFG for 'xmlExpandCatalog' function";
+
+	Node0x55f36792b3f0 [shape=record,label="{catalog.c:2740:|{<s0>T|<s1>F}}"];
+	Node0x55f36792b3f0:s0 -> Node0x55f36792c880;
+	Node0x55f36792b3f0:s1 -> Node0x55f36792c920;
+	Node0x55f36792c920 [shape=record,label="{catalog.c:2744:|{<s0>T|<s1>F}}"];
+	Node0x55f36792c920:s0 -> Node0x55f36792c880;
+	Node0x55f36792c920:s1 -> Node0x55f36792c8d0;
+	Node0x55f36792c880 [shape=record,label="{catalog.c:2745:}"];
+	Node0x55f36792c880 -> Node0x55f36792b440;
+	Node0x55f36792c8d0 [shape=record,label="{catalog.c:2748:|{<s0>T|<s1>F}}"];
+	Node0x55f36792c8d0:s0 -> Node0x55f36792d040;
+	Node0x55f36792c8d0:s1 -> Node0x55f36792d0e0;
+	Node0x55f36792d040 [shape=record,label="{catalog.c:2749:|{<s0>T|<s1>F}}"];
+	Node0x55f36792d040:s0 -> Node0x55f36792d960;
+	Node0x55f36792d040:s1 -> Node0x55f36792d9b0;
+	Node0x55f36792d960 [shape=record,label="{catalog.c:2753:}"];
+	Node0x55f36792d960 -> Node0x55f36792b440;
+	Node0x55f36792d9b0 [shape=record,label="{catalog.c:2755:|{<s0>T|<s1>F}}"];
+	Node0x55f36792d9b0:s0 -> Node0x55f36792e160;
+	Node0x55f36792d9b0:s1 -> Node0x55f36792e1b0;
+	Node0x55f36792e160 [shape=record,label="{catalog.c:2757:}"];
+	Node0x55f36792e160 -> Node0x55f36792b440;
+	Node0x55f36792e1b0 [shape=record,label="{catalog.c:2760:}"];
+	Node0x55f36792e1b0 -> Node0x55f36792d090;
+	Node0x55f36792d0e0 [shape=record,label="{catalog.c:2762:|{<s0>T|<s1>F}}"];
+	Node0x55f36792d0e0:s0 -> Node0x55f36792f680;
+	Node0x55f36792d0e0:s1 -> Node0x55f36792f720;
+	Node0x55f36792f680 [shape=record,label="{catalog.c:2768:}"];
+	Node0x55f36792f680 -> Node0x55f36792f6d0;
+	Node0x55f36792f720 [shape=record,label="{catalog.c:2770:}"];
+	Node0x55f36792f720 -> Node0x55f36792fd40;
+	Node0x55f36792fd40 [shape=record,label="{catalog.c:2770:|{<s0>T|<s1>F}}"];
+	Node0x55f36792fd40:s0 -> Node0x55f3679301d0;
+	Node0x55f36792fd40:s1 -> Node0x55f36792ff60;
+	Node0x55f3679301d0 [shape=record,label="{catalog.c:2770:}"];
+	Node0x55f3679301d0 -> Node0x55f36792fd40;
+	Node0x55f36792ff60 [shape=record,label="{catalog.c:2771:}"];
+	Node0x55f36792ff60 -> Node0x55f36792f6d0;
+	Node0x55f36792f6d0 [shape=record,label="{%52}"];
+	Node0x55f36792f6d0 -> Node0x55f36792d090;
+	Node0x55f36792d090 [shape=record,label="{catalog.c:2774:}"];
+	Node0x55f36792d090 -> Node0x55f36792b440;
+	Node0x55f36792b440 [shape=record,label="{catalog.c:2775:}"];
+}

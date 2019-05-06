@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlRelaxNGFree' function" {
+	label="CFG for 'libxml_xmlRelaxNGFree' function";
+
+	Node0x55d6cb9ce4a0 [shape=record,label="{libxml2-py.c:6304:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb9ce4a0:s0 -> Node0x55d6cb9d2e50;
+	Node0x55d6cb9ce4a0:s1 -> Node0x55d6cb9d2e00;
+	Node0x55d6cb9d2e00 [shape=record,label="{libxml2-py.c:6309:}"];
+	Node0x55d6cb9d2e00 -> Node0x55d6cb9ce680;
+	Node0x55d6cb9d2e50 [shape=record,label="{libxml2-py.c:6310:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb9d2e50:s0 -> Node0x55d6cb9d35f0;
+	Node0x55d6cb9d2e50:s1 -> Node0x55d6cb9d3640;
+	Node0x55d6cb9d35f0 [shape=record,label="{libxml2-py.c:6310:}"];
+	Node0x55d6cb9d35f0 -> Node0x55d6cb9d3690;
+	Node0x55d6cb9d3640 [shape=record,label="{libxml2-py.c:6310:}"];
+	Node0x55d6cb9d3640 -> Node0x55d6cb9d3690;
+	Node0x55d6cb9d3690 [shape=record,label="{libxml2-py.c:6310:}"];
+	Node0x55d6cb9d3690 -> Node0x55d6cb9ce680;
+	Node0x55d6cb9ce680 [shape=record,label="{libxml2-py.c:6315:}"];
+}

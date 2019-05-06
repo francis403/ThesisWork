@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlSetCompressMode' function" {
+	label="CFG for 'xmlSetCompressMode' function";
+
+	Node0x5627b47149f0 [shape=record,label="{tree.c:7796:|{<s0>T|<s1>F}}"];
+	Node0x5627b47149f0 -> Node0x5627b4715f30;
+	Node0x5627b47149f0 -> Node0x5627b4716080;
+	Node0x5627b4715f30 [shape=record,label="{tree.c:7797:}"];
+	Node0x5627b4715f30 -> Node0x5627b4707ba0;
+	Node0x5627b4716080 [shape=record,label="{tree.c:7798:|{<s0>T|<s1>F}}"];
+	Node0x5627b4716080 -> Node0x5627b4717370;
+	Node0x5627b4716080 -> Node0x5627b4717410;
+	Node0x5627b4717370 [shape=record,label="{tree.c:7798:}"];
+	Node0x5627b4717370 -> Node0x5627b47173c0;
+	Node0x5627b4717410 [shape=record,label="{tree.c:7799:}"];
+	Node0x5627b4717410 -> Node0x5627b47173c0;
+	Node0x5627b47173c0 [shape=record,label="{%7}"];
+	Node0x5627b47173c0 -> Node0x5627b4707ba0;
+	Node0x5627b4707ba0 [shape=record,label="{tree.c:7800:}"];
+}

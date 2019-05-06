@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlSchemaGetFreshAttrInfo' function" {
+	label="CFG for 'xmlSchemaGetFreshAttrInfo' function";
+
+	Node0x558353cf47b0 [shape=record,label="{xmlschemas.c:23947:|{<s0>T|<s1>F}}"];
+	Node0x558353cf47b0:s0 -> Node0x558353cf5240;
+	Node0x558353cf47b0:s1 -> Node0x558353cf52e0;
+	Node0x558353cf5240 [shape=record,label="{xmlschemas.c:23955:|{<s0>T|<s1>F}}"];
+	Node0x558353cf5240:s0 -> Node0x558353cf5bc0;
+	Node0x558353cf5240:s1 -> Node0x558353cf5c10;
+	Node0x558353cf5bc0 [shape=record,label="{xmlschemas.c:23958:}"];
+	Node0x558353cf5bc0 -> Node0x558353cf4800;
+	Node0x558353cf5c10 [shape=record,label="{xmlschemas.c:23962:}"];
+	Node0x558353cf5c10 -> Node0x558353cf5290;
+	Node0x558353cf52e0 [shape=record,label="{xmlschemas.c:23962:|{<s0>T|<s1>F}}"];
+	Node0x558353cf52e0:s0 -> Node0x558353cf66c0;
+	Node0x558353cf52e0:s1 -> Node0x558353cf6760;
+	Node0x558353cf66c0 [shape=record,label="{xmlschemas.c:23963:|{<s0>T|<s1>F}}"];
+	Node0x558353cf66c0:s0 -> Node0x558353cf7960;
+	Node0x558353cf66c0:s1 -> Node0x558353cf79b0;
+	Node0x558353cf7960 [shape=record,label="{xmlschemas.c:23968:}"];
+	Node0x558353cf7960 -> Node0x558353cf4800;
+	Node0x558353cf79b0 [shape=record,label="{xmlschemas.c:23972:}"];
+	Node0x558353cf79b0 -> Node0x558353cf6710;
+	Node0x558353cf6760 [shape=record,label="{xmlschemas.c:23973:|{<s0>T|<s1>F}}"];
+	Node0x558353cf6760:s0 -> Node0x558353cf8bb0;
+	Node0x558353cf6760:s1 -> Node0x558353cf8c00;
+	Node0x558353cf8bb0 [shape=record,label="{xmlschemas.c:23975:}"];
+	Node0x558353cf8bb0 -> Node0x558353cf4800;
+	Node0x558353cf8c00 [shape=record,label="{xmlschemas.c:23979:}"];
+	Node0x558353cf8c00 -> Node0x558353cf4800;
+	Node0x558353cf6710 [shape=record,label="{%69}"];
+	Node0x558353cf6710 -> Node0x558353cf5290;
+	Node0x558353cf5290 [shape=record,label="{xmlschemas.c:23986:|{<s0>T|<s1>F}}"];
+	Node0x558353cf5290:s0 -> Node0x558353cf9f50;
+	Node0x558353cf5290:s1 -> Node0x558353cf9fa0;
+	Node0x558353cf9f50 [shape=record,label="{xmlschemas.c:23988:}"];
+	Node0x558353cf9f50 -> Node0x558353cf4800;
+	Node0x558353cf9fa0 [shape=record,label="{xmlschemas.c:23991:}"];
+	Node0x558353cf9fa0 -> Node0x558353cf4800;
+	Node0x558353cf4800 [shape=record,label="{xmlschemas.c:23996:}"];
+}

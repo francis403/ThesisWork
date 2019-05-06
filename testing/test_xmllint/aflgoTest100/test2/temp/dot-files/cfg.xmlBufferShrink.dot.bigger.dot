@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlBufferShrink' function" {
+	label="CFG for 'xmlBufferShrink' function";
+
+	Node0x5627b46b5140 [shape=record,label="{tree.c:7220:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b5140:s0 -> Node0x5627b46b54f0;
+	Node0x5627b46b5140:s1 -> Node0x5627b46b5600;
+	Node0x5627b46b54f0 [shape=record,label="{tree.c:7221:}"];
+	Node0x5627b46b54f0 -> Node0x5627b46b8a50;
+	Node0x5627b46b5600 [shape=record,label="{tree.c:7222:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b5600:s0 -> Node0x5627b46b9b20;
+	Node0x5627b46b5600:s1 -> Node0x5627b46b9b70;
+	Node0x5627b46b9b20 [shape=record,label="{tree.c:7222:}"];
+	Node0x5627b46b9b20 -> Node0x5627b46b8a50;
+	Node0x5627b46b9b70 [shape=record,label="{tree.c:7223:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b9b70:s0 -> Node0x5627b46ba000;
+	Node0x5627b46b9b70:s1 -> Node0x5627b46ba050;
+	Node0x5627b46ba000 [shape=record,label="{tree.c:7223:}"];
+	Node0x5627b46ba000 -> Node0x5627b46b8a50;
+	Node0x5627b46ba050 [shape=record,label="{tree.c:7225:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ba050:s0 -> Node0x5627b46ba8e0;
+	Node0x5627b46ba050:s1 -> Node0x5627b46ba9d0;
+	Node0x5627b46ba9d0 [shape=record,label="{tree.c:7227:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ba9d0:s0 -> Node0x5627b46bad40;
+	Node0x5627b46ba9d0:s1 -> Node0x5627b46ba980;
+	Node0x5627b46bad40 [shape=record,label="{tree.c:7227:|{<s0>T|<s1>F}}"];
+	Node0x5627b46bad40:s0 -> Node0x5627b46ba8e0;
+	Node0x5627b46bad40:s1 -> Node0x5627b46ba980;
+	Node0x5627b46ba8e0 [shape=record,label="{tree.c:7232:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ba8e0:s0 -> Node0x5627b46bbc40;
+	Node0x5627b46ba8e0:s1 -> Node0x5627b46bbbf0;
+	Node0x5627b46bbc40 [shape=record,label="{tree.c:7239:|{<s0>T|<s1>F}}"];
+	Node0x5627b46bbc40:s0 -> Node0x5627b46bbba0;
+	Node0x5627b46bbc40:s1 -> Node0x5627b46bbbf0;
+	Node0x5627b46bbba0 [shape=record,label="{tree.c:7240:|{<s0>T|<s1>F}}"];
+	Node0x5627b46bbba0:s0 -> Node0x5627b46bcc00;
+	Node0x5627b46bbba0:s1 -> Node0x5627b46bcc50;
+	Node0x5627b46bcc00 [shape=record,label="{tree.c:7242:}"];
+	Node0x5627b46bcc00 -> Node0x5627b46bcc50;
+	Node0x5627b46bcc50 [shape=record,label="{tree.c:7247:}"];
+	Node0x5627b46bcc50 -> Node0x5627b46bbbf0;
+	Node0x5627b46bbbf0 [shape=record,label="{tree.c:7248:}"];
+	Node0x5627b46bbbf0 -> Node0x5627b46ba930;
+	Node0x5627b46ba980 [shape=record,label="{tree.c:7249:}"];
+	Node0x5627b46ba980 -> Node0x5627b46ba930;
+	Node0x5627b46ba930 [shape=record,label="{tree.c:7252:}"];
+	Node0x5627b46ba930 -> Node0x5627b46b8a50;
+	Node0x5627b46b8a50 [shape=record,label="{tree.c:7253:}"];
+}

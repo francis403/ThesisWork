@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlIOFTPRead' function" {
+	label="CFG for 'xmlIOFTPRead' function";
+
+	Node0x5635e00d1290 [shape=record,label="{xmlIO.c:2146:|{<s0>T|<s1>F}}"];
+	Node0x5635e00d1290:s0 -> Node0x5635e00db170;
+	Node0x5635e00d1290:s1 -> Node0x5635e00db210;
+	Node0x5635e00db210 [shape=record,label="{xmlIO.c:2147:|{<s0>T|<s1>F}}"];
+	Node0x5635e00db210:s0 -> Node0x5635e00db170;
+	Node0x5635e00db210:s1 -> Node0x5635e00db1c0;
+	Node0x5635e00db170 [shape=record,label="{xmlIO.c:2147:}"];
+	Node0x5635e00db170 -> Node0x5635e00d9ac0;
+	Node0x5635e00db1c0 [shape=record,label="{xmlIO.c:2148:}"];
+	Node0x5635e00db1c0 -> Node0x5635e00d9ac0;
+	Node0x5635e00d9ac0 [shape=record,label="{xmlIO.c:2149:}"];
+}

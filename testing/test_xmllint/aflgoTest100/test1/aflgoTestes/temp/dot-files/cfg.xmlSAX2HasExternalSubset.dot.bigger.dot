@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSAX2HasExternalSubset' function" {
+	label="CFG for 'xmlSAX2HasExternalSubset' function";
+
+	Node0x55f4ae62fc90 [shape=record,label="{SAX2.c:337:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae62fc90:s0 -> Node0x55f4ae6308e0;
+	Node0x55f4ae62fc90:s1 -> Node0x55f4ae630980;
+	Node0x55f4ae630980 [shape=record,label="{SAX2.c:340:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae630980:s0 -> Node0x55f4ae6308e0;
+	Node0x55f4ae630980:s1 -> Node0x55f4ae630930;
+	Node0x55f4ae6308e0 [shape=record,label="{SAX2.c:340:}"];
+	Node0x55f4ae6308e0 -> Node0x55f4ae62ff00;
+	Node0x55f4ae630930 [shape=record,label="{SAX2.c:341:}"];
+	Node0x55f4ae630930 -> Node0x55f4ae62ff00;
+	Node0x55f4ae62ff00 [shape=record,label="{SAX2.c:342:}"];
+}

@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlRelaxNGSchemaTypeCheck' function" {
+	label="CFG for 'xmlRelaxNGSchemaTypeCheck' function";
+
+	Node0x559d0bd278e0 [shape=record,label="{relaxng.c:2456:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd278e0 -> Node0x559d0bd3a800;
+	Node0x559d0bd278e0 -> Node0x559d0bd3a8a0;
+	Node0x559d0bd3a8a0 [shape=record,label="{relaxng.c:2464:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd3a8a0 -> Node0x559d0bd3a800;
+	Node0x559d0bd3a8a0 -> Node0x559d0bd3a850;
+	Node0x559d0bd3a800 [shape=record,label="{relaxng.c:2465:}"];
+	Node0x559d0bd3a800 -> Node0x559d0bd27930;
+	Node0x559d0bd3a850 [shape=record,label="{relaxng.c:2466:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd3a850 -> Node0x559d0bd3b1c0;
+	Node0x559d0bd3a850 -> Node0x559d0bd3b210;
+	Node0x559d0bd3b1c0 [shape=record,label="{relaxng.c:2470:}"];
+	Node0x559d0bd3b1c0 -> Node0x559d0bd27930;
+	Node0x559d0bd3b210 [shape=record,label="{relaxng.c:2471:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd3b210 -> Node0x559d0bd3c4f0;
+	Node0x559d0bd3b210 -> Node0x559d0bd3c540;
+	Node0x559d0bd3c4f0 [shape=record,label="{relaxng.c:2474:}"];
+	Node0x559d0bd3c4f0 -> Node0x559d0bd27930;
+	Node0x559d0bd3c540 [shape=record,label="{relaxng.c:2475:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd3c540 -> Node0x559d0bd3c940;
+	Node0x559d0bd3c540 -> Node0x559d0bd3c990;
+	Node0x559d0bd3c940 [shape=record,label="{relaxng.c:2476:}"];
+	Node0x559d0bd3c940 -> Node0x559d0bd27930;
+	Node0x559d0bd3c990 [shape=record,label="{relaxng.c:2477:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd3c990 -> Node0x559d0bd3ce20;
+	Node0x559d0bd3c990 -> Node0x559d0bd3ce70;
+	Node0x559d0bd3ce20 [shape=record,label="{relaxng.c:2478:}"];
+	Node0x559d0bd3ce20 -> Node0x559d0bd27930;
+	Node0x559d0bd3ce70 [shape=record,label="{relaxng.c:2479:}"];
+	Node0x559d0bd3ce70 -> Node0x559d0bd27930;
+	Node0x559d0bd27930 [shape=record,label="{relaxng.c:2480:}"];
+}

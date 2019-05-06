@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCatalogGetSystem' function" {
+	label="CFG for 'libxml_xmlCatalogGetSystem' function";
+
+	Node0x55d6cb735cd0 [shape=record,label="{libxml2-py.c:1343:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb735cd0:s0 -> Node0x55d6cb7f8c60;
+	Node0x55d6cb735cd0:s1 -> Node0x55d6cb7f8c10;
+	Node0x55d6cb7f8c10 [shape=record,label="{libxml2-py.c:1349:}"];
+	Node0x55d6cb7f8c10 -> Node0x55d6cb735ba0;
+	Node0x55d6cb7f8c60 [shape=record,label="{libxml2-py.c:1351:}"];
+	Node0x55d6cb7f8c60 -> Node0x55d6cb735ba0;
+	Node0x55d6cb735ba0 [shape=record,label="{libxml2-py.c:1354:}"];
+}

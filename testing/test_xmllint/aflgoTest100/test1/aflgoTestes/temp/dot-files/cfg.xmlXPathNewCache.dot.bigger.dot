@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathNewCache' function" {
+	label="CFG for 'xmlXPathNewCache' function";
+
+	Node0x55e6b2ab0000 [shape=record,label="{xpath.c:2162:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2ab0000:s0 -> Node0x55e6b2ab0990;
+	Node0x55e6b2ab0000:s1 -> Node0x55e6b2ab09e0;
+	Node0x55e6b2ab0990 [shape=record,label="{xpath.c:2166:}"];
+	Node0x55e6b2ab0990 -> Node0x55e6b2ab0050;
+	Node0x55e6b2ab09e0 [shape=record,label="{xpath.c:2169:}"];
+	Node0x55e6b2ab09e0 -> Node0x55e6b2ab0050;
+	Node0x55e6b2ab0050 [shape=record,label="{xpath.c:2176:}"];
+}

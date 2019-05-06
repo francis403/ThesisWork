@@ -1,0 +1,47 @@
+digraph "CFG for 'xmlParse3986URI' function" {
+	label="CFG for 'xmlParse3986URI' function";
+
+	Node0x563ca5e950b0 [shape=record,label="{uri.c:857:|{<s0>T|<s1>F}}"];
+	Node0x563ca5e950b0:s0 -> Node0x563ca5e965c0;
+	Node0x563ca5e950b0:s1 -> Node0x563ca5e96610;
+	Node0x563ca5e965c0 [shape=record,label="{uri.c:861:}"];
+	Node0x563ca5e965c0 -> Node0x563ca5e95100;
+	Node0x563ca5e96610 [shape=record,label="{uri.c:862:|{<s0>T|<s1>F}}"];
+	Node0x563ca5e96610:s0 -> Node0x563ca5e96a70;
+	Node0x563ca5e96610:s1 -> Node0x563ca5e96ac0;
+	Node0x563ca5e96a70 [shape=record,label="{uri.c:863:}"];
+	Node0x563ca5e96a70 -> Node0x563ca5e95100;
+	Node0x563ca5e96ac0 [shape=record,label="{uri.c:865:|{<s0>T|<s1>F}}"];
+	Node0x563ca5e96ac0:s0 -> Node0x563ca5e976e0;
+	Node0x563ca5e96ac0:s1 -> Node0x563ca5e97730;
+	Node0x563ca5e976e0 [shape=record,label="{uri.c:867:}"];
+	Node0x563ca5e976e0 -> Node0x563ca5e95100;
+	Node0x563ca5e97730 [shape=record,label="{uri.c:868:|{<s0>T|<s1>F}}"];
+	Node0x563ca5e97730:s0 -> Node0x563ca5e97b60;
+	Node0x563ca5e97730:s1 -> Node0x563ca5e97bb0;
+	Node0x563ca5e97b60 [shape=record,label="{uri.c:869:|{<s0>T|<s1>F}}"];
+	Node0x563ca5e97b60:s0 -> Node0x563ca5e975b0;
+	Node0x563ca5e97b60:s1 -> Node0x563ca5e98580;
+	Node0x563ca5e975b0 [shape=record,label="{uri.c:871:}"];
+	Node0x563ca5e975b0 -> Node0x563ca5e95100;
+	Node0x563ca5e98580 [shape=record,label="{uri.c:872:}"];
+	Node0x563ca5e98580 -> Node0x563ca5e97bb0;
+	Node0x563ca5e97bb0 [shape=record,label="{uri.c:873:|{<s0>T|<s1>F}}"];
+	Node0x563ca5e97bb0:s0 -> Node0x563ca5e98b60;
+	Node0x563ca5e97bb0:s1 -> Node0x563ca5e98bb0;
+	Node0x563ca5e98b60 [shape=record,label="{uri.c:874:|{<s0>T|<s1>F}}"];
+	Node0x563ca5e98b60:s0 -> Node0x563ca5e99580;
+	Node0x563ca5e98b60:s1 -> Node0x563ca5e995d0;
+	Node0x563ca5e99580 [shape=record,label="{uri.c:876:}"];
+	Node0x563ca5e99580 -> Node0x563ca5e95100;
+	Node0x563ca5e995d0 [shape=record,label="{uri.c:877:}"];
+	Node0x563ca5e995d0 -> Node0x563ca5e98bb0;
+	Node0x563ca5e98bb0 [shape=record,label="{uri.c:878:|{<s0>T|<s1>F}}"];
+	Node0x563ca5e98bb0:s0 -> Node0x563ca5e99b20;
+	Node0x563ca5e98bb0:s1 -> Node0x563ca5e99b70;
+	Node0x563ca5e99b20 [shape=record,label="{uri.c:879:}"];
+	Node0x563ca5e99b20 -> Node0x563ca5e95100;
+	Node0x563ca5e99b70 [shape=record,label="{uri.c:882:}"];
+	Node0x563ca5e99b70 -> Node0x563ca5e95100;
+	Node0x563ca5e95100 [shape=record,label="{uri.c:883:}"];
+}

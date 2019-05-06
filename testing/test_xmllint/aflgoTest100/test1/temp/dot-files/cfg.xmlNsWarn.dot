@@ -1,0 +1,18 @@
+digraph "CFG for 'xmlNsWarn' function" {
+	label="CFG for 'xmlNsWarn' function";
+
+	Node0x55d73c1e8f90 [shape=record,label="{parser.c:815:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1e8f90 -> Node0x55d73c1f2e50;
+	Node0x55d73c1e8f90 -> Node0x55d73c1f2d80;
+	Node0x55d73c1f2e50 [shape=record,label="{parser.c:820:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f2e50 -> Node0x55d73c1f2dd0;
+	Node0x55d73c1f2e50 -> Node0x55d73c1f2d80;
+	Node0x55d73c1f2dd0 [shape=record,label="{parser.c:821:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f2dd0 -> Node0x55d73c1f2d30;
+	Node0x55d73c1f2dd0 -> Node0x55d73c1f2d80;
+	Node0x55d73c1f2d30 [shape=record,label="{parser.c:822:}"];
+	Node0x55d73c1f2d30 -> Node0x55d73c1e8fe0;
+	Node0x55d73c1f2d80 [shape=record,label="{parser.c:823:}"];
+	Node0x55d73c1f2d80 -> Node0x55d73c1e8fe0;
+	Node0x55d73c1e8fe0 [shape=record,label="{parser.c:827:}"];
+}

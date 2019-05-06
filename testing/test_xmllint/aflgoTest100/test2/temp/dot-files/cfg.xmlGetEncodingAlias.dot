@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlGetEncodingAlias' function" {
+	label="CFG for 'xmlGetEncodingAlias' function";
+
+	Node0x561e6c040960 [shape=record,label="{encoding.c:1019:|{<s0>T|<s1>F}}"];
+	Node0x561e6c040960 -> Node0x561e6c045960;
+	Node0x561e6c040960 -> Node0x561e6c0459b0;
+	Node0x561e6c045960 [shape=record,label="{encoding.c:1024:}"];
+	Node0x561e6c045960 -> Node0x561e6c044870;
+	Node0x561e6c0459b0 [shape=record,label="{encoding.c:1026:|{<s0>T|<s1>F}}"];
+	Node0x561e6c0459b0 -> Node0x561e6c045e10;
+	Node0x561e6c0459b0 -> Node0x561e6c045e60;
+	Node0x561e6c045e10 [shape=record,label="{encoding.c:1027:}"];
+	Node0x561e6c045e10 -> Node0x561e6c044870;
+	Node0x561e6c045e60 [shape=record,label="{encoding.c:1029:}"];
+	Node0x561e6c045e60 -> Node0x561e6c046fc0;
+	Node0x561e6c046fc0 [shape=record,label="{encoding.c:1029:|{<s0>T|<s1>F}}"];
+	Node0x561e6c046fc0 -> Node0x561e6c0472a0;
+	Node0x561e6c046fc0 -> Node0x561e6c046e60;
+	Node0x561e6c0472a0 [shape=record,label="{encoding.c:1030:|{<s0>T|<s1>F}}"];
+	Node0x561e6c0472a0 -> Node0x561e6c048290;
+	Node0x561e6c0472a0 -> Node0x561e6c0482e0;
+	Node0x561e6c048290 [shape=record,label="{encoding.c:1031:}"];
+	Node0x561e6c048290 -> Node0x561e6c046e60;
+	Node0x561e6c0482e0 [shape=record,label="{encoding.c:1032:}"];
+	Node0x561e6c0482e0 -> Node0x561e6c047210;
+	Node0x561e6c047210 [shape=record,label="{encoding.c:1029:}"];
+	Node0x561e6c047210 -> Node0x561e6c046fc0;
+	Node0x561e6c046e60 [shape=record,label="{encoding.c:1033:}"];
+	Node0x561e6c046e60 -> Node0x561e6c048e60;
+	Node0x561e6c048e60 [shape=record,label="{encoding.c:1038:|{<s0>T|<s1>F}}"];
+	Node0x561e6c048e60 -> Node0x561e6c049140;
+	Node0x561e6c048e60 -> Node0x561e6c048cc0;
+	Node0x561e6c049140 [shape=record,label="{encoding.c:1039:|{<s0>T|<s1>F}}"];
+	Node0x561e6c049140 -> Node0x561e6c049530;
+	Node0x561e6c049140 -> Node0x561e6c0494e0;
+	Node0x561e6c0494e0 [shape=record,label="{encoding.c:1040:}"];
+	Node0x561e6c0494e0 -> Node0x561e6c044870;
+	Node0x561e6c049530 [shape=record,label="{encoding.c:1042:}"];
+	Node0x561e6c049530 -> Node0x561e6c0490b0;
+	Node0x561e6c0490b0 [shape=record,label="{encoding.c:1038:}"];
+	Node0x561e6c0490b0 -> Node0x561e6c048e60;
+	Node0x561e6c048cc0 [shape=record,label="{encoding.c:1043:}"];
+	Node0x561e6c048cc0 -> Node0x561e6c044870;
+	Node0x561e6c044870 [shape=record,label="{encoding.c:1044:}"];
+}

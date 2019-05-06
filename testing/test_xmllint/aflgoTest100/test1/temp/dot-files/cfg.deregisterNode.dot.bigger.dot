@@ -1,0 +1,17 @@
+digraph "CFG for 'deregisterNode' function" {
+	label="CFG for 'deregisterNode' function";
+
+	Node0x556d1b5c91c0 [shape=record,label="{xmllint.c:3097:|{<s0>T|<s1>F}}"];
+	Node0x556d1b5c91c0:s0 -> Node0x556d1b5c7570;
+	Node0x556d1b5c91c0:s1 -> Node0x556d1b5c82b0;
+	Node0x556d1b5c7570 [shape=record,label="{xmllint.c:3099:}"];
+	Node0x556d1b5c7570 -> Node0x556d1b5c8380;
+	Node0x556d1b5c82b0 [shape=record,label="{xmllint.c:3099:}"];
+	Node0x556d1b5c8380 [shape=record,label="{xmllint.c:3100:|{<s0>T|<s1>F}}"];
+	Node0x556d1b5c8380:s0 -> Node0x556d1b5cd090;
+	Node0x556d1b5c8380:s1 -> Node0x556d1b5cd1b0;
+	Node0x556d1b5cd090 [shape=record,label="{xmllint.c:3100:}"];
+	Node0x556d1b5cd090 -> Node0x556d1b5cd160;
+	Node0x556d1b5cd1b0 [shape=record,label="{xmllint.c:3100:}"];
+	Node0x556d1b5cd160 [shape=record,label="{xmllint.c:3101:}"];
+}

@@ -1,0 +1,34 @@
+digraph "CFG for 'libxml_prev' function" {
+	label="CFG for 'libxml_prev' function";
+
+	Node0x55ea37695e60 [shape=record,label="{libxml.c:2571:|{<s0>T|<s1>F}}"];
+	Node0x55ea37695e60:s0 -> Node0x55ea37697170;
+	Node0x55ea37695e60:s1 -> Node0x55ea37697120;
+	Node0x55ea37697120 [shape=record,label="{libxml.c:2578:}"];
+	Node0x55ea37697120 -> Node0x55ea37695eb0;
+	Node0x55ea37697170 [shape=record,label="{libxml.c:2579:|{<s0>T|<s1>F}}"];
+	Node0x55ea37697170:s0 -> Node0x55ea376978b0;
+	Node0x55ea37697170:s1 -> Node0x55ea37697900;
+	Node0x55ea376978b0 [shape=record,label="{libxml.c:2579:}"];
+	Node0x55ea376978b0 -> Node0x55ea37697950;
+	Node0x55ea37697900 [shape=record,label="{libxml.c:2579:}"];
+	Node0x55ea37697900 -> Node0x55ea37697950;
+	Node0x55ea37697950 [shape=record,label="{libxml.c:2579:|{<s0>def|<s1>9|<s2>21|<s3>13|<s4>2|<s5>18}}"];
+	Node0x55ea37697950:s0 -> Node0x55ea37698000;
+	Node0x55ea37697950:s1 -> Node0x55ea376980e0;
+	Node0x55ea37697950:s2 -> Node0x55ea376980e0;
+	Node0x55ea37697950:s3 -> Node0x55ea376980e0;
+	Node0x55ea37697950:s4 -> Node0x55ea376982d0;
+	Node0x55ea37697950:s5 -> Node0x55ea37698bc0;
+	Node0x55ea376980e0 [shape=record,label="{libxml.c:2591:}"];
+	Node0x55ea376980e0 -> Node0x55ea37697e90;
+	Node0x55ea376982d0 [shape=record,label="{libxml.c:2594:}"];
+	Node0x55ea376982d0 -> Node0x55ea37697e90;
+	Node0x55ea37698bc0 [shape=record,label="{libxml.c:2600:}"];
+	Node0x55ea37698bc0 -> Node0x55ea37697e90;
+	Node0x55ea37698000 [shape=record,label="{libxml.c:2603:}"];
+	Node0x55ea37698000 -> Node0x55ea37697e90;
+	Node0x55ea37697e90 [shape=record,label="{libxml.c:2606:}"];
+	Node0x55ea37697e90 -> Node0x55ea37695eb0;
+	Node0x55ea37695eb0 [shape=record,label="{libxml.c:2608:}"];
+}

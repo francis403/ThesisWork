@@ -1,0 +1,28 @@
+digraph "CFG for 'htmlErrMemory' function" {
+	label="CFG for 'htmlErrMemory' function";
+
+	Node0x5630c5ea62a0 [shape=record,label="{HTMLparser.c:77:|{<s0>T|<s1>F}}"];
+	Node0x5630c5ea62a0:s0 -> Node0x5630c5e95540;
+	Node0x5630c5ea62a0:s1 -> Node0x5630c5e95470;
+	Node0x5630c5e95540 [shape=record,label="{HTMLparser.c:79:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e95540:s0 -> Node0x5630c5e954c0;
+	Node0x5630c5e95540:s1 -> Node0x5630c5e95470;
+	Node0x5630c5e954c0 [shape=record,label="{HTMLparser.c:80:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e954c0:s0 -> Node0x5630c5e95420;
+	Node0x5630c5e954c0:s1 -> Node0x5630c5e95470;
+	Node0x5630c5e95420 [shape=record,label="{HTMLparser.c:81:}"];
+	Node0x5630c5e95420 -> Node0x5630c5eeebc0;
+	Node0x5630c5e95470 [shape=record,label="{HTMLparser.c:82:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e95470:s0 -> Node0x5630c5eee0b0;
+	Node0x5630c5e95470:s1 -> Node0x5630c5eee100;
+	Node0x5630c5eee0b0 [shape=record,label="{HTMLparser.c:83:}"];
+	Node0x5630c5eee0b0 -> Node0x5630c5eee100;
+	Node0x5630c5eee100 [shape=record,label="{HTMLparser.c:87:|{<s0>T|<s1>F}}"];
+	Node0x5630c5eee100:s0 -> Node0x5630c5eeeb70;
+	Node0x5630c5eee100:s1 -> Node0x5630c5eeec10;
+	Node0x5630c5eeeb70 [shape=record,label="{HTMLparser.c:88:}"];
+	Node0x5630c5eeeb70 -> Node0x5630c5eeebc0;
+	Node0x5630c5eeec10 [shape=record,label="{HTMLparser.c:93:}"];
+	Node0x5630c5eeec10 -> Node0x5630c5eeebc0;
+	Node0x5630c5eeebc0 [shape=record,label="{HTMLparser.c:96:}"];
+}

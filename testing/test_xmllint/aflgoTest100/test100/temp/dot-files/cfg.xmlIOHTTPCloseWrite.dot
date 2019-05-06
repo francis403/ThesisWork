@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlIOHTTPCloseWrite' function" {
+	label="CFG for 'xmlIOHTTPCloseWrite' function";
+
+	Node0x5635e016c2c0 [shape=record,label="{xmlIO.c:1944:|{<s0>T|<s1>F}}"];
+	Node0x5635e016c2c0 -> Node0x5635e00562b0;
+	Node0x5635e016c2c0 -> Node0x5635e0056350;
+	Node0x5635e0056350 [shape=record,label="{xmlIO.c:1956:|{<s0>T|<s1>F}}"];
+	Node0x5635e0056350 -> Node0x5635e00562b0;
+	Node0x5635e0056350 -> Node0x5635e0056300;
+	Node0x5635e00562b0 [shape=record,label="{xmlIO.c:1957:}"];
+	Node0x5635e00562b0 -> Node0x5635e0053280;
+	Node0x5635e0056300 [shape=record,label="{xmlIO.c:1963:|{<s0>T|<s1>F}}"];
+	Node0x5635e0056300 -> Node0x5635e0056a70;
+	Node0x5635e0056300 -> Node0x5635e0056b10;
+	Node0x5635e0056a70 [shape=record,label="{xmlIO.c:1964:}"];
+	Node0x5635e0056a70 -> Node0x5635e0056ac0;
+	Node0x5635e0056b10 [shape=record,label="{xmlIO.c:1972:}"];
+	Node0x5635e0056b10 -> Node0x5635e0056ac0;
+	Node0x5635e0056ac0 [shape=record,label="{xmlIO.c:1977:|{<s0>T|<s1>F}}"];
+	Node0x5635e0056ac0 -> Node0x5635e0058960;
+	Node0x5635e0056ac0 -> Node0x5635e0058a00;
+	Node0x5635e0058960 [shape=record,label="{xmlIO.c:1978:}"];
+	Node0x5635e0058960 -> Node0x5635e00589b0;
+	Node0x5635e0058a00 [shape=record,label="{xmlIO.c:1988:|{<s0>T|<s1>F}}"];
+	Node0x5635e0058a00 -> Node0x5635e016d750;
+	Node0x5635e0058a00 -> Node0x5635e016d7a0;
+	Node0x5635e016d750 [shape=record,label="{xmlIO.c:2046:|{<s0>T|<s1>F}}"];
+	Node0x5635e016d750 -> Node0x5635e016dd90;
+	Node0x5635e016d750 -> Node0x5635e016dd40;
+	Node0x5635e016dd90 [shape=record,label="{xmlIO.c:2047:|{<s0>T|<s1>F}}"];
+	Node0x5635e016dd90 -> Node0x5635e016dca0;
+	Node0x5635e016dd90 -> Node0x5635e016dd40;
+	Node0x5635e016dca0 [shape=record,label="{xmlIO.c:2048:}"];
+	Node0x5635e016dca0 -> Node0x5635e016dcf0;
+	Node0x5635e016dd40 [shape=record,label="{xmlIO.c:2050:}"];
+	Node0x5635e016dd40 -> Node0x5635e016dcf0;
+	Node0x5635e016dcf0 [shape=record,label="{xmlIO.c:2059:}"];
+	Node0x5635e016dcf0 -> Node0x5635e016d7a0;
+	Node0x5635e016d7a0 [shape=record,label="{%81}"];
+	Node0x5635e016d7a0 -> Node0x5635e00589b0;
+	Node0x5635e00589b0 [shape=record,label="{xmlIO.c:2066:}"];
+	Node0x5635e00589b0 -> Node0x5635e0053280;
+	Node0x5635e0053280 [shape=record,label="{xmlIO.c:2069:}"];
+}

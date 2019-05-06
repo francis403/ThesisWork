@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlTextWriterWriteCDATA' function" {
+	label="CFG for 'xmlTextWriterWriteCDATA' function";
+
+	Node0x562150ee85f0 [shape=record,label="{xmlwriter.c:2793:|{<s0>T|<s1>F}}"];
+	Node0x562150ee85f0:s0 -> Node0x562150eed750;
+	Node0x562150ee85f0:s1 -> Node0x562150eed7a0;
+	Node0x562150eed750 [shape=record,label="{xmlwriter.c:2801:}"];
+	Node0x562150eed750 -> Node0x562150ee9fa0;
+	Node0x562150eed7a0 [shape=record,label="{xmlwriter.c:2802:|{<s0>T|<s1>F}}"];
+	Node0x562150eed7a0:s0 -> Node0x562150eedeb0;
+	Node0x562150eed7a0:s1 -> Node0x562150eedf00;
+	Node0x562150eedeb0 [shape=record,label="{xmlwriter.c:2804:|{<s0>T|<s1>F}}"];
+	Node0x562150eedeb0:s0 -> Node0x562150eee490;
+	Node0x562150eedeb0:s1 -> Node0x562150eee4e0;
+	Node0x562150eee490 [shape=record,label="{xmlwriter.c:2806:}"];
+	Node0x562150eee490 -> Node0x562150ee9fa0;
+	Node0x562150eee4e0 [shape=record,label="{xmlwriter.c:2807:}"];
+	Node0x562150eee4e0 -> Node0x562150eedf00;
+	Node0x562150eedf00 [shape=record,label="{xmlwriter.c:2809:|{<s0>T|<s1>F}}"];
+	Node0x562150eedf00:s0 -> Node0x562150eeef10;
+	Node0x562150eedf00:s1 -> Node0x562150eeef60;
+	Node0x562150eeef10 [shape=record,label="{xmlwriter.c:2811:}"];
+	Node0x562150eeef10 -> Node0x562150ee9fa0;
+	Node0x562150eeef60 [shape=record,label="{xmlwriter.c:2812:}"];
+	Node0x562150eeef60 -> Node0x562150ee9fa0;
+	Node0x562150ee9fa0 [shape=record,label="{xmlwriter.c:2815:}"];
+}

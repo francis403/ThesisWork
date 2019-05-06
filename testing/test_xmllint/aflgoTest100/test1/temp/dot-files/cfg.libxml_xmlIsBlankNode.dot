@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlIsBlankNode' function" {
+	label="CFG for 'libxml_xmlIsBlankNode' function";
+
+	Node0x55f930f2f1b0 [shape=record,label="{libxml2-py.c:3332:|{<s0>T|<s1>F}}"];
+	Node0x55f930f2f1b0:s0 -> Node0x55f930f32360;
+	Node0x55f930f2f1b0:s1 -> Node0x55f930f32310;
+	Node0x55f930f32310 [shape=record,label="{libxml2-py.c:3339:}"];
+	Node0x55f930f32310 -> Node0x55f930f2f4b0;
+	Node0x55f930f32360 [shape=record,label="{libxml2-py.c:3340:|{<s0>T|<s1>F}}"];
+	Node0x55f930f32360:s0 -> Node0x55f930f32b40;
+	Node0x55f930f32360:s1 -> Node0x55f930f32b90;
+	Node0x55f930f32b40 [shape=record,label="{libxml2-py.c:3340:}"];
+	Node0x55f930f32b40 -> Node0x55f930f32be0;
+	Node0x55f930f32b90 [shape=record,label="{libxml2-py.c:3340:}"];
+	Node0x55f930f32b90 -> Node0x55f930f32be0;
+	Node0x55f930f32be0 [shape=record,label="{libxml2-py.c:3340:}"];
+	Node0x55f930f32be0 -> Node0x55f930f2f4b0;
+	Node0x55f930f2f4b0 [shape=record,label="{libxml2-py.c:3345:}"];
+}

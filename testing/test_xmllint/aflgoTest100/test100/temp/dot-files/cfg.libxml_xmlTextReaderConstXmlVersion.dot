@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlTextReaderConstXmlVersion' function" {
+	label="CFG for 'libxml_xmlTextReaderConstXmlVersion' function";
+
+	Node0x55d6cbe82740 [shape=record,label="{libxml2-py.c:7967:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbe82740:s0 -> Node0x55d6cbe86410;
+	Node0x55d6cbe82740:s1 -> Node0x55d6cbe863c0;
+	Node0x55d6cbe863c0 [shape=record,label="{libxml2-py.c:7974:}"];
+	Node0x55d6cbe863c0 -> Node0x55d6cbe829d0;
+	Node0x55d6cbe86410 [shape=record,label="{libxml2-py.c:7975:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbe86410:s0 -> Node0x55d6cbe86c00;
+	Node0x55d6cbe86410:s1 -> Node0x55d6cbe86c50;
+	Node0x55d6cbe86c00 [shape=record,label="{libxml2-py.c:7975:}"];
+	Node0x55d6cbe86c00 -> Node0x55d6cbe86ca0;
+	Node0x55d6cbe86c50 [shape=record,label="{libxml2-py.c:7975:}"];
+	Node0x55d6cbe86c50 -> Node0x55d6cbe86ca0;
+	Node0x55d6cbe86ca0 [shape=record,label="{libxml2-py.c:7975:}"];
+	Node0x55d6cbe86ca0 -> Node0x55d6cbe829d0;
+	Node0x55d6cbe829d0 [shape=record,label="{libxml2-py.c:7980:}"];
+}

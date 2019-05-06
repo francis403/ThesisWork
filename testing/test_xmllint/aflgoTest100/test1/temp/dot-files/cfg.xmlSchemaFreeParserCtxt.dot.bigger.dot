@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlSchemaFreeParserCtxt' function" {
+	label="CFG for 'xmlSchemaFreeParserCtxt' function";
+
+	Node0x55d025ab3510 [shape=record,label="{xmlschemas.c:12562:|{<s0>T|<s1>F}}"];
+	Node0x55d025ab3510:s0 -> Node0x55d025ab1d20;
+	Node0x55d025ab3510:s1 -> Node0x55d025ab37f0;
+	Node0x55d025ab1d20 [shape=record,label="{xmlschemas.c:12565:}"];
+	Node0x55d025ab1d20 -> Node0x55d025ab3a10;
+	Node0x55d025ab37f0 [shape=record,label="{xmlschemas.c:12566:|{<s0>T|<s1>F}}"];
+	Node0x55d025ab37f0:s0 -> Node0x55d025ab4d90;
+	Node0x55d025ab37f0:s1 -> Node0x55d025ab4d40;
+	Node0x55d025ab4d90 [shape=record,label="{xmlschemas.c:12566:|{<s0>T|<s1>F}}"];
+	Node0x55d025ab4d90:s0 -> Node0x55d025ab4d40;
+	Node0x55d025ab4d90:s1 -> Node0x55d025ab4cf0;
+	Node0x55d025ab4cf0 [shape=record,label="{xmlschemas.c:12567:}"];
+	Node0x55d025ab4cf0 -> Node0x55d025ab4d40;
+	Node0x55d025ab4d40 [shape=record,label="{xmlschemas.c:12568:|{<s0>T|<s1>F}}"];
+	Node0x55d025ab4d40:s0 -> Node0x55d025ab5b30;
+	Node0x55d025ab4d40:s1 -> Node0x55d025ab5b80;
+	Node0x55d025ab5b30 [shape=record,label="{xmlschemas.c:12569:}"];
+	Node0x55d025ab5b30 -> Node0x55d025ab5b80;
+	Node0x55d025ab5b80 [shape=record,label="{xmlschemas.c:12571:|{<s0>T|<s1>F}}"];
+	Node0x55d025ab5b80:s0 -> Node0x55d025ab64e0;
+	Node0x55d025ab5b80:s1 -> Node0x55d025ab6490;
+	Node0x55d025ab64e0 [shape=record,label="{xmlschemas.c:12571:|{<s0>T|<s1>F}}"];
+	Node0x55d025ab64e0:s0 -> Node0x55d025ab6440;
+	Node0x55d025ab64e0:s1 -> Node0x55d025ab6490;
+	Node0x55d025ab6440 [shape=record,label="{xmlschemas.c:12572:}"];
+	Node0x55d025ab6440 -> Node0x55d025ab6490;
+	Node0x55d025ab6490 [shape=record,label="{xmlschemas.c:12576:|{<s0>T|<s1>F}}"];
+	Node0x55d025ab6490:s0 -> Node0x55d025ab7340;
+	Node0x55d025ab6490:s1 -> Node0x55d025ab7390;
+	Node0x55d025ab7340 [shape=record,label="{xmlschemas.c:12577:}"];
+	Node0x55d025ab7340 -> Node0x55d025ab7390;
+	Node0x55d025ab7390 [shape=record,label="{xmlschemas.c:12578:}"];
+	Node0x55d025ab7390 -> Node0x55d025ab3a10;
+	Node0x55d025ab3a10 [shape=record,label="{xmlschemas.c:12580:}"];
+}

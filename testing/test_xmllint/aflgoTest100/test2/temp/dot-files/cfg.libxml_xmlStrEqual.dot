@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlStrEqual' function" {
+	label="CFG for 'libxml_xmlStrEqual' function";
+
+	Node0x55d6cb9f3750 [shape=record,label="{libxml2-py.c:7376:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb9f3750:s0 -> Node0x55d6cbe00680;
+	Node0x55d6cb9f3750:s1 -> Node0x55d6cbe00630;
+	Node0x55d6cbe00630 [shape=record,label="{libxml2-py.c:7383:}"];
+	Node0x55d6cbe00630 -> Node0x55d6cbdfc540;
+	Node0x55d6cbe00680 [shape=record,label="{libxml2-py.c:7385:}"];
+	Node0x55d6cbe00680 -> Node0x55d6cbdfc540;
+	Node0x55d6cbdfc540 [shape=record,label="{libxml2-py.c:7388:}"];
+}

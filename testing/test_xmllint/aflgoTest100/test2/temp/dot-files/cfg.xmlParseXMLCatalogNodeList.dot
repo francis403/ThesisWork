@@ -1,0 +1,23 @@
+digraph "CFG for 'xmlParseXMLCatalogNodeList' function" {
+	label="CFG for 'xmlParseXMLCatalogNodeList' function";
+
+	Node0x55f3677a4de0 [shape=record,label="{catalog.c:1323:}"];
+	Node0x55f3677a4de0 -> Node0x55f3677a5d50;
+	Node0x55f3677a5d50 [shape=record,label="{catalog.c:1325:|{<s0>T|<s1>F}}"];
+	Node0x55f3677a5d50 -> Node0x55f3677a6150;
+	Node0x55f3677a5d50 -> Node0x55f3677a5f70;
+	Node0x55f3677a6150 [shape=record,label="{catalog.c:1326:|{<s0>T|<s1>F}}"];
+	Node0x55f3677a6150 -> Node0x55f3677a6420;
+	Node0x55f3677a6150 -> Node0x55f3677a6350;
+	Node0x55f3677a6420 [shape=record,label="{catalog.c:1326:|{<s0>T|<s1>F}}"];
+	Node0x55f3677a6420 -> Node0x55f3677a63a0;
+	Node0x55f3677a6420 -> Node0x55f3677a6350;
+	Node0x55f3677a63a0 [shape=record,label="{catalog.c:1327:|{<s0>T|<s1>F}}"];
+	Node0x55f3677a63a0 -> Node0x55f3677a6300;
+	Node0x55f3677a63a0 -> Node0x55f3677a6350;
+	Node0x55f3677a6300 [shape=record,label="{catalog.c:1328:}"];
+	Node0x55f3677a6300 -> Node0x55f3677a6350;
+	Node0x55f3677a6350 [shape=record,label="{catalog.c:1330:}"];
+	Node0x55f3677a6350 -> Node0x55f3677a5d50;
+	Node0x55f3677a5f70 [shape=record,label="{catalog.c:1333:}"];
+}

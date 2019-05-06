@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlXPathNodeSetRemove' function" {
+	label="CFG for 'xmlXPathNodeSetRemove' function";
+
+	Node0x5621ee7174b0 [shape=record,label="{xpath.c:4157:|{<s0>T|<s1>F}}"];
+	Node0x5621ee7174b0:s0 -> Node0x5621ee71ce20;
+	Node0x5621ee7174b0:s1 -> Node0x5621ee71d240;
+	Node0x5621ee71ce20 [shape=record,label="{xpath.c:4158:}"];
+	Node0x5621ee71ce20 -> Node0x5621ee71cc90;
+	Node0x5621ee71d240 [shape=record,label="{xpath.c:4159:|{<s0>T|<s1>F}}"];
+	Node0x5621ee71d240:s0 -> Node0x5621ee71df70;
+	Node0x5621ee71d240:s1 -> Node0x5621ee71dfc0;
+	Node0x5621ee71df70 [shape=record,label="{xpath.c:4159:}"];
+	Node0x5621ee71df70 -> Node0x5621ee71cc90;
+	Node0x5621ee71dfc0 [shape=record,label="{xpath.c:4160:|{<s0>T|<s1>F}}"];
+	Node0x5621ee71dfc0:s0 -> Node0x5621ee71e500;
+	Node0x5621ee71dfc0:s1 -> Node0x5621ee71e4b0;
+	Node0x5621ee71e500 [shape=record,label="{xpath.c:4161:|{<s0>T|<s1>F}}"];
+	Node0x5621ee71e500:s0 -> Node0x5621ee71e460;
+	Node0x5621ee71e500:s1 -> Node0x5621ee71e4b0;
+	Node0x5621ee71e460 [shape=record,label="{xpath.c:4162:}"];
+	Node0x5621ee71e460 -> Node0x5621ee71e4b0;
+	Node0x5621ee71e4b0 [shape=record,label="{xpath.c:4163:}"];
+	Node0x5621ee71e4b0 -> Node0x5621ee71f850;
+	Node0x5621ee71f850 [shape=record,label="{xpath.c:4164:|{<s0>T|<s1>F}}"];
+	Node0x5621ee71f850:s0 -> Node0x5621ee71fb30;
+	Node0x5621ee71f850:s1 -> Node0x5621ee71f800;
+	Node0x5621ee71fb30 [shape=record,label="{xpath.c:4165:}"];
+	Node0x5621ee71fb30 -> Node0x5621ee71faa0;
+	Node0x5621ee71faa0 [shape=record,label="{xpath.c:4164:}"];
+	Node0x5621ee71faa0 -> Node0x5621ee71f850;
+	Node0x5621ee71f800 [shape=record,label="{xpath.c:4166:}"];
+	Node0x5621ee71f800 -> Node0x5621ee71cc90;
+	Node0x5621ee71cc90 [shape=record,label="{xpath.c:4167:}"];
+}

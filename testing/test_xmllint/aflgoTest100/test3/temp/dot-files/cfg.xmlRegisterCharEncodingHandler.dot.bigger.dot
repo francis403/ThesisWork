@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlRegisterCharEncodingHandler' function" {
+	label="CFG for 'xmlRegisterCharEncodingHandler' function";
+
+	Node0x561e6c0b2380 [shape=record,label="{encoding.c:1481:|{<s0>T|<s1>F}}"];
+	Node0x561e6c0b2380:s0 -> Node0x561e6c0b2310;
+	Node0x561e6c0b2380:s1 -> Node0x561e6c0aab80;
+	Node0x561e6c0b2310 [shape=record,label="{encoding.c:1482:}"];
+	Node0x561e6c0b2310 -> Node0x561e6c0aab80;
+	Node0x561e6c0aab80 [shape=record,label="{encoding.c:1483:|{<s0>T|<s1>F}}"];
+	Node0x561e6c0aab80:s0 -> Node0x561e6c0b30c0;
+	Node0x561e6c0aab80:s1 -> Node0x561e6c0b3160;
+	Node0x561e6c0b3160 [shape=record,label="{encoding.c:1483:|{<s0>T|<s1>F}}"];
+	Node0x561e6c0b3160:s0 -> Node0x561e6c0b30c0;
+	Node0x561e6c0b3160:s1 -> Node0x561e6c0b3110;
+	Node0x561e6c0b30c0 [shape=record,label="{encoding.c:1484:}"];
+	Node0x561e6c0b30c0 -> Node0x561e6c0b2570;
+	Node0x561e6c0b3110 [shape=record,label="{encoding.c:1489:|{<s0>T|<s1>F}}"];
+	Node0x561e6c0b3110:s0 -> Node0x561e6c0b43a0;
+	Node0x561e6c0b3110:s1 -> Node0x561e6c0b43f0;
+	Node0x561e6c0b43a0 [shape=record,label="{encoding.c:1490:}"];
+	Node0x561e6c0b43a0 -> Node0x561e6c0b2570;
+	Node0x561e6c0b43f0 [shape=record,label="{encoding.c:1495:}"];
+	Node0x561e6c0b43f0 -> Node0x561e6c0b2570;
+	Node0x561e6c0b2570 [shape=record,label="{encoding.c:1496:}"];
+}

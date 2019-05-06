@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlTextWriterWriteComment' function" {
+	label="CFG for 'xmlTextWriterWriteComment' function";
+
+	Node0x562150de9cf0 [shape=record,label="{xmlwriter.c:924:|{<s0>T|<s1>F}}"];
+	Node0x562150de9cf0:s0 -> Node0x562150defb90;
+	Node0x562150de9cf0:s1 -> Node0x562150defbe0;
+	Node0x562150defb90 [shape=record,label="{xmlwriter.c:932:}"];
+	Node0x562150defb90 -> Node0x562150deeb90;
+	Node0x562150defbe0 [shape=record,label="{xmlwriter.c:933:|{<s0>T|<s1>F}}"];
+	Node0x562150defbe0:s0 -> Node0x562150df0c60;
+	Node0x562150defbe0:s1 -> Node0x562150df0cb0;
+	Node0x562150df0c60 [shape=record,label="{xmlwriter.c:936:}"];
+	Node0x562150df0c60 -> Node0x562150deeb90;
+	Node0x562150df0cb0 [shape=record,label="{xmlwriter.c:937:|{<s0>T|<s1>F}}"];
+	Node0x562150df0cb0:s0 -> Node0x562150df1500;
+	Node0x562150df0cb0:s1 -> Node0x562150df1550;
+	Node0x562150df1500 [shape=record,label="{xmlwriter.c:940:}"];
+	Node0x562150df1500 -> Node0x562150deeb90;
+	Node0x562150df1550 [shape=record,label="{xmlwriter.c:941:}"];
+	Node0x562150df1550 -> Node0x562150deeb90;
+	Node0x562150deeb90 [shape=record,label="{xmlwriter.c:944:}"];
+}

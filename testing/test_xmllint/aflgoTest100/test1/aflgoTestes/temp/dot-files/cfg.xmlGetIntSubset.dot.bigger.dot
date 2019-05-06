@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlGetIntSubset' function" {
+	label="CFG for 'xmlGetIntSubset' function";
+
+	Node0x55ad0b9a8e70 [shape=record,label="{tree.c:925:|{<s0>T|<s1>F}}"];
+	Node0x55ad0b9a8e70:s0 -> Node0x55ad0b9b2010;
+	Node0x55ad0b9a8e70:s1 -> Node0x55ad0b9b2060;
+	Node0x55ad0b9b2010 [shape=record,label="{tree.c:929:}"];
+	Node0x55ad0b9b2010 -> Node0x55ad0b9b1780;
+	Node0x55ad0b9b2060 [shape=record,label="{tree.c:930:}"];
+	Node0x55ad0b9b2060 -> Node0x55ad0b9b2660;
+	Node0x55ad0b9b2660 [shape=record,label="{tree.c:931:|{<s0>T|<s1>F}}"];
+	Node0x55ad0b9b2660:s0 -> Node0x55ad0b9b2a20;
+	Node0x55ad0b9b2660:s1 -> Node0x55ad0b9b2840;
+	Node0x55ad0b9b2a20 [shape=record,label="{tree.c:932:|{<s0>T|<s1>F}}"];
+	Node0x55ad0b9b2a20:s0 -> Node0x55ad0b9b2bd0;
+	Node0x55ad0b9b2a20:s1 -> Node0x55ad0b9b2c20;
+	Node0x55ad0b9b2bd0 [shape=record,label="{tree.c:933:}"];
+	Node0x55ad0b9b2bd0 -> Node0x55ad0b9b1780;
+	Node0x55ad0b9b2c20 [shape=record,label="{tree.c:934:}"];
+	Node0x55ad0b9b2c20 -> Node0x55ad0b9b2660;
+	Node0x55ad0b9b2840 [shape=record,label="{tree.c:936:}"];
+	Node0x55ad0b9b2840 -> Node0x55ad0b9b1780;
+	Node0x55ad0b9b1780 [shape=record,label="{tree.c:937:}"];
+}

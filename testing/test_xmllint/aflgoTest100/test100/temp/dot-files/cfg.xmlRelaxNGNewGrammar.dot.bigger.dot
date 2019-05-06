@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlRelaxNGNewGrammar' function" {
+	label="CFG for 'xmlRelaxNGNewGrammar' function";
+
+	Node0x559d0be08bc0 [shape=record,label="{relaxng.c:840:|{<s0>T|<s1>F}}"];
+	Node0x559d0be08bc0:s0 -> Node0x559d0be09da0;
+	Node0x559d0be08bc0:s1 -> Node0x559d0be09df0;
+	Node0x559d0be09da0 [shape=record,label="{relaxng.c:846:}"];
+	Node0x559d0be09da0 -> Node0x559d0be08c10;
+	Node0x559d0be09df0 [shape=record,label="{relaxng.c:849:}"];
+	Node0x559d0be09df0 -> Node0x559d0be08c10;
+	Node0x559d0be08c10 [shape=record,label="{relaxng.c:852:}"];
+}

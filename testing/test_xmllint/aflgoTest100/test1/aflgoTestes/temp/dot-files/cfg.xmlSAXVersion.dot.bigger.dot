@@ -1,0 +1,26 @@
+digraph "CFG for 'xmlSAXVersion' function" {
+	label="CFG for 'xmlSAXVersion' function";
+
+	Node0x55f4ae7c8770 [shape=record,label="{SAX2.c:2868:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae7c8770:s0 -> Node0x55f4ae7ccc60;
+	Node0x55f4ae7c8770:s1 -> Node0x55f4ae7cccb0;
+	Node0x55f4ae7ccc60 [shape=record,label="{SAX2.c:2870:}"];
+	Node0x55f4ae7ccc60 -> Node0x55f4ae7c9f10;
+	Node0x55f4ae7cccb0 [shape=record,label="{SAX2.c:2871:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae7cccb0:s0 -> Node0x55f4ae7cd170;
+	Node0x55f4ae7cccb0:s1 -> Node0x55f4ae7cd210;
+	Node0x55f4ae7cd170 [shape=record,label="{SAX2.c:2872:}"];
+	Node0x55f4ae7cd170 -> Node0x55f4ae7cd1c0;
+	Node0x55f4ae7cd210 [shape=record,label="{SAX2.c:2879:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae7cd210:s0 -> Node0x55f4ae7ce250;
+	Node0x55f4ae7cd210:s1 -> Node0x55f4ae7ce2f0;
+	Node0x55f4ae7ce250 [shape=record,label="{SAX2.c:2880:}"];
+	Node0x55f4ae7ce250 -> Node0x55f4ae7ce2a0;
+	Node0x55f4ae7ce2f0 [shape=record,label="{SAX2.c:2885:}"];
+	Node0x55f4ae7ce2f0 -> Node0x55f4ae7c9f10;
+	Node0x55f4ae7ce2a0 [shape=record,label="{%29}"];
+	Node0x55f4ae7ce2a0 -> Node0x55f4ae7cd1c0;
+	Node0x55f4ae7cd1c0 [shape=record,label="{SAX2.c:2886:}"];
+	Node0x55f4ae7cd1c0 -> Node0x55f4ae7c9f10;
+	Node0x55f4ae7c9f10 [shape=record,label="{SAX2.c:2913:}"];
+}

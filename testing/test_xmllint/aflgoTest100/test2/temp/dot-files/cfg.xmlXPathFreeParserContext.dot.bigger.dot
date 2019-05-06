@@ -1,0 +1,36 @@
+digraph "CFG for 'xmlXPathFreeParserContext' function" {
+	label="CFG for 'xmlXPathFreeParserContext' function";
+
+	Node0x5621ee6fbfa0 [shape=record,label="{xpath.c:6306:|{<s0>T|<s1>F}}"];
+	Node0x5621ee6fbfa0:s0 -> Node0x5621ee6c3490;
+	Node0x5621ee6fbfa0:s1 -> Node0x5621ee6c34e0;
+	Node0x5621ee6c3490 [shape=record,label="{xpath.c:6310:}"];
+	Node0x5621ee6c3490 -> Node0x5621ee6c2ac0;
+	Node0x5621ee6c2ac0 [shape=record,label="{xpath.c:6310:|{<s0>T|<s1>F}}"];
+	Node0x5621ee6c2ac0:s0 -> Node0x5621ee83a490;
+	Node0x5621ee6c2ac0:s1 -> Node0x5621ee6c38c0;
+	Node0x5621ee83a490 [shape=record,label="{xpath.c:6311:|{<s0>T|<s1>F}}"];
+	Node0x5621ee83a490:s0 -> Node0x5621ee83a8c0;
+	Node0x5621ee83a490:s1 -> Node0x5621ee83a960;
+	Node0x5621ee83a8c0 [shape=record,label="{xpath.c:6312:}"];
+	Node0x5621ee83a8c0 -> Node0x5621ee83a910;
+	Node0x5621ee83a960 [shape=record,label="{xpath.c:6314:}"];
+	Node0x5621ee83a960 -> Node0x5621ee83a910;
+	Node0x5621ee83a910 [shape=record,label="{xpath.c:6315:}"];
+	Node0x5621ee83a910 -> Node0x5621ee83a400;
+	Node0x5621ee83a400 [shape=record,label="{xpath.c:6310:}"];
+	Node0x5621ee83a400 -> Node0x5621ee6c2ac0;
+	Node0x5621ee6c38c0 [shape=record,label="{xpath.c:6316:}"];
+	Node0x5621ee6c38c0 -> Node0x5621ee6c34e0;
+	Node0x5621ee6c34e0 [shape=record,label="{xpath.c:6318:|{<s0>T|<s1>F}}"];
+	Node0x5621ee6c34e0:s0 -> Node0x5621ee83bdc0;
+	Node0x5621ee6c34e0:s1 -> Node0x5621ee83be10;
+	Node0x5621ee83bdc0 [shape=record,label="{xpath.c:6320:|{<s0>T|<s1>F}}"];
+	Node0x5621ee83bdc0:s0 -> Node0x5621ee83c300;
+	Node0x5621ee83bdc0:s1 -> Node0x5621ee83c350;
+	Node0x5621ee83c300 [shape=record,label="{xpath.c:6321:}"];
+	Node0x5621ee83c300 -> Node0x5621ee83c350;
+	Node0x5621ee83c350 [shape=record,label="{xpath.c:6325:}"];
+	Node0x5621ee83c350 -> Node0x5621ee83be10;
+	Node0x5621ee83be10 [shape=record,label="{xpath.c:6327:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathValueFlipSign' function" {
+	label="CFG for 'libxml_xmlXPathValueFlipSign' function";
+
+	Node0x55d6cc3ffaf0 [shape=record,label="{libxml2-py.c:14559:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc3ffaf0:s0 -> Node0x55d6cc402b30;
+	Node0x55d6cc3ffaf0:s1 -> Node0x55d6cc402ae0;
+	Node0x55d6cc402ae0 [shape=record,label="{libxml2-py.c:14564:}"];
+	Node0x55d6cc402ae0 -> Node0x55d6cc3ff810;
+	Node0x55d6cc402b30 [shape=record,label="{libxml2-py.c:14565:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc402b30:s0 -> Node0x55d6cc403320;
+	Node0x55d6cc402b30:s1 -> Node0x55d6cc403370;
+	Node0x55d6cc403320 [shape=record,label="{libxml2-py.c:14565:}"];
+	Node0x55d6cc403320 -> Node0x55d6cc4033c0;
+	Node0x55d6cc403370 [shape=record,label="{libxml2-py.c:14565:}"];
+	Node0x55d6cc403370 -> Node0x55d6cc4033c0;
+	Node0x55d6cc4033c0 [shape=record,label="{libxml2-py.c:14565:}"];
+	Node0x55d6cc4033c0 -> Node0x55d6cc3ff810;
+	Node0x55d6cc3ff810 [shape=record,label="{libxml2-py.c:14570:}"];
+}

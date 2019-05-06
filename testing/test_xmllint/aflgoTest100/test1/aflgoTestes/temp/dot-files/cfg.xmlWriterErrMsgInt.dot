@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlWriterErrMsgInt' function" {
+	label="CFG for 'xmlWriterErrMsgInt' function";
+
+	Node0x55d09c799bc0 [shape=record,label="{xmlwriter.c:157:|{<s0>T|<s1>F}}"];
+	Node0x55d09c799bc0:s0 -> Node0x55d09c79cea0;
+	Node0x55d09c799bc0:s1 -> Node0x55d09c79cf40;
+	Node0x55d09c79cea0 [shape=record,label="{xmlwriter.c:161:}"];
+	Node0x55d09c79cea0 -> Node0x55d09c79cef0;
+	Node0x55d09c79cf40 [shape=record,label="{xmlwriter.c:165:}"];
+	Node0x55d09c79cf40 -> Node0x55d09c79cef0;
+	Node0x55d09c79cef0 [shape=record,label="{xmlwriter.c:168:}"];
+}

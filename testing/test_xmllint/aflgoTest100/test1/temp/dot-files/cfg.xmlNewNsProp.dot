@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlNewNsProp' function" {
+	label="CFG for 'xmlNewNsProp' function";
+
+	Node0x55ad0ba11130 [shape=record,label="{tree.c:1964:|{<s0>T|<s1>F}}"];
+	Node0x55ad0ba11130 -> Node0x55ad0ba95c60;
+	Node0x55ad0ba11130 -> Node0x55ad0ba95cb0;
+	Node0x55ad0ba95c60 [shape=record,label="{tree.c:1972:}"];
+	Node0x55ad0ba95c60 -> Node0x55ad0ba93860;
+	Node0x55ad0ba95cb0 [shape=record,label="{tree.c:1975:}"];
+	Node0x55ad0ba95cb0 -> Node0x55ad0ba93860;
+	Node0x55ad0ba93860 [shape=record,label="{tree.c:1976:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlFreePatternList' function" {
+	label="CFG for 'xmlFreePatternList' function";
+
+	Node0x55c8a1085350 [shape=record,label="{pattern.c:269:}"];
+	Node0x55c8a1085350 -> Node0x55c8a1086300;
+	Node0x55c8a1086300 [shape=record,label="{pattern.c:272:|{<s0>T|<s1>F}}"];
+	Node0x55c8a1086300 -> Node0x55c8a1071600;
+	Node0x55c8a1086300 -> Node0x55c8a1086460;
+	Node0x55c8a1071600 [shape=record,label="{pattern.c:273:}"];
+	Node0x55c8a1071600 -> Node0x55c8a1086300;
+	Node0x55c8a1086460 [shape=record,label="{pattern.c:278:}"];
+}

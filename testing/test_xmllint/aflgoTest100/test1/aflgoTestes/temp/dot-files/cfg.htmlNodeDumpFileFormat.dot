@@ -1,0 +1,39 @@
+digraph "CFG for 'htmlNodeDumpFileFormat' function" {
+	label="CFG for 'htmlNodeDumpFileFormat' function";
+
+	Node0x560912eeb950 [shape=record,label="{HTMLtree.c:488:|{<s0>T|<s1>F}}"];
+	Node0x560912eeb950 -> Node0x560912efdff0;
+	Node0x560912eeb950 -> Node0x560912efe090;
+	Node0x560912efdff0 [shape=record,label="{HTMLtree.c:497:|{<s0>T|<s1>F}}"];
+	Node0x560912efdff0 -> Node0x560912eff630;
+	Node0x560912efdff0 -> Node0x560912eff680;
+	Node0x560912eff630 [shape=record,label="{HTMLtree.c:501:|{<s0>T|<s1>F}}"];
+	Node0x560912eff630 -> Node0x560912effd70;
+	Node0x560912eff630 -> Node0x560912effdc0;
+	Node0x560912effd70 [shape=record,label="{HTMLtree.c:503:}"];
+	Node0x560912effd70 -> Node0x560912effdc0;
+	Node0x560912effdc0 [shape=record,label="{HTMLtree.c:504:}"];
+	Node0x560912effdc0 -> Node0x560912eff680;
+	Node0x560912eff680 [shape=record,label="{HTMLtree.c:505:}"];
+	Node0x560912eff680 -> Node0x560912efe040;
+	Node0x560912efe090 [shape=record,label="{HTMLtree.c:509:|{<s0>T|<s1>F}}"];
+	Node0x560912efe090 -> Node0x560912f0e1f0;
+	Node0x560912efe090 -> Node0x560912f0e240;
+	Node0x560912f0e1f0 [shape=record,label="{HTMLtree.c:510:}"];
+	Node0x560912f0e1f0 -> Node0x560912f0e240;
+	Node0x560912f0e240 [shape=record,label="{HTMLtree.c:511:|{<s0>T|<s1>F}}"];
+	Node0x560912f0e240 -> Node0x560912f07250;
+	Node0x560912f0e240 -> Node0x560912f072a0;
+	Node0x560912f07250 [shape=record,label="{HTMLtree.c:512:}"];
+	Node0x560912f07250 -> Node0x560912f072a0;
+	Node0x560912f072a0 [shape=record,label="{%32}"];
+	Node0x560912f072a0 -> Node0x560912efe040;
+	Node0x560912efe040 [shape=record,label="{HTMLtree.c:518:|{<s0>T|<s1>F}}"];
+	Node0x560912efe040 -> Node0x560912f08180;
+	Node0x560912efe040 -> Node0x560912f081d0;
+	Node0x560912f08180 [shape=record,label="{HTMLtree.c:519:}"];
+	Node0x560912f08180 -> Node0x560912ef3c20;
+	Node0x560912f081d0 [shape=record,label="{HTMLtree.c:521:}"];
+	Node0x560912f081d0 -> Node0x560912ef3c20;
+	Node0x560912ef3c20 [shape=record,label="{HTMLtree.c:525:}"];
+}

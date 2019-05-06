@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsGothic' function" {
+	label="CFG for 'libxml_xmlUCSIsGothic' function";
+
+	Node0x55d6cc0ace00 [shape=record,label="{libxml2-py.c:10347:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc0ace00:s0 -> Node0x55d6cc0afd50;
+	Node0x55d6cc0ace00:s1 -> Node0x55d6cc0afd00;
+	Node0x55d6cc0afd00 [shape=record,label="{libxml2-py.c:10353:}"];
+	Node0x55d6cc0afd00 -> Node0x55d6cc0ad100;
+	Node0x55d6cc0afd50 [shape=record,label="{libxml2-py.c:10355:}"];
+	Node0x55d6cc0afd50 -> Node0x55d6cc0ad100;
+	Node0x55d6cc0ad100 [shape=record,label="{libxml2-py.c:10358:}"];
+}

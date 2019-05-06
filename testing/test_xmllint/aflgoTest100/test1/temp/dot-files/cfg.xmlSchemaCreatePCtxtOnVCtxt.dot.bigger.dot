@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlSchemaCreatePCtxtOnVCtxt' function" {
+	label="CFG for 'xmlSchemaCreatePCtxtOnVCtxt' function";
+
+	Node0x55d02698c940 [shape=record,label="{xmlschemas.c:10027:|{<s0>T|<s1>F}}"];
+	Node0x55d02698c940:s0 -> Node0x55d026989550;
+	Node0x55d02698c940:s1 -> Node0x55d0269895a0;
+	Node0x55d026989550 [shape=record,label="{xmlschemas.c:10030:|{<s0>T|<s1>F}}"];
+	Node0x55d026989550:s0 -> Node0x55d0269924b0;
+	Node0x55d026989550:s1 -> Node0x55d026992550;
+	Node0x55d0269924b0 [shape=record,label="{xmlschemas.c:10032:}"];
+	Node0x55d0269924b0 -> Node0x55d026992500;
+	Node0x55d026992550 [shape=record,label="{xmlschemas.c:10034:}"];
+	Node0x55d026992550 -> Node0x55d026992500;
+	Node0x55d026992500 [shape=record,label="{xmlschemas.c:10035:|{<s0>T|<s1>F}}"];
+	Node0x55d026992500:s0 -> Node0x55d0269931c0;
+	Node0x55d026992500:s1 -> Node0x55d026993210;
+	Node0x55d0269931c0 [shape=record,label="{xmlschemas.c:10036:}"];
+	Node0x55d0269931c0 -> Node0x55d02698c990;
+	Node0x55d026993210 [shape=record,label="{xmlschemas.c:10041:}"];
+	Node0x55d026993210 -> Node0x55d0269895a0;
+	Node0x55d0269895a0 [shape=record,label="{xmlschemas.c:10046:}"];
+	Node0x55d0269895a0 -> Node0x55d02698c990;
+	Node0x55d02698c990 [shape=record,label="{xmlschemas.c:10047:}"];
+}

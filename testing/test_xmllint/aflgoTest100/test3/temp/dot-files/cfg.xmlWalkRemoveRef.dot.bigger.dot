@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlWalkRemoveRef' function" {
+	label="CFG for 'xmlWalkRemoveRef' function";
+
+	Node0x55bbc3882310 [shape=record,label="{valid.c:2891:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3882310:s0 -> Node0x55bbc3886ae0;
+	Node0x55bbc3882310:s1 -> Node0x55bbc3886b30;
+	Node0x55bbc3886ae0 [shape=record,label="{valid.c:2898:}"];
+	Node0x55bbc3886ae0 -> Node0x55bbc3882360;
+	Node0x55bbc3886b30 [shape=record,label="{valid.c:2901:}"];
+	Node0x55bbc3886b30 -> Node0x55bbc3882360;
+	Node0x55bbc3882360 [shape=record,label="{valid.c:2902:}"];
+}

@@ -1,0 +1,23 @@
+digraph "CFG for 'xmlNodeBufGetContent' function" {
+	label="CFG for 'xmlNodeBufGetContent' function";
+
+	Node0x55ad0bc894d0 [shape=record,label="{tree.c:5356:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc894d0 -> Node0x55ad0bc9be70;
+	Node0x55ad0bc894d0 -> Node0x55ad0bc9bf10;
+	Node0x55ad0bc9bf10 [shape=record,label="{tree.c:5361:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc9bf10 -> Node0x55ad0bc9be70;
+	Node0x55ad0bc9bf10 -> Node0x55ad0bc9bec0;
+	Node0x55ad0bc9be70 [shape=record,label="{tree.c:5361:}"];
+	Node0x55ad0bc9be70 -> Node0x55ad0bc891e0;
+	Node0x55ad0bc9bec0 [shape=record,label="{tree.c:5362:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc9bec0 -> Node0x55ad0bc9d820;
+	Node0x55ad0bc9bec0 -> Node0x55ad0bc9d8c0;
+	Node0x55ad0bc9d8c0 [shape=record,label="{tree.c:5365:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc9d8c0 -> Node0x55ad0bc9d820;
+	Node0x55ad0bc9d8c0 -> Node0x55ad0bc9d870;
+	Node0x55ad0bc9d820 [shape=record,label="{tree.c:5366:}"];
+	Node0x55ad0bc9d820 -> Node0x55ad0bc891e0;
+	Node0x55ad0bc9d870 [shape=record,label="{tree.c:5367:}"];
+	Node0x55ad0bc9d870 -> Node0x55ad0bc891e0;
+	Node0x55ad0bc891e0 [shape=record,label="{tree.c:5368:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlListFront' function" {
+	label="CFG for 'xmlListFront' function";
+
+	Node0x56019df86160 [shape=record,label="{list.c:462:|{<s0>T|<s1>F}}"];
+	Node0x56019df86160:s0 -> Node0x56019df87b90;
+	Node0x56019df86160:s1 -> Node0x56019df88390;
+	Node0x56019df87b90 [shape=record,label="{list.c:465:}"];
+	Node0x56019df87b90 -> Node0x56019df86340;
+	Node0x56019df88390 [shape=record,label="{list.c:466:}"];
+	Node0x56019df88390 -> Node0x56019df86340;
+	Node0x56019df86340 [shape=record,label="{list.c:467:}"];
+}

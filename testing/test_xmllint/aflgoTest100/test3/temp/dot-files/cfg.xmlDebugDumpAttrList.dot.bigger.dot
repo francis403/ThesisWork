@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlDebugDumpAttrList' function" {
+	label="CFG for 'xmlDebugDumpAttrList' function";
+
+	Node0x5589802e0650 [shape=record,label="{debugXML.c:1419:|{<s0>T|<s1>F}}"];
+	Node0x5589802e0650:s0 -> Node0x5589802e3760;
+	Node0x5589802e0650:s1 -> Node0x5589802e37b0;
+	Node0x5589802e3760 [shape=record,label="{debugXML.c:1423:}"];
+	Node0x5589802e3760 -> Node0x5589802e29a0;
+	Node0x5589802e37b0 [shape=record,label="{debugXML.c:1424:}"];
+	Node0x5589802e37b0 -> Node0x5589802e29a0;
+	Node0x5589802e29a0 [shape=record,label="{debugXML.c:1429:}"];
+}

@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlListSort' function" {
+	label="CFG for 'xmlListSort' function";
+
+	Node0x56019df9b660 [shape=record,label="{list.c:643:|{<s0>T|<s1>F}}"];
+	Node0x56019df9b660:s0 -> Node0x56019df7f180;
+	Node0x56019df9b660:s1 -> Node0x56019df7f1d0;
+	Node0x56019df7f180 [shape=record,label="{list.c:648:}"];
+	Node0x56019df7f180 -> Node0x56019df9f0e0;
+	Node0x56019df7f1d0 [shape=record,label="{list.c:649:|{<s0>T|<s1>F}}"];
+	Node0x56019df7f1d0:s0 -> Node0x56019df7f580;
+	Node0x56019df7f1d0:s1 -> Node0x56019df7f5d0;
+	Node0x56019df7f580 [shape=record,label="{list.c:650:}"];
+	Node0x56019df7f580 -> Node0x56019df9f0e0;
+	Node0x56019df7f5d0 [shape=record,label="{list.c:658:|{<s0>T|<s1>F}}"];
+	Node0x56019df7f5d0:s0 -> Node0x56019df7fa10;
+	Node0x56019df7f5d0:s1 -> Node0x56019df7fa60;
+	Node0x56019df7fa10 [shape=record,label="{list.c:659:}"];
+	Node0x56019df7fa10 -> Node0x56019df9f0e0;
+	Node0x56019df7fa60 [shape=record,label="{list.c:660:}"];
+	Node0x56019df7fa60 -> Node0x56019df9f0e0;
+	Node0x56019df9f0e0 [shape=record,label="{list.c:664:}"];
+}

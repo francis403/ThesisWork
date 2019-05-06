@@ -1,0 +1,24 @@
+digraph "CFG for 'endElementNsDebug' function" {
+	label="CFG for 'endElementNsDebug' function";
+
+	Node0x55c15e1fbf50 [shape=record,label="{xmllint.c:1564:|{<s0>T|<s1>F}}"];
+	Node0x55c15e1fbf50 -> Node0x55c15e1fd060;
+	Node0x55c15e1fbf50 -> Node0x55c15e1fd0b0;
+	Node0x55c15e1fd060 [shape=record,label="{xmllint.c:1571:}"];
+	Node0x55c15e1fd060 -> Node0x55c15e1fe010;
+	Node0x55c15e1fd0b0 [shape=record,label="{xmllint.c:1572:|{<s0>T|<s1>F}}"];
+	Node0x55c15e1fd0b0 -> Node0x55c15e1fd7e0;
+	Node0x55c15e1fd0b0 -> Node0x55c15e1fd880;
+	Node0x55c15e1fd7e0 [shape=record,label="{xmllint.c:1574:}"];
+	Node0x55c15e1fd7e0 -> Node0x55c15e1fd830;
+	Node0x55c15e1fd880 [shape=record,label="{xmllint.c:1576:}"];
+	Node0x55c15e1fd880 -> Node0x55c15e1fd830;
+	Node0x55c15e1fd830 [shape=record,label="{xmllint.c:1577:|{<s0>T|<s1>F}}"];
+	Node0x55c15e1fd830 -> Node0x55c15e1fdfc0;
+	Node0x55c15e1fd830 -> Node0x55c15e1fe060;
+	Node0x55c15e1fdfc0 [shape=record,label="{xmllint.c:1578:}"];
+	Node0x55c15e1fdfc0 -> Node0x55c15e1fe010;
+	Node0x55c15e1fe060 [shape=record,label="{xmllint.c:1580:}"];
+	Node0x55c15e1fe060 -> Node0x55c15e1fe010;
+	Node0x55c15e1fe010 [shape=record,label="{xmllint.c:1581:}"];
+}

@@ -1,0 +1,15 @@
+digraph "CFG for '__libxml2_xzdopen' function" {
+	label="CFG for '__libxml2_xzdopen' function";
+
+	Node0x56316f31d0b0 [shape=record,label="{xzlib.c:219:|{<s0>T|<s1>F}}"];
+	Node0x56316f31d0b0 -> Node0x56316f3190a0;
+	Node0x56316f31d0b0 -> Node0x56316f31d580;
+	Node0x56316f31d580 [shape=record,label="{xzlib.c:224:|{<s0>T|<s1>F}}"];
+	Node0x56316f31d580 -> Node0x56316f3190a0;
+	Node0x56316f31d580 -> Node0x56316f08b1b0;
+	Node0x56316f3190a0 [shape=record,label="{xzlib.c:225:}"];
+	Node0x56316f3190a0 -> Node0x56316f31db00;
+	Node0x56316f08b1b0 [shape=record,label="{xzlib.c:226:}"];
+	Node0x56316f08b1b0 -> Node0x56316f31db00;
+	Node0x56316f31db00 [shape=record,label="{xzlib.c:230:}"];
+}

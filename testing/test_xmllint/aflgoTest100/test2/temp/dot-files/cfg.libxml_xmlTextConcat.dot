@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlTextConcat' function" {
+	label="CFG for 'libxml_xmlTextConcat' function";
+
+	Node0x55d6cbe489d0 [shape=record,label="{libxml2-py.c:7712:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbe489d0:s0 -> Node0x55d6cbe4c170;
+	Node0x55d6cbe489d0:s1 -> Node0x55d6cbe4c120;
+	Node0x55d6cbe4c120 [shape=record,label="{libxml2-py.c:7721:}"];
+	Node0x55d6cbe4c120 -> Node0x55d6cbe48cd0;
+	Node0x55d6cbe4c170 [shape=record,label="{libxml2-py.c:7722:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbe4c170:s0 -> Node0x55d6cbe4ca40;
+	Node0x55d6cbe4c170:s1 -> Node0x55d6cbe4ca90;
+	Node0x55d6cbe4ca40 [shape=record,label="{libxml2-py.c:7722:}"];
+	Node0x55d6cbe4ca40 -> Node0x55d6cbe4cae0;
+	Node0x55d6cbe4ca90 [shape=record,label="{libxml2-py.c:7722:}"];
+	Node0x55d6cbe4ca90 -> Node0x55d6cbe4cae0;
+	Node0x55d6cbe4cae0 [shape=record,label="{libxml2-py.c:7722:}"];
+	Node0x55d6cbe4cae0 -> Node0x55d6cbe48cd0;
+	Node0x55d6cbe48cd0 [shape=record,label="{libxml2-py.c:7727:}"];
+}

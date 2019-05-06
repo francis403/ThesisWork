@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaValueGetNext' function" {
+	label="CFG for 'xmlSchemaValueGetNext' function";
+
+	Node0x557d8d944360 [shape=record,label="{xmlschemastypes.c:879:|{<s0>T|<s1>F}}"];
+	Node0x557d8d944360:s0 -> Node0x557d8d943d40;
+	Node0x557d8d944360:s1 -> Node0x557d8d943d90;
+	Node0x557d8d943d40 [shape=record,label="{xmlschemastypes.c:882:}"];
+	Node0x557d8d943d40 -> Node0x557d8d9443b0;
+	Node0x557d8d943d90 [shape=record,label="{xmlschemastypes.c:883:}"];
+	Node0x557d8d943d90 -> Node0x557d8d9443b0;
+	Node0x557d8d9443b0 [shape=record,label="{xmlschemastypes.c:884:}"];
+}

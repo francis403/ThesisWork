@@ -1,0 +1,27 @@
+digraph "CFG for 'libxml_xmlNodeGetNsDefs' function" {
+	label="CFG for 'libxml_xmlNodeGetNsDefs' function";
+
+	Node0x55ea37392960 [shape=record,label="{libxml.c:2839:|{<s0>T|<s1>F}}"];
+	Node0x55ea37392960:s0 -> Node0x55ea37396310;
+	Node0x55ea37392960:s1 -> Node0x55ea373962c0;
+	Node0x55ea373962c0 [shape=record,label="{libxml.c:2848:}"];
+	Node0x55ea373962c0 -> Node0x55ea3738b060;
+	Node0x55ea37396310 [shape=record,label="{libxml.c:2849:|{<s0>T|<s1>F}}"];
+	Node0x55ea37396310:s0 -> Node0x55ea37394f50;
+	Node0x55ea37396310:s1 -> Node0x55ea373a72b0;
+	Node0x55ea37394f50 [shape=record,label="{libxml.c:2849:}"];
+	Node0x55ea37394f50 -> Node0x55ea373a7300;
+	Node0x55ea373a72b0 [shape=record,label="{libxml.c:2849:}"];
+	Node0x55ea373a72b0 -> Node0x55ea373a7300;
+	Node0x55ea373a7300 [shape=record,label="{libxml.c:2849:|{<s0>T|<s1>F}}"];
+	Node0x55ea373a7300:s0 -> Node0x55ea373a7cd0;
+	Node0x55ea373a7300:s1 -> Node0x55ea373a7d70;
+	Node0x55ea373a7d70 [shape=record,label="{libxml.c:2851:|{<s0>T|<s1>F}}"];
+	Node0x55ea373a7d70:s0 -> Node0x55ea373a7cd0;
+	Node0x55ea373a7d70:s1 -> Node0x55ea373a7d20;
+	Node0x55ea373a7cd0 [shape=record,label="{libxml.c:2852:}"];
+	Node0x55ea373a7cd0 -> Node0x55ea3738b060;
+	Node0x55ea373a7d20 [shape=record,label="{libxml.c:2855:}"];
+	Node0x55ea373a7d20 -> Node0x55ea3738b060;
+	Node0x55ea3738b060 [shape=record,label="{libxml.c:2858:}"];
+}

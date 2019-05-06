@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsEnclosedAlphanumerics' function" {
+	label="CFG for 'xmlUCSIsEnclosedAlphanumerics' function";
+
+	Node0x55ca9b2022c0 [shape=record,label="{xmlunicode.c:1470:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b2022c0:s0 -> Node0x55ca9b2038b0;
+	Node0x55ca9b2022c0:s1 -> Node0x55ca9b203b40;
+	Node0x55ca9b2038b0 [shape=record,label="{xmlunicode.c:1471:}"];
+	Node0x55ca9b2038b0 -> Node0x55ca9b203b40;
+	Node0x55ca9b203b40 [shape=record,label="{xmlunicode.c:1471:}"];
+}

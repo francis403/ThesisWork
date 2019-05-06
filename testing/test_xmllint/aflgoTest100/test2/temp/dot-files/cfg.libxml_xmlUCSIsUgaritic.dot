@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsUgaritic' function" {
+	label="CFG for 'libxml_xmlUCSIsUgaritic' function";
+
+	Node0x55d6cc14ab90 [shape=record,label="{libxml2-py.c:11579:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc14ab90:s0 -> Node0x55d6cc14dae0;
+	Node0x55d6cc14ab90:s1 -> Node0x55d6cc14da90;
+	Node0x55d6cc14da90 [shape=record,label="{libxml2-py.c:11585:}"];
+	Node0x55d6cc14da90 -> Node0x55d6cc14ae90;
+	Node0x55d6cc14dae0 [shape=record,label="{libxml2-py.c:11587:}"];
+	Node0x55d6cc14dae0 -> Node0x55d6cc14ae90;
+	Node0x55d6cc14ae90 [shape=record,label="{libxml2-py.c:11590:}"];
+}

@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlIsChar' function" {
+	label="CFG for 'xmlIsChar' function";
+
+	Node0x5610db889020 [shape=record,label="{chvalid.c:256:|{<s0>T|<s1>F}}"];
+	Node0x5610db889020 -> Node0x5610db887b10;
+	Node0x5610db889020 -> Node0x5610db88a650;
+	Node0x5610db887b10 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x5610db887b10 -> Node0x5610db88b040;
+	Node0x5610db887b10 -> Node0x5610db88aff0;
+	Node0x5610db88b040 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x5610db88b040 -> Node0x5610db889660;
+	Node0x5610db88b040 -> Node0x5610db88aff0;
+	Node0x5610db88aff0 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x5610db88aff0 -> Node0x5610db889660;
+	Node0x5610db88aff0 -> Node0x5610db8896b0;
+	Node0x5610db8896b0 [shape=record,label="{chvalid.c:257:}"];
+	Node0x5610db8896b0 -> Node0x5610db889660;
+	Node0x5610db889660 [shape=record,label="{chvalid.c:257:}"];
+	Node0x5610db889660 -> Node0x5610db88a6a0;
+	Node0x5610db88a650 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x5610db88a650 -> Node0x5610db88b7d0;
+	Node0x5610db88a650 -> Node0x5610db88b780;
+	Node0x5610db88b7d0 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x5610db88b7d0 -> Node0x5610db88b4e0;
+	Node0x5610db88b7d0 -> Node0x5610db88b780;
+	Node0x5610db88b780 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x5610db88b780 -> Node0x5610db88bb60;
+	Node0x5610db88b780 -> Node0x5610db88b730;
+	Node0x5610db88bb60 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x5610db88bb60 -> Node0x5610db88b4e0;
+	Node0x5610db88bb60 -> Node0x5610db88b730;
+	Node0x5610db88b730 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x5610db88b730 -> Node0x5610db88bfb0;
+	Node0x5610db88b730 -> Node0x5610db88bf60;
+	Node0x5610db88bfb0 [shape=record,label="{chvalid.c:257:}"];
+	Node0x5610db88bfb0 -> Node0x5610db88bf60;
+	Node0x5610db88bf60 [shape=record,label="{chvalid.c:257:}"];
+	Node0x5610db88bf60 -> Node0x5610db88b4e0;
+	Node0x5610db88b4e0 [shape=record,label="{chvalid.c:257:}"];
+	Node0x5610db88b4e0 -> Node0x5610db88a6a0;
+	Node0x5610db88a6a0 [shape=record,label="{chvalid.c:257:}"];
+}

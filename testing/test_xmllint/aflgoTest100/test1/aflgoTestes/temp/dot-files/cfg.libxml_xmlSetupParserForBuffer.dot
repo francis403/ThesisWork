@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlSetupParserForBuffer' function" {
+	label="CFG for 'libxml_xmlSetupParserForBuffer' function";
+
+	Node0x55f931324890 [shape=record,label="{libxml2-py.c:7298:|{<s0>T|<s1>F}}"];
+	Node0x55f931324890:s0 -> Node0x55f931328740;
+	Node0x55f931324890:s1 -> Node0x55f9313286f0;
+	Node0x55f9313286f0 [shape=record,label="{libxml2-py.c:7305:}"];
+	Node0x55f9313286f0 -> Node0x55f931324620;
+	Node0x55f931328740 [shape=record,label="{libxml2-py.c:7306:|{<s0>T|<s1>F}}"];
+	Node0x55f931328740:s0 -> Node0x55f931329110;
+	Node0x55f931328740:s1 -> Node0x55f931329160;
+	Node0x55f931329110 [shape=record,label="{libxml2-py.c:7306:}"];
+	Node0x55f931329110 -> Node0x55f9313291b0;
+	Node0x55f931329160 [shape=record,label="{libxml2-py.c:7306:}"];
+	Node0x55f931329160 -> Node0x55f9313291b0;
+	Node0x55f9313291b0 [shape=record,label="{libxml2-py.c:7306:}"];
+	Node0x55f9313291b0 -> Node0x55f931324620;
+	Node0x55f931324620 [shape=record,label="{libxml2-py.c:7311:}"];
+}

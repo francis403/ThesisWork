@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlIsMixedElement' function" {
+	label="CFG for 'xmlIsMixedElement' function";
+
+	Node0x55bbc37f4ac0 [shape=record,label="{valid.c:3413:|{<s0>T|<s1>F}}"];
+	Node0x55bbc37f4ac0:s0 -> Node0x55bbc365a3a0;
+	Node0x55bbc37f4ac0:s1 -> Node0x55bbc365a440;
+	Node0x55bbc365a440 [shape=record,label="{valid.c:3416:|{<s0>T|<s1>F}}"];
+	Node0x55bbc365a440:s0 -> Node0x55bbc365a3a0;
+	Node0x55bbc365a440:s1 -> Node0x55bbc365a3f0;
+	Node0x55bbc365a3a0 [shape=record,label="{valid.c:3416:}"];
+	Node0x55bbc365a3a0 -> Node0x55bbc37f4b10;
+	Node0x55bbc365a3f0 [shape=record,label="{valid.c:3418:|{<s0>T|<s1>F}}"];
+	Node0x55bbc365a3f0:s0 -> Node0x55bbc37fa820;
+	Node0x55bbc365a3f0:s1 -> Node0x55bbc37fa7d0;
+	Node0x55bbc37fa820 [shape=record,label="{valid.c:3419:|{<s0>T|<s1>F}}"];
+	Node0x55bbc37fa820:s0 -> Node0x55bbc37fa780;
+	Node0x55bbc37fa820:s1 -> Node0x55bbc37fa7d0;
+	Node0x55bbc37fa780 [shape=record,label="{valid.c:3420:}"];
+	Node0x55bbc37fa780 -> Node0x55bbc37fa7d0;
+	Node0x55bbc37fa7d0 [shape=record,label="{valid.c:3421:|{<s0>T|<s1>F}}"];
+	Node0x55bbc37fa7d0:s0 -> Node0x55bbc37fb290;
+	Node0x55bbc37fa7d0:s1 -> Node0x55bbc37fb2e0;
+	Node0x55bbc37fb290 [shape=record,label="{valid.c:3421:}"];
+	Node0x55bbc37fb290 -> Node0x55bbc37f4b10;
+	Node0x55bbc37fb2e0 [shape=record,label="{valid.c:3422:|{<s0>def|<s1>0|<s2>4|<s3>1|<s4>2|<s5>3}}"];
+	Node0x55bbc37fb2e0:s0 -> Node0x55bbc37fb770;
+	Node0x55bbc37fb2e0:s1 -> Node0x55bbc37fbc80;
+	Node0x55bbc37fb2e0:s2 -> Node0x55bbc37fbe70;
+	Node0x55bbc37fb2e0:s3 -> Node0x55bbc37fc030;
+	Node0x55bbc37fb2e0:s4 -> Node0x55bbc37fc030;
+	Node0x55bbc37fb2e0:s5 -> Node0x55bbc37fc030;
+	Node0x55bbc37fbc80 [shape=record,label="{valid.c:3424:}"];
+	Node0x55bbc37fbc80 -> Node0x55bbc37f4b10;
+	Node0x55bbc37fbe70 [shape=record,label="{valid.c:3426:}"];
+	Node0x55bbc37fbe70 -> Node0x55bbc37f4b10;
+	Node0x55bbc37fc030 [shape=record,label="{valid.c:3434:}"];
+	Node0x55bbc37fc030 -> Node0x55bbc37f4b10;
+	Node0x55bbc37fb770 [shape=record,label="{valid.c:3436:}"];
+	Node0x55bbc37fb770 -> Node0x55bbc37f4b10;
+	Node0x55bbc37f4b10 [shape=record,label="{valid.c:3437:}"];
+}

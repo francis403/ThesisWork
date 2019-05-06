@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsTags' function" {
+	label="CFG for 'xmlUCSIsTags' function";
+
+	Node0x564952e85ac0 [shape=record,label="{xmlunicode.c:2447:|{<s0>T|<s1>F}}"];
+	Node0x564952e85ac0:s0 -> Node0x564952e87100;
+	Node0x564952e85ac0:s1 -> Node0x564952e870b0;
+	Node0x564952e87100 [shape=record,label="{xmlunicode.c:2448:}"];
+	Node0x564952e87100 -> Node0x564952e870b0;
+	Node0x564952e870b0 [shape=record,label="{xmlunicode.c:2448:}"];
+}

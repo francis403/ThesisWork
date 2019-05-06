@@ -1,0 +1,23 @@
+digraph "CFG for 'cdataBlockSplit' function" {
+	label="CFG for 'cdataBlockSplit' function";
+
+	Node0x55d02697ed40 [shape=record,label="{xmlschemas.c:28552:|{<s0>T|<s1>F}}"];
+	Node0x55d02697ed40:s0 -> Node0x55d02697fea0;
+	Node0x55d02697ed40:s1 -> Node0x55d02697fef0;
+	Node0x55d02697fea0 [shape=record,label="{xmlschemas.c:28556:}"];
+	Node0x55d02697fea0 -> Node0x55d0269811b0;
+	Node0x55d02697fef0 [shape=record,label="{xmlschemas.c:28557:|{<s0>T|<s1>F}}"];
+	Node0x55d02697fef0:s0 -> Node0x55d026980340;
+	Node0x55d02697fef0:s1 -> Node0x55d0269802f0;
+	Node0x55d026980340 [shape=record,label="{xmlschemas.c:28558:|{<s0>T|<s1>F}}"];
+	Node0x55d026980340:s0 -> Node0x55d0269802a0;
+	Node0x55d026980340:s1 -> Node0x55d0269802f0;
+	Node0x55d0269802a0 [shape=record,label="{xmlschemas.c:28559:}"];
+	Node0x55d0269802a0 -> Node0x55d0269802f0;
+	Node0x55d0269802f0 [shape=record,label="{xmlschemas.c:28560:|{<s0>T|<s1>F}}"];
+	Node0x55d0269802f0:s0 -> Node0x55d026981160;
+	Node0x55d0269802f0:s1 -> Node0x55d0269811b0;
+	Node0x55d026981160 [shape=record,label="{xmlschemas.c:28561:}"];
+	Node0x55d026981160 -> Node0x55d0269811b0;
+	Node0x55d0269811b0 [shape=record,label="{xmlschemas.c:28562:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSaveClose' function" {
+	label="CFG for 'xmlSaveClose' function";
+
+	Node0x556f1756def0 [shape=record,label="{xmlsave.c:1986:|{<s0>T|<s1>F}}"];
+	Node0x556f1756def0 -> Node0x556f1756f310;
+	Node0x556f1756def0 -> Node0x556f1756f3e0;
+	Node0x556f1756f310 [shape=record,label="{xmlsave.c:1990:}"];
+	Node0x556f1756f310 -> Node0x556f1756f870;
+	Node0x556f1756f3e0 [shape=record,label="{xmlsave.c:1991:}"];
+	Node0x556f1756f3e0 -> Node0x556f1756f870;
+	Node0x556f1756f870 [shape=record,label="{xmlsave.c:1994:}"];
+}

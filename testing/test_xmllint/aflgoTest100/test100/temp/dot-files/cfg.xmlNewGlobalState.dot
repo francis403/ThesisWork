@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlNewGlobalState' function" {
+	label="CFG for 'xmlNewGlobalState' function";
+
+	Node0x55e556a45bb0 [shape=record,label="{threads.c:578:|{<s0>T|<s1>F}}"];
+	Node0x55e556a45bb0 -> Node0x55e556a49b30;
+	Node0x55e556a45bb0 -> Node0x55e556a49b80;
+	Node0x55e556a49b30 [shape=record,label="{threads.c:582:}"];
+	Node0x55e556a49b30 -> Node0x55e556a49300;
+	Node0x55e556a49b80 [shape=record,label="{threads.c:587:}"];
+	Node0x55e556a49b80 -> Node0x55e556a49300;
+	Node0x55e556a49300 [shape=record,label="{threads.c:590:}"];
+}

@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlXPathDebugDumpNodeSet' function" {
+	label="CFG for 'xmlXPathDebugDumpNodeSet' function";
+
+	Node0x55e6b2a5ba80 [shape=record,label="{xpath.c:1284:}"];
+	Node0x55e6b2a5ba80 -> Node0x55e6b265d930;
+	Node0x55e6b265d930 [shape=record,label="{xpath.c:1288:|{<s0>T|<s1>F}}"];
+	Node0x55e6b265d930:s0 -> Node0x55e6b265dd10;
+	Node0x55e6b265d930:s1 -> Node0x55e6b265dcc0;
+	Node0x55e6b265dd10 [shape=record,label="{xpath.c:1288:}"];
+	Node0x55e6b265dd10 -> Node0x55e6b265dcc0;
+	Node0x55e6b265dcc0 [shape=record,label="{xpath.c:1288:|{<s0>T|<s1>F}}"];
+	Node0x55e6b265dcc0:s0 -> Node0x55e6b265dc10;
+	Node0x55e6b265dcc0:s1 -> Node0x55e6b265d790;
+	Node0x55e6b265dc10 [shape=record,label="{xpath.c:1289:}"];
+	Node0x55e6b265dc10 -> Node0x55e6b265db80;
+	Node0x55e6b265db80 [shape=record,label="{xpath.c:1288:}"];
+	Node0x55e6b265db80 -> Node0x55e6b265d930;
+	Node0x55e6b265d790 [shape=record,label="{xpath.c:1290:|{<s0>T|<s1>F}}"];
+	Node0x55e6b265d790:s0 -> Node0x55e6b2a777d0;
+	Node0x55e6b265d790:s1 -> Node0x55e6b2a77820;
+	Node0x55e6b2a777d0 [shape=record,label="{xpath.c:1293:}"];
+	Node0x55e6b2a777d0 -> Node0x55e6b2a782a0;
+	Node0x55e6b2a77820 [shape=record,label="{xpath.c:1299:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2a77820:s0 -> Node0x55e6b2a78250;
+	Node0x55e6b2a77820:s1 -> Node0x55e6b2a782a0;
+	Node0x55e6b2a78250 [shape=record,label="{xpath.c:1300:}"];
+	Node0x55e6b2a78250 -> Node0x55e6b2a78c50;
+	Node0x55e6b2a78c50 [shape=record,label="{xpath.c:1301:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2a78c50:s0 -> Node0x55e6b2a78f30;
+	Node0x55e6b2a78c50:s1 -> Node0x55e6b2a78ab0;
+	Node0x55e6b2a78f30 [shape=record,label="{xpath.c:1302:}"];
+	Node0x55e6b2a78f30 -> Node0x55e6b2a78ea0;
+	Node0x55e6b2a78ea0 [shape=record,label="{xpath.c:1301:}"];
+	Node0x55e6b2a78ea0 -> Node0x55e6b2a78c50;
+	Node0x55e6b2a78ab0 [shape=record,label="{xpath.c:1306:}"];
+	Node0x55e6b2a78ab0 -> Node0x55e6b2a782a0;
+	Node0x55e6b2a782a0 [shape=record,label="{xpath.c:1307:}"];
+}

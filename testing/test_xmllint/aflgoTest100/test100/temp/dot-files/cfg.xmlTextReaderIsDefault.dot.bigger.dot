@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlTextReaderIsDefault' function" {
+	label="CFG for 'xmlTextReaderIsDefault' function";
+
+	Node0x5619bd507d50 [shape=record,label="{xmlreader.c:3684:|{<s0>T|<s1>F}}"];
+	Node0x5619bd507d50:s0 -> Node0x5619bd62e920;
+	Node0x5619bd507d50:s1 -> Node0x5619bd62ef20;
+	Node0x5619bd62e920 [shape=record,label="{xmlreader.c:3686:}"];
+	Node0x5619bd62e920 -> Node0x5619bd631110;
+	Node0x5619bd62ef20 [shape=record,label="{xmlreader.c:3687:}"];
+	Node0x5619bd62ef20 -> Node0x5619bd631110;
+	Node0x5619bd631110 [shape=record,label="{xmlreader.c:3688:}"];
+}

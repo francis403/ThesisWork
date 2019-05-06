@@ -1,0 +1,23 @@
+digraph "CFG for 'startElementNsSplit' function" {
+	label="CFG for 'startElementNsSplit' function";
+
+	Node0x55d026982430 [shape=record,label="{xmlschemas.c:28578:|{<s0>T|<s1>F}}"];
+	Node0x55d026982430:s0 -> Node0x55d026986c70;
+	Node0x55d026982430:s1 -> Node0x55d026986cc0;
+	Node0x55d026986c70 [shape=record,label="{xmlschemas.c:28585:}"];
+	Node0x55d026986c70 -> Node0x55d026988220;
+	Node0x55d026986cc0 [shape=record,label="{xmlschemas.c:28586:|{<s0>T|<s1>F}}"];
+	Node0x55d026986cc0:s0 -> Node0x55d026987110;
+	Node0x55d026986cc0:s1 -> Node0x55d0269870c0;
+	Node0x55d026987110 [shape=record,label="{xmlschemas.c:28587:|{<s0>T|<s1>F}}"];
+	Node0x55d026987110:s0 -> Node0x55d026987070;
+	Node0x55d026987110:s1 -> Node0x55d0269870c0;
+	Node0x55d026987070 [shape=record,label="{xmlschemas.c:28588:}"];
+	Node0x55d026987070 -> Node0x55d0269870c0;
+	Node0x55d0269870c0 [shape=record,label="{xmlschemas.c:28592:|{<s0>T|<s1>F}}"];
+	Node0x55d0269870c0:s0 -> Node0x55d0269881d0;
+	Node0x55d0269870c0:s1 -> Node0x55d026988220;
+	Node0x55d0269881d0 [shape=record,label="{xmlschemas.c:28593:}"];
+	Node0x55d0269881d0 -> Node0x55d026988220;
+	Node0x55d026988220 [shape=record,label="{xmlschemas.c:28597:}"];
+}

@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlExpandCatalog' function" {
+	label="CFG for 'xmlExpandCatalog' function";
+
+	Node0x5650cca88bb0 [shape=record,label="{catalog.c:2740:|{<s0>T|<s1>F}}"];
+	Node0x5650cca88bb0 -> Node0x5650cca8a040;
+	Node0x5650cca88bb0 -> Node0x5650cca8a0e0;
+	Node0x5650cca8a0e0 [shape=record,label="{catalog.c:2744:|{<s0>T|<s1>F}}"];
+	Node0x5650cca8a0e0 -> Node0x5650cca8a040;
+	Node0x5650cca8a0e0 -> Node0x5650cca8a090;
+	Node0x5650cca8a040 [shape=record,label="{catalog.c:2745:}"];
+	Node0x5650cca8a040 -> Node0x5650cca88c00;
+	Node0x5650cca8a090 [shape=record,label="{catalog.c:2748:|{<s0>T|<s1>F}}"];
+	Node0x5650cca8a090 -> Node0x5650cca8a800;
+	Node0x5650cca8a090 -> Node0x5650cca8a8a0;
+	Node0x5650cca8a800 [shape=record,label="{catalog.c:2749:|{<s0>T|<s1>F}}"];
+	Node0x5650cca8a800 -> Node0x5650cca8b120;
+	Node0x5650cca8a800 -> Node0x5650cca8b170;
+	Node0x5650cca8b120 [shape=record,label="{catalog.c:2753:}"];
+	Node0x5650cca8b120 -> Node0x5650cca88c00;
+	Node0x5650cca8b170 [shape=record,label="{catalog.c:2755:|{<s0>T|<s1>F}}"];
+	Node0x5650cca8b170 -> Node0x5650cca8b920;
+	Node0x5650cca8b170 -> Node0x5650cca8b970;
+	Node0x5650cca8b920 [shape=record,label="{catalog.c:2757:}"];
+	Node0x5650cca8b920 -> Node0x5650cca88c00;
+	Node0x5650cca8b970 [shape=record,label="{catalog.c:2760:}"];
+	Node0x5650cca8b970 -> Node0x5650cca8a850;
+	Node0x5650cca8a8a0 [shape=record,label="{catalog.c:2762:|{<s0>T|<s1>F}}"];
+	Node0x5650cca8a8a0 -> Node0x5650cca8ce40;
+	Node0x5650cca8a8a0 -> Node0x5650cca8cee0;
+	Node0x5650cca8ce40 [shape=record,label="{catalog.c:2768:}"];
+	Node0x5650cca8ce40 -> Node0x5650cca8ce90;
+	Node0x5650cca8cee0 [shape=record,label="{catalog.c:2770:}"];
+	Node0x5650cca8cee0 -> Node0x5650cca8d500;
+	Node0x5650cca8d500 [shape=record,label="{catalog.c:2770:|{<s0>T|<s1>F}}"];
+	Node0x5650cca8d500 -> Node0x5650cca8d990;
+	Node0x5650cca8d500 -> Node0x5650cca8d720;
+	Node0x5650cca8d990 [shape=record,label="{catalog.c:2770:}"];
+	Node0x5650cca8d990 -> Node0x5650cca8d500;
+	Node0x5650cca8d720 [shape=record,label="{catalog.c:2771:}"];
+	Node0x5650cca8d720 -> Node0x5650cca8ce90;
+	Node0x5650cca8ce90 [shape=record,label="{%52}"];
+	Node0x5650cca8ce90 -> Node0x5650cca8a850;
+	Node0x5650cca8a850 [shape=record,label="{catalog.c:2774:}"];
+	Node0x5650cca8a850 -> Node0x5650cca88c00;
+	Node0x5650cca88c00 [shape=record,label="{catalog.c:2775:}"];
+}

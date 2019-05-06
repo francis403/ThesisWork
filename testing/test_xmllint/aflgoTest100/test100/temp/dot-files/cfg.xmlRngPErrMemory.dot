@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlRngPErrMemory' function" {
+	label="CFG for 'xmlRngPErrMemory' function";
+
+	Node0x559d0bd6e540 [shape=record,label="{relaxng.c:438:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd6e540 -> Node0x559d0bd70dd0;
+	Node0x559d0bd6e540 -> Node0x559d0bd70e20;
+	Node0x559d0bd70dd0 [shape=record,label="{relaxng.c:445:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd70dd0 -> Node0x559d0bd711e0;
+	Node0x559d0bd70dd0 -> Node0x559d0bd71280;
+	Node0x559d0bd711e0 [shape=record,label="{relaxng.c:446:}"];
+	Node0x559d0bd711e0 -> Node0x559d0bd71230;
+	Node0x559d0bd71280 [shape=record,label="{relaxng.c:448:}"];
+	Node0x559d0bd71280 -> Node0x559d0bd71230;
+	Node0x559d0bd71230 [shape=record,label="{relaxng.c:449:}"];
+	Node0x559d0bd71230 -> Node0x559d0bd70e20;
+	Node0x559d0bd70e20 [shape=record,label="{relaxng.c:452:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd70e20 -> Node0x559d0bd72070;
+	Node0x559d0bd70e20 -> Node0x559d0bd72110;
+	Node0x559d0bd72070 [shape=record,label="{relaxng.c:453:}"];
+	Node0x559d0bd72070 -> Node0x559d0bd720c0;
+	Node0x559d0bd72110 [shape=record,label="{relaxng.c:459:}"];
+	Node0x559d0bd72110 -> Node0x559d0bd720c0;
+	Node0x559d0bd720c0 [shape=record,label="{relaxng.c:463:}"];
+}

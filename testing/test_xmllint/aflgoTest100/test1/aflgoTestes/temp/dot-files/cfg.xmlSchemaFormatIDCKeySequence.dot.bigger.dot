@@ -1,0 +1,33 @@
+digraph "CFG for 'xmlSchemaFormatIDCKeySequence' function" {
+	label="CFG for 'xmlSchemaFormatIDCKeySequence' function";
+
+	Node0x55d0268588b0 [shape=record,label="{xmlschemas.c:22636:}"];
+	Node0x55d0268588b0 -> Node0x55d02685b990;
+	Node0x55d02685b990 [shape=record,label="{xmlschemas.c:22645:|{<s0>T|<s1>F}}"];
+	Node0x55d02685b990:s0 -> Node0x55d02685bc70;
+	Node0x55d02685b990:s1 -> Node0x55d02685b830;
+	Node0x55d02685bc70 [shape=record,label="{xmlschemas.c:22646:|{<s0>T|<s1>F}}"];
+	Node0x55d02685bc70:s0 -> Node0x55d02685cb40;
+	Node0x55d02685bc70:s1 -> Node0x55d02685cbe0;
+	Node0x55d02685cb40 [shape=record,label="{xmlschemas.c:22651:}"];
+	Node0x55d02685cb40 -> Node0x55d02685cb90;
+	Node0x55d02685cbe0 [shape=record,label="{xmlschemas.c:22653:}"];
+	Node0x55d02685cbe0 -> Node0x55d02685cb90;
+	Node0x55d02685cb90 [shape=record,label="{xmlschemas.c:22657:|{<s0>T|<s1>F}}"];
+	Node0x55d02685cb90:s0 -> Node0x55d02685def0;
+	Node0x55d02685cb90:s1 -> Node0x55d02685df90;
+	Node0x55d02685def0 [shape=record,label="{xmlschemas.c:22658:}"];
+	Node0x55d02685def0 -> Node0x55d02685df40;
+	Node0x55d02685df90 [shape=record,label="{xmlschemas.c:22660:}"];
+	Node0x55d02685df90 -> Node0x55d02685df40;
+	Node0x55d02685df40 [shape=record,label="{xmlschemas.c:22661:|{<s0>T|<s1>F}}"];
+	Node0x55d02685df40:s0 -> Node0x55d02685ec30;
+	Node0x55d02685df40:s1 -> Node0x55d02685ec80;
+	Node0x55d02685ec30 [shape=record,label="{xmlschemas.c:22662:}"];
+	Node0x55d02685ec30 -> Node0x55d02685ec80;
+	Node0x55d02685ec80 [shape=record,label="{xmlschemas.c:22665:}"];
+	Node0x55d02685ec80 -> Node0x55d02685bbe0;
+	Node0x55d02685bbe0 [shape=record,label="{xmlschemas.c:22645:}"];
+	Node0x55d02685bbe0 -> Node0x55d02685b990;
+	Node0x55d02685b830 [shape=record,label="{xmlschemas.c:22666:}"];
+}

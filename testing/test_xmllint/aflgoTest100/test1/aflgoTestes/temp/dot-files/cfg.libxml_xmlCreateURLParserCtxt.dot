@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCreateURLParserCtxt' function" {
+	label="CFG for 'libxml_xmlCreateURLParserCtxt' function";
+
+	Node0x55f930dac900 [shape=record,label="{libxml2-py.c:1919:|{<s0>T|<s1>F}}"];
+	Node0x55f930dac900:s0 -> Node0x55f930b82360;
+	Node0x55f930dac900:s1 -> Node0x55f930b82310;
+	Node0x55f930b82310 [shape=record,label="{libxml2-py.c:1926:}"];
+	Node0x55f930b82310 -> Node0x55f930daf2c0;
+	Node0x55f930b82360 [shape=record,label="{libxml2-py.c:1928:}"];
+	Node0x55f930b82360 -> Node0x55f930daf2c0;
+	Node0x55f930daf2c0 [shape=record,label="{libxml2-py.c:1931:}"];
+}

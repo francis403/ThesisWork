@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlTextReaderMoveToAttribute' function" {
+	label="CFG for 'libxml_xmlTextReaderMoveToAttribute' function";
+
+	Node0x55d6cbed20b0 [shape=record,label="{libxml2-py.c:8351:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbed20b0:s0 -> Node0x55d6cbede170;
+	Node0x55d6cbed20b0:s1 -> Node0x55d6cbede120;
+	Node0x55d6cbede120 [shape=record,label="{libxml2-py.c:8359:}"];
+	Node0x55d6cbede120 -> Node0x55d6cbed4310;
+	Node0x55d6cbede170 [shape=record,label="{libxml2-py.c:8360:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbede170:s0 -> Node0x55d6cbede9d0;
+	Node0x55d6cbede170:s1 -> Node0x55d6cbedea20;
+	Node0x55d6cbede9d0 [shape=record,label="{libxml2-py.c:8360:}"];
+	Node0x55d6cbede9d0 -> Node0x55d6cbedea70;
+	Node0x55d6cbedea20 [shape=record,label="{libxml2-py.c:8360:}"];
+	Node0x55d6cbedea20 -> Node0x55d6cbedea70;
+	Node0x55d6cbedea70 [shape=record,label="{libxml2-py.c:8360:}"];
+	Node0x55d6cbedea70 -> Node0x55d6cbed4310;
+	Node0x55d6cbed4310 [shape=record,label="{libxml2-py.c:8365:}"];
+}

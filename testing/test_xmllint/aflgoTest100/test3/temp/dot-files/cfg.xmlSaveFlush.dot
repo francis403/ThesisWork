@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSaveFlush' function" {
+	label="CFG for 'xmlSaveFlush' function";
+
+	Node0x556f1756bf60 [shape=record,label="{xmlsave.c:1969:|{<s0>T|<s1>F}}"];
+	Node0x556f1756bf60 -> Node0x556f1756d6f0;
+	Node0x556f1756bf60 -> Node0x556f1756d830;
+	Node0x556f1756d6f0 [shape=record,label="{xmlsave.c:1971:}"];
+	Node0x556f1756d6f0 -> Node0x556f1756c110;
+	Node0x556f1756d830 [shape=record,label="{xmlsave.c:1972:|{<s0>T|<s1>F}}"];
+	Node0x556f1756d830 -> Node0x556f1756e870;
+	Node0x556f1756d830 -> Node0x556f1756e8c0;
+	Node0x556f1756e870 [shape=record,label="{xmlsave.c:1972:}"];
+	Node0x556f1756e870 -> Node0x556f1756c110;
+	Node0x556f1756e8c0 [shape=record,label="{xmlsave.c:1973:}"];
+	Node0x556f1756e8c0 -> Node0x556f1756c110;
+	Node0x556f1756c110 [shape=record,label="{xmlsave.c:1974:}"];
+}

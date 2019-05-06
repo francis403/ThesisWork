@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlNormalizeWindowsPath' function" {
+	label="CFG for 'libxml_xmlNormalizeWindowsPath' function";
+
+	Node0x55d6cbb57850 [shape=record,label="{libxml2-py.c:4689:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbb57850:s0 -> Node0x55d6cbb5a870;
+	Node0x55d6cbb57850:s1 -> Node0x55d6cbb5a820;
+	Node0x55d6cbb5a820 [shape=record,label="{libxml2-py.c:4695:}"];
+	Node0x55d6cbb5a820 -> Node0x55d6cbb57ae0;
+	Node0x55d6cbb5a870 [shape=record,label="{libxml2-py.c:4697:}"];
+	Node0x55d6cbb5a870 -> Node0x55d6cbb57ae0;
+	Node0x55d6cbb57ae0 [shape=record,label="{libxml2-py.c:4700:}"];
+}

@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlC14NDocSave' function" {
+	label="CFG for 'xmlC14NDocSave' function";
+
+	Node0x55fe83ba38d0 [shape=record,label="{c14n.c:2072:|{<s0>T|<s1>F}}"];
+	Node0x55fe83ba38d0:s0 -> Node0x55fe83ba8770;
+	Node0x55fe83ba38d0:s1 -> Node0x55fe83ba87c0;
+	Node0x55fe83ba8770 [shape=record,label="{c14n.c:2080:}"];
+	Node0x55fe83ba8770 -> Node0x55fe839258c0;
+	Node0x55fe83ba87c0 [shape=record,label="{c14n.c:2084:|{<s0>T|<s1>F}}"];
+	Node0x55fe83ba87c0:s0 -> Node0x55fe83ba8fb0;
+	Node0x55fe83ba87c0:s1 -> Node0x55fe83ba9000;
+	Node0x55fe83ba8fb0 [shape=record,label="{c14n.c:2085:}"];
+	Node0x55fe83ba8fb0 -> Node0x55fe83ba9000;
+	Node0x55fe83ba9000 [shape=record,label="{c14n.c:2091:|{<s0>T|<s1>F}}"];
+	Node0x55fe83ba9000:s0 -> Node0x55fe83baa5e0;
+	Node0x55fe83ba9000:s1 -> Node0x55fe83baa630;
+	Node0x55fe83baa5e0 [shape=record,label="{c14n.c:2093:}"];
+	Node0x55fe83baa5e0 -> Node0x55fe839258c0;
+	Node0x55fe83baa630 [shape=record,label="{c14n.c:2100:|{<s0>T|<s1>F}}"];
+	Node0x55fe83baa630:s0 -> Node0x55fe83bab210;
+	Node0x55fe83baa630:s1 -> Node0x55fe83bab260;
+	Node0x55fe83bab210 [shape=record,label="{c14n.c:2103:}"];
+	Node0x55fe83bab210 -> Node0x55fe839258c0;
+	Node0x55fe83bab260 [shape=record,label="{c14n.c:2111:}"];
+	Node0x55fe83bab260 -> Node0x55fe839258c0;
+	Node0x55fe839258c0 [shape=record,label="{c14n.c:2113:}"];
+}

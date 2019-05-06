@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsLetterlikeSymbols' function" {
+	label="CFG for 'libxml_xmlUCSIsLetterlikeSymbols' function";
+
+	Node0x55d6cbbfc0b0 [shape=record,label="{libxml2-py.c:10811:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbbfc0b0:s0 -> Node0x55d6cbbff150;
+	Node0x55d6cbbfc0b0:s1 -> Node0x55d6cbbff100;
+	Node0x55d6cbbff100 [shape=record,label="{libxml2-py.c:10817:}"];
+	Node0x55d6cbbff100 -> Node0x55d6cbbfc340;
+	Node0x55d6cbbff150 [shape=record,label="{libxml2-py.c:10819:}"];
+	Node0x55d6cbbff150 -> Node0x55d6cbbfc340;
+	Node0x55d6cbbfc340 [shape=record,label="{libxml2-py.c:10822:}"];
+}

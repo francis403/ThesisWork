@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlResetError' function" {
+	label="CFG for 'xmlResetError' function";
+
+	Node0x563067a6b0f0 [shape=record,label="{error.c:873:|{<s0>T|<s1>F}}"];
+	Node0x563067a6b0f0 -> Node0x563067a6afa0;
+	Node0x563067a6b0f0 -> Node0x563067a6aff0;
+	Node0x563067a6afa0 [shape=record,label="{error.c:876:}"];
+	Node0x563067a6afa0 -> Node0x563067a61440;
+	Node0x563067a6aff0 [shape=record,label="{error.c:877:|{<s0>T|<s1>F}}"];
+	Node0x563067a6aff0 -> Node0x563067a6b0a0;
+	Node0x563067a6aff0 -> Node0x563067a6dec0;
+	Node0x563067a6b0a0 [shape=record,label="{error.c:878:}"];
+	Node0x563067a6b0a0 -> Node0x563067a61440;
+	Node0x563067a6dec0 [shape=record,label="{error.c:879:|{<s0>T|<s1>F}}"];
+	Node0x563067a6dec0 -> Node0x563067a6e300;
+	Node0x563067a6dec0 -> Node0x563067a6e350;
+	Node0x563067a6e300 [shape=record,label="{error.c:880:}"];
+	Node0x563067a6e300 -> Node0x563067a6e350;
+	Node0x563067a6e350 [shape=record,label="{error.c:881:|{<s0>T|<s1>F}}"];
+	Node0x563067a6e350 -> Node0x563067a6e9a0;
+	Node0x563067a6e350 -> Node0x563067a6e9f0;
+	Node0x563067a6e9a0 [shape=record,label="{error.c:882:}"];
+	Node0x563067a6e9a0 -> Node0x563067a6e9f0;
+	Node0x563067a6e9f0 [shape=record,label="{error.c:883:|{<s0>T|<s1>F}}"];
+	Node0x563067a6e9f0 -> Node0x563067a6f040;
+	Node0x563067a6e9f0 -> Node0x563067a6f090;
+	Node0x563067a6f040 [shape=record,label="{error.c:884:}"];
+	Node0x563067a6f040 -> Node0x563067a6f090;
+	Node0x563067a6f090 [shape=record,label="{error.c:885:|{<s0>T|<s1>F}}"];
+	Node0x563067a6f090 -> Node0x563067a6f820;
+	Node0x563067a6f090 -> Node0x563067a6f870;
+	Node0x563067a6f820 [shape=record,label="{error.c:886:}"];
+	Node0x563067a6f820 -> Node0x563067a6f870;
+	Node0x563067a6f870 [shape=record,label="{error.c:887:|{<s0>T|<s1>F}}"];
+	Node0x563067a6f870 -> Node0x563067a70000;
+	Node0x563067a6f870 -> Node0x563067a70050;
+	Node0x563067a70000 [shape=record,label="{error.c:888:}"];
+	Node0x563067a70000 -> Node0x563067a70050;
+	Node0x563067a70050 [shape=record,label="{error.c:889:}"];
+	Node0x563067a70050 -> Node0x563067a61440;
+	Node0x563067a61440 [shape=record,label="{error.c:891:}"];
+}

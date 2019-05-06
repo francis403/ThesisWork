@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParseDocument' function" {
+	label="CFG for 'libxml_xmlParseDocument' function";
+
+	Node0x55f9310c91a0 [shape=record,label="{libxml2-py.c:4948:|{<s0>T|<s1>F}}"];
+	Node0x55f9310c91a0:s0 -> Node0x55f9310cc570;
+	Node0x55f9310c91a0:s1 -> Node0x55f9310cc520;
+	Node0x55f9310cc520 [shape=record,label="{libxml2-py.c:4955:}"];
+	Node0x55f9310cc520 -> Node0x55f9310c94a0;
+	Node0x55f9310cc570 [shape=record,label="{libxml2-py.c:4956:|{<s0>T|<s1>F}}"];
+	Node0x55f9310cc570:s0 -> Node0x55f9310ccd50;
+	Node0x55f9310cc570:s1 -> Node0x55f9310ccda0;
+	Node0x55f9310ccd50 [shape=record,label="{libxml2-py.c:4956:}"];
+	Node0x55f9310ccd50 -> Node0x55f9310ccdf0;
+	Node0x55f9310ccda0 [shape=record,label="{libxml2-py.c:4956:}"];
+	Node0x55f9310ccda0 -> Node0x55f9310ccdf0;
+	Node0x55f9310ccdf0 [shape=record,label="{libxml2-py.c:4956:}"];
+	Node0x55f9310ccdf0 -> Node0x55f9310c94a0;
+	Node0x55f9310c94a0 [shape=record,label="{libxml2-py.c:4961:}"];
+}

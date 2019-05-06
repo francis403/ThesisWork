@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlBufInflate' function" {
+	label="CFG for 'xmlBufInflate' function";
+
+	Node0x5607238407a0 [shape=record,label="{buf.c:531:|{<s0>T|<s1>F}}"];
+	Node0x5607238407a0:s0 -> Node0x560723843b10;
+	Node0x5607238407a0:s1 -> Node0x560723843b60;
+	Node0x560723843b10 [shape=record,label="{buf.c:532:}"];
+	Node0x560723843b10 -> Node0x560723843000;
+	Node0x560723843b60 [shape=record,label="{buf.c:533:|{<s0>T|<s1>F}}"];
+	Node0x560723843b60:s0 -> Node0x560723844340;
+	Node0x560723843b60:s1 -> Node0x560723844390;
+	Node0x560723844340 [shape=record,label="{buf.c:535:}"];
+	Node0x560723844340 -> Node0x560723843000;
+	Node0x560723844390 [shape=record,label="{buf.c:536:}"];
+	Node0x560723844390 -> Node0x560723843000;
+	Node0x560723843000 [shape=record,label="{buf.c:537:}"];
+}

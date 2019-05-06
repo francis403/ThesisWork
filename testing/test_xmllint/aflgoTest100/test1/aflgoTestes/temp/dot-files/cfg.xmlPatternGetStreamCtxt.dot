@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlPatternGetStreamCtxt' function" {
+	label="CFG for 'xmlPatternGetStreamCtxt' function";
+
+	Node0x55c8a112d640 [shape=record,label="{pattern.c:2490:|{<s0>T|<s1>F}}"];
+	Node0x55c8a112d640 -> Node0x55c8a1130700;
+	Node0x55c8a112d640 -> Node0x55c8a112faf0;
+	Node0x55c8a112faf0 [shape=record,label="{pattern.c:2494:|{<s0>T|<s1>F}}"];
+	Node0x55c8a112faf0 -> Node0x55c8a1130700;
+	Node0x55c8a112faf0 -> Node0x55c8a11307d0;
+	Node0x55c8a1130700 [shape=record,label="{pattern.c:2495:}"];
+	Node0x55c8a1130700 -> Node0x55c8a112f930;
+	Node0x55c8a11307d0 [shape=record,label="{pattern.c:2497:}"];
+	Node0x55c8a11307d0 -> Node0x55c8a111c160;
+	Node0x55c8a111c160 [shape=record,label="{pattern.c:2497:|{<s0>T|<s1>F}}"];
+	Node0x55c8a111c160 -> Node0x55c8a111c520;
+	Node0x55c8a111c160 -> Node0x55c8a111c340;
+	Node0x55c8a111c520 [shape=record,label="{pattern.c:2498:|{<s0>T|<s1>F}}"];
+	Node0x55c8a111c520 -> Node0x55c8a111c6d0;
+	Node0x55c8a111c520 -> Node0x55c8a111c720;
+	Node0x55c8a111c6d0 [shape=record,label="{pattern.c:2499:}"];
+	Node0x55c8a111c6d0 -> Node0x55c8a111d200;
+	Node0x55c8a111c720 [shape=record,label="{pattern.c:2500:|{<s0>T|<s1>F}}"];
+	Node0x55c8a111c720 -> Node0x55c8a111dc70;
+	Node0x55c8a111c720 -> Node0x55c8a111dcc0;
+	Node0x55c8a111dc70 [shape=record,label="{pattern.c:2502:}"];
+	Node0x55c8a111dc70 -> Node0x55c8a111d200;
+	Node0x55c8a111dcc0 [shape=record,label="{pattern.c:2503:|{<s0>T|<s1>F}}"];
+	Node0x55c8a111dcc0 -> Node0x55c8a1135f80;
+	Node0x55c8a111dcc0 -> Node0x55c8a1136020;
+	Node0x55c8a1135f80 [shape=record,label="{pattern.c:2504:}"];
+	Node0x55c8a1135f80 -> Node0x55c8a1135fd0;
+	Node0x55c8a1136020 [shape=record,label="{pattern.c:2506:}"];
+	Node0x55c8a1136020 -> Node0x55c8a1135fd0;
+	Node0x55c8a1135fd0 [shape=record,label="{pattern.c:2509:}"];
+	Node0x55c8a1135fd0 -> Node0x55c8a111c160;
+	Node0x55c8a111c340 [shape=record,label="{pattern.c:2512:}"];
+	Node0x55c8a111c340 -> Node0x55c8a112f930;
+	Node0x55c8a111d200 [shape=record,label="{pattern.c:2514:}"];
+	Node0x55c8a111d200 -> Node0x55c8a112f930;
+	Node0x55c8a112f930 [shape=record,label="{pattern.c:2516:}"];
+}

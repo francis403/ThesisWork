@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlOutputBufferCreateFile' function" {
+	label="CFG for 'xmlOutputBufferCreateFile' function";
+
+	Node0x55ed34788bb0 [shape=record,label="{xmlIO.c:2812:|{<s0>T|<s1>F}}"];
+	Node0x55ed34788bb0 -> Node0x55ed34790610;
+	Node0x55ed34788bb0 -> Node0x55ed34790660;
+	Node0x55ed34790610 [shape=record,label="{xmlIO.c:2816:}"];
+	Node0x55ed34790610 -> Node0x55ed34790660;
+	Node0x55ed34790660 [shape=record,label="{xmlIO.c:2818:|{<s0>T|<s1>F}}"];
+	Node0x55ed34790660 -> Node0x55ed34790a10;
+	Node0x55ed34790660 -> Node0x55ed34790a60;
+	Node0x55ed34790a10 [shape=record,label="{xmlIO.c:2818:}"];
+	Node0x55ed34790a10 -> Node0x55ed3478adb0;
+	Node0x55ed34790a60 [shape=record,label="{xmlIO.c:2820:|{<s0>T|<s1>F}}"];
+	Node0x55ed34790a60 -> Node0x55ed347910f0;
+	Node0x55ed34790a60 -> Node0x55ed34791140;
+	Node0x55ed347910f0 [shape=record,label="{xmlIO.c:2822:}"];
+	Node0x55ed347910f0 -> Node0x55ed34791140;
+	Node0x55ed34791140 [shape=record,label="{xmlIO.c:2827:}"];
+	Node0x55ed34791140 -> Node0x55ed3478adb0;
+	Node0x55ed3478adb0 [shape=record,label="{xmlIO.c:2828:}"];
+}

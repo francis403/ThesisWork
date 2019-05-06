@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlBufGrow' function" {
+	label="CFG for 'xmlBufGrow' function";
+
+	Node0x55756c04a170 [shape=record,label="{buf.c:509:|{<s0>T|<s1>F}}"];
+	Node0x55756c04a170 -> Node0x55756c05c1d0;
+	Node0x55756c04a170 -> Node0x55756c05c270;
+	Node0x55756c05c270 [shape=record,label="{buf.c:512:|{<s0>T|<s1>F}}"];
+	Node0x55756c05c270 -> Node0x55756c05c1d0;
+	Node0x55756c05c270 -> Node0x55756c05c220;
+	Node0x55756c05c1d0 [shape=record,label="{buf.c:512:}"];
+	Node0x55756c05c1d0 -> Node0x55756c036600;
+	Node0x55756c05c220 [shape=record,label="{buf.c:513:|{<s0>T|<s1>F}}"];
+	Node0x55756c05c220 -> Node0x55756c05c990;
+	Node0x55756c05c220 -> Node0x55756c05c9e0;
+	Node0x55756c05c990 [shape=record,label="{buf.c:514:}"];
+	Node0x55756c05c990 -> Node0x55756c036600;
+	Node0x55756c05c9e0 [shape=record,label="{buf.c:515:|{<s0>T|<s1>F}}"];
+	Node0x55756c05c9e0 -> Node0x55756c05d640;
+	Node0x55756c05c9e0 -> Node0x55756c05d690;
+	Node0x55756c05d640 [shape=record,label="{buf.c:517:}"];
+	Node0x55756c05d640 -> Node0x55756c036600;
+	Node0x55756c05d690 [shape=record,label="{buf.c:518:}"];
+	Node0x55756c05d690 -> Node0x55756c036600;
+	Node0x55756c036600 [shape=record,label="{buf.c:519:}"];
+}

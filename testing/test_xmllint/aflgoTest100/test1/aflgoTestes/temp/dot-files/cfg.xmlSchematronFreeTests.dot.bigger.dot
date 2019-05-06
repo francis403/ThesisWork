@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlSchematronFreeTests' function" {
+	label="CFG for 'xmlSchematronFreeTests' function";
+
+	Node0x5600fc347d70 [shape=record,label="{schematron.c:362:}"];
+	Node0x5600fc347d70 -> Node0x5600fc348700;
+	Node0x5600fc348700 [shape=record,label="{schematron.c:365:|{<s0>T|<s1>F}}"];
+	Node0x5600fc348700:s0 -> Node0x5600fc348b00;
+	Node0x5600fc348700:s1 -> Node0x5600fc348920;
+	Node0x5600fc348b00 [shape=record,label="{schematron.c:366:|{<s0>T|<s1>F}}"];
+	Node0x5600fc348b00:s0 -> Node0x5600fc348dd0;
+	Node0x5600fc348b00:s1 -> Node0x5600fc348e20;
+	Node0x5600fc348dd0 [shape=record,label="{schematron.c:368:}"];
+	Node0x5600fc348dd0 -> Node0x5600fc348e20;
+	Node0x5600fc348e20 [shape=record,label="{schematron.c:369:|{<s0>T|<s1>F}}"];
+	Node0x5600fc348e20:s0 -> Node0x5600fc349470;
+	Node0x5600fc348e20:s1 -> Node0x5600fc3494c0;
+	Node0x5600fc349470 [shape=record,label="{schematron.c:370:}"];
+	Node0x5600fc349470 -> Node0x5600fc3494c0;
+	Node0x5600fc3494c0 [shape=record,label="{schematron.c:371:|{<s0>T|<s1>F}}"];
+	Node0x5600fc3494c0:s0 -> Node0x5600fc34a140;
+	Node0x5600fc3494c0:s1 -> Node0x5600fc34a190;
+	Node0x5600fc34a140 [shape=record,label="{schematron.c:372:}"];
+	Node0x5600fc34a140 -> Node0x5600fc34a190;
+	Node0x5600fc34a190 [shape=record,label="{schematron.c:373:}"];
+	Node0x5600fc34a190 -> Node0x5600fc348700;
+	Node0x5600fc348920 [shape=record,label="{schematron.c:376:}"];
+}

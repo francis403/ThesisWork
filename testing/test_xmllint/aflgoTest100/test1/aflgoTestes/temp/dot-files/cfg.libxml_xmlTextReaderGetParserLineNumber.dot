@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlTextReaderGetParserLineNumber' function" {
+	label="CFG for 'libxml_xmlTextReaderGetParserLineNumber' function";
+
+	Node0x55f9313da590 [shape=record,label="{libxml2-py.c:8133:|{<s0>T|<s1>F}}"];
+	Node0x55f9313da590:s0 -> Node0x55f9313de370;
+	Node0x55f9313da590:s1 -> Node0x55f9313de320;
+	Node0x55f9313de320 [shape=record,label="{libxml2-py.c:8140:}"];
+	Node0x55f9313de320 -> Node0x55f9313da820;
+	Node0x55f9313de370 [shape=record,label="{libxml2-py.c:8141:|{<s0>T|<s1>F}}"];
+	Node0x55f9313de370:s0 -> Node0x55f9313deb60;
+	Node0x55f9313de370:s1 -> Node0x55f9313debb0;
+	Node0x55f9313deb60 [shape=record,label="{libxml2-py.c:8141:}"];
+	Node0x55f9313deb60 -> Node0x55f9313dec00;
+	Node0x55f9313debb0 [shape=record,label="{libxml2-py.c:8141:}"];
+	Node0x55f9313debb0 -> Node0x55f9313dec00;
+	Node0x55f9313dec00 [shape=record,label="{libxml2-py.c:8141:}"];
+	Node0x55f9313dec00 -> Node0x55f9313da820;
+	Node0x55f9313da820 [shape=record,label="{libxml2-py.c:8146:}"];
+}

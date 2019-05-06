@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlIsBaseChar' function" {
+	label="CFG for 'xmlIsBaseChar' function";
+
+	Node0x561e9979ce10 [shape=record,label="{chvalid.c:226:|{<s0>T|<s1>F}}"];
+	Node0x561e9979ce10 -> Node0x561e9979cb20;
+	Node0x561e9979ce10 -> Node0x561e996e5b00;
+	Node0x561e9979cb20 [shape=record,label="{chvalid.c:227:|{<s0>T|<s1>F}}"];
+	Node0x561e9979cb20 -> Node0x561e9979f380;
+	Node0x561e9979cb20 -> Node0x561e9979f330;
+	Node0x561e9979f380 [shape=record,label="{chvalid.c:227:|{<s0>T|<s1>F}}"];
+	Node0x561e9979f380 -> Node0x561e996e57c0;
+	Node0x561e9979f380 -> Node0x561e9979f330;
+	Node0x561e9979f330 [shape=record,label="{chvalid.c:227:|{<s0>T|<s1>F}}"];
+	Node0x561e9979f330 -> Node0x561e9979f790;
+	Node0x561e9979f330 -> Node0x561e9979f2e0;
+	Node0x561e9979f790 [shape=record,label="{chvalid.c:227:|{<s0>T|<s1>F}}"];
+	Node0x561e9979f790 -> Node0x561e996e57c0;
+	Node0x561e9979f790 -> Node0x561e9979f2e0;
+	Node0x561e9979f2e0 [shape=record,label="{chvalid.c:227:|{<s0>T|<s1>F}}"];
+	Node0x561e9979f2e0 -> Node0x561e9979fb40;
+	Node0x561e9979f2e0 -> Node0x561e9979f290;
+	Node0x561e9979fb40 [shape=record,label="{chvalid.c:227:|{<s0>T|<s1>F}}"];
+	Node0x561e9979fb40 -> Node0x561e996e57c0;
+	Node0x561e9979fb40 -> Node0x561e9979f290;
+	Node0x561e9979f290 [shape=record,label="{chvalid.c:227:|{<s0>T|<s1>F}}"];
+	Node0x561e9979f290 -> Node0x561e9979fef0;
+	Node0x561e9979f290 -> Node0x561e9979f240;
+	Node0x561e9979fef0 [shape=record,label="{chvalid.c:227:|{<s0>T|<s1>F}}"];
+	Node0x561e9979fef0 -> Node0x561e996e57c0;
+	Node0x561e9979fef0 -> Node0x561e9979f240;
+	Node0x561e9979f240 [shape=record,label="{chvalid.c:227:}"];
+	Node0x561e9979f240 -> Node0x561e996e57c0;
+	Node0x561e996e57c0 [shape=record,label="{chvalid.c:227:}"];
+	Node0x561e996e57c0 -> Node0x561e997970a0;
+	Node0x561e996e5b00 [shape=record,label="{chvalid.c:227:}"];
+	Node0x561e996e5b00 -> Node0x561e997970a0;
+	Node0x561e997970a0 [shape=record,label="{chvalid.c:227:}"];
+}

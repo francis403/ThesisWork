@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlAutomataNewAllTrans' function" {
+	label="CFG for 'xmlAutomataNewAllTrans' function";
+
+	Node0x563d9d624410 [shape=record,label="{xmlregexp.c:6211:|{<s0>T|<s1>F}}"];
+	Node0x563d9d624410 -> Node0x563d9d625710;
+	Node0x563d9d624410 -> Node0x563d9d6257b0;
+	Node0x563d9d6257b0 [shape=record,label="{xmlregexp.c:6213:|{<s0>T|<s1>F}}"];
+	Node0x563d9d6257b0 -> Node0x563d9d625710;
+	Node0x563d9d6257b0 -> Node0x563d9d625760;
+	Node0x563d9d625710 [shape=record,label="{xmlregexp.c:6214:}"];
+	Node0x563d9d625710 -> Node0x563d9d624600;
+	Node0x563d9d625760 [shape=record,label="{xmlregexp.c:6215:|{<s0>T|<s1>F}}"];
+	Node0x563d9d625760 -> Node0x563d9d6268f0;
+	Node0x563d9d625760 -> Node0x563d9d626940;
+	Node0x563d9d6268f0 [shape=record,label="{xmlregexp.c:6217:}"];
+	Node0x563d9d6268f0 -> Node0x563d9d624600;
+	Node0x563d9d626940 [shape=record,label="{xmlregexp.c:6218:}"];
+	Node0x563d9d626940 -> Node0x563d9d624600;
+	Node0x563d9d624600 [shape=record,label="{xmlregexp.c:6219:}"];
+}

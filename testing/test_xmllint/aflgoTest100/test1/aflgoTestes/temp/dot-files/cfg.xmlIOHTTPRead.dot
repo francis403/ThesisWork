@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlIOHTTPRead' function" {
+	label="CFG for 'xmlIOHTTPRead' function";
+
+	Node0x55ed34713070 [shape=record,label="{xmlIO.c:1867:|{<s0>T|<s1>F}}"];
+	Node0x55ed34713070 -> Node0x55ed3471a840;
+	Node0x55ed34713070 -> Node0x55ed3471a8e0;
+	Node0x55ed3471a8e0 [shape=record,label="{xmlIO.c:1868:|{<s0>T|<s1>F}}"];
+	Node0x55ed3471a8e0 -> Node0x55ed3471a840;
+	Node0x55ed3471a8e0 -> Node0x55ed3471a890;
+	Node0x55ed3471a840 [shape=record,label="{xmlIO.c:1868:}"];
+	Node0x55ed3471a840 -> Node0x55ed34715210;
+	Node0x55ed3471a890 [shape=record,label="{xmlIO.c:1869:}"];
+	Node0x55ed3471a890 -> Node0x55ed34715210;
+	Node0x55ed34715210 [shape=record,label="{xmlIO.c:1870:}"];
+}

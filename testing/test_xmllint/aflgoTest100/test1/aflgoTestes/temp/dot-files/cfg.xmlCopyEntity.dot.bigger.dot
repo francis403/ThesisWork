@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlCopyEntity' function" {
+	label="CFG for 'xmlCopyEntity' function";
+
+	Node0x559a621fe760 [shape=record,label="{entities.c:914:|{<s0>T|<s1>F}}"];
+	Node0x559a621fe760:s0 -> Node0x559a622010a0;
+	Node0x559a621fe760:s1 -> Node0x559a622010f0;
+	Node0x559a622010a0 [shape=record,label="{entities.c:920:}"];
+	Node0x559a622010a0 -> Node0x559a621fe7b0;
+	Node0x559a622010f0 [shape=record,label="{entities.c:923:|{<s0>T|<s1>F}}"];
+	Node0x559a622010f0:s0 -> Node0x559a62201f60;
+	Node0x559a622010f0:s1 -> Node0x559a62201fb0;
+	Node0x559a62201f60 [shape=record,label="{entities.c:928:}"];
+	Node0x559a62201f60 -> Node0x559a62201fb0;
+	Node0x559a62201fb0 [shape=record,label="{entities.c:929:|{<s0>T|<s1>F}}"];
+	Node0x559a62201fb0:s0 -> Node0x559a62202710;
+	Node0x559a62201fb0:s1 -> Node0x559a62202760;
+	Node0x559a62202710 [shape=record,label="{entities.c:930:}"];
+	Node0x559a62202710 -> Node0x559a62202760;
+	Node0x559a62202760 [shape=record,label="{entities.c:931:|{<s0>T|<s1>F}}"];
+	Node0x559a62202760:s0 -> Node0x559a62203000;
+	Node0x559a62202760:s1 -> Node0x559a62203050;
+	Node0x559a62203000 [shape=record,label="{entities.c:932:}"];
+	Node0x559a62203000 -> Node0x559a62203050;
+	Node0x559a62203050 [shape=record,label="{entities.c:933:|{<s0>T|<s1>F}}"];
+	Node0x559a62203050:s0 -> Node0x559a62203990;
+	Node0x559a62203050:s1 -> Node0x559a622039e0;
+	Node0x559a62203990 [shape=record,label="{entities.c:934:}"];
+	Node0x559a62203990 -> Node0x559a622039e0;
+	Node0x559a622039e0 [shape=record,label="{entities.c:935:|{<s0>T|<s1>F}}"];
+	Node0x559a622039e0:s0 -> Node0x559a62204320;
+	Node0x559a622039e0:s1 -> Node0x559a62204370;
+	Node0x559a62204320 [shape=record,label="{entities.c:936:}"];
+	Node0x559a62204320 -> Node0x559a62204370;
+	Node0x559a62204370 [shape=record,label="{entities.c:937:|{<s0>T|<s1>F}}"];
+	Node0x559a62204370:s0 -> Node0x559a62204cb0;
+	Node0x559a62204370:s1 -> Node0x559a62204d00;
+	Node0x559a62204cb0 [shape=record,label="{entities.c:938:}"];
+	Node0x559a62204cb0 -> Node0x559a62204d00;
+	Node0x559a62204d00 [shape=record,label="{entities.c:939:}"];
+	Node0x559a62204d00 -> Node0x559a621fe7b0;
+	Node0x559a621fe7b0 [shape=record,label="{entities.c:940:}"];
+}

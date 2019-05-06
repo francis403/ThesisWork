@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlSchemaIsParticleEmptiable' function" {
+	label="CFG for 'xmlSchemaIsParticleEmptiable' function";
+
+	Node0x558353aafe30 [shape=record,label="{xmlschemas.c:14806:|{<s0>T|<s1>F}}"];
+	Node0x558353aafe30:s0 -> Node0x558353aafc20;
+	Node0x558353aafe30:s1 -> Node0x558353ae0260;
+	Node0x558353ae0260 [shape=record,label="{xmlschemas.c:14811:|{<s0>T|<s1>F}}"];
+	Node0x558353ae0260:s0 -> Node0x558353aafc20;
+	Node0x558353ae0260:s1 -> Node0x558353ae0210;
+	Node0x558353ae0210 [shape=record,label="{xmlschemas.c:14812:|{<s0>T|<s1>F}}"];
+	Node0x558353ae0210:s0 -> Node0x558353aafc20;
+	Node0x558353ae0210:s1 -> Node0x558353aafc70;
+	Node0x558353aafc20 [shape=record,label="{xmlschemas.c:14813:}"];
+	Node0x558353aafc20 -> Node0x558353aafe80;
+	Node0x558353aafc70 [shape=record,label="{xmlschemas.c:14818:|{<s0>T|<s1>F}}"];
+	Node0x558353aafc70:s0 -> Node0x558353ae0c70;
+	Node0x558353aafc70:s1 -> Node0x558353ae0d90;
+	Node0x558353ae0d90 [shape=record,label="{xmlschemas.c:14818:|{<s0>T|<s1>F}}"];
+	Node0x558353ae0d90:s0 -> Node0x558353ae0c70;
+	Node0x558353ae0d90:s1 -> Node0x558353ae0d10;
+	Node0x558353ae0d10 [shape=record,label="{xmlschemas.c:14818:|{<s0>T|<s1>F}}"];
+	Node0x558353ae0d10:s0 -> Node0x558353ae0c70;
+	Node0x558353ae0d10:s1 -> Node0x558353ae0cc0;
+	Node0x558353ae0c70 [shape=record,label="{xmlschemas.c:14819:|{<s0>T|<s1>F}}"];
+	Node0x558353ae0c70:s0 -> Node0x558353ae1900;
+	Node0x558353ae0c70:s1 -> Node0x558353ae1950;
+	Node0x558353ae1900 [shape=record,label="{xmlschemas.c:14820:}"];
+	Node0x558353ae1900 -> Node0x558353aafe80;
+	Node0x558353ae1950 [shape=record,label="{xmlschemas.c:14821:}"];
+	Node0x558353ae1950 -> Node0x558353ae0cc0;
+	Node0x558353ae0cc0 [shape=record,label="{xmlschemas.c:14822:}"];
+	Node0x558353ae0cc0 -> Node0x558353aafe80;
+	Node0x558353aafe80 [shape=record,label="{xmlschemas.c:14823:}"];
+}

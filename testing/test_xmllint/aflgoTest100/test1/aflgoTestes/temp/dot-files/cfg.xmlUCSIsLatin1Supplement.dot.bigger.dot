@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsLatin1Supplement' function" {
+	label="CFG for 'xmlUCSIsLatin1Supplement' function";
+
+	Node0x564952e932e0 [shape=record,label="{xmlunicode.c:1873:|{<s0>T|<s1>F}}"];
+	Node0x564952e932e0:s0 -> Node0x564952e948d0;
+	Node0x564952e932e0:s1 -> Node0x564952e94b60;
+	Node0x564952e948d0 [shape=record,label="{xmlunicode.c:1874:}"];
+	Node0x564952e948d0 -> Node0x564952e94b60;
+	Node0x564952e94b60 [shape=record,label="{xmlunicode.c:1874:}"];
+}

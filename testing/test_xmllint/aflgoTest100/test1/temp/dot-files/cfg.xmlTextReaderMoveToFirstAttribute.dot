@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlTextReaderMoveToFirstAttribute' function" {
+	label="CFG for 'xmlTextReaderMoveToFirstAttribute' function";
+
+	Node0x55e449384b00 [shape=record,label="{xmlreader.c:2802:|{<s0>T|<s1>F}}"];
+	Node0x55e449384b00 -> Node0x55e4493849b0;
+	Node0x55e449384b00 -> Node0x55e44937d090;
+	Node0x55e4493849b0 [shape=record,label="{xmlreader.c:2804:}"];
+	Node0x55e4493849b0 -> Node0x55e449384cf0;
+	Node0x55e44937d090 [shape=record,label="{xmlreader.c:2805:|{<s0>T|<s1>F}}"];
+	Node0x55e44937d090 -> Node0x55e449385ac0;
+	Node0x55e44937d090 -> Node0x55e449385b10;
+	Node0x55e449385ac0 [shape=record,label="{xmlreader.c:2806:}"];
+	Node0x55e449385ac0 -> Node0x55e449384cf0;
+	Node0x55e449385b10 [shape=record,label="{xmlreader.c:2807:|{<s0>T|<s1>F}}"];
+	Node0x55e449385b10 -> Node0x55e449386060;
+	Node0x55e449385b10 -> Node0x55e4493860b0;
+	Node0x55e449386060 [shape=record,label="{xmlreader.c:2808:}"];
+	Node0x55e449386060 -> Node0x55e449384cf0;
+	Node0x55e4493860b0 [shape=record,label="{xmlreader.c:2810:|{<s0>T|<s1>F}}"];
+	Node0x55e4493860b0 -> Node0x55e449386660;
+	Node0x55e4493860b0 -> Node0x55e4493866b0;
+	Node0x55e449386660 [shape=record,label="{xmlreader.c:2811:}"];
+	Node0x55e449386660 -> Node0x55e449384cf0;
+	Node0x55e4493866b0 [shape=record,label="{xmlreader.c:2814:|{<s0>T|<s1>F}}"];
+	Node0x55e4493866b0 -> Node0x55e449387360;
+	Node0x55e4493866b0 -> Node0x55e4493873b0;
+	Node0x55e449387360 [shape=record,label="{xmlreader.c:2815:}"];
+	Node0x55e449387360 -> Node0x55e449384cf0;
+	Node0x55e4493873b0 [shape=record,label="{xmlreader.c:2818:}"];
+	Node0x55e4493873b0 -> Node0x55e449384cf0;
+	Node0x55e449384cf0 [shape=record,label="{xmlreader.c:2819:}"];
+}

@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlFreeInputStream' function" {
+	label="CFG for 'xmlFreeInputStream' function";
+
+	Node0x5581cbe874a0 [shape=record,label="{parserInternals.c:1339:|{<s0>T|<s1>F}}"];
+	Node0x5581cbe874a0 -> Node0x5581cbef6e20;
+	Node0x5581cbe874a0 -> Node0x5581cbef6e70;
+	Node0x5581cbef6e20 [shape=record,label="{parserInternals.c:1340:}"];
+	Node0x5581cbef6e20 -> Node0x5581cbef3ee0;
+	Node0x5581cbef6e70 [shape=record,label="{parserInternals.c:1342:|{<s0>T|<s1>F}}"];
+	Node0x5581cbef6e70 -> Node0x5581cbef7220;
+	Node0x5581cbef6e70 -> Node0x5581cbef7270;
+	Node0x5581cbef7220 [shape=record,label="{parserInternals.c:1342:}"];
+	Node0x5581cbef7220 -> Node0x5581cbef7270;
+	Node0x5581cbef7270 [shape=record,label="{parserInternals.c:1343:|{<s0>T|<s1>F}}"];
+	Node0x5581cbef7270 -> Node0x5581cbef2270;
+	Node0x5581cbef7270 -> Node0x5581cbef4040;
+	Node0x5581cbef2270 [shape=record,label="{parserInternals.c:1343:}"];
+	Node0x5581cbef2270 -> Node0x5581cbef4040;
+	Node0x5581cbef4040 [shape=record,label="{parserInternals.c:1344:|{<s0>T|<s1>F}}"];
+	Node0x5581cbef4040 -> Node0x5581cbef8770;
+	Node0x5581cbef4040 -> Node0x5581cbef87c0;
+	Node0x5581cbef8770 [shape=record,label="{parserInternals.c:1344:}"];
+	Node0x5581cbef8770 -> Node0x5581cbef87c0;
+	Node0x5581cbef87c0 [shape=record,label="{parserInternals.c:1345:|{<s0>T|<s1>F}}"];
+	Node0x5581cbef87c0 -> Node0x5581cbef8e40;
+	Node0x5581cbef87c0 -> Node0x5581cbef8e90;
+	Node0x5581cbef8e40 [shape=record,label="{parserInternals.c:1345:}"];
+	Node0x5581cbef8e40 -> Node0x5581cbef8e90;
+	Node0x5581cbef8e90 [shape=record,label="{parserInternals.c:1346:|{<s0>T|<s1>F}}"];
+	Node0x5581cbef8e90 -> Node0x5581cbef9650;
+	Node0x5581cbef8e90 -> Node0x5581cbef9600;
+	Node0x5581cbef9650 [shape=record,label="{parserInternals.c:1346:|{<s0>T|<s1>F}}"];
+	Node0x5581cbef9650 -> Node0x5581cbef95b0;
+	Node0x5581cbef9650 -> Node0x5581cbef9600;
+	Node0x5581cbef95b0 [shape=record,label="{parserInternals.c:1347:}"];
+	Node0x5581cbef95b0 -> Node0x5581cbef9600;
+	Node0x5581cbef9600 [shape=record,label="{parserInternals.c:1348:|{<s0>T|<s1>F}}"];
+	Node0x5581cbef9600 -> Node0x5581cbefa300;
+	Node0x5581cbef9600 -> Node0x5581cbefa350;
+	Node0x5581cbefa300 [shape=record,label="{parserInternals.c:1349:}"];
+	Node0x5581cbefa300 -> Node0x5581cbefa350;
+	Node0x5581cbefa350 [shape=record,label="{parserInternals.c:1350:}"];
+	Node0x5581cbefa350 -> Node0x5581cbef3ee0;
+	Node0x5581cbef3ee0 [shape=record,label="{parserInternals.c:1351:}"];
+}

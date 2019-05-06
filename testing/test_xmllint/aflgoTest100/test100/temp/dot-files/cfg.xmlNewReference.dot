@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlNewReference' function" {
+	label="CFG for 'xmlNewReference' function";
+
+	Node0x5627b43c9200 [shape=record,label="{tree.c:2597:|{<s0>T|<s1>F}}"];
+	Node0x5627b43c9200 -> Node0x5627b43cf660;
+	Node0x5627b43c9200 -> Node0x5627b43cf6b0;
+	Node0x5627b43cf660 [shape=record,label="{tree.c:2602:}"];
+	Node0x5627b43cf660 -> Node0x5627b43cbf30;
+	Node0x5627b43cf6b0 [shape=record,label="{tree.c:2607:|{<s0>T|<s1>F}}"];
+	Node0x5627b43cf6b0 -> Node0x5627b43cfdd0;
+	Node0x5627b43cf6b0 -> Node0x5627b43cfe20;
+	Node0x5627b43cfdd0 [shape=record,label="{tree.c:2609:}"];
+	Node0x5627b43cfdd0 -> Node0x5627b43cbf30;
+	Node0x5627b43cfe20 [shape=record,label="{tree.c:2612:|{<s0>T|<s1>F}}"];
+	Node0x5627b43cfe20 -> Node0x5627b43d0bf0;
+	Node0x5627b43cfe20 -> Node0x5627b43d0c90;
+	Node0x5627b43d0bf0 [shape=record,label="{tree.c:2617:|{<s0>T|<s1>F}}"];
+	Node0x5627b43d0bf0 -> Node0x5627b43d17d0;
+	Node0x5627b43d0bf0 -> Node0x5627b43d1870;
+	Node0x5627b43d17d0 [shape=record,label="{tree.c:2621:}"];
+	Node0x5627b43d17d0 -> Node0x5627b43d1820;
+	Node0x5627b43d1870 [shape=record,label="{tree.c:2623:}"];
+	Node0x5627b43d1870 -> Node0x5627b43d1820;
+	Node0x5627b43d1820 [shape=record,label="{tree.c:2624:}"];
+	Node0x5627b43d1820 -> Node0x5627b43d0c40;
+	Node0x5627b43d0c90 [shape=record,label="{tree.c:2625:}"];
+	Node0x5627b43d0c90 -> Node0x5627b43d0c40;
+	Node0x5627b43d0c40 [shape=record,label="{tree.c:2627:|{<s0>T|<s1>F}}"];
+	Node0x5627b43d0c40 -> Node0x5627b43d2fc0;
+	Node0x5627b43d0c40 -> Node0x5627b43d3010;
+	Node0x5627b43d2fc0 [shape=record,label="{tree.c:2629:}"];
+	Node0x5627b43d2fc0 -> Node0x5627b43d3010;
+	Node0x5627b43d3010 [shape=record,label="{tree.c:2639:|{<s0>T|<s1>F}}"];
+	Node0x5627b43d3010 -> Node0x5627b43d3f30;
+	Node0x5627b43d3010 -> Node0x5627b43d3ee0;
+	Node0x5627b43d3f30 [shape=record,label="{tree.c:2639:|{<s0>T|<s1>F}}"];
+	Node0x5627b43d3f30 -> Node0x5627b43d3e90;
+	Node0x5627b43d3f30 -> Node0x5627b43d3ee0;
+	Node0x5627b43d3e90 [shape=record,label="{tree.c:2640:}"];
+	Node0x5627b43d3e90 -> Node0x5627b43d3ee0;
+	Node0x5627b43d3ee0 [shape=record,label="{tree.c:2641:}"];
+	Node0x5627b43d3ee0 -> Node0x5627b43cbf30;
+	Node0x5627b43cbf30 [shape=record,label="{tree.c:2642:}"];
+}

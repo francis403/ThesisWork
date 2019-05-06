@@ -1,0 +1,12 @@
+digraph "CFG for 'fatalErrorDebug' function" {
+	label="CFG for 'fatalErrorDebug' function";
+
+	Node0x55c15e1492d0 [shape=record,label="{xmllint.c:1446:|{<s0>T|<s1>F}}"];
+	Node0x55c15e1492d0:s0 -> Node0x55c15e14b300;
+	Node0x55c15e1492d0:s1 -> Node0x55c15e14b350;
+	Node0x55c15e14b300 [shape=record,label="{xmllint.c:1452:}"];
+	Node0x55c15e14b300 -> Node0x55c15e14a4d0;
+	Node0x55c15e14b350 [shape=record,label="{xmllint.c:1453:}"];
+	Node0x55c15e14b350 -> Node0x55c15e14a4d0;
+	Node0x55c15e14a4d0 [shape=record,label="{xmllint.c:1457:}"];
+}

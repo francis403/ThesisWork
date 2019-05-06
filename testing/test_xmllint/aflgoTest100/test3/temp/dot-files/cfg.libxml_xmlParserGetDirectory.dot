@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlParserGetDirectory' function" {
+	label="CFG for 'libxml_xmlParserGetDirectory' function";
+
+	Node0x55d6cbc2ff80 [shape=record,label="{libxml2-py.c:5492:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbc2ff80:s0 -> Node0x55d6cbc330e0;
+	Node0x55d6cbc2ff80:s1 -> Node0x55d6cbc33090;
+	Node0x55d6cbc33090 [shape=record,label="{libxml2-py.c:5498:}"];
+	Node0x55d6cbc33090 -> Node0x55d6cbc30210;
+	Node0x55d6cbc330e0 [shape=record,label="{libxml2-py.c:5500:}"];
+	Node0x55d6cbc330e0 -> Node0x55d6cbc30210;
+	Node0x55d6cbc30210 [shape=record,label="{libxml2-py.c:5503:}"];
+}

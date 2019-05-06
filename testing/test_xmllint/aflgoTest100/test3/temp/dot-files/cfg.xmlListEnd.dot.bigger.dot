@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlListEnd' function" {
+	label="CFG for 'xmlListEnd' function";
+
+	Node0x5577c1675d60 [shape=record,label="{list.c:478:|{<s0>T|<s1>F}}"];
+	Node0x5577c1675d60:s0 -> Node0x5577c1676de0;
+	Node0x5577c1675d60:s1 -> Node0x5577c1672720;
+	Node0x5577c1676de0 [shape=record,label="{list.c:481:}"];
+	Node0x5577c1676de0 -> Node0x5577c16772f0;
+	Node0x5577c1672720 [shape=record,label="{list.c:482:}"];
+	Node0x5577c1672720 -> Node0x5577c16772f0;
+	Node0x5577c16772f0 [shape=record,label="{list.c:483:}"];
+}

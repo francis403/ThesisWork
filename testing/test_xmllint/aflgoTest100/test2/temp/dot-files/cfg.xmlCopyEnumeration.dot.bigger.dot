@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlCopyEnumeration' function" {
+	label="CFG for 'xmlCopyEnumeration' function";
+
+	Node0x55bbc3708a10 [shape=record,label="{valid.c:1808:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3708a10:s0 -> Node0x55bbc3702310;
+	Node0x55bbc3708a10:s1 -> Node0x55bbc37096a0;
+	Node0x55bbc3702310 [shape=record,label="{valid.c:1811:}"];
+	Node0x55bbc3702310 -> Node0x55bbc3708ea0;
+	Node0x55bbc37096a0 [shape=record,label="{valid.c:1812:|{<s0>T|<s1>F}}"];
+	Node0x55bbc37096a0:s0 -> Node0x55bbc3709df0;
+	Node0x55bbc37096a0:s1 -> Node0x55bbc3709e40;
+	Node0x55bbc3709df0 [shape=record,label="{valid.c:1813:}"];
+	Node0x55bbc3709df0 -> Node0x55bbc3708ea0;
+	Node0x55bbc3709e40 [shape=record,label="{valid.c:1815:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3709e40:s0 -> Node0x55bbc370a2a0;
+	Node0x55bbc3709e40:s1 -> Node0x55bbc370a340;
+	Node0x55bbc370a2a0 [shape=record,label="{valid.c:1815:}"];
+	Node0x55bbc370a2a0 -> Node0x55bbc370a2f0;
+	Node0x55bbc370a340 [shape=record,label="{valid.c:1816:}"];
+	Node0x55bbc370a340 -> Node0x55bbc370a2f0;
+	Node0x55bbc370a2f0 [shape=record,label="{valid.c:1818:}"];
+	Node0x55bbc370a2f0 -> Node0x55bbc3708ea0;
+	Node0x55bbc3708ea0 [shape=record,label="{valid.c:1819:}"];
+}

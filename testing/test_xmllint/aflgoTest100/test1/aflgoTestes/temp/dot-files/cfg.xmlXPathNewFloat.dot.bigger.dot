@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathNewFloat' function" {
+	label="CFG for 'xmlXPathNewFloat' function";
+
+	Node0x55e6b2617200 [shape=record,label="{xpath.c:5230:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2617200:s0 -> Node0x55e6b2618100;
+	Node0x55e6b2617200:s1 -> Node0x55e6b2618150;
+	Node0x55e6b2618100 [shape=record,label="{xpath.c:5235:}"];
+	Node0x55e6b2618100 -> Node0x55e6b2617610;
+	Node0x55e6b2618150 [shape=record,label="{xpath.c:5238:}"];
+	Node0x55e6b2618150 -> Node0x55e6b2617610;
+	Node0x55e6b2617610 [shape=record,label="{xpath.c:5245:}"];
+}

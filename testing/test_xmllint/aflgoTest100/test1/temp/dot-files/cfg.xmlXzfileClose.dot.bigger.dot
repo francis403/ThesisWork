@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlXzfileClose' function" {
+	label="CFG for 'xmlXzfileClose' function";
+
+	Node0x55ed34870180 [shape=record,label="{xmlIO.c:1356:|{<s0>T|<s1>F}}"];
+	Node0x55ed34870180:s0 -> Node0x55ed346a6820;
+	Node0x55ed34870180:s1 -> Node0x55ed34877260;
+	Node0x55ed346a6820 [shape=record,label="{xmlIO.c:1360:}"];
+	Node0x55ed346a6820 -> Node0x55ed34877260;
+	Node0x55ed34877260 [shape=record,label="{xmlIO.c:1361:}"];
+}

@@ -1,0 +1,33 @@
+digraph "CFG for 'xmlSchemaFormatIDCKeySequence' function" {
+	label="CFG for 'xmlSchemaFormatIDCKeySequence' function";
+
+	Node0x558353e14df0 [shape=record,label="{xmlschemas.c:22636:}"];
+	Node0x558353e14df0 -> Node0x558353e17ed0;
+	Node0x558353e17ed0 [shape=record,label="{xmlschemas.c:22645:|{<s0>T|<s1>F}}"];
+	Node0x558353e17ed0:s0 -> Node0x558353e181b0;
+	Node0x558353e17ed0:s1 -> Node0x558353e17d70;
+	Node0x558353e181b0 [shape=record,label="{xmlschemas.c:22646:|{<s0>T|<s1>F}}"];
+	Node0x558353e181b0:s0 -> Node0x558353e19080;
+	Node0x558353e181b0:s1 -> Node0x558353e19120;
+	Node0x558353e19080 [shape=record,label="{xmlschemas.c:22651:}"];
+	Node0x558353e19080 -> Node0x558353e190d0;
+	Node0x558353e19120 [shape=record,label="{xmlschemas.c:22653:}"];
+	Node0x558353e19120 -> Node0x558353e190d0;
+	Node0x558353e190d0 [shape=record,label="{xmlschemas.c:22657:|{<s0>T|<s1>F}}"];
+	Node0x558353e190d0:s0 -> Node0x558353e1a430;
+	Node0x558353e190d0:s1 -> Node0x558353e1a4d0;
+	Node0x558353e1a430 [shape=record,label="{xmlschemas.c:22658:}"];
+	Node0x558353e1a430 -> Node0x558353e1a480;
+	Node0x558353e1a4d0 [shape=record,label="{xmlschemas.c:22660:}"];
+	Node0x558353e1a4d0 -> Node0x558353e1a480;
+	Node0x558353e1a480 [shape=record,label="{xmlschemas.c:22661:|{<s0>T|<s1>F}}"];
+	Node0x558353e1a480:s0 -> Node0x558353e1b170;
+	Node0x558353e1a480:s1 -> Node0x558353e1b1c0;
+	Node0x558353e1b170 [shape=record,label="{xmlschemas.c:22662:}"];
+	Node0x558353e1b170 -> Node0x558353e1b1c0;
+	Node0x558353e1b1c0 [shape=record,label="{xmlschemas.c:22665:}"];
+	Node0x558353e1b1c0 -> Node0x558353e18120;
+	Node0x558353e18120 [shape=record,label="{xmlschemas.c:22645:}"];
+	Node0x558353e18120 -> Node0x558353e17ed0;
+	Node0x558353e17d70 [shape=record,label="{xmlschemas.c:22666:}"];
+}

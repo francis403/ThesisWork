@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlGetLineNo' function" {
+	label="CFG for 'libxml_xmlGetLineNo' function";
+
+	Node0x55f930ee32a0 [shape=record,label="{libxml2-py.c:3031:|{<s0>T|<s1>F}}"];
+	Node0x55f930ee32a0:s0 -> Node0x55f930ee8290;
+	Node0x55f930ee32a0:s1 -> Node0x55f930ee8240;
+	Node0x55f930ee8240 [shape=record,label="{libxml2-py.c:3038:}"];
+	Node0x55f930ee8240 -> Node0x55f930ee5ce0;
+	Node0x55f930ee8290 [shape=record,label="{libxml2-py.c:3039:|{<s0>T|<s1>F}}"];
+	Node0x55f930ee8290:s0 -> Node0x55f930ee8a70;
+	Node0x55f930ee8290:s1 -> Node0x55f930ee8ac0;
+	Node0x55f930ee8a70 [shape=record,label="{libxml2-py.c:3039:}"];
+	Node0x55f930ee8a70 -> Node0x55f930ee8b10;
+	Node0x55f930ee8ac0 [shape=record,label="{libxml2-py.c:3039:}"];
+	Node0x55f930ee8ac0 -> Node0x55f930ee8b10;
+	Node0x55f930ee8b10 [shape=record,label="{libxml2-py.c:3039:}"];
+	Node0x55f930ee8b10 -> Node0x55f930ee5ce0;
+	Node0x55f930ee5ce0 [shape=record,label="{libxml2-py.c:3044:}"];
+}

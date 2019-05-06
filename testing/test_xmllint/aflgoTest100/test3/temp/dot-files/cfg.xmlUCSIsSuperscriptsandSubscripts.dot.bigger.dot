@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsSuperscriptsandSubscripts' function" {
+	label="CFG for 'xmlUCSIsSuperscriptsandSubscripts' function";
+
+	Node0x55ca9b25bab0 [shape=record,label="{xmlunicode.c:2330:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b25bab0:s0 -> Node0x55ca9b25d120;
+	Node0x55ca9b25bab0:s1 -> Node0x55ca9b25d3b0;
+	Node0x55ca9b25d120 [shape=record,label="{xmlunicode.c:2331:}"];
+	Node0x55ca9b25d120 -> Node0x55ca9b25d3b0;
+	Node0x55ca9b25d3b0 [shape=record,label="{xmlunicode.c:2331:}"];
+}

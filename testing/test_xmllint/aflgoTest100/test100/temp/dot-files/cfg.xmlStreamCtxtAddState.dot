@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlStreamCtxtAddState' function" {
+	label="CFG for 'xmlStreamCtxtAddState' function";
+
+	Node0x55aa3b052f40 [shape=record,label="{pattern.c:1814:}"];
+	Node0x55aa3b052f40 -> Node0x55aa3b074100;
+	Node0x55aa3b074100 [shape=record,label="{pattern.c:1816:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b074100 -> Node0x55aa3b0743e0;
+	Node0x55aa3b074100 -> Node0x55aa3b073f60;
+	Node0x55aa3b0743e0 [shape=record,label="{pattern.c:1817:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b0743e0 -> Node0x55aa3b074810;
+	Node0x55aa3b0743e0 -> Node0x55aa3b074860;
+	Node0x55aa3b074810 [shape=record,label="{pattern.c:1818:}"];
+	Node0x55aa3b074810 -> Node0x55aa3b052f90;
+	Node0x55aa3b074860 [shape=record,label="{pattern.c:1822:}"];
+	Node0x55aa3b074860 -> Node0x55aa3b074350;
+	Node0x55aa3b074350 [shape=record,label="{pattern.c:1816:}"];
+	Node0x55aa3b074350 -> Node0x55aa3b074100;
+	Node0x55aa3b073f60 [shape=record,label="{pattern.c:1823:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b073f60 -> Node0x55aa3b075ea0;
+	Node0x55aa3b073f60 -> Node0x55aa3b075ef0;
+	Node0x55aa3b075ea0 [shape=record,label="{pattern.c:1824:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b075ea0 -> Node0x55aa3b0781a0;
+	Node0x55aa3b075ea0 -> Node0x55aa3b0781f0;
+	Node0x55aa3b0781a0 [shape=record,label="{pattern.c:1831:}"];
+	Node0x55aa3b0781a0 -> Node0x55aa3b052f90;
+	Node0x55aa3b0781f0 [shape=record,label="{pattern.c:1833:}"];
+	Node0x55aa3b0781f0 -> Node0x55aa3b075ef0;
+	Node0x55aa3b075ef0 [shape=record,label="{pattern.c:1836:}"];
+	Node0x55aa3b075ef0 -> Node0x55aa3b052f90;
+	Node0x55aa3b052f90 [shape=record,label="{pattern.c:1839:}"];
+}

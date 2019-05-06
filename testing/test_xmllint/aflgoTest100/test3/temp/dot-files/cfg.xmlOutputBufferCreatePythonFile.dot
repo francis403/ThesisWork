@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlOutputBufferCreatePythonFile' function" {
+	label="CFG for 'xmlOutputBufferCreatePythonFile' function";
+
+	Node0x55fa6c374b40 [shape=record,label="{libxml.c:483:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c374b40:s0 -> Node0x55fa6c3acd00;
+	Node0x55fa6c374b40:s1 -> Node0x55fa6c3acd50;
+	Node0x55fa6c3acd00 [shape=record,label="{libxml.c:487:}"];
+	Node0x55fa6c3acd00 -> Node0x55fa6c3abe70;
+	Node0x55fa6c3acd50 [shape=record,label="{libxml.c:489:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c3acd50:s0 -> Node0x55fa6c3ad850;
+	Node0x55fa6c3acd50:s1 -> Node0x55fa6c3ad8a0;
+	Node0x55fa6c3ad850 [shape=record,label="{libxml.c:491:}"];
+	Node0x55fa6c3ad850 -> Node0x55fa6c3ad8a0;
+	Node0x55fa6c3ad8a0 [shape=record,label="{libxml.c:497:}"];
+	Node0x55fa6c3ad8a0 -> Node0x55fa6c3abe70;
+	Node0x55fa6c3abe70 [shape=record,label="{libxml.c:498:}"];
+}

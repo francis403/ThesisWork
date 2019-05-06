@@ -1,0 +1,36 @@
+digraph "CFG for 'xmlFileOpenW' function" {
+	label="CFG for 'xmlFileOpenW' function";
+
+	Node0x5635e022a720 [shape=record,label="{xmlIO.c:885:|{<s0>T|<s1>F}}"];
+	Node0x5635e022a720:s0 -> Node0x5635e022c550;
+	Node0x5635e022a720:s1 -> Node0x5635e022c210;
+	Node0x5635e022c210 [shape=record,label="{xmlIO.c:890:}"];
+	Node0x5635e022c210 -> Node0x5635e022dc90;
+	Node0x5635e022c550 [shape=record,label="{xmlIO.c:894:|{<s0>T|<s1>F}}"];
+	Node0x5635e022c550:s0 -> Node0x5635e017d8d0;
+	Node0x5635e022c550:s1 -> Node0x5635e017d830;
+	Node0x5635e017d830 [shape=record,label="{xmlIO.c:898:}"];
+	Node0x5635e017d830 -> Node0x5635e017d880;
+	Node0x5635e017d8d0 [shape=record,label="{xmlIO.c:900:|{<s0>T|<s1>F}}"];
+	Node0x5635e017d8d0:s0 -> Node0x5635e0230c00;
+	Node0x5635e017d8d0:s1 -> Node0x5635e0230b60;
+	Node0x5635e0230b60 [shape=record,label="{xmlIO.c:904:}"];
+	Node0x5635e0230b60 -> Node0x5635e0230bb0;
+	Node0x5635e0230c00 [shape=record,label="{xmlIO.c:907:}"];
+	Node0x5635e0230c00 -> Node0x5635e0230bb0;
+	Node0x5635e0230bb0 [shape=record,label="{%22}"];
+	Node0x5635e0230bb0 -> Node0x5635e017d880;
+	Node0x5635e017d880 [shape=record,label="{xmlIO.c:909:|{<s0>T|<s1>F}}"];
+	Node0x5635e017d880:s0 -> Node0x5635e02316c0;
+	Node0x5635e017d880:s1 -> Node0x5635e0231710;
+	Node0x5635e02316c0 [shape=record,label="{xmlIO.c:910:}"];
+	Node0x5635e02316c0 -> Node0x5635e022dc90;
+	Node0x5635e0231710 [shape=record,label="{xmlIO.c:917:|{<s0>T|<s1>F}}"];
+	Node0x5635e0231710:s0 -> Node0x5635e0231eb0;
+	Node0x5635e0231710:s1 -> Node0x5635e0231f00;
+	Node0x5635e0231eb0 [shape=record,label="{xmlIO.c:920:}"];
+	Node0x5635e0231eb0 -> Node0x5635e0231f00;
+	Node0x5635e0231f00 [shape=record,label="{xmlIO.c:921:}"];
+	Node0x5635e0231f00 -> Node0x5635e022dc90;
+	Node0x5635e022dc90 [shape=record,label="{xmlIO.c:922:}"];
+}

@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlXIncludeNewRef' function" {
+	label="CFG for 'xmlXIncludeNewRef' function";
+
+	Node0x560832a66970 [shape=record,label="{xinclude.c:225:|{<s0>T|<s1>F}}"];
+	Node0x560832a66970:s0 -> Node0x560832a6abd0;
+	Node0x560832a66970:s1 -> Node0x560832a6ac20;
+	Node0x560832a6abd0 [shape=record,label="{xinclude.c:234:}"];
+	Node0x560832a6abd0 -> Node0x560832a669c0;
+	Node0x560832a6ac20 [shape=record,label="{xinclude.c:237:|{<s0>T|<s1>F}}"];
+	Node0x560832a6ac20:s0 -> Node0x560832a6b780;
+	Node0x560832a6ac20:s1 -> Node0x560832a6b820;
+	Node0x560832a6b780 [shape=record,label="{xinclude.c:239:}"];
+	Node0x560832a6b780 -> Node0x560832a6b7d0;
+	Node0x560832a6b820 [shape=record,label="{xinclude.c:241:}"];
+	Node0x560832a6b820 -> Node0x560832a6b7d0;
+	Node0x560832a6b7d0 [shape=record,label="{xinclude.c:242:|{<s0>T|<s1>F}}"];
+	Node0x560832a6b7d0:s0 -> Node0x560832a6cbc0;
+	Node0x560832a6b7d0:s1 -> Node0x560832a6cc10;
+	Node0x560832a6cbc0 [shape=record,label="{xinclude.c:249:|{<s0>T|<s1>F}}"];
+	Node0x560832a6cbc0:s0 -> Node0x560832a6d9a0;
+	Node0x560832a6cbc0:s1 -> Node0x560832a6d9f0;
+	Node0x560832a6d9a0 [shape=record,label="{xinclude.c:253:}"];
+	Node0x560832a6d9a0 -> Node0x560832a669c0;
+	Node0x560832a6d9f0 [shape=record,label="{xinclude.c:257:}"];
+	Node0x560832a6d9f0 -> Node0x560832a6cc10;
+	Node0x560832a6cc10 [shape=record,label="{xinclude.c:258:|{<s0>T|<s1>F}}"];
+	Node0x560832a6cc10:s0 -> Node0x560832a6e4d0;
+	Node0x560832a6cc10:s1 -> Node0x560832a6e520;
+	Node0x560832a6e4d0 [shape=record,label="{xinclude.c:259:|{<s0>T|<s1>F}}"];
+	Node0x560832a6e4d0:s0 -> Node0x560832a6f750;
+	Node0x560832a6e4d0:s1 -> Node0x560832a6f7a0;
+	Node0x560832a6f750 [shape=record,label="{xinclude.c:263:}"];
+	Node0x560832a6f750 -> Node0x560832a669c0;
+	Node0x560832a6f7a0 [shape=record,label="{xinclude.c:267:}"];
+	Node0x560832a6f7a0 -> Node0x560832a6e520;
+	Node0x560832a6e520 [shape=record,label="{xinclude.c:268:}"];
+	Node0x560832a6e520 -> Node0x560832a669c0;
+	Node0x560832a669c0 [shape=record,label="{xinclude.c:270:}"];
+}

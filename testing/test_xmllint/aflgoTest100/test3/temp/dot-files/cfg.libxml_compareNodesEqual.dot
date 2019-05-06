@@ -1,0 +1,31 @@
+digraph "CFG for 'libxml_compareNodesEqual' function" {
+	label="CFG for 'libxml_compareNodesEqual' function";
+
+	Node0x55fa6c6f49a0 [shape=record,label="{libxml.c:3784:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c6f49a0:s0 -> Node0x55fa6c6f8f20;
+	Node0x55fa6c6f49a0:s1 -> Node0x55fa6c6f8ed0;
+	Node0x55fa6c6f8ed0 [shape=record,label="{libxml.c:3791:}"];
+	Node0x55fa6c6f8ed0 -> Node0x55fa6c6f49f0;
+	Node0x55fa6c6f8f20 [shape=record,label="{libxml.c:3793:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c6f8f20:s0 -> Node0x55fa6c6f9700;
+	Node0x55fa6c6f8f20:s1 -> Node0x55fa6c6f9750;
+	Node0x55fa6c6f9700 [shape=record,label="{libxml.c:3793:}"];
+	Node0x55fa6c6f9700 -> Node0x55fa6c6f97a0;
+	Node0x55fa6c6f9750 [shape=record,label="{libxml.c:3793:}"];
+	Node0x55fa6c6f9750 -> Node0x55fa6c6f97a0;
+	Node0x55fa6c6f97a0 [shape=record,label="{libxml.c:3793:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c6f97a0:s0 -> Node0x55fa6c6f9d40;
+	Node0x55fa6c6f97a0:s1 -> Node0x55fa6c6f9d90;
+	Node0x55fa6c6f9d40 [shape=record,label="{libxml.c:3794:}"];
+	Node0x55fa6c6f9d40 -> Node0x55fa6c6f9de0;
+	Node0x55fa6c6f9d90 [shape=record,label="{libxml.c:3794:}"];
+	Node0x55fa6c6f9d90 -> Node0x55fa6c6f9de0;
+	Node0x55fa6c6f9de0 [shape=record,label="{libxml.c:3794:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c6f9de0:s0 -> Node0x55fa6c6fa310;
+	Node0x55fa6c6f9de0:s1 -> Node0x55fa6c6fa3b0;
+	Node0x55fa6c6fa310 [shape=record,label="{libxml.c:3796:}"];
+	Node0x55fa6c6fa310 -> Node0x55fa6c6f49f0;
+	Node0x55fa6c6fa3b0 [shape=record,label="{libxml.c:3798:}"];
+	Node0x55fa6c6fa3b0 -> Node0x55fa6c6f49f0;
+	Node0x55fa6c6f49f0 [shape=record,label="{libxml.c:3800:}"];
+}

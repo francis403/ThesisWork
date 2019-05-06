@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlSchemaIsDerivedFromBuiltInType' function" {
+	label="CFG for 'xmlSchemaIsDerivedFromBuiltInType' function";
+
+	Node0x558353a52ab0 [shape=record,label="{xmlschemas.c:13402:|{<s0>T|<s1>F}}"];
+	Node0x558353a52ab0 -> Node0x558353a53430;
+	Node0x558353a52ab0 -> Node0x558353a53480;
+	Node0x558353a53430 [shape=record,label="{xmlschemas.c:13405:}"];
+	Node0x558353a53430 -> Node0x558353a52b00;
+	Node0x558353a53480 [shape=record,label="{xmlschemas.c:13406:|{<s0>T|<s1>F}}"];
+	Node0x558353a53480 -> Node0x558353a53910;
+	Node0x558353a53480 -> Node0x558353a539b0;
+	Node0x558353a539b0 [shape=record,label="{xmlschemas.c:13406:|{<s0>T|<s1>F}}"];
+	Node0x558353a539b0 -> Node0x558353a53910;
+	Node0x558353a539b0 -> Node0x558353a53960;
+	Node0x558353a53910 [shape=record,label="{xmlschemas.c:13407:}"];
+	Node0x558353a53910 -> Node0x558353a52b00;
+	Node0x558353a53960 [shape=record,label="{xmlschemas.c:13408:|{<s0>T|<s1>F}}"];
+	Node0x558353a53960 -> Node0x558353a53fe0;
+	Node0x558353a53960 -> Node0x558353a54030;
+	Node0x558353a53fe0 [shape=record,label="{xmlschemas.c:13409:|{<s0>T|<s1>F}}"];
+	Node0x558353a53fe0 -> Node0x558353a54480;
+	Node0x558353a53fe0 -> Node0x558353a544d0;
+	Node0x558353a54480 [shape=record,label="{xmlschemas.c:13410:}"];
+	Node0x558353a54480 -> Node0x558353a52b00;
+	Node0x558353a544d0 [shape=record,label="{xmlschemas.c:13411:|{<s0>T|<s1>F}}"];
+	Node0x558353a544d0 -> Node0x558353a54a90;
+	Node0x558353a544d0 -> Node0x558353a54b30;
+	Node0x558353a54b30 [shape=record,label="{xmlschemas.c:13412:|{<s0>T|<s1>F}}"];
+	Node0x558353a54b30 -> Node0x558353a54a90;
+	Node0x558353a54b30 -> Node0x558353a54ae0;
+	Node0x558353a54a90 [shape=record,label="{xmlschemas.c:13413:}"];
+	Node0x558353a54a90 -> Node0x558353a52b00;
+	Node0x558353a54ae0 [shape=record,label="{xmlschemas.c:13414:}"];
+	Node0x558353a54ae0 -> Node0x558353a52b00;
+	Node0x558353a54030 [shape=record,label="{xmlschemas.c:13416:}"];
+	Node0x558353a54030 -> Node0x558353a52b00;
+	Node0x558353a52b00 [shape=record,label="{xmlschemas.c:13417:}"];
+}

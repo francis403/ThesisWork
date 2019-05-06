@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlFatalErrMsgStrIntStr' function" {
+	label="CFG for 'xmlFatalErrMsgStrIntStr' function";
+
+	Node0x5557de52e030 [shape=record,label="{parser.c:702:|{<s0>T|<s1>F}}"];
+	Node0x5557de52e030:s0 -> Node0x5557de52f850;
+	Node0x5557de52e030:s1 -> Node0x5557de52f780;
+	Node0x5557de52f850 [shape=record,label="{parser.c:706:|{<s0>T|<s1>F}}"];
+	Node0x5557de52f850:s0 -> Node0x5557de52f7d0;
+	Node0x5557de52f850:s1 -> Node0x5557de52f780;
+	Node0x5557de52f7d0 [shape=record,label="{parser.c:707:|{<s0>T|<s1>F}}"];
+	Node0x5557de52f7d0:s0 -> Node0x5557de52f730;
+	Node0x5557de52f7d0:s1 -> Node0x5557de52f780;
+	Node0x5557de52f730 [shape=record,label="{parser.c:708:}"];
+	Node0x5557de52f730 -> Node0x5557de530ef0;
+	Node0x5557de52f780 [shape=record,label="{parser.c:709:|{<s0>T|<s1>F}}"];
+	Node0x5557de52f780:s0 -> Node0x5557de530180;
+	Node0x5557de52f780:s1 -> Node0x5557de5301d0;
+	Node0x5557de530180 [shape=record,label="{parser.c:710:}"];
+	Node0x5557de530180 -> Node0x5557de5301d0;
+	Node0x5557de5301d0 [shape=record,label="{parser.c:712:|{<s0>T|<s1>F}}"];
+	Node0x5557de5301d0:s0 -> Node0x5557de530ea0;
+	Node0x5557de5301d0:s1 -> Node0x5557de530ef0;
+	Node0x5557de530ea0 [shape=record,label="{parser.c:716:|{<s0>T|<s1>F}}"];
+	Node0x5557de530ea0:s0 -> Node0x5557de5317d0;
+	Node0x5557de530ea0:s1 -> Node0x5557de531820;
+	Node0x5557de5317d0 [shape=record,label="{parser.c:718:}"];
+	Node0x5557de5317d0 -> Node0x5557de531820;
+	Node0x5557de531820 [shape=record,label="{parser.c:719:}"];
+	Node0x5557de531820 -> Node0x5557de530ef0;
+	Node0x5557de530ef0 [shape=record,label="{parser.c:720:}"];
+}

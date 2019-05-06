@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlXPtrNewLocationSetNodes' function" {
+	label="CFG for 'xmlXPtrNewLocationSetNodes' function";
+
+	Node0x55f690443110 [shape=record,label="{xpointer.c:763:|{<s0>T|<s1>F}}"];
+	Node0x55f690443110:s0 -> Node0x55f69044a150;
+	Node0x55f690443110:s1 -> Node0x55f69044a1a0;
+	Node0x55f69044a150 [shape=record,label="{xpointer.c:768:}"];
+	Node0x55f69044a150 -> Node0x55f69043cc60;
+	Node0x55f69044a1a0 [shape=record,label="{xpointer.c:771:|{<s0>T|<s1>F}}"];
+	Node0x55f69044a1a0:s0 -> Node0x55f69044ac00;
+	Node0x55f69044a1a0:s1 -> Node0x55f69044aca0;
+	Node0x55f69044ac00 [shape=record,label="{xpointer.c:774:}"];
+	Node0x55f69044ac00 -> Node0x55f69044ac50;
+	Node0x55f69044aca0 [shape=record,label="{xpointer.c:776:}"];
+	Node0x55f69044aca0 -> Node0x55f69044ac50;
+	Node0x55f69044ac50 [shape=record,label="{xpointer.c:777:}"];
+	Node0x55f69044ac50 -> Node0x55f69043cc60;
+	Node0x55f69043cc60 [shape=record,label="{xpointer.c:778:}"];
+}

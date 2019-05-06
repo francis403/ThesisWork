@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchemaNewStringValue' function" {
+	label="CFG for 'xmlSchemaNewStringValue' function";
+
+	Node0x557d8d949c80 [shape=record,label="{xmlschemastypes.c:950:|{<s0>T|<s1>F}}"];
+	Node0x557d8d949c80:s0 -> Node0x557d8d94bfa0;
+	Node0x557d8d949c80:s1 -> Node0x557d8d94bff0;
+	Node0x557d8d94bfa0 [shape=record,label="{xmlschemastypes.c:956:}"];
+	Node0x557d8d94bfa0 -> Node0x557d8d94afa0;
+	Node0x557d8d94bff0 [shape=record,label="{xmlschemastypes.c:957:|{<s0>T|<s1>F}}"];
+	Node0x557d8d94bff0:s0 -> Node0x557d8d94c750;
+	Node0x557d8d94bff0:s1 -> Node0x557d8d94c7a0;
+	Node0x557d8d94c750 [shape=record,label="{xmlschemastypes.c:959:}"];
+	Node0x557d8d94c750 -> Node0x557d8d94afa0;
+	Node0x557d8d94c7a0 [shape=record,label="{xmlschemastypes.c:961:}"];
+	Node0x557d8d94c7a0 -> Node0x557d8d94afa0;
+	Node0x557d8d94afa0 [shape=record,label="{xmlschemastypes.c:965:}"];
+}

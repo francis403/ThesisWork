@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlIsChar' function" {
+	label="CFG for 'libxml_xmlIsChar' function";
+
+	Node0x55d6cb9fced0 [shape=record,label="{libxml2-py.c:3348:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb9fced0:s0 -> Node0x55d6cba00830;
+	Node0x55d6cb9fced0:s1 -> Node0x55d6cba007e0;
+	Node0x55d6cba007e0 [shape=record,label="{libxml2-py.c:3354:}"];
+	Node0x55d6cba007e0 -> Node0x55d6cb9fd1d0;
+	Node0x55d6cba00830 [shape=record,label="{libxml2-py.c:3356:}"];
+	Node0x55d6cba00830 -> Node0x55d6cb9fd1d0;
+	Node0x55d6cb9fd1d0 [shape=record,label="{libxml2-py.c:3359:}"];
+}

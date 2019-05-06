@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlRelaxNGCleanupDoc' function" {
+	label="CFG for 'xmlRelaxNGCleanupDoc' function";
+
+	Node0x559d0bd81980 [shape=record,label="{relaxng.c:7471:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd81980:s0 -> Node0x559d0bd82800;
+	Node0x559d0bd81980:s1 -> Node0x559d0bd82850;
+	Node0x559d0bd82800 [shape=record,label="{relaxng.c:7480:}"];
+	Node0x559d0bd82800 -> Node0x559d0bd819d0;
+	Node0x559d0bd82850 [shape=record,label="{relaxng.c:7484:}"];
+	Node0x559d0bd82850 -> Node0x559d0bd819d0;
+	Node0x559d0bd819d0 [shape=record,label="{relaxng.c:7486:}"];
+}

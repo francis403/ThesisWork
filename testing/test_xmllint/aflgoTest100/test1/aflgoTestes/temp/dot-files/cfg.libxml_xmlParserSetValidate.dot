@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParserSetValidate' function" {
+	label="CFG for 'libxml_xmlParserSetValidate' function";
+
+	Node0x55f931195300 [shape=record,label="{libxml2-py.c:5696:|{<s0>T|<s1>F}}"];
+	Node0x55f931195300:s0 -> Node0x55f9311966e0;
+	Node0x55f931195300:s1 -> Node0x55f931196690;
+	Node0x55f931196690 [shape=record,label="{libxml2-py.c:5702:}"];
+	Node0x55f931196690 -> Node0x55f9311954f0;
+	Node0x55f9311966e0 [shape=record,label="{libxml2-py.c:5703:|{<s0>T|<s1>F}}"];
+	Node0x55f9311966e0:s0 -> Node0x55f931196f40;
+	Node0x55f9311966e0:s1 -> Node0x55f931196f90;
+	Node0x55f931196f40 [shape=record,label="{libxml2-py.c:5703:}"];
+	Node0x55f931196f40 -> Node0x55f931196fe0;
+	Node0x55f931196f90 [shape=record,label="{libxml2-py.c:5703:}"];
+	Node0x55f931196f90 -> Node0x55f931196fe0;
+	Node0x55f931196fe0 [shape=record,label="{libxml2-py.c:5703:}"];
+	Node0x55f931196fe0 -> Node0x55f9311954f0;
+	Node0x55f9311954f0 [shape=record,label="{libxml2-py.c:5708:}"];
+}

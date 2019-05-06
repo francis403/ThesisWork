@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlXPtrNewRangeNodes' function" {
+	label="CFG for 'xmlXPtrNewRangeNodes' function";
+
+	Node0x55f690414510 [shape=record,label="{xpointer.c:488:|{<s0>T|<s1>F}}"];
+	Node0x55f690414510:s0 -> Node0x55f690415570;
+	Node0x55f690414510:s1 -> Node0x55f6904155c0;
+	Node0x55f690415570 [shape=record,label="{xpointer.c:492:}"];
+	Node0x55f690415570 -> Node0x55f690414990;
+	Node0x55f6904155c0 [shape=record,label="{xpointer.c:493:|{<s0>T|<s1>F}}"];
+	Node0x55f6904155c0:s0 -> Node0x55f69040d900;
+	Node0x55f6904155c0:s1 -> Node0x55f690415ab0;
+	Node0x55f69040d900 [shape=record,label="{xpointer.c:494:}"];
+	Node0x55f69040d900 -> Node0x55f690414990;
+	Node0x55f690415ab0 [shape=record,label="{xpointer.c:496:}"];
+	Node0x55f690415ab0 -> Node0x55f690414990;
+	Node0x55f690414990 [shape=record,label="{xpointer.c:499:}"];
+}

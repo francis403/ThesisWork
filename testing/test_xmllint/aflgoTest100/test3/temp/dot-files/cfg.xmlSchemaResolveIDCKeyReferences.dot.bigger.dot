@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlSchemaResolveIDCKeyReferences' function" {
+	label="CFG for 'xmlSchemaResolveIDCKeyReferences' function";
+
+	Node0x5583538ff290 [shape=record,label="{xmlschemas.c:20403:|{<s0>T|<s1>F}}"];
+	Node0x5583538ff290:s0 -> Node0x5583538ff5d0;
+	Node0x5583538ff290:s1 -> Node0x5583538ff620;
+	Node0x5583538ff5d0 [shape=record,label="{xmlschemas.c:20407:}"];
+	Node0x5583538ff5d0 -> Node0x5583538ff2e0;
+	Node0x5583538ff620 [shape=record,label="{xmlschemas.c:20408:|{<s0>T|<s1>F}}"];
+	Node0x5583538ff620:s0 -> Node0x558353906430;
+	Node0x5583538ff620:s1 -> Node0x558353906480;
+	Node0x558353906430 [shape=record,label="{xmlschemas.c:20410:|{<s0>T|<s1>F}}"];
+	Node0x558353906430:s0 -> Node0x558353907bf0;
+	Node0x558353906430:s1 -> Node0x558353907c90;
+	Node0x558353907bf0 [shape=record,label="{xmlschemas.c:20417:}"];
+	Node0x558353907bf0 -> Node0x5583538ff2e0;
+	Node0x558353907c90 [shape=record,label="{xmlschemas.c:20424:|{<s0>T|<s1>F}}"];
+	Node0x558353907c90:s0 -> Node0x558353909100;
+	Node0x558353907c90:s1 -> Node0x5583539091a0;
+	Node0x558353909100 [shape=record,label="{xmlschemas.c:20428:}"];
+	Node0x558353909100 -> Node0x5583538ff2e0;
+	Node0x5583539091a0 [shape=record,label="{xmlschemas.c:20436:|{<s0>T|<s1>F}}"];
+	Node0x5583539091a0:s0 -> Node0x55835390a490;
+	Node0x5583539091a0:s1 -> Node0x55835390a4e0;
+	Node0x55835390a490 [shape=record,label="{xmlschemas.c:20438:|{<s0>T|<s1>F}}"];
+	Node0x55835390a490:s0 -> Node0x55835390c330;
+	Node0x55835390a490:s1 -> Node0x55835390c380;
+	Node0x55835390c330 [shape=record,label="{xmlschemas.c:20456:}"];
+	Node0x55835390c330 -> Node0x55835390c380;
+	Node0x55835390c380 [shape=record,label="{xmlschemas.c:20457:}"];
+	Node0x55835390c380 -> Node0x5583538ff2e0;
+	Node0x55835390a4e0 [shape=record,label="{%116}"];
+	Node0x55835390a4e0 -> Node0x558353909150;
+	Node0x558353909150 [shape=record,label="{%117}"];
+	Node0x558353909150 -> Node0x558353907c40;
+	Node0x558353907c40 [shape=record,label="{xmlschemas.c:20460:}"];
+	Node0x558353907c40 -> Node0x558353906480;
+	Node0x558353906480 [shape=record,label="{xmlschemas.c:20461:}"];
+	Node0x558353906480 -> Node0x5583538ff2e0;
+	Node0x5583538ff2e0 [shape=record,label="{xmlschemas.c:20462:}"];
+}

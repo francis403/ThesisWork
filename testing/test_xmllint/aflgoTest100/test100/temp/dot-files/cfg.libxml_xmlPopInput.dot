@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlPopInput' function" {
+	label="CFG for 'libxml_xmlPopInput' function";
+
+	Node0x55d6cbc663c0 [shape=record,label="{libxml2-py.c:5739:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbc663c0:s0 -> Node0x55d6cbc6a5d0;
+	Node0x55d6cbc663c0:s1 -> Node0x55d6cbc6a580;
+	Node0x55d6cbc6a580 [shape=record,label="{libxml2-py.c:5746:}"];
+	Node0x55d6cbc6a580 -> Node0x55d6cbc666c0;
+	Node0x55d6cbc6a5d0 [shape=record,label="{libxml2-py.c:5747:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbc6a5d0:s0 -> Node0x55d6cbc6adb0;
+	Node0x55d6cbc6a5d0:s1 -> Node0x55d6cbc6ae00;
+	Node0x55d6cbc6adb0 [shape=record,label="{libxml2-py.c:5747:}"];
+	Node0x55d6cbc6adb0 -> Node0x55d6cbc6ae50;
+	Node0x55d6cbc6ae00 [shape=record,label="{libxml2-py.c:5747:}"];
+	Node0x55d6cbc6ae00 -> Node0x55d6cbc6ae50;
+	Node0x55d6cbc6ae50 [shape=record,label="{libxml2-py.c:5747:}"];
+	Node0x55d6cbc6ae50 -> Node0x55d6cbc666c0;
+	Node0x55d6cbc666c0 [shape=record,label="{libxml2-py.c:5752:}"];
+}

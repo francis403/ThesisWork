@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlGetEncodingAlias' function" {
+	label="CFG for 'xmlGetEncodingAlias' function";
+
+	Node0x5557bd87b980 [shape=record,label="{encoding.c:1019:|{<s0>T|<s1>F}}"];
+	Node0x5557bd87b980:s0 -> Node0x5557bd880980;
+	Node0x5557bd87b980:s1 -> Node0x5557bd8809d0;
+	Node0x5557bd880980 [shape=record,label="{encoding.c:1024:}"];
+	Node0x5557bd880980 -> Node0x5557bd87f890;
+	Node0x5557bd8809d0 [shape=record,label="{encoding.c:1026:|{<s0>T|<s1>F}}"];
+	Node0x5557bd8809d0:s0 -> Node0x5557bd880e30;
+	Node0x5557bd8809d0:s1 -> Node0x5557bd880e80;
+	Node0x5557bd880e30 [shape=record,label="{encoding.c:1027:}"];
+	Node0x5557bd880e30 -> Node0x5557bd87f890;
+	Node0x5557bd880e80 [shape=record,label="{encoding.c:1029:}"];
+	Node0x5557bd880e80 -> Node0x5557bd881fe0;
+	Node0x5557bd881fe0 [shape=record,label="{encoding.c:1029:|{<s0>T|<s1>F}}"];
+	Node0x5557bd881fe0:s0 -> Node0x5557bd8822c0;
+	Node0x5557bd881fe0:s1 -> Node0x5557bd881e80;
+	Node0x5557bd8822c0 [shape=record,label="{encoding.c:1030:|{<s0>T|<s1>F}}"];
+	Node0x5557bd8822c0:s0 -> Node0x5557bd8832b0;
+	Node0x5557bd8822c0:s1 -> Node0x5557bd883300;
+	Node0x5557bd8832b0 [shape=record,label="{encoding.c:1031:}"];
+	Node0x5557bd8832b0 -> Node0x5557bd881e80;
+	Node0x5557bd883300 [shape=record,label="{encoding.c:1032:}"];
+	Node0x5557bd883300 -> Node0x5557bd882230;
+	Node0x5557bd882230 [shape=record,label="{encoding.c:1029:}"];
+	Node0x5557bd882230 -> Node0x5557bd881fe0;
+	Node0x5557bd881e80 [shape=record,label="{encoding.c:1033:}"];
+	Node0x5557bd881e80 -> Node0x5557bd883e80;
+	Node0x5557bd883e80 [shape=record,label="{encoding.c:1038:|{<s0>T|<s1>F}}"];
+	Node0x5557bd883e80:s0 -> Node0x5557bd884160;
+	Node0x5557bd883e80:s1 -> Node0x5557bd883ce0;
+	Node0x5557bd884160 [shape=record,label="{encoding.c:1039:|{<s0>T|<s1>F}}"];
+	Node0x5557bd884160:s0 -> Node0x5557bd884550;
+	Node0x5557bd884160:s1 -> Node0x5557bd884500;
+	Node0x5557bd884500 [shape=record,label="{encoding.c:1040:}"];
+	Node0x5557bd884500 -> Node0x5557bd87f890;
+	Node0x5557bd884550 [shape=record,label="{encoding.c:1042:}"];
+	Node0x5557bd884550 -> Node0x5557bd8840d0;
+	Node0x5557bd8840d0 [shape=record,label="{encoding.c:1038:}"];
+	Node0x5557bd8840d0 -> Node0x5557bd883e80;
+	Node0x5557bd883ce0 [shape=record,label="{encoding.c:1043:}"];
+	Node0x5557bd883ce0 -> Node0x5557bd87f890;
+	Node0x5557bd87f890 [shape=record,label="{encoding.c:1044:}"];
+}

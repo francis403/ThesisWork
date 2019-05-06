@@ -1,0 +1,21 @@
+digraph "CFG for 'libxml_xpathCallbacksInitialize' function" {
+	label="CFG for 'libxml_xpathCallbacksInitialize' function";
+
+	Node0x55ea3755bde0 [shape=record,label="{libxml.c:2309:|{<s0>T|<s1>F}}"];
+	Node0x55ea3755bde0:s0 -> Node0x55ea3755a170;
+	Node0x55ea3755bde0:s1 -> Node0x55ea37558590;
+	Node0x55ea3755a170 [shape=record,label="{libxml.c:2312:}"];
+	Node0x55ea3755a170 -> Node0x55ea3755d5c0;
+	Node0x55ea37558590 [shape=record,label="{libxml.c:2317:}"];
+	Node0x55ea37558590 -> Node0x55ea37503040;
+	Node0x55ea37503040 [shape=record,label="{libxml.c:2320:|{<s0>T|<s1>F}}"];
+	Node0x55ea37503040:s0 -> Node0x55ea37562a70;
+	Node0x55ea37503040:s1 -> Node0x55ea37502f60;
+	Node0x55ea37562a70 [shape=record,label="{libxml.c:2321:}"];
+	Node0x55ea37562a70 -> Node0x55ea375629e0;
+	Node0x55ea375629e0 [shape=record,label="{libxml.c:2320:}"];
+	Node0x55ea375629e0 -> Node0x55ea37503040;
+	Node0x55ea37502f60 [shape=record,label="{libxml.c:2326:}"];
+	Node0x55ea37502f60 -> Node0x55ea3755d5c0;
+	Node0x55ea3755d5c0 [shape=record,label="{libxml.c:2327:}"];
+}

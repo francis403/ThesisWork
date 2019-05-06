@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSAX2IsStandalone' function" {
+	label="CFG for 'xmlSAX2IsStandalone' function";
+
+	Node0x55f4ae624eb0 [shape=record,label="{SAX2.c:305:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae624eb0 -> Node0x55f4ae62bba0;
+	Node0x55f4ae624eb0 -> Node0x55f4ae62bc40;
+	Node0x55f4ae62bc40 [shape=record,label="{SAX2.c:308:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae62bc40 -> Node0x55f4ae62bba0;
+	Node0x55f4ae62bc40 -> Node0x55f4ae62bbf0;
+	Node0x55f4ae62bba0 [shape=record,label="{SAX2.c:308:}"];
+	Node0x55f4ae62bba0 -> Node0x55f4ae62b0c0;
+	Node0x55f4ae62bbf0 [shape=record,label="{SAX2.c:309:}"];
+	Node0x55f4ae62bbf0 -> Node0x55f4ae62b0c0;
+	Node0x55f4ae62b0c0 [shape=record,label="{SAX2.c:310:}"];
+}

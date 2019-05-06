@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlDocGetRootElement' function" {
+	label="CFG for 'xmlDocGetRootElement' function";
+
+	Node0x55ad0bc549b0 [shape=record,label="{tree.c:4906:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc549b0:s0 -> Node0x55ad0bc59780;
+	Node0x55ad0bc549b0:s1 -> Node0x55ad0bc597d0;
+	Node0x55ad0bc59780 [shape=record,label="{tree.c:4909:}"];
+	Node0x55ad0bc59780 -> Node0x55ad0bc58fa0;
+	Node0x55ad0bc597d0 [shape=record,label="{tree.c:4910:}"];
+	Node0x55ad0bc597d0 -> Node0x55ad0bc59e00;
+	Node0x55ad0bc59e00 [shape=record,label="{tree.c:4911:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc59e00:s0 -> Node0x55ad0bc5a1c0;
+	Node0x55ad0bc59e00:s1 -> Node0x55ad0bc59fe0;
+	Node0x55ad0bc5a1c0 [shape=record,label="{tree.c:4912:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc5a1c0:s0 -> Node0x55ad0bc5a370;
+	Node0x55ad0bc5a1c0:s1 -> Node0x55ad0bc5a3c0;
+	Node0x55ad0bc5a370 [shape=record,label="{tree.c:4913:}"];
+	Node0x55ad0bc5a370 -> Node0x55ad0bc58fa0;
+	Node0x55ad0bc5a3c0 [shape=record,label="{tree.c:4914:}"];
+	Node0x55ad0bc5a3c0 -> Node0x55ad0bc59e00;
+	Node0x55ad0bc59fe0 [shape=record,label="{tree.c:4916:}"];
+	Node0x55ad0bc59fe0 -> Node0x55ad0bc58fa0;
+	Node0x55ad0bc58fa0 [shape=record,label="{tree.c:4917:}"];
+}

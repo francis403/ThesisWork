@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlCleanupEncodingAliases' function" {
+	label="CFG for 'xmlCleanupEncodingAliases' function";
+
+	Node0x5557bd878fc0 [shape=record,label="{encoding.c:993:|{<s0>T|<s1>F}}"];
+	Node0x5557bd878fc0 -> Node0x5557bd8789f0;
+	Node0x5557bd878fc0 -> Node0x5557bd878e70;
+	Node0x5557bd8789f0 [shape=record,label="{encoding.c:996:}"];
+	Node0x5557bd8789f0 -> Node0x5557bd878ce0;
+	Node0x5557bd878e70 [shape=record,label="{encoding.c:998:}"];
+	Node0x5557bd878e70 -> Node0x5557bd87c2d0;
+	Node0x5557bd87c2d0 [shape=record,label="{encoding.c:998:|{<s0>T|<s1>F}}"];
+	Node0x5557bd87c2d0 -> Node0x5557bd87cab0;
+	Node0x5557bd87c2d0 -> Node0x5557bd87c280;
+	Node0x5557bd87cab0 [shape=record,label="{encoding.c:999:|{<s0>T|<s1>F}}"];
+	Node0x5557bd87cab0 -> Node0x5557bd87ce70;
+	Node0x5557bd87cab0 -> Node0x5557bd87cec0;
+	Node0x5557bd87ce70 [shape=record,label="{encoding.c:1000:}"];
+	Node0x5557bd87ce70 -> Node0x5557bd87cec0;
+	Node0x5557bd87cec0 [shape=record,label="{encoding.c:1001:|{<s0>T|<s1>F}}"];
+	Node0x5557bd87cec0 -> Node0x5557bd87d8c0;
+	Node0x5557bd87cec0 -> Node0x5557bd87d910;
+	Node0x5557bd87d8c0 [shape=record,label="{encoding.c:1002:}"];
+	Node0x5557bd87d8c0 -> Node0x5557bd87d910;
+	Node0x5557bd87d910 [shape=record,label="{encoding.c:1003:}"];
+	Node0x5557bd87d910 -> Node0x5557bd87ca20;
+	Node0x5557bd87ca20 [shape=record,label="{encoding.c:998:}"];
+	Node0x5557bd87ca20 -> Node0x5557bd87c2d0;
+	Node0x5557bd87c280 [shape=record,label="{encoding.c:1004:}"];
+	Node0x5557bd87c280 -> Node0x5557bd878ce0;
+	Node0x5557bd878ce0 [shape=record,label="{encoding.c:1008:}"];
+}

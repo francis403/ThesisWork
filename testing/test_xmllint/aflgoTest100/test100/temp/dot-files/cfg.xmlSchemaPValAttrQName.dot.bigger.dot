@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaPValAttrQName' function" {
+	label="CFG for 'xmlSchemaPValAttrQName' function";
+
+	Node0x558353663730 [shape=record,label="{xmlschemas.c:5942:|{<s0>T|<s1>F}}"];
+	Node0x558353663730:s0 -> Node0x558353665590;
+	Node0x558353663730:s1 -> Node0x5583536655e0;
+	Node0x558353665590 [shape=record,label="{xmlschemas.c:5954:}"];
+	Node0x558353665590 -> Node0x558353663780;
+	Node0x5583536655e0 [shape=record,label="{xmlschemas.c:5958:}"];
+	Node0x5583536655e0 -> Node0x558353663780;
+	Node0x558353663780 [shape=record,label="{xmlschemas.c:5960:}"];
+}

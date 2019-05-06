@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlTextReaderNormalization' function" {
+	label="CFG for 'xmlTextReaderNormalization' function";
+
+	Node0x55e449262b40 [shape=record,label="{xmlreader.c:3780:|{<s0>T|<s1>F}}"];
+	Node0x55e449262b40 -> Node0x55e44933d900;
+	Node0x55e449262b40 -> Node0x55e44933d950;
+	Node0x55e44933d900 [shape=record,label="{xmlreader.c:3782:}"];
+	Node0x55e44933d900 -> Node0x55e44933d0e0;
+	Node0x55e44933d950 [shape=record,label="{xmlreader.c:3783:}"];
+	Node0x55e44933d950 -> Node0x55e44933d0e0;
+	Node0x55e44933d0e0 [shape=record,label="{xmlreader.c:3784:}"];
+}

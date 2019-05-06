@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlPatPushState' function" {
+	label="CFG for 'xmlPatPushState' function";
+
+	Node0x55aa3b1520d0 [shape=record,label="{pattern.c:464:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b1520d0 -> Node0x55aa3b175be0;
+	Node0x55aa3b1520d0 -> Node0x55aa3b175cd0;
+	Node0x55aa3b175cd0 [shape=record,label="{pattern.c:465:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b175cd0 -> Node0x55aa3b175be0;
+	Node0x55aa3b175cd0 -> Node0x55aa3b175c80;
+	Node0x55aa3b175be0 [shape=record,label="{pattern.c:466:}"];
+	Node0x55aa3b175be0 -> Node0x55aa3b175c30;
+	Node0x55aa3b175c80 [shape=record,label="{pattern.c:470:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b175c80 -> Node0x55aa3b176c40;
+	Node0x55aa3b175c80 -> Node0x55aa3b176c90;
+	Node0x55aa3b176c40 [shape=record,label="{pattern.c:471:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b176c40 -> Node0x55aa3b177db0;
+	Node0x55aa3b176c40 -> Node0x55aa3b177e00;
+	Node0x55aa3b177db0 [shape=record,label="{pattern.c:476:}"];
+	Node0x55aa3b177db0 -> Node0x55aa3b152120;
+	Node0x55aa3b177e00 [shape=record,label="{pattern.c:477:}"];
+	Node0x55aa3b177e00 -> Node0x55aa3b176c90;
+	Node0x55aa3b176c90 [shape=record,label="{%54}"];
+	Node0x55aa3b176c90 -> Node0x55aa3b175c30;
+	Node0x55aa3b175c30 [shape=record,label="{pattern.c:480:}"];
+	Node0x55aa3b175c30 -> Node0x55aa3b152120;
+	Node0x55aa3b152120 [shape=record,label="{pattern.c:486:}"];
+}

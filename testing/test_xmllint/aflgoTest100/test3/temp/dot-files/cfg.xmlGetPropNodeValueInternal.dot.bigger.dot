@@ -1,0 +1,47 @@
+digraph "CFG for 'xmlGetPropNodeValueInternal' function" {
+	label="CFG for 'xmlGetPropNodeValueInternal' function";
+
+	Node0x5627b486aee0 [shape=record,label="{tree.c:6595:|{<s0>T|<s1>F}}"];
+	Node0x5627b486aee0:s0 -> Node0x5627b4871a20;
+	Node0x5627b486aee0:s1 -> Node0x5627b4871a70;
+	Node0x5627b4871a20 [shape=record,label="{tree.c:6598:}"];
+	Node0x5627b4871a20 -> Node0x5627b486af30;
+	Node0x5627b4871a70 [shape=record,label="{tree.c:6599:|{<s0>T|<s1>F}}"];
+	Node0x5627b4871a70:s0 -> Node0x5627b4872700;
+	Node0x5627b4871a70:s1 -> Node0x5627b48727a0;
+	Node0x5627b4872700 [shape=record,label="{tree.c:6604:|{<s0>T|<s1>F}}"];
+	Node0x5627b4872700:s0 -> Node0x5627b4872bf0;
+	Node0x5627b4872700:s1 -> Node0x5627b4872c40;
+	Node0x5627b4872bf0 [shape=record,label="{tree.c:6605:|{<s0>T|<s1>F}}"];
+	Node0x5627b4872bf0:s0 -> Node0x5627b4873120;
+	Node0x5627b4872bf0:s1 -> Node0x5627b48730d0;
+	Node0x5627b4873120 [shape=record,label="{tree.c:6606:|{<s0>T|<s1>F}}"];
+	Node0x5627b4873120:s0 -> Node0x5627b4873030;
+	Node0x5627b4873120:s1 -> Node0x5627b48735a0;
+	Node0x5627b48735a0 [shape=record,label="{tree.c:6607:|{<s0>T|<s1>F}}"];
+	Node0x5627b48735a0:s0 -> Node0x5627b4873030;
+	Node0x5627b48735a0:s1 -> Node0x5627b48730d0;
+	Node0x5627b4873030 [shape=record,label="{tree.c:6612:}"];
+	Node0x5627b4873030 -> Node0x5627b486af30;
+	Node0x5627b48730d0 [shape=record,label="{tree.c:6614:|{<s0>T|<s1>F}}"];
+	Node0x5627b48730d0:s0 -> Node0x5627b4874cf0;
+	Node0x5627b48730d0:s1 -> Node0x5627b4874d40;
+	Node0x5627b4874cf0 [shape=record,label="{tree.c:6618:}"];
+	Node0x5627b4874cf0 -> Node0x5627b486af30;
+	Node0x5627b4874d40 [shape=record,label="{%48}"];
+	Node0x5627b4874d40 -> Node0x5627b4873080;
+	Node0x5627b4873080 [shape=record,label="{tree.c:6620:}"];
+	Node0x5627b4873080 -> Node0x5627b4872c40;
+	Node0x5627b4872c40 [shape=record,label="{tree.c:6621:}"];
+	Node0x5627b4872c40 -> Node0x5627b486af30;
+	Node0x5627b48727a0 [shape=record,label="{tree.c:6622:|{<s0>T|<s1>F}}"];
+	Node0x5627b48727a0:s0 -> Node0x5627b4875700;
+	Node0x5627b48727a0:s1 -> Node0x5627b4875750;
+	Node0x5627b4875700 [shape=record,label="{tree.c:6623:}"];
+	Node0x5627b4875700 -> Node0x5627b486af30;
+	Node0x5627b4875750 [shape=record,label="{%59}"];
+	Node0x5627b4875750 -> Node0x5627b4872750;
+	Node0x5627b4872750 [shape=record,label="{tree.c:6625:}"];
+	Node0x5627b4872750 -> Node0x5627b486af30;
+	Node0x5627b486af30 [shape=record,label="{tree.c:6626:}"];
+}

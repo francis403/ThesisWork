@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlFreeCatalogHashEntryList' function" {
+	label="CFG for 'xmlFreeCatalogHashEntryList' function";
+
+	Node0x5650cc91dd60 [shape=record,label="{catalog.c:384:|{<s0>T|<s1>F}}"];
+	Node0x5650cc91dd60 -> Node0x5650cca8f8e0;
+	Node0x5650cc91dd60 -> Node0x5650cca8f930;
+	Node0x5650cca8f8e0 [shape=record,label="{catalog.c:390:}"];
+	Node0x5650cca8f8e0 -> Node0x5650cca8e760;
+	Node0x5650cca8f930 [shape=record,label="{catalog.c:392:}"];
+	Node0x5650cca8f930 -> Node0x5650cca8feb0;
+	Node0x5650cca8feb0 [shape=record,label="{catalog.c:393:|{<s0>T|<s1>F}}"];
+	Node0x5650cca8feb0 -> Node0x5650cca90270;
+	Node0x5650cca8feb0 -> Node0x5650cca90090;
+	Node0x5650cca90270 [shape=record,label="{catalog.c:394:}"];
+	Node0x5650cca90270 -> Node0x5650cca8feb0;
+	Node0x5650cca90090 [shape=record,label="{catalog.c:400:}"];
+	Node0x5650cca90090 -> Node0x5650cca8e760;
+	Node0x5650cca8e760 [shape=record,label="{catalog.c:402:}"];
+}

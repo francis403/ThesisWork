@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlTextReaderGenericError' function" {
+	label="CFG for 'xmlTextReaderGenericError' function";
+
+	Node0x55e44963bdd0 [shape=record,label="{xmlreader.c:4841:|{<s0>T|<s1>F}}"];
+	Node0x55e44963bdd0 -> Node0x55e44963e4b0;
+	Node0x55e44963bdd0 -> Node0x55e44963e500;
+	Node0x55e44963e4b0 [shape=record,label="{xmlreader.c:4849:|{<s0>T|<s1>F}}"];
+	Node0x55e44963e4b0 -> Node0x55e44963e8c0;
+	Node0x55e44963e4b0 -> Node0x55e44963e910;
+	Node0x55e44963e8c0 [shape=record,label="{xmlreader.c:4850:}"];
+	Node0x55e44963e8c0 -> Node0x55e44963e910;
+	Node0x55e44963e910 [shape=record,label="{xmlreader.c:4852:}"];
+	Node0x55e44963e910 -> Node0x55e44963e500;
+	Node0x55e44963e500 [shape=record,label="{xmlreader.c:4854:}"];
+}

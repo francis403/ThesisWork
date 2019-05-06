@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlNanoHTTPSave' function" {
+	label="CFG for 'xmlNanoHTTPSave' function";
+
+	Node0x5565208d6080 [shape=record,label="{nanohttp.c:1681:|{<s0>T|<s1>F}}"];
+	Node0x5565208d6080:s0 -> Node0x556520a66e30;
+	Node0x5565208d6080:s1 -> Node0x556520a66ed0;
+	Node0x556520a66ed0 [shape=record,label="{nanohttp.c:1687:|{<s0>T|<s1>F}}"];
+	Node0x556520a66ed0:s0 -> Node0x556520a66e30;
+	Node0x556520a66ed0:s1 -> Node0x556520a66e80;
+	Node0x556520a66e30 [shape=record,label="{nanohttp.c:1687:}"];
+	Node0x556520a66e30 -> Node0x5565208d6410;
+	Node0x556520a66e80 [shape=record,label="{nanohttp.c:1689:|{<s0>T|<s1>F}}"];
+	Node0x556520a66e80:s0 -> Node0x556520a67660;
+	Node0x556520a66e80:s1 -> Node0x556520a675c0;
+	Node0x556520a675c0 [shape=record,label="{nanohttp.c:1690:}"];
+	Node0x556520a675c0 -> Node0x556520a67610;
+	Node0x556520a67660 [shape=record,label="{nanohttp.c:1692:|{<s0>T|<s1>F}}"];
+	Node0x556520a67660:s0 -> Node0x556520a67e90;
+	Node0x556520a67660:s1 -> Node0x556520a67ee0;
+	Node0x556520a67e90 [shape=record,label="{nanohttp.c:1694:}"];
+	Node0x556520a67e90 -> Node0x5565208d6410;
+	Node0x556520a67ee0 [shape=record,label="{%21}"];
+	Node0x556520a67ee0 -> Node0x556520a67610;
+	Node0x556520a67610 [shape=record,label="{nanohttp.c:1699:|{<s0>T|<s1>F}}"];
+	Node0x556520a67610:s0 -> Node0x556520a68920;
+	Node0x556520a67610:s1 -> Node0x556520a68970;
+	Node0x556520a68920 [shape=record,label="{nanohttp.c:1701:|{<s0>T|<s1>F}}"];
+	Node0x556520a68920:s0 -> Node0x556520a69540;
+	Node0x556520a68920:s1 -> Node0x556520a69590;
+	Node0x556520a69540 [shape=record,label="{nanohttp.c:1702:}"];
+	Node0x556520a69540 -> Node0x556520a69590;
+	Node0x556520a69590 [shape=record,label="{nanohttp.c:1704:}"];
+	Node0x556520a69590 -> Node0x556520a68970;
+	Node0x556520a68970 [shape=record,label="{nanohttp.c:1706:}"];
+	Node0x556520a68970 -> Node0x5565208d6410;
+	Node0x5565208d6410 [shape=record,label="{nanohttp.c:1709:}"];
+}

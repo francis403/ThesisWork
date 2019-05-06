@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlIsCombining' function" {
+	label="CFG for 'libxml_xmlIsCombining' function";
+
+	Node0x55d6cb9ffb90 [shape=record,label="{libxml2-py.c:3362:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb9ffb90:s0 -> Node0x55d6cba02ae0;
+	Node0x55d6cb9ffb90:s1 -> Node0x55d6cba02a90;
+	Node0x55d6cba02a90 [shape=record,label="{libxml2-py.c:3368:}"];
+	Node0x55d6cba02a90 -> Node0x55d6cb9ffe90;
+	Node0x55d6cba02ae0 [shape=record,label="{libxml2-py.c:3370:}"];
+	Node0x55d6cba02ae0 -> Node0x55d6cb9ffe90;
+	Node0x55d6cb9ffe90 [shape=record,label="{libxml2-py.c:3373:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaParseInclude' function" {
+	label="CFG for 'xmlSchemaParseInclude' function";
+
+	Node0x558353418290 [shape=record,label="{xmlschemas.c:11214:|{<s0>T|<s1>F}}"];
+	Node0x558353418290:s0 -> Node0x558353419d30;
+	Node0x558353418290:s1 -> Node0x558353419d80;
+	Node0x558353419d30 [shape=record,label="{xmlschemas.c:11222:}"];
+	Node0x558353419d30 -> Node0x5583534182e0;
+	Node0x558353419d80 [shape=record,label="{xmlschemas.c:11223:}"];
+	Node0x558353419d80 -> Node0x5583534182e0;
+	Node0x5583534182e0 [shape=record,label="{xmlschemas.c:11224:}"];
+}

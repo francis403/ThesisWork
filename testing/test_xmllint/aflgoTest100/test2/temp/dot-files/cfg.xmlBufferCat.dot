@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlBufferCat' function" {
+	label="CFG for 'xmlBufferCat' function";
+
+	Node0x5627b46f87b0 [shape=record,label="{tree.c:7617:|{<s0>T|<s1>F}}"];
+	Node0x5627b46f87b0 -> Node0x5627b46fd6a0;
+	Node0x5627b46f87b0 -> Node0x5627b46fd6f0;
+	Node0x5627b46fd6a0 [shape=record,label="{tree.c:7619:}"];
+	Node0x5627b46fd6a0 -> Node0x5627b46fcd10;
+	Node0x5627b46fd6f0 [shape=record,label="{tree.c:7620:|{<s0>T|<s1>F}}"];
+	Node0x5627b46fd6f0 -> Node0x5627b46fdbb0;
+	Node0x5627b46fd6f0 -> Node0x5627b46fdc00;
+	Node0x5627b46fdbb0 [shape=record,label="{tree.c:7620:}"];
+	Node0x5627b46fdbb0 -> Node0x5627b46fcd10;
+	Node0x5627b46fdc00 [shape=record,label="{tree.c:7621:|{<s0>T|<s1>F}}"];
+	Node0x5627b46fdc00 -> Node0x5627b46fe120;
+	Node0x5627b46fdc00 -> Node0x5627b46fe170;
+	Node0x5627b46fe120 [shape=record,label="{tree.c:7621:}"];
+	Node0x5627b46fe120 -> Node0x5627b46fcd10;
+	Node0x5627b46fe170 [shape=record,label="{tree.c:7622:}"];
+	Node0x5627b46fe170 -> Node0x5627b46fcd10;
+	Node0x5627b46fcd10 [shape=record,label="{tree.c:7623:}"];
+}

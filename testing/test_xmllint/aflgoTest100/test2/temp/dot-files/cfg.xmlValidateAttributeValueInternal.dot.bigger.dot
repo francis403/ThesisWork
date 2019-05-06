@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlValidateAttributeValueInternal' function" {
+	label="CFG for 'xmlValidateAttributeValueInternal' function";
+
+	Node0x55bbc3aa2eb0 [shape=record,label="{valid.c:3789:|{<s0>def|<s1>6|<s2>4|<s3>5|<s4>3|<s5>2|<s6>10|<s7>8|<s8>9|<s9>7|<s10>1}}"];
+	Node0x55bbc3aa2eb0:s0 -> Node0x55bbc3aa3b80;
+	Node0x55bbc3aa2eb0:s1 -> Node0x55bbc3aa3fa0;
+	Node0x55bbc3aa2eb0:s2 -> Node0x55bbc3aa3fa0;
+	Node0x55bbc3aa2eb0:s3 -> Node0x55bbc3aa4280;
+	Node0x55bbc3aa2eb0:s4 -> Node0x55bbc3aa4280;
+	Node0x55bbc3aa2eb0:s5 -> Node0x55bbc3aa4280;
+	Node0x55bbc3aa2eb0:s6 -> Node0x55bbc3aa4280;
+	Node0x55bbc3aa2eb0:s7 -> Node0x55bbc3aa4560;
+	Node0x55bbc3aa2eb0:s8 -> Node0x55bbc3aa4560;
+	Node0x55bbc3aa2eb0:s9 -> Node0x55bbc3aa4840;
+	Node0x55bbc3aa2eb0:s10 -> Node0x55bbc3aa4bc0;
+	Node0x55bbc3aa3fa0 [shape=record,label="{valid.c:3794:}"];
+	Node0x55bbc3aa3fa0 -> Node0x55bbc3aa2f00;
+	Node0x55bbc3aa4280 [shape=record,label="{valid.c:3799:}"];
+	Node0x55bbc3aa4280 -> Node0x55bbc3aa2f00;
+	Node0x55bbc3aa4560 [shape=record,label="{valid.c:3802:}"];
+	Node0x55bbc3aa4560 -> Node0x55bbc3aa2f00;
+	Node0x55bbc3aa4840 [shape=record,label="{valid.c:3804:}"];
+	Node0x55bbc3aa4840 -> Node0x55bbc3aa2f00;
+	Node0x55bbc3aa4bc0 [shape=record,label="{valid.c:3806:}"];
+	Node0x55bbc3aa4bc0 -> Node0x55bbc3aa3b80;
+	Node0x55bbc3aa3b80 [shape=record,label="{valid.c:3808:}"];
+	Node0x55bbc3aa3b80 -> Node0x55bbc3aa2f00;
+	Node0x55bbc3aa2f00 [shape=record,label="{valid.c:3809:}"];
+}

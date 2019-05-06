@@ -1,0 +1,28 @@
+digraph "CFG for 'xmlSchemaGetSchemaBucket' function" {
+	label="CFG for 'xmlSchemaGetSchemaBucket' function";
+
+	Node0x55d025e98ff0 [shape=record,label="{xmlschemas.c:10060:|{<s0>T|<s1>F}}"];
+	Node0x55d025e98ff0:s0 -> Node0x55d025ebad30;
+	Node0x55d025e98ff0:s1 -> Node0x55d025ebadd0;
+	Node0x55d025ebad30 [shape=record,label="{xmlschemas.c:10068:}"];
+	Node0x55d025ebad30 -> Node0x55d025e99040;
+	Node0x55d025ebadd0 [shape=record,label="{xmlschemas.c:10070:}"];
+	Node0x55d025ebadd0 -> Node0x55d025ebb690;
+	Node0x55d025ebb690 [shape=record,label="{xmlschemas.c:10071:|{<s0>T|<s1>F}}"];
+	Node0x55d025ebb690:s0 -> Node0x55d025ebb970;
+	Node0x55d025ebb690:s1 -> Node0x55d025ebb4f0;
+	Node0x55d025ebb970 [shape=record,label="{xmlschemas.c:10072:|{<s0>T|<s1>F}}"];
+	Node0x55d025ebb970:s0 -> Node0x55d025ebc270;
+	Node0x55d025ebb970:s1 -> Node0x55d025ebc2c0;
+	Node0x55d025ebc270 [shape=record,label="{xmlschemas.c:10075:}"];
+	Node0x55d025ebc270 -> Node0x55d025e99040;
+	Node0x55d025ebc2c0 [shape=record,label="{xmlschemas.c:10076:}"];
+	Node0x55d025ebc2c0 -> Node0x55d025ebb8e0;
+	Node0x55d025ebb8e0 [shape=record,label="{xmlschemas.c:10071:}"];
+	Node0x55d025ebb8e0 -> Node0x55d025ebb690;
+	Node0x55d025ebb4f0 [shape=record,label="{%38}"];
+	Node0x55d025ebb4f0 -> Node0x55d025ebad80;
+	Node0x55d025ebad80 [shape=record,label="{xmlschemas.c:10078:}"];
+	Node0x55d025ebad80 -> Node0x55d025e99040;
+	Node0x55d025e99040 [shape=record,label="{xmlschemas.c:10079:}"];
+}

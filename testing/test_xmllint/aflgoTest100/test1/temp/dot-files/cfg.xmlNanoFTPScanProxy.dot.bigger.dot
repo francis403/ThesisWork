@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlNanoFTPScanProxy' function" {
+	label="CFG for 'xmlNanoFTPScanProxy' function";
+
+	Node0x561533c24960 [shape=record,label="{nanoftp.c:419:|{<s0>T|<s1>F}}"];
+	Node0x561533c24960:s0 -> Node0x561533c3d700;
+	Node0x561533c24960:s1 -> Node0x561533c3d750;
+	Node0x561533c3d700 [shape=record,label="{nanoftp.c:423:}"];
+	Node0x561533c3d700 -> Node0x561533c3d750;
+	Node0x561533c3d750 [shape=record,label="{nanoftp.c:426:|{<s0>T|<s1>F}}"];
+	Node0x561533c3d750:s0 -> Node0x561533c3ddc0;
+	Node0x561533c3d750:s1 -> Node0x561533c3bb00;
+	Node0x561533c3ddc0 [shape=record,label="{nanoftp.c:436:}"];
+	Node0x561533c3ddc0 -> Node0x561533c249d0;
+	Node0x561533c3bb00 [shape=record,label="{nanoftp.c:438:|{<s0>T|<s1>F}}"];
+	Node0x561533c3bb00:s0 -> Node0x561533c3c080;
+	Node0x561533c3bb00:s1 -> Node0x561533c3c220;
+	Node0x561533c3c220 [shape=record,label="{nanoftp.c:439:|{<s0>T|<s1>F}}"];
+	Node0x561533c3c220:s0 -> Node0x561533c3c080;
+	Node0x561533c3c220:s1 -> Node0x561533c3c1a0;
+	Node0x561533c3c1a0 [shape=record,label="{nanoftp.c:440:|{<s0>T|<s1>F}}"];
+	Node0x561533c3c1a0:s0 -> Node0x561533c3c080;
+	Node0x561533c3c1a0:s1 -> Node0x561533c3c120;
+	Node0x561533c3c120 [shape=record,label="{nanoftp.c:440:|{<s0>T|<s1>F}}"];
+	Node0x561533c3c120:s0 -> Node0x561533c3c080;
+	Node0x561533c3c120:s1 -> Node0x561533c3c0d0;
+	Node0x561533c3c080 [shape=record,label="{nanoftp.c:441:|{<s0>T|<s1>F}}"];
+	Node0x561533c3c080:s0 -> Node0x561533c4aa60;
+	Node0x561533c3c080:s1 -> Node0x561533c4df00;
+	Node0x561533c4aa60 [shape=record,label="{nanoftp.c:443:}"];
+	Node0x561533c4aa60 -> Node0x561533c4df00;
+	Node0x561533c4df00 [shape=record,label="{nanoftp.c:444:}"];
+	Node0x561533c4df00 -> Node0x561533c249d0;
+	Node0x561533c3c0d0 [shape=record,label="{nanoftp.c:447:|{<s0>T|<s1>F}}"];
+	Node0x561533c3c0d0:s0 -> Node0x561533c4e750;
+	Node0x561533c3c0d0:s1 -> Node0x561533c4e7a0;
+	Node0x561533c4e750 [shape=record,label="{nanoftp.c:449:}"];
+	Node0x561533c4e750 -> Node0x561533c4e7a0;
+	Node0x561533c4e7a0 [shape=record,label="{nanoftp.c:451:}"];
+	Node0x561533c4e7a0 -> Node0x561533c249d0;
+	Node0x561533c249d0 [shape=record,label="{nanoftp.c:452:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlFileFlush' function" {
+	label="CFG for 'xmlFileFlush' function";
+
+	Node0x5635e027dc40 [shape=record,label="{xmlIO.c:1008:|{<s0>T|<s1>F}}"];
+	Node0x5635e027dc40 -> Node0x5635e027e2d0;
+	Node0x5635e027dc40 -> Node0x5635e027e320;
+	Node0x5635e027e2d0 [shape=record,label="{xmlIO.c:1012:}"];
+	Node0x5635e027e2d0 -> Node0x5635e027dfc0;
+	Node0x5635e027e320 [shape=record,label="{xmlIO.c:1013:|{<s0>T|<s1>F}}"];
+	Node0x5635e027e320 -> Node0x5635e0280dd0;
+	Node0x5635e027e320 -> Node0x5635e0280e20;
+	Node0x5635e0280dd0 [shape=record,label="{xmlIO.c:1015:}"];
+	Node0x5635e0280dd0 -> Node0x5635e0280e20;
+	Node0x5635e0280e20 [shape=record,label="{xmlIO.c:1016:}"];
+	Node0x5635e0280e20 -> Node0x5635e027dfc0;
+	Node0x5635e027dfc0 [shape=record,label="{xmlIO.c:1017:}"];
+}

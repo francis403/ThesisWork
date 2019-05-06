@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlListReverseSearch' function" {
+	label="CFG for 'xmlListReverseSearch' function";
+
+	Node0x56019df68d30 [shape=record,label="{list.c:252:|{<s0>T|<s1>F}}"];
+	Node0x56019df68d30:s0 -> Node0x56019df69cd0;
+	Node0x56019df68d30:s1 -> Node0x56019df69d20;
+	Node0x56019df69cd0 [shape=record,label="{list.c:256:}"];
+	Node0x56019df69cd0 -> Node0x56019df69200;
+	Node0x56019df69d20 [shape=record,label="{list.c:257:|{<s0>T|<s1>F}}"];
+	Node0x56019df69d20:s0 -> Node0x56019df62c90;
+	Node0x56019df69d20:s1 -> Node0x56019df6aaa0;
+	Node0x56019df62c90 [shape=record,label="{list.c:259:}"];
+	Node0x56019df62c90 -> Node0x56019df69200;
+	Node0x56019df6aaa0 [shape=record,label="{list.c:260:}"];
+	Node0x56019df6aaa0 -> Node0x56019df69200;
+	Node0x56019df69200 [shape=record,label="{list.c:261:}"];
+}

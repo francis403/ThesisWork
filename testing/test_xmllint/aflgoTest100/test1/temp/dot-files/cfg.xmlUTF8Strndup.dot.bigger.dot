@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlUTF8Strndup' function" {
+	label="CFG for 'xmlUTF8Strndup' function";
+
+	Node0x55c23f84b370 [shape=record,label="{xmlstring.c:866:|{<s0>T|<s1>F}}"];
+	Node0x55c23f84b370:s0 -> Node0x55c23f851eb0;
+	Node0x55c23f84b370:s1 -> Node0x55c23f851f50;
+	Node0x55c23f851f50 [shape=record,label="{xmlstring.c:870:|{<s0>T|<s1>F}}"];
+	Node0x55c23f851f50:s0 -> Node0x55c23f851eb0;
+	Node0x55c23f851f50:s1 -> Node0x55c23f851f00;
+	Node0x55c23f851eb0 [shape=record,label="{xmlstring.c:870:}"];
+	Node0x55c23f851eb0 -> Node0x55c23f84f220;
+	Node0x55c23f851f00 [shape=record,label="{xmlstring.c:871:|{<s0>T|<s1>F}}"];
+	Node0x55c23f851f00:s0 -> Node0x55c23f852c90;
+	Node0x55c23f851f00:s1 -> Node0x55c23f852ce0;
+	Node0x55c23f852c90 [shape=record,label="{xmlstring.c:874:}"];
+	Node0x55c23f852c90 -> Node0x55c23f84f220;
+	Node0x55c23f852ce0 [shape=record,label="{xmlstring.c:879:}"];
+	Node0x55c23f852ce0 -> Node0x55c23f84f220;
+	Node0x55c23f84f220 [shape=record,label="{xmlstring.c:882:}"];
+}

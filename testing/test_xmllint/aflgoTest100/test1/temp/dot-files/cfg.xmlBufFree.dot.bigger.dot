@@ -1,0 +1,30 @@
+digraph "CFG for 'xmlBufFree' function" {
+	label="CFG for 'xmlBufFree' function";
+
+	Node0x55756c039200 [shape=record,label="{buf.c:329:|{<s0>T|<s1>F}}"];
+	Node0x55756c039200:s0 -> Node0x55756c0396c0;
+	Node0x55756c039200:s1 -> Node0x55756c0397d0;
+	Node0x55756c0396c0 [shape=record,label="{buf.c:335:}"];
+	Node0x55756c0396c0 -> Node0x55756c0398e0;
+	Node0x55756c0397d0 [shape=record,label="{buf.c:338:|{<s0>T|<s1>F}}"];
+	Node0x55756c0397d0:s0 -> Node0x55756c03a540;
+	Node0x55756c0397d0:s1 -> Node0x55756c03a4f0;
+	Node0x55756c03a540 [shape=record,label="{buf.c:339:|{<s0>T|<s1>F}}"];
+	Node0x55756c03a540:s0 -> Node0x55756c03a450;
+	Node0x55756c03a540:s1 -> Node0x55756c03a4f0;
+	Node0x55756c03a450 [shape=record,label="{buf.c:340:}"];
+	Node0x55756c03a450 -> Node0x55756c03a4a0;
+	Node0x55756c03a4f0 [shape=record,label="{buf.c:341:|{<s0>T|<s1>F}}"];
+	Node0x55756c03a4f0:s0 -> Node0x55756c03af90;
+	Node0x55756c03a4f0:s1 -> Node0x55756c03af40;
+	Node0x55756c03af90 [shape=record,label="{buf.c:342:|{<s0>T|<s1>F}}"];
+	Node0x55756c03af90:s0 -> Node0x55756c03aef0;
+	Node0x55756c03af90:s1 -> Node0x55756c03af40;
+	Node0x55756c03aef0 [shape=record,label="{buf.c:343:}"];
+	Node0x55756c03aef0 -> Node0x55756c03af40;
+	Node0x55756c03af40 [shape=record,label="{%28}"];
+	Node0x55756c03af40 -> Node0x55756c03a4a0;
+	Node0x55756c03a4a0 [shape=record,label="{buf.c:345:}"];
+	Node0x55756c03a4a0 -> Node0x55756c0398e0;
+	Node0x55756c0398e0 [shape=record,label="{buf.c:346:}"];
+}

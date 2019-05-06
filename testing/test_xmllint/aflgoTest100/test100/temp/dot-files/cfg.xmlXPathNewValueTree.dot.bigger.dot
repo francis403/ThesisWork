@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathNewValueTree' function" {
+	label="CFG for 'xmlXPathNewValueTree' function";
+
+	Node0x5621ee729420 [shape=record,label="{xpath.c:4367:|{<s0>T|<s1>F}}"];
+	Node0x5621ee729420:s0 -> Node0x5621ee72b860;
+	Node0x5621ee729420:s1 -> Node0x5621ee72b8b0;
+	Node0x5621ee72b860 [shape=record,label="{xpath.c:4372:}"];
+	Node0x5621ee72b860 -> Node0x5621ee72ad70;
+	Node0x5621ee72b8b0 [shape=record,label="{xpath.c:4375:}"];
+	Node0x5621ee72b8b0 -> Node0x5621ee72ad70;
+	Node0x5621ee72ad70 [shape=record,label="{xpath.c:4384:}"];
+}

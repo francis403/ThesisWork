@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlSchemaIDCStoreKey' function" {
+	label="CFG for 'xmlSchemaIDCStoreKey' function";
+
+	Node0x558353de1a60 [shape=record,label="{xmlschemas.c:22146:|{<s0>T|<s1>F}}"];
+	Node0x558353de1a60:s0 -> Node0x558353e06a70;
+	Node0x558353de1a60:s1 -> Node0x558353de6790;
+	Node0x558353e06a70 [shape=record,label="{xmlschemas.c:22154:|{<s0>T|<s1>F}}"];
+	Node0x558353e06a70:s0 -> Node0x558353e11980;
+	Node0x558353e06a70:s1 -> Node0x558353e119d0;
+	Node0x558353e11980 [shape=record,label="{xmlschemas.c:22156:}"];
+	Node0x558353e11980 -> Node0x558353e0ff40;
+	Node0x558353e119d0 [shape=record,label="{xmlschemas.c:22160:}"];
+	Node0x558353e119d0 -> Node0x558353e107b0;
+	Node0x558353de6790 [shape=record,label="{xmlschemas.c:22161:|{<s0>T|<s1>F}}"];
+	Node0x558353de6790:s0 -> Node0x558353e12620;
+	Node0x558353de6790:s1 -> Node0x558353e12670;
+	Node0x558353e12620 [shape=record,label="{xmlschemas.c:22162:|{<s0>T|<s1>F}}"];
+	Node0x558353e12620:s0 -> Node0x558353e13800;
+	Node0x558353e12620:s1 -> Node0x558353e13850;
+	Node0x558353e13800 [shape=record,label="{xmlschemas.c:22167:}"];
+	Node0x558353e13800 -> Node0x558353e0ff40;
+	Node0x558353e13850 [shape=record,label="{xmlschemas.c:22171:}"];
+	Node0x558353e13850 -> Node0x558353e12670;
+	Node0x558353e12670 [shape=record,label="{%51}"];
+	Node0x558353e12670 -> Node0x558353e107b0;
+	Node0x558353e107b0 [shape=record,label="{xmlschemas.c:22172:}"];
+	Node0x558353e107b0 -> Node0x558353e0ff40;
+	Node0x558353e0ff40 [shape=record,label="{xmlschemas.c:22175:}"];
+}

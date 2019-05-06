@@ -1,0 +1,17 @@
+digraph "CFG for 'doXPathQuery' function" {
+	label="CFG for 'doXPathQuery' function";
+
+	Node0x556d1b6d1590 [shape=record,label="{xmllint.c:2129:|{<s0>T|<s1>F}}"];
+	Node0x556d1b6d1590 -> Node0x556d1b3ef0b0;
+	Node0x556d1b6d1590 -> Node0x556d1b6e5140;
+	Node0x556d1b3ef0b0 [shape=record,label="{xmllint.c:2135:}"];
+	Node0x556d1b3ef0b0 -> Node0x556d1b6d15e0;
+	Node0x556d1b6e5140 [shape=record,label="{xmllint.c:2139:|{<s0>T|<s1>F}}"];
+	Node0x556d1b6e5140 -> Node0x556d1b582000;
+	Node0x556d1b6e5140 -> Node0x556d1b582050;
+	Node0x556d1b582000 [shape=record,label="{xmllint.c:2144:}"];
+	Node0x556d1b582000 -> Node0x556d1b6d15e0;
+	Node0x556d1b582050 [shape=record,label="{xmllint.c:2148:}"];
+	Node0x556d1b582050 -> Node0x556d1b6d15e0;
+	Node0x556d1b6d15e0 [shape=record,label="{xmllint.c:2150:}"];
+}

@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlTextMerge' function" {
+	label="CFG for 'xmlTextMerge' function";
+
+	Node0x55ad0bb19d40 [shape=record,label="{tree.c:5880:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bb19d40 -> Node0x55ad0bb1b920;
+	Node0x55ad0bb19d40 -> Node0x55ad0bb1b970;
+	Node0x55ad0bb1b920 [shape=record,label="{tree.c:5881:}"];
+	Node0x55ad0bb1b920 -> Node0x55ad0bb1b170;
+	Node0x55ad0bb1b970 [shape=record,label="{tree.c:5882:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bb1b970 -> Node0x55ad0bb1be60;
+	Node0x55ad0bb1b970 -> Node0x55ad0bb1beb0;
+	Node0x55ad0bb1be60 [shape=record,label="{tree.c:5882:}"];
+	Node0x55ad0bb1be60 -> Node0x55ad0bb1b170;
+	Node0x55ad0bb1beb0 [shape=record,label="{tree.c:5883:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bb1beb0 -> Node0x55ad0bb1c3a0;
+	Node0x55ad0bb1beb0 -> Node0x55ad0bb1c3f0;
+	Node0x55ad0bb1c3a0 [shape=record,label="{tree.c:5883:}"];
+	Node0x55ad0bb1c3a0 -> Node0x55ad0bb1b170;
+	Node0x55ad0bb1c3f0 [shape=record,label="{tree.c:5884:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bb1c3f0 -> Node0x55ad0bb1c970;
+	Node0x55ad0bb1c3f0 -> Node0x55ad0bb1c9c0;
+	Node0x55ad0bb1c970 [shape=record,label="{tree.c:5884:}"];
+	Node0x55ad0bb1c970 -> Node0x55ad0bb1b170;
+	Node0x55ad0bb1c9c0 [shape=record,label="{tree.c:5885:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bb1c9c0 -> Node0x55ad0bb1cf40;
+	Node0x55ad0bb1c9c0 -> Node0x55ad0bb1cf90;
+	Node0x55ad0bb1cf40 [shape=record,label="{tree.c:5886:}"];
+	Node0x55ad0bb1cf40 -> Node0x55ad0bb1b170;
+	Node0x55ad0bb1cf90 [shape=record,label="{tree.c:5887:}"];
+	Node0x55ad0bb1cf90 -> Node0x55ad0bb1b170;
+	Node0x55ad0bb1b170 [shape=record,label="{tree.c:5891:}"];
+}

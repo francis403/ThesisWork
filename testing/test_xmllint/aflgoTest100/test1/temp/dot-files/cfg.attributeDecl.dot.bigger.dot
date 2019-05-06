@@ -1,0 +1,10 @@
+digraph "CFG for 'attributeDecl' function" {
+	label="CFG for 'attributeDecl' function";
+
+	Node0x55f3b47ed5e0 [shape=record,label="{legacy.c:996:|{<s0>T|<s1>F}}"];
+	Node0x55f3b47ed5e0:s0 -> Node0x55f3b47f0f80;
+	Node0x55f3b47ed5e0:s1 -> Node0x55f3b47f0fd0;
+	Node0x55f3b47f0f80 [shape=record,label="{legacy.c:1000:}"];
+	Node0x55f3b47f0f80 -> Node0x55f3b47f0fd0;
+	Node0x55f3b47f0fd0 [shape=record,label="{legacy.c:1000:}"];
+}

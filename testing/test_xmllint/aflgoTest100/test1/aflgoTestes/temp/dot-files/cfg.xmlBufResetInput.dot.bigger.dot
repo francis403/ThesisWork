@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlBufResetInput' function" {
+	label="CFG for 'xmlBufResetInput' function";
+
+	Node0x55756c129cf0 [shape=record,label="{buf.c:1283:|{<s0>T|<s1>F}}"];
+	Node0x55756c129cf0:s0 -> Node0x55756c139b30;
+	Node0x55756c129cf0:s1 -> Node0x55756c139c50;
+	Node0x55756c139c50 [shape=record,label="{buf.c:1284:|{<s0>T|<s1>F}}"];
+	Node0x55756c139c50:s0 -> Node0x55756c139b30;
+	Node0x55756c139c50:s1 -> Node0x55756c139bd0;
+	Node0x55756c139bd0 [shape=record,label="{buf.c:1284:|{<s0>T|<s1>F}}"];
+	Node0x55756c139bd0:s0 -> Node0x55756c139b30;
+	Node0x55756c139bd0:s1 -> Node0x55756c139b80;
+	Node0x55756c139b30 [shape=record,label="{buf.c:1285:}"];
+	Node0x55756c139b30 -> Node0x55756c12b500;
+	Node0x55756c139b80 [shape=record,label="{buf.c:1286:|{<s0>T|<s1>F}}"];
+	Node0x55756c139b80:s0 -> Node0x55756c13a5d0;
+	Node0x55756c139b80:s1 -> Node0x55756c13a620;
+	Node0x55756c13a5d0 [shape=record,label="{buf.c:1286:|{<s0>T|<s1>F}}"];
+	Node0x55756c13a5d0:s0 -> Node0x55756c13aa30;
+	Node0x55756c13a5d0:s1 -> Node0x55756c13aa80;
+	Node0x55756c13aa30 [shape=record,label="{buf.c:1286:}"];
+	Node0x55756c13aa30 -> Node0x55756c13aa80;
+	Node0x55756c13aa80 [shape=record,label="{buf.c:1286:}"];
+	Node0x55756c13aa80 -> Node0x55756c13a620;
+	Node0x55756c13a620 [shape=record,label="{buf.c:1286:|{<s0>T|<s1>F}}"];
+	Node0x55756c13a620:s0 -> Node0x55756c13b150;
+	Node0x55756c13a620:s1 -> Node0x55756c13b1a0;
+	Node0x55756c13b150 [shape=record,label="{buf.c:1286:|{<s0>T|<s1>F}}"];
+	Node0x55756c13b150:s0 -> Node0x55756c13b6f0;
+	Node0x55756c13b150:s1 -> Node0x55756c13b740;
+	Node0x55756c13b6f0 [shape=record,label="{buf.c:1286:}"];
+	Node0x55756c13b6f0 -> Node0x55756c13b740;
+	Node0x55756c13b740 [shape=record,label="{buf.c:1286:}"];
+	Node0x55756c13b740 -> Node0x55756c13b1a0;
+	Node0x55756c13b1a0 [shape=record,label="{buf.c:1287:}"];
+	Node0x55756c13b1a0 -> Node0x55756c12b500;
+	Node0x55756c12b500 [shape=record,label="{buf.c:1290:}"];
+}

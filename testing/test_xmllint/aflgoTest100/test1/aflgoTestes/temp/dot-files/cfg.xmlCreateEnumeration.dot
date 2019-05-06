@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlCreateEnumeration' function" {
+	label="CFG for 'xmlCreateEnumeration' function";
+
+	Node0x55fa50ca6420 [shape=record,label="{valid.c:1766:|{<s0>T|<s1>F}}"];
+	Node0x55fa50ca6420 -> Node0x55fa50ca8b00;
+	Node0x55fa50ca6420 -> Node0x55fa50ca8b50;
+	Node0x55fa50ca8b00 [shape=record,label="{valid.c:1771:}"];
+	Node0x55fa50ca8b00 -> Node0x55fa50ca7f40;
+	Node0x55fa50ca8b50 [shape=record,label="{valid.c:1774:|{<s0>T|<s1>F}}"];
+	Node0x55fa50ca8b50 -> Node0x55fa50ca93b0;
+	Node0x55fa50ca8b50 -> Node0x55fa50ca9400;
+	Node0x55fa50ca93b0 [shape=record,label="{valid.c:1777:}"];
+	Node0x55fa50ca93b0 -> Node0x55fa50ca9400;
+	Node0x55fa50ca9400 [shape=record,label="{valid.c:1778:}"];
+	Node0x55fa50ca9400 -> Node0x55fa50ca7f40;
+	Node0x55fa50ca7f40 [shape=record,label="{valid.c:1779:}"];
+}

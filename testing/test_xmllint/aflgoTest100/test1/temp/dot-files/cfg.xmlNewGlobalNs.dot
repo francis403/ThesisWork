@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlNewGlobalNs' function" {
+	label="CFG for 'xmlNewGlobalNs' function";
+
+	Node0x55f3b47cc4c0 [shape=record,label="{legacy.c:679:|{<s0>T|<s1>F}}"];
+	Node0x55f3b47cc4c0:s0 -> Node0x55f3b47cd960;
+	Node0x55f3b47cc4c0:s1 -> Node0x55f3b47cd910;
+	Node0x55f3b47cd910 [shape=record,label="{legacy.c:686:}"];
+	Node0x55f3b47cd910 -> Node0x55f3b47cd960;
+	Node0x55f3b47cd960 [shape=record,label="{legacy.c:690:}"];
+}

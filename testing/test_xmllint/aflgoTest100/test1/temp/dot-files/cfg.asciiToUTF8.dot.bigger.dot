@@ -1,0 +1,31 @@
+digraph "CFG for 'asciiToUTF8' function" {
+	label="CFG for 'asciiToUTF8' function";
+
+	Node0x5557bd948490 [shape=record,label="{encoding.c:176:}"];
+	Node0x5557bd948490 -> Node0x5557bd94a8a0;
+	Node0x5557bd94a8a0 [shape=record,label="{encoding.c:186:|{<s0>T|<s1>F}}"];
+	Node0x5557bd94a8a0:s0 -> Node0x5557bd94ab90;
+	Node0x5557bd94a8a0:s1 -> Node0x5557bd94ab40;
+	Node0x5557bd94ab90 [shape=record,label="{encoding.c:186:}"];
+	Node0x5557bd94ab90 -> Node0x5557bd94ab40;
+	Node0x5557bd94ab40 [shape=record,label="{encoding.c:186:|{<s0>T|<s1>F}}"];
+	Node0x5557bd94ab40:s0 -> Node0x5557bd94b480;
+	Node0x5557bd94ab40:s1 -> Node0x5557bd94aac0;
+	Node0x5557bd94b480 [shape=record,label="{encoding.c:187:|{<s0>T|<s1>F}}"];
+	Node0x5557bd94b480:s0 -> Node0x5557bd94b9b0;
+	Node0x5557bd94b480:s1 -> Node0x5557bd94ba00;
+	Node0x5557bd94b9b0 [shape=record,label="{encoding.c:190:}"];
+	Node0x5557bd94b9b0 -> Node0x5557bd94aac0;
+	Node0x5557bd94ba00 [shape=record,label="{encoding.c:191:|{<s0>T|<s1>F}}"];
+	Node0x5557bd94ba00:s0 -> Node0x5557bd94be10;
+	Node0x5557bd94ba00:s1 -> Node0x5557bd94beb0;
+	Node0x5557bd94be10 [shape=record,label="{encoding.c:192:}"];
+	Node0x5557bd94be10 -> Node0x5557bd94be60;
+	Node0x5557bd94beb0 [shape=record,label="{encoding.c:194:}"];
+	Node0x5557bd94beb0 -> Node0x5557bd9484e0;
+	Node0x5557bd94be60 [shape=record,label="{encoding.c:199:}"];
+	Node0x5557bd94be60 -> Node0x5557bd94a8a0;
+	Node0x5557bd94aac0 [shape=record,label="{encoding.c:201:}"];
+	Node0x5557bd94aac0 -> Node0x5557bd9484e0;
+	Node0x5557bd9484e0 [shape=record,label="{encoding.c:204:}"];
+}

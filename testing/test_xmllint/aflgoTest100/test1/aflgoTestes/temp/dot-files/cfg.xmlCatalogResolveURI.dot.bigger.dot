@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlCatalogResolveURI' function" {
+	label="CFG for 'xmlCatalogResolveURI' function";
+
+	Node0x5650cc8d74c0 [shape=record,label="{catalog.c:3372:|{<s0>T|<s1>F}}"];
+	Node0x5650cc8d74c0:s0 -> Node0x5650cc89c240;
+	Node0x5650cc8d74c0:s1 -> Node0x5650cc89c1f0;
+	Node0x5650cc89c1f0 [shape=record,label="{catalog.c:3376:}"];
+	Node0x5650cc89c1f0 -> Node0x5650cc89c240;
+	Node0x5650cc89c240 [shape=record,label="{catalog.c:3378:}"];
+}

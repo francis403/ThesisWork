@@ -1,0 +1,47 @@
+digraph "CFG for 'xmlParseVersionNum' function" {
+	label="CFG for 'xmlParseVersionNum' function";
+
+	Node0x5557ddfdde40 [shape=record,label="{parser.c:10072:|{<s0>T|<s1>F}}"];
+	Node0x5557ddfdde40 -> Node0x5557ddffe820;
+	Node0x5557ddfdde40 -> Node0x5557ddffe870;
+	Node0x5557ddffe820 [shape=record,label="{parser.c:10080:}"];
+	Node0x5557ddffe820 -> Node0x5557ddfe1fc0;
+	Node0x5557ddffe870 [shape=record,label="{parser.c:10083:|{<s0>T|<s1>F}}"];
+	Node0x5557ddffe870 -> Node0x5557ddfff1c0;
+	Node0x5557ddffe870 -> Node0x5557ddfff120;
+	Node0x5557ddfff1c0 [shape=record,label="{parser.c:10084:|{<s0>T|<s1>F}}"];
+	Node0x5557ddfff1c0 -> Node0x5557ddfff170;
+	Node0x5557ddfff1c0 -> Node0x5557ddfff120;
+	Node0x5557ddfff120 [shape=record,label="{parser.c:10085:}"];
+	Node0x5557ddfff120 -> Node0x5557ddfe1fc0;
+	Node0x5557ddfff170 [shape=record,label="{parser.c:10088:|{<s0>T|<s1>F}}"];
+	Node0x5557ddfff170 -> Node0x5557de000490;
+	Node0x5557ddfff170 -> Node0x5557de0004e0;
+	Node0x5557de000490 [shape=record,label="{parser.c:10092:}"];
+	Node0x5557de000490 -> Node0x5557ddfe1fc0;
+	Node0x5557de0004e0 [shape=record,label="{parser.c:10095:}"];
+	Node0x5557de0004e0 -> Node0x5557de001520;
+	Node0x5557de001520 [shape=record,label="{parser.c:10098:|{<s0>T|<s1>F}}"];
+	Node0x5557de001520 -> Node0x5557de001810;
+	Node0x5557de001520 -> Node0x5557de0017c0;
+	Node0x5557de001810 [shape=record,label="{parser.c:10098:}"];
+	Node0x5557de001810 -> Node0x5557de0017c0;
+	Node0x5557de0017c0 [shape=record,label="{parser.c:10098:|{<s0>T|<s1>F}}"];
+	Node0x5557de0017c0 -> Node0x5557de001d30;
+	Node0x5557de0017c0 -> Node0x5557de001740;
+	Node0x5557de001d30 [shape=record,label="{parser.c:10099:|{<s0>T|<s1>F}}"];
+	Node0x5557de001d30 -> Node0x5557de001f20;
+	Node0x5557de001d30 -> Node0x5557de001f70;
+	Node0x5557de001f20 [shape=record,label="{parser.c:10100:|{<s0>T|<s1>F}}"];
+	Node0x5557de001f20 -> Node0x5557de002ca0;
+	Node0x5557de001f20 -> Node0x5557de002cf0;
+	Node0x5557de002ca0 [shape=record,label="{parser.c:10105:}"];
+	Node0x5557de002ca0 -> Node0x5557ddfe1fc0;
+	Node0x5557de002cf0 [shape=record,label="{parser.c:10109:}"];
+	Node0x5557de002cf0 -> Node0x5557de001f70;
+	Node0x5557de001f70 [shape=record,label="{parser.c:10111:}"];
+	Node0x5557de001f70 -> Node0x5557de001520;
+	Node0x5557de001740 [shape=record,label="{parser.c:10115:}"];
+	Node0x5557de001740 -> Node0x5557ddfe1fc0;
+	Node0x5557ddfe1fc0 [shape=record,label="{parser.c:10117:}"];
+}

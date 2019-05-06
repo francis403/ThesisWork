@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsCJKCompatibility' function" {
+	label="CFG for 'xmlUCSIsCJKCompatibility' function";
+
+	Node0x55ca9b1e81d0 [shape=record,label="{xmlunicode.c:1184:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b1e81d0:s0 -> Node0x55ca9b1e9cd0;
+	Node0x55ca9b1e81d0:s1 -> Node0x55ca9b1e9c80;
+	Node0x55ca9b1e9cd0 [shape=record,label="{xmlunicode.c:1185:}"];
+	Node0x55ca9b1e9cd0 -> Node0x55ca9b1e9c80;
+	Node0x55ca9b1e9c80 [shape=record,label="{xmlunicode.c:1185:}"];
+}

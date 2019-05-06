@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlSchemaGetChameleonSchemaBucket' function" {
+	label="CFG for 'xmlSchemaGetChameleonSchemaBucket' function";
+
+	Node0x558353485d30 [shape=record,label="{xmlschemas.c:10082:|{<s0>T|<s1>F}}"];
+	Node0x558353485d30 -> Node0x558353487220;
+	Node0x558353485d30 -> Node0x5583534872c0;
+	Node0x558353487220 [shape=record,label="{xmlschemas.c:10091:}"];
+	Node0x558353487220 -> Node0x558353485d80;
+	Node0x5583534872c0 [shape=record,label="{xmlschemas.c:10093:}"];
+	Node0x5583534872c0 -> Node0x558353487b80;
+	Node0x558353487b80 [shape=record,label="{xmlschemas.c:10094:|{<s0>T|<s1>F}}"];
+	Node0x558353487b80 -> Node0x558353487e60;
+	Node0x558353487b80 -> Node0x5583534879e0;
+	Node0x558353487e60 [shape=record,label="{xmlschemas.c:10095:|{<s0>T|<s1>F}}"];
+	Node0x558353487e60 -> Node0x558353488880;
+	Node0x558353487e60 -> Node0x5583534887b0;
+	Node0x558353488880 [shape=record,label="{xmlschemas.c:10098:|{<s0>T|<s1>F}}"];
+	Node0x558353488880 -> Node0x558353488800;
+	Node0x558353488880 -> Node0x5583534887b0;
+	Node0x558353488800 [shape=record,label="{xmlschemas.c:10099:|{<s0>T|<s1>F}}"];
+	Node0x558353488800 -> Node0x558353488760;
+	Node0x558353488800 -> Node0x5583534887b0;
+	Node0x558353488760 [shape=record,label="{xmlschemas.c:10100:}"];
+	Node0x558353488760 -> Node0x558353485d80;
+	Node0x5583534887b0 [shape=record,label="{xmlschemas.c:10101:}"];
+	Node0x5583534887b0 -> Node0x558353487dd0;
+	Node0x558353487dd0 [shape=record,label="{xmlschemas.c:10094:}"];
+	Node0x558353487dd0 -> Node0x558353487b80;
+	Node0x5583534879e0 [shape=record,label="{%49}"];
+	Node0x5583534879e0 -> Node0x558353487270;
+	Node0x558353487270 [shape=record,label="{xmlschemas.c:10103:}"];
+	Node0x558353487270 -> Node0x558353485d80;
+	Node0x558353485d80 [shape=record,label="{xmlschemas.c:10104:}"];
+}

@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlGetBooleanProp' function" {
+	label="CFG for 'xmlGetBooleanProp' function";
+
+	Node0x55d0260edbf0 [shape=record,label="{xmlschemas.c:6221:|{<s0>T|<s1>F}}"];
+	Node0x55d0260edbf0 -> Node0x55d0260ef310;
+	Node0x55d0260edbf0 -> Node0x55d0260ef360;
+	Node0x55d0260ef310 [shape=record,label="{xmlschemas.c:6229:}"];
+	Node0x55d0260ef310 -> Node0x55d0260edc40;
+	Node0x55d0260ef360 [shape=record,label="{xmlschemas.c:6235:|{<s0>T|<s1>F}}"];
+	Node0x55d0260ef360 -> Node0x55d0260ef850;
+	Node0x55d0260ef360 -> Node0x55d0260ef8f0;
+	Node0x55d0260ef850 [shape=record,label="{xmlschemas.c:6236:}"];
+	Node0x55d0260ef850 -> Node0x55d0260ef8a0;
+	Node0x55d0260ef8f0 [shape=record,label="{xmlschemas.c:6237:|{<s0>T|<s1>F}}"];
+	Node0x55d0260ef8f0 -> Node0x55d0260efd80;
+	Node0x55d0260ef8f0 -> Node0x55d0260efe20;
+	Node0x55d0260efd80 [shape=record,label="{xmlschemas.c:6238:}"];
+	Node0x55d0260efd80 -> Node0x55d0260efdd0;
+	Node0x55d0260efe20 [shape=record,label="{xmlschemas.c:6239:|{<s0>T|<s1>F}}"];
+	Node0x55d0260efe20 -> Node0x55d0260f02b0;
+	Node0x55d0260efe20 -> Node0x55d0260f0350;
+	Node0x55d0260f02b0 [shape=record,label="{xmlschemas.c:6240:}"];
+	Node0x55d0260f02b0 -> Node0x55d0260f0300;
+	Node0x55d0260f0350 [shape=record,label="{xmlschemas.c:6241:|{<s0>T|<s1>F}}"];
+	Node0x55d0260f0350 -> Node0x55d0260f0880;
+	Node0x55d0260f0350 -> Node0x55d0260f0920;
+	Node0x55d0260f0880 [shape=record,label="{xmlschemas.c:6242:}"];
+	Node0x55d0260f0880 -> Node0x55d0260f08d0;
+	Node0x55d0260f0920 [shape=record,label="{xmlschemas.c:6244:}"];
+	Node0x55d0260f0920 -> Node0x55d0260f08d0;
+	Node0x55d0260f08d0 [shape=record,label="{%36}"];
+	Node0x55d0260f08d0 -> Node0x55d0260f0300;
+	Node0x55d0260f0300 [shape=record,label="{%37}"];
+	Node0x55d0260f0300 -> Node0x55d0260efdd0;
+	Node0x55d0260efdd0 [shape=record,label="{%38}"];
+	Node0x55d0260efdd0 -> Node0x55d0260ef8a0;
+	Node0x55d0260ef8a0 [shape=record,label="{xmlschemas.c:6251:}"];
+	Node0x55d0260ef8a0 -> Node0x55d0260edc40;
+	Node0x55d0260edc40 [shape=record,label="{xmlschemas.c:6252:}"];
+}

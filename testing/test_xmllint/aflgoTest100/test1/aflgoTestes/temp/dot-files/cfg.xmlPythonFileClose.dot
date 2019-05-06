@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlPythonFileClose' function" {
+	label="CFG for 'xmlPythonFileClose' function";
+
+	Node0x55ea374b25f0 [shape=record,label="{libxml.c:452:|{<s0>T|<s1>F}}"];
+	Node0x55ea374b25f0:s0 -> Node0x55ea374b4450;
+	Node0x55ea374b25f0:s1 -> Node0x55ea374b44a0;
+	Node0x55ea374b4450 [shape=record,label="{libxml.c:459:}"];
+	Node0x55ea374b4450 -> Node0x55ea37499220;
+	Node0x55ea374b44a0 [shape=record,label="{libxml.c:460:|{<s0>T|<s1>F}}"];
+	Node0x55ea374b44a0:s0 -> Node0x55ea374b4960;
+	Node0x55ea374b44a0:s1 -> Node0x55ea374b4a00;
+	Node0x55ea374b4960 [shape=record,label="{libxml.c:461:}"];
+	Node0x55ea374b4960 -> Node0x55ea374b49b0;
+	Node0x55ea374b4a00 [shape=record,label="{libxml.c:462:|{<s0>T|<s1>F}}"];
+	Node0x55ea374b4a00:s0 -> Node0x55ea374bd440;
+	Node0x55ea374b4a00:s1 -> Node0x55ea374bd490;
+	Node0x55ea374bd440 [shape=record,label="{libxml.c:463:}"];
+	Node0x55ea374bd440 -> Node0x55ea374bd490;
+	Node0x55ea374bd490 [shape=record,label="{%19}"];
+	Node0x55ea374bd490 -> Node0x55ea374b49b0;
+	Node0x55ea374b49b0 [shape=record,label="{libxml.c:465:|{<s0>T|<s1>F}}"];
+	Node0x55ea374b49b0:s0 -> Node0x55ea374bde60;
+	Node0x55ea374b49b0:s1 -> Node0x55ea374bdeb0;
+	Node0x55ea374bde60 [shape=record,label="{libxml.c:466:}"];
+	Node0x55ea374bde60 -> Node0x55ea374be2a0;
+	Node0x55ea374be2a0 [shape=record,label="{libxml.c:466:|{<s0>T|<s1>F}}"];
+	Node0x55ea374be2a0:s0 -> Node0x55ea374be4e0;
+	Node0x55ea374be2a0:s1 -> Node0x55ea374be580;
+	Node0x55ea374be4e0 [shape=record,label="{libxml.c:466:}"];
+	Node0x55ea374be4e0 -> Node0x55ea374be530;
+	Node0x55ea374be580 [shape=record,label="{libxml.c:466:}"];
+	Node0x55ea374be580 -> Node0x55ea374be530;
+	Node0x55ea374be530 [shape=record,label="{libxml.c:466:}"];
+	Node0x55ea374be530 -> Node0x55ea374be200;
+	Node0x55ea374be200 [shape=record,label="{libxml.c:467:}"];
+	Node0x55ea374be200 -> Node0x55ea374bdeb0;
+	Node0x55ea374bdeb0 [shape=record,label="{libxml.c:468:}"];
+	Node0x55ea374bdeb0 -> Node0x55ea37499220;
+	Node0x55ea37499220 [shape=record,label="{libxml.c:469:}"];
+}

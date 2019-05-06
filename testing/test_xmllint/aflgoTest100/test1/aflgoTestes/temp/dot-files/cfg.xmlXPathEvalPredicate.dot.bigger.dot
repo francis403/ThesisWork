@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlXPathEvalPredicate' function" {
+	label="CFG for 'xmlXPathEvalPredicate' function";
+
+	Node0x55e6b2392350 [shape=record,label="{xpath.c:14374:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2392350:s0 -> Node0x55e6b2911f60;
+	Node0x55e6b2392350:s1 -> Node0x55e6b297aa60;
+	Node0x55e6b297aa60 [shape=record,label="{xpath.c:14375:|{<s0>T|<s1>F}}"];
+	Node0x55e6b297aa60:s0 -> Node0x55e6b2911f60;
+	Node0x55e6b297aa60:s1 -> Node0x55e6b297aa10;
+	Node0x55e6b2911f60 [shape=record,label="{xpath.c:14375:}"];
+	Node0x55e6b2911f60 -> Node0x55e6b2874440;
+	Node0x55e6b297aa10 [shape=record,label="{xpath.c:14376:|{<s0>def|<s1>2|<s2>3|<s3>1|<s4>9|<s5>4}}"];
+	Node0x55e6b297aa10:s0 -> Node0x55e6b29eb620;
+	Node0x55e6b297aa10:s1 -> Node0x55e6b29799c0;
+	Node0x55e6b297aa10:s2 -> Node0x55e6b2979c70;
+	Node0x55e6b297aa10:s3 -> Node0x55e6b297a1b0;
+	Node0x55e6b297aa10:s4 -> Node0x55e6b297a1b0;
+	Node0x55e6b297aa10:s5 -> Node0x55e6b299b440;
+	Node0x55e6b29799c0 [shape=record,label="{xpath.c:14378:}"];
+	Node0x55e6b29799c0 -> Node0x55e6b2874440;
+	Node0x55e6b2979c70 [shape=record,label="{xpath.c:14380:}"];
+	Node0x55e6b2979c70 -> Node0x55e6b2874440;
+	Node0x55e6b297a1b0 [shape=record,label="{xpath.c:14383:|{<s0>T|<s1>F}}"];
+	Node0x55e6b297a1b0:s0 -> Node0x55e6b297a2a0;
+	Node0x55e6b297a1b0:s1 -> Node0x55e6b297a2f0;
+	Node0x55e6b297a2a0 [shape=record,label="{xpath.c:14384:}"];
+	Node0x55e6b297a2a0 -> Node0x55e6b2874440;
+	Node0x55e6b297a2f0 [shape=record,label="{xpath.c:14385:}"];
+	Node0x55e6b297a2f0 -> Node0x55e6b2874440;
+	Node0x55e6b299b440 [shape=record,label="{xpath.c:14387:|{<s0>T|<s1>F}}"];
+	Node0x55e6b299b440:s0 -> Node0x55e6b299b570;
+	Node0x55e6b299b440:s1 -> Node0x55e6b299b520;
+	Node0x55e6b299b570 [shape=record,label="{xpath.c:14388:}"];
+	Node0x55e6b299b570 -> Node0x55e6b299b520;
+	Node0x55e6b299b520 [shape=record,label="{xpath.c:14387:}"];
+	Node0x55e6b299b520 -> Node0x55e6b2874440;
+	Node0x55e6b29eb620 [shape=record,label="{xpath.c:14390:}"];
+	Node0x55e6b29eb620 -> Node0x55e6b297ab10;
+	Node0x55e6b297ab10 [shape=record,label="{xpath.c:14392:}"];
+	Node0x55e6b297ab10 -> Node0x55e6b2874440;
+	Node0x55e6b2874440 [shape=record,label="{xpath.c:14393:}"];
+}

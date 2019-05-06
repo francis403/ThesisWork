@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchemaAddAttributeUse' function" {
+	label="CFG for 'xmlSchemaAddAttributeUse' function";
+
+	Node0x558353783000 [shape=record,label="{xmlschemas.c:5239:|{<s0>T|<s1>F}}"];
+	Node0x558353783000 -> Node0x558353783da0;
+	Node0x558353783000 -> Node0x558353783df0;
+	Node0x558353783da0 [shape=record,label="{xmlschemas.c:5245:}"];
+	Node0x558353783da0 -> Node0x558353783050;
+	Node0x558353783df0 [shape=record,label="{xmlschemas.c:5247:|{<s0>T|<s1>F}}"];
+	Node0x558353783df0 -> Node0x558353784510;
+	Node0x558353783df0 -> Node0x558353784560;
+	Node0x558353784510 [shape=record,label="{xmlschemas.c:5249:}"];
+	Node0x558353784510 -> Node0x558353783050;
+	Node0x558353784560 [shape=record,label="{xmlschemas.c:5252:}"];
+	Node0x558353784560 -> Node0x558353783050;
+	Node0x558353783050 [shape=record,label="{xmlschemas.c:5258:}"];
+}

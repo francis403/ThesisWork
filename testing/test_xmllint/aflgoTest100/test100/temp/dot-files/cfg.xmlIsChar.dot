@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlIsChar' function" {
+	label="CFG for 'xmlIsChar' function";
+
+	Node0x561e997a2000 [shape=record,label="{chvalid.c:256:|{<s0>T|<s1>F}}"];
+	Node0x561e997a2000 -> Node0x561e997a0af0;
+	Node0x561e997a2000 -> Node0x561e997a3630;
+	Node0x561e997a0af0 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x561e997a0af0 -> Node0x561e997a4020;
+	Node0x561e997a0af0 -> Node0x561e997a3fd0;
+	Node0x561e997a4020 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x561e997a4020 -> Node0x561e997a2640;
+	Node0x561e997a4020 -> Node0x561e997a3fd0;
+	Node0x561e997a3fd0 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x561e997a3fd0 -> Node0x561e997a2640;
+	Node0x561e997a3fd0 -> Node0x561e997a2690;
+	Node0x561e997a2690 [shape=record,label="{chvalid.c:257:}"];
+	Node0x561e997a2690 -> Node0x561e997a2640;
+	Node0x561e997a2640 [shape=record,label="{chvalid.c:257:}"];
+	Node0x561e997a2640 -> Node0x561e997a3680;
+	Node0x561e997a3630 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x561e997a3630 -> Node0x561e997a47b0;
+	Node0x561e997a3630 -> Node0x561e997a4760;
+	Node0x561e997a47b0 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x561e997a47b0 -> Node0x561e997a44c0;
+	Node0x561e997a47b0 -> Node0x561e997a4760;
+	Node0x561e997a4760 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x561e997a4760 -> Node0x561e997a4b40;
+	Node0x561e997a4760 -> Node0x561e997a4710;
+	Node0x561e997a4b40 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x561e997a4b40 -> Node0x561e997a44c0;
+	Node0x561e997a4b40 -> Node0x561e997a4710;
+	Node0x561e997a4710 [shape=record,label="{chvalid.c:257:|{<s0>T|<s1>F}}"];
+	Node0x561e997a4710 -> Node0x561e997a4f90;
+	Node0x561e997a4710 -> Node0x561e997a4f40;
+	Node0x561e997a4f90 [shape=record,label="{chvalid.c:257:}"];
+	Node0x561e997a4f90 -> Node0x561e997a4f40;
+	Node0x561e997a4f40 [shape=record,label="{chvalid.c:257:}"];
+	Node0x561e997a4f40 -> Node0x561e997a44c0;
+	Node0x561e997a44c0 [shape=record,label="{chvalid.c:257:}"];
+	Node0x561e997a44c0 -> Node0x561e997a3680;
+	Node0x561e997a3680 [shape=record,label="{chvalid.c:257:}"];
+}

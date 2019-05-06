@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCanonicPath' function" {
+	label="CFG for 'libxml_xmlCanonicPath' function";
+
+	Node0x55f930d11120 [shape=record,label="{libxml2-py.c:1255:|{<s0>T|<s1>F}}"];
+	Node0x55f930d11120:s0 -> Node0x55f930d14c30;
+	Node0x55f930d11120:s1 -> Node0x55f930d14be0;
+	Node0x55f930d14be0 [shape=record,label="{libxml2-py.c:1261:}"];
+	Node0x55f930d14be0 -> Node0x55f930d11420;
+	Node0x55f930d14c30 [shape=record,label="{libxml2-py.c:1263:}"];
+	Node0x55f930d14c30 -> Node0x55f930d11420;
+	Node0x55f930d11420 [shape=record,label="{libxml2-py.c:1266:}"];
+}

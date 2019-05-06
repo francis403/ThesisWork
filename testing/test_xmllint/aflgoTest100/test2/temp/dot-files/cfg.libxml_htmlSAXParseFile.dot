@@ -1,0 +1,17 @@
+digraph "CFG for 'libxml_htmlSAXParseFile' function" {
+	label="CFG for 'libxml_htmlSAXParseFile' function";
+
+	Node0x55fa6c1ec6a0 [shape=record,label="{libxml.c:1549:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1ec6a0:s0 -> Node0x55fa6c2687d0;
+	Node0x55fa6c1ec6a0:s1 -> Node0x55fa6c268780;
+	Node0x55fa6c268780 [shape=record,label="{libxml.c:1560:}"];
+	Node0x55fa6c268780 -> Node0x55fa6c1ec910;
+	Node0x55fa6c2687d0 [shape=record,label="{libxml.c:1566:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c2687d0:s0 -> Node0x55fa6c269100;
+	Node0x55fa6c2687d0:s1 -> Node0x55fa6c269150;
+	Node0x55fa6c269100 [shape=record,label="{libxml.c:1567:}"];
+	Node0x55fa6c269100 -> Node0x55fa6c1ec910;
+	Node0x55fa6c269150 [shape=record,label="{libxml.c:1570:}"];
+	Node0x55fa6c269150 -> Node0x55fa6c1ec910;
+	Node0x55fa6c1ec910 [shape=record,label="{libxml.c:1580:}"];
+}

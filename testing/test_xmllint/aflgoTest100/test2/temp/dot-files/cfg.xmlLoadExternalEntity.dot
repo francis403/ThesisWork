@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlLoadExternalEntity' function" {
+	label="CFG for 'xmlLoadExternalEntity' function";
+
+	Node0x5635e01e4b90 [shape=record,label="{xmlIO.c:4020:|{<s0>T|<s1>F}}"];
+	Node0x5635e01e4b90 -> Node0x5635e01e9c80;
+	Node0x5635e01e4b90 -> Node0x5635e01e9c30;
+	Node0x5635e01e9c80 [shape=record,label="{xmlIO.c:4022:|{<s0>T|<s1>F}}"];
+	Node0x5635e01e9c80 -> Node0x5635e01e9be0;
+	Node0x5635e01e9c80 -> Node0x5635e01e9c30;
+	Node0x5635e01e9be0 [shape=record,label="{xmlIO.c:4023:|{<s0>T|<s1>F}}"];
+	Node0x5635e01e9be0 -> Node0x5635e01eaf90;
+	Node0x5635e01e9be0 -> Node0x5635e01eafe0;
+	Node0x5635e01eaf90 [shape=record,label="{xmlIO.c:4028:}"];
+	Node0x5635e01eaf90 -> Node0x5635e01e4ad0;
+	Node0x5635e01eafe0 [shape=record,label="{xmlIO.c:4032:}"];
+	Node0x5635e01eafe0 -> Node0x5635e01e4ad0;
+	Node0x5635e01e9c30 [shape=record,label="{xmlIO.c:4036:}"];
+	Node0x5635e01e9c30 -> Node0x5635e01e4ad0;
+	Node0x5635e01e4ad0 [shape=record,label="{xmlIO.c:4037:}"];
+}

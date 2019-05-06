@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlIOFTPMatch' function" {
+	label="CFG for 'xmlIOFTPMatch' function";
+
+	Node0x5635e00d0170 [shape=record,label="{xmlIO.c:2116:|{<s0>T|<s1>F}}"];
+	Node0x5635e00d0170:s0 -> Node0x5635e00d88a0;
+	Node0x5635e00d0170:s1 -> Node0x5635e00d4530;
+	Node0x5635e00d4530 [shape=record,label="{xmlIO.c:2118:}"];
+	Node0x5635e00d4530 -> Node0x5635e00d8ab0;
+	Node0x5635e00d88a0 [shape=record,label="{xmlIO.c:2119:}"];
+	Node0x5635e00d88a0 -> Node0x5635e00d8ab0;
+	Node0x5635e00d8ab0 [shape=record,label="{xmlIO.c:2120:}"];
+}

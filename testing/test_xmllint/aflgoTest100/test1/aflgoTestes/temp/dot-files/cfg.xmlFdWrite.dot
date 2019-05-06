@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlFdWrite' function" {
+	label="CFG for 'xmlFdWrite' function";
+
+	Node0x55ed348cd820 [shape=record,label="{xmlIO.c:750:|{<s0>T|<s1>F}}"];
+	Node0x55ed348cd820 -> Node0x55ed348d14b0;
+	Node0x55ed348cd820 -> Node0x55ed348d1500;
+	Node0x55ed348d14b0 [shape=record,label="{xmlIO.c:754:|{<s0>T|<s1>F}}"];
+	Node0x55ed348d14b0 -> Node0x55ed348d2530;
+	Node0x55ed348d14b0 -> Node0x55ed348d2580;
+	Node0x55ed348d2530 [shape=record,label="{xmlIO.c:755:}"];
+	Node0x55ed348d2530 -> Node0x55ed348d2580;
+	Node0x55ed348d2580 [shape=record,label="{xmlIO.c:756:}"];
+	Node0x55ed348d2580 -> Node0x55ed348d1500;
+	Node0x55ed348d1500 [shape=record,label="{xmlIO.c:757:}"];
+}

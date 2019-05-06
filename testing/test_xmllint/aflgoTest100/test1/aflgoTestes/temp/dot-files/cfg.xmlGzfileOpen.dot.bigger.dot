@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlGzfileOpen' function" {
+	label="CFG for 'xmlGzfileOpen' function";
+
+	Node0x55ed348574a0 [shape=record,label="{xmlIO.c:1120:|{<s0>T|<s1>F}}"];
+	Node0x55ed348574a0:s0 -> Node0x55ed348632d0;
+	Node0x55ed348574a0:s1 -> Node0x55ed34863320;
+	Node0x55ed348632d0 [shape=record,label="{xmlIO.c:1126:|{<s0>T|<s1>F}}"];
+	Node0x55ed348632d0:s0 -> Node0x55ed348638c0;
+	Node0x55ed348632d0:s1 -> Node0x55ed34863910;
+	Node0x55ed348638c0 [shape=record,label="{xmlIO.c:1128:}"];
+	Node0x55ed348638c0 -> Node0x55ed34863910;
+	Node0x55ed34863910 [shape=record,label="{xmlIO.c:1130:}"];
+	Node0x55ed34863910 -> Node0x55ed34863320;
+	Node0x55ed34863320 [shape=record,label="{xmlIO.c:1132:}"];
+}

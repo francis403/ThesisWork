@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlBufCat' function" {
+	label="CFG for 'xmlBufCat' function";
+
+	Node0x55756c0f4750 [shape=record,label="{buf.c:1007:|{<s0>T|<s1>F}}"];
+	Node0x55756c0f4750 -> Node0x55756c0f7af0;
+	Node0x55756c0f4750 -> Node0x55756c0f7c90;
+	Node0x55756c0f7c90 [shape=record,label="{buf.c:1008:|{<s0>T|<s1>F}}"];
+	Node0x55756c0f7c90 -> Node0x55756c0f7af0;
+	Node0x55756c0f7c90 -> Node0x55756c0b0000;
+	Node0x55756c0f7af0 [shape=record,label="{buf.c:1009:}"];
+	Node0x55756c0f7af0 -> Node0x55756beb1a70;
+	Node0x55756c0b0000 [shape=record,label="{buf.c:1010:|{<s0>T|<s1>F}}"];
+	Node0x55756c0b0000 -> Node0x55756c0f8ea0;
+	Node0x55756c0b0000 -> Node0x55756c0f8ef0;
+	Node0x55756c0f8ea0 [shape=record,label="{buf.c:1010:|{<s0>T|<s1>F}}"];
+	Node0x55756c0f8ea0 -> Node0x55756c0f9300;
+	Node0x55756c0f8ea0 -> Node0x55756c0f9350;
+	Node0x55756c0f9300 [shape=record,label="{buf.c:1010:}"];
+	Node0x55756c0f9300 -> Node0x55756c0f9350;
+	Node0x55756c0f9350 [shape=record,label="{buf.c:1010:}"];
+	Node0x55756c0f9350 -> Node0x55756c0f8ef0;
+	Node0x55756c0f8ef0 [shape=record,label="{buf.c:1010:|{<s0>T|<s1>F}}"];
+	Node0x55756c0f8ef0 -> Node0x55756c0f9980;
+	Node0x55756c0f8ef0 -> Node0x55756c0f99d0;
+	Node0x55756c0f9980 [shape=record,label="{buf.c:1010:|{<s0>T|<s1>F}}"];
+	Node0x55756c0f9980 -> Node0x55756c0f9f20;
+	Node0x55756c0f9980 -> Node0x55756c0f9f70;
+	Node0x55756c0f9f20 [shape=record,label="{buf.c:1010:}"];
+	Node0x55756c0f9f20 -> Node0x55756c0f9f70;
+	Node0x55756c0f9f70 [shape=record,label="{buf.c:1010:}"];
+	Node0x55756c0f9f70 -> Node0x55756c0f99d0;
+	Node0x55756c0f99d0 [shape=record,label="{buf.c:1011:|{<s0>T|<s1>F}}"];
+	Node0x55756c0f99d0 -> Node0x55756c0fa6a0;
+	Node0x55756c0f99d0 -> Node0x55756c0fa6f0;
+	Node0x55756c0fa6a0 [shape=record,label="{buf.c:1011:}"];
+	Node0x55756c0fa6a0 -> Node0x55756beb1a70;
+	Node0x55756c0fa6f0 [shape=record,label="{buf.c:1012:|{<s0>T|<s1>F}}"];
+	Node0x55756c0fa6f0 -> Node0x55756c0facb0;
+	Node0x55756c0fa6f0 -> Node0x55756c0fad00;
+	Node0x55756c0facb0 [shape=record,label="{buf.c:1012:}"];
+	Node0x55756c0facb0 -> Node0x55756beb1a70;
+	Node0x55756c0fad00 [shape=record,label="{buf.c:1013:}"];
+	Node0x55756c0fad00 -> Node0x55756beb1a70;
+	Node0x55756beb1a70 [shape=record,label="{buf.c:1014:}"];
+}

@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlACatalogRemove' function" {
+	label="CFG for 'xmlACatalogRemove' function";
+
+	Node0x55f367747ab0 [shape=record,label="{catalog.c:3000:|{<s0>T|<s1>F}}"];
+	Node0x55f367747ab0:s0 -> Node0x55f3677512c0;
+	Node0x55f367747ab0:s1 -> Node0x55f367751360;
+	Node0x55f367751360 [shape=record,label="{catalog.c:3003:|{<s0>T|<s1>F}}"];
+	Node0x55f367751360:s0 -> Node0x55f3677512c0;
+	Node0x55f367751360:s1 -> Node0x55f367751310;
+	Node0x55f3677512c0 [shape=record,label="{catalog.c:3004:}"];
+	Node0x55f3677512c0 -> Node0x55f367749450;
+	Node0x55f367751310 [shape=record,label="{catalog.c:3006:|{<s0>T|<s1>F}}"];
+	Node0x55f367751310:s0 -> Node0x55f367751d10;
+	Node0x55f367751310:s1 -> Node0x55f367751db0;
+	Node0x55f367751d10 [shape=record,label="{catalog.c:3007:}"];
+	Node0x55f367751d10 -> Node0x55f367751d60;
+	Node0x55f367751db0 [shape=record,label="{catalog.c:3009:|{<s0>T|<s1>F}}"];
+	Node0x55f367751db0:s0 -> Node0x55f3677531f0;
+	Node0x55f367751db0:s1 -> Node0x55f367753240;
+	Node0x55f3677531f0 [shape=record,label="{catalog.c:3011:}"];
+	Node0x55f3677531f0 -> Node0x55f367753240;
+	Node0x55f367753240 [shape=record,label="{%26}"];
+	Node0x55f367753240 -> Node0x55f367751d60;
+	Node0x55f367751d60 [shape=record,label="{catalog.c:3013:}"];
+	Node0x55f367751d60 -> Node0x55f367749450;
+	Node0x55f367749450 [shape=record,label="{catalog.c:3014:}"];
+}

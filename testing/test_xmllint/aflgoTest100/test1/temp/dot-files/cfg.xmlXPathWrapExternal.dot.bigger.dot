@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathWrapExternal' function" {
+	label="CFG for 'xmlXPathWrapExternal' function";
+
+	Node0x55e6b2626580 [shape=record,label="{xpath.c:5376:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2626580:s0 -> Node0x55e6b2627fd0;
+	Node0x55e6b2626580:s1 -> Node0x55e6b2628020;
+	Node0x55e6b2627fd0 [shape=record,label="{xpath.c:5381:}"];
+	Node0x55e6b2627fd0 -> Node0x55e6b2626c70;
+	Node0x55e6b2628020 [shape=record,label="{xpath.c:5384:}"];
+	Node0x55e6b2628020 -> Node0x55e6b2626c70;
+	Node0x55e6b2626c70 [shape=record,label="{xpath.c:5391:}"];
+}

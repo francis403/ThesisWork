@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlModuleClose' function" {
+	label="CFG for 'xmlModuleClose' function";
+
+	Node0x5556ed4f3ce0 [shape=record,label="{xmlmodule.c:155:|{<s0>T|<s1>F}}"];
+	Node0x5556ed4f3ce0:s0 -> Node0x5556ed4f6810;
+	Node0x5556ed4f3ce0:s1 -> Node0x5556ed4f6860;
+	Node0x5556ed4f6810 [shape=record,label="{xmlmodule.c:160:}"];
+	Node0x5556ed4f6810 -> Node0x5556ed4f5b90;
+	Node0x5556ed4f6860 [shape=record,label="{xmlmodule.c:166:|{<s0>T|<s1>F}}"];
+	Node0x5556ed4f6860:s0 -> Node0x5556ed4f8510;
+	Node0x5556ed4f6860:s1 -> Node0x5556ed4f8560;
+	Node0x5556ed4f8510 [shape=record,label="{xmlmodule.c:171:}"];
+	Node0x5556ed4f8510 -> Node0x5556ed4f5b90;
+	Node0x5556ed4f8560 [shape=record,label="{xmlmodule.c:176:}"];
+	Node0x5556ed4f8560 -> Node0x5556ed4f5b90;
+	Node0x5556ed4f5b90 [shape=record,label="{xmlmodule.c:178:}"];
+}

@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlAutomataNewOnceTrans' function" {
+	label="CFG for 'xmlAutomataNewOnceTrans' function";
+
+	Node0x563d9d614eb0 [shape=record,label="{xmlregexp.c:6116:|{<s0>T|<s1>F}}"];
+	Node0x563d9d614eb0 -> Node0x563d9d617180;
+	Node0x563d9d614eb0 -> Node0x563d9d6172a0;
+	Node0x563d9d6172a0 [shape=record,label="{xmlregexp.c:6122:|{<s0>T|<s1>F}}"];
+	Node0x563d9d6172a0 -> Node0x563d9d617180;
+	Node0x563d9d6172a0 -> Node0x563d9d617220;
+	Node0x563d9d617220 [shape=record,label="{xmlregexp.c:6122:|{<s0>T|<s1>F}}"];
+	Node0x563d9d617220 -> Node0x563d9d617180;
+	Node0x563d9d617220 -> Node0x563d9d6171d0;
+	Node0x563d9d617180 [shape=record,label="{xmlregexp.c:6123:}"];
+	Node0x563d9d617180 -> Node0x563d9d6154f0;
+	Node0x563d9d6171d0 [shape=record,label="{xmlregexp.c:6124:|{<s0>T|<s1>F}}"];
+	Node0x563d9d6171d0 -> Node0x563d9d617b60;
+	Node0x563d9d6171d0 -> Node0x563d9d617bb0;
+	Node0x563d9d617b60 [shape=record,label="{xmlregexp.c:6125:}"];
+	Node0x563d9d617b60 -> Node0x563d9d6154f0;
+	Node0x563d9d617bb0 [shape=record,label="{xmlregexp.c:6126:|{<s0>T|<s1>F}}"];
+	Node0x563d9d617bb0 -> Node0x563d9d618010;
+	Node0x563d9d617bb0 -> Node0x563d9d6180b0;
+	Node0x563d9d6180b0 [shape=record,label="{xmlregexp.c:6126:|{<s0>T|<s1>F}}"];
+	Node0x563d9d6180b0 -> Node0x563d9d618010;
+	Node0x563d9d6180b0 -> Node0x563d9d618060;
+	Node0x563d9d618010 [shape=record,label="{xmlregexp.c:6127:}"];
+	Node0x563d9d618010 -> Node0x563d9d6154f0;
+	Node0x563d9d618060 [shape=record,label="{xmlregexp.c:6128:|{<s0>T|<s1>F}}"];
+	Node0x563d9d618060 -> Node0x563d9d6189a0;
+	Node0x563d9d618060 -> Node0x563d9d6189f0;
+	Node0x563d9d6189a0 [shape=record,label="{xmlregexp.c:6130:}"];
+	Node0x563d9d6189a0 -> Node0x563d9d6154f0;
+	Node0x563d9d6189f0 [shape=record,label="{xmlregexp.c:6131:|{<s0>T|<s1>F}}"];
+	Node0x563d9d6189f0 -> Node0x563d9d61a600;
+	Node0x563d9d6189f0 -> Node0x563d9d61a650;
+	Node0x563d9d61a600 [shape=record,label="{xmlregexp.c:6145:}"];
+	Node0x563d9d61a600 -> Node0x563d9d61a650;
+	Node0x563d9d61a650 [shape=record,label="{xmlregexp.c:6148:}"];
+	Node0x563d9d61a650 -> Node0x563d9d6154f0;
+	Node0x563d9d6154f0 [shape=record,label="{xmlregexp.c:6152:}"];
+}

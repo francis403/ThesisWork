@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlXPathIsNodeType' function" {
+	label="CFG for 'libxml_xmlXPathIsNodeType' function";
+
+	Node0x55f93183c2a0 [shape=record,label="{libxml2-py.c:13422:|{<s0>T|<s1>F}}"];
+	Node0x55f93183c2a0:s0 -> Node0x55f93183f220;
+	Node0x55f93183c2a0:s1 -> Node0x55f93183f1d0;
+	Node0x55f93183f1d0 [shape=record,label="{libxml2-py.c:13428:}"];
+	Node0x55f93183f1d0 -> Node0x55f93183c530;
+	Node0x55f93183f220 [shape=record,label="{libxml2-py.c:13430:}"];
+	Node0x55f93183f220 -> Node0x55f93183c530;
+	Node0x55f93183c530 [shape=record,label="{libxml2-py.c:13433:}"];
+}

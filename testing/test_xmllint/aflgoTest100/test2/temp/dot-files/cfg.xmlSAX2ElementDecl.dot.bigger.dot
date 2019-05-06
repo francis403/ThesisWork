@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlSAX2ElementDecl' function" {
+	label="CFG for 'xmlSAX2ElementDecl' function";
+
+	Node0x559fe3d324d0 [shape=record,label="{SAX2.c:802:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d324d0:s0 -> Node0x559fe3d45460;
+	Node0x559fe3d324d0:s1 -> Node0x559fe3d45500;
+	Node0x559fe3d45500 [shape=record,label="{SAX2.c:808:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d45500:s0 -> Node0x559fe3d45460;
+	Node0x559fe3d45500:s1 -> Node0x559fe3d454b0;
+	Node0x559fe3d45460 [shape=record,label="{SAX2.c:809:}"];
+	Node0x559fe3d45460 -> Node0x559fe3d486a0;
+	Node0x559fe3d454b0 [shape=record,label="{SAX2.c:816:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d454b0:s0 -> Node0x559fe3d45ba0;
+	Node0x559fe3d454b0:s1 -> Node0x559fe3d45c40;
+	Node0x559fe3d45ba0 [shape=record,label="{SAX2.c:817:}"];
+	Node0x559fe3d45ba0 -> Node0x559fe3d45bf0;
+	Node0x559fe3d45c40 [shape=record,label="{SAX2.c:819:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d45c40:s0 -> Node0x559fe3d46fa0;
+	Node0x559fe3d45c40:s1 -> Node0x559fe3d47040;
+	Node0x559fe3d46fa0 [shape=record,label="{SAX2.c:820:}"];
+	Node0x559fe3d46fa0 -> Node0x559fe3d46ff0;
+	Node0x559fe3d47040 [shape=record,label="{SAX2.c:823:}"];
+	Node0x559fe3d47040 -> Node0x559fe3d486a0;
+	Node0x559fe3d46ff0 [shape=record,label="{%50}"];
+	Node0x559fe3d46ff0 -> Node0x559fe3d45bf0;
+	Node0x559fe3d45bf0 [shape=record,label="{SAX2.c:829:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d45bf0:s0 -> Node0x559fe3d48040;
+	Node0x559fe3d45bf0:s1 -> Node0x559fe3d48090;
+	Node0x559fe3d48040 [shape=record,label="{SAX2.c:830:}"];
+	Node0x559fe3d48040 -> Node0x559fe3d48090;
+	Node0x559fe3d48090 [shape=record,label="{SAX2.c:831:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d48090:s0 -> Node0x559fe3d487f0;
+	Node0x559fe3d48090:s1 -> Node0x559fe3d486a0;
+	Node0x559fe3d487f0 [shape=record,label="{SAX2.c:831:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d487f0:s0 -> Node0x559fe3d48770;
+	Node0x559fe3d487f0:s1 -> Node0x559fe3d486a0;
+	Node0x559fe3d48770 [shape=record,label="{SAX2.c:832:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d48770:s0 -> Node0x559fe3d486f0;
+	Node0x559fe3d48770:s1 -> Node0x559fe3d486a0;
+	Node0x559fe3d486f0 [shape=record,label="{SAX2.c:832:|{<s0>T|<s1>F}}"];
+	Node0x559fe3d486f0:s0 -> Node0x559fe3d48650;
+	Node0x559fe3d486f0:s1 -> Node0x559fe3d486a0;
+	Node0x559fe3d48650 [shape=record,label="{SAX2.c:834:}"];
+	Node0x559fe3d48650 -> Node0x559fe3d486a0;
+	Node0x559fe3d486a0 [shape=record,label="{SAX2.c:836:}"];
+}

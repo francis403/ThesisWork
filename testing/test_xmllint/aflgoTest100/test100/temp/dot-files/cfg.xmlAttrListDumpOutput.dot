@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlAttrListDumpOutput' function" {
+	label="CFG for 'xmlAttrListDumpOutput' function";
+
+	Node0x556f176b2c60 [shape=record,label="{xmlsave.c:794:|{<s0>T|<s1>F}}"];
+	Node0x556f176b2c60 -> Node0x556f176b30e0;
+	Node0x556f176b2c60 -> Node0x556f176b3130;
+	Node0x556f176b30e0 [shape=record,label="{xmlsave.c:795:}"];
+	Node0x556f176b30e0 -> Node0x556f176b4eb0;
+	Node0x556f176b3130 [shape=record,label="{xmlsave.c:796:}"];
+	Node0x556f176b3130 -> Node0x556f176b4cd0;
+	Node0x556f176b4cd0 [shape=record,label="{xmlsave.c:796:|{<s0>T|<s1>F}}"];
+	Node0x556f176b4cd0 -> Node0x556f176b5090;
+	Node0x556f176b4cd0 -> Node0x556f176b4eb0;
+	Node0x556f176b5090 [shape=record,label="{xmlsave.c:797:}"];
+	Node0x556f176b5090 -> Node0x556f176b4cd0;
+	Node0x556f176b4eb0 [shape=record,label="{xmlsave.c:800:}"];
+}

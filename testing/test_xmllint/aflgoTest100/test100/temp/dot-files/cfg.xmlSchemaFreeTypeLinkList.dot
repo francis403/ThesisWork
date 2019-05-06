@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaFreeTypeLinkList' function" {
+	label="CFG for 'xmlSchemaFreeTypeLinkList' function";
+
+	Node0x5583532b1fe0 [shape=record,label="{xmlschemas.c:3883:}"];
+	Node0x5583532b1fe0 -> Node0x5583532b29b0;
+	Node0x5583532b29b0 [shape=record,label="{xmlschemas.c:3887:|{<s0>T|<s1>F}}"];
+	Node0x5583532b29b0 -> Node0x5583532b2cf0;
+	Node0x5583532b29b0 -> Node0x5583532b2b70;
+	Node0x5583532b2cf0 [shape=record,label="{xmlschemas.c:3888:}"];
+	Node0x5583532b2cf0 -> Node0x5583532b29b0;
+	Node0x5583532b2b70 [shape=record,label="{xmlschemas.c:3892:}"];
+}

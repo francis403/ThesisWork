@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlParseSGMLCatalogComment' function" {
+	label="CFG for 'xmlParseSGMLCatalogComment' function";
+
+	Node0x5650cc976a40 [shape=record,label="{catalog.c:2161:|{<s0>T|<s1>F}}"];
+	Node0x5650cc976a40 -> Node0x5650cc94e6d0;
+	Node0x5650cc976a40 -> Node0x5650cc9771f0;
+	Node0x5650cc9771f0 [shape=record,label="{catalog.c:2162:|{<s0>T|<s1>F}}"];
+	Node0x5650cc9771f0 -> Node0x5650cc94e6d0;
+	Node0x5650cc9771f0 -> Node0x5650cc8de700;
+	Node0x5650cc94e6d0 [shape=record,label="{catalog.c:2163:}"];
+	Node0x5650cc94e6d0 -> Node0x5650cc976a90;
+	Node0x5650cc8de700 [shape=record,label="{catalog.c:2164:}"];
+	Node0x5650cc8de700 -> Node0x5650cc977d80;
+	Node0x5650cc977d80 [shape=record,label="{catalog.c:2165:|{<s0>T|<s1>F}}"];
+	Node0x5650cc977d80 -> Node0x5650cc978070;
+	Node0x5650cc977d80 -> Node0x5650cc978020;
+	Node0x5650cc978070 [shape=record,label="{catalog.c:2165:|{<s0>T|<s1>F}}"];
+	Node0x5650cc978070 -> Node0x5650cc9784d0;
+	Node0x5650cc978070 -> Node0x5650cc978520;
+	Node0x5650cc978520 [shape=record,label="{catalog.c:2165:}"];
+	Node0x5650cc978520 -> Node0x5650cc9784d0;
+	Node0x5650cc9784d0 [shape=record,label="{%31}"];
+	Node0x5650cc9784d0 -> Node0x5650cc978020;
+	Node0x5650cc978020 [shape=record,label="{catalog.c:2165:|{<s0>T|<s1>F}}"];
+	Node0x5650cc978020 -> Node0x5650cc978d90;
+	Node0x5650cc978020 -> Node0x5650cc977fa0;
+	Node0x5650cc978d90 [shape=record,label="{catalog.c:2166:}"];
+	Node0x5650cc978d90 -> Node0x5650cc977d80;
+	Node0x5650cc977fa0 [shape=record,label="{catalog.c:2167:|{<s0>T|<s1>F}}"];
+	Node0x5650cc977fa0 -> Node0x5650cc979080;
+	Node0x5650cc977fa0 -> Node0x5650cc9790d0;
+	Node0x5650cc979080 [shape=record,label="{catalog.c:2168:}"];
+	Node0x5650cc979080 -> Node0x5650cc976a90;
+	Node0x5650cc9790d0 [shape=record,label="{catalog.c:2170:}"];
+	Node0x5650cc9790d0 -> Node0x5650cc976a90;
+	Node0x5650cc976a90 [shape=record,label="{catalog.c:2171:}"];
+}

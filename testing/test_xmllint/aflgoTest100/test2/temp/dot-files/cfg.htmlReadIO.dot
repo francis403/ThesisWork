@@ -1,0 +1,32 @@
+digraph "CFG for 'htmlReadIO' function" {
+	label="CFG for 'htmlReadIO' function";
+
+	Node0x5607448cf480 [shape=record,label="{HTMLparser.c:6934:|{<s0>T|<s1>F}}"];
+	Node0x5607448cf480 -> Node0x5607448d6220;
+	Node0x5607448cf480 -> Node0x5607448d6270;
+	Node0x5607448d6220 [shape=record,label="{HTMLparser.c:6942:}"];
+	Node0x5607448d6220 -> Node0x5607448d1040;
+	Node0x5607448d6270 [shape=record,label="{HTMLparser.c:6943:|{<s0>T|<s1>F}}"];
+	Node0x5607448d6270 -> Node0x5607448d73c0;
+	Node0x5607448d6270 -> Node0x5607448d7410;
+	Node0x5607448d73c0 [shape=record,label="{HTMLparser.c:6948:|{<s0>T|<s1>F}}"];
+	Node0x5607448d73c0 -> Node0x5607448d7740;
+	Node0x5607448d73c0 -> Node0x5607448d7790;
+	Node0x5607448d7740 [shape=record,label="{HTMLparser.c:6949:}"];
+	Node0x5607448d7740 -> Node0x5607448d7790;
+	Node0x5607448d7790 [shape=record,label="{HTMLparser.c:6950:}"];
+	Node0x5607448d7790 -> Node0x5607448d1040;
+	Node0x5607448d7410 [shape=record,label="{HTMLparser.c:6952:|{<s0>T|<s1>F}}"];
+	Node0x5607448d7410 -> Node0x5607448d7f70;
+	Node0x5607448d7410 -> Node0x5607448d7fc0;
+	Node0x5607448d7f70 [shape=record,label="{HTMLparser.c:6954:}"];
+	Node0x5607448d7f70 -> Node0x5607448d1040;
+	Node0x5607448d7fc0 [shape=record,label="{HTMLparser.c:6957:|{<s0>T|<s1>F}}"];
+	Node0x5607448d7fc0 -> Node0x5607448d8960;
+	Node0x5607448d7fc0 -> Node0x5607448d89b0;
+	Node0x5607448d8960 [shape=record,label="{HTMLparser.c:6959:}"];
+	Node0x5607448d8960 -> Node0x5607448d1040;
+	Node0x5607448d89b0 [shape=record,label="{HTMLparser.c:6963:}"];
+	Node0x5607448d89b0 -> Node0x5607448d1040;
+	Node0x5607448d1040 [shape=record,label="{HTMLparser.c:6965:}"];
+}

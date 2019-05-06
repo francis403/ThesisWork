@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlTextReaderLocatorLineNumber' function" {
+	label="CFG for 'xmlTextReaderLocatorLineNumber' function";
+
+	Node0x5619bd6aed10 [shape=record,label="{xmlreader.c:4776:|{<s0>T|<s1>F}}"];
+	Node0x5619bd6aed10:s0 -> Node0x5619bd6b9120;
+	Node0x5619bd6aed10:s1 -> Node0x5619bd6b9170;
+	Node0x5619bd6b9120 [shape=record,label="{xmlreader.c:4782:}"];
+	Node0x5619bd6b9120 -> Node0x5619bd6b3f30;
+	Node0x5619bd6b9170 [shape=record,label="{xmlreader.c:4783:|{<s0>T|<s1>F}}"];
+	Node0x5619bd6b9170:s0 -> Node0x5619bd6b9630;
+	Node0x5619bd6b9170:s1 -> Node0x5619bd6b96d0;
+	Node0x5619bd6b9630 [shape=record,label="{xmlreader.c:4784:}"];
+	Node0x5619bd6b9630 -> Node0x5619bd6b9680;
+	Node0x5619bd6b96d0 [shape=record,label="{xmlreader.c:4788:|{<s0>T|<s1>F}}"];
+	Node0x5619bd6b96d0:s0 -> Node0x5619bd6baab0;
+	Node0x5619bd6b96d0:s1 -> Node0x5619bd6baa60;
+	Node0x5619bd6baab0 [shape=record,label="{xmlreader.c:4790:|{<s0>T|<s1>F}}"];
+	Node0x5619bd6baab0:s0 -> Node0x5619bd6baa10;
+	Node0x5619bd6baab0:s1 -> Node0x5619bd6baa60;
+	Node0x5619bd6baa10 [shape=record,label="{xmlreader.c:4791:}"];
+	Node0x5619bd6baa10 -> Node0x5619bd6baa60;
+	Node0x5619bd6baa60 [shape=record,label="{xmlreader.c:4792:|{<s0>T|<s1>F}}"];
+	Node0x5619bd6baa60:s0 -> Node0x5619bd6bb7a0;
+	Node0x5619bd6baa60:s1 -> Node0x5619bd6bb840;
+	Node0x5619bd6bb7a0 [shape=record,label="{xmlreader.c:4793:}"];
+	Node0x5619bd6bb7a0 -> Node0x5619bd6bb7f0;
+	Node0x5619bd6bb840 [shape=record,label="{xmlreader.c:4796:}"];
+	Node0x5619bd6bb840 -> Node0x5619bd6bb7f0;
+	Node0x5619bd6bb7f0 [shape=record,label="{%45}"];
+	Node0x5619bd6bb7f0 -> Node0x5619bd6b9680;
+	Node0x5619bd6b9680 [shape=record,label="{xmlreader.c:4800:}"];
+	Node0x5619bd6b9680 -> Node0x5619bd6b3f30;
+	Node0x5619bd6b3f30 [shape=record,label="{xmlreader.c:4801:}"];
+}

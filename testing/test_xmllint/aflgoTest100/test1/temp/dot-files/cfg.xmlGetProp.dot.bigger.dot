@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlGetProp' function" {
+	label="CFG for 'xmlGetProp' function";
+
+	Node0x55ad0b7a5250 [shape=record,label="{tree.c:6718:|{<s0>T|<s1>F}}"];
+	Node0x55ad0b7a5250:s0 -> Node0x55ad0bd967b0;
+	Node0x55ad0b7a5250:s1 -> Node0x55ad0bd96800;
+	Node0x55ad0bd967b0 [shape=record,label="{tree.c:6723:}"];
+	Node0x55ad0bd967b0 -> Node0x55ad0bd94890;
+	Node0x55ad0bd96800 [shape=record,label="{tree.c:6724:}"];
+	Node0x55ad0bd96800 -> Node0x55ad0bd94890;
+	Node0x55ad0bd94890 [shape=record,label="{tree.c:6725:}"];
+}

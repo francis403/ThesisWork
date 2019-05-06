@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlXPathCastNodeToNumber' function" {
+	label="CFG for 'xmlXPathCastNodeToNumber' function";
+
+	Node0x55e6b2534c00 [shape=record,label="{xpath.c:5895:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2534c00 -> Node0x55e6b2536940;
+	Node0x55e6b2534c00 -> Node0x55e6b2536990;
+	Node0x55e6b2536940 [shape=record,label="{xpath.c:5900:}"];
+	Node0x55e6b2536940 -> Node0x55e6b2534e80;
+	Node0x55e6b2536990 [shape=record,label="{xpath.c:5901:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2536990 -> Node0x55e6b2534730;
+	Node0x55e6b2536990 -> Node0x55e6b2534690;
+	Node0x55e6b2534730 [shape=record,label="{xpath.c:5903:}"];
+	Node0x55e6b2534730 -> Node0x55e6b2534e80;
+	Node0x55e6b2534690 [shape=record,label="{xpath.c:5904:}"];
+	Node0x55e6b2534690 -> Node0x55e6b2534e80;
+	Node0x55e6b2534e80 [shape=record,label="{xpath.c:5908:}"];
+}

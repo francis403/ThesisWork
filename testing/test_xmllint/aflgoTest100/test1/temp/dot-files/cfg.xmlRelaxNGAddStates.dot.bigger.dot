@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlRelaxNGAddStates' function" {
+	label="CFG for 'xmlRelaxNGAddStates' function";
+
+	Node0x555e9c7c6f90 [shape=record,label="{relaxng.c:1093:|{<s0>T|<s1>F}}"];
+	Node0x555e9c7c6f90:s0 -> Node0x555e9c7ccef0;
+	Node0x555e9c7c6f90:s1 -> Node0x555e9c7ccf90;
+	Node0x555e9c7ccf90 [shape=record,label="{relaxng.c:1099:|{<s0>T|<s1>F}}"];
+	Node0x555e9c7ccf90:s0 -> Node0x555e9c7ccef0;
+	Node0x555e9c7ccf90:s1 -> Node0x555e9c7ccf40;
+	Node0x555e9c7ccef0 [shape=record,label="{relaxng.c:1100:}"];
+	Node0x555e9c7ccef0 -> Node0x555e9c7c6fe0;
+	Node0x555e9c7ccf40 [shape=record,label="{relaxng.c:1102:|{<s0>T|<s1>F}}"];
+	Node0x555e9c7ccf40:s0 -> Node0x555e9c7cd750;
+	Node0x555e9c7ccf40:s1 -> Node0x555e9c7cd7a0;
+	Node0x555e9c7cd750 [shape=record,label="{relaxng.c:1103:|{<s0>T|<s1>F}}"];
+	Node0x555e9c7cd750:s0 -> Node0x555e9c7ceae0;
+	Node0x555e9c7cd750:s1 -> Node0x555e9c7ceb30;
+	Node0x555e9c7ceae0 [shape=record,label="{relaxng.c:1112:}"];
+	Node0x555e9c7ceae0 -> Node0x555e9c7c6fe0;
+	Node0x555e9c7ceb30 [shape=record,label="{relaxng.c:1115:}"];
+	Node0x555e9c7ceb30 -> Node0x555e9c7cd7a0;
+	Node0x555e9c7cd7a0 [shape=record,label="{relaxng.c:1118:}"];
+	Node0x555e9c7cd7a0 -> Node0x555e9c7cf9b0;
+	Node0x555e9c7cf9b0 [shape=record,label="{relaxng.c:1118:|{<s0>T|<s1>F}}"];
+	Node0x555e9c7cf9b0:s0 -> Node0x555e9c7cfc90;
+	Node0x555e9c7cf9b0:s1 -> Node0x555e9c7cf810;
+	Node0x555e9c7cfc90 [shape=record,label="{relaxng.c:1119:|{<s0>T|<s1>F}}"];
+	Node0x555e9c7cfc90:s0 -> Node0x555e9c7d0160;
+	Node0x555e9c7cfc90:s1 -> Node0x555e9c7d01b0;
+	Node0x555e9c7d0160 [shape=record,label="{relaxng.c:1120:}"];
+	Node0x555e9c7d0160 -> Node0x555e9c7c6fe0;
+	Node0x555e9c7d01b0 [shape=record,label="{relaxng.c:1123:}"];
+	Node0x555e9c7d01b0 -> Node0x555e9c7cfc00;
+	Node0x555e9c7cfc00 [shape=record,label="{relaxng.c:1118:}"];
+	Node0x555e9c7cfc00 -> Node0x555e9c7cf9b0;
+	Node0x555e9c7cf810 [shape=record,label="{relaxng.c:1124:}"];
+	Node0x555e9c7cf810 -> Node0x555e9c7c6fe0;
+	Node0x555e9c7c6fe0 [shape=record,label="{relaxng.c:1126:}"];
+}

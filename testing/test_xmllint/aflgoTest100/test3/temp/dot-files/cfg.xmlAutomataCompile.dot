@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlAutomataCompile' function" {
+	label="CFG for 'xmlAutomataCompile' function";
+
+	Node0x5580ae9c5850 [shape=record,label="{xmlregexp.c:6304:|{<s0>T|<s1>F}}"];
+	Node0x5580ae9c5850 -> Node0x5580ae9c59b0;
+	Node0x5580ae9c5850 -> Node0x5580ae9c8420;
+	Node0x5580ae9c8420 [shape=record,label="{xmlregexp.c:6307:|{<s0>T|<s1>F}}"];
+	Node0x5580ae9c8420 -> Node0x5580ae9c59b0;
+	Node0x5580ae9c8420 -> Node0x5580ae9c83d0;
+	Node0x5580ae9c59b0 [shape=record,label="{xmlregexp.c:6307:}"];
+	Node0x5580ae9c59b0 -> Node0x5580ae9c5570;
+	Node0x5580ae9c83d0 [shape=record,label="{xmlregexp.c:6308:}"];
+	Node0x5580ae9c83d0 -> Node0x5580ae9c5570;
+	Node0x5580ae9c5570 [shape=record,label="{xmlregexp.c:6313:}"];
+}

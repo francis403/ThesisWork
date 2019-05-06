@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlNanoHTTPNewCtxt' function" {
+	label="CFG for 'xmlNanoHTTPNewCtxt' function";
+
+	Node0x564de2470a80 [shape=record,label="{nanohttp.c:396:|{<s0>T|<s1>F}}"];
+	Node0x564de2470a80:s0 -> Node0x564de2471840;
+	Node0x564de2470a80:s1 -> Node0x564de2471890;
+	Node0x564de2471840 [shape=record,label="{nanohttp.c:401:}"];
+	Node0x564de2471840 -> Node0x564de2470ad0;
+	Node0x564de2471890 [shape=record,label="{nanohttp.c:405:}"];
+	Node0x564de2471890 -> Node0x564de2470ad0;
+	Node0x564de2470ad0 [shape=record,label="{nanohttp.c:414:}"];
+}

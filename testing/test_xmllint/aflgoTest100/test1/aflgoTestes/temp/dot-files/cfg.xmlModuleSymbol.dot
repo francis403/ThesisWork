@@ -1,0 +1,30 @@
+digraph "CFG for 'xmlModuleSymbol' function" {
+	label="CFG for 'xmlModuleSymbol' function";
+
+	Node0x5556ed4d2560 [shape=record,label="{xmlmodule.c:119:|{<s0>T|<s1>F}}"];
+	Node0x5556ed4d2560:s0 -> Node0x5556ed4c6f50;
+	Node0x5556ed4d2560:s1 -> Node0x5556ed4f1580;
+	Node0x5556ed4f1580 [shape=record,label="{xmlmodule.c:123:|{<s0>T|<s1>F}}"];
+	Node0x5556ed4f1580:s0 -> Node0x5556ed4c6f50;
+	Node0x5556ed4f1580:s1 -> Node0x5556ed4f1500;
+	Node0x5556ed4f1500 [shape=record,label="{xmlmodule.c:123:|{<s0>T|<s1>F}}"];
+	Node0x5556ed4f1500:s0 -> Node0x5556ed4c6f50;
+	Node0x5556ed4f1500:s1 -> Node0x5556ed4f14b0;
+	Node0x5556ed4c6f50 [shape=record,label="{xmlmodule.c:124:}"];
+	Node0x5556ed4c6f50 -> Node0x5556ed4f0260;
+	Node0x5556ed4f14b0 [shape=record,label="{xmlmodule.c:130:|{<s0>T|<s1>F}}"];
+	Node0x5556ed4f14b0:s0 -> Node0x5556ed4ca170;
+	Node0x5556ed4f14b0:s1 -> Node0x5556ed4f4640;
+	Node0x5556ed4ca170 [shape=record,label="{xmlmodule.c:135:|{<s0>T|<s1>F}}"];
+	Node0x5556ed4ca170:s0 -> Node0x5556ed4f4ea0;
+	Node0x5556ed4ca170:s1 -> Node0x5556ed4f4ef0;
+	Node0x5556ed4f4ea0 [shape=record,label="{xmlmodule.c:137:}"];
+	Node0x5556ed4f4ea0 -> Node0x5556ed4f4f40;
+	Node0x5556ed4f4ef0 [shape=record,label="{xmlmodule.c:137:}"];
+	Node0x5556ed4f4ef0 -> Node0x5556ed4f4f40;
+	Node0x5556ed4f4f40 [shape=record,label="{xmlmodule.c:137:}"];
+	Node0x5556ed4f4f40 -> Node0x5556ed4f0260;
+	Node0x5556ed4f4640 [shape=record,label="{xmlmodule.c:141:}"];
+	Node0x5556ed4f4640 -> Node0x5556ed4f0260;
+	Node0x5556ed4f0260 [shape=record,label="{xmlmodule.c:142:}"];
+}

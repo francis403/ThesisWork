@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlSchemaAttributeGroupExpandRefs' function" {
+	label="CFG for 'xmlSchemaAttributeGroupExpandRefs' function";
+
+	Node0x55d02636fb00 [shape=record,label="{xmlschemas.c:19367:|{<s0>T|<s1>F}}"];
+	Node0x55d02636fb00 -> Node0x55d026372dd0;
+	Node0x55d02636fb00 -> Node0x55d026373950;
+	Node0x55d026373950 [shape=record,label="{xmlschemas.c:19371:|{<s0>T|<s1>F}}"];
+	Node0x55d026373950 -> Node0x55d026372dd0;
+	Node0x55d026373950 -> Node0x55d026373900;
+	Node0x55d026372dd0 [shape=record,label="{xmlschemas.c:19372:}"];
+	Node0x55d026372dd0 -> Node0x55d02636fb50;
+	Node0x55d026373900 [shape=record,label="{xmlschemas.c:19374:|{<s0>T|<s1>F}}"];
+	Node0x55d026373900 -> Node0x55d026374430;
+	Node0x55d026373900 -> Node0x55d026374480;
+	Node0x55d026374430 [shape=record,label="{xmlschemas.c:19377:}"];
+	Node0x55d026374430 -> Node0x55d02636fb50;
+	Node0x55d026374480 [shape=record,label="{xmlschemas.c:19378:}"];
+	Node0x55d026374480 -> Node0x55d02636fb50;
+	Node0x55d02636fb50 [shape=record,label="{xmlschemas.c:19379:}"];
+}

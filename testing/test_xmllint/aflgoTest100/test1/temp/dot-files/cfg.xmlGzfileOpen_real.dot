@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlGzfileOpen_real' function" {
+	label="CFG for 'xmlGzfileOpen_real' function";
+
+	Node0x55ed348619e0 [shape=record,label="{xmlIO.c:1070:|{<s0>T|<s1>F}}"];
+	Node0x55ed348619e0 -> Node0x55ed34864d40;
+	Node0x55ed348619e0 -> Node0x55ed34864cf0;
+	Node0x55ed34864cf0 [shape=record,label="{xmlIO.c:1075:|{<s0>T|<s1>F}}"];
+	Node0x55ed34864cf0 -> Node0x55ed34867380;
+	Node0x55ed34864cf0 -> Node0x55ed34867330;
+	Node0x55ed34867380 [shape=record,label="{xmlIO.c:1077:|{<s0>T|<s1>F}}"];
+	Node0x55ed34867380 -> Node0x55ed348672e0;
+	Node0x55ed34867380 -> Node0x55ed34867330;
+	Node0x55ed348672e0 [shape=record,label="{xmlIO.c:1078:}"];
+	Node0x55ed348672e0 -> Node0x55ed34867330;
+	Node0x55ed34867330 [shape=record,label="{xmlIO.c:1081:}"];
+	Node0x55ed34867330 -> Node0x55ed348624a0;
+	Node0x55ed34864d40 [shape=record,label="{xmlIO.c:1084:|{<s0>T|<s1>F}}"];
+	Node0x55ed34864d40 -> Node0x55ed34867fb0;
+	Node0x55ed34864d40 -> Node0x55ed34867f10;
+	Node0x55ed34867f10 [shape=record,label="{xmlIO.c:1088:}"];
+	Node0x55ed34867f10 -> Node0x55ed34867f60;
+	Node0x55ed34867fb0 [shape=record,label="{xmlIO.c:1090:|{<s0>T|<s1>F}}"];
+	Node0x55ed34867fb0 -> Node0x55ed34868750;
+	Node0x55ed34867fb0 -> Node0x55ed348686b0;
+	Node0x55ed348686b0 [shape=record,label="{xmlIO.c:1094:}"];
+	Node0x55ed348686b0 -> Node0x55ed34868700;
+	Node0x55ed34868750 [shape=record,label="{xmlIO.c:1097:}"];
+	Node0x55ed34868750 -> Node0x55ed34868700;
+	Node0x55ed34868700 [shape=record,label="{%33}"];
+	Node0x55ed34868700 -> Node0x55ed34867f60;
+	Node0x55ed34867f60 [shape=record,label="{xmlIO.c:1099:|{<s0>T|<s1>F}}"];
+	Node0x55ed34867f60 -> Node0x55ed34869210;
+	Node0x55ed34867f60 -> Node0x55ed34869260;
+	Node0x55ed34869210 [shape=record,label="{xmlIO.c:1100:}"];
+	Node0x55ed34869210 -> Node0x55ed348624a0;
+	Node0x55ed34869260 [shape=record,label="{xmlIO.c:1101:|{<s0>T|<s1>F}}"];
+	Node0x55ed34869260 -> Node0x55ed34869740;
+	Node0x55ed34869260 -> Node0x55ed348696f0;
+	Node0x55ed348696f0 [shape=record,label="{xmlIO.c:1102:}"];
+	Node0x55ed348696f0 -> Node0x55ed348624a0;
+	Node0x55ed34869740 [shape=record,label="{xmlIO.c:1107:}"];
+	Node0x55ed34869740 -> Node0x55ed348624a0;
+	Node0x55ed348624a0 [shape=record,label="{xmlIO.c:1110:}"];
+}

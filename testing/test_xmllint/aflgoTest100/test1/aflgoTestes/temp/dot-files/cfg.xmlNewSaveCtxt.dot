@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlNewSaveCtxt' function" {
+	label="CFG for 'xmlNewSaveCtxt' function";
+
+	Node0x5645e40661e0 [shape=record,label="{xmlsave.c:380:|{<s0>T|<s1>F}}"];
+	Node0x5645e40661e0 -> Node0x5645e406ae50;
+	Node0x5645e40661e0 -> Node0x5645e406aea0;
+	Node0x5645e406ae50 [shape=record,label="{xmlsave.c:386:}"];
+	Node0x5645e406ae50 -> Node0x5645e4069df0;
+	Node0x5645e406aea0 [shape=record,label="{xmlsave.c:389:|{<s0>T|<s1>F}}"];
+	Node0x5645e406aea0 -> Node0x5645e406b8b0;
+	Node0x5645e406aea0 -> Node0x5645e406b900;
+	Node0x5645e406b8b0 [shape=record,label="{xmlsave.c:392:|{<s0>T|<s1>F}}"];
+	Node0x5645e406b8b0 -> Node0x5645e406bf20;
+	Node0x5645e406b8b0 -> Node0x5645e406bf70;
+	Node0x5645e406bf20 [shape=record,label="{xmlsave.c:394:}"];
+	Node0x5645e406bf20 -> Node0x5645e4069df0;
+	Node0x5645e406bf70 [shape=record,label="{xmlsave.c:398:}"];
+	Node0x5645e406bf70 -> Node0x5645e406b900;
+	Node0x5645e406b900 [shape=record,label="{xmlsave.c:401:|{<s0>T|<s1>F}}"];
+	Node0x5645e406b900 -> Node0x5645e406dca0;
+	Node0x5645e406b900 -> Node0x5645e406dc50;
+	Node0x5645e406dca0 [shape=record,label="{xmlsave.c:408:|{<s0>T|<s1>F}}"];
+	Node0x5645e406dca0 -> Node0x5645e406dc50;
+	Node0x5645e406dca0 -> Node0x5645e406dc00;
+	Node0x5645e406dc00 [shape=record,label="{xmlsave.c:409:}"];
+	Node0x5645e406dc00 -> Node0x5645e406dc50;
+	Node0x5645e406dc50 [shape=record,label="{xmlsave.c:412:|{<s0>T|<s1>F}}"];
+	Node0x5645e406dc50 -> Node0x5645e406ea10;
+	Node0x5645e406dc50 -> Node0x5645e406eab0;
+	Node0x5645e406ea10 [shape=record,label="{xmlsave.c:414:}"];
+	Node0x5645e406ea10 -> Node0x5645e406ea60;
+	Node0x5645e406eab0 [shape=record,label="{xmlsave.c:415:|{<s0>T|<s1>F}}"];
+	Node0x5645e406eab0 -> Node0x5645e406f0c0;
+	Node0x5645e406eab0 -> Node0x5645e406f110;
+	Node0x5645e406f0c0 [shape=record,label="{xmlsave.c:416:}"];
+	Node0x5645e406f0c0 -> Node0x5645e406f110;
+	Node0x5645e406f110 [shape=record,label="{%55}"];
+	Node0x5645e406f110 -> Node0x5645e406ea60;
+	Node0x5645e406ea60 [shape=record,label="{xmlsave.c:418:}"];
+	Node0x5645e406ea60 -> Node0x5645e4069df0;
+	Node0x5645e4069df0 [shape=record,label="{xmlsave.c:419:}"];
+}

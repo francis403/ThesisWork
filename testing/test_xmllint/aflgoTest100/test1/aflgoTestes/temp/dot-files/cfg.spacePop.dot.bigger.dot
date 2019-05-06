@@ -1,0 +1,19 @@
+digraph "CFG for 'spacePop' function" {
+	label="CFG for 'spacePop' function";
+
+	Node0x55d73c1f6830 [shape=record,label="{parser.c:1971:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f6830:s0 -> Node0x55d73c1f6bd0;
+	Node0x55d73c1f6830:s1 -> Node0x55d73c1f6c20;
+	Node0x55d73c1f6bd0 [shape=record,label="{parser.c:1973:}"];
+	Node0x55d73c1f6bd0 -> Node0x55d73c1f6880;
+	Node0x55d73c1f6c20 [shape=record,label="{parser.c:1974:|{<s0>T|<s1>F}}"];
+	Node0x55d73c1f6c20:s0 -> Node0x55d73c1fbb80;
+	Node0x55d73c1f6c20:s1 -> Node0x55d73c1fbc20;
+	Node0x55d73c1fbb80 [shape=record,label="{parser.c:1976:}"];
+	Node0x55d73c1fbb80 -> Node0x55d73c1fbbd0;
+	Node0x55d73c1fbc20 [shape=record,label="{parser.c:1978:}"];
+	Node0x55d73c1fbc20 -> Node0x55d73c1fbbd0;
+	Node0x55d73c1fbbd0 [shape=record,label="{parser.c:1979:}"];
+	Node0x55d73c1fbbd0 -> Node0x55d73c1f6880;
+	Node0x55d73c1f6880 [shape=record,label="{parser.c:1982:}"];
+}

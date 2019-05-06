@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlInitializeGlobalState' function" {
+	label="CFG for 'xmlInitializeGlobalState' function";
+
+	Node0x5624fdaf0b90 [shape=record,label="{globals.c:506:|{<s0>T|<s1>F}}"];
+	Node0x5624fdaf0b90:s0 -> Node0x5624fdb15270;
+	Node0x5624fdaf0b90:s1 -> Node0x5624fdb152c0;
+	Node0x5624fdb15270 [shape=record,label="{globals.c:517:}"];
+	Node0x5624fdb15270 -> Node0x5624fdb152c0;
+	Node0x5624fdb152c0 [shape=record,label="{globals.c:519:}"];
+}

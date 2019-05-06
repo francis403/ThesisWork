@@ -1,0 +1,24 @@
+digraph "CFG for 'externalSubsetDebug' function" {
+	label="CFG for 'externalSubsetDebug' function";
+
+	Node0x55c15e14de70 [shape=record,label="{xmllint.c:960:|{<s0>T|<s1>F}}"];
+	Node0x55c15e14de70:s0 -> Node0x55c15e12ed60;
+	Node0x55c15e14de70:s1 -> Node0x55c15e12edb0;
+	Node0x55c15e12ed60 [shape=record,label="{xmllint.c:965:}"];
+	Node0x55c15e12ed60 -> Node0x55c15e12f4c0;
+	Node0x55c15e12edb0 [shape=record,label="{xmllint.c:966:|{<s0>T|<s1>F}}"];
+	Node0x55c15e12edb0:s0 -> Node0x55c15e0abf50;
+	Node0x55c15e12edb0:s1 -> Node0x55c15e0abff0;
+	Node0x55c15e0abf50 [shape=record,label="{xmllint.c:968:}"];
+	Node0x55c15e0abf50 -> Node0x55c15e0abfa0;
+	Node0x55c15e0abff0 [shape=record,label="{xmllint.c:970:}"];
+	Node0x55c15e0abff0 -> Node0x55c15e0abfa0;
+	Node0x55c15e0abfa0 [shape=record,label="{xmllint.c:971:|{<s0>T|<s1>F}}"];
+	Node0x55c15e0abfa0:s0 -> Node0x55c15e12f470;
+	Node0x55c15e0abfa0:s1 -> Node0x55c15e12f510;
+	Node0x55c15e12f470 [shape=record,label="{xmllint.c:972:}"];
+	Node0x55c15e12f470 -> Node0x55c15e12f4c0;
+	Node0x55c15e12f510 [shape=record,label="{xmllint.c:974:}"];
+	Node0x55c15e12f510 -> Node0x55c15e12f4c0;
+	Node0x55c15e12f4c0 [shape=record,label="{xmllint.c:975:}"];
+}

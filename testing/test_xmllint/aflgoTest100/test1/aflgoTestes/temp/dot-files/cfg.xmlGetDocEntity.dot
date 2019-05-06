@@ -1,0 +1,43 @@
+digraph "CFG for 'xmlGetDocEntity' function" {
+	label="CFG for 'xmlGetDocEntity' function";
+
+	Node0x559a62164d20 [shape=record,label="{entities.c:510:|{<s0>T|<s1>F}}"];
+	Node0x559a62164d20 -> Node0x559a62168fd0;
+	Node0x559a62164d20 -> Node0x559a62169020;
+	Node0x559a62168fd0 [shape=record,label="{entities.c:515:|{<s0>T|<s1>F}}"];
+	Node0x559a62168fd0 -> Node0x559a62169480;
+	Node0x559a62168fd0 -> Node0x559a62169430;
+	Node0x559a62169480 [shape=record,label="{entities.c:515:|{<s0>T|<s1>F}}"];
+	Node0x559a62169480 -> Node0x559a621693e0;
+	Node0x559a62169480 -> Node0x559a62169430;
+	Node0x559a621693e0 [shape=record,label="{entities.c:516:|{<s0>T|<s1>F}}"];
+	Node0x559a621693e0 -> Node0x559a6216a000;
+	Node0x559a621693e0 -> Node0x559a6216a050;
+	Node0x559a6216a000 [shape=record,label="{entities.c:519:}"];
+	Node0x559a6216a000 -> Node0x559a62167e60;
+	Node0x559a6216a050 [shape=record,label="{entities.c:520:}"];
+	Node0x559a6216a050 -> Node0x559a62169430;
+	Node0x559a62169430 [shape=record,label="{entities.c:521:|{<s0>T|<s1>F}}"];
+	Node0x559a62169430 -> Node0x559a6216a660;
+	Node0x559a62169430 -> Node0x559a6216a6b0;
+	Node0x559a6216a660 [shape=record,label="{entities.c:522:|{<s0>T|<s1>F}}"];
+	Node0x559a6216a660 -> Node0x559a6216ac80;
+	Node0x559a6216a660 -> Node0x559a6216ac30;
+	Node0x559a6216ac80 [shape=record,label="{entities.c:523:|{<s0>T|<s1>F}}"];
+	Node0x559a6216ac80 -> Node0x559a6216abe0;
+	Node0x559a6216ac80 -> Node0x559a6216ac30;
+	Node0x559a6216abe0 [shape=record,label="{entities.c:524:|{<s0>T|<s1>F}}"];
+	Node0x559a6216abe0 -> Node0x559a6216bc70;
+	Node0x559a6216abe0 -> Node0x559a6216bcc0;
+	Node0x559a6216bc70 [shape=record,label="{entities.c:527:}"];
+	Node0x559a6216bc70 -> Node0x559a62167e60;
+	Node0x559a6216bcc0 [shape=record,label="{entities.c:528:}"];
+	Node0x559a6216bcc0 -> Node0x559a6216ac30;
+	Node0x559a6216ac30 [shape=record,label="{entities.c:529:}"];
+	Node0x559a6216ac30 -> Node0x559a6216a6b0;
+	Node0x559a6216a6b0 [shape=record,label="{entities.c:530:}"];
+	Node0x559a6216a6b0 -> Node0x559a62169020;
+	Node0x559a62169020 [shape=record,label="{entities.c:531:}"];
+	Node0x559a62169020 -> Node0x559a62167e60;
+	Node0x559a62167e60 [shape=record,label="{entities.c:532:}"];
+}

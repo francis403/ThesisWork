@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlRelaxNGNewValidCtxt' function" {
+	label="CFG for 'xmlRelaxNGNewValidCtxt' function";
+
+	Node0x555e9c1cdca0 [shape=record,label="{relaxng.c:10912:|{<s0>T|<s1>F}}"];
+	Node0x555e9c1cdca0 -> Node0x555e9c269c70;
+	Node0x555e9c1cdca0 -> Node0x555e9c269cc0;
+	Node0x555e9c269c70 [shape=record,label="{relaxng.c:10918:}"];
+	Node0x555e9c269c70 -> Node0x555e9c1cdab0;
+	Node0x555e9c269cc0 [shape=record,label="{relaxng.c:10921:|{<s0>T|<s1>F}}"];
+	Node0x555e9c269cc0 -> Node0x555e9c0583f0;
+	Node0x555e9c269cc0 -> Node0x555e9c058440;
+	Node0x555e9c0583f0 [shape=record,label="{relaxng.c:10930:}"];
+	Node0x555e9c0583f0 -> Node0x555e9c058440;
+	Node0x555e9c058440 [shape=record,label="{relaxng.c:10931:}"];
+	Node0x555e9c058440 -> Node0x555e9c1cdab0;
+	Node0x555e9c1cdab0 [shape=record,label="{relaxng.c:10936:}"];
+}

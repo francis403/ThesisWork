@@ -1,0 +1,18 @@
+digraph "CFG for 'xmlTextWriterSetQuoteChar' function" {
+	label="CFG for 'xmlTextWriterSetQuoteChar' function";
+
+	Node0x562150fe13f0 [shape=record,label="{xmlwriter.c:4623:|{<s0>T|<s1>F}}"];
+	Node0x562150fe13f0:s0 -> Node0x562150fe1290;
+	Node0x562150fe13f0:s1 -> Node0x562150fe2300;
+	Node0x562150fe2300 [shape=record,label="{xmlwriter.c:4625:|{<s0>T|<s1>F}}"];
+	Node0x562150fe2300:s0 -> Node0x562150fe2620;
+	Node0x562150fe2300:s1 -> Node0x562150fdcda0;
+	Node0x562150fe2620 [shape=record,label="{xmlwriter.c:4625:|{<s0>T|<s1>F}}"];
+	Node0x562150fe2620:s0 -> Node0x562150fe1290;
+	Node0x562150fe2620:s1 -> Node0x562150fdcda0;
+	Node0x562150fe1290 [shape=record,label="{xmlwriter.c:4626:}"];
+	Node0x562150fe1290 -> Node0x562150fe1440;
+	Node0x562150fdcda0 [shape=record,label="{xmlwriter.c:4628:}"];
+	Node0x562150fdcda0 -> Node0x562150fe1440;
+	Node0x562150fe1440 [shape=record,label="{xmlwriter.c:4631:}"];
+}

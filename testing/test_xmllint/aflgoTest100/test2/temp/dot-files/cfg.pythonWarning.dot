@@ -1,0 +1,37 @@
+digraph "CFG for 'pythonWarning' function" {
+	label="CFG for 'pythonWarning' function";
+
+	Node0x55fa6c478bf0 [shape=record,label="{libxml.c:1130:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c478bf0:s0 -> Node0x55fa6c47bab0;
+	Node0x55fa6c478bf0:s1 -> Node0x55fa6c47bb00;
+	Node0x55fa6c47bab0 [shape=record,label="{libxml.c:1142:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c47bab0:s0 -> Node0x55fa6c47daf0;
+	Node0x55fa6c47bab0:s1 -> Node0x55fa6c47db40;
+	Node0x55fa6c47daf0 [shape=record,label="{libxml.c:1150:}"];
+	Node0x55fa6c47daf0 -> Node0x55fa6c47db40;
+	Node0x55fa6c47db40 [shape=record,label="{libxml.c:1151:}"];
+	Node0x55fa6c47db40 -> Node0x55fa6c47de90;
+	Node0x55fa6c47de90 [shape=record,label="{libxml.c:1151:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c47de90:s0 -> Node0x55fa6c47e130;
+	Node0x55fa6c47de90:s1 -> Node0x55fa6c47e1d0;
+	Node0x55fa6c47e130 [shape=record,label="{libxml.c:1151:}"];
+	Node0x55fa6c47e130 -> Node0x55fa6c47e180;
+	Node0x55fa6c47e1d0 [shape=record,label="{libxml.c:1151:}"];
+	Node0x55fa6c47e1d0 -> Node0x55fa6c47e480;
+	Node0x55fa6c47e480 [shape=record,label="{libxml.c:1151:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c47e480:s0 -> Node0x55fa6c47e660;
+	Node0x55fa6c47e480:s1 -> Node0x55fa6c47e700;
+	Node0x55fa6c47e660 [shape=record,label="{libxml.c:1151:}"];
+	Node0x55fa6c47e660 -> Node0x55fa6c47e6b0;
+	Node0x55fa6c47e700 [shape=record,label="{libxml.c:1151:}"];
+	Node0x55fa6c47e700 -> Node0x55fa6c47e6b0;
+	Node0x55fa6c47e6b0 [shape=record,label="{libxml.c:1151:}"];
+	Node0x55fa6c47e6b0 -> Node0x55fa6c47e3e0;
+	Node0x55fa6c47e3e0 [shape=record,label="{%40}"];
+	Node0x55fa6c47e3e0 -> Node0x55fa6c47e180;
+	Node0x55fa6c47e180 [shape=record,label="{libxml.c:1151:}"];
+	Node0x55fa6c47e180 -> Node0x55fa6c47ddf0;
+	Node0x55fa6c47ddf0 [shape=record,label="{libxml.c:1152:}"];
+	Node0x55fa6c47ddf0 -> Node0x55fa6c47bb00;
+	Node0x55fa6c47bb00 [shape=record,label="{libxml.c:1153:}"];
+}

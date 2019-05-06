@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlFreePatParserContext' function" {
+	label="CFG for 'xmlFreePatParserContext' function";
+
+	Node0x55aa3b107990 [shape=record,label="{pattern.c:328:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b107990:s0 -> Node0x55aa3af81640;
+	Node0x55aa3b107990:s1 -> Node0x55aa3af81690;
+	Node0x55aa3af81640 [shape=record,label="{pattern.c:330:}"];
+	Node0x55aa3af81640 -> Node0x55aa3b1079e0;
+	Node0x55aa3af81690 [shape=record,label="{pattern.c:331:}"];
+	Node0x55aa3af81690 -> Node0x55aa3b1079e0;
+	Node0x55aa3b1079e0 [shape=record,label="{pattern.c:333:}"];
+}

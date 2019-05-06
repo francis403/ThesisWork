@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlXPathCacheConvertBoolean' function" {
+	label="CFG for 'xmlXPathCacheConvertBoolean' function";
+
+	Node0x5621eed531d0 [shape=record,label="{xpath.c:2732:|{<s0>T|<s1>F}}"];
+	Node0x5621eed531d0 -> Node0x5621eed59300;
+	Node0x5621eed531d0 -> Node0x5621eed59350;
+	Node0x5621eed59300 [shape=record,label="{xpath.c:2736:}"];
+	Node0x5621eed59300 -> Node0x5621eed53220;
+	Node0x5621eed59350 [shape=record,label="{xpath.c:2737:|{<s0>T|<s1>F}}"];
+	Node0x5621eed59350 -> Node0x5621eed598a0;
+	Node0x5621eed59350 -> Node0x5621eed598f0;
+	Node0x5621eed598a0 [shape=record,label="{xpath.c:2738:}"];
+	Node0x5621eed598a0 -> Node0x5621eed53220;
+	Node0x5621eed598f0 [shape=record,label="{xpath.c:2739:}"];
+	Node0x5621eed598f0 -> Node0x5621eed53220;
+	Node0x5621eed53220 [shape=record,label="{xpath.c:2742:}"];
+}

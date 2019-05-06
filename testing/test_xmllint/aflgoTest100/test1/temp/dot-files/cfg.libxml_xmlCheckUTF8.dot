@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCheckUTF8' function" {
+	label="CFG for 'libxml_xmlCheckUTF8' function";
+
+	Node0x55f930d4dac0 [shape=record,label="{libxml2-py.c:1530:|{<s0>T|<s1>F}}"];
+	Node0x55f930d4dac0:s0 -> Node0x55f930d50a10;
+	Node0x55f930d4dac0:s1 -> Node0x55f930d509c0;
+	Node0x55f930d509c0 [shape=record,label="{libxml2-py.c:1536:}"];
+	Node0x55f930d509c0 -> Node0x55f930d4ddc0;
+	Node0x55f930d50a10 [shape=record,label="{libxml2-py.c:1538:}"];
+	Node0x55f930d50a10 -> Node0x55f930d4ddc0;
+	Node0x55f930d4ddc0 [shape=record,label="{libxml2-py.c:1541:}"];
+}

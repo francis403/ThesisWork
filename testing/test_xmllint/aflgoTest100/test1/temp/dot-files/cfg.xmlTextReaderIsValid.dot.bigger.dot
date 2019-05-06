@@ -1,0 +1,30 @@
+digraph "CFG for 'xmlTextReaderIsValid' function" {
+	label="CFG for 'xmlTextReaderIsValid' function";
+
+	Node0x55e4494c7030 [shape=record,label="{xmlreader.c:5075:|{<s0>T|<s1>F}}"];
+	Node0x55e4494c7030:s0 -> Node0x55e44936bc00;
+	Node0x55e4494c7030:s1 -> Node0x55e44936bc50;
+	Node0x55e44936bc00 [shape=record,label="{xmlreader.c:5078:}"];
+	Node0x55e44936bc00 -> Node0x55e44936b360;
+	Node0x55e44936bc50 [shape=record,label="{xmlreader.c:5080:|{<s0>T|<s1>F}}"];
+	Node0x55e44936bc50:s0 -> Node0x55e4494be0b0;
+	Node0x55e44936bc50:s1 -> Node0x55e4494c8cc0;
+	Node0x55e4494be0b0 [shape=record,label="{xmlreader.c:5081:}"];
+	Node0x55e4494be0b0 -> Node0x55e44936b360;
+	Node0x55e4494c8cc0 [shape=record,label="{xmlreader.c:5082:|{<s0>T|<s1>F}}"];
+	Node0x55e4494c8cc0:s0 -> Node0x55e4494c93e0;
+	Node0x55e4494c8cc0:s1 -> Node0x55e4494c9430;
+	Node0x55e4494c93e0 [shape=record,label="{xmlreader.c:5083:}"];
+	Node0x55e4494c93e0 -> Node0x55e44936b360;
+	Node0x55e4494c9430 [shape=record,label="{xmlreader.c:5085:|{<s0>T|<s1>F}}"];
+	Node0x55e4494c9430:s0 -> Node0x55e4494c9c20;
+	Node0x55e4494c9430:s1 -> Node0x55e4494c9bd0;
+	Node0x55e4494c9c20 [shape=record,label="{xmlreader.c:5085:|{<s0>T|<s1>F}}"];
+	Node0x55e4494c9c20:s0 -> Node0x55e4494c9b80;
+	Node0x55e4494c9c20:s1 -> Node0x55e4494c9bd0;
+	Node0x55e4494c9b80 [shape=record,label="{xmlreader.c:5086:}"];
+	Node0x55e4494c9b80 -> Node0x55e44936b360;
+	Node0x55e4494c9bd0 [shape=record,label="{xmlreader.c:5087:}"];
+	Node0x55e4494c9bd0 -> Node0x55e44936b360;
+	Node0x55e44936b360 [shape=record,label="{xmlreader.c:5088:}"];
+}

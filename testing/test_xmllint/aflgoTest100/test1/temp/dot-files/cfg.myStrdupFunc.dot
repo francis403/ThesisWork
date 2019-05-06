@@ -1,0 +1,17 @@
+digraph "CFG for 'myStrdupFunc' function" {
+	label="CFG for 'myStrdupFunc' function";
+
+	Node0x556d1b5be2b0 [shape=record,label="{xmllint.c:373:|{<s0>T|<s1>F}}"];
+	Node0x556d1b5be2b0 -> Node0x556d1b5bedf0;
+	Node0x556d1b5be2b0 -> Node0x556d1b5c0d00;
+	Node0x556d1b5bedf0 [shape=record,label="{xmllint.c:379:|{<s0>T|<s1>F}}"];
+	Node0x556d1b5bedf0 -> Node0x556d1b5c1140;
+	Node0x556d1b5bedf0 -> Node0x556d1b5c1190;
+	Node0x556d1b5c1140 [shape=record,label="{xmllint.c:380:}"];
+	Node0x556d1b5c1140 -> Node0x556d1b5be300;
+	Node0x556d1b5c1190 [shape=record,label="{xmllint.c:384:}"];
+	Node0x556d1b5c1190 -> Node0x556d1b5c0d00;
+	Node0x556d1b5c0d00 [shape=record,label="{xmllint.c:385:}"];
+	Node0x556d1b5c0d00 -> Node0x556d1b5be300;
+	Node0x556d1b5be300 [shape=record,label="{xmllint.c:386:}"];
+}

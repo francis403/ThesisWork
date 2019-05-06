@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlParse3986Authority' function" {
+	label="CFG for 'xmlParse3986Authority' function";
+
+	Node0x563ca5ea1e70 [shape=record,label="{uri.c:508:|{<s0>T|<s1>F}}"];
+	Node0x563ca5ea1e70 -> Node0x563ca5eafcf0;
+	Node0x563ca5ea1e70 -> Node0x563ca5eafde0;
+	Node0x563ca5eafde0 [shape=record,label="{uri.c:518:|{<s0>T|<s1>F}}"];
+	Node0x563ca5eafde0 -> Node0x563ca5eafcf0;
+	Node0x563ca5eafde0 -> Node0x563ca5eafd90;
+	Node0x563ca5eafcf0 [shape=record,label="{uri.c:519:}"];
+	Node0x563ca5eafcf0 -> Node0x563ca5eafd40;
+	Node0x563ca5eafd90 [shape=record,label="{uri.c:521:}"];
+	Node0x563ca5eafd90 -> Node0x563ca5eafd40;
+	Node0x563ca5eafd40 [shape=record,label="{uri.c:522:|{<s0>T|<s1>F}}"];
+	Node0x563ca5eafd40 -> Node0x563ca5eb0c50;
+	Node0x563ca5eafd40 -> Node0x563ca5eb0ca0;
+	Node0x563ca5eb0c50 [shape=record,label="{uri.c:523:}"];
+	Node0x563ca5eb0c50 -> Node0x563ca5ea1ec0;
+	Node0x563ca5eb0ca0 [shape=record,label="{uri.c:524:|{<s0>T|<s1>F}}"];
+	Node0x563ca5eb0ca0 -> Node0x563ca5eb10d0;
+	Node0x563ca5eb0ca0 -> Node0x563ca5eb1120;
+	Node0x563ca5eb10d0 [shape=record,label="{uri.c:525:|{<s0>T|<s1>F}}"];
+	Node0x563ca5eb10d0 -> Node0x563ca5eb0b20;
+	Node0x563ca5eb10d0 -> Node0x563ca5eb1af0;
+	Node0x563ca5eb0b20 [shape=record,label="{uri.c:527:}"];
+	Node0x563ca5eb0b20 -> Node0x563ca5ea1ec0;
+	Node0x563ca5eb1af0 [shape=record,label="{uri.c:528:}"];
+	Node0x563ca5eb1af0 -> Node0x563ca5eb1120;
+	Node0x563ca5eb1120 [shape=record,label="{uri.c:529:}"];
+	Node0x563ca5eb1120 -> Node0x563ca5ea1ec0;
+	Node0x563ca5ea1ec0 [shape=record,label="{uri.c:531:}"];
+}

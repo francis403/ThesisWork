@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchematronFreePatterns' function" {
+	label="CFG for 'xmlSchematronFreePatterns' function";
+
+	Node0x5600fc34ae30 [shape=record,label="{schematron.c:519:}"];
+	Node0x5600fc34ae30 -> Node0x5600fc34b790;
+	Node0x5600fc34b790 [shape=record,label="{schematron.c:522:|{<s0>T|<s1>F}}"];
+	Node0x5600fc34b790 -> Node0x5600fc34bb60;
+	Node0x5600fc34b790 -> Node0x5600fc34b980;
+	Node0x5600fc34bb60 [shape=record,label="{schematron.c:523:|{<s0>T|<s1>F}}"];
+	Node0x5600fc34bb60 -> Node0x5600fc34be30;
+	Node0x5600fc34bb60 -> Node0x5600fc34be80;
+	Node0x5600fc34be30 [shape=record,label="{schematron.c:525:}"];
+	Node0x5600fc34be30 -> Node0x5600fc34be80;
+	Node0x5600fc34be80 [shape=record,label="{schematron.c:526:}"];
+	Node0x5600fc34be80 -> Node0x5600fc34b790;
+	Node0x5600fc34b980 [shape=record,label="{schematron.c:529:}"];
+}

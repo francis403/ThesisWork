@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlChildElementCount' function" {
+	label="CFG for 'xmlChildElementCount' function";
+
+	Node0x5627b445e190 [shape=record,label="{tree.c:3479:|{<s0>T|<s1>F}}"];
+	Node0x5627b445e190 -> Node0x5627b4460370;
+	Node0x5627b445e190 -> Node0x5627b44603c0;
+	Node0x5627b4460370 [shape=record,label="{tree.c:3484:}"];
+	Node0x5627b4460370 -> Node0x5627b445f360;
+	Node0x5627b44603c0 [shape=record,label="{tree.c:3485:|{<s0>def|<s1>1|<s2>6|<s3>9|<s4>11|<s5>13}}"];
+	Node0x5627b44603c0 -> Node0x5627b4460990;
+	Node0x5627b44603c0 -> Node0x5627b4460a70;
+	Node0x5627b44603c0 -> Node0x5627b4460a70;
+	Node0x5627b44603c0 -> Node0x5627b4460a70;
+	Node0x5627b44603c0 -> Node0x5627b4460a70;
+	Node0x5627b44603c0 -> Node0x5627b4460a70;
+	Node0x5627b4460a70 [shape=record,label="{tree.c:3491:}"];
+	Node0x5627b4460a70 -> Node0x5627b4460820;
+	Node0x5627b4460990 [shape=record,label="{tree.c:3494:}"];
+	Node0x5627b4460990 -> Node0x5627b445f360;
+	Node0x5627b4460820 [shape=record,label="{tree.c:3496:}"];
+	Node0x5627b4460820 -> Node0x5627b4460f50;
+	Node0x5627b4460f50 [shape=record,label="{tree.c:3496:|{<s0>T|<s1>F}}"];
+	Node0x5627b4460f50 -> Node0x5627b4461350;
+	Node0x5627b4460f50 -> Node0x5627b4461170;
+	Node0x5627b4461350 [shape=record,label="{tree.c:3497:|{<s0>T|<s1>F}}"];
+	Node0x5627b4461350 -> Node0x5627b4461500;
+	Node0x5627b4461350 -> Node0x5627b4461550;
+	Node0x5627b4461500 [shape=record,label="{tree.c:3498:}"];
+	Node0x5627b4461500 -> Node0x5627b4461550;
+	Node0x5627b4461550 [shape=record,label="{tree.c:3499:}"];
+	Node0x5627b4461550 -> Node0x5627b4460f50;
+	Node0x5627b4461170 [shape=record,label="{tree.c:3501:}"];
+	Node0x5627b4461170 -> Node0x5627b445f360;
+	Node0x5627b445f360 [shape=record,label="{tree.c:3502:}"];
+}

@@ -1,0 +1,16 @@
+digraph "CFG for 'endDocumentSplit' function" {
+	label="CFG for 'endDocumentSplit' function";
+
+	Node0x55d026966790 [shape=record,label="{xmlschemas.c:28466:|{<s0>T|<s1>F}}"];
+	Node0x55d026966790 -> Node0x55d026969780;
+	Node0x55d026966790 -> Node0x55d0269696b0;
+	Node0x55d026969780 [shape=record,label="{xmlschemas.c:28469:|{<s0>T|<s1>F}}"];
+	Node0x55d026969780 -> Node0x55d026969700;
+	Node0x55d026969780 -> Node0x55d0269696b0;
+	Node0x55d026969700 [shape=record,label="{xmlschemas.c:28470:|{<s0>T|<s1>F}}"];
+	Node0x55d026969700 -> Node0x55d026969660;
+	Node0x55d026969700 -> Node0x55d0269696b0;
+	Node0x55d026969660 [shape=record,label="{xmlschemas.c:28471:}"];
+	Node0x55d026969660 -> Node0x55d0269696b0;
+	Node0x55d0269696b0 [shape=record,label="{xmlschemas.c:28472:}"];
+}

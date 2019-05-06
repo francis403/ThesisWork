@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlXPathIsInf' function" {
+	label="CFG for 'xmlXPathIsInf' function";
+
+	Node0x5621ee5878a0 [shape=record,label="{xpath.c:526:|{<s0>T|<s1>F}}"];
+	Node0x5621ee5878a0:s0 -> Node0x5621ee5887c0;
+	Node0x5621ee5878a0:s1 -> Node0x5621ee588810;
+	Node0x5621ee5887c0 [shape=record,label="{xpath.c:528:|{<s0>T|<s1>F}}"];
+	Node0x5621ee5887c0:s0 -> Node0x5621ee580c00;
+	Node0x5621ee5887c0:s1 -> Node0x5621ee586330;
+	Node0x5621ee588810 [shape=record,label="{xpath.c:528:|{<s0>T|<s1>F}}"];
+	Node0x5621ee588810:s0 -> Node0x5621ee58a390;
+	Node0x5621ee588810:s1 -> Node0x5621ee58a3e0;
+	Node0x5621ee58a390 [shape=record,label="{xpath.c:528:|{<s0>T|<s1>F}}"];
+	Node0x5621ee58a390:s0 -> Node0x5621ee580c00;
+	Node0x5621ee58a390:s1 -> Node0x5621ee586330;
+	Node0x5621ee58a3e0 [shape=record,label="{xpath.c:528:|{<s0>T|<s1>F}}"];
+	Node0x5621ee58a3e0:s0 -> Node0x5621ee580c00;
+	Node0x5621ee58a3e0:s1 -> Node0x5621ee586330;
+	Node0x5621ee580c00 [shape=record,label="{xpath.c:528:}"];
+	Node0x5621ee580c00 -> Node0x5621ee547220;
+	Node0x5621ee586330 [shape=record,label="{xpath.c:528:}"];
+	Node0x5621ee586330 -> Node0x5621ee547220;
+	Node0x5621ee547220 [shape=record,label="{xpath.c:528:}"];
+}

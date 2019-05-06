@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlTextReaderRemoveID' function" {
+	label="CFG for 'xmlTextReaderRemoveID' function";
+
+	Node0x55e44955ce10 [shape=record,label="{xmlreader.c:256:|{<s0>T|<s1>F}}"];
+	Node0x55e44955ce10 -> Node0x55e4495665d0;
+	Node0x55e44955ce10 -> Node0x55e449566620;
+	Node0x55e4495665d0 [shape=record,label="{xmlreader.c:261:}"];
+	Node0x55e4495665d0 -> Node0x55e44955ce60;
+	Node0x55e449566620 [shape=record,label="{xmlreader.c:262:|{<s0>T|<s1>F}}"];
+	Node0x55e449566620 -> Node0x55e449566a60;
+	Node0x55e449566620 -> Node0x55e449566ab0;
+	Node0x55e449566a60 [shape=record,label="{xmlreader.c:262:}"];
+	Node0x55e449566a60 -> Node0x55e44955ce60;
+	Node0x55e449566ab0 [shape=record,label="{xmlreader.c:263:|{<s0>T|<s1>F}}"];
+	Node0x55e449566ab0 -> Node0x55e449567810;
+	Node0x55e449566ab0 -> Node0x55e449567860;
+	Node0x55e449567810 [shape=record,label="{xmlreader.c:265:}"];
+	Node0x55e449567810 -> Node0x55e44955ce60;
+	Node0x55e449567860 [shape=record,label="{xmlreader.c:267:|{<s0>T|<s1>F}}"];
+	Node0x55e449567860 -> Node0x55e449568100;
+	Node0x55e449567860 -> Node0x55e449568150;
+	Node0x55e449568100 [shape=record,label="{xmlreader.c:269:}"];
+	Node0x55e449568100 -> Node0x55e44955ce60;
+	Node0x55e449568150 [shape=record,label="{xmlreader.c:270:|{<s0>T|<s1>F}}"];
+	Node0x55e449568150 -> Node0x55e449569260;
+	Node0x55e449568150 -> Node0x55e449569300;
+	Node0x55e449569300 [shape=record,label="{xmlreader.c:272:|{<s0>T|<s1>F}}"];
+	Node0x55e449569300 -> Node0x55e449569260;
+	Node0x55e449569300 -> Node0x55e4495692b0;
+	Node0x55e449569260 [shape=record,label="{xmlreader.c:273:}"];
+	Node0x55e449569260 -> Node0x55e44955ce60;
+	Node0x55e4495692b0 [shape=record,label="{xmlreader.c:275:}"];
+	Node0x55e4495692b0 -> Node0x55e44955ce60;
+	Node0x55e44955ce60 [shape=record,label="{xmlreader.c:279:}"];
+}

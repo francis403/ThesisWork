@@ -1,0 +1,18 @@
+digraph "CFG for 'hasExternalSubsetSplit' function" {
+	label="CFG for 'hasExternalSubsetSplit' function";
+
+	Node0x55d02694d590 [shape=record,label="{xmlschemas.c:28336:|{<s0>T|<s1>F}}"];
+	Node0x55d02694d590:s0 -> Node0x55d02694f950;
+	Node0x55d02694d590:s1 -> Node0x55d02694f880;
+	Node0x55d02694f950 [shape=record,label="{xmlschemas.c:28339:|{<s0>T|<s1>F}}"];
+	Node0x55d02694f950:s0 -> Node0x55d02694f8d0;
+	Node0x55d02694f950:s1 -> Node0x55d02694f880;
+	Node0x55d02694f8d0 [shape=record,label="{xmlschemas.c:28340:|{<s0>T|<s1>F}}"];
+	Node0x55d02694f8d0:s0 -> Node0x55d02694f830;
+	Node0x55d02694f8d0:s1 -> Node0x55d02694f880;
+	Node0x55d02694f830 [shape=record,label="{xmlschemas.c:28341:}"];
+	Node0x55d02694f830 -> Node0x55d02694ecb0;
+	Node0x55d02694f880 [shape=record,label="{xmlschemas.c:28342:}"];
+	Node0x55d02694f880 -> Node0x55d02694ecb0;
+	Node0x55d02694ecb0 [shape=record,label="{xmlschemas.c:28343:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaFreeWildcardNsSet' function" {
+	label="CFG for 'xmlSchemaFreeWildcardNsSet' function";
+
+	Node0x55d025cf19f0 [shape=record,label="{xmlschemas.c:3815:}"];
+	Node0x55d025cf19f0 -> Node0x55d025cf3970;
+	Node0x55d025cf3970 [shape=record,label="{xmlschemas.c:3819:|{<s0>T|<s1>F}}"];
+	Node0x55d025cf3970:s0 -> Node0x55d025cf3d70;
+	Node0x55d025cf3970:s1 -> Node0x55d025cf3b90;
+	Node0x55d025cf3d70 [shape=record,label="{xmlschemas.c:3820:}"];
+	Node0x55d025cf3d70 -> Node0x55d025cf3970;
+	Node0x55d025cf3b90 [shape=record,label="{xmlschemas.c:3824:}"];
+}

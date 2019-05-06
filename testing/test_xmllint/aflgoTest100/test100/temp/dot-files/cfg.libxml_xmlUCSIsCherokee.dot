@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsCherokee' function" {
+	label="CFG for 'libxml_xmlUCSIsCherokee' function";
+
+	Node0x55d6cc0735a0 [shape=record,label="{libxml2-py.c:10043:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc0735a0:s0 -> Node0x55d6cc0764f0;
+	Node0x55d6cc0735a0:s1 -> Node0x55d6cc0764a0;
+	Node0x55d6cc0764a0 [shape=record,label="{libxml2-py.c:10049:}"];
+	Node0x55d6cc0764a0 -> Node0x55d6cc0738a0;
+	Node0x55d6cc0764f0 [shape=record,label="{libxml2-py.c:10051:}"];
+	Node0x55d6cc0764f0 -> Node0x55d6cc0738a0;
+	Node0x55d6cc0738a0 [shape=record,label="{libxml2-py.c:10054:}"];
+}

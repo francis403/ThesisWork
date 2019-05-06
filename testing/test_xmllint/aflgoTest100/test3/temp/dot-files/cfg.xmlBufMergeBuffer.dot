@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlBufMergeBuffer' function" {
+	label="CFG for 'xmlBufMergeBuffer' function";
+
+	Node0x560723907a30 [shape=record,label="{buf.c:1257:|{<s0>T|<s1>F}}"];
+	Node0x560723907a30 -> Node0x56072390f4e0;
+	Node0x560723907a30 -> Node0x56072390f580;
+	Node0x56072390f580 [shape=record,label="{buf.c:1260:|{<s0>T|<s1>F}}"];
+	Node0x56072390f580 -> Node0x56072390f4e0;
+	Node0x56072390f580 -> Node0x56072390f530;
+	Node0x56072390f4e0 [shape=record,label="{buf.c:1261:}"];
+	Node0x56072390f4e0 -> Node0x560723907c20;
+	Node0x56072390f530 [shape=record,label="{buf.c:1264:|{<s0>T|<s1>F}}"];
+	Node0x56072390f530 -> Node0x560723910920;
+	Node0x56072390f530 -> Node0x560723910970;
+	Node0x560723910920 [shape=record,label="{buf.c:1264:|{<s0>T|<s1>F}}"];
+	Node0x560723910920 -> Node0x560723910d80;
+	Node0x560723910920 -> Node0x560723910dd0;
+	Node0x560723910d80 [shape=record,label="{buf.c:1264:}"];
+	Node0x560723910d80 -> Node0x560723910dd0;
+	Node0x560723910dd0 [shape=record,label="{buf.c:1264:}"];
+	Node0x560723910dd0 -> Node0x560723910970;
+	Node0x560723910970 [shape=record,label="{buf.c:1264:|{<s0>T|<s1>F}}"];
+	Node0x560723910970 -> Node0x560723911360;
+	Node0x560723910970 -> Node0x5607239113b0;
+	Node0x560723911360 [shape=record,label="{buf.c:1264:|{<s0>T|<s1>F}}"];
+	Node0x560723911360 -> Node0x560723911900;
+	Node0x560723911360 -> Node0x560723911950;
+	Node0x560723911900 [shape=record,label="{buf.c:1264:}"];
+	Node0x560723911900 -> Node0x560723911950;
+	Node0x560723911950 [shape=record,label="{buf.c:1264:}"];
+	Node0x560723911950 -> Node0x5607239113b0;
+	Node0x5607239113b0 [shape=record,label="{buf.c:1265:|{<s0>T|<s1>F}}"];
+	Node0x5607239113b0 -> Node0x5607239121a0;
+	Node0x5607239113b0 -> Node0x5607239120d0;
+	Node0x5607239121a0 [shape=record,label="{buf.c:1265:|{<s0>T|<s1>F}}"];
+	Node0x5607239121a0 -> Node0x560723912120;
+	Node0x5607239121a0 -> Node0x5607239120d0;
+	Node0x560723912120 [shape=record,label="{buf.c:1266:|{<s0>T|<s1>F}}"];
+	Node0x560723912120 -> Node0x560723912080;
+	Node0x560723912120 -> Node0x5607239120d0;
+	Node0x560723912080 [shape=record,label="{buf.c:1267:}"];
+	Node0x560723912080 -> Node0x5607239120d0;
+	Node0x5607239120d0 [shape=record,label="{buf.c:1269:}"];
+	Node0x5607239120d0 -> Node0x560723907c20;
+	Node0x560723907c20 [shape=record,label="{buf.c:1271:}"];
+}

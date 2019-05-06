@@ -1,0 +1,19 @@
+digraph "CFG for '__xmlSimpleError' function" {
+	label="CFG for '__xmlSimpleError' function";
+
+	Node0x560648586ec0 [shape=record,label="{error.c:651:|{<s0>T|<s1>F}}"];
+	Node0x560648586ec0 -> Node0x56064858a560;
+	Node0x560648586ec0 -> Node0x56064858a600;
+	Node0x56064858a560 [shape=record,label="{error.c:656:|{<s0>T|<s1>F}}"];
+	Node0x56064858a560 -> Node0x56064858a9c0;
+	Node0x56064858a560 -> Node0x56064858aa60;
+	Node0x56064858a9c0 [shape=record,label="{error.c:657:}"];
+	Node0x56064858a9c0 -> Node0x56064858aa10;
+	Node0x56064858aa60 [shape=record,label="{error.c:662:}"];
+	Node0x56064858aa60 -> Node0x56064858aa10;
+	Node0x56064858aa10 [shape=record,label="{error.c:665:}"];
+	Node0x56064858aa10 -> Node0x56064858a5b0;
+	Node0x56064858a600 [shape=record,label="{error.c:666:}"];
+	Node0x56064858a600 -> Node0x56064858a5b0;
+	Node0x56064858a5b0 [shape=record,label="{error.c:670:}"];
+}

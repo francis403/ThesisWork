@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlXPathConvertBoolean' function" {
+	label="CFG for 'xmlXPathConvertBoolean' function";
+
+	Node0x55e6b266ee60 [shape=record,label="{xpath.c:6099:|{<s0>T|<s1>F}}"];
+	Node0x55e6b266ee60:s0 -> Node0x55e6b254f490;
+	Node0x55e6b266ee60:s1 -> Node0x55e6b254f4e0;
+	Node0x55e6b254f490 [shape=record,label="{xpath.c:6103:}"];
+	Node0x55e6b254f490 -> Node0x55e6b254eae0;
+	Node0x55e6b254f4e0 [shape=record,label="{xpath.c:6104:|{<s0>T|<s1>F}}"];
+	Node0x55e6b254f4e0:s0 -> Node0x55e6b254fa30;
+	Node0x55e6b254f4e0:s1 -> Node0x55e6b254fa80;
+	Node0x55e6b254fa30 [shape=record,label="{xpath.c:6105:}"];
+	Node0x55e6b254fa30 -> Node0x55e6b254eae0;
+	Node0x55e6b254fa80 [shape=record,label="{xpath.c:6106:}"];
+	Node0x55e6b254fa80 -> Node0x55e6b254eae0;
+	Node0x55e6b254eae0 [shape=record,label="{xpath.c:6109:}"];
+}

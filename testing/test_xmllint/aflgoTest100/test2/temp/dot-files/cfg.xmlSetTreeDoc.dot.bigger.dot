@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlSetTreeDoc' function" {
+	label="CFG for 'xmlSetTreeDoc' function";
+
+	Node0x5627b43eea10 [shape=record,label="{tree.c:2804:|{<s0>T|<s1>F}}"];
+	Node0x5627b43eea10:s0 -> Node0x5627b43f0fd0;
+	Node0x5627b43eea10:s1 -> Node0x5627b43f1070;
+	Node0x5627b43f1070 [shape=record,label="{tree.c:2807:|{<s0>T|<s1>F}}"];
+	Node0x5627b43f1070:s0 -> Node0x5627b43f0fd0;
+	Node0x5627b43f1070:s1 -> Node0x5627b43f1020;
+	Node0x5627b43f0fd0 [shape=record,label="{tree.c:2808:}"];
+	Node0x5627b43f0fd0 -> Node0x5627b43f1760;
+	Node0x5627b43f1020 [shape=record,label="{tree.c:2809:|{<s0>T|<s1>F}}"];
+	Node0x5627b43f1020:s0 -> Node0x5627b43f1710;
+	Node0x5627b43f1020:s1 -> Node0x5627b43f1760;
+	Node0x5627b43f1710 [shape=record,label="{tree.c:2810:|{<s0>T|<s1>F}}"];
+	Node0x5627b43f1710:s0 -> Node0x5627b43112d0;
+	Node0x5627b43f1710:s1 -> Node0x5627b4311320;
+	Node0x5627b43112d0 [shape=record,label="{tree.c:2811:}"];
+	Node0x5627b43112d0 -> Node0x5627b4311840;
+	Node0x5627b4311840 [shape=record,label="{tree.c:2812:|{<s0>T|<s1>F}}"];
+	Node0x5627b4311840:s0 -> Node0x5627b4311c40;
+	Node0x5627b4311840:s1 -> Node0x5627b4311a60;
+	Node0x5627b4311c40 [shape=record,label="{tree.c:2813:|{<s0>T|<s1>F}}"];
+	Node0x5627b4311c40:s0 -> Node0x5627b4311df0;
+	Node0x5627b4311c40:s1 -> Node0x5627b4311e40;
+	Node0x5627b4311df0 [shape=record,label="{tree.c:2814:}"];
+	Node0x5627b4311df0 -> Node0x5627b4311e40;
+	Node0x5627b4311e40 [shape=record,label="{tree.c:2817:}"];
+	Node0x5627b4311e40 -> Node0x5627b4311840;
+	Node0x5627b4311a60 [shape=record,label="{tree.c:2836:}"];
+	Node0x5627b4311a60 -> Node0x5627b4311320;
+	Node0x5627b4311320 [shape=record,label="{tree.c:2837:|{<s0>T|<s1>F}}"];
+	Node0x5627b4311320:s0 -> Node0x5627b43133b0;
+	Node0x5627b4311320:s1 -> Node0x5627b4313400;
+	Node0x5627b43133b0 [shape=record,label="{tree.c:2838:}"];
+	Node0x5627b43133b0 -> Node0x5627b4313400;
+	Node0x5627b4313400 [shape=record,label="{tree.c:2839:}"];
+	Node0x5627b4313400 -> Node0x5627b43f1760;
+	Node0x5627b43f1760 [shape=record,label="{tree.c:2841:}"];
+}

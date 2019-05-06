@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlBufferCCat' function" {
+	label="CFG for 'xmlBufferCCat' function";
+
+	Node0x55ad0be23760 [shape=record,label="{tree.c:7636:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be23760 -> Node0x55ad0be26340;
+	Node0x55ad0be23760 -> Node0x55ad0be26390;
+	Node0x55ad0be26340 [shape=record,label="{tree.c:7640:}"];
+	Node0x55ad0be26340 -> Node0x55ad0be25520;
+	Node0x55ad0be26390 [shape=record,label="{tree.c:7641:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be26390 -> Node0x55ad0be26850;
+	Node0x55ad0be26390 -> Node0x55ad0be268a0;
+	Node0x55ad0be26850 [shape=record,label="{tree.c:7641:}"];
+	Node0x55ad0be26850 -> Node0x55ad0be25520;
+	Node0x55ad0be268a0 [shape=record,label="{tree.c:7642:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be268a0 -> Node0x55ad0be26dc0;
+	Node0x55ad0be268a0 -> Node0x55ad0be26e10;
+	Node0x55ad0be26dc0 [shape=record,label="{tree.c:7647:}"];
+	Node0x55ad0be26dc0 -> Node0x55ad0be25520;
+	Node0x55ad0be26e10 [shape=record,label="{tree.c:7649:}"];
+	Node0x55ad0be26e10 -> Node0x55ad0be27500;
+	Node0x55ad0be27500 [shape=record,label="{tree.c:7649:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be27500 -> Node0x55ad0be277e0;
+	Node0x55ad0be27500 -> Node0x55ad0be27300;
+	Node0x55ad0be277e0 [shape=record,label="{tree.c:7650:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be277e0 -> Node0x55ad0be27c10;
+	Node0x55ad0be277e0 -> Node0x55ad0be27c60;
+	Node0x55ad0be27c10 [shape=record,label="{tree.c:7651:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be27c10 -> Node0x55ad0be281f0;
+	Node0x55ad0be27c10 -> Node0x55ad0be281a0;
+	Node0x55ad0be281a0 [shape=record,label="{tree.c:7652:}"];
+	Node0x55ad0be281a0 -> Node0x55ad0be25520;
+	Node0x55ad0be281f0 [shape=record,label="{tree.c:7655:}"];
+	Node0x55ad0be281f0 -> Node0x55ad0be27c60;
+	Node0x55ad0be27c60 [shape=record,label="{tree.c:7656:}"];
+	Node0x55ad0be27c60 -> Node0x55ad0be27750;
+	Node0x55ad0be27750 [shape=record,label="{tree.c:7649:}"];
+	Node0x55ad0be27750 -> Node0x55ad0be27500;
+	Node0x55ad0be27300 [shape=record,label="{tree.c:7658:}"];
+	Node0x55ad0be27300 -> Node0x55ad0be25520;
+	Node0x55ad0be25520 [shape=record,label="{tree.c:7660:}"];
+}

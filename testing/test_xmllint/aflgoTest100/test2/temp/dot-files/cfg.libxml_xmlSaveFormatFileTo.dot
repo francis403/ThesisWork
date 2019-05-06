@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlSaveFormatFileTo' function" {
+	label="CFG for 'libxml_xmlSaveFormatFileTo' function";
+
+	Node0x55fa6c636dc0 [shape=record,label="{libxml.c:624:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c636dc0:s0 -> Node0x55fa6c63cb60;
+	Node0x55fa6c636dc0:s1 -> Node0x55fa6c63cb10;
+	Node0x55fa6c63cb10 [shape=record,label="{libxml.c:635:}"];
+	Node0x55fa6c63cb10 -> Node0x55fa6c636e10;
+	Node0x55fa6c63cb60 [shape=record,label="{libxml.c:636:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c63cb60:s0 -> Node0x55fa6c63d4b0;
+	Node0x55fa6c63cb60:s1 -> Node0x55fa6c63d500;
+	Node0x55fa6c63d4b0 [shape=record,label="{libxml.c:636:}"];
+	Node0x55fa6c63d4b0 -> Node0x55fa6c63d550;
+	Node0x55fa6c63d500 [shape=record,label="{libxml.c:636:}"];
+	Node0x55fa6c63d500 -> Node0x55fa6c63d550;
+	Node0x55fa6c63d550 [shape=record,label="{libxml.c:636:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c63d550:s0 -> Node0x55fa6c63dae0;
+	Node0x55fa6c63d550:s1 -> Node0x55fa6c63db30;
+	Node0x55fa6c63dae0 [shape=record,label="{libxml.c:637:}"];
+	Node0x55fa6c63dae0 -> Node0x55fa6c63db80;
+	Node0x55fa6c63db30 [shape=record,label="{libxml.c:637:}"];
+	Node0x55fa6c63db30 -> Node0x55fa6c63db80;
+	Node0x55fa6c63db80 [shape=record,label="{libxml.c:637:}"];
+	Node0x55fa6c63db80 -> Node0x55fa6c636e10;
+	Node0x55fa6c636e10 [shape=record,label="{libxml.c:645:}"];
+}

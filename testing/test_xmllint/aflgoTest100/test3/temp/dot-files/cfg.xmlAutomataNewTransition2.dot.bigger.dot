@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlAutomataNewTransition2' function" {
+	label="CFG for 'xmlAutomataNewTransition2' function";
+
+	Node0x5580ae962fd0 [shape=record,label="{xmlregexp.c:5754:|{<s0>T|<s1>F}}"];
+	Node0x5580ae962fd0:s0 -> Node0x5580ae9689c0;
+	Node0x5580ae962fd0:s1 -> Node0x5580ae968ae0;
+	Node0x5580ae968ae0 [shape=record,label="{xmlregexp.c:5759:|{<s0>T|<s1>F}}"];
+	Node0x5580ae968ae0:s0 -> Node0x5580ae9689c0;
+	Node0x5580ae968ae0:s1 -> Node0x5580ae968a60;
+	Node0x5580ae968a60 [shape=record,label="{xmlregexp.c:5759:|{<s0>T|<s1>F}}"];
+	Node0x5580ae968a60:s0 -> Node0x5580ae9689c0;
+	Node0x5580ae968a60:s1 -> Node0x5580ae968a10;
+	Node0x5580ae9689c0 [shape=record,label="{xmlregexp.c:5760:}"];
+	Node0x5580ae9689c0 -> Node0x5580ae967150;
+	Node0x5580ae968a10 [shape=record,label="{xmlregexp.c:5761:|{<s0>T|<s1>F}}"];
+	Node0x5580ae968a10:s0 -> Node0x5580ae969570;
+	Node0x5580ae968a10:s1 -> Node0x5580ae9695c0;
+	Node0x5580ae969570 [shape=record,label="{xmlregexp.c:5763:}"];
+	Node0x5580ae969570 -> Node0x5580ae967150;
+	Node0x5580ae9695c0 [shape=record,label="{xmlregexp.c:5764:|{<s0>T|<s1>F}}"];
+	Node0x5580ae9695c0:s0 -> Node0x5580ae969c20;
+	Node0x5580ae9695c0:s1 -> Node0x5580ae969d10;
+	Node0x5580ae969d10 [shape=record,label="{xmlregexp.c:5765:|{<s0>T|<s1>F}}"];
+	Node0x5580ae969d10:s0 -> Node0x5580ae969c20;
+	Node0x5580ae969d10:s1 -> Node0x5580ae969cc0;
+	Node0x5580ae969c20 [shape=record,label="{xmlregexp.c:5766:}"];
+	Node0x5580ae969c20 -> Node0x5580ae969c70;
+	Node0x5580ae969cc0 [shape=record,label="{xmlregexp.c:5768:|{<s0>T|<s1>F}}"];
+	Node0x5580ae969cc0:s0 -> Node0x5580ae96ba80;
+	Node0x5580ae969cc0:s1 -> Node0x5580ae96bad0;
+	Node0x5580ae96ba80 [shape=record,label="{xmlregexp.c:5776:}"];
+	Node0x5580ae96ba80 -> Node0x5580ae967150;
+	Node0x5580ae96bad0 [shape=record,label="{xmlregexp.c:5779:}"];
+	Node0x5580ae96bad0 -> Node0x5580ae969c70;
+	Node0x5580ae969c70 [shape=record,label="{xmlregexp.c:5787:|{<s0>T|<s1>F}}"];
+	Node0x5580ae969c70:s0 -> Node0x5580ae96d5f0;
+	Node0x5580ae969c70:s1 -> Node0x5580ae96d640;
+	Node0x5580ae96d5f0 [shape=record,label="{xmlregexp.c:5788:}"];
+	Node0x5580ae96d5f0 -> Node0x5580ae967150;
+	Node0x5580ae96d640 [shape=record,label="{xmlregexp.c:5791:|{<s0>T|<s1>F}}"];
+	Node0x5580ae96d640:s0 -> Node0x5580ae96df70;
+	Node0x5580ae96d640:s1 -> Node0x5580ae96dfc0;
+	Node0x5580ae96df70 [shape=record,label="{xmlregexp.c:5792:}"];
+	Node0x5580ae96df70 -> Node0x5580ae967150;
+	Node0x5580ae96dfc0 [shape=record,label="{xmlregexp.c:5793:}"];
+	Node0x5580ae96dfc0 -> Node0x5580ae967150;
+	Node0x5580ae967150 [shape=record,label="{xmlregexp.c:5794:}"];
+}

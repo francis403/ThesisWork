@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlPatternFromRoot' function" {
+	label="CFG for 'xmlPatternFromRoot' function";
+
+	Node0x55aa3b03d7c0 [shape=record,label="{pattern.c:2602:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b03d7c0:s0 -> Node0x55aa3ad2d6a0;
+	Node0x55aa3b03d7c0:s1 -> Node0x55aa3b03d8d0;
+	Node0x55aa3ad2d6a0 [shape=record,label="{pattern.c:2604:}"];
+	Node0x55aa3ad2d6a0 -> Node0x55aa3b040cb0;
+	Node0x55aa3b03d8d0 [shape=record,label="{pattern.c:2605:}"];
+	Node0x55aa3b03d8d0 -> Node0x55aa3b043b00;
+	Node0x55aa3b043b00 [shape=record,label="{pattern.c:2605:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b043b00:s0 -> Node0x55aa3b043ec0;
+	Node0x55aa3b043b00:s1 -> Node0x55aa3b043ce0;
+	Node0x55aa3b043ec0 [shape=record,label="{pattern.c:2606:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b043ec0:s0 -> Node0x55aa3b044070;
+	Node0x55aa3b043ec0:s1 -> Node0x55aa3b0440c0;
+	Node0x55aa3b044070 [shape=record,label="{pattern.c:2607:}"];
+	Node0x55aa3b044070 -> Node0x55aa3b040cb0;
+	Node0x55aa3b0440c0 [shape=record,label="{pattern.c:2608:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b0440c0:s0 -> Node0x55aa3b044530;
+	Node0x55aa3b0440c0:s1 -> Node0x55aa3b044580;
+	Node0x55aa3b044530 [shape=record,label="{pattern.c:2609:}"];
+	Node0x55aa3b044530 -> Node0x55aa3b040cb0;
+	Node0x55aa3b044580 [shape=record,label="{pattern.c:2610:}"];
+	Node0x55aa3b044580 -> Node0x55aa3b043b00;
+	Node0x55aa3b043ce0 [shape=record,label="{pattern.c:2612:}"];
+	Node0x55aa3b043ce0 -> Node0x55aa3b040cb0;
+	Node0x55aa3b040cb0 [shape=record,label="{pattern.c:2614:}"];
+}

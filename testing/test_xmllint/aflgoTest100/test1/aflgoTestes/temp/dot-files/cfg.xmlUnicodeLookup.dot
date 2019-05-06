@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlUnicodeLookup' function" {
+	label="CFG for 'xmlUnicodeLookup' function";
+
+	Node0x564952f18530 [shape=record,label="{xmlunicode.c:946:|{<s0>T|<s1>F}}"];
+	Node0x564952f18530 -> Node0x564952f1a220;
+	Node0x564952f18530 -> Node0x564952f1a2c0;
+	Node0x564952f1a2c0 [shape=record,label="{xmlunicode.c:950:|{<s0>T|<s1>F}}"];
+	Node0x564952f1a2c0 -> Node0x564952f1a220;
+	Node0x564952f1a2c0 -> Node0x564952f1a270;
+	Node0x564952f1a220 [shape=record,label="{xmlunicode.c:950:}"];
+	Node0x564952f1a220 -> Node0x564952f18580;
+	Node0x564952f1a270 [shape=record,label="{xmlunicode.c:952:}"];
+	Node0x564952f1a270 -> Node0x564952f1af70;
+	Node0x564952f1af70 [shape=record,label="{xmlunicode.c:955:|{<s0>T|<s1>F}}"];
+	Node0x564952f1af70 -> Node0x564952f1b350;
+	Node0x564952f1af70 -> Node0x564952f1b150;
+	Node0x564952f1b350 [shape=record,label="{xmlunicode.c:956:|{<s0>T|<s1>F}}"];
+	Node0x564952f1b350 -> Node0x564952f1b890;
+	Node0x564952f1b350 -> Node0x564952f1b8e0;
+	Node0x564952f1b890 [shape=record,label="{xmlunicode.c:958:}"];
+	Node0x564952f1b890 -> Node0x564952f18580;
+	Node0x564952f1b8e0 [shape=record,label="{xmlunicode.c:959:|{<s0>T|<s1>F}}"];
+	Node0x564952f1b8e0 -> Node0x564952f1cc50;
+	Node0x564952f1b8e0 -> Node0x564952f1ccf0;
+	Node0x564952f1cc50 [shape=record,label="{xmlunicode.c:960:}"];
+	Node0x564952f1cc50 -> Node0x564952f1cca0;
+	Node0x564952f1ccf0 [shape=record,label="{xmlunicode.c:962:}"];
+	Node0x564952f1ccf0 -> Node0x564952f1cca0;
+	Node0x564952f1cca0 [shape=record,label="{xmlunicode.c:955:}"];
+	Node0x564952f1cca0 -> Node0x564952f1af70;
+	Node0x564952f1b150 [shape=record,label="{xmlunicode.c:964:}"];
+	Node0x564952f1b150 -> Node0x564952f18580;
+	Node0x564952f18580 [shape=record,label="{xmlunicode.c:965:}"];
+}

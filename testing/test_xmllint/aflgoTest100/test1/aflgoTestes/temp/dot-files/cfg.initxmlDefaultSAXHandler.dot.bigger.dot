@@ -1,0 +1,19 @@
+digraph "CFG for 'initxmlDefaultSAXHandler' function" {
+	label="CFG for 'initxmlDefaultSAXHandler' function";
+
+	Node0x55c4c91f7910 [shape=record,label="{SAX.c:42:|{<s0>T|<s1>F}}"];
+	Node0x55c4c91f7910:s0 -> Node0x55c4c93359c0;
+	Node0x55c4c91f7910:s1 -> Node0x55c4c9335a10;
+	Node0x55c4c93359c0 [shape=record,label="{SAX.c:46:}"];
+	Node0x55c4c93359c0 -> Node0x55c4c923cc90;
+	Node0x55c4c9335a10 [shape=record,label="{SAX.c:48:|{<s0>T|<s1>F}}"];
+	Node0x55c4c9335a10:s0 -> Node0x55c4c933ca90;
+	Node0x55c4c9335a10:s1 -> Node0x55c4c933cb30;
+	Node0x55c4c933ca90 [shape=record,label="{SAX.c:72:}"];
+	Node0x55c4c933ca90 -> Node0x55c4c933cae0;
+	Node0x55c4c933cb30 [shape=record,label="{SAX.c:74:}"];
+	Node0x55c4c933cb30 -> Node0x55c4c933cae0;
+	Node0x55c4c933cae0 [shape=record,label="{SAX.c:75:}"];
+	Node0x55c4c933cae0 -> Node0x55c4c923cc90;
+	Node0x55c4c923cc90 [shape=record,label="{SAX.c:79:}"];
+}

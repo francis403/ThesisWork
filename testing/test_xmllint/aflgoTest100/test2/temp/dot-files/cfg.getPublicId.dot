@@ -1,0 +1,10 @@
+digraph "CFG for 'getPublicId' function" {
+	label="CFG for 'getPublicId' function";
+
+	Node0x55adc8b87cb0 [shape=record,label="{legacy.c:764:|{<s0>T|<s1>F}}"];
+	Node0x55adc8b87cb0:s0 -> Node0x55adc8b8c9b0;
+	Node0x55adc8b87cb0:s1 -> Node0x55adc8b8c5d0;
+	Node0x55adc8b8c9b0 [shape=record,label="{legacy.c:766:}"];
+	Node0x55adc8b8c9b0 -> Node0x55adc8b8c5d0;
+	Node0x55adc8b8c5d0 [shape=record,label="{legacy.c:766:}"];
+}

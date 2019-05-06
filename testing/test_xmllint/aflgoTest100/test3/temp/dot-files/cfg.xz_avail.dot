@@ -1,0 +1,22 @@
+digraph "CFG for 'xz_avail' function" {
+	label="CFG for 'xz_avail' function";
+
+	Node0x56316f383c10 [shape=record,label="{xzlib.c:255:|{<s0>T|<s1>F}}"];
+	Node0x56316f383c10 -> Node0x56316f3ab860;
+	Node0x56316f383c10 -> Node0x56316f3ab8b0;
+	Node0x56316f3ab860 [shape=record,label="{xzlib.c:260:}"];
+	Node0x56316f3ab860 -> Node0x56316f383c60;
+	Node0x56316f3ab8b0 [shape=record,label="{xzlib.c:261:|{<s0>T|<s1>F}}"];
+	Node0x56316f3ab8b0 -> Node0x56316f3abdd0;
+	Node0x56316f3ab8b0 -> Node0x56316f3abe20;
+	Node0x56316f3abdd0 [shape=record,label="{xzlib.c:263:|{<s0>T|<s1>F}}"];
+	Node0x56316f3abdd0 -> Node0x56316f3ac710;
+	Node0x56316f3abdd0 -> Node0x56316f3ac760;
+	Node0x56316f3ac710 [shape=record,label="{xzlib.c:266:}"];
+	Node0x56316f3ac710 -> Node0x56316f383c60;
+	Node0x56316f3ac760 [shape=record,label="{xzlib.c:269:}"];
+	Node0x56316f3ac760 -> Node0x56316f3abe20;
+	Node0x56316f3abe20 [shape=record,label="{xzlib.c:272:}"];
+	Node0x56316f3abe20 -> Node0x56316f383c60;
+	Node0x56316f383c60 [shape=record,label="{xzlib.c:273:}"];
+}

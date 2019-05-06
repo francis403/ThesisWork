@@ -1,0 +1,21 @@
+digraph "CFG for 'htmlEntityLookup' function" {
+	label="CFG for 'htmlEntityLookup' function";
+
+	Node0x56074464cf90 [shape=record,label="{HTMLparser.c:1934:}"];
+	Node0x56074464cf90 -> Node0x56074466a990;
+	Node0x56074466a990 [shape=record,label="{HTMLparser.c:1937:|{<s0>T|<s1>F}}"];
+	Node0x56074466a990 -> Node0x56074466ac70;
+	Node0x56074466a990 -> Node0x56074466a7f0;
+	Node0x56074466ac70 [shape=record,label="{HTMLparser.c:1939:|{<s0>T|<s1>F}}"];
+	Node0x56074466ac70 -> Node0x56074466b160;
+	Node0x56074466ac70 -> Node0x56074466b1b0;
+	Node0x56074466b160 [shape=record,label="{HTMLparser.c:1940:}"];
+	Node0x56074466b160 -> Node0x56074463c9d0;
+	Node0x56074466b1b0 [shape=record,label="{HTMLparser.c:1942:}"];
+	Node0x56074466b1b0 -> Node0x56074466abe0;
+	Node0x56074466abe0 [shape=record,label="{HTMLparser.c:1938:}"];
+	Node0x56074466abe0 -> Node0x56074466a990;
+	Node0x56074466a7f0 [shape=record,label="{HTMLparser.c:1943:}"];
+	Node0x56074466a7f0 -> Node0x56074463c9d0;
+	Node0x56074463c9d0 [shape=record,label="{HTMLparser.c:1944:}"];
+}

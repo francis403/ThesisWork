@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlNanoFTPNewCtxt' function" {
+	label="CFG for 'xmlNanoFTPNewCtxt' function";
+
+	Node0x561533c3ce00 [shape=record,label="{nanoftp.c:464:|{<s0>T|<s1>F}}"];
+	Node0x561533c3ce00 -> Node0x561533c61f00;
+	Node0x561533c3ce00 -> Node0x561533c61f50;
+	Node0x561533c61f00 [shape=record,label="{nanoftp.c:470:}"];
+	Node0x561533c61f00 -> Node0x561533c3f880;
+	Node0x561533c61f50 [shape=record,label="{nanoftp.c:474:|{<s0>T|<s1>F}}"];
+	Node0x561533c61f50 -> Node0x561533c63fe0;
+	Node0x561533c61f50 -> Node0x561533c64080;
+	Node0x561533c63fe0 [shape=record,label="{nanoftp.c:484:}"];
+	Node0x561533c63fe0 -> Node0x561533c64030;
+	Node0x561533c64080 [shape=record,label="{nanoftp.c:486:|{<s0>T|<s1>F}}"];
+	Node0x561533c64080 -> Node0x561533c64920;
+	Node0x561533c64080 -> Node0x561533c64970;
+	Node0x561533c64920 [shape=record,label="{nanoftp.c:487:}"];
+	Node0x561533c64920 -> Node0x561533c64970;
+	Node0x561533c64970 [shape=record,label="{%38}"];
+	Node0x561533c64970 -> Node0x561533c64030;
+	Node0x561533c64030 [shape=record,label="{nanoftp.c:489:}"];
+	Node0x561533c64030 -> Node0x561533c3f880;
+	Node0x561533c3f880 [shape=record,label="{nanoftp.c:490:}"];
+}

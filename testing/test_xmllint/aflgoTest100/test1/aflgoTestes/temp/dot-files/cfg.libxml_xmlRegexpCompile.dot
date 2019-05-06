@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlRegexpCompile' function" {
+	label="CFG for 'libxml_xmlRegexpCompile' function";
+
+	Node0x55f9311f9150 [shape=record,label="{libxml2-py.c:6151:|{<s0>T|<s1>F}}"];
+	Node0x55f9311f9150:s0 -> Node0x55f9311fd3f0;
+	Node0x55f9311f9150:s1 -> Node0x55f9311fd3a0;
+	Node0x55f9311fd3a0 [shape=record,label="{libxml2-py.c:6157:}"];
+	Node0x55f9311fd3a0 -> Node0x55f9311f9450;
+	Node0x55f9311fd3f0 [shape=record,label="{libxml2-py.c:6159:}"];
+	Node0x55f9311fd3f0 -> Node0x55f9311f9450;
+	Node0x55f9311f9450 [shape=record,label="{libxml2-py.c:6162:}"];
+}

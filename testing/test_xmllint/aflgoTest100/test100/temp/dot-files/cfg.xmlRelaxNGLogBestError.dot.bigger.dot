@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlRelaxNGLogBestError' function" {
+	label="CFG for 'xmlRelaxNGLogBestError' function";
+
+	Node0x559d0c16ebc0 [shape=record,label="{relaxng.c:9796:|{<s0>T|<s1>F}}"];
+	Node0x559d0c16ebc0:s0 -> Node0x559d0c174260;
+	Node0x559d0c16ebc0:s1 -> Node0x559d0c174380;
+	Node0x559d0c174380 [shape=record,label="{relaxng.c:9800:|{<s0>T|<s1>F}}"];
+	Node0x559d0c174380:s0 -> Node0x559d0c174260;
+	Node0x559d0c174380:s1 -> Node0x559d0c174300;
+	Node0x559d0c174300 [shape=record,label="{relaxng.c:9801:|{<s0>T|<s1>F}}"];
+	Node0x559d0c174300:s0 -> Node0x559d0c174260;
+	Node0x559d0c174300:s1 -> Node0x559d0c1742b0;
+	Node0x559d0c174260 [shape=record,label="{relaxng.c:9802:}"];
+	Node0x559d0c174260 -> Node0x559d0c178d90;
+	Node0x559d0c1742b0 [shape=record,label="{relaxng.c:9804:|{<s0>T|<s1>F}}"];
+	Node0x559d0c1742b0:s0 -> Node0x559d0c178de0;
+	Node0x559d0c1742b0:s1 -> Node0x559d0c178d90;
+	Node0x559d0c178de0 [shape=record,label="{relaxng.c:9805:|{<s0>T|<s1>F}}"];
+	Node0x559d0c178de0:s0 -> Node0x559d0c178d40;
+	Node0x559d0c178de0:s1 -> Node0x559d0c178d90;
+	Node0x559d0c178d40 [shape=record,label="{relaxng.c:9806:}"];
+	Node0x559d0c178d40 -> Node0x559d0c178d90;
+	Node0x559d0c178d90 [shape=record,label="{relaxng.c:9810:}"];
+}

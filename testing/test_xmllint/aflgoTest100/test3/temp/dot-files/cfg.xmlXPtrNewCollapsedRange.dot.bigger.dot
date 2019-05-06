@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPtrNewCollapsedRange' function" {
+	label="CFG for 'xmlXPtrNewCollapsedRange' function";
+
+	Node0x55e33431f980 [shape=record,label="{xpointer.c:510:|{<s0>T|<s1>F}}"];
+	Node0x55e33431f980:s0 -> Node0x55e334320650;
+	Node0x55e33431f980:s1 -> Node0x55e3343206a0;
+	Node0x55e334320650 [shape=record,label="{xpointer.c:514:}"];
+	Node0x55e334320650 -> Node0x55e33431fd40;
+	Node0x55e3343206a0 [shape=record,label="{xpointer.c:516:}"];
+	Node0x55e3343206a0 -> Node0x55e33431fd40;
+	Node0x55e33431fd40 [shape=record,label="{xpointer.c:518:}"];
+}

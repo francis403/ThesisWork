@@ -1,0 +1,20 @@
+digraph "CFG for 'htmlElementStatusHere' function" {
+	label="CFG for 'htmlElementStatusHere' function";
+
+	Node0x56074488ed60 [shape=record,label="{HTMLparser.c:6503:|{<s0>T|<s1>F}}"];
+	Node0x56074488ed60 -> Node0x560744891c30;
+	Node0x56074488ed60 -> Node0x560744891b90;
+	Node0x560744891c30 [shape=record,label="{HTMLparser.c:6504:|{<s0>T|<s1>F}}"];
+	Node0x560744891c30 -> Node0x560744891be0;
+	Node0x560744891c30 -> Node0x560744891b90;
+	Node0x560744891b90 [shape=record,label="{HTMLparser.c:6505:}"];
+	Node0x560744891b90 -> Node0x56074488eb20;
+	Node0x560744891be0 [shape=record,label="{HTMLparser.c:6506:|{<s0>T|<s1>F}}"];
+	Node0x560744891be0 -> Node0x560744892250;
+	Node0x560744891be0 -> Node0x560744892200;
+	Node0x560744892200 [shape=record,label="{HTMLparser.c:6507:}"];
+	Node0x560744892200 -> Node0x56074488eb20;
+	Node0x560744892250 [shape=record,label="{HTMLparser.c:6509:}"];
+	Node0x560744892250 -> Node0x56074488eb20;
+	Node0x56074488eb20 [shape=record,label="{HTMLparser.c:6510:}"];
+}

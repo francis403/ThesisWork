@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlSchemaGetComponentTypeStr' function" {
+	label="CFG for 'xmlSchemaGetComponentTypeStr' function";
+
+	Node0x55d025dc8d20 [shape=record,label="{xmlschemas.c:1181:|{<s0>def|<s1>1}}"];
+	Node0x55d025dc8d20:s0 -> Node0x55d025dcb7f0;
+	Node0x55d025dc8d20:s1 -> Node0x55d025dcb910;
+	Node0x55d025dcb910 [shape=record,label="{xmlschemas.c:1185:|{<s0>T|<s1>F}}"];
+	Node0x55d025dcb910:s0 -> Node0x55d025dcba00;
+	Node0x55d025dcb910:s1 -> Node0x55d025dcbaf0;
+	Node0x55d025dcbaf0 [shape=record,label="{xmlschemas.c:1185:|{<s0>T|<s1>F}}"];
+	Node0x55d025dcbaf0:s0 -> Node0x55d025dcba00;
+	Node0x55d025dcbaf0:s1 -> Node0x55d025dcbaa0;
+	Node0x55d025dcba00 [shape=record,label="{xmlschemas.c:1186:}"];
+	Node0x55d025dcba00 -> Node0x55d025dc8d70;
+	Node0x55d025dcbaa0 [shape=record,label="{xmlschemas.c:1188:}"];
+	Node0x55d025dcbaa0 -> Node0x55d025dc8d70;
+	Node0x55d025dcb7f0 [shape=record,label="{xmlschemas.c:1190:}"];
+	Node0x55d025dcb7f0 -> Node0x55d025dc8d70;
+	Node0x55d025dc8d70 [shape=record,label="{xmlschemas.c:1192:}"];
+}

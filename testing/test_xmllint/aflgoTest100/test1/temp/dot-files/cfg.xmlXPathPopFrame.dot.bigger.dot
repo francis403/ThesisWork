@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlXPathPopFrame' function" {
+	label="CFG for 'xmlXPathPopFrame' function";
+
+	Node0x55e6b2dc8140 [shape=record,label="{xpath.c:2801:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2dc8140:s0 -> Node0x55e6b2dc9090;
+	Node0x55e6b2dc8140:s1 -> Node0x55e6b2dbe5b0;
+	Node0x55e6b2dc9090 [shape=record,label="{xpath.c:2803:}"];
+	Node0x55e6b2dc9090 -> Node0x55e6b2dc8190;
+	Node0x55e6b2dbe5b0 [shape=record,label="{xpath.c:2804:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2dbe5b0:s0 -> Node0x55e6b2dc9dd0;
+	Node0x55e6b2dbe5b0:s1 -> Node0x55e6b2dc9e20;
+	Node0x55e6b2dc9dd0 [shape=record,label="{xpath.c:2805:}"];
+	Node0x55e6b2dc9dd0 -> Node0x55e6b2dc9e20;
+	Node0x55e6b2dc9e20 [shape=record,label="{xpath.c:2807:}"];
+	Node0x55e6b2dc9e20 -> Node0x55e6b2dc8190;
+	Node0x55e6b2dc8190 [shape=record,label="{xpath.c:2808:}"];
+}

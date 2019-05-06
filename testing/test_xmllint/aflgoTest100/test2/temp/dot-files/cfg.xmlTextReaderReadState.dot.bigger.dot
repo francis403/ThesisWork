@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlTextReaderReadState' function" {
+	label="CFG for 'xmlTextReaderReadState' function";
+
+	Node0x5619bd48d0f0 [shape=record,label="{xmlreader.c:1632:|{<s0>T|<s1>F}}"];
+	Node0x5619bd48d0f0:s0 -> Node0x5619bd4af470;
+	Node0x5619bd48d0f0:s1 -> Node0x5619bd4b6190;
+	Node0x5619bd4af470 [shape=record,label="{xmlreader.c:1634:}"];
+	Node0x5619bd4af470 -> Node0x5619bd48d480;
+	Node0x5619bd4b6190 [shape=record,label="{xmlreader.c:1635:}"];
+	Node0x5619bd4b6190 -> Node0x5619bd48d480;
+	Node0x5619bd48d480 [shape=record,label="{xmlreader.c:1636:}"];
+}

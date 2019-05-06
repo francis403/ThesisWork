@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlXPathNodeSetKeepLast' function" {
+	label="CFG for 'xmlXPathNodeSetKeepLast' function";
+
+	Node0x55e6b2e98f50 [shape=record,label="{xpath.c:4242:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2e98f50 -> Node0x55e6b2eab2a0;
+	Node0x55e6b2e98f50 -> Node0x55e6b2eab340;
+	Node0x55e6b2eab340 [shape=record,label="{xpath.c:4247:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2eab340 -> Node0x55e6b2eab2a0;
+	Node0x55e6b2eab340 -> Node0x55e6b2eab2f0;
+	Node0x55e6b2eab2a0 [shape=record,label="{xpath.c:4248:}"];
+	Node0x55e6b2eab2a0 -> Node0x55e6b2eaa640;
+	Node0x55e6b2eab2f0 [shape=record,label="{xpath.c:4249:}"];
+	Node0x55e6b2eab2f0 -> Node0x55e6b2eabb10;
+	Node0x55e6b2eabb10 [shape=record,label="{xpath.c:4249:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2eabb10 -> Node0x55e6b2eabdf0;
+	Node0x55e6b2eabb10 -> Node0x55e6b2eab9b0;
+	Node0x55e6b2eabdf0 [shape=record,label="{xpath.c:4250:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2eabdf0 -> Node0x55e6b2eac6a0;
+	Node0x55e6b2eabdf0 -> Node0x55e6b2eac650;
+	Node0x55e6b2eac6a0 [shape=record,label="{xpath.c:4252:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2eac6a0 -> Node0x55e6b2eac600;
+	Node0x55e6b2eac6a0 -> Node0x55e6b2eac650;
+	Node0x55e6b2eac600 [shape=record,label="{xpath.c:4253:}"];
+	Node0x55e6b2eac600 -> Node0x55e6b2eac650;
+	Node0x55e6b2eac650 [shape=record,label="{xpath.c:4254:}"];
+	Node0x55e6b2eac650 -> Node0x55e6b2eabd60;
+	Node0x55e6b2eabd60 [shape=record,label="{xpath.c:4249:}"];
+	Node0x55e6b2eabd60 -> Node0x55e6b2eabb10;
+	Node0x55e6b2eab9b0 [shape=record,label="{xpath.c:4255:}"];
+	Node0x55e6b2eab9b0 -> Node0x55e6b2eaa640;
+	Node0x55e6b2eaa640 [shape=record,label="{xpath.c:4257:}"];
+}

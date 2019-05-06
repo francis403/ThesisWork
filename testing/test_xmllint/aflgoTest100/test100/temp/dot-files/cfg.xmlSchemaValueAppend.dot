@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaValueAppend' function" {
+	label="CFG for 'xmlSchemaValueAppend' function";
+
+	Node0x557b21834440 [shape=record,label="{xmlschemastypes.c:861:|{<s0>T|<s1>F}}"];
+	Node0x557b21834440 -> Node0x557b2183ef10;
+	Node0x557b21834440 -> Node0x557b2183efb0;
+	Node0x557b2183efb0 [shape=record,label="{xmlschemastypes.c:863:|{<s0>T|<s1>F}}"];
+	Node0x557b2183efb0 -> Node0x557b2183ef10;
+	Node0x557b2183efb0 -> Node0x557b2183ef60;
+	Node0x557b2183ef10 [shape=record,label="{xmlschemastypes.c:864:}"];
+	Node0x557b2183ef10 -> Node0x557b218340e0;
+	Node0x557b2183ef60 [shape=record,label="{xmlschemastypes.c:865:}"];
+	Node0x557b2183ef60 -> Node0x557b218340e0;
+	Node0x557b218340e0 [shape=record,label="{xmlschemastypes.c:867:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsOldItalic' function" {
+	label="CFG for 'libxml_xmlUCSIsOldItalic' function";
+
+	Node0x55f931625b50 [shape=record,label="{libxml2-py.c:11099:|{<s0>T|<s1>F}}"];
+	Node0x55f931625b50:s0 -> Node0x55f931628ad0;
+	Node0x55f931625b50:s1 -> Node0x55f931628a80;
+	Node0x55f931628a80 [shape=record,label="{libxml2-py.c:11105:}"];
+	Node0x55f931628a80 -> Node0x55f931625de0;
+	Node0x55f931628ad0 [shape=record,label="{libxml2-py.c:11107:}"];
+	Node0x55f931628ad0 -> Node0x55f931625de0;
+	Node0x55f931625de0 [shape=record,label="{libxml2-py.c:11110:}"];
+}

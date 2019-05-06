@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlListRemoveFirst' function" {
+	label="CFG for 'xmlListRemoveFirst' function";
+
+	Node0x56019df78f70 [shape=record,label="{list.c:353:|{<s0>T|<s1>F}}"];
+	Node0x56019df78f70:s0 -> Node0x56019df79e40;
+	Node0x56019df78f70:s1 -> Node0x56019df79e90;
+	Node0x56019df79e40 [shape=record,label="{list.c:358:}"];
+	Node0x56019df79e40 -> Node0x56019df79380;
+	Node0x56019df79e90 [shape=record,label="{list.c:360:|{<s0>T|<s1>F}}"];
+	Node0x56019df79e90:s0 -> Node0x56019df7a550;
+	Node0x56019df79e90:s1 -> Node0x56019df7a5a0;
+	Node0x56019df7a550 [shape=record,label="{list.c:362:}"];
+	Node0x56019df7a550 -> Node0x56019df79380;
+	Node0x56019df7a5a0 [shape=record,label="{list.c:365:}"];
+	Node0x56019df7a5a0 -> Node0x56019df79380;
+	Node0x56019df79380 [shape=record,label="{list.c:366:}"];
+}

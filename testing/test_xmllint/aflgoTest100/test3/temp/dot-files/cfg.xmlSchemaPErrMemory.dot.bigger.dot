@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlSchemaPErrMemory' function" {
+	label="CFG for 'xmlSchemaPErrMemory' function";
+
+	Node0x5583533c2b70 [shape=record,label="{xmlschemas.c:1881:|{<s0>T|<s1>F}}"];
+	Node0x5583533c2b70:s0 -> Node0x5583532cdaf0;
+	Node0x5583533c2b70:s1 -> Node0x5583532cdb40;
+	Node0x5583532cdaf0 [shape=record,label="{xmlschemas.c:1885:}"];
+	Node0x5583532cdaf0 -> Node0x5583532cdb40;
+	Node0x5583532cdb40 [shape=record,label="{xmlschemas.c:1886:}"];
+}

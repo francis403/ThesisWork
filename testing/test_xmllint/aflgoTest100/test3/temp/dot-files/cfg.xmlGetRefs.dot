@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlGetRefs' function" {
+	label="CFG for 'xmlGetRefs' function";
+
+	Node0x55bbc37c3a00 [shape=record,label="{valid.c:3141:|{<s0>T|<s1>F}}"];
+	Node0x55bbc37c3a00 -> Node0x55bbc37c2cc0;
+	Node0x55bbc37c3a00 -> Node0x55bbc37be910;
+	Node0x55bbc37c2cc0 [shape=record,label="{valid.c:3145:}"];
+	Node0x55bbc37c2cc0 -> Node0x55bbc37c2e60;
+	Node0x55bbc37be910 [shape=record,label="{valid.c:3148:|{<s0>T|<s1>F}}"];
+	Node0x55bbc37be910 -> Node0x55bbc37c7d90;
+	Node0x55bbc37be910 -> Node0x55bbc37c7de0;
+	Node0x55bbc37c7d90 [shape=record,label="{valid.c:3149:}"];
+	Node0x55bbc37c7d90 -> Node0x55bbc37c2e60;
+	Node0x55bbc37c7de0 [shape=record,label="{valid.c:3152:|{<s0>T|<s1>F}}"];
+	Node0x55bbc37c7de0 -> Node0x55bbc372b540;
+	Node0x55bbc37c7de0 -> Node0x55bbc372b590;
+	Node0x55bbc372b540 [shape=record,label="{valid.c:3154:}"];
+	Node0x55bbc372b540 -> Node0x55bbc37c2e60;
+	Node0x55bbc372b590 [shape=record,label="{valid.c:3156:}"];
+	Node0x55bbc372b590 -> Node0x55bbc37c2e60;
+	Node0x55bbc37c2e60 [shape=record,label="{valid.c:3157:}"];
+}

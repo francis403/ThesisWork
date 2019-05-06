@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlRecoverDoc' function" {
+	label="CFG for 'libxml_xmlRecoverDoc' function";
+
+	Node0x55d6cbcba980 [shape=record,label="{libxml2-py.c:6085:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbcba980:s0 -> Node0x55d6cbcbed60;
+	Node0x55d6cbcba980:s1 -> Node0x55d6cbcbed10;
+	Node0x55d6cbcbed10 [shape=record,label="{libxml2-py.c:6091:}"];
+	Node0x55d6cbcbed10 -> Node0x55d6cbcba7d0;
+	Node0x55d6cbcbed60 [shape=record,label="{libxml2-py.c:6093:}"];
+	Node0x55d6cbcbed60 -> Node0x55d6cbcba7d0;
+	Node0x55d6cbcba7d0 [shape=record,label="{libxml2-py.c:6096:}"];
+}

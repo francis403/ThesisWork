@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlBufferDetach' function" {
+	label="CFG for 'xmlBufferDetach' function";
+
+	Node0x55ad0bdcd3f0 [shape=record,label="{tree.c:7085:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bdcd3f0:s0 -> Node0x55ad0bdbc420;
+	Node0x55ad0bdcd3f0:s1 -> Node0x55ad0bdce2a0;
+	Node0x55ad0bdbc420 [shape=record,label="{tree.c:7089:}"];
+	Node0x55ad0bdbc420 -> Node0x55ad0bdcd9e0;
+	Node0x55ad0bdce2a0 [shape=record,label="{tree.c:7090:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bdce2a0:s0 -> Node0x55ad0bdce6d0;
+	Node0x55ad0bdce2a0:s1 -> Node0x55ad0bdce720;
+	Node0x55ad0bdce6d0 [shape=record,label="{tree.c:7091:}"];
+	Node0x55ad0bdce6d0 -> Node0x55ad0bdcd9e0;
+	Node0x55ad0bdce720 [shape=record,label="{tree.c:7093:}"];
+	Node0x55ad0bdce720 -> Node0x55ad0bdcd9e0;
+	Node0x55ad0bdcd9e0 [shape=record,label="{tree.c:7099:}"];
+}

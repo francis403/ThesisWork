@@ -1,0 +1,24 @@
+digraph "CFG for 'nameNsPush' function" {
+	label="CFG for 'nameNsPush' function";
+
+	Node0x5557de605690 [shape=record,label="{parser.c:1835:|{<s0>T|<s1>F}}"];
+	Node0x5557de605690:s0 -> Node0x5557de6069c0;
+	Node0x5557de605690:s1 -> Node0x5557de606a10;
+	Node0x5557de6069c0 [shape=record,label="{parser.c:1839:|{<s0>T|<s1>F}}"];
+	Node0x5557de6069c0:s0 -> Node0x5557de607e90;
+	Node0x5557de6069c0:s1 -> Node0x5557de607ee0;
+	Node0x5557de607e90 [shape=record,label="{parser.c:1846:}"];
+	Node0x5557de607e90 -> Node0x5557de608d00;
+	Node0x5557de607ee0 [shape=record,label="{parser.c:1849:|{<s0>T|<s1>F}}"];
+	Node0x5557de607ee0:s0 -> Node0x5557de609a50;
+	Node0x5557de607ee0:s1 -> Node0x5557de609aa0;
+	Node0x5557de609a50 [shape=record,label="{parser.c:1854:}"];
+	Node0x5557de609a50 -> Node0x5557de608d00;
+	Node0x5557de609aa0 [shape=record,label="{parser.c:1857:}"];
+	Node0x5557de609aa0 -> Node0x5557de606a10;
+	Node0x5557de606a10 [shape=record,label="{parser.c:1859:}"];
+	Node0x5557de606a10 -> Node0x5557de6056e0;
+	Node0x5557de608d00 [shape=record,label="{parser.c:1866:}"];
+	Node0x5557de608d00 -> Node0x5557de6056e0;
+	Node0x5557de6056e0 [shape=record,label="{parser.c:1868:}"];
+}

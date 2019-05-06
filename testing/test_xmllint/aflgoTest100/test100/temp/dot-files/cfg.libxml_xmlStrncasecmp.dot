@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlStrncasecmp' function" {
+	label="CFG for 'libxml_xmlStrncasecmp' function";
+
+	Node0x55d6cbe33fb0 [shape=record,label="{libxml2-py.c:7588:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbe33fb0:s0 -> Node0x55d6cbe37430;
+	Node0x55d6cbe33fb0:s1 -> Node0x55d6cbe373e0;
+	Node0x55d6cbe373e0 [shape=record,label="{libxml2-py.c:7596:}"];
+	Node0x55d6cbe373e0 -> Node0x55d6cbe342b0;
+	Node0x55d6cbe37430 [shape=record,label="{libxml2-py.c:7598:}"];
+	Node0x55d6cbe37430 -> Node0x55d6cbe342b0;
+	Node0x55d6cbe342b0 [shape=record,label="{libxml2-py.c:7601:}"];
+}

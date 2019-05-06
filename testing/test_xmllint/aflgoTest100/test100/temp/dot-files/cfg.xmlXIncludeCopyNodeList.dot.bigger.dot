@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlXIncludeCopyNodeList' function" {
+	label="CFG for 'xmlXIncludeCopyNodeList' function";
+
+	Node0x560832b0c330 [shape=record,label="{xinclude.c:845:|{<s0>T|<s1>F}}"];
+	Node0x560832b0c330:s0 -> Node0x560832b0de30;
+	Node0x560832b0c330:s1 -> Node0x560832b0dfd0;
+	Node0x560832b0dfd0 [shape=record,label="{xinclude.c:849:|{<s0>T|<s1>F}}"];
+	Node0x560832b0dfd0:s0 -> Node0x560832b0de30;
+	Node0x560832b0dfd0:s1 -> Node0x560832b0df50;
+	Node0x560832b0df50 [shape=record,label="{xinclude.c:849:|{<s0>T|<s1>F}}"];
+	Node0x560832b0df50:s0 -> Node0x560832b0de30;
+	Node0x560832b0df50:s1 -> Node0x560832b0ded0;
+	Node0x560832b0ded0 [shape=record,label="{xinclude.c:850:|{<s0>T|<s1>F}}"];
+	Node0x560832b0ded0:s0 -> Node0x560832b0de30;
+	Node0x560832b0ded0:s1 -> Node0x560832b0de80;
+	Node0x560832b0de30 [shape=record,label="{xinclude.c:851:}"];
+	Node0x560832b0de30 -> Node0x560832b0c380;
+	Node0x560832b0de80 [shape=record,label="{xinclude.c:852:}"];
+	Node0x560832b0de80 -> Node0x560832b0ebd0;
+	Node0x560832b0ebd0 [shape=record,label="{xinclude.c:853:|{<s0>T|<s1>F}}"];
+	Node0x560832b0ebd0:s0 -> Node0x560832b0ef90;
+	Node0x560832b0ebd0:s1 -> Node0x560832b0edb0;
+	Node0x560832b0ef90 [shape=record,label="{xinclude.c:854:|{<s0>T|<s1>F}}"];
+	Node0x560832b0ef90:s0 -> Node0x560832b0fc80;
+	Node0x560832b0ef90:s1 -> Node0x560832b0fcd0;
+	Node0x560832b0fc80 [shape=record,label="{xinclude.c:856:|{<s0>T|<s1>F}}"];
+	Node0x560832b0fc80:s0 -> Node0x560832b10000;
+	Node0x560832b0fc80:s1 -> Node0x560832b100a0;
+	Node0x560832b10000 [shape=record,label="{xinclude.c:857:}"];
+	Node0x560832b10000 -> Node0x560832b10050;
+	Node0x560832b100a0 [shape=record,label="{xinclude.c:859:}"];
+	Node0x560832b100a0 -> Node0x560832b10050;
+	Node0x560832b10050 [shape=record,label="{xinclude.c:863:}"];
+	Node0x560832b10050 -> Node0x560832b0fcd0;
+	Node0x560832b0fcd0 [shape=record,label="{xinclude.c:864:}"];
+	Node0x560832b0fcd0 -> Node0x560832b0ebd0;
+	Node0x560832b0edb0 [shape=record,label="{xinclude.c:866:}"];
+	Node0x560832b0edb0 -> Node0x560832b0c380;
+	Node0x560832b0c380 [shape=record,label="{xinclude.c:867:}"];
+}

@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlListSearch' function" {
+	label="CFG for 'xmlListSearch' function";
+
+	Node0x56019df64320 [shape=record,label="{list.c:231:|{<s0>T|<s1>F}}"];
+	Node0x56019df64320 -> Node0x56019df659b0;
+	Node0x56019df64320 -> Node0x56019df64410;
+	Node0x56019df659b0 [shape=record,label="{list.c:235:}"];
+	Node0x56019df659b0 -> Node0x56019df65730;
+	Node0x56019df64410 [shape=record,label="{list.c:236:|{<s0>T|<s1>F}}"];
+	Node0x56019df64410 -> Node0x56019df68640;
+	Node0x56019df64410 -> Node0x56019df68690;
+	Node0x56019df68640 [shape=record,label="{list.c:238:}"];
+	Node0x56019df68640 -> Node0x56019df65730;
+	Node0x56019df68690 [shape=record,label="{list.c:239:}"];
+	Node0x56019df68690 -> Node0x56019df65730;
+	Node0x56019df65730 [shape=record,label="{list.c:240:}"];
+}

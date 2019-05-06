@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlNodeGetSpacePreserve' function" {
+	label="CFG for 'xmlNodeGetSpacePreserve' function";
+
+	Node0x5627b4548f20 [shape=record,label="{tree.c:5101:|{<s0>T|<s1>F}}"];
+	Node0x5627b4548f20 -> Node0x5627b43853b0;
+	Node0x5627b4548f20 -> Node0x5627b4385450;
+	Node0x5627b4385450 [shape=record,label="{tree.c:5104:|{<s0>T|<s1>F}}"];
+	Node0x5627b4385450 -> Node0x5627b43853b0;
+	Node0x5627b4385450 -> Node0x5627b4385400;
+	Node0x5627b43853b0 [shape=record,label="{tree.c:5105:}"];
+	Node0x5627b43853b0 -> Node0x5627b4545ce0;
+	Node0x5627b4385400 [shape=record,label="{tree.c:5106:}"];
+	Node0x5627b4385400 -> Node0x5627b4382730;
+	Node0x5627b4382730 [shape=record,label="{tree.c:5106:|{<s0>T|<s1>F}}"];
+	Node0x5627b4382730 -> Node0x5627b4382ab0;
+	Node0x5627b4382730 -> Node0x5627b4382910;
+	Node0x5627b4382ab0 [shape=record,label="{tree.c:5107:|{<s0>T|<s1>F}}"];
+	Node0x5627b4382ab0 -> Node0x5627b4382e70;
+	Node0x5627b4382ab0 -> Node0x5627b4382ec0;
+	Node0x5627b4382e70 [shape=record,label="{tree.c:5109:|{<s0>T|<s1>F}}"];
+	Node0x5627b4382e70 -> Node0x5627b4383280;
+	Node0x5627b4382e70 -> Node0x5627b43832d0;
+	Node0x5627b4383280 [shape=record,label="{tree.c:5110:}"];
+	Node0x5627b4383280 -> Node0x5627b4545ce0;
+	Node0x5627b43832d0 [shape=record,label="{tree.c:5113:|{<s0>T|<s1>F}}"];
+	Node0x5627b43832d0 -> Node0x5627b454efb0;
+	Node0x5627b43832d0 -> Node0x5627b454f000;
+	Node0x5627b454efb0 [shape=record,label="{tree.c:5114:}"];
+	Node0x5627b454efb0 -> Node0x5627b4545ce0;
+	Node0x5627b454f000 [shape=record,label="{tree.c:5117:}"];
+	Node0x5627b454f000 -> Node0x5627b4382ec0;
+	Node0x5627b4382ec0 [shape=record,label="{tree.c:5119:}"];
+	Node0x5627b4382ec0 -> Node0x5627b4382730;
+	Node0x5627b4382910 [shape=record,label="{tree.c:5121:}"];
+	Node0x5627b4382910 -> Node0x5627b4545ce0;
+	Node0x5627b4545ce0 [shape=record,label="{tree.c:5122:}"];
+}

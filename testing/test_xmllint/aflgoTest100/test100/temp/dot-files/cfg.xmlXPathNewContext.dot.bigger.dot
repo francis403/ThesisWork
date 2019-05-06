@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathNewContext' function" {
+	label="CFG for 'xmlXPathNewContext' function";
+
+	Node0x5621ee6eebd0 [shape=record,label="{xpath.c:6126:|{<s0>T|<s1>F}}"];
+	Node0x5621ee6eebd0:s0 -> Node0x5621ee6f54e0;
+	Node0x5621ee6eebd0:s1 -> Node0x5621ee6f5530;
+	Node0x5621ee6f54e0 [shape=record,label="{xpath.c:6131:}"];
+	Node0x5621ee6f54e0 -> Node0x5621ee6f07c0;
+	Node0x5621ee6f5530 [shape=record,label="{xpath.c:6134:}"];
+	Node0x5621ee6f5530 -> Node0x5621ee6f07c0;
+	Node0x5621ee6f07c0 [shape=record,label="{xpath.c:6166:}"];
+}

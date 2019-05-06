@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlRelaxNGDumpDefines' function" {
+	label="CFG for 'xmlRelaxNGDumpDefines' function";
+
+	Node0x559d0c0d5910 [shape=record,label="{relaxng.c:7714:}"];
+	Node0x559d0c0d5910 -> Node0x559d0c0e44e0;
+	Node0x559d0c0e44e0 [shape=record,label="{relaxng.c:7716:|{<s0>T|<s1>F}}"];
+	Node0x559d0c0e44e0:s0 -> Node0x559d0c0e48e0;
+	Node0x559d0c0e44e0:s1 -> Node0x559d0c0e4700;
+	Node0x559d0c0e48e0 [shape=record,label="{relaxng.c:7717:}"];
+	Node0x559d0c0e48e0 -> Node0x559d0c0e44e0;
+	Node0x559d0c0e4700 [shape=record,label="{relaxng.c:7720:}"];
+}

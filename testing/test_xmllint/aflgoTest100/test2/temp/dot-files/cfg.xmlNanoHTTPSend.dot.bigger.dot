@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlNanoHTTPSend' function" {
+	label="CFG for 'xmlNanoHTTPSend' function";
+
+	Node0x556520a01d20 [shape=record,label="{nanohttp.c:459:|{<s0>T|<s1>F}}"];
+	Node0x556520a01d20:s0 -> Node0x556520ad5700;
+	Node0x556520a01d20:s1 -> Node0x556520ad56b0;
+	Node0x556520ad5700 [shape=record,label="{nanohttp.c:469:|{<s0>T|<s1>F}}"];
+	Node0x556520ad5700:s0 -> Node0x556520ad5660;
+	Node0x556520ad5700:s1 -> Node0x556520ad56b0;
+	Node0x556520ad5660 [shape=record,label="{nanohttp.c:470:}"];
+	Node0x556520ad5660 -> Node0x556520ad5d90;
+	Node0x556520ad5d90 [shape=record,label="{nanohttp.c:470:|{<s0>T|<s1>F}}"];
+	Node0x556520ad5d90:s0 -> Node0x556520ad6150;
+	Node0x556520ad5d90:s1 -> Node0x556520ad5f50;
+	Node0x556520ad6150 [shape=record,label="{nanohttp.c:471:|{<s0>T|<s1>F}}"];
+	Node0x556520ad6150:s0 -> Node0x556520ad73e0;
+	Node0x556520ad6150:s1 -> Node0x556520ad7480;
+	Node0x556520ad73e0 [shape=record,label="{nanohttp.c:475:}"];
+	Node0x556520ad73e0 -> Node0x556520ad7430;
+	Node0x556520ad7480 [shape=record,label="{nanohttp.c:476:|{<s0>T|<s1>F}}"];
+	Node0x556520ad7480:s0 -> Node0x556520ad7b10;
+	Node0x556520ad7480:s1 -> Node0x556520ad7ac0;
+	Node0x556520ad7b10 [shape=record,label="{nanohttp.c:480:|{<s0>T|<s1>F}}"];
+	Node0x556520ad7b10:s0 -> Node0x556520ad7a20;
+	Node0x556520ad7b10:s1 -> Node0x556520ad7ac0;
+	Node0x556520ad7a20 [shape=record,label="{nanohttp.c:481:|{<s0>T|<s1>F}}"];
+	Node0x556520ad7a20:s0 -> Node0x556520ad83c0;
+	Node0x556520ad7a20:s1 -> Node0x556520ad8410;
+	Node0x556520ad83c0 [shape=record,label="{nanohttp.c:483:}"];
+	Node0x556520ad83c0 -> Node0x556520ad8410;
+	Node0x556520ad8410 [shape=record,label="{nanohttp.c:484:}"];
+	Node0x556520ad8410 -> Node0x556520ad5f50;
+	Node0x556520ad7ac0 [shape=record,label="{nanohttp.c:511:}"];
+	Node0x556520ad7ac0 -> Node0x556520ad7a70;
+	Node0x556520ad7a70 [shape=record,label="{%51}"];
+	Node0x556520ad7a70 -> Node0x556520ad7430;
+	Node0x556520ad7430 [shape=record,label="{nanohttp.c:470:}"];
+	Node0x556520ad7430 -> Node0x556520ad5d90;
+	Node0x556520ad5f50 [shape=record,label="{nanohttp.c:517:}"];
+	Node0x556520ad5f50 -> Node0x556520ad56b0;
+	Node0x556520ad56b0 [shape=record,label="{nanohttp.c:519:}"];
+}

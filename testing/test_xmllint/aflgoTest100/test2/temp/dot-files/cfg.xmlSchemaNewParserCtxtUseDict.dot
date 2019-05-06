@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlSchemaNewParserCtxtUseDict' function" {
+	label="CFG for 'xmlSchemaNewParserCtxtUseDict' function";
+
+	Node0x55835357ec30 [shape=record,label="{xmlschemas.c:10012:|{<s0>T|<s1>F}}"];
+	Node0x55835357ec30 -> Node0x558353416fa0;
+	Node0x55835357ec30 -> Node0x558353416ff0;
+	Node0x558353416fa0 [shape=record,label="{xmlschemas.c:10018:}"];
+	Node0x558353416fa0 -> Node0x55835357ec80;
+	Node0x558353416ff0 [shape=record,label="{xmlschemas.c:10019:|{<s0>T|<s1>F}}"];
+	Node0x558353416ff0 -> Node0x558353417740;
+	Node0x558353416ff0 -> Node0x558353417790;
+	Node0x558353417740 [shape=record,label="{xmlschemas.c:10022:}"];
+	Node0x558353417740 -> Node0x558353417790;
+	Node0x558353417790 [shape=record,label="{xmlschemas.c:10023:}"];
+	Node0x558353417790 -> Node0x55835357ec80;
+	Node0x55835357ec80 [shape=record,label="{xmlschemas.c:10024:}"];
+}

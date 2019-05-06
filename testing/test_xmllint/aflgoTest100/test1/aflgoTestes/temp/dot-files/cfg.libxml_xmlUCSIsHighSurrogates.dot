@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsHighSurrogates' function" {
+	label="CFG for 'libxml_xmlUCSIsHighSurrogates' function";
+
+	Node0x55f9316078a0 [shape=record,label="{libxml2-py.c:10555:|{<s0>T|<s1>F}}"];
+	Node0x55f9316078a0:s0 -> Node0x55f931105300;
+	Node0x55f9316078a0:s1 -> Node0x55f9311052b0;
+	Node0x55f9311052b0 [shape=record,label="{libxml2-py.c:10561:}"];
+	Node0x55f9311052b0 -> Node0x55f931607b30;
+	Node0x55f931105300 [shape=record,label="{libxml2-py.c:10563:}"];
+	Node0x55f931105300 -> Node0x55f931607b30;
+	Node0x55f931607b30 [shape=record,label="{libxml2-py.c:10566:}"];
+}

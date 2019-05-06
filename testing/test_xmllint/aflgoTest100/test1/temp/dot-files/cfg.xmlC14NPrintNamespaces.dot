@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlC14NPrintNamespaces' function" {
+	label="CFG for 'xmlC14NPrintNamespaces' function";
+
+	Node0x55fe83c20510 [shape=record,label="{c14n.c:542:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c20510 -> Node0x55fe83c20ee0;
+	Node0x55fe83c20510 -> Node0x55fe83c20f80;
+	Node0x55fe83c20f80 [shape=record,label="{c14n.c:545:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c20f80 -> Node0x55fe83c20ee0;
+	Node0x55fe83c20f80 -> Node0x55fe83c20f30;
+	Node0x55fe83c20ee0 [shape=record,label="{c14n.c:546:}"];
+	Node0x55fe83c20ee0 -> Node0x55fe83c20560;
+	Node0x55fe83c20f30 [shape=record,label="{c14n.c:550:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c20f30 -> Node0x55fe83c21970;
+	Node0x55fe83c20f30 -> Node0x55fe83c21a10;
+	Node0x55fe83c21970 [shape=record,label="{c14n.c:551:}"];
+	Node0x55fe83c21970 -> Node0x55fe83c219c0;
+	Node0x55fe83c21a10 [shape=record,label="{c14n.c:555:}"];
+	Node0x55fe83c21a10 -> Node0x55fe83c219c0;
+	Node0x55fe83c219c0 [shape=record,label="{c14n.c:557:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c219c0 -> Node0x55fe83c22fc0;
+	Node0x55fe83c219c0 -> Node0x55fe83c23060;
+	Node0x55fe83c22fc0 [shape=record,label="{c14n.c:558:}"];
+	Node0x55fe83c22fc0 -> Node0x55fe83c23010;
+	Node0x55fe83c23060 [shape=record,label="{c14n.c:560:}"];
+	Node0x55fe83c23060 -> Node0x55fe83c23010;
+	Node0x55fe83c23010 [shape=record,label="{c14n.c:562:}"];
+	Node0x55fe83c23010 -> Node0x55fe83c20560;
+	Node0x55fe83c20560 [shape=record,label="{c14n.c:563:}"];
+}

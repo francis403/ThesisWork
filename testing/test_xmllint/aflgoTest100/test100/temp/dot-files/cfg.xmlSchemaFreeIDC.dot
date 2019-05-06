@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlSchemaFreeIDC' function" {
+	label="CFG for 'xmlSchemaFreeIDC' function";
+
+	Node0x55835337c0c0 [shape=record,label="{xmlschemas.c:3916:|{<s0>T|<s1>F}}"];
+	Node0x55835337c0c0 -> Node0x55835337cbe0;
+	Node0x55835337c0c0 -> Node0x55835337cc30;
+	Node0x55835337cbe0 [shape=record,label="{xmlschemas.c:3921:}"];
+	Node0x55835337cbe0 -> Node0x55835337c110;
+	Node0x55835337cc30 [shape=record,label="{xmlschemas.c:3922:|{<s0>T|<s1>F}}"];
+	Node0x55835337cc30 -> Node0x55835337d010;
+	Node0x55835337cc30 -> Node0x55835337d060;
+	Node0x55835337d010 [shape=record,label="{xmlschemas.c:3923:}"];
+	Node0x55835337d010 -> Node0x55835337d060;
+	Node0x55835337d060 [shape=record,label="{xmlschemas.c:3925:|{<s0>T|<s1>F}}"];
+	Node0x55835337d060 -> Node0x55835337d650;
+	Node0x55835337d060 -> Node0x55835337d6a0;
+	Node0x55835337d650 [shape=record,label="{xmlschemas.c:3926:|{<s0>T|<s1>F}}"];
+	Node0x55835337d650 -> Node0x55835337db20;
+	Node0x55835337d650 -> Node0x55835337db70;
+	Node0x55835337db20 [shape=record,label="{xmlschemas.c:3927:}"];
+	Node0x55835337db20 -> Node0x55835337db70;
+	Node0x55835337db70 [shape=record,label="{xmlschemas.c:3928:}"];
+	Node0x55835337db70 -> Node0x55835337d6a0;
+	Node0x55835337d6a0 [shape=record,label="{xmlschemas.c:3931:|{<s0>T|<s1>F}}"];
+	Node0x55835337d6a0 -> Node0x55835337f510;
+	Node0x55835337d6a0 -> Node0x55835337f560;
+	Node0x55835337f510 [shape=record,label="{xmlschemas.c:3932:}"];
+	Node0x55835337f510 -> Node0x55835337fcc0;
+	Node0x55835337fcc0 [shape=record,label="{xmlschemas.c:3934:|{<s0>T|<s1>F}}"];
+	Node0x55835337fcc0 -> Node0x558353380300;
+	Node0x55835337fcc0 -> Node0x558353380350;
+	Node0x558353380300 [shape=record,label="{xmlschemas.c:3937:}"];
+	Node0x558353380300 -> Node0x558353380350;
+	Node0x558353380350 [shape=record,label="{xmlschemas.c:3938:}"];
+	Node0x558353380350 -> Node0x55835337fc70;
+	Node0x55835337fc70 [shape=record,label="{xmlschemas.c:3939:|{<s0>T|<s1>F}}"];
+	Node0x55835337fc70 -> Node0x55835337fcc0;
+	Node0x55835337fc70 -> Node0x55835337fc20;
+	Node0x55835337fc20 [shape=record,label="{xmlschemas.c:3940:}"];
+	Node0x55835337fc20 -> Node0x55835337f560;
+	Node0x55835337f560 [shape=record,label="{xmlschemas.c:3941:}"];
+	Node0x55835337f560 -> Node0x55835337c110;
+	Node0x55835337c110 [shape=record,label="{xmlschemas.c:3942:}"];
+}

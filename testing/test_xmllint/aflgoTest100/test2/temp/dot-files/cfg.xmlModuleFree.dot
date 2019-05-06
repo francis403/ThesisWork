@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlModuleFree' function" {
+	label="CFG for 'xmlModuleFree' function";
+
+	Node0x5570ded440e0 [shape=record,label="{xmlmodule.c:191:|{<s0>T|<s1>F}}"];
+	Node0x5570ded440e0:s0 -> Node0x5570ded431a0;
+	Node0x5570ded440e0:s1 -> Node0x5570ded4a420;
+	Node0x5570ded431a0 [shape=record,label="{xmlmodule.c:194:}"];
+	Node0x5570ded431a0 -> Node0x5570ded41460;
+	Node0x5570ded4a420 [shape=record,label="{xmlmodule.c:200:}"];
+	Node0x5570ded4a420 -> Node0x5570ded41460;
+	Node0x5570ded41460 [shape=record,label="{xmlmodule.c:204:}"];
+}

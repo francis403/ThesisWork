@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlListDup' function" {
+	label="CFG for 'xmlListDup' function";
+
+	Node0x5577c1699cc0 [shape=record,label="{list.c:732:|{<s0>T|<s1>F}}"];
+	Node0x5577c1699cc0:s0 -> Node0x5577c169d440;
+	Node0x5577c1699cc0:s1 -> Node0x5577c169d490;
+	Node0x5577c169d440 [shape=record,label="{list.c:737:}"];
+	Node0x5577c169d440 -> Node0x5577c169a570;
+	Node0x5577c169d490 [shape=record,label="{list.c:744:|{<s0>T|<s1>F}}"];
+	Node0x5577c169d490:s0 -> Node0x5577c169d8f0;
+	Node0x5577c169d490:s1 -> Node0x5577c169d940;
+	Node0x5577c169d8f0 [shape=record,label="{list.c:745:}"];
+	Node0x5577c169d8f0 -> Node0x5577c169a570;
+	Node0x5577c169d940 [shape=record,label="{list.c:746:|{<s0>T|<s1>F}}"];
+	Node0x5577c169d940:s0 -> Node0x5577c169dfd0;
+	Node0x5577c169d940:s1 -> Node0x5577c169e020;
+	Node0x5577c169dfd0 [shape=record,label="{list.c:747:}"];
+	Node0x5577c169dfd0 -> Node0x5577c169a570;
+	Node0x5577c169e020 [shape=record,label="{list.c:748:}"];
+	Node0x5577c169e020 -> Node0x5577c169a570;
+	Node0x5577c169a570 [shape=record,label="{list.c:749:}"];
+}

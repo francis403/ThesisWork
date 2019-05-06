@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlTextReaderEntPop' function" {
+	label="CFG for 'xmlTextReaderEntPop' function";
+
+	Node0x55e449583ea0 [shape=record,label="{xmlreader.c:642:|{<s0>T|<s1>F}}"];
+	Node0x55e449583ea0:s0 -> Node0x55e449583f40;
+	Node0x55e449583ea0:s1 -> Node0x55e449583f90;
+	Node0x55e449583f40 [shape=record,label="{xmlreader.c:647:}"];
+	Node0x55e449583f40 -> Node0x55e449583ef0;
+	Node0x55e449583f90 [shape=record,label="{xmlreader.c:648:|{<s0>T|<s1>F}}"];
+	Node0x55e449583f90:s0 -> Node0x55e44933bec0;
+	Node0x55e449583f90:s1 -> Node0x55e44933bf60;
+	Node0x55e44933bec0 [shape=record,label="{xmlreader.c:650:}"];
+	Node0x55e44933bec0 -> Node0x55e44933bf10;
+	Node0x55e44933bf60 [shape=record,label="{xmlreader.c:652:}"];
+	Node0x55e44933bf60 -> Node0x55e44933bf10;
+	Node0x55e44933bf10 [shape=record,label="{xmlreader.c:653:}"];
+	Node0x55e44933bf10 -> Node0x55e449583ef0;
+	Node0x55e449583ef0 [shape=record,label="{xmlreader.c:656:}"];
+}

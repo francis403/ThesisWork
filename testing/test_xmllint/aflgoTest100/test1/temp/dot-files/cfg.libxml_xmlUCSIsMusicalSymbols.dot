@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsMusicalSymbols' function" {
+	label="CFG for 'libxml_xmlUCSIsMusicalSymbols' function";
+
+	Node0x55f93161bfe0 [shape=record,label="{libxml2-py.c:11035:|{<s0>T|<s1>F}}"];
+	Node0x55f93161bfe0:s0 -> Node0x55f93161ef90;
+	Node0x55f93161bfe0:s1 -> Node0x55f93161ef40;
+	Node0x55f93161ef40 [shape=record,label="{libxml2-py.c:11041:}"];
+	Node0x55f93161ef40 -> Node0x55f93161c270;
+	Node0x55f93161ef90 [shape=record,label="{libxml2-py.c:11043:}"];
+	Node0x55f93161ef90 -> Node0x55f93161c270;
+	Node0x55f93161c270 [shape=record,label="{libxml2-py.c:11046:}"];
+}

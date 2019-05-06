@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlSchemaValidateFacet' function" {
+	label="CFG for 'xmlSchemaValidateFacet' function";
+
+	Node0x557d8da8cf30 [shape=record,label="{xmlschemastypes.c:5540:|{<s0>T|<s1>F}}"];
+	Node0x557d8da8cf30:s0 -> Node0x557d8da97cd0;
+	Node0x557d8da8cf30:s1 -> Node0x557d8da97d70;
+	Node0x557d8da97cd0 [shape=record,label="{xmlschemastypes.c:5551:}"];
+	Node0x557d8da97cd0 -> Node0x557d8da96e90;
+	Node0x557d8da97d70 [shape=record,label="{xmlschemastypes.c:5554:|{<s0>T|<s1>F}}"];
+	Node0x557d8da97d70:s0 -> Node0x557d8da98ca0;
+	Node0x557d8da97d70:s1 -> Node0x557d8da98cf0;
+	Node0x557d8da98ca0 [shape=record,label="{xmlschemastypes.c:5555:}"];
+	Node0x557d8da98ca0 -> Node0x557d8da96e90;
+	Node0x557d8da98cf0 [shape=record,label="{%27}"];
+	Node0x557d8da98cf0 -> Node0x557d8da97d20;
+	Node0x557d8da97d20 [shape=record,label="{xmlschemastypes.c:5558:}"];
+	Node0x557d8da97d20 -> Node0x557d8da96e90;
+	Node0x557d8da96e90 [shape=record,label="{xmlschemastypes.c:5559:}"];
+}

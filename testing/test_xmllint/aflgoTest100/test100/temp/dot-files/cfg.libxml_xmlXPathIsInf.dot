@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlXPathIsInf' function" {
+	label="CFG for 'libxml_xmlXPathIsInf' function";
+
+	Node0x55d6cc301440 [shape=record,label="{libxml2-py.c:13390:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc301440:s0 -> Node0x55d6cc305810;
+	Node0x55d6cc301440:s1 -> Node0x55d6cc3057c0;
+	Node0x55d6cc3057c0 [shape=record,label="{libxml2-py.c:13396:}"];
+	Node0x55d6cc3057c0 -> Node0x55d6cc303f50;
+	Node0x55d6cc305810 [shape=record,label="{libxml2-py.c:13398:}"];
+	Node0x55d6cc305810 -> Node0x55d6cc303f50;
+	Node0x55d6cc303f50 [shape=record,label="{libxml2-py.c:13401:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlUnlinkNode' function" {
+	label="CFG for 'libxml_xmlUnlinkNode' function";
+
+	Node0x55f93170b900 [shape=record,label="{libxml2-py.c:12173:|{<s0>T|<s1>F}}"];
+	Node0x55f93170b900:s0 -> Node0x55f93170eec0;
+	Node0x55f93170b900:s1 -> Node0x55f93170ee70;
+	Node0x55f93170ee70 [shape=record,label="{libxml2-py.c:12178:}"];
+	Node0x55f93170ee70 -> Node0x55f93170bc00;
+	Node0x55f93170eec0 [shape=record,label="{libxml2-py.c:12179:|{<s0>T|<s1>F}}"];
+	Node0x55f93170eec0:s0 -> Node0x55f93170f6a0;
+	Node0x55f93170eec0:s1 -> Node0x55f93170f6f0;
+	Node0x55f93170f6a0 [shape=record,label="{libxml2-py.c:12179:}"];
+	Node0x55f93170f6a0 -> Node0x55f93170f740;
+	Node0x55f93170f6f0 [shape=record,label="{libxml2-py.c:12179:}"];
+	Node0x55f93170f6f0 -> Node0x55f93170f740;
+	Node0x55f93170f740 [shape=record,label="{libxml2-py.c:12179:}"];
+	Node0x55f93170f740 -> Node0x55f93170bc00;
+	Node0x55f93170bc00 [shape=record,label="{libxml2-py.c:12184:}"];
+}

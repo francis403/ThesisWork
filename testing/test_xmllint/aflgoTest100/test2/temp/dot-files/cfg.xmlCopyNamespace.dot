@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlCopyNamespace' function" {
+	label="CFG for 'xmlCopyNamespace' function";
+
+	Node0x5627b44a7fb0 [shape=record,label="{tree.c:3958:|{<s0>T|<s1>F}}"];
+	Node0x5627b44a7fb0 -> Node0x5627b44b2690;
+	Node0x5627b44a7fb0 -> Node0x5627b44b26e0;
+	Node0x5627b44b2690 [shape=record,label="{tree.c:3961:}"];
+	Node0x5627b44b2690 -> Node0x5627b449a5a0;
+	Node0x5627b44b26e0 [shape=record,label="{tree.c:3962:|{<s0>def|<s1>18}}"];
+	Node0x5627b44b26e0 -> Node0x5627b44b2c80;
+	Node0x5627b44b26e0 -> Node0x5627b44b2f80;
+	Node0x5627b44b2f80 [shape=record,label="{tree.c:3964:}"];
+	Node0x5627b44b2f80 -> Node0x5627b44b2b10;
+	Node0x5627b44b2c80 [shape=record,label="{tree.c:3971:}"];
+	Node0x5627b44b2c80 -> Node0x5627b449a5a0;
+	Node0x5627b44b2b10 [shape=record,label="{tree.c:3973:}"];
+	Node0x5627b44b2b10 -> Node0x5627b449a5a0;
+	Node0x5627b449a5a0 [shape=record,label="{tree.c:3974:}"];
+}

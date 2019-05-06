@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlGetFeaturesList' function" {
+	label="CFG for 'xmlGetFeaturesList' function";
+
+	Node0x55f3b4749d60 [shape=record,label="{legacy.c:145:|{<s0>T|<s1>F}}"];
+	Node0x55f3b4749d60:s0 -> Node0x55f3b474e4a0;
+	Node0x55f3b4749d60:s1 -> Node0x55f3b474e540;
+	Node0x55f3b474e540 [shape=record,label="{legacy.c:150:|{<s0>T|<s1>F}}"];
+	Node0x55f3b474e540:s0 -> Node0x55f3b474e4a0;
+	Node0x55f3b474e540:s1 -> Node0x55f3b474e4f0;
+	Node0x55f3b474e4a0 [shape=record,label="{legacy.c:151:}"];
+	Node0x55f3b474e4a0 -> Node0x55f3b474d410;
+	Node0x55f3b474e4f0 [shape=record,label="{legacy.c:152:|{<s0>T|<s1>F}}"];
+	Node0x55f3b474e4f0:s0 -> Node0x55f3b474ecf0;
+	Node0x55f3b474e4f0:s1 -> Node0x55f3b474ed90;
+	Node0x55f3b474ed90 [shape=record,label="{legacy.c:152:|{<s0>T|<s1>F}}"];
+	Node0x55f3b474ed90:s0 -> Node0x55f3b474ecf0;
+	Node0x55f3b474ed90:s1 -> Node0x55f3b474ed40;
+	Node0x55f3b474ecf0 [shape=record,label="{legacy.c:153:}"];
+	Node0x55f3b474ecf0 -> Node0x55f3b474d410;
+	Node0x55f3b474ed40 [shape=record,label="{legacy.c:154:|{<s0>T|<s1>F}}"];
+	Node0x55f3b474ed40:s0 -> Node0x55f3b4751660;
+	Node0x55f3b474ed40:s1 -> Node0x55f3b47516b0;
+	Node0x55f3b4751660 [shape=record,label="{legacy.c:155:}"];
+	Node0x55f3b4751660 -> Node0x55f3b47516b0;
+	Node0x55f3b47516b0 [shape=record,label="{legacy.c:156:}"];
+	Node0x55f3b47516b0 -> Node0x55f3b4751e50;
+	Node0x55f3b4751e50 [shape=record,label="{legacy.c:156:|{<s0>T|<s1>F}}"];
+	Node0x55f3b4751e50:s0 -> Node0x55f3b4752130;
+	Node0x55f3b4751e50:s1 -> Node0x55f3b4751cb0;
+	Node0x55f3b4752130 [shape=record,label="{legacy.c:157:}"];
+	Node0x55f3b4752130 -> Node0x55f3b47520a0;
+	Node0x55f3b47520a0 [shape=record,label="{legacy.c:156:}"];
+	Node0x55f3b47520a0 -> Node0x55f3b4751e50;
+	Node0x55f3b4751cb0 [shape=record,label="{legacy.c:158:}"];
+	Node0x55f3b4751cb0 -> Node0x55f3b474d410;
+	Node0x55f3b474d410 [shape=record,label="{legacy.c:159:}"];
+}

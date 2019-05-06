@@ -1,0 +1,47 @@
+digraph "CFG for 'xmlSchemaParseNotation' function" {
+	label="CFG for 'xmlSchemaParseNotation' function";
+
+	Node0x55d025ffc810 [shape=record,label="{xmlschemas.c:7024:|{<s0>T|<s1>F}}"];
+	Node0x55d025ffc810:s0 -> Node0x55d025ffde00;
+	Node0x55d025ffc810:s1 -> Node0x55d025ffdf20;
+	Node0x55d025ffdf20 [shape=record,label="{xmlschemas.c:7031:|{<s0>T|<s1>F}}"];
+	Node0x55d025ffdf20:s0 -> Node0x55d025ffde00;
+	Node0x55d025ffdf20:s1 -> Node0x55d025ffdea0;
+	Node0x55d025ffdea0 [shape=record,label="{xmlschemas.c:7031:|{<s0>T|<s1>F}}"];
+	Node0x55d025ffdea0:s0 -> Node0x55d025ffde00;
+	Node0x55d025ffdea0:s1 -> Node0x55d025ffde50;
+	Node0x55d025ffde00 [shape=record,label="{xmlschemas.c:7032:}"];
+	Node0x55d025ffde00 -> Node0x55d025ffc860;
+	Node0x55d025ffde50 [shape=record,label="{xmlschemas.c:7033:|{<s0>T|<s1>F}}"];
+	Node0x55d025ffde50:s0 -> Node0x55d025ffeb00;
+	Node0x55d025ffde50:s1 -> Node0x55d025ffeb50;
+	Node0x55d025ffeb00 [shape=record,label="{xmlschemas.c:7035:}"];
+	Node0x55d025ffeb00 -> Node0x55d025ffc860;
+	Node0x55d025ffeb50 [shape=record,label="{xmlschemas.c:7039:|{<s0>T|<s1>F}}"];
+	Node0x55d025ffeb50:s0 -> Node0x55d026000470;
+	Node0x55d025ffeb50:s1 -> Node0x55d0260004c0;
+	Node0x55d026000470 [shape=record,label="{xmlschemas.c:7042:}"];
+	Node0x55d026000470 -> Node0x55d025ffc860;
+	Node0x55d0260004c0 [shape=record,label="{xmlschemas.c:7043:|{<s0>T|<s1>F}}"];
+	Node0x55d0260004c0:s0 -> Node0x55d026000e70;
+	Node0x55d0260004c0:s1 -> Node0x55d026000d50;
+	Node0x55d026000e70 [shape=record,label="{xmlschemas.c:7046:|{<s0>T|<s1>F}}"];
+	Node0x55d026000e70:s0 -> Node0x55d026000e20;
+	Node0x55d026000e70:s1 -> Node0x55d026000d50;
+	Node0x55d026000e20 [shape=record,label="{xmlschemas.c:7046:|{<s0>T|<s1>F}}"];
+	Node0x55d026000e20:s0 -> Node0x55d026000da0;
+	Node0x55d026000e20:s1 -> Node0x55d026000d50;
+	Node0x55d026000da0 [shape=record,label="{xmlschemas.c:7046:|{<s0>T|<s1>F}}"];
+	Node0x55d026000da0:s0 -> Node0x55d026000d00;
+	Node0x55d026000da0:s1 -> Node0x55d026000d50;
+	Node0x55d026000d00 [shape=record,label="{xmlschemas.c:7047:}"];
+	Node0x55d026000d00 -> Node0x55d026000d50;
+	Node0x55d026000d50 [shape=record,label="{xmlschemas.c:7050:|{<s0>T|<s1>F}}"];
+	Node0x55d026000d50:s0 -> Node0x55d0260021a0;
+	Node0x55d026000d50:s1 -> Node0x55d0260021f0;
+	Node0x55d0260021a0 [shape=record,label="{xmlschemas.c:7051:}"];
+	Node0x55d0260021a0 -> Node0x55d0260021f0;
+	Node0x55d0260021f0 [shape=record,label="{xmlschemas.c:7057:}"];
+	Node0x55d0260021f0 -> Node0x55d025ffc860;
+	Node0x55d025ffc860 [shape=record,label="{xmlschemas.c:7058:}"];
+}

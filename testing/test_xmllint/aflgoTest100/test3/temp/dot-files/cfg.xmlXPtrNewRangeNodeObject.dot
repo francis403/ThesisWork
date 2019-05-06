@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlXPtrNewRangeNodeObject' function" {
+	label="CFG for 'xmlXPtrNewRangeNodeObject' function";
+
+	Node0x55e334320440 [shape=record,label="{xpointer.c:530:|{<s0>T|<s1>F}}"];
+	Node0x55e334320440 -> Node0x55e334324ce0;
+	Node0x55e334320440 -> Node0x55e334324d30;
+	Node0x55e334324ce0 [shape=record,label="{xpointer.c:536:}"];
+	Node0x55e334324ce0 -> Node0x55e33431df70;
+	Node0x55e334324d30 [shape=record,label="{xpointer.c:537:|{<s0>T|<s1>F}}"];
+	Node0x55e334324d30 -> Node0x55e334325190;
+	Node0x55e334324d30 -> Node0x55e3343251e0;
+	Node0x55e334325190 [shape=record,label="{xpointer.c:538:}"];
+	Node0x55e334325190 -> Node0x55e33431df70;
+	Node0x55e3343251e0 [shape=record,label="{xpointer.c:539:|{<s0>def|<s1>5|<s2>6|<s3>1}}"];
+	Node0x55e3343251e0 -> Node0x55e334325930;
+	Node0x55e3343251e0 -> Node0x55e334325c30;
+	Node0x55e3343251e0 -> Node0x55e334326170;
+	Node0x55e3343251e0 -> Node0x55e334326730;
+	Node0x55e334325c30 [shape=record,label="{xpointer.c:541:}"];
+	Node0x55e334325c30 -> Node0x55e3343257c0;
+	Node0x55e334326170 [shape=record,label="{xpointer.c:545:}"];
+	Node0x55e334326170 -> Node0x55e3343257c0;
+	Node0x55e334326730 [shape=record,label="{xpointer.c:552:|{<s0>T|<s1>F}}"];
+	Node0x55e334326730 -> Node0x55e334326820;
+	Node0x55e334326730 -> Node0x55e3343268c0;
+	Node0x55e3343268c0 [shape=record,label="{xpointer.c:552:|{<s0>T|<s1>F}}"];
+	Node0x55e3343268c0 -> Node0x55e334326820;
+	Node0x55e3343268c0 -> Node0x55e334326870;
+	Node0x55e334326820 [shape=record,label="{xpointer.c:553:}"];
+	Node0x55e334326820 -> Node0x55e33431df70;
+	Node0x55e334326870 [shape=record,label="{xpointer.c:554:}"];
+	Node0x55e334326870 -> Node0x55e3343257c0;
+	Node0x55e334325930 [shape=record,label="{xpointer.c:559:}"];
+	Node0x55e334325930 -> Node0x55e33431df70;
+	Node0x55e3343257c0 [shape=record,label="{xpointer.c:562:}"];
+	Node0x55e3343257c0 -> Node0x55e33431df70;
+	Node0x55e33431df70 [shape=record,label="{xpointer.c:565:}"];
+}

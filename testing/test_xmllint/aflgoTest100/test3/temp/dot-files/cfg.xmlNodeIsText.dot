@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlNodeIsText' function" {
+	label="CFG for 'xmlNodeIsText' function";
+
+	Node0x5627b468b7f0 [shape=record,label="{tree.c:6933:|{<s0>T|<s1>F}}"];
+	Node0x5627b468b7f0 -> Node0x5627b468bce0;
+	Node0x5627b468b7f0 -> Node0x5627b4683890;
+	Node0x5627b468bce0 [shape=record,label="{tree.c:6934:}"];
+	Node0x5627b468bce0 -> Node0x5627b46839a0;
+	Node0x5627b4683890 [shape=record,label="{tree.c:6936:|{<s0>T|<s1>F}}"];
+	Node0x5627b4683890 -> Node0x5627b46912a0;
+	Node0x5627b4683890 -> Node0x5627b46912f0;
+	Node0x5627b46912a0 [shape=record,label="{tree.c:6936:}"];
+	Node0x5627b46912a0 -> Node0x5627b46839a0;
+	Node0x5627b46912f0 [shape=record,label="{tree.c:6937:}"];
+	Node0x5627b46912f0 -> Node0x5627b46839a0;
+	Node0x5627b46839a0 [shape=record,label="{tree.c:6938:}"];
+}

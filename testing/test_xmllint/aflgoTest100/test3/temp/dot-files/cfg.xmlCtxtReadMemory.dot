@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlCtxtReadMemory' function" {
+	label="CFG for 'xmlCtxtReadMemory' function";
+
+	Node0x5557ddcb6120 [shape=record,label="{parser.c:15461:|{<s0>T|<s1>F}}"];
+	Node0x5557ddcb6120 -> Node0x5557ddcb7f50;
+	Node0x5557ddcb6120 -> Node0x5557ddcb7fa0;
+	Node0x5557ddcb7f50 [shape=record,label="{parser.c:15468:}"];
+	Node0x5557ddcb7f50 -> Node0x5557ddcb64e0;
+	Node0x5557ddcb7fa0 [shape=record,label="{parser.c:15469:|{<s0>T|<s1>F}}"];
+	Node0x5557ddcb7fa0 -> Node0x5557ddcb8400;
+	Node0x5557ddcb7fa0 -> Node0x5557ddcb8450;
+	Node0x5557ddcb8400 [shape=record,label="{parser.c:15470:}"];
+	Node0x5557ddcb8400 -> Node0x5557ddcb64e0;
+	Node0x5557ddcb8450 [shape=record,label="{parser.c:15471:|{<s0>T|<s1>F}}"];
+	Node0x5557ddcb8450 -> Node0x5557ddcb8d50;
+	Node0x5557ddcb8450 -> Node0x5557ddcb8da0;
+	Node0x5557ddcb8d50 [shape=record,label="{parser.c:15477:}"];
+	Node0x5557ddcb8d50 -> Node0x5557ddcb64e0;
+	Node0x5557ddcb8da0 [shape=record,label="{parser.c:15480:|{<s0>T|<s1>F}}"];
+	Node0x5557ddcb8da0 -> Node0x5557ddcb95f0;
+	Node0x5557ddcb8da0 -> Node0x5557ddcb9640;
+	Node0x5557ddcb95f0 [shape=record,label="{parser.c:15482:}"];
+	Node0x5557ddcb95f0 -> Node0x5557ddcb64e0;
+	Node0x5557ddcb9640 [shape=record,label="{parser.c:15486:}"];
+	Node0x5557ddcb9640 -> Node0x5557ddcb64e0;
+	Node0x5557ddcb64e0 [shape=record,label="{parser.c:15488:}"];
+}

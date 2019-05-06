@@ -1,0 +1,10 @@
+digraph "CFG for 'libxml_xmlDumpMemory' function" {
+	label="CFG for 'libxml_xmlDumpMemory' function";
+
+	Node0x55fa6c1aada0 [shape=record,label="{libxml.c:226:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1aada0:s0 -> Node0x55fa6c1bf1c0;
+	Node0x55fa6c1aada0:s1 -> Node0x55fa6c1a9de0;
+	Node0x55fa6c1bf1c0 [shape=record,label="{libxml.c:231:}"];
+	Node0x55fa6c1bf1c0 -> Node0x55fa6c1a9de0;
+	Node0x55fa6c1a9de0 [shape=record,label="{libxml.c:232:}"];
+}

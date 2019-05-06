@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSAXDefaultVersion' function" {
+	label="CFG for 'xmlSAXDefaultVersion' function";
+
+	Node0x55f4ae7c5250 [shape=record,label="{SAX2.c:2847:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae7c5250:s0 -> Node0x55f4ae7c90a0;
+	Node0x55f4ae7c5250:s1 -> Node0x55f4ae7c9050;
+	Node0x55f4ae7c90a0 [shape=record,label="{SAX2.c:2851:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae7c90a0:s0 -> Node0x55f4ae7c9000;
+	Node0x55f4ae7c90a0:s1 -> Node0x55f4ae7c9050;
+	Node0x55f4ae7c9000 [shape=record,label="{SAX2.c:2852:}"];
+	Node0x55f4ae7c9000 -> Node0x55f4ae7c6730;
+	Node0x55f4ae7c9050 [shape=record,label="{SAX2.c:2853:}"];
+	Node0x55f4ae7c9050 -> Node0x55f4ae7c6730;
+	Node0x55f4ae7c6730 [shape=record,label="{SAX2.c:2855:}"];
+}

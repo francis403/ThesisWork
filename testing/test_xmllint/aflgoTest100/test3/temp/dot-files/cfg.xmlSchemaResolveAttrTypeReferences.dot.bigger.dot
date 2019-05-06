@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlSchemaResolveAttrTypeReferences' function" {
+	label="CFG for 'xmlSchemaResolveAttrTypeReferences' function";
+
+	Node0x5583538d63e0 [shape=record,label="{xmlschemas.c:20354:|{<s0>T|<s1>F}}"];
+	Node0x5583538d63e0:s0 -> Node0x5583538e7af0;
+	Node0x5583538d63e0:s1 -> Node0x5583538e7b40;
+	Node0x5583538e7af0 [shape=record,label="{xmlschemas.c:20364:}"];
+	Node0x5583538e7af0 -> Node0x5583538e7620;
+	Node0x5583538e7b40 [shape=record,label="{xmlschemas.c:20365:|{<s0>T|<s1>F}}"];
+	Node0x5583538e7b40:s0 -> Node0x5583538ea430;
+	Node0x5583538e7b40:s1 -> Node0x5583538ea480;
+	Node0x5583538ea430 [shape=record,label="{xmlschemas.c:20367:}"];
+	Node0x5583538ea430 -> Node0x5583538e7620;
+	Node0x5583538ea480 [shape=record,label="{xmlschemas.c:20368:|{<s0>T|<s1>F}}"];
+	Node0x5583538ea480:s0 -> Node0x5583538ea9a0;
+	Node0x5583538ea480:s1 -> Node0x5583538eaa40;
+	Node0x5583538ea9a0 [shape=record,label="{xmlschemas.c:20369:|{<s0>T|<s1>F}}"];
+	Node0x5583538ea9a0:s0 -> Node0x5583538eb840;
+	Node0x5583538ea9a0:s1 -> Node0x5583538eb930;
+	Node0x5583538eb930 [shape=record,label="{xmlschemas.c:20373:|{<s0>T|<s1>F}}"];
+	Node0x5583538eb930:s0 -> Node0x5583538eb8e0;
+	Node0x5583538eb930:s1 -> Node0x5583538ebc50;
+	Node0x5583538ebc50 [shape=record,label="{xmlschemas.c:20373:|{<s0>T|<s1>F}}"];
+	Node0x5583538ebc50:s0 -> Node0x5583538ebf40;
+	Node0x5583538ebc50:s1 -> Node0x5583538eb840;
+	Node0x5583538ebf40 [shape=record,label="{xmlschemas.c:20373:|{<s0>T|<s1>F}}"];
+	Node0x5583538ebf40:s0 -> Node0x5583538eb8e0;
+	Node0x5583538ebf40:s1 -> Node0x5583538eb840;
+	Node0x5583538eb840 [shape=record,label="{xmlschemas.c:20374:}"];
+	Node0x5583538eb840 -> Node0x5583538e7620;
+	Node0x5583538eb8e0 [shape=record,label="{xmlschemas.c:20381:}"];
+	Node0x5583538eb8e0 -> Node0x5583538eb890;
+	Node0x5583538eb890 [shape=record,label="{xmlschemas.c:20383:}"];
+	Node0x5583538eb890 -> Node0x5583538ea9f0;
+	Node0x5583538eaa40 [shape=record,label="{xmlschemas.c:20387:}"];
+	Node0x5583538eaa40 -> Node0x5583538ea9f0;
+	Node0x5583538ea9f0 [shape=record,label="{xmlschemas.c:20389:}"];
+	Node0x5583538ea9f0 -> Node0x5583538e7620;
+	Node0x5583538e7620 [shape=record,label="{xmlschemas.c:20390:}"];
+}

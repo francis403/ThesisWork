@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlStringDecodeEntities' function" {
+	label="CFG for 'xmlStringDecodeEntities' function";
+
+	Node0x55d73b7df640 [shape=record,label="{parser.c:2780:|{<s0>T|<s1>F}}"];
+	Node0x55d73b7df640:s0 -> Node0x55d73b807e30;
+	Node0x55d73b7df640:s1 -> Node0x55d73b807ed0;
+	Node0x55d73b807ed0 [shape=record,label="{parser.c:2782:|{<s0>T|<s1>F}}"];
+	Node0x55d73b807ed0:s0 -> Node0x55d73b807e30;
+	Node0x55d73b807ed0:s1 -> Node0x55d73b807e80;
+	Node0x55d73b807e30 [shape=record,label="{parser.c:2782:}"];
+	Node0x55d73b807e30 -> Node0x55d73b7d9f40;
+	Node0x55d73b807e80 [shape=record,label="{parser.c:2783:}"];
+	Node0x55d73b807e80 -> Node0x55d73b7d9f40;
+	Node0x55d73b7d9f40 [shape=record,label="{parser.c:2785:}"];
+}

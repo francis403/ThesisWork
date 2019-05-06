@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlModuleErrMemory' function" {
+	label="CFG for 'xmlModuleErrMemory' function";
+
+	Node0x5570ded4aaf0 [shape=record,label="{xmlmodule.c:49:|{<s0>T|<s1>F}}"];
+	Node0x5570ded4aaf0:s0 -> Node0x5570ded4cb70;
+	Node0x5570ded4aaf0:s1 -> Node0x5570ded4cbc0;
+	Node0x5570ded4cb70 [shape=record,label="{xmlmodule.c:54:}"];
+	Node0x5570ded4cb70 -> Node0x5570ded4cbc0;
+	Node0x5570ded4cbc0 [shape=record,label="{xmlmodule.c:58:}"];
+}

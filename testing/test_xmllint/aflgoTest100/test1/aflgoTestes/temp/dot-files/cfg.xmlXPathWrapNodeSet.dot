@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathWrapNodeSet' function" {
+	label="CFG for 'xmlXPathWrapNodeSet' function";
+
+	Node0x55e6b2594f00 [shape=record,label="{xpath.c:4427:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2594f00 -> Node0x55e6b2595960;
+	Node0x55e6b2594f00 -> Node0x55e6b25959b0;
+	Node0x55e6b2595960 [shape=record,label="{xpath.c:4432:}"];
+	Node0x55e6b2595960 -> Node0x55e6b2594f50;
+	Node0x55e6b25959b0 [shape=record,label="{xpath.c:4435:}"];
+	Node0x55e6b25959b0 -> Node0x55e6b2594f50;
+	Node0x55e6b2594f50 [shape=record,label="{xpath.c:4442:}"];
+}

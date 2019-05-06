@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlBufferEmpty' function" {
+	label="CFG for 'xmlBufferEmpty' function";
+
+	Node0x5627b46b4b40 [shape=record,label="{tree.c:7192:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b4b40:s0 -> Node0x5627b46ae630;
+	Node0x5627b46b4b40:s1 -> Node0x5627b46b4f60;
+	Node0x5627b46ae630 [shape=record,label="{tree.c:7193:}"];
+	Node0x5627b46ae630 -> Node0x5627b46b5ff0;
+	Node0x5627b46b4f60 [shape=record,label="{tree.c:7194:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b4f60:s0 -> Node0x5627b46b29b0;
+	Node0x5627b46b4f60:s1 -> Node0x5627b46b59c0;
+	Node0x5627b46b29b0 [shape=record,label="{tree.c:7194:}"];
+	Node0x5627b46b29b0 -> Node0x5627b46b5ff0;
+	Node0x5627b46b59c0 [shape=record,label="{tree.c:7195:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b59c0:s0 -> Node0x5627b46b5fa0;
+	Node0x5627b46b59c0:s1 -> Node0x5627b46b6040;
+	Node0x5627b46b5fa0 [shape=record,label="{tree.c:7197:}"];
+	Node0x5627b46b5fa0 -> Node0x5627b46b5ff0;
+	Node0x5627b46b6040 [shape=record,label="{tree.c:7198:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b6040:s0 -> Node0x5627b46b67b0;
+	Node0x5627b46b6040:s1 -> Node0x5627b46b6760;
+	Node0x5627b46b67b0 [shape=record,label="{tree.c:7199:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b67b0:s0 -> Node0x5627b46b66c0;
+	Node0x5627b46b67b0:s1 -> Node0x5627b46b6760;
+	Node0x5627b46b66c0 [shape=record,label="{tree.c:7200:}"];
+	Node0x5627b46b66c0 -> Node0x5627b46b6710;
+	Node0x5627b46b6760 [shape=record,label="{tree.c:7206:}"];
+	Node0x5627b46b6760 -> Node0x5627b46b6710;
+	Node0x5627b46b6710 [shape=record,label="{%54}"];
+	Node0x5627b46b6710 -> Node0x5627b46b5ff0;
+	Node0x5627b46b5ff0 [shape=record,label="{tree.c:7208:}"];
+}

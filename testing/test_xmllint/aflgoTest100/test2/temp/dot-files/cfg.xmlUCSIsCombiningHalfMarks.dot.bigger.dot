@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsCombiningHalfMarks' function" {
+	label="CFG for 'xmlUCSIsCombiningHalfMarks' function";
+
+	Node0x55ca9b1f6990 [shape=record,label="{xmlunicode.c:1340:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b1f6990:s0 -> Node0x55ca9b1e5460;
+	Node0x55ca9b1f6990:s1 -> Node0x55ca9b1e5410;
+	Node0x55ca9b1e5460 [shape=record,label="{xmlunicode.c:1341:}"];
+	Node0x55ca9b1e5460 -> Node0x55ca9b1e5410;
+	Node0x55ca9b1e5410 [shape=record,label="{xmlunicode.c:1341:}"];
+}

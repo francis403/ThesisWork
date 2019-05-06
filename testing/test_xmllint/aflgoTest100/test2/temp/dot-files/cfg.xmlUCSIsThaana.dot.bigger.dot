@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsThaana' function" {
+	label="CFG for 'xmlUCSIsThaana' function";
+
+	Node0x55ca9b26d9c0 [shape=record,label="{xmlunicode.c:2512:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b26d9c0:s0 -> Node0x55ca9b271060;
+	Node0x55ca9b26d9c0:s1 -> Node0x55ca9b271010;
+	Node0x55ca9b271060 [shape=record,label="{xmlunicode.c:2513:}"];
+	Node0x55ca9b271060 -> Node0x55ca9b271010;
+	Node0x55ca9b271010 [shape=record,label="{xmlunicode.c:2513:}"];
+}

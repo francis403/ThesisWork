@@ -1,0 +1,43 @@
+digraph "CFG for 'xmlPatternMaxDepth' function" {
+	label="CFG for 'xmlPatternMaxDepth' function";
+
+	Node0x55aa3b037500 [shape=record,label="{pattern.c:2549:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b037500:s0 -> Node0x55aa3b039be0;
+	Node0x55aa3b037500:s1 -> Node0x55aa3b039c30;
+	Node0x55aa3b039be0 [shape=record,label="{pattern.c:2552:}"];
+	Node0x55aa3b039be0 -> Node0x55aa3b038df0;
+	Node0x55aa3b039c30 [shape=record,label="{pattern.c:2553:}"];
+	Node0x55aa3b039c30 -> Node0x55aa3b03a0c0;
+	Node0x55aa3b03a0c0 [shape=record,label="{pattern.c:2553:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b03a0c0:s0 -> Node0x55aa3b03a480;
+	Node0x55aa3b03a0c0:s1 -> Node0x55aa3b03a2a0;
+	Node0x55aa3b03a480 [shape=record,label="{pattern.c:2554:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b03a480:s0 -> Node0x55aa3b03a630;
+	Node0x55aa3b03a480:s1 -> Node0x55aa3b03a680;
+	Node0x55aa3b03a630 [shape=record,label="{pattern.c:2555:}"];
+	Node0x55aa3b03a630 -> Node0x55aa3b038df0;
+	Node0x55aa3b03a680 [shape=record,label="{pattern.c:2556:}"];
+	Node0x55aa3b03a680 -> Node0x55aa3b03ac20;
+	Node0x55aa3b03ac20 [shape=record,label="{pattern.c:2556:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b03ac20:s0 -> Node0x55aa3b03af00;
+	Node0x55aa3b03ac20:s1 -> Node0x55aa3b03aac0;
+	Node0x55aa3b03af00 [shape=record,label="{pattern.c:2557:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b03af00:s0 -> Node0x55aa3b03b350;
+	Node0x55aa3b03af00:s1 -> Node0x55aa3b03b3a0;
+	Node0x55aa3b03b350 [shape=record,label="{pattern.c:2558:}"];
+	Node0x55aa3b03b350 -> Node0x55aa3b038df0;
+	Node0x55aa3b03b3a0 [shape=record,label="{pattern.c:2557:}"];
+	Node0x55aa3b03b3a0 -> Node0x55aa3b03ae70;
+	Node0x55aa3b03ae70 [shape=record,label="{pattern.c:2556:}"];
+	Node0x55aa3b03ae70 -> Node0x55aa3b03ac20;
+	Node0x55aa3b03aac0 [shape=record,label="{pattern.c:2559:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b03aac0:s0 -> Node0x55aa3b03be50;
+	Node0x55aa3b03aac0:s1 -> Node0x55aa3b03bea0;
+	Node0x55aa3b03be50 [shape=record,label="{pattern.c:2560:}"];
+	Node0x55aa3b03be50 -> Node0x55aa3b03bea0;
+	Node0x55aa3b03bea0 [shape=record,label="{pattern.c:2561:}"];
+	Node0x55aa3b03bea0 -> Node0x55aa3b03a0c0;
+	Node0x55aa3b03a2a0 [shape=record,label="{pattern.c:2563:}"];
+	Node0x55aa3b03a2a0 -> Node0x55aa3b038df0;
+	Node0x55aa3b038df0 [shape=record,label="{pattern.c:2564:}"];
+}

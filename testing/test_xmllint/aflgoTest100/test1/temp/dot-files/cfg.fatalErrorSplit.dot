@@ -1,0 +1,16 @@
+digraph "CFG for 'fatalErrorSplit' function" {
+	label="CFG for 'fatalErrorSplit' function";
+
+	Node0x55d026972650 [shape=record,label="{xmlschemas.c:28514:|{<s0>T|<s1>F}}"];
+	Node0x55d026972650 -> Node0x55d026973620;
+	Node0x55d026972650 -> Node0x55d026973550;
+	Node0x55d026973620 [shape=record,label="{xmlschemas.c:28516:|{<s0>T|<s1>F}}"];
+	Node0x55d026973620 -> Node0x55d0269735a0;
+	Node0x55d026973620 -> Node0x55d026973550;
+	Node0x55d0269735a0 [shape=record,label="{xmlschemas.c:28517:|{<s0>T|<s1>F}}"];
+	Node0x55d0269735a0 -> Node0x55d026973500;
+	Node0x55d0269735a0 -> Node0x55d026973550;
+	Node0x55d026973500 [shape=record,label="{xmlschemas.c:28518:}"];
+	Node0x55d026973500 -> Node0x55d026973550;
+	Node0x55d026973550 [shape=record,label="{xmlschemas.c:28520:}"];
+}

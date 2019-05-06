@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlGetIntSubset' function" {
+	label="CFG for 'libxml_xmlGetIntSubset' function";
+
+	Node0x55f930edd390 [shape=record,label="{libxml2-py.c:2989:|{<s0>T|<s1>F}}"];
+	Node0x55f930edd390:s0 -> Node0x55f930ee1120;
+	Node0x55f930edd390:s1 -> Node0x55f930ee10d0;
+	Node0x55f930ee10d0 [shape=record,label="{libxml2-py.c:2996:}"];
+	Node0x55f930ee10d0 -> Node0x55f930edd0b0;
+	Node0x55f930ee1120 [shape=record,label="{libxml2-py.c:2997:|{<s0>T|<s1>F}}"];
+	Node0x55f930ee1120:s0 -> Node0x55f930ee1900;
+	Node0x55f930ee1120:s1 -> Node0x55f930ee1950;
+	Node0x55f930ee1900 [shape=record,label="{libxml2-py.c:2997:}"];
+	Node0x55f930ee1900 -> Node0x55f930ee19a0;
+	Node0x55f930ee1950 [shape=record,label="{libxml2-py.c:2997:}"];
+	Node0x55f930ee1950 -> Node0x55f930ee19a0;
+	Node0x55f930ee19a0 [shape=record,label="{libxml2-py.c:2997:}"];
+	Node0x55f930ee19a0 -> Node0x55f930edd0b0;
+	Node0x55f930edd0b0 [shape=record,label="{libxml2-py.c:3002:}"];
+}

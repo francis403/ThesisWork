@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlMutexLock' function" {
+	label="CFG for 'xmlMutexLock' function";
+
+	Node0x55e5569e0dd0 [shape=record,label="{threads.c:229:|{<s0>T|<s1>F}}"];
+	Node0x55e5569e0dd0:s0 -> Node0x55e5569e0c30;
+	Node0x55e5569e0dd0:s1 -> Node0x55e5569dc150;
+	Node0x55e5569e0c30 [shape=record,label="{threads.c:232:}"];
+	Node0x55e5569e0c30 -> Node0x55e5569e1a30;
+	Node0x55e5569dc150 [shape=record,label="{threads.c:234:|{<s0>T|<s1>F}}"];
+	Node0x55e5569dc150:s0 -> Node0x55e5569e19e0;
+	Node0x55e5569dc150:s1 -> Node0x55e5569e1a30;
+	Node0x55e5569e19e0 [shape=record,label="{threads.c:235:}"];
+	Node0x55e5569e19e0 -> Node0x55e5569e1a30;
+	Node0x55e5569e1a30 [shape=record,label="{threads.c:248:}"];
+}

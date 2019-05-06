@@ -1,0 +1,16 @@
+digraph "CFG for 'commentSplit' function" {
+	label="CFG for 'commentSplit' function";
+
+	Node0x55d02696caf0 [shape=record,label="{xmlschemas.c:28485:|{<s0>T|<s1>F}}"];
+	Node0x55d02696caf0 -> Node0x55d02696da80;
+	Node0x55d02696caf0 -> Node0x55d02696d9b0;
+	Node0x55d02696da80 [shape=record,label="{xmlschemas.c:28488:|{<s0>T|<s1>F}}"];
+	Node0x55d02696da80 -> Node0x55d02696da00;
+	Node0x55d02696da80 -> Node0x55d02696d9b0;
+	Node0x55d02696da00 [shape=record,label="{xmlschemas.c:28489:|{<s0>T|<s1>F}}"];
+	Node0x55d02696da00 -> Node0x55d02696d960;
+	Node0x55d02696da00 -> Node0x55d02696d9b0;
+	Node0x55d02696d960 [shape=record,label="{xmlschemas.c:28490:}"];
+	Node0x55d02696d960 -> Node0x55d02696d9b0;
+	Node0x55d02696d9b0 [shape=record,label="{xmlschemas.c:28491:}"];
+}

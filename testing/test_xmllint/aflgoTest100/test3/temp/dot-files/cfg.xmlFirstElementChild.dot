@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlFirstElementChild' function" {
+	label="CFG for 'xmlFirstElementChild' function";
+
+	Node0x5627b445f9f0 [shape=record,label="{tree.c:3516:|{<s0>T|<s1>F}}"];
+	Node0x5627b445f9f0 -> Node0x5627b445feb0;
+	Node0x5627b445f9f0 -> Node0x5627b4462e50;
+	Node0x5627b445feb0 [shape=record,label="{tree.c:3520:}"];
+	Node0x5627b445feb0 -> Node0x5627b4462210;
+	Node0x5627b4462e50 [shape=record,label="{tree.c:3521:|{<s0>def|<s1>1|<s2>6|<s3>9|<s4>11|<s5>13}}"];
+	Node0x5627b4462e50 -> Node0x5627b44633c0;
+	Node0x5627b4462e50 -> Node0x5627b44634a0;
+	Node0x5627b4462e50 -> Node0x5627b44634a0;
+	Node0x5627b4462e50 -> Node0x5627b44634a0;
+	Node0x5627b4462e50 -> Node0x5627b44634a0;
+	Node0x5627b4462e50 -> Node0x5627b44634a0;
+	Node0x5627b44634a0 [shape=record,label="{tree.c:3527:}"];
+	Node0x5627b44634a0 -> Node0x5627b4463250;
+	Node0x5627b44633c0 [shape=record,label="{tree.c:3530:}"];
+	Node0x5627b44633c0 -> Node0x5627b4462210;
+	Node0x5627b4463250 [shape=record,label="{tree.c:3532:}"];
+	Node0x5627b4463250 -> Node0x5627b4463950;
+	Node0x5627b4463950 [shape=record,label="{tree.c:3532:|{<s0>T|<s1>F}}"];
+	Node0x5627b4463950 -> Node0x5627b4463d50;
+	Node0x5627b4463950 -> Node0x5627b4463b70;
+	Node0x5627b4463d50 [shape=record,label="{tree.c:3533:|{<s0>T|<s1>F}}"];
+	Node0x5627b4463d50 -> Node0x5627b4463f00;
+	Node0x5627b4463d50 -> Node0x5627b4463f50;
+	Node0x5627b4463f00 [shape=record,label="{tree.c:3534:}"];
+	Node0x5627b4463f00 -> Node0x5627b4462210;
+	Node0x5627b4463f50 [shape=record,label="{tree.c:3535:}"];
+	Node0x5627b4463f50 -> Node0x5627b4463950;
+	Node0x5627b4463b70 [shape=record,label="{tree.c:3537:}"];
+	Node0x5627b4463b70 -> Node0x5627b4462210;
+	Node0x5627b4462210 [shape=record,label="{tree.c:3538:}"];
+}

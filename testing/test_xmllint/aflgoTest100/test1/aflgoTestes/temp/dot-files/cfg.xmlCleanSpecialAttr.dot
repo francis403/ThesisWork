@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlCleanSpecialAttr' function" {
+	label="CFG for 'xmlCleanSpecialAttr' function";
+
+	Node0x55d73c2253f0 [shape=record,label="{parser.c:1365:|{<s0>T|<s1>F}}"];
+	Node0x55d73c2253f0 -> Node0x55d73c21f950;
+	Node0x55d73c2253f0 -> Node0x55d73bf08da0;
+	Node0x55d73c21f950 [shape=record,label="{parser.c:1368:}"];
+	Node0x55d73c21f950 -> Node0x55d73c225440;
+	Node0x55d73bf08da0 [shape=record,label="{parser.c:1370:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf08da0 -> Node0x55d73c228850;
+	Node0x55d73bf08da0 -> Node0x55d73c2288a0;
+	Node0x55d73c228850 [shape=record,label="{parser.c:1373:}"];
+	Node0x55d73c228850 -> Node0x55d73c2288a0;
+	Node0x55d73c2288a0 [shape=record,label="{parser.c:1376:}"];
+	Node0x55d73c2288a0 -> Node0x55d73c225440;
+	Node0x55d73c225440 [shape=record,label="{parser.c:1377:}"];
+}

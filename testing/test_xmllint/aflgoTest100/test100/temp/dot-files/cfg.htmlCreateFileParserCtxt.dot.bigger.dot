@@ -1,0 +1,47 @@
+digraph "CFG for 'htmlCreateFileParserCtxt' function" {
+	label="CFG for 'htmlCreateFileParserCtxt' function";
+
+	Node0x56074486d0f0 [shape=record,label="{HTMLparser.c:6338:|{<s0>T|<s1>F}}"];
+	Node0x56074486d0f0:s0 -> Node0x5607447846e0;
+	Node0x56074486d0f0:s1 -> Node0x560744784730;
+	Node0x5607447846e0 [shape=record,label="{HTMLparser.c:6347:}"];
+	Node0x5607447846e0 -> Node0x56074477da30;
+	Node0x560744784730 [shape=record,label="{HTMLparser.c:6349:|{<s0>T|<s1>F}}"];
+	Node0x560744784730:s0 -> Node0x560744784ca0;
+	Node0x560744784730:s1 -> Node0x560744784cf0;
+	Node0x560744784ca0 [shape=record,label="{HTMLparser.c:6351:}"];
+	Node0x560744784ca0 -> Node0x56074477da30;
+	Node0x560744784cf0 [shape=record,label="{HTMLparser.c:6353:|{<s0>T|<s1>F}}"];
+	Node0x560744784cf0:s0 -> Node0x5607447854b0;
+	Node0x560744784cf0:s1 -> Node0x560744785500;
+	Node0x5607447854b0 [shape=record,label="{HTMLparser.c:6356:|{<s0>T|<s1>F}}"];
+	Node0x5607447854b0:s0 -> Node0x56074487f670;
+	Node0x5607447854b0:s1 -> Node0x56074487f6c0;
+	Node0x56074487f670 [shape=record,label="{HTMLparser.c:6357:}"];
+	Node0x56074487f670 -> Node0x56074487f6c0;
+	Node0x56074487f6c0 [shape=record,label="{HTMLparser.c:6360:}"];
+	Node0x56074487f6c0 -> Node0x56074477da30;
+	Node0x560744785500 [shape=record,label="{HTMLparser.c:6364:|{<s0>T|<s1>F}}"];
+	Node0x560744785500:s0 -> Node0x560744880ee0;
+	Node0x560744785500:s1 -> Node0x560744880f30;
+	Node0x560744880ee0 [shape=record,label="{HTMLparser.c:6367:}"];
+	Node0x560744880ee0 -> Node0x56074477da30;
+	Node0x560744880f30 [shape=record,label="{HTMLparser.c:6371:|{<s0>T|<s1>F}}"];
+	Node0x560744880f30:s0 -> Node0x560744881700;
+	Node0x560744880f30:s1 -> Node0x560744881750;
+	Node0x560744881700 [shape=record,label="{HTMLparser.c:6375:|{<s0>T|<s1>F}}"];
+	Node0x560744881700:s0 -> Node0x560744881e80;
+	Node0x560744881700:s1 -> Node0x560744881ed0;
+	Node0x560744881e80 [shape=record,label="{HTMLparser.c:6378:|{<s0>T|<s1>F}}"];
+	Node0x560744881e80:s0 -> Node0x560744882b00;
+	Node0x560744881e80:s1 -> Node0x560744882b50;
+	Node0x560744882b00 [shape=record,label="{HTMLparser.c:6380:}"];
+	Node0x560744882b00 -> Node0x560744882b50;
+	Node0x560744882b50 [shape=record,label="{HTMLparser.c:6385:}"];
+	Node0x560744882b50 -> Node0x560744881ed0;
+	Node0x560744881ed0 [shape=record,label="{HTMLparser.c:6386:}"];
+	Node0x560744881ed0 -> Node0x560744881750;
+	Node0x560744881750 [shape=record,label="{HTMLparser.c:6388:}"];
+	Node0x560744881750 -> Node0x56074477da30;
+	Node0x56074477da30 [shape=record,label="{HTMLparser.c:6389:}"];
+}

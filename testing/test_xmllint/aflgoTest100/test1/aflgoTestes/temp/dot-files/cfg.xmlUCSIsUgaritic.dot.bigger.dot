@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsUgaritic' function" {
+	label="CFG for 'xmlUCSIsUgaritic' function";
+
+	Node0x564952e59850 [shape=record,label="{xmlunicode.c:2551:|{<s0>T|<s1>F}}"];
+	Node0x564952e59850:s0 -> Node0x564952e5c040;
+	Node0x564952e59850:s1 -> Node0x564952e5bff0;
+	Node0x564952e5c040 [shape=record,label="{xmlunicode.c:2552:}"];
+	Node0x564952e5c040 -> Node0x564952e5bff0;
+	Node0x564952e5bff0 [shape=record,label="{xmlunicode.c:2552:}"];
+}

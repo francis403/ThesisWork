@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlIsMixedElement' function" {
+	label="CFG for 'xmlIsMixedElement' function";
+
+	Node0x55fa50d9aad0 [shape=record,label="{valid.c:3413:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d9aad0 -> Node0x55fa50c003c0;
+	Node0x55fa50d9aad0 -> Node0x55fa50c00460;
+	Node0x55fa50c00460 [shape=record,label="{valid.c:3416:|{<s0>T|<s1>F}}"];
+	Node0x55fa50c00460 -> Node0x55fa50c003c0;
+	Node0x55fa50c00460 -> Node0x55fa50c00410;
+	Node0x55fa50c003c0 [shape=record,label="{valid.c:3416:}"];
+	Node0x55fa50c003c0 -> Node0x55fa50d9ab20;
+	Node0x55fa50c00410 [shape=record,label="{valid.c:3418:|{<s0>T|<s1>F}}"];
+	Node0x55fa50c00410 -> Node0x55fa50d9fc10;
+	Node0x55fa50c00410 -> Node0x55fa50d9fbc0;
+	Node0x55fa50d9fc10 [shape=record,label="{valid.c:3419:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d9fc10 -> Node0x55fa50d9fb70;
+	Node0x55fa50d9fc10 -> Node0x55fa50d9fbc0;
+	Node0x55fa50d9fb70 [shape=record,label="{valid.c:3420:}"];
+	Node0x55fa50d9fb70 -> Node0x55fa50d9fbc0;
+	Node0x55fa50d9fbc0 [shape=record,label="{valid.c:3421:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d9fbc0 -> Node0x55fa50da0680;
+	Node0x55fa50d9fbc0 -> Node0x55fa50da06d0;
+	Node0x55fa50da0680 [shape=record,label="{valid.c:3421:}"];
+	Node0x55fa50da0680 -> Node0x55fa50d9ab20;
+	Node0x55fa50da06d0 [shape=record,label="{valid.c:3422:|{<s0>def|<s1>0|<s2>4|<s3>1|<s4>2|<s5>3}}"];
+	Node0x55fa50da06d0 -> Node0x55fa50da0b60;
+	Node0x55fa50da06d0 -> Node0x55fa50da1070;
+	Node0x55fa50da06d0 -> Node0x55fa50da1260;
+	Node0x55fa50da06d0 -> Node0x55fa50da1420;
+	Node0x55fa50da06d0 -> Node0x55fa50da1420;
+	Node0x55fa50da06d0 -> Node0x55fa50da1420;
+	Node0x55fa50da1070 [shape=record,label="{valid.c:3424:}"];
+	Node0x55fa50da1070 -> Node0x55fa50d9ab20;
+	Node0x55fa50da1260 [shape=record,label="{valid.c:3426:}"];
+	Node0x55fa50da1260 -> Node0x55fa50d9ab20;
+	Node0x55fa50da1420 [shape=record,label="{valid.c:3434:}"];
+	Node0x55fa50da1420 -> Node0x55fa50d9ab20;
+	Node0x55fa50da0b60 [shape=record,label="{valid.c:3436:}"];
+	Node0x55fa50da0b60 -> Node0x55fa50d9ab20;
+	Node0x55fa50d9ab20 [shape=record,label="{valid.c:3437:}"];
+}

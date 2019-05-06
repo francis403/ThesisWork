@@ -1,0 +1,47 @@
+digraph "CFG for 'xz_make' function" {
+	label="CFG for 'xz_make' function";
+
+	Node0x559901d0f680 [shape=record,label="{xzlib.c:643:|{<s0>T|<s1>F}}"];
+	Node0x559901d0f680:s0 -> Node0x559901cf9700;
+	Node0x559901d0f680:s1 -> Node0x559901cf9750;
+	Node0x559901cf9700 [shape=record,label="{xzlib.c:648:|{<s0>T|<s1>F}}"];
+	Node0x559901cf9700:s0 -> Node0x559901cf9ba0;
+	Node0x559901cf9700:s1 -> Node0x559901cf9bf0;
+	Node0x559901cf9ba0 [shape=record,label="{xzlib.c:649:}"];
+	Node0x559901cf9ba0 -> Node0x559901d0f6d0;
+	Node0x559901cf9bf0 [shape=record,label="{xzlib.c:650:|{<s0>T|<s1>F}}"];
+	Node0x559901cf9bf0:s0 -> Node0x559901cfa690;
+	Node0x559901cf9bf0:s1 -> Node0x559901cfa6e0;
+	Node0x559901cfa690 [shape=record,label="{xzlib.c:651:}"];
+	Node0x559901cfa690 -> Node0x559901d0f6d0;
+	Node0x559901cfa6e0 [shape=record,label="{xzlib.c:652:}"];
+	Node0x559901cfa6e0 -> Node0x559901cf9750;
+	Node0x559901cf9750 [shape=record,label="{xzlib.c:653:|{<s0>T|<s1>F}}"];
+	Node0x559901cf9750:s0 -> Node0x559901cfac60;
+	Node0x559901cf9750:s1 -> Node0x559901cfad00;
+	Node0x559901cfac60 [shape=record,label="{xzlib.c:654:|{<s0>T|<s1>F}}"];
+	Node0x559901cfac60:s0 -> Node0x559901cfb150;
+	Node0x559901cfac60:s1 -> Node0x559901cfb1a0;
+	Node0x559901cfb150 [shape=record,label="{xzlib.c:656:}"];
+	Node0x559901cfb150 -> Node0x559901d0f6d0;
+	Node0x559901cfb1a0 [shape=record,label="{xzlib.c:657:}"];
+	Node0x559901cfb1a0 -> Node0x559901cfacb0;
+	Node0x559901cfad00 [shape=record,label="{xzlib.c:658:|{<s0>T|<s1>F}}"];
+	Node0x559901cfad00:s0 -> Node0x559901d14c70;
+	Node0x559901cfad00:s1 -> Node0x559901d14d10;
+	Node0x559901d14d10 [shape=record,label="{xzlib.c:658:|{<s0>T|<s1>F}}"];
+	Node0x559901d14d10:s0 -> Node0x559901d14c70;
+	Node0x559901d14d10:s1 -> Node0x559901d14cc0;
+	Node0x559901d14c70 [shape=record,label="{xzlib.c:659:|{<s0>T|<s1>F}}"];
+	Node0x559901d14c70:s0 -> Node0x559901d15de0;
+	Node0x559901d14c70:s1 -> Node0x559901d15e30;
+	Node0x559901d15de0 [shape=record,label="{xzlib.c:662:}"];
+	Node0x559901d15de0 -> Node0x559901d0f6d0;
+	Node0x559901d15e30 [shape=record,label="{xzlib.c:663:}"];
+	Node0x559901d15e30 -> Node0x559901d14cc0;
+	Node0x559901d14cc0 [shape=record,label="{%61}"];
+	Node0x559901d14cc0 -> Node0x559901cfacb0;
+	Node0x559901cfacb0 [shape=record,label="{xzlib.c:664:}"];
+	Node0x559901cfacb0 -> Node0x559901d0f6d0;
+	Node0x559901d0f6d0 [shape=record,label="{xzlib.c:665:}"];
+}

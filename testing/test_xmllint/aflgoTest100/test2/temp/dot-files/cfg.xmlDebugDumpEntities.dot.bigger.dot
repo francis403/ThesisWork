@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlDebugDumpEntities' function" {
+	label="CFG for 'xmlDebugDumpEntities' function";
+
+	Node0x5589802ddd00 [shape=record,label="{debugXML.c:1399:|{<s0>T|<s1>F}}"];
+	Node0x5589802ddd00:s0 -> Node0x5589802de1f0;
+	Node0x5589802ddd00:s1 -> Node0x5589802dc320;
+	Node0x5589802de1f0 [shape=record,label="{debugXML.c:1403:}"];
+	Node0x5589802de1f0 -> Node0x5589802dd6e0;
+	Node0x5589802dc320 [shape=record,label="{debugXML.c:1404:}"];
+	Node0x5589802dc320 -> Node0x5589802dd6e0;
+	Node0x5589802dd6e0 [shape=record,label="{debugXML.c:1408:}"];
+}

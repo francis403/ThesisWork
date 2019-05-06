@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlReadFile' function" {
+	label="CFG for 'xmlReadFile' function";
+
+	Node0x55d73bf89120 [shape=record,label="{parser.c:15252:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf89120 -> Node0x55d73bf8c5d0;
+	Node0x55d73bf89120 -> Node0x55d73bf8c620;
+	Node0x55d73bf8c5d0 [shape=record,label="{parser.c:15259:}"];
+	Node0x55d73bf8c5d0 -> Node0x55d73bf89390;
+	Node0x55d73bf8c620 [shape=record,label="{parser.c:15260:}"];
+	Node0x55d73bf8c620 -> Node0x55d73bf89390;
+	Node0x55d73bf89390 [shape=record,label="{parser.c:15261:}"];
+}

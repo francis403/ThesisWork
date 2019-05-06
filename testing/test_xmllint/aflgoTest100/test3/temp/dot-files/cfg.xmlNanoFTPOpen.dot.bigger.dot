@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlNanoFTPOpen' function" {
+	label="CFG for 'xmlNanoFTPOpen' function";
+
+	Node0x55e2ef74c340 [shape=record,label="{nanoftp.c:1999:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef74c340:s0 -> Node0x55e2ef748f10;
+	Node0x55e2ef74c340:s1 -> Node0x55e2ef647e00;
+	Node0x55e2ef748f10 [shape=record,label="{nanoftp.c:2004:}"];
+	Node0x55e2ef748f10 -> Node0x55e2ef73d680;
+	Node0x55e2ef647e00 [shape=record,label="{nanoftp.c:2005:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef647e00:s0 -> Node0x55e2ef74fd10;
+	Node0x55e2ef647e00:s1 -> Node0x55e2ef74fd60;
+	Node0x55e2ef74fd10 [shape=record,label="{nanoftp.c:2005:}"];
+	Node0x55e2ef74fd10 -> Node0x55e2ef73d680;
+	Node0x55e2ef74fd60 [shape=record,label="{nanoftp.c:2007:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef74fd60:s0 -> Node0x55e2ef750e70;
+	Node0x55e2ef74fd60:s1 -> Node0x55e2ef750ec0;
+	Node0x55e2ef750e70 [shape=record,label="{nanoftp.c:2008:}"];
+	Node0x55e2ef750e70 -> Node0x55e2ef73d680;
+	Node0x55e2ef750ec0 [shape=record,label="{nanoftp.c:2009:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef750ec0:s0 -> Node0x55e2ef751350;
+	Node0x55e2ef750ec0:s1 -> Node0x55e2ef7513a0;
+	Node0x55e2ef751350 [shape=record,label="{nanoftp.c:2010:}"];
+	Node0x55e2ef751350 -> Node0x55e2ef73d680;
+	Node0x55e2ef7513a0 [shape=record,label="{nanoftp.c:2013:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef7513a0:s0 -> Node0x55e2ef751ef0;
+	Node0x55e2ef7513a0:s1 -> Node0x55e2ef751f40;
+	Node0x55e2ef751ef0 [shape=record,label="{nanoftp.c:2015:}"];
+	Node0x55e2ef751ef0 -> Node0x55e2ef73d680;
+	Node0x55e2ef751f40 [shape=record,label="{nanoftp.c:2018:}"];
+	Node0x55e2ef751f40 -> Node0x55e2ef73d680;
+	Node0x55e2ef73d680 [shape=record,label="{nanoftp.c:2019:}"];
+}

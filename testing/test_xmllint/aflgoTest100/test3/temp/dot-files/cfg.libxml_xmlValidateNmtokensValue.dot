@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlValidateNmtokensValue' function" {
+	label="CFG for 'libxml_xmlValidateNmtokensValue' function";
+
+	Node0x55d6cc21d000 [shape=record,label="{libxml2-py.c:12488:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc21d000:s0 -> Node0x55d6cc21ffc0;
+	Node0x55d6cc21d000:s1 -> Node0x55d6cc21ff70;
+	Node0x55d6cc21ff70 [shape=record,label="{libxml2-py.c:12494:}"];
+	Node0x55d6cc21ff70 -> Node0x55d6cc21d290;
+	Node0x55d6cc21ffc0 [shape=record,label="{libxml2-py.c:12496:}"];
+	Node0x55d6cc21ffc0 -> Node0x55d6cc21d290;
+	Node0x55d6cc21d290 [shape=record,label="{libxml2-py.c:12499:}"];
+}

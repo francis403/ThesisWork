@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlSchematronAddNamespace' function" {
+	label="CFG for 'xmlSchematronAddNamespace' function";
+
+	Node0x5600fc356620 [shape=record,label="{schematron.c:804:|{<s0>T|<s1>F}}"];
+	Node0x5600fc356620 -> Node0x5600fc358390;
+	Node0x5600fc356620 -> Node0x5600fc358430;
+	Node0x5600fc358390 [shape=record,label="{schematron.c:808:|{<s0>T|<s1>F}}"];
+	Node0x5600fc358390 -> Node0x5600fc307c10;
+	Node0x5600fc358390 -> Node0x5600fc307c60;
+	Node0x5600fc307c10 [shape=record,label="{schematron.c:812:}"];
+	Node0x5600fc307c10 -> Node0x5600fc356670;
+	Node0x5600fc307c60 [shape=record,label="{schematron.c:816:}"];
+	Node0x5600fc307c60 -> Node0x5600fc3583e0;
+	Node0x5600fc358430 [shape=record,label="{schematron.c:817:|{<s0>T|<s1>F}}"];
+	Node0x5600fc358430 -> Node0x5600fc308810;
+	Node0x5600fc358430 -> Node0x5600fc308860;
+	Node0x5600fc308810 [shape=record,label="{schematron.c:818:|{<s0>T|<s1>F}}"];
+	Node0x5600fc308810 -> Node0x5600fc309bd0;
+	Node0x5600fc308810 -> Node0x5600fc309c20;
+	Node0x5600fc309bd0 [shape=record,label="{schematron.c:824:}"];
+	Node0x5600fc309bd0 -> Node0x5600fc356670;
+	Node0x5600fc309c20 [shape=record,label="{schematron.c:828:}"];
+	Node0x5600fc309c20 -> Node0x5600fc308860;
+	Node0x5600fc308860 [shape=record,label="{%60}"];
+	Node0x5600fc308860 -> Node0x5600fc3583e0;
+	Node0x5600fc3583e0 [shape=record,label="{schematron.c:832:}"];
+	Node0x5600fc3583e0 -> Node0x5600fc356670;
+	Node0x5600fc356670 [shape=record,label="{schematron.c:839:}"];
+}

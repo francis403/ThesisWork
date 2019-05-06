@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlXPathLeading' function" {
+	label="CFG for 'xmlXPathLeading' function";
+
+	Node0x55e6b25c4260 [shape=record,label="{xpath.c:4717:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25c4260:s0 -> Node0x55e6b25c4820;
+	Node0x55e6b25c4260:s1 -> Node0x55e6b25c6a90;
+	Node0x55e6b25c6a90 [shape=record,label="{xpath.c:4718:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25c6a90:s0 -> Node0x55e6b25c4820;
+	Node0x55e6b25c6a90:s1 -> Node0x55e6b25be390;
+	Node0x55e6b25be390 [shape=record,label="{xpath.c:4718:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25be390:s0 -> Node0x55e6b25c4820;
+	Node0x55e6b25be390:s1 -> Node0x55e6b25c4360;
+	Node0x55e6b25c4820 [shape=record,label="{xpath.c:4719:}"];
+	Node0x55e6b25c4820 -> Node0x55e6b25c4650;
+	Node0x55e6b25c4360 [shape=record,label="{xpath.c:4720:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25c4360:s0 -> Node0x55e6b25c7220;
+	Node0x55e6b25c4360:s1 -> Node0x55e6b25c7340;
+	Node0x55e6b25c7340 [shape=record,label="{xpath.c:4720:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25c7340:s0 -> Node0x55e6b25c7220;
+	Node0x55e6b25c7340:s1 -> Node0x55e6b25c72c0;
+	Node0x55e6b25c72c0 [shape=record,label="{xpath.c:4720:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25c72c0:s0 -> Node0x55e6b25c7220;
+	Node0x55e6b25c72c0:s1 -> Node0x55e6b25c7270;
+	Node0x55e6b25c7220 [shape=record,label="{xpath.c:4721:}"];
+	Node0x55e6b25c7220 -> Node0x55e6b25c4650;
+	Node0x55e6b25c7270 [shape=record,label="{xpath.c:4722:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25c7270:s0 -> Node0x55e6b25c7ff0;
+	Node0x55e6b25c7270:s1 -> Node0x55e6b25c7f50;
+	Node0x55e6b25c7ff0 [shape=record,label="{xpath.c:4725:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25c7ff0:s0 -> Node0x55e6b25c7f00;
+	Node0x55e6b25c7ff0:s1 -> Node0x55e6b25c7f50;
+	Node0x55e6b25c7f00 [shape=record,label="{xpath.c:4725:}"];
+	Node0x55e6b25c7f00 -> Node0x55e6b25c7fa0;
+	Node0x55e6b25c7f50 [shape=record,label="{xpath.c:4725:}"];
+	Node0x55e6b25c7f50 -> Node0x55e6b25c7fa0;
+	Node0x55e6b25c7fa0 [shape=record,label="{xpath.c:4725:}"];
+	Node0x55e6b25c7fa0 -> Node0x55e6b25c4650;
+	Node0x55e6b25c4650 [shape=record,label="{xpath.c:4726:}"];
+}

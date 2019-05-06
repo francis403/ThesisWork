@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlNanoFTPCloseConnection' function" {
+	label="CFG for 'xmlNanoFTPCloseConnection' function";
+
+	Node0x55e2ef6d4f10 [shape=record,label="{nanoftp.c:1547:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef6d4f10:s0 -> Node0x55e2ef6f6c10;
+	Node0x55e2ef6d4f10:s1 -> Node0x55e2ef6f6cb0;
+	Node0x55e2ef6f6cb0 [shape=record,label="{nanoftp.c:1553:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef6f6cb0:s0 -> Node0x55e2ef6f6c10;
+	Node0x55e2ef6f6cb0:s1 -> Node0x55e2ef6f6c60;
+	Node0x55e2ef6f6c10 [shape=record,label="{nanoftp.c:1553:}"];
+	Node0x55e2ef6f6c10 -> Node0x55e2ef6e07b0;
+	Node0x55e2ef6f6c60 [shape=record,label="{nanoftp.c:1555:}"];
+	Node0x55e2ef6f6c60 -> Node0x55e2ef6f7b10;
+	Node0x55e2ef6f7b10 [shape=record,label="{nanoftp.c:1558:}"];
+	Node0x55e2ef6f7b10 -> Node0x55e2ef6f7a70;
+	Node0x55e2ef6f7a70 [shape=record,label="{nanoftp.c:1559:}"];
+	Node0x55e2ef6f7a70 -> Node0x55e2ef6f91f0;
+	Node0x55e2ef6f91f0 [shape=record,label="{nanoftp.c:1560:}"];
+	Node0x55e2ef6f91f0 -> Node0x55e2ef6f7ac0;
+	Node0x55e2ef6f7ac0 [shape=record,label="{nanoftp.c:1561:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef6f7ac0:s0 -> Node0x55e2ef6f85f0;
+	Node0x55e2ef6f7ac0:s1 -> Node0x55e2ef6f9a40;
+	Node0x55e2ef6f85f0 [shape=record,label="{nanoftp.c:1567:}"];
+	Node0x55e2ef6f85f0 -> Node0x55e2ef6e07b0;
+	Node0x55e2ef6f9a40 [shape=record,label="{nanoftp.c:1570:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef6f9a40:s0 -> Node0x55e2ef6fb5d0;
+	Node0x55e2ef6f9a40:s1 -> Node0x55e2ef6fb670;
+	Node0x55e2ef6fb5d0 [shape=record,label="{nanoftp.c:1575:}"];
+	Node0x55e2ef6fb5d0 -> Node0x55e2ef6fb620;
+	Node0x55e2ef6fb670 [shape=record,label="{nanoftp.c:1577:|{<s0>T|<s1>F}}"];
+	Node0x55e2ef6fb670:s0 -> Node0x55e2ef6fc1f0;
+	Node0x55e2ef6fb670:s1 -> Node0x55e2ef6fc240;
+	Node0x55e2ef6fc1f0 [shape=record,label="{nanoftp.c:1579:}"];
+	Node0x55e2ef6fc1f0 -> Node0x55e2ef6e07b0;
+	Node0x55e2ef6fc240 [shape=record,label="{%106}"];
+	Node0x55e2ef6fc240 -> Node0x55e2ef6fb620;
+	Node0x55e2ef6fb620 [shape=record,label="{nanoftp.c:1583:}"];
+	Node0x55e2ef6fb620 -> Node0x55e2ef6e07b0;
+	Node0x55e2ef6e07b0 [shape=record,label="{nanoftp.c:1584:}"];
+}

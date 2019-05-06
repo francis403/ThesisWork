@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlTextReaderNormalization' function" {
+	label="CFG for 'libxml_xmlTextReaderNormalization' function";
+
+	Node0x55d6cbab5620 [shape=record,label="{libxml2-py.c:8517:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbab5620:s0 -> Node0x55d6cbadd9e0;
+	Node0x55d6cbab5620:s1 -> Node0x55d6cbadd990;
+	Node0x55d6cbadd990 [shape=record,label="{libxml2-py.c:8524:}"];
+	Node0x55d6cbadd990 -> Node0x55d6cbab7800;
+	Node0x55d6cbadd9e0 [shape=record,label="{libxml2-py.c:8525:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbadd9e0:s0 -> Node0x55d6cbade1d0;
+	Node0x55d6cbadd9e0:s1 -> Node0x55d6cbade220;
+	Node0x55d6cbade1d0 [shape=record,label="{libxml2-py.c:8525:}"];
+	Node0x55d6cbade1d0 -> Node0x55d6cbade270;
+	Node0x55d6cbade220 [shape=record,label="{libxml2-py.c:8525:}"];
+	Node0x55d6cbade220 -> Node0x55d6cbade270;
+	Node0x55d6cbade270 [shape=record,label="{libxml2-py.c:8525:}"];
+	Node0x55d6cbade270 -> Node0x55d6cbab7800;
+	Node0x55d6cbab7800 [shape=record,label="{libxml2-py.c:8530:}"];
+}

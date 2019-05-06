@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlFreeEntityWrapper' function" {
+	label="CFG for 'xmlFreeEntityWrapper' function";
+
+	Node0x559a621dbd20 [shape=record,label="{entities.c:888:|{<s0>T|<s1>F}}"];
+	Node0x559a621dbd20:s0 -> Node0x559a621fee90;
+	Node0x559a621dbd20:s1 -> Node0x559a621feee0;
+	Node0x559a621fee90 [shape=record,label="{entities.c:890:}"];
+	Node0x559a621fee90 -> Node0x559a621feee0;
+	Node0x559a621feee0 [shape=record,label="{entities.c:891:}"];
+}

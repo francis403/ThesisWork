@@ -1,0 +1,28 @@
+digraph "CFG for 'xmlIsIdeographic' function" {
+	label="CFG for 'xmlIsIdeographic' function";
+
+	Node0x5610db88eff0 [shape=record,label="{chvalid.c:316:|{<s0>T|<s1>F}}"];
+	Node0x5610db88eff0 -> Node0x5610db890d80;
+	Node0x5610db88eff0 -> Node0x5610db88fc40;
+	Node0x5610db890d80 [shape=record,label="{chvalid.c:317:}"];
+	Node0x5610db890d80 -> Node0x5610db8903c0;
+	Node0x5610db88fc40 [shape=record,label="{chvalid.c:317:|{<s0>T|<s1>F}}"];
+	Node0x5610db88fc40 -> Node0x5610db8926c0;
+	Node0x5610db88fc40 -> Node0x5610db892670;
+	Node0x5610db8926c0 [shape=record,label="{chvalid.c:317:|{<s0>T|<s1>F}}"];
+	Node0x5610db8926c0 -> Node0x5610db8925d0;
+	Node0x5610db8926c0 -> Node0x5610db892670;
+	Node0x5610db892670 [shape=record,label="{chvalid.c:317:|{<s0>T|<s1>F}}"];
+	Node0x5610db892670 -> Node0x5610db8925d0;
+	Node0x5610db892670 -> Node0x5610db892620;
+	Node0x5610db892620 [shape=record,label="{chvalid.c:317:|{<s0>T|<s1>F}}"];
+	Node0x5610db892620 -> Node0x5610db892ce0;
+	Node0x5610db892620 -> Node0x5610db892c90;
+	Node0x5610db892ce0 [shape=record,label="{chvalid.c:317:}"];
+	Node0x5610db892ce0 -> Node0x5610db892c90;
+	Node0x5610db892c90 [shape=record,label="{chvalid.c:317:}"];
+	Node0x5610db892c90 -> Node0x5610db8925d0;
+	Node0x5610db8925d0 [shape=record,label="{chvalid.c:317:}"];
+	Node0x5610db8925d0 -> Node0x5610db8903c0;
+	Node0x5610db8903c0 [shape=record,label="{chvalid.c:317:}"];
+}

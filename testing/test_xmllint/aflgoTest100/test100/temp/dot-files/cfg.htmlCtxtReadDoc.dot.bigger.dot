@@ -1,0 +1,22 @@
+digraph "CFG for 'htmlCtxtReadDoc' function" {
+	label="CFG for 'htmlCtxtReadDoc' function";
+
+	Node0x5607448d4a00 [shape=record,label="{HTMLparser.c:6981:|{<s0>T|<s1>F}}"];
+	Node0x5607448d4a00:s0 -> Node0x5607448def20;
+	Node0x5607448d4a00:s1 -> Node0x5607448def70;
+	Node0x5607448def20 [shape=record,label="{HTMLparser.c:6987:}"];
+	Node0x5607448def20 -> Node0x5607448ddb40;
+	Node0x5607448def70 [shape=record,label="{HTMLparser.c:6988:|{<s0>T|<s1>F}}"];
+	Node0x5607448def70:s0 -> Node0x5607448df3d0;
+	Node0x5607448def70:s1 -> Node0x5607448df420;
+	Node0x5607448df3d0 [shape=record,label="{HTMLparser.c:6989:}"];
+	Node0x5607448df3d0 -> Node0x5607448ddb40;
+	Node0x5607448df420 [shape=record,label="{HTMLparser.c:6990:|{<s0>T|<s1>F}}"];
+	Node0x5607448df420:s0 -> Node0x5607448e0510;
+	Node0x5607448df420:s1 -> Node0x5607448e0560;
+	Node0x5607448e0510 [shape=record,label="{HTMLparser.c:6996:}"];
+	Node0x5607448e0510 -> Node0x5607448ddb40;
+	Node0x5607448e0560 [shape=record,label="{HTMLparser.c:6998:}"];
+	Node0x5607448e0560 -> Node0x5607448ddb40;
+	Node0x5607448ddb40 [shape=record,label="{HTMLparser.c:7000:}"];
+}

@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlSchemaPCheckParticleCorrect_2' function" {
+	label="CFG for 'xmlSchemaPCheckParticleCorrect_2' function";
+
+	Node0x5583536eeef0 [shape=record,label="{xmlschemas.c:6875:|{<s0>T|<s1>F}}"];
+	Node0x5583536eeef0:s0 -> Node0x5583536f0340;
+	Node0x5583536eeef0:s1 -> Node0x5583536f02f0;
+	Node0x5583536f0340 [shape=record,label="{xmlschemas.c:6881:|{<s0>T|<s1>F}}"];
+	Node0x5583536f0340:s0 -> Node0x5583536f02a0;
+	Node0x5583536f0340:s1 -> Node0x5583536f02f0;
+	Node0x5583536f02a0 [shape=record,label="{xmlschemas.c:6882:}"];
+	Node0x5583536f02a0 -> Node0x5583536eef40;
+	Node0x5583536f02f0 [shape=record,label="{xmlschemas.c:6883:|{<s0>T|<s1>F}}"];
+	Node0x5583536f02f0:s0 -> Node0x5583536f0a30;
+	Node0x5583536f02f0:s1 -> Node0x5583536f0a80;
+	Node0x5583536f0a30 [shape=record,label="{xmlschemas.c:6893:|{<s0>T|<s1>F}}"];
+	Node0x5583536f0a30:s0 -> Node0x5583536f0e40;
+	Node0x5583536f0a30:s1 -> Node0x5583536f0ee0;
+	Node0x5583536f0e40 [shape=record,label="{xmlschemas.c:6897:}"];
+	Node0x5583536f0e40 -> Node0x5583536eef40;
+	Node0x5583536f0ee0 [shape=record,label="{xmlschemas.c:6903:|{<s0>T|<s1>F}}"];
+	Node0x5583536f0ee0:s0 -> Node0x5583536f20b0;
+	Node0x5583536f0ee0:s1 -> Node0x5583536f2100;
+	Node0x5583536f20b0 [shape=record,label="{xmlschemas.c:6907:}"];
+	Node0x5583536f20b0 -> Node0x5583536eef40;
+	Node0x5583536f2100 [shape=record,label="{%28}"];
+	Node0x5583536f2100 -> Node0x5583536f0e90;
+	Node0x5583536f0e90 [shape=record,label="{xmlschemas.c:6914:}"];
+	Node0x5583536f0e90 -> Node0x5583536f0a80;
+	Node0x5583536f0a80 [shape=record,label="{xmlschemas.c:6915:}"];
+	Node0x5583536f0a80 -> Node0x5583536eef40;
+	Node0x5583536eef40 [shape=record,label="{xmlschemas.c:6916:}"];
+}

@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlDumpXMLCatalog' function" {
+	label="CFG for 'xmlDumpXMLCatalog' function";
+
+	Node0x5650cca4a6e0 [shape=record,label="{catalog.c:662:|{<s0>T|<s1>F}}"];
+	Node0x5650cca4a6e0:s0 -> Node0x5650cca4e550;
+	Node0x5650cca4a6e0:s1 -> Node0x5650cca4e5a0;
+	Node0x5650cca4e550 [shape=record,label="{catalog.c:675:}"];
+	Node0x5650cca4e550 -> Node0x5650cca4a730;
+	Node0x5650cca4e5a0 [shape=record,label="{catalog.c:676:|{<s0>T|<s1>F}}"];
+	Node0x5650cca4e5a0:s0 -> Node0x5650cca4fc50;
+	Node0x5650cca4e5a0:s1 -> Node0x5650cca4fca0;
+	Node0x5650cca4fc50 [shape=record,label="{catalog.c:684:}"];
+	Node0x5650cca4fc50 -> Node0x5650cca4a730;
+	Node0x5650cca4fca0 [shape=record,label="{catalog.c:687:|{<s0>T|<s1>F}}"];
+	Node0x5650cca4fca0:s0 -> Node0x5650cca50940;
+	Node0x5650cca4fca0:s1 -> Node0x5650cca50990;
+	Node0x5650cca50940 [shape=record,label="{catalog.c:689:}"];
+	Node0x5650cca50940 -> Node0x5650cca4a730;
+	Node0x5650cca50990 [shape=record,label="{catalog.c:693:|{<s0>T|<s1>F}}"];
+	Node0x5650cca50990:s0 -> Node0x5650cca520b0;
+	Node0x5650cca50990:s1 -> Node0x5650cca52100;
+	Node0x5650cca520b0 [shape=record,label="{catalog.c:703:}"];
+	Node0x5650cca520b0 -> Node0x5650cca4a730;
+	Node0x5650cca52100 [shape=record,label="{catalog.c:706:}"];
+	Node0x5650cca52100 -> Node0x5650cca4a730;
+	Node0x5650cca4a730 [shape=record,label="{catalog.c:714:}"];
+}

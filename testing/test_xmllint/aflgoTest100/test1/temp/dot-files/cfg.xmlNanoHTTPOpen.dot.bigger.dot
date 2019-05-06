@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlNanoHTTPOpen' function" {
+	label="CFG for 'xmlNanoHTTPOpen' function";
+
+	Node0x564de23b2d90 [shape=record,label="{nanohttp.c:1235:|{<s0>T|<s1>F}}"];
+	Node0x564de23b2d90:s0 -> Node0x564de23dfd80;
+	Node0x564de23b2d90:s1 -> Node0x564de23da7b0;
+	Node0x564de23dfd80 [shape=record,label="{nanohttp.c:1236:}"];
+	Node0x564de23dfd80 -> Node0x564de23da7b0;
+	Node0x564de23da7b0 [shape=record,label="{nanohttp.c:1237:}"];
+}

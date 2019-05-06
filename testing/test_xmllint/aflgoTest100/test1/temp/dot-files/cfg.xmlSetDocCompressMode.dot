@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlSetDocCompressMode' function" {
+	label="CFG for 'xmlSetDocCompressMode' function";
+
+	Node0x55ad0be39980 [shape=record,label="{tree.c:7769:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be39980 -> Node0x55ad0be3ab90;
+	Node0x55ad0be39980 -> Node0x55ad0be39a80;
+	Node0x55ad0be3ab90 [shape=record,label="{tree.c:7770:}"];
+	Node0x55ad0be3ab90 -> Node0x55ad0be3b940;
+	Node0x55ad0be39a80 [shape=record,label="{tree.c:7771:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be39a80 -> Node0x55ad0be3b8f0;
+	Node0x55ad0be39a80 -> Node0x55ad0be3b990;
+	Node0x55ad0be3b8f0 [shape=record,label="{tree.c:7771:}"];
+	Node0x55ad0be3b8f0 -> Node0x55ad0be3b940;
+	Node0x55ad0be3b990 [shape=record,label="{tree.c:7772:|{<s0>T|<s1>F}}"];
+	Node0x55ad0be3b990 -> Node0x55ad0be3be80;
+	Node0x55ad0be3b990 -> Node0x55ad0be3bf20;
+	Node0x55ad0be3be80 [shape=record,label="{tree.c:7772:}"];
+	Node0x55ad0be3be80 -> Node0x55ad0be3bed0;
+	Node0x55ad0be3bf20 [shape=record,label="{tree.c:7773:}"];
+	Node0x55ad0be3bf20 -> Node0x55ad0be3bed0;
+	Node0x55ad0be3bed0 [shape=record,label="{%17}"];
+	Node0x55ad0be3bed0 -> Node0x55ad0be3b940;
+	Node0x55ad0be3b940 [shape=record,label="{tree.c:7774:}"];
+}

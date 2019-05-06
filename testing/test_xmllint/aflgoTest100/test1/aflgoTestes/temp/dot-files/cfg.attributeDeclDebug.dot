@@ -1,0 +1,19 @@
+digraph "CFG for 'attributeDeclDebug' function" {
+	label="CFG for 'attributeDeclDebug' function";
+
+	Node0x556d1b556930 [shape=record,label="{xmllint.c:1090:|{<s0>T|<s1>F}}"];
+	Node0x556d1b556930 -> Node0x556d1b5583a0;
+	Node0x556d1b556930 -> Node0x556d1b5583f0;
+	Node0x556d1b5583a0 [shape=record,label="{xmllint.c:1096:}"];
+	Node0x556d1b5583a0 -> Node0x556d1b556980;
+	Node0x556d1b5583f0 [shape=record,label="{xmllint.c:1097:|{<s0>T|<s1>F}}"];
+	Node0x556d1b5583f0 -> Node0x556d1b558710;
+	Node0x556d1b5583f0 -> Node0x556d1b5587b0;
+	Node0x556d1b558710 [shape=record,label="{xmllint.c:1098:}"];
+	Node0x556d1b558710 -> Node0x556d1b558760;
+	Node0x556d1b5587b0 [shape=record,label="{xmllint.c:1101:}"];
+	Node0x556d1b5587b0 -> Node0x556d1b558760;
+	Node0x556d1b558760 [shape=record,label="{xmllint.c:1103:}"];
+	Node0x556d1b558760 -> Node0x556d1b556980;
+	Node0x556d1b556980 [shape=record,label="{xmllint.c:1104:}"];
+}

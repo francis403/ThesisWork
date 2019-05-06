@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlCatalogLocalResolveURI' function" {
+	label="CFG for 'xmlCatalogLocalResolveURI' function";
+
+	Node0x55f3677a9c70 [shape=record,label="{catalog.c:3710:|{<s0>T|<s1>F}}"];
+	Node0x55f3677a9c70:s0 -> Node0x55f3677aadb0;
+	Node0x55f3677a9c70:s1 -> Node0x55f3677aad60;
+	Node0x55f3677aad60 [shape=record,label="{catalog.c:3715:}"];
+	Node0x55f3677aad60 -> Node0x55f3677aadb0;
+	Node0x55f3677aadb0 [shape=record,label="{catalog.c:3717:|{<s0>T|<s1>F}}"];
+	Node0x55f3677aadb0:s0 -> Node0x55f3677ab100;
+	Node0x55f3677aadb0:s1 -> Node0x55f3677ab150;
+	Node0x55f3677ab100 [shape=record,label="{catalog.c:3718:}"];
+	Node0x55f3677ab100 -> Node0x55f3677a9ff0;
+	Node0x55f3677ab150 [shape=record,label="{catalog.c:3720:|{<s0>T|<s1>F}}"];
+	Node0x55f3677ab150:s0 -> Node0x55f3677ab5b0;
+	Node0x55f3677ab150:s1 -> Node0x55f3677ab600;
+	Node0x55f3677ab5b0 [shape=record,label="{catalog.c:3721:}"];
+	Node0x55f3677ab5b0 -> Node0x55f3677ab600;
+	Node0x55f3677ab600 [shape=record,label="{catalog.c:3724:|{<s0>T|<s1>F}}"];
+	Node0x55f3677ab600:s0 -> Node0x55f3677abe00;
+	Node0x55f3677ab600:s1 -> Node0x55f3677abe50;
+	Node0x55f3677abe00 [shape=record,label="{catalog.c:3726:}"];
+	Node0x55f3677abe00 -> Node0x55f3677a9ff0;
+	Node0x55f3677abe50 [shape=record,label="{catalog.c:3727:|{<s0>T|<s1>F}}"];
+	Node0x55f3677abe50:s0 -> Node0x55f3677ac580;
+	Node0x55f3677abe50:s1 -> Node0x55f3677ac530;
+	Node0x55f3677ac580 [shape=record,label="{catalog.c:3728:|{<s0>T|<s1>F}}"];
+	Node0x55f3677ac580:s0 -> Node0x55f3677ac4e0;
+	Node0x55f3677ac580:s1 -> Node0x55f3677ac530;
+	Node0x55f3677ac4e0 [shape=record,label="{catalog.c:3729:}"];
+	Node0x55f3677ac4e0 -> Node0x55f3677a9ff0;
+	Node0x55f3677ac530 [shape=record,label="{catalog.c:3730:}"];
+	Node0x55f3677ac530 -> Node0x55f3677a9ff0;
+	Node0x55f3677a9ff0 [shape=record,label="{catalog.c:3731:}"];
+}

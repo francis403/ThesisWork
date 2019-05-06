@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlTextWriterWriteDTDAttlist' function" {
+	label="CFG for 'xmlTextWriterWriteDTDAttlist' function";
+
+	Node0x562150f64950 [shape=record,label="{xmlwriter.c:3587:|{<s0>T|<s1>F}}"];
+	Node0x562150f64950:s0 -> Node0x562150f69f10;
+	Node0x562150f64950:s1 -> Node0x562150f69f60;
+	Node0x562150f69f10 [shape=record,label="{xmlwriter.c:3594:}"];
+	Node0x562150f69f10 -> Node0x562150f66620;
+	Node0x562150f69f60 [shape=record,label="{xmlwriter.c:3596:|{<s0>T|<s1>F}}"];
+	Node0x562150f69f60:s0 -> Node0x562150f6a730;
+	Node0x562150f69f60:s1 -> Node0x562150f6a780;
+	Node0x562150f6a730 [shape=record,label="{xmlwriter.c:3599:}"];
+	Node0x562150f6a730 -> Node0x562150f66620;
+	Node0x562150f6a780 [shape=record,label="{xmlwriter.c:3600:|{<s0>T|<s1>F}}"];
+	Node0x562150f6a780:s0 -> Node0x562150f6b0c0;
+	Node0x562150f6a780:s1 -> Node0x562150f6b110;
+	Node0x562150f6b0c0 [shape=record,label="{xmlwriter.c:3604:}"];
+	Node0x562150f6b0c0 -> Node0x562150f66620;
+	Node0x562150f6b110 [shape=record,label="{xmlwriter.c:3605:|{<s0>T|<s1>F}}"];
+	Node0x562150f6b110:s0 -> Node0x562150f6ba50;
+	Node0x562150f6b110:s1 -> Node0x562150f6baa0;
+	Node0x562150f6ba50 [shape=record,label="{xmlwriter.c:3609:}"];
+	Node0x562150f6ba50 -> Node0x562150f66620;
+	Node0x562150f6baa0 [shape=record,label="{xmlwriter.c:3610:}"];
+	Node0x562150f6baa0 -> Node0x562150f66620;
+	Node0x562150f66620 [shape=record,label="{xmlwriter.c:3613:}"];
+}

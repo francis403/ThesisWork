@@ -1,0 +1,13 @@
+digraph "CFG for 'xmlHTMLValidityError' function" {
+	label="CFG for 'xmlHTMLValidityError' function";
+
+	Node0x556d1b6c9100 [shape=record,label="{xmllint.c:697:|{<s0>T|<s1>F}}"];
+	Node0x556d1b6c9100:s0 -> Node0x556d1b6ca9b0;
+	Node0x556d1b6c9100:s1 -> Node0x556d1b6ca960;
+	Node0x556d1b6ca9b0 [shape=record,label="{xmllint.c:706:|{<s0>T|<s1>F}}"];
+	Node0x556d1b6ca9b0:s0 -> Node0x556d1b6ca910;
+	Node0x556d1b6ca9b0:s1 -> Node0x556d1b6ca960;
+	Node0x556d1b6ca910 [shape=record,label="{xmllint.c:707:}"];
+	Node0x556d1b6ca910 -> Node0x556d1b6ca960;
+	Node0x556d1b6ca960 [shape=record,label="{xmllint.c:709:}"];
+}

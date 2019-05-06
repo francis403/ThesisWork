@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlBufResetInput' function" {
+	label="CFG for 'xmlBufResetInput' function";
+
+	Node0x56072390ecd0 [shape=record,label="{buf.c:1283:|{<s0>T|<s1>F}}"];
+	Node0x56072390ecd0:s0 -> Node0x56072391eb10;
+	Node0x56072390ecd0:s1 -> Node0x56072391ec30;
+	Node0x56072391ec30 [shape=record,label="{buf.c:1284:|{<s0>T|<s1>F}}"];
+	Node0x56072391ec30:s0 -> Node0x56072391eb10;
+	Node0x56072391ec30:s1 -> Node0x56072391ebb0;
+	Node0x56072391ebb0 [shape=record,label="{buf.c:1284:|{<s0>T|<s1>F}}"];
+	Node0x56072391ebb0:s0 -> Node0x56072391eb10;
+	Node0x56072391ebb0:s1 -> Node0x56072391eb60;
+	Node0x56072391eb10 [shape=record,label="{buf.c:1285:}"];
+	Node0x56072391eb10 -> Node0x5607239104e0;
+	Node0x56072391eb60 [shape=record,label="{buf.c:1286:|{<s0>T|<s1>F}}"];
+	Node0x56072391eb60:s0 -> Node0x56072391f5b0;
+	Node0x56072391eb60:s1 -> Node0x56072391f600;
+	Node0x56072391f5b0 [shape=record,label="{buf.c:1286:|{<s0>T|<s1>F}}"];
+	Node0x56072391f5b0:s0 -> Node0x56072391fa10;
+	Node0x56072391f5b0:s1 -> Node0x56072391fa60;
+	Node0x56072391fa10 [shape=record,label="{buf.c:1286:}"];
+	Node0x56072391fa10 -> Node0x56072391fa60;
+	Node0x56072391fa60 [shape=record,label="{buf.c:1286:}"];
+	Node0x56072391fa60 -> Node0x56072391f600;
+	Node0x56072391f600 [shape=record,label="{buf.c:1286:|{<s0>T|<s1>F}}"];
+	Node0x56072391f600:s0 -> Node0x560723920130;
+	Node0x56072391f600:s1 -> Node0x560723920180;
+	Node0x560723920130 [shape=record,label="{buf.c:1286:|{<s0>T|<s1>F}}"];
+	Node0x560723920130:s0 -> Node0x5607239206d0;
+	Node0x560723920130:s1 -> Node0x560723920720;
+	Node0x5607239206d0 [shape=record,label="{buf.c:1286:}"];
+	Node0x5607239206d0 -> Node0x560723920720;
+	Node0x560723920720 [shape=record,label="{buf.c:1286:}"];
+	Node0x560723920720 -> Node0x560723920180;
+	Node0x560723920180 [shape=record,label="{buf.c:1287:}"];
+	Node0x560723920180 -> Node0x5607239104e0;
+	Node0x5607239104e0 [shape=record,label="{buf.c:1290:}"];
+}

@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlReaderForIO' function" {
+	label="CFG for 'xmlReaderForIO' function";
+
+	Node0x5619bd729760 [shape=record,label="{xmlreader.c:5514:|{<s0>T|<s1>F}}"];
+	Node0x5619bd729760 -> Node0x5619bd72e980;
+	Node0x5619bd729760 -> Node0x5619bd72e9d0;
+	Node0x5619bd72e980 [shape=record,label="{xmlreader.c:5522:}"];
+	Node0x5619bd72e980 -> Node0x5619bd72af60;
+	Node0x5619bd72e9d0 [shape=record,label="{xmlreader.c:5524:|{<s0>T|<s1>F}}"];
+	Node0x5619bd72e9d0 -> Node0x5619bd72fb10;
+	Node0x5619bd72e9d0 -> Node0x5619bd72fb60;
+	Node0x5619bd72fb10 [shape=record,label="{xmlreader.c:5527:|{<s0>T|<s1>F}}"];
+	Node0x5619bd72fb10 -> Node0x5619bd72fe90;
+	Node0x5619bd72fb10 -> Node0x5619bd72fee0;
+	Node0x5619bd72fe90 [shape=record,label="{xmlreader.c:5528:}"];
+	Node0x5619bd72fe90 -> Node0x5619bd72fee0;
+	Node0x5619bd72fee0 [shape=record,label="{xmlreader.c:5529:}"];
+	Node0x5619bd72fee0 -> Node0x5619bd72af60;
+	Node0x5619bd72fb60 [shape=record,label="{xmlreader.c:5531:|{<s0>T|<s1>F}}"];
+	Node0x5619bd72fb60 -> Node0x5619bd7307b0;
+	Node0x5619bd72fb60 -> Node0x5619bd730800;
+	Node0x5619bd7307b0 [shape=record,label="{xmlreader.c:5533:}"];
+	Node0x5619bd7307b0 -> Node0x5619bd72af60;
+	Node0x5619bd730800 [shape=record,label="{xmlreader.c:5536:}"];
+	Node0x5619bd730800 -> Node0x5619bd72af60;
+	Node0x5619bd72af60 [shape=record,label="{xmlreader.c:5539:}"];
+}

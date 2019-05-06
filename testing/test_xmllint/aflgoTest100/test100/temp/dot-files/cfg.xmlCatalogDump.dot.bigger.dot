@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlCatalogDump' function" {
+	label="CFG for 'xmlCatalogDump' function";
+
+	Node0x55f36773f620 [shape=record,label="{catalog.c:3390:|{<s0>T|<s1>F}}"];
+	Node0x55f36773f620:s0 -> Node0x55f36773f6b0;
+	Node0x55f36773f620:s1 -> Node0x55f36773f700;
+	Node0x55f36773f6b0 [shape=record,label="{catalog.c:3392:}"];
+	Node0x55f36773f6b0 -> Node0x55f3677406f0;
+	Node0x55f36773f700 [shape=record,label="{catalog.c:3394:|{<s0>T|<s1>F}}"];
+	Node0x55f36773f700:s0 -> Node0x55f367741120;
+	Node0x55f36773f700:s1 -> Node0x55f3677410d0;
+	Node0x55f3677410d0 [shape=record,label="{catalog.c:3395:}"];
+	Node0x55f3677410d0 -> Node0x55f367741120;
+	Node0x55f367741120 [shape=record,label="{catalog.c:3397:}"];
+	Node0x55f367741120 -> Node0x55f3677406f0;
+	Node0x55f3677406f0 [shape=record,label="{catalog.c:3398:}"];
+}

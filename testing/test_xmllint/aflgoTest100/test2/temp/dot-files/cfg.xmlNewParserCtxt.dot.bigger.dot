@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlNewParserCtxt' function" {
+	label="CFG for 'xmlNewParserCtxt' function";
+
+	Node0x5581cbf6f2e0 [shape=record,label="{parserInternals.c:1863:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf6f2e0:s0 -> Node0x5581cbf6fbc0;
+	Node0x5581cbf6f2e0:s1 -> Node0x5581cbf6fc10;
+	Node0x5581cbf6fbc0 [shape=record,label="{parserInternals.c:1867:}"];
+	Node0x5581cbf6fbc0 -> Node0x5581cbf6f330;
+	Node0x5581cbf6fc10 [shape=record,label="{parserInternals.c:1870:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf6fc10:s0 -> Node0x5581cbf705c0;
+	Node0x5581cbf6fc10:s1 -> Node0x5581cbf70610;
+	Node0x5581cbf705c0 [shape=record,label="{parserInternals.c:1872:}"];
+	Node0x5581cbf705c0 -> Node0x5581cbf6f330;
+	Node0x5581cbf70610 [shape=record,label="{parserInternals.c:1875:}"];
+	Node0x5581cbf70610 -> Node0x5581cbf6f330;
+	Node0x5581cbf6f330 [shape=record,label="{parserInternals.c:1876:}"];
+}

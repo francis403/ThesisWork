@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlSchemaIsGlobalItem' function" {
+	label="CFG for 'xmlSchemaIsGlobalItem' function";
+
+	Node0x5583533c2fc0 [shape=record,label="{xmlschemas.c:2432:|{<s0>def|<s1>5|<s2>4|<s3>17|<s4>14|<s5>15}}"];
+	Node0x5583533c2fc0 -> Node0x5583533c3900;
+	Node0x5583533c2fc0 -> Node0x5583533c3c00;
+	Node0x5583533c2fc0 -> Node0x5583533c3c00;
+	Node0x5583533c2fc0 -> Node0x5583533c42d0;
+	Node0x5583533c2fc0 -> Node0x5583533c4490;
+	Node0x5583533c2fc0 -> Node0x5583533c4c30;
+	Node0x5583533c3c00 [shape=record,label="{xmlschemas.c:2437:|{<s0>T|<s1>F}}"];
+	Node0x5583533c3c00 -> Node0x5583533c3cf0;
+	Node0x5583533c3c00 -> Node0x5583533c3d40;
+	Node0x5583533c3cf0 [shape=record,label="{xmlschemas.c:2438:}"];
+	Node0x5583533c3cf0 -> Node0x5583533c3010;
+	Node0x5583533c3d40 [shape=record,label="{xmlschemas.c:2439:}"];
+	Node0x5583533c3d40 -> Node0x5583534f6c40;
+	Node0x5583533c42d0 [shape=record,label="{xmlschemas.c:2441:}"];
+	Node0x5583533c42d0 -> Node0x5583533c3010;
+	Node0x5583533c4490 [shape=record,label="{xmlschemas.c:2443:|{<s0>T|<s1>F}}"];
+	Node0x5583533c4490 -> Node0x5583533c4580;
+	Node0x5583533c4490 -> Node0x5583533c45d0;
+	Node0x5583533c4580 [shape=record,label="{xmlschemas.c:2445:}"];
+	Node0x5583533c4580 -> Node0x5583533c3010;
+	Node0x5583533c45d0 [shape=record,label="{xmlschemas.c:2446:}"];
+	Node0x5583533c45d0 -> Node0x5583534f6c40;
+	Node0x5583533c4c30 [shape=record,label="{xmlschemas.c:2448:|{<s0>T|<s1>F}}"];
+	Node0x5583533c4c30 -> Node0x5583533c4ce0;
+	Node0x5583533c4c30 -> Node0x55835350cfd0;
+	Node0x5583533c4ce0 [shape=record,label="{xmlschemas.c:2450:}"];
+	Node0x5583533c4ce0 -> Node0x5583533c3010;
+	Node0x55835350cfd0 [shape=record,label="{xmlschemas.c:2451:}"];
+	Node0x55835350cfd0 -> Node0x5583534f6c40;
+	Node0x5583533c3900 [shape=record,label="{xmlschemas.c:2454:}"];
+	Node0x5583533c3900 -> Node0x5583533c3010;
+	Node0x5583534f6c40 [shape=record,label="{xmlschemas.c:2456:}"];
+	Node0x5583534f6c40 -> Node0x5583533c3010;
+	Node0x5583533c3010 [shape=record,label="{xmlschemas.c:2457:}"];
+}

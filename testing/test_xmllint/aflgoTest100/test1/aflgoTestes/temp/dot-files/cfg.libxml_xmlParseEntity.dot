@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlParseEntity' function" {
+	label="CFG for 'libxml_xmlParseEntity' function";
+
+	Node0x55f9310e0cc0 [shape=record,label="{libxml2-py.c:5043:|{<s0>T|<s1>F}}"];
+	Node0x55f9310e0cc0:s0 -> Node0x55f9310e3df0;
+	Node0x55f9310e0cc0:s1 -> Node0x55f9310e3da0;
+	Node0x55f9310e3da0 [shape=record,label="{libxml2-py.c:5049:}"];
+	Node0x55f9310e3da0 -> Node0x55f9310e0fc0;
+	Node0x55f9310e3df0 [shape=record,label="{libxml2-py.c:5051:}"];
+	Node0x55f9310e3df0 -> Node0x55f9310e0fc0;
+	Node0x55f9310e0fc0 [shape=record,label="{libxml2-py.c:5054:}"];
+}

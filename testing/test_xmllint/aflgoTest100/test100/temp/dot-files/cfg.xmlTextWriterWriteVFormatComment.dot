@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlTextWriterWriteVFormatComment' function" {
+	label="CFG for 'xmlTextWriterWriteVFormatComment' function";
+
+	Node0x562150db18f0 [shape=record,label="{xmlwriter.c:892:|{<s0>T|<s1>F}}"];
+	Node0x562150db18f0:s0 -> Node0x562150dea980;
+	Node0x562150db18f0:s1 -> Node0x562150dea9d0;
+	Node0x562150dea980 [shape=record,label="{xmlwriter.c:899:}"];
+	Node0x562150dea980 -> Node0x562150de6da0;
+	Node0x562150dea9d0 [shape=record,label="{xmlwriter.c:904:|{<s0>T|<s1>F}}"];
+	Node0x562150dea9d0:s0 -> Node0x562150debda0;
+	Node0x562150dea9d0:s1 -> Node0x562150debdf0;
+	Node0x562150debda0 [shape=record,label="{xmlwriter.c:906:}"];
+	Node0x562150debda0 -> Node0x562150de6da0;
+	Node0x562150debdf0 [shape=record,label="{xmlwriter.c:908:}"];
+	Node0x562150debdf0 -> Node0x562150de6da0;
+	Node0x562150de6da0 [shape=record,label="{xmlwriter.c:912:}"];
+}

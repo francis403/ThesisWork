@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlMemFree' function" {
+	label="CFG for 'xmlMemFree' function";
+
+	Node0x5650c3edc490 [shape=record,label="{xmlmemory.c:431:|{<s0>T|<s1>F}}"];
+	Node0x5650c3edc490:s0 -> Node0x5650c3ee6550;
+	Node0x5650c3edc490:s1 -> Node0x5650c3ee65a0;
+	Node0x5650c3ee6550 [shape=record,label="{xmlmemory.c:440:}"];
+	Node0x5650c3ee6550 -> Node0x5650c3ee3640;
+	Node0x5650c3ee65a0 [shape=record,label="{xmlmemory.c:442:|{<s0>T|<s1>F}}"];
+	Node0x5650c3ee65a0:s0 -> Node0x5650c3ee6890;
+	Node0x5650c3ee65a0:s1 -> Node0x5650c3ee68e0;
+	Node0x5650c3ee6890 [shape=record,label="{xmlmemory.c:443:}"];
+	Node0x5650c3ee6890 -> Node0x5650c3ee7760;
+	Node0x5650c3ee68e0 [shape=record,label="{xmlmemory.c:448:|{<s0>T|<s1>F}}"];
+	Node0x5650c3ee68e0:s0 -> Node0x5650c3ee7940;
+	Node0x5650c3ee68e0:s1 -> Node0x5650c3ee7990;
+	Node0x5650c3ee7940 [shape=record,label="{xmlmemory.c:449:}"];
+	Node0x5650c3ee7940 -> Node0x5650c3ee7990;
+	Node0x5650c3ee7990 [shape=record,label="{xmlmemory.c:456:|{<s0>T|<s1>F}}"];
+	Node0x5650c3ee7990:s0 -> Node0x5650c3ee86f0;
+	Node0x5650c3ee7990:s1 -> Node0x5650c3ee8740;
+	Node0x5650c3ee86f0 [shape=record,label="{xmlmemory.c:460:}"];
+	Node0x5650c3ee86f0 -> Node0x5650c3ee7760;
+	Node0x5650c3ee8740 [shape=record,label="{xmlmemory.c:463:|{<s0>T|<s1>F}}"];
+	Node0x5650c3ee8740:s0 -> Node0x5650c3ee8dd0;
+	Node0x5650c3ee8740:s1 -> Node0x5650c3ee8e20;
+	Node0x5650c3ee8dd0 [shape=record,label="{xmlmemory.c:463:}"];
+	Node0x5650c3ee8dd0 -> Node0x5650c3ee8e20;
+	Node0x5650c3ee8e20 [shape=record,label="{xmlmemory.c:464:}"];
+	Node0x5650c3ee8e20 -> Node0x5650c3ee3640;
+	Node0x5650c3ee7760 [shape=record,label="{xmlmemory.c:489:}"];
+	Node0x5650c3ee7760 -> Node0x5650c3ee3640;
+	Node0x5650c3ee3640 [shape=record,label="{xmlmemory.c:493:}"];
+}

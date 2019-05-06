@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlACatalogResolveURI' function" {
+	label="CFG for 'libxml_xmlACatalogResolveURI' function";
+
+	Node0x55d6cb796be0 [shape=record,label="{libxml2-py.c:1004:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb796be0:s0 -> Node0x55d6cb79ba70;
+	Node0x55d6cb796be0:s1 -> Node0x55d6cb79ba20;
+	Node0x55d6cb79ba20 [shape=record,label="{libxml2-py.c:1012:}"];
+	Node0x55d6cb79ba20 -> Node0x55d6cb799e10;
+	Node0x55d6cb79ba70 [shape=record,label="{libxml2-py.c:1013:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb79ba70:s0 -> Node0x55d6cb79c2a0;
+	Node0x55d6cb79ba70:s1 -> Node0x55d6cb79c2f0;
+	Node0x55d6cb79c2a0 [shape=record,label="{libxml2-py.c:1013:}"];
+	Node0x55d6cb79c2a0 -> Node0x55d6cb79c340;
+	Node0x55d6cb79c2f0 [shape=record,label="{libxml2-py.c:1013:}"];
+	Node0x55d6cb79c2f0 -> Node0x55d6cb79c340;
+	Node0x55d6cb79c340 [shape=record,label="{libxml2-py.c:1013:}"];
+	Node0x55d6cb79c340 -> Node0x55d6cb799e10;
+	Node0x55d6cb799e10 [shape=record,label="{libxml2-py.c:1018:}"];
+}

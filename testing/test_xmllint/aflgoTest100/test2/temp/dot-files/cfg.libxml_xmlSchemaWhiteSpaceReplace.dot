@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlSchemaWhiteSpaceReplace' function" {
+	label="CFG for 'libxml_xmlSchemaWhiteSpaceReplace' function";
+
+	Node0x55d6cbdc0430 [shape=record,label="{libxml2-py.c:7121:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbdc0430:s0 -> Node0x55d6cbdc38d0;
+	Node0x55d6cbdc0430:s1 -> Node0x55d6cbdc3880;
+	Node0x55d6cbdc3880 [shape=record,label="{libxml2-py.c:7127:}"];
+	Node0x55d6cbdc3880 -> Node0x55d6cbdc0150;
+	Node0x55d6cbdc38d0 [shape=record,label="{libxml2-py.c:7129:}"];
+	Node0x55d6cbdc38d0 -> Node0x55d6cbdc0150;
+	Node0x55d6cbdc0150 [shape=record,label="{libxml2-py.c:7132:}"];
+}

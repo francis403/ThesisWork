@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlBufferLength' function" {
+	label="CFG for 'xmlBufferLength' function";
+
+	Node0x5627b46d25a0 [shape=record,label="{tree.c:7371:|{<s0>T|<s1>F}}"];
+	Node0x5627b46d25a0:s0 -> Node0x5627b46d2a60;
+	Node0x5627b46d25a0:s1 -> Node0x5627b46d2910;
+	Node0x5627b46d2910 [shape=record,label="{tree.c:7374:}"];
+	Node0x5627b46d2910 -> Node0x5627b46d2780;
+	Node0x5627b46d2a60 [shape=record,label="{tree.c:7376:}"];
+	Node0x5627b46d2a60 -> Node0x5627b46d2780;
+	Node0x5627b46d2780 [shape=record,label="{tree.c:7377:}"];
+}

@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlGetBooleanProp' function" {
+	label="CFG for 'xmlGetBooleanProp' function";
+
+	Node0x5583536aa2c0 [shape=record,label="{xmlschemas.c:6221:|{<s0>T|<s1>F}}"];
+	Node0x5583536aa2c0:s0 -> Node0x5583536ab9e0;
+	Node0x5583536aa2c0:s1 -> Node0x5583536aba30;
+	Node0x5583536ab9e0 [shape=record,label="{xmlschemas.c:6229:}"];
+	Node0x5583536ab9e0 -> Node0x5583536aa310;
+	Node0x5583536aba30 [shape=record,label="{xmlschemas.c:6235:|{<s0>T|<s1>F}}"];
+	Node0x5583536aba30:s0 -> Node0x5583536abf20;
+	Node0x5583536aba30:s1 -> Node0x5583536abfc0;
+	Node0x5583536abf20 [shape=record,label="{xmlschemas.c:6236:}"];
+	Node0x5583536abf20 -> Node0x5583536abf70;
+	Node0x5583536abfc0 [shape=record,label="{xmlschemas.c:6237:|{<s0>T|<s1>F}}"];
+	Node0x5583536abfc0:s0 -> Node0x5583536ac450;
+	Node0x5583536abfc0:s1 -> Node0x5583536ac4f0;
+	Node0x5583536ac450 [shape=record,label="{xmlschemas.c:6238:}"];
+	Node0x5583536ac450 -> Node0x5583536ac4a0;
+	Node0x5583536ac4f0 [shape=record,label="{xmlschemas.c:6239:|{<s0>T|<s1>F}}"];
+	Node0x5583536ac4f0:s0 -> Node0x5583536ac980;
+	Node0x5583536ac4f0:s1 -> Node0x5583536aca20;
+	Node0x5583536ac980 [shape=record,label="{xmlschemas.c:6240:}"];
+	Node0x5583536ac980 -> Node0x5583536ac9d0;
+	Node0x5583536aca20 [shape=record,label="{xmlschemas.c:6241:|{<s0>T|<s1>F}}"];
+	Node0x5583536aca20:s0 -> Node0x5583536acf50;
+	Node0x5583536aca20:s1 -> Node0x5583536acff0;
+	Node0x5583536acf50 [shape=record,label="{xmlschemas.c:6242:}"];
+	Node0x5583536acf50 -> Node0x5583536acfa0;
+	Node0x5583536acff0 [shape=record,label="{xmlschemas.c:6244:}"];
+	Node0x5583536acff0 -> Node0x5583536acfa0;
+	Node0x5583536acfa0 [shape=record,label="{%36}"];
+	Node0x5583536acfa0 -> Node0x5583536ac9d0;
+	Node0x5583536ac9d0 [shape=record,label="{%37}"];
+	Node0x5583536ac9d0 -> Node0x5583536ac4a0;
+	Node0x5583536ac4a0 [shape=record,label="{%38}"];
+	Node0x5583536ac4a0 -> Node0x5583536abf70;
+	Node0x5583536abf70 [shape=record,label="{xmlschemas.c:6251:}"];
+	Node0x5583536abf70 -> Node0x5583536aa310;
+	Node0x5583536aa310 [shape=record,label="{xmlschemas.c:6252:}"];
+}

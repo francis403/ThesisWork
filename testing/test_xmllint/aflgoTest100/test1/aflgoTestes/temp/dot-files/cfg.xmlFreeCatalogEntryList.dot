@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlFreeCatalogEntryList' function" {
+	label="CFG for 'xmlFreeCatalogEntryList' function";
+
+	Node0x5650cc917460 [shape=record,label="{catalog.c:366:}"];
+	Node0x5650cc917460 -> Node0x5650cc9137c0;
+	Node0x5650cc9137c0 [shape=record,label="{catalog.c:369:|{<s0>T|<s1>F}}"];
+	Node0x5650cc9137c0 -> Node0x5650cc918960;
+	Node0x5650cc9137c0 -> Node0x5650cc918780;
+	Node0x5650cc918960 [shape=record,label="{catalog.c:370:}"];
+	Node0x5650cc918960 -> Node0x5650cc9137c0;
+	Node0x5650cc918780 [shape=record,label="{catalog.c:374:}"];
+}

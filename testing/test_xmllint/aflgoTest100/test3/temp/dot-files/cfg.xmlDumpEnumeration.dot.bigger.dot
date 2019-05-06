@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlDumpEnumeration' function" {
+	label="CFG for 'xmlDumpEnumeration' function";
+
+	Node0x55bbc3a30880 [shape=record,label="{valid.c:1831:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3a30880:s0 -> Node0x55bbc3a31250;
+	Node0x55bbc3a30880:s1 -> Node0x55bbc3a312f0;
+	Node0x55bbc3a312f0 [shape=record,label="{valid.c:1832:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3a312f0:s0 -> Node0x55bbc3a31250;
+	Node0x55bbc3a312f0:s1 -> Node0x55bbc3a312a0;
+	Node0x55bbc3a31250 [shape=record,label="{valid.c:1833:}"];
+	Node0x55bbc3a31250 -> Node0x55bbc3a31b30;
+	Node0x55bbc3a312a0 [shape=record,label="{valid.c:1835:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3a312a0:s0 -> Node0x55bbc3a31ae0;
+	Node0x55bbc3a312a0:s1 -> Node0x55bbc3a31b80;
+	Node0x55bbc3a31ae0 [shape=record,label="{valid.c:1837:}"];
+	Node0x55bbc3a31ae0 -> Node0x55bbc3a31b30;
+	Node0x55bbc3a31b80 [shape=record,label="{valid.c:1839:}"];
+	Node0x55bbc3a31b80 -> Node0x55bbc3a31b30;
+	Node0x55bbc3a31b30 [shape=record,label="{valid.c:1842:}"];
+}

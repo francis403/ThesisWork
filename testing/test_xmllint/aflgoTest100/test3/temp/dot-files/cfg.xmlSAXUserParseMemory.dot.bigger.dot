@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlSAXUserParseMemory' function" {
+	label="CFG for 'xmlSAXUserParseMemory' function";
+
+	Node0x5557de2567f0 [shape=record,label="{parser.c:14526:|{<s0>T|<s1>F}}"];
+	Node0x5557de2567f0:s0 -> Node0x5557de259770;
+	Node0x5557de2567f0:s1 -> Node0x5557de2597c0;
+	Node0x5557de259770 [shape=record,label="{parser.c:14534:}"];
+	Node0x5557de259770 -> Node0x5557de258390;
+	Node0x5557de2597c0 [shape=record,label="{parser.c:14535:|{<s0>T|<s1>F}}"];
+	Node0x5557de2597c0:s0 -> Node0x5557de259c50;
+	Node0x5557de2597c0:s1 -> Node0x5557de259ca0;
+	Node0x5557de259c50 [shape=record,label="{parser.c:14536:}"];
+	Node0x5557de259c50 -> Node0x5557de259ca0;
+	Node0x5557de259ca0 [shape=record,label="{parser.c:14537:|{<s0>T|<s1>F}}"];
+	Node0x5557de259ca0:s0 -> Node0x5557de25a7d0;
+	Node0x5557de259ca0:s1 -> Node0x5557de25a820;
+	Node0x5557de25a7d0 [shape=record,label="{parser.c:14541:}"];
+	Node0x5557de25a7d0 -> Node0x5557de25a820;
+	Node0x5557de25a820 [shape=record,label="{parser.c:14543:|{<s0>T|<s1>F}}"];
+	Node0x5557de25a820:s0 -> Node0x5557de25aef0;
+	Node0x5557de25a820:s1 -> Node0x5557de25af90;
+	Node0x5557de25aef0 [shape=record,label="{parser.c:14546:}"];
+	Node0x5557de25aef0 -> Node0x5557de25af40;
+	Node0x5557de25af90 [shape=record,label="{parser.c:14548:|{<s0>T|<s1>F}}"];
+	Node0x5557de25af90:s0 -> Node0x5557de25b490;
+	Node0x5557de25af90:s1 -> Node0x5557de25b530;
+	Node0x5557de25b490 [shape=record,label="{parser.c:14549:}"];
+	Node0x5557de25b490 -> Node0x5557de25b4e0;
+	Node0x5557de25b530 [shape=record,label="{parser.c:14551:}"];
+	Node0x5557de25b530 -> Node0x5557de25b4e0;
+	Node0x5557de25b4e0 [shape=record,label="{%49}"];
+	Node0x5557de25b4e0 -> Node0x5557de25af40;
+	Node0x5557de25af40 [shape=record,label="{parser.c:14553:|{<s0>T|<s1>F}}"];
+	Node0x5557de25af40:s0 -> Node0x5557de25be70;
+	Node0x5557de25af40:s1 -> Node0x5557de25bec0;
+	Node0x5557de25be70 [shape=record,label="{parser.c:14554:}"];
+	Node0x5557de25be70 -> Node0x5557de25bec0;
+	Node0x5557de25bec0 [shape=record,label="{parser.c:14555:|{<s0>T|<s1>F}}"];
+	Node0x5557de25bec0:s0 -> Node0x5557de25c480;
+	Node0x5557de25bec0:s1 -> Node0x5557de25c4d0;
+	Node0x5557de25c480 [shape=record,label="{parser.c:14556:}"];
+	Node0x5557de25c480 -> Node0x5557de25c4d0;
+	Node0x5557de25c4d0 [shape=record,label="{parser.c:14559:}"];
+	Node0x5557de25c4d0 -> Node0x5557de258390;
+	Node0x5557de258390 [shape=record,label="{parser.c:14562:}"];
+}

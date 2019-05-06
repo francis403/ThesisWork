@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlListRemoveLast' function" {
+	label="CFG for 'xmlListRemoveLast' function";
+
+	Node0x56019df7b500 [shape=record,label="{list.c:378:|{<s0>T|<s1>F}}"];
+	Node0x56019df7b500 -> Node0x56019df7c9f0;
+	Node0x56019df7b500 -> Node0x56019df7ca40;
+	Node0x56019df7c9f0 [shape=record,label="{list.c:383:}"];
+	Node0x56019df7c9f0 -> Node0x56019df7b770;
+	Node0x56019df7ca40 [shape=record,label="{list.c:385:|{<s0>T|<s1>F}}"];
+	Node0x56019df7ca40 -> Node0x56019df7d100;
+	Node0x56019df7ca40 -> Node0x56019df7d150;
+	Node0x56019df7d100 [shape=record,label="{list.c:387:}"];
+	Node0x56019df7d100 -> Node0x56019df7b770;
+	Node0x56019df7d150 [shape=record,label="{list.c:390:}"];
+	Node0x56019df7d150 -> Node0x56019df7b770;
+	Node0x56019df7b770 [shape=record,label="{list.c:391:}"];
+}

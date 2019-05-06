@@ -1,0 +1,12 @@
+digraph "CFG for 'warningDebug' function" {
+	label="CFG for 'warningDebug' function";
+
+	Node0x55c15e144ac0 [shape=record,label="{xmllint.c:1400:|{<s0>T|<s1>F}}"];
+	Node0x55c15e144ac0:s0 -> Node0x55c15e146810;
+	Node0x55c15e144ac0:s1 -> Node0x55c15e146860;
+	Node0x55c15e146810 [shape=record,label="{xmllint.c:1406:}"];
+	Node0x55c15e146810 -> Node0x55c15e144a20;
+	Node0x55c15e146860 [shape=record,label="{xmllint.c:1407:}"];
+	Node0x55c15e146860 -> Node0x55c15e144a20;
+	Node0x55c15e144a20 [shape=record,label="{xmllint.c:1411:}"];
+}

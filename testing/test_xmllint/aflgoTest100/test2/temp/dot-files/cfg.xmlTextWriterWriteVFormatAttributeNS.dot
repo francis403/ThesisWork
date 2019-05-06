@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlTextWriterWriteVFormatAttributeNS' function" {
+	label="CFG for 'xmlTextWriterWriteVFormatAttributeNS' function";
+
+	Node0x562150e8c530 [shape=record,label="{xmlwriter.c:2094:|{<s0>T|<s1>F}}"];
+	Node0x562150e8c530:s0 -> Node0x562150e90500;
+	Node0x562150e8c530:s1 -> Node0x562150e90550;
+	Node0x562150e90500 [shape=record,label="{xmlwriter.c:2104:}"];
+	Node0x562150e90500 -> Node0x562150e8caa0;
+	Node0x562150e90550 [shape=record,label="{xmlwriter.c:2106:|{<s0>T|<s1>F}}"];
+	Node0x562150e90550:s0 -> Node0x562150e90c10;
+	Node0x562150e90550:s1 -> Node0x562150e90c60;
+	Node0x562150e90c10 [shape=record,label="{xmlwriter.c:2108:}"];
+	Node0x562150e90c10 -> Node0x562150e8caa0;
+	Node0x562150e90c60 [shape=record,label="{xmlwriter.c:2110:}"];
+	Node0x562150e90c60 -> Node0x562150e8caa0;
+	Node0x562150e8caa0 [shape=record,label="{xmlwriter.c:2115:}"];
+}

@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlSAXParseEntity' function" {
+	label="CFG for 'xmlSAXParseEntity' function";
+
+	Node0x5557de2005e0 [shape=record,label="{parser.c:13926:|{<s0>T|<s1>F}}"];
+	Node0x5557de2005e0:s0 -> Node0x5557de21aba0;
+	Node0x5557de2005e0:s1 -> Node0x5557de21abf0;
+	Node0x5557de21aba0 [shape=record,label="{parser.c:13932:}"];
+	Node0x5557de21aba0 -> Node0x5557dde133c0;
+	Node0x5557de21abf0 [shape=record,label="{parser.c:13934:|{<s0>T|<s1>F}}"];
+	Node0x5557de21abf0:s0 -> Node0x5557de21b0c0;
+	Node0x5557de21abf0:s1 -> Node0x5557de21b110;
+	Node0x5557de21b0c0 [shape=record,label="{parser.c:13935:|{<s0>T|<s1>F}}"];
+	Node0x5557de21b0c0:s0 -> Node0x5557de21b4d0;
+	Node0x5557de21b0c0:s1 -> Node0x5557de21b520;
+	Node0x5557de21b4d0 [shape=record,label="{parser.c:13936:}"];
+	Node0x5557de21b4d0 -> Node0x5557de21b520;
+	Node0x5557de21b520 [shape=record,label="{parser.c:13937:}"];
+	Node0x5557de21b520 -> Node0x5557de21b110;
+	Node0x5557de21b110 [shape=record,label="{parser.c:13941:|{<s0>T|<s1>F}}"];
+	Node0x5557de21b110:s0 -> Node0x5557de21c150;
+	Node0x5557de21b110:s1 -> Node0x5557de21c1f0;
+	Node0x5557de21c150 [shape=record,label="{parser.c:13944:}"];
+	Node0x5557de21c150 -> Node0x5557de21c1a0;
+	Node0x5557de21c1f0 [shape=record,label="{parser.c:13946:}"];
+	Node0x5557de21c1f0 -> Node0x5557de21c1a0;
+	Node0x5557de21c1a0 [shape=record,label="{parser.c:13950:|{<s0>T|<s1>F}}"];
+	Node0x5557de21c1a0:s0 -> Node0x5557de21cf40;
+	Node0x5557de21c1a0:s1 -> Node0x5557de21cf90;
+	Node0x5557de21cf40 [shape=record,label="{parser.c:13951:}"];
+	Node0x5557de21cf40 -> Node0x5557de21cf90;
+	Node0x5557de21cf90 [shape=record,label="{parser.c:13952:}"];
+	Node0x5557de21cf90 -> Node0x5557dde133c0;
+	Node0x5557dde133c0 [shape=record,label="{parser.c:13955:}"];
+}

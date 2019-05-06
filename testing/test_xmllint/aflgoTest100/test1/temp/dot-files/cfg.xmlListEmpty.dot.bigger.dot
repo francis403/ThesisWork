@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlListEmpty' function" {
+	label="CFG for 'xmlListEmpty' function";
+
+	Node0x56019df84890 [shape=record,label="{list.c:446:|{<s0>T|<s1>F}}"];
+	Node0x56019df84890:s0 -> Node0x56019df84400;
+	Node0x56019df84890:s1 -> Node0x56019df85f30;
+	Node0x56019df84400 [shape=record,label="{list.c:449:}"];
+	Node0x56019df84400 -> Node0x56019df85db0;
+	Node0x56019df85f30 [shape=record,label="{list.c:450:}"];
+	Node0x56019df85f30 -> Node0x56019df85db0;
+	Node0x56019df85db0 [shape=record,label="{list.c:451:}"];
+}

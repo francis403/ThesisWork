@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlTextWriterEndDTDAttlist' function" {
+	label="CFG for 'xmlTextWriterEndDTDAttlist' function";
+
+	Node0x55d09c6e7650 [shape=record,label="{xmlwriter.c:3475:|{<s0>T|<s1>F}}"];
+	Node0x55d09c6e7650:s0 -> Node0x55d09c6e89a0;
+	Node0x55d09c6e7650:s1 -> Node0x55d09c6e89f0;
+	Node0x55d09c6e89a0 [shape=record,label="{xmlwriter.c:3483:}"];
+	Node0x55d09c6e89a0 -> Node0x55d09c6e7a70;
+	Node0x55d09c6e89f0 [shape=record,label="{xmlwriter.c:3485:|{<s0>T|<s1>F}}"];
+	Node0x55d09c6e89f0:s0 -> Node0x55d09c6e9250;
+	Node0x55d09c6e89f0:s1 -> Node0x55d09c6e92a0;
+	Node0x55d09c6e9250 [shape=record,label="{xmlwriter.c:3488:}"];
+	Node0x55d09c6e9250 -> Node0x55d09c6e7a70;
+	Node0x55d09c6e92a0 [shape=record,label="{xmlwriter.c:3490:|{<s0>T|<s1>F}}"];
+	Node0x55d09c6e92a0:s0 -> Node0x55d09c6e99f0;
+	Node0x55d09c6e92a0:s1 -> Node0x55d09c6e9a40;
+	Node0x55d09c6e99f0 [shape=record,label="{xmlwriter.c:3492:}"];
+	Node0x55d09c6e99f0 -> Node0x55d09c6e7a70;
+	Node0x55d09c6e9a40 [shape=record,label="{xmlwriter.c:3494:|{<s0>def|<s1>11|<s2>12}}"];
+	Node0x55d09c6e9a40:s0 -> Node0x55d09c6e9fd0;
+	Node0x55d09c6e9a40:s1 -> Node0x55d09c6ea310;
+	Node0x55d09c6e9a40:s2 -> Node0x55d09c6ea310;
+	Node0x55d09c6ea310 [shape=record,label="{xmlwriter.c:3497:|{<s0>T|<s1>F}}"];
+	Node0x55d09c6ea310:s0 -> Node0x55d09c6ea700;
+	Node0x55d09c6ea310:s1 -> Node0x55d09c6ea750;
+	Node0x55d09c6ea700 [shape=record,label="{xmlwriter.c:3499:}"];
+	Node0x55d09c6ea700 -> Node0x55d09c6e7a70;
+	Node0x55d09c6ea750 [shape=record,label="{xmlwriter.c:3500:}"];
+	Node0x55d09c6ea750 -> Node0x55d09c6e9e60;
+	Node0x55d09c6e9fd0 [shape=record,label="{xmlwriter.c:3503:}"];
+	Node0x55d09c6e9fd0 -> Node0x55d09c6e7a70;
+	Node0x55d09c6e9e60 [shape=record,label="{xmlwriter.c:3506:|{<s0>T|<s1>F}}"];
+	Node0x55d09c6e9e60:s0 -> Node0x55d09c6eb090;
+	Node0x55d09c6e9e60:s1 -> Node0x55d09c6eb0e0;
+	Node0x55d09c6eb090 [shape=record,label="{xmlwriter.c:3507:|{<s0>T|<s1>F}}"];
+	Node0x55d09c6eb090:s0 -> Node0x55d09c6eb8b0;
+	Node0x55d09c6eb090:s1 -> Node0x55d09c6eb900;
+	Node0x55d09c6eb8b0 [shape=record,label="{xmlwriter.c:3509:}"];
+	Node0x55d09c6eb8b0 -> Node0x55d09c6e7a70;
+	Node0x55d09c6eb900 [shape=record,label="{xmlwriter.c:3510:}"];
+	Node0x55d09c6eb900 -> Node0x55d09c6eb0e0;
+	Node0x55d09c6eb0e0 [shape=record,label="{xmlwriter.c:3513:}"];
+	Node0x55d09c6eb0e0 -> Node0x55d09c6e7a70;
+	Node0x55d09c6e7a70 [shape=record,label="{xmlwriter.c:3515:}"];
+}

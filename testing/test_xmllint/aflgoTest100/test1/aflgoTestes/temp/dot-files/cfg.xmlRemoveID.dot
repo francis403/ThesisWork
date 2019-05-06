@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlRemoveID' function" {
+	label="CFG for 'xmlRemoveID' function";
+
+	Node0x55fa50d2ba50 [shape=record,label="{valid.c:2765:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d2ba50 -> Node0x55fa50d3d0f0;
+	Node0x55fa50d2ba50 -> Node0x55fa50d3d140;
+	Node0x55fa50d3d0f0 [shape=record,label="{valid.c:2770:}"];
+	Node0x55fa50d3d0f0 -> Node0x55fa50d3be80;
+	Node0x55fa50d3d140 [shape=record,label="{valid.c:2771:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d3d140 -> Node0x55fa50d3d600;
+	Node0x55fa50d3d140 -> Node0x55fa50d3d650;
+	Node0x55fa50d3d600 [shape=record,label="{valid.c:2771:}"];
+	Node0x55fa50d3d600 -> Node0x55fa50d3be80;
+	Node0x55fa50d3d650 [shape=record,label="{valid.c:2773:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d3d650 -> Node0x55fa50d3bd70;
+	Node0x55fa50d3d650 -> Node0x55fa50d257a0;
+	Node0x55fa50d3bd70 [shape=record,label="{valid.c:2775:}"];
+	Node0x55fa50d3bd70 -> Node0x55fa50d3be80;
+	Node0x55fa50d257a0 [shape=record,label="{valid.c:2777:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d257a0 -> Node0x55fa50d3eda0;
+	Node0x55fa50d257a0 -> Node0x55fa50d3edf0;
+	Node0x55fa50d3eda0 [shape=record,label="{valid.c:2779:}"];
+	Node0x55fa50d3eda0 -> Node0x55fa50d3be80;
+	Node0x55fa50d3edf0 [shape=record,label="{valid.c:2781:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d3edf0 -> Node0x55fa50d407e0;
+	Node0x55fa50d3edf0 -> Node0x55fa50d40880;
+	Node0x55fa50d40880 [shape=record,label="{valid.c:2782:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d40880 -> Node0x55fa50d407e0;
+	Node0x55fa50d40880 -> Node0x55fa50d40830;
+	Node0x55fa50d407e0 [shape=record,label="{valid.c:2783:}"];
+	Node0x55fa50d407e0 -> Node0x55fa50d3be80;
+	Node0x55fa50d40830 [shape=record,label="{valid.c:2787:}"];
+	Node0x55fa50d40830 -> Node0x55fa50d3be80;
+	Node0x55fa50d3be80 [shape=record,label="{valid.c:2791:}"];
+}

@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlNewDocFragment' function" {
+	label="CFG for 'xmlNewDocFragment' function";
+
+	Node0x55ad0b9d5f00 [shape=record,label="{tree.c:2409:|{<s0>T|<s1>F}}"];
+	Node0x55ad0b9d5f00 -> Node0x55ad0badb7e0;
+	Node0x55ad0b9d5f00 -> Node0x55ad0badb830;
+	Node0x55ad0badb7e0 [shape=record,label="{tree.c:2417:}"];
+	Node0x55ad0badb7e0 -> Node0x55ad0bad1fc0;
+	Node0x55ad0badb830 [shape=record,label="{tree.c:2420:|{<s0>T|<s1>F}}"];
+	Node0x55ad0badb830 -> Node0x55ad0badc670;
+	Node0x55ad0badb830 -> Node0x55ad0badc620;
+	Node0x55ad0badc670 [shape=record,label="{tree.c:2425:|{<s0>T|<s1>F}}"];
+	Node0x55ad0badc670 -> Node0x55ad0badc5d0;
+	Node0x55ad0badc670 -> Node0x55ad0badc620;
+	Node0x55ad0badc5d0 [shape=record,label="{tree.c:2426:}"];
+	Node0x55ad0badc5d0 -> Node0x55ad0badc620;
+	Node0x55ad0badc620 [shape=record,label="{tree.c:2427:}"];
+	Node0x55ad0badc620 -> Node0x55ad0bad1fc0;
+	Node0x55ad0bad1fc0 [shape=record,label="{tree.c:2428:}"];
+}

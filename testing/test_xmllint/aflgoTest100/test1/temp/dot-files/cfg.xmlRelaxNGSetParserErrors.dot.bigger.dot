@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlRelaxNGSetParserErrors' function" {
+	label="CFG for 'xmlRelaxNGSetParserErrors' function";
+
+	Node0x555e9c17e6c0 [shape=record,label="{relaxng.c:7636:|{<s0>T|<s1>F}}"];
+	Node0x555e9c17e6c0:s0 -> Node0x555e9c17fb30;
+	Node0x555e9c17e6c0:s1 -> Node0x555e9c17fb80;
+	Node0x555e9c17fb30 [shape=record,label="{relaxng.c:7641:}"];
+	Node0x555e9c17fb30 -> Node0x555e9c17eb40;
+	Node0x555e9c17fb80 [shape=record,label="{relaxng.c:7642:}"];
+	Node0x555e9c17fb80 -> Node0x555e9c17eb40;
+	Node0x555e9c17eb40 [shape=record,label="{relaxng.c:7646:}"];
+}

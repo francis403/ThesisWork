@@ -1,0 +1,21 @@
+digraph "CFG for 'xmlSaveErr' function" {
+	label="CFG for 'xmlSaveErr' function";
+
+	Node0x556f176b4460 [shape=record,label="{xmlsave.c:123:|{<s0>def|<s1>1400|<s2>1401|<s3>1403|<s4>1402}}"];
+	Node0x556f176b4460:s0 -> Node0x556f176b6750;
+	Node0x556f176b4460:s1 -> Node0x556f176b6870;
+	Node0x556f176b4460:s2 -> Node0x556f176b6be0;
+	Node0x556f176b4460:s3 -> Node0x556f176b6f50;
+	Node0x556f176b4460:s4 -> Node0x556f176b72f0;
+	Node0x556f176b6870 [shape=record,label="{xmlsave.c:129:}"];
+	Node0x556f176b6870 -> Node0x556f176b6670;
+	Node0x556f176b6be0 [shape=record,label="{xmlsave.c:132:}"];
+	Node0x556f176b6be0 -> Node0x556f176b6670;
+	Node0x556f176b6f50 [shape=record,label="{xmlsave.c:135:}"];
+	Node0x556f176b6f50 -> Node0x556f176b6670;
+	Node0x556f176b72f0 [shape=record,label="{xmlsave.c:138:}"];
+	Node0x556f176b72f0 -> Node0x556f176b6670;
+	Node0x556f176b6750 [shape=record,label="{xmlsave.c:141:}"];
+	Node0x556f176b6750 -> Node0x556f176b6670;
+	Node0x556f176b6670 [shape=record,label="{xmlsave.c:143:}"];
+}

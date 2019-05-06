@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlIsDigit' function" {
+	label="CFG for 'xmlIsDigit' function";
+
+	Node0x5610db88ad20 [shape=record,label="{chvalid.c:286:|{<s0>T|<s1>F}}"];
+	Node0x5610db88ad20 -> Node0x5610db88c820;
+	Node0x5610db88ad20 -> Node0x5610db88e990;
+	Node0x5610db88c820 [shape=record,label="{chvalid.c:287:|{<s0>T|<s1>F}}"];
+	Node0x5610db88c820 -> Node0x5610db88f2b0;
+	Node0x5610db88c820 -> Node0x5610db88e2f0;
+	Node0x5610db88f2b0 [shape=record,label="{chvalid.c:287:}"];
+	Node0x5610db88f2b0 -> Node0x5610db88e2f0;
+	Node0x5610db88e2f0 [shape=record,label="{chvalid.c:287:}"];
+	Node0x5610db88e2f0 -> Node0x5610db88e0b0;
+	Node0x5610db88e990 [shape=record,label="{chvalid.c:287:}"];
+	Node0x5610db88e990 -> Node0x5610db88e0b0;
+	Node0x5610db88e0b0 [shape=record,label="{chvalid.c:287:}"];
+}

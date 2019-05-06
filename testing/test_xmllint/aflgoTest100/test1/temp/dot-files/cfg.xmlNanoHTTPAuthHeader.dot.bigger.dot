@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlNanoHTTPAuthHeader' function" {
+	label="CFG for 'xmlNanoHTTPAuthHeader' function";
+
+	Node0x564de24469b0 [shape=record,label="{nanohttp.c:1739:|{<s0>T|<s1>F}}"];
+	Node0x564de24469b0:s0 -> Node0x564de2448b50;
+	Node0x564de24469b0:s1 -> Node0x564de2448ba0;
+	Node0x564de2448b50 [shape=record,label="{nanohttp.c:1742:}"];
+	Node0x564de2448b50 -> Node0x564de2446af0;
+	Node0x564de2448ba0 [shape=record,label="{nanohttp.c:1744:}"];
+	Node0x564de2448ba0 -> Node0x564de2446af0;
+	Node0x564de2446af0 [shape=record,label="{nanohttp.c:1745:}"];
+}

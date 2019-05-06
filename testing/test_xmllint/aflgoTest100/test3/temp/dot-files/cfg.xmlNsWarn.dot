@@ -1,0 +1,18 @@
+digraph "CFG for 'xmlNsWarn' function" {
+	label="CFG for 'xmlNsWarn' function";
+
+	Node0x5557de515950 [shape=record,label="{parser.c:815:|{<s0>T|<s1>F}}"];
+	Node0x5557de515950 -> Node0x5557de51f810;
+	Node0x5557de515950 -> Node0x5557de51f740;
+	Node0x5557de51f810 [shape=record,label="{parser.c:820:|{<s0>T|<s1>F}}"];
+	Node0x5557de51f810 -> Node0x5557de51f790;
+	Node0x5557de51f810 -> Node0x5557de51f740;
+	Node0x5557de51f790 [shape=record,label="{parser.c:821:|{<s0>T|<s1>F}}"];
+	Node0x5557de51f790 -> Node0x5557de51f6f0;
+	Node0x5557de51f790 -> Node0x5557de51f740;
+	Node0x5557de51f6f0 [shape=record,label="{parser.c:822:}"];
+	Node0x5557de51f6f0 -> Node0x5557de5159a0;
+	Node0x5557de51f740 [shape=record,label="{parser.c:823:}"];
+	Node0x5557de51f740 -> Node0x5557de5159a0;
+	Node0x5557de5159a0 [shape=record,label="{parser.c:827:}"];
+}

@@ -1,0 +1,21 @@
+digraph "CFG for 'xmlCleanupInputCallbacks' function" {
+	label="CFG for 'xmlCleanupInputCallbacks' function";
+
+	Node0x55ed346c64d0 [shape=record,label="{xmlIO.c:496:|{<s0>T|<s1>F}}"];
+	Node0x55ed346c64d0:s0 -> Node0x55ed346c76d0;
+	Node0x55ed346c64d0:s1 -> Node0x55ed346c7680;
+	Node0x55ed346c7680 [shape=record,label="{xmlIO.c:499:}"];
+	Node0x55ed346c7680 -> Node0x55ed346c6ea0;
+	Node0x55ed346c76d0 [shape=record,label="{xmlIO.c:501:}"];
+	Node0x55ed346c76d0 -> Node0x55ed346c7810;
+	Node0x55ed346c7810 [shape=record,label="{xmlIO.c:501:|{<s0>T|<s1>F}}"];
+	Node0x55ed346c7810:s0 -> Node0x55ed3468d800;
+	Node0x55ed346c7810:s1 -> Node0x55ed346c7a90;
+	Node0x55ed3468d800 [shape=record,label="{xmlIO.c:502:}"];
+	Node0x55ed3468d800 -> Node0x55ed346c6170;
+	Node0x55ed346c6170 [shape=record,label="{xmlIO.c:501:}"];
+	Node0x55ed346c6170 -> Node0x55ed346c7810;
+	Node0x55ed346c7a90 [shape=record,label="{xmlIO.c:508:}"];
+	Node0x55ed346c7a90 -> Node0x55ed346c6ea0;
+	Node0x55ed346c6ea0 [shape=record,label="{xmlIO.c:510:}"];
+}

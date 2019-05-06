@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlStringLenDecodeEntities' function" {
+	label="CFG for 'libxml_xmlStringLenDecodeEntities' function";
+
+	Node0x55f931356890 [shape=record,label="{libxml2-py.c:7534:|{<s0>T|<s1>F}}"];
+	Node0x55f931356890:s0 -> Node0x55f93135b7c0;
+	Node0x55f931356890:s1 -> Node0x55f93135b770;
+	Node0x55f93135b770 [shape=record,label="{libxml2-py.c:7547:}"];
+	Node0x55f93135b770 -> Node0x55f931358e10;
+	Node0x55f93135b7c0 [shape=record,label="{libxml2-py.c:7548:|{<s0>T|<s1>F}}"];
+	Node0x55f93135b7c0:s0 -> Node0x55f93135c280;
+	Node0x55f93135b7c0:s1 -> Node0x55f93135c2d0;
+	Node0x55f93135c280 [shape=record,label="{libxml2-py.c:7548:}"];
+	Node0x55f93135c280 -> Node0x55f93135c320;
+	Node0x55f93135c2d0 [shape=record,label="{libxml2-py.c:7548:}"];
+	Node0x55f93135c2d0 -> Node0x55f93135c320;
+	Node0x55f93135c320 [shape=record,label="{libxml2-py.c:7548:}"];
+	Node0x55f93135c320 -> Node0x55f931358e10;
+	Node0x55f931358e10 [shape=record,label="{libxml2-py.c:7553:}"];
+}

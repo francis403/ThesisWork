@@ -1,0 +1,24 @@
+digraph "CFG for 'nodePop' function" {
+	label="CFG for 'nodePop' function";
+
+	Node0x55d73b721ef0 [shape=record,label="{parser.c:1805:|{<s0>T|<s1>F}}"];
+	Node0x55d73b721ef0:s0 -> Node0x55d73b7605e0;
+	Node0x55d73b721ef0:s1 -> Node0x55d73b760630;
+	Node0x55d73b7605e0 [shape=record,label="{parser.c:1809:}"];
+	Node0x55d73b7605e0 -> Node0x55d73b712e10;
+	Node0x55d73b760630 [shape=record,label="{parser.c:1810:|{<s0>T|<s1>F}}"];
+	Node0x55d73b760630:s0 -> Node0x55d73b760a80;
+	Node0x55d73b760630:s1 -> Node0x55d73b760ad0;
+	Node0x55d73b760a80 [shape=record,label="{parser.c:1811:}"];
+	Node0x55d73b760a80 -> Node0x55d73b712e10;
+	Node0x55d73b760ad0 [shape=record,label="{parser.c:1812:|{<s0>T|<s1>F}}"];
+	Node0x55d73b760ad0:s0 -> Node0x55d73b761210;
+	Node0x55d73b760ad0:s1 -> Node0x55d73b7612b0;
+	Node0x55d73b761210 [shape=record,label="{parser.c:1814:}"];
+	Node0x55d73b761210 -> Node0x55d73b761260;
+	Node0x55d73b7612b0 [shape=record,label="{parser.c:1816:}"];
+	Node0x55d73b7612b0 -> Node0x55d73b761260;
+	Node0x55d73b761260 [shape=record,label="{parser.c:1817:}"];
+	Node0x55d73b761260 -> Node0x55d73b712e10;
+	Node0x55d73b712e10 [shape=record,label="{parser.c:1820:}"];
+}

@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlSchemaSAXUnplug' function" {
+	label="CFG for 'xmlSchemaSAXUnplug' function";
+
+	Node0x55d025d5ebe0 [shape=record,label="{xmlschemas.c:28768:|{<s0>T|<s1>F}}"];
+	Node0x55d025d5ebe0:s0 -> Node0x55d025d77400;
+	Node0x55d025d5ebe0:s1 -> Node0x55d025d774a0;
+	Node0x55d025d774a0 [shape=record,label="{xmlschemas.c:28773:|{<s0>T|<s1>F}}"];
+	Node0x55d025d774a0:s0 -> Node0x55d025d77400;
+	Node0x55d025d774a0:s1 -> Node0x55d025d77450;
+	Node0x55d025d77400 [shape=record,label="{xmlschemas.c:28774:}"];
+	Node0x55d025d77400 -> Node0x55d025d6f670;
+	Node0x55d025d77450 [shape=record,label="{xmlschemas.c:28775:|{<s0>T|<s1>F}}"];
+	Node0x55d025d77450:s0 -> Node0x55d025d78a20;
+	Node0x55d025d77450:s1 -> Node0x55d025d78a70;
+	Node0x55d025d78a20 [shape=record,label="{xmlschemas.c:28782:}"];
+	Node0x55d025d78a20 -> Node0x55d025d78a70;
+	Node0x55d025d78a70 [shape=record,label="{xmlschemas.c:28787:}"];
+	Node0x55d025d78a70 -> Node0x55d025d6f670;
+	Node0x55d025d6f670 [shape=record,label="{xmlschemas.c:28789:}"];
+}

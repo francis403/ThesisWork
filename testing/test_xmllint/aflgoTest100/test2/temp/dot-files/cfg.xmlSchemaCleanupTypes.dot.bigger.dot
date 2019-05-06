@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaCleanupTypes' function" {
+	label="CFG for 'xmlSchemaCleanupTypes' function";
+
+	Node0x557b217e75d0 [shape=record,label="{xmlschemastypes.c:634:|{<s0>T|<s1>F}}"];
+	Node0x557b217e75d0:s0 -> Node0x557b21822840;
+	Node0x557b217e75d0:s1 -> Node0x557b21822890;
+	Node0x557b21822840 [shape=record,label="{xmlschemastypes.c:635:}"];
+	Node0x557b21822840 -> Node0x557b21802130;
+	Node0x557b21822890 [shape=record,label="{xmlschemastypes.c:640:}"];
+	Node0x557b21822890 -> Node0x557b21802130;
+	Node0x557b21802130 [shape=record,label="{xmlschemastypes.c:656:}"];
+}

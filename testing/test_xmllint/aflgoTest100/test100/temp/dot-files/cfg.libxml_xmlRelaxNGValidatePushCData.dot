@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlRelaxNGValidatePushCData' function" {
+	label="CFG for 'libxml_xmlRelaxNGValidatePushCData' function";
+
+	Node0x55d6cbd23050 [shape=record,label="{libxml2-py.c:6504:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbd23050:s0 -> Node0x55d6cbd28c40;
+	Node0x55d6cbd23050:s1 -> Node0x55d6cbd28bf0;
+	Node0x55d6cbd28bf0 [shape=record,label="{libxml2-py.c:6513:}"];
+	Node0x55d6cbd28bf0 -> Node0x55d6cbd22e70;
+	Node0x55d6cbd28c40 [shape=record,label="{libxml2-py.c:6514:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbd28c40:s0 -> Node0x55d6cbd29520;
+	Node0x55d6cbd28c40:s1 -> Node0x55d6cbd29570;
+	Node0x55d6cbd29520 [shape=record,label="{libxml2-py.c:6514:}"];
+	Node0x55d6cbd29520 -> Node0x55d6cbd295c0;
+	Node0x55d6cbd29570 [shape=record,label="{libxml2-py.c:6514:}"];
+	Node0x55d6cbd29570 -> Node0x55d6cbd295c0;
+	Node0x55d6cbd295c0 [shape=record,label="{libxml2-py.c:6514:}"];
+	Node0x55d6cbd295c0 -> Node0x55d6cbd22e70;
+	Node0x55d6cbd22e70 [shape=record,label="{libxml2-py.c:6519:}"];
+}

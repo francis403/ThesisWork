@@ -1,0 +1,34 @@
+digraph "CFG for 'libxml_doc' function" {
+	label="CFG for 'libxml_doc' function";
+
+	Node0x55fa6c431a90 [shape=record,label="{libxml.c:2469:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c431a90:s0 -> Node0x55fa6c5eb320;
+	Node0x55fa6c431a90:s1 -> Node0x55fa6c5eb2d0;
+	Node0x55fa6c5eb2d0 [shape=record,label="{libxml.c:2476:}"];
+	Node0x55fa6c5eb2d0 -> Node0x55fa6c5e9f70;
+	Node0x55fa6c5eb320 [shape=record,label="{libxml.c:2477:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c5eb320:s0 -> Node0x55fa6c5eba60;
+	Node0x55fa6c5eb320:s1 -> Node0x55fa6c5ebab0;
+	Node0x55fa6c5eba60 [shape=record,label="{libxml.c:2477:}"];
+	Node0x55fa6c5eba60 -> Node0x55fa6c5ebb00;
+	Node0x55fa6c5ebab0 [shape=record,label="{libxml.c:2477:}"];
+	Node0x55fa6c5ebab0 -> Node0x55fa6c5ebb00;
+	Node0x55fa6c5ebb00 [shape=record,label="{libxml.c:2477:|{<s0>def|<s1>9|<s2>21|<s3>13|<s4>2|<s5>18}}"];
+	Node0x55fa6c5ebb00:s0 -> Node0x55fa6c5ec1b0;
+	Node0x55fa6c5ebb00:s1 -> Node0x55fa6c5ec290;
+	Node0x55fa6c5ebb00:s2 -> Node0x55fa6c5ec290;
+	Node0x55fa6c5ebb00:s3 -> Node0x55fa6c5ec290;
+	Node0x55fa6c5ebb00:s4 -> Node0x55fa6c5ec4b0;
+	Node0x55fa6c5ebb00:s5 -> Node0x55fa6c5ecd10;
+	Node0x55fa6c5ec290 [shape=record,label="{libxml.c:2489:}"];
+	Node0x55fa6c5ec290 -> Node0x55fa6c5ec040;
+	Node0x55fa6c5ec4b0 [shape=record,label="{libxml.c:2492:}"];
+	Node0x55fa6c5ec4b0 -> Node0x55fa6c5ec040;
+	Node0x55fa6c5ecd10 [shape=record,label="{libxml.c:2498:}"];
+	Node0x55fa6c5ecd10 -> Node0x55fa6c5ec040;
+	Node0x55fa6c5ec1b0 [shape=record,label="{libxml.c:2501:}"];
+	Node0x55fa6c5ec1b0 -> Node0x55fa6c5ec040;
+	Node0x55fa6c5ec040 [shape=record,label="{libxml.c:2504:}"];
+	Node0x55fa6c5ec040 -> Node0x55fa6c5e9f70;
+	Node0x55fa6c5e9f70 [shape=record,label="{libxml.c:2506:}"];
+}

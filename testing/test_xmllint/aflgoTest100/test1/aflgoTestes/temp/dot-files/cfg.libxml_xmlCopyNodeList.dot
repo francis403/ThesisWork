@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlCopyNodeList' function" {
+	label="CFG for 'libxml_xmlCopyNodeList' function";
+
+	Node0x55f930d87690 [shape=record,label="{libxml2-py.c:1776:|{<s0>T|<s1>F}}"];
+	Node0x55f930d87690:s0 -> Node0x55f930d8b330;
+	Node0x55f930d87690:s1 -> Node0x55f930d8b2e0;
+	Node0x55f930d8b2e0 [shape=record,label="{libxml2-py.c:1783:}"];
+	Node0x55f930d8b2e0 -> Node0x55f930d873b0;
+	Node0x55f930d8b330 [shape=record,label="{libxml2-py.c:1784:|{<s0>T|<s1>F}}"];
+	Node0x55f930d8b330:s0 -> Node0x55f930d8bae0;
+	Node0x55f930d8b330:s1 -> Node0x55f930d8bb30;
+	Node0x55f930d8bae0 [shape=record,label="{libxml2-py.c:1784:}"];
+	Node0x55f930d8bae0 -> Node0x55f930d8bb80;
+	Node0x55f930d8bb30 [shape=record,label="{libxml2-py.c:1784:}"];
+	Node0x55f930d8bb30 -> Node0x55f930d8bb80;
+	Node0x55f930d8bb80 [shape=record,label="{libxml2-py.c:1784:}"];
+	Node0x55f930d8bb80 -> Node0x55f930d873b0;
+	Node0x55f930d873b0 [shape=record,label="{libxml2-py.c:1789:}"];
+}

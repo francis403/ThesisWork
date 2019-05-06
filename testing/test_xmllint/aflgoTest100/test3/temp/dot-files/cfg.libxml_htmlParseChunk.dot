@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_htmlParseChunk' function" {
+	label="CFG for 'libxml_htmlParseChunk' function";
+
+	Node0x55d6cb70e440 [shape=record,label="{libxml2-py.c:552:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb70e440:s0 -> Node0x55d6cb716760;
+	Node0x55d6cb70e440:s1 -> Node0x55d6cb716710;
+	Node0x55d6cb716710 [shape=record,label="{libxml2-py.c:563:}"];
+	Node0x55d6cb716710 -> Node0x55d6cb70e740;
+	Node0x55d6cb716760 [shape=record,label="{libxml2-py.c:564:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb716760:s0 -> Node0x55d6cb6cd010;
+	Node0x55d6cb716760:s1 -> Node0x55d6cb6cd060;
+	Node0x55d6cb6cd010 [shape=record,label="{libxml2-py.c:564:}"];
+	Node0x55d6cb6cd010 -> Node0x55d6cb7179d0;
+	Node0x55d6cb6cd060 [shape=record,label="{libxml2-py.c:564:}"];
+	Node0x55d6cb6cd060 -> Node0x55d6cb7179d0;
+	Node0x55d6cb7179d0 [shape=record,label="{libxml2-py.c:564:}"];
+	Node0x55d6cb7179d0 -> Node0x55d6cb70e740;
+	Node0x55d6cb70e740 [shape=record,label="{libxml2-py.c:569:}"];
+}

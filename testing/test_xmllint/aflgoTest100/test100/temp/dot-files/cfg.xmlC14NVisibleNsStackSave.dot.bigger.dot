@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlC14NVisibleNsStackSave' function" {
+	label="CFG for 'xmlC14NVisibleNsStackSave' function";
+
+	Node0x5587dfc38260 [shape=record,label="{c14n.c:361:|{<s0>T|<s1>F}}"];
+	Node0x5587dfc38260:s0 -> Node0x5587dfc7ccc0;
+	Node0x5587dfc38260:s1 -> Node0x5587dfc7cd60;
+	Node0x5587dfc7cd60 [shape=record,label="{c14n.c:362:|{<s0>T|<s1>F}}"];
+	Node0x5587dfc7cd60:s0 -> Node0x5587dfc7ccc0;
+	Node0x5587dfc7cd60:s1 -> Node0x5587dfc7cd10;
+	Node0x5587dfc7ccc0 [shape=record,label="{c14n.c:363:}"];
+	Node0x5587dfc7ccc0 -> Node0x5587dfc7b9a0;
+	Node0x5587dfc7cd10 [shape=record,label="{c14n.c:367:}"];
+	Node0x5587dfc7cd10 -> Node0x5587dfc7b9a0;
+	Node0x5587dfc7b9a0 [shape=record,label="{c14n.c:370:}"];
+}

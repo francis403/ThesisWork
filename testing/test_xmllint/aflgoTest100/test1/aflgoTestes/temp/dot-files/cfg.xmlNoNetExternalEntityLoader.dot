@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlNoNetExternalEntityLoader' function" {
+	label="CFG for 'xmlNoNetExternalEntityLoader' function";
+
+	Node0x55ed34834580 [shape=record,label="{xmlIO.c:4057:|{<s0>T|<s1>F}}"];
+	Node0x55ed34834580 -> Node0x55ed34838030;
+	Node0x55ed34834580 -> Node0x55ed34838080;
+	Node0x55ed34838030 [shape=record,label="{xmlIO.c:4067:}"];
+	Node0x55ed34838030 -> Node0x55ed34838080;
+	Node0x55ed34838080 [shape=record,label="{xmlIO.c:4069:|{<s0>T|<s1>F}}"];
+	Node0x55ed34838080 -> Node0x55ed348384e0;
+	Node0x55ed34838080 -> Node0x55ed34838530;
+	Node0x55ed348384e0 [shape=record,label="{xmlIO.c:4070:|{<s0>T|<s1>F}}"];
+	Node0x55ed348384e0 -> Node0x55ed34838990;
+	Node0x55ed348384e0 -> Node0x55ed348388f0;
+	Node0x55ed34838990 [shape=record,label="{xmlIO.c:4071:|{<s0>T|<s1>F}}"];
+	Node0x55ed34838990 -> Node0x55ed34838940;
+	Node0x55ed34838990 -> Node0x55ed348388f0;
+	Node0x55ed348388f0 [shape=record,label="{xmlIO.c:4072:|{<s0>T|<s1>F}}"];
+	Node0x55ed348388f0 -> Node0x55ed348392c0;
+	Node0x55ed348388f0 -> Node0x55ed34839310;
+	Node0x55ed348392c0 [shape=record,label="{xmlIO.c:4074:}"];
+	Node0x55ed348392c0 -> Node0x55ed34839310;
+	Node0x55ed34839310 [shape=record,label="{xmlIO.c:4075:}"];
+	Node0x55ed34839310 -> Node0x55ed348333e0;
+	Node0x55ed34838940 [shape=record,label="{xmlIO.c:4077:}"];
+	Node0x55ed34838940 -> Node0x55ed34838530;
+	Node0x55ed34838530 [shape=record,label="{xmlIO.c:4078:|{<s0>T|<s1>F}}"];
+	Node0x55ed34838530 -> Node0x55ed3483a130;
+	Node0x55ed34838530 -> Node0x55ed3483a180;
+	Node0x55ed3483a130 [shape=record,label="{xmlIO.c:4080:}"];
+	Node0x55ed3483a130 -> Node0x55ed3483a180;
+	Node0x55ed3483a180 [shape=record,label="{xmlIO.c:4081:}"];
+	Node0x55ed3483a180 -> Node0x55ed348333e0;
+	Node0x55ed348333e0 [shape=record,label="{xmlIO.c:4082:}"];
+}

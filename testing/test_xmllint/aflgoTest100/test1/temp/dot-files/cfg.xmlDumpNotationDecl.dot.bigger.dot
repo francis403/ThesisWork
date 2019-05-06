@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlDumpNotationDecl' function" {
+	label="CFG for 'xmlDumpNotationDecl' function";
+
+	Node0x55fa50cffe00 [shape=record,label="{valid.c:2503:|{<s0>T|<s1>F}}"];
+	Node0x55fa50cffe00:s0 -> Node0x55fa50d022b0;
+	Node0x55fa50cffe00:s1 -> Node0x55fa50d02450;
+	Node0x55fa50d02450 [shape=record,label="{valid.c:2504:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d02450:s0 -> Node0x55fa50d022b0;
+	Node0x55fa50d02450:s1 -> Node0x55fa50d021a0;
+	Node0x55fa50d022b0 [shape=record,label="{valid.c:2505:}"];
+	Node0x55fa50d022b0 -> Node0x55fa50d024c0;
+	Node0x55fa50d021a0 [shape=record,label="{valid.c:2506:|{<s0>T|<s1>F}}"];
+	Node0x55fa50d021a0:s0 -> Node0x55fa50c82990;
+	Node0x55fa50d021a0:s1 -> Node0x55fa50c82a30;
+	Node0x55fa50c82990 [shape=record,label="{valid.c:2509:|{<s0>T|<s1>F}}"];
+	Node0x55fa50c82990:s0 -> Node0x55fa50c83260;
+	Node0x55fa50c82990:s1 -> Node0x55fa50c832b0;
+	Node0x55fa50c83260 [shape=record,label="{valid.c:2512:}"];
+	Node0x55fa50c83260 -> Node0x55fa50c832b0;
+	Node0x55fa50c832b0 [shape=record,label="{valid.c:2515:}"];
+	Node0x55fa50c832b0 -> Node0x55fa50c829e0;
+	Node0x55fa50c82a30 [shape=record,label="{valid.c:2516:}"];
+	Node0x55fa50c82a30 -> Node0x55fa50c829e0;
+	Node0x55fa50c829e0 [shape=record,label="{valid.c:2519:}"];
+	Node0x55fa50c829e0 -> Node0x55fa50d024c0;
+	Node0x55fa50d024c0 [shape=record,label="{valid.c:2520:}"];
+}

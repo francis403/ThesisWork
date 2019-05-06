@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlDocSetRootElement' function" {
+	label="CFG for 'xmlDocSetRootElement' function";
+
+	Node0x55ad0bc59110 [shape=record,label="{tree.c:4932:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc59110 -> Node0x55ad0bc5d2e0;
+	Node0x55ad0bc59110 -> Node0x55ad0bc5d330;
+	Node0x55ad0bc5d2e0 [shape=record,label="{tree.c:4935:}"];
+	Node0x55ad0bc5d2e0 -> Node0x55ad0bc5b0d0;
+	Node0x55ad0bc5d330 [shape=record,label="{tree.c:4936:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc5d330 -> Node0x55ad0bc5d790;
+	Node0x55ad0bc5d330 -> Node0x55ad0bc5d830;
+	Node0x55ad0bc5d830 [shape=record,label="{tree.c:4936:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc5d830 -> Node0x55ad0bc5d790;
+	Node0x55ad0bc5d830 -> Node0x55ad0bc5d7e0;
+	Node0x55ad0bc5d790 [shape=record,label="{tree.c:4937:}"];
+	Node0x55ad0bc5d790 -> Node0x55ad0bc5b0d0;
+	Node0x55ad0bc5d7e0 [shape=record,label="{tree.c:4938:}"];
+	Node0x55ad0bc5d7e0 -> Node0x55ad0bc5e680;
+	Node0x55ad0bc5e680 [shape=record,label="{tree.c:4942:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc5e680 -> Node0x55ad0bc5ea40;
+	Node0x55ad0bc5e680 -> Node0x55ad0bc5e860;
+	Node0x55ad0bc5ea40 [shape=record,label="{tree.c:4943:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc5ea40 -> Node0x55ad0bc5ebf0;
+	Node0x55ad0bc5ea40 -> Node0x55ad0bc5ec40;
+	Node0x55ad0bc5ebf0 [shape=record,label="{tree.c:4944:}"];
+	Node0x55ad0bc5ebf0 -> Node0x55ad0bc5e860;
+	Node0x55ad0bc5ec40 [shape=record,label="{tree.c:4945:}"];
+	Node0x55ad0bc5ec40 -> Node0x55ad0bc5e680;
+	Node0x55ad0bc5e860 [shape=record,label="{tree.c:4947:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc5e860 -> Node0x55ad0bc5f2d0;
+	Node0x55ad0bc5e860 -> Node0x55ad0bc5f370;
+	Node0x55ad0bc5f2d0 [shape=record,label="{tree.c:4948:|{<s0>T|<s1>F}}"];
+	Node0x55ad0bc5f2d0 -> Node0x55ad0bc5f730;
+	Node0x55ad0bc5f2d0 -> Node0x55ad0bc5f7d0;
+	Node0x55ad0bc5f730 [shape=record,label="{tree.c:4949:}"];
+	Node0x55ad0bc5f730 -> Node0x55ad0bc5f780;
+	Node0x55ad0bc5f7d0 [shape=record,label="{tree.c:4952:}"];
+	Node0x55ad0bc5f7d0 -> Node0x55ad0bc5f780;
+	Node0x55ad0bc5f780 [shape=record,label="{tree.c:4954:}"];
+	Node0x55ad0bc5f780 -> Node0x55ad0bc5f320;
+	Node0x55ad0bc5f370 [shape=record,label="{tree.c:4955:}"];
+	Node0x55ad0bc5f370 -> Node0x55ad0bc5f320;
+	Node0x55ad0bc5f320 [shape=record,label="{tree.c:4957:}"];
+	Node0x55ad0bc5f320 -> Node0x55ad0bc5b0d0;
+	Node0x55ad0bc5b0d0 [shape=record,label="{tree.c:4958:}"];
+}

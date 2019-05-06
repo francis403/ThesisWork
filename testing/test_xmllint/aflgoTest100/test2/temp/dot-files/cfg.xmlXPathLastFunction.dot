@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlXPathLastFunction' function" {
+	label="CFG for 'xmlXPathLastFunction' function";
+
+	Node0x5621ee925170 [shape=record,label="{xpath.c:8502:|{<s0>T|<s1>F}}"];
+	Node0x5621ee925170 -> Node0x5621ee925da0;
+	Node0x5621ee925170 -> Node0x5621ee92aba0;
+	Node0x5621ee925da0 [shape=record,label="{xpath.c:8503:}"];
+	Node0x5621ee925da0 -> Node0x5621ee92b7e0;
+	Node0x5621ee92aba0 [shape=record,label="{xpath.c:8503:|{<s0>T|<s1>F}}"];
+	Node0x5621ee92aba0 -> Node0x5621ee92ae30;
+	Node0x5621ee92aba0 -> Node0x5621ee92ae80;
+	Node0x5621ee92ae30 [shape=record,label="{xpath.c:8503:}"];
+	Node0x5621ee92ae30 -> Node0x5621ee92b7e0;
+	Node0x5621ee92ae80 [shape=record,label="{xpath.c:8503:|{<s0>T|<s1>F}}"];
+	Node0x5621ee92ae80 -> Node0x5621ee92b1e0;
+	Node0x5621ee92ae80 -> Node0x5621ee92b230;
+	Node0x5621ee92b1e0 [shape=record,label="{xpath.c:8503:}"];
+	Node0x5621ee92b1e0 -> Node0x5621ee92b7e0;
+	Node0x5621ee92b230 [shape=record,label="{xpath.c:8504:|{<s0>T|<s1>F}}"];
+	Node0x5621ee92b230 -> Node0x5621ee92b790;
+	Node0x5621ee92b230 -> Node0x5621ee92b830;
+	Node0x5621ee92b790 [shape=record,label="{xpath.c:8505:}"];
+	Node0x5621ee92b790 -> Node0x5621ee92b7e0;
+	Node0x5621ee92b830 [shape=record,label="{xpath.c:8513:}"];
+	Node0x5621ee92b830 -> Node0x5621ee92b7e0;
+	Node0x5621ee92b7e0 [shape=record,label="{xpath.c:8515:}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'reference' function" {
+	label="CFG for 'reference' function";
+
+	Node0x55adc8b9d3e0 [shape=record,label="{legacy.c:1166:|{<s0>T|<s1>F}}"];
+	Node0x55adc8b9d3e0:s0 -> Node0x55adc8bc13f0;
+	Node0x55adc8b9d3e0:s1 -> Node0x55adc8bc1660;
+	Node0x55adc8bc13f0 [shape=record,label="{legacy.c:1168:}"];
+	Node0x55adc8bc13f0 -> Node0x55adc8bc1660;
+	Node0x55adc8bc1660 [shape=record,label="{legacy.c:1168:}"];
+}

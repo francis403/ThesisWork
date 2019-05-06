@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlSAXParseDoc' function" {
+	label="CFG for 'xmlSAXParseDoc' function";
+
+	Node0x55d73bf31520 [shape=record,label="{parser.c:14599:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf31520 -> Node0x55d73bf33780;
+	Node0x55d73bf31520 -> Node0x55d73bf337d0;
+	Node0x55d73bf33780 [shape=record,label="{parser.c:14604:}"];
+	Node0x55d73bf33780 -> Node0x55d73bf31160;
+	Node0x55d73bf337d0 [shape=record,label="{parser.c:14607:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf337d0 -> Node0x55d73bf33e60;
+	Node0x55d73bf337d0 -> Node0x55d73bf33eb0;
+	Node0x55d73bf33e60 [shape=record,label="{parser.c:14608:}"];
+	Node0x55d73bf33e60 -> Node0x55d73bf31160;
+	Node0x55d73bf33eb0 [shape=record,label="{parser.c:14609:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf33eb0 -> Node0x55d73bf34310;
+	Node0x55d73bf33eb0 -> Node0x55d73bf34360;
+	Node0x55d73bf34310 [shape=record,label="{parser.c:14610:}"];
+	Node0x55d73bf34310 -> Node0x55d73bf34360;
+	Node0x55d73bf34360 [shape=record,label="{parser.c:14614:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf34360 -> Node0x55d73bf34ff0;
+	Node0x55d73bf34360 -> Node0x55d73bf350e0;
+	Node0x55d73bf350e0 [shape=record,label="{parser.c:14617:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf350e0 -> Node0x55d73bf34ff0;
+	Node0x55d73bf350e0 -> Node0x55d73bf35090;
+	Node0x55d73bf34ff0 [shape=record,label="{parser.c:14617:}"];
+	Node0x55d73bf34ff0 -> Node0x55d73bf35040;
+	Node0x55d73bf35090 [shape=record,label="{parser.c:14619:}"];
+	Node0x55d73bf35090 -> Node0x55d73bf35040;
+	Node0x55d73bf35040 [shape=record,label="{parser.c:14623:|{<s0>T|<s1>F}}"];
+	Node0x55d73bf35040 -> Node0x55d73bf35f90;
+	Node0x55d73bf35040 -> Node0x55d73bf35fe0;
+	Node0x55d73bf35f90 [shape=record,label="{parser.c:14624:}"];
+	Node0x55d73bf35f90 -> Node0x55d73bf35fe0;
+	Node0x55d73bf35fe0 [shape=record,label="{parser.c:14625:}"];
+	Node0x55d73bf35fe0 -> Node0x55d73bf31160;
+	Node0x55d73bf31160 [shape=record,label="{parser.c:14628:}"];
+}

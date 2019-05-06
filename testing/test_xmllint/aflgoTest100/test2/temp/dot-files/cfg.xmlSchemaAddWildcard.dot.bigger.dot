@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlSchemaAddWildcard' function" {
+	label="CFG for 'xmlSchemaAddWildcard' function";
+
+	Node0x5583534e52d0 [shape=record,label="{xmlschemas.c:5691:|{<s0>T|<s1>F}}"];
+	Node0x5583534e52d0:s0 -> Node0x5583534e66e0;
+	Node0x5583534e52d0:s1 -> Node0x5583534e6780;
+	Node0x5583534e6780 [shape=record,label="{xmlschemas.c:5696:|{<s0>T|<s1>F}}"];
+	Node0x5583534e6780:s0 -> Node0x5583534e66e0;
+	Node0x5583534e6780:s1 -> Node0x5583534e6730;
+	Node0x5583534e66e0 [shape=record,label="{xmlschemas.c:5697:}"];
+	Node0x5583534e66e0 -> Node0x5583534e5320;
+	Node0x5583534e6730 [shape=record,label="{xmlschemas.c:5699:|{<s0>T|<s1>F}}"];
+	Node0x5583534e6730:s0 -> Node0x5583534e7100;
+	Node0x5583534e6730:s1 -> Node0x5583534e7150;
+	Node0x5583534e7100 [shape=record,label="{xmlschemas.c:5701:}"];
+	Node0x5583534e7100 -> Node0x5583534e5320;
+	Node0x5583534e7150 [shape=record,label="{xmlschemas.c:5704:}"];
+	Node0x5583534e7150 -> Node0x5583534e5320;
+	Node0x5583534e5320 [shape=record,label="{xmlschemas.c:5709:}"];
+}

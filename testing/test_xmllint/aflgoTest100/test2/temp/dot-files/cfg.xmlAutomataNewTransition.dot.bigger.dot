@@ -1,0 +1,33 @@
+digraph "CFG for 'xmlAutomataNewTransition' function" {
+	label="CFG for 'xmlAutomataNewTransition' function";
+
+	Node0x5580ae95cb50 [shape=record,label="{xmlregexp.c:5716:|{<s0>T|<s1>F}}"];
+	Node0x5580ae95cb50:s0 -> Node0x5580ae964000;
+	Node0x5580ae95cb50:s1 -> Node0x5580ae964120;
+	Node0x5580ae964120 [shape=record,label="{xmlregexp.c:5721:|{<s0>T|<s1>F}}"];
+	Node0x5580ae964120:s0 -> Node0x5580ae964000;
+	Node0x5580ae964120:s1 -> Node0x5580ae9640a0;
+	Node0x5580ae9640a0 [shape=record,label="{xmlregexp.c:5721:|{<s0>T|<s1>F}}"];
+	Node0x5580ae9640a0:s0 -> Node0x5580ae964000;
+	Node0x5580ae9640a0:s1 -> Node0x5580ae964050;
+	Node0x5580ae964000 [shape=record,label="{xmlregexp.c:5722:}"];
+	Node0x5580ae964000 -> Node0x5580ae95e880;
+	Node0x5580ae964050 [shape=record,label="{xmlregexp.c:5723:|{<s0>T|<s1>F}}"];
+	Node0x5580ae964050:s0 -> Node0x5580ae965420;
+	Node0x5580ae964050:s1 -> Node0x5580ae965470;
+	Node0x5580ae965420 [shape=record,label="{xmlregexp.c:5725:}"];
+	Node0x5580ae965420 -> Node0x5580ae95e880;
+	Node0x5580ae965470 [shape=record,label="{xmlregexp.c:5726:|{<s0>T|<s1>F}}"];
+	Node0x5580ae965470:s0 -> Node0x5580ae965ed0;
+	Node0x5580ae965470:s1 -> Node0x5580ae965f20;
+	Node0x5580ae965ed0 [shape=record,label="{xmlregexp.c:5730:}"];
+	Node0x5580ae965ed0 -> Node0x5580ae95e880;
+	Node0x5580ae965f20 [shape=record,label="{xmlregexp.c:5733:|{<s0>T|<s1>F}}"];
+	Node0x5580ae965f20:s0 -> Node0x5580ae966880;
+	Node0x5580ae965f20:s1 -> Node0x5580ae9668d0;
+	Node0x5580ae966880 [shape=record,label="{xmlregexp.c:5734:}"];
+	Node0x5580ae966880 -> Node0x5580ae95e880;
+	Node0x5580ae9668d0 [shape=record,label="{xmlregexp.c:5735:}"];
+	Node0x5580ae9668d0 -> Node0x5580ae95e880;
+	Node0x5580ae95e880 [shape=record,label="{xmlregexp.c:5736:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlCreateIntSubset' function" {
+	label="CFG for 'libxml_xmlCreateIntSubset' function";
+
+	Node0x55d6cb8720b0 [shape=record,label="{libxml2-py.c:1874:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb8720b0:s0 -> Node0x55d6cb876160;
+	Node0x55d6cb8720b0:s1 -> Node0x55d6cb876110;
+	Node0x55d6cb876110 [shape=record,label="{libxml2-py.c:1884:}"];
+	Node0x55d6cb876110 -> Node0x55d6cb872340;
+	Node0x55d6cb876160 [shape=record,label="{libxml2-py.c:1885:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb876160:s0 -> Node0x55d6cb876a80;
+	Node0x55d6cb876160:s1 -> Node0x55d6cb876ad0;
+	Node0x55d6cb876a80 [shape=record,label="{libxml2-py.c:1885:}"];
+	Node0x55d6cb876a80 -> Node0x55d6cb876b20;
+	Node0x55d6cb876ad0 [shape=record,label="{libxml2-py.c:1885:}"];
+	Node0x55d6cb876ad0 -> Node0x55d6cb876b20;
+	Node0x55d6cb876b20 [shape=record,label="{libxml2-py.c:1885:}"];
+	Node0x55d6cb876b20 -> Node0x55d6cb872340;
+	Node0x55d6cb872340 [shape=record,label="{libxml2-py.c:1890:}"];
+}

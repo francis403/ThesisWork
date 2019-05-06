@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsGeneralPunctuation' function" {
+	label="CFG for 'libxml_xmlUCSIsGeneralPunctuation' function";
+
+	Node0x55f9315db9d0 [shape=record,label="{libxml2-py.c:10299:|{<s0>T|<s1>F}}"];
+	Node0x55f9315db9d0:s0 -> Node0x55f9315de950;
+	Node0x55f9315db9d0:s1 -> Node0x55f9315de900;
+	Node0x55f9315de900 [shape=record,label="{libxml2-py.c:10305:}"];
+	Node0x55f9315de900 -> Node0x55f9315dbc60;
+	Node0x55f9315de950 [shape=record,label="{libxml2-py.c:10307:}"];
+	Node0x55f9315de950 -> Node0x55f9315dbc60;
+	Node0x55f9315dbc60 [shape=record,label="{libxml2-py.c:10310:}"];
+}

@@ -1,0 +1,32 @@
+digraph "CFG for 'htmlDtdDumpOutput' function" {
+	label="CFG for 'htmlDtdDumpOutput' function";
+
+	Node0x5651eecf01a0 [shape=record,label="{HTMLtree.c:643:|{<s0>T|<s1>F}}"];
+	Node0x5651eecf01a0 -> Node0x5651eecf3710;
+	Node0x5651eecf01a0 -> Node0x5651eecf3760;
+	Node0x5651eecf3710 [shape=record,label="{HTMLtree.c:648:}"];
+	Node0x5651eecf3710 -> Node0x5651eecf01f0;
+	Node0x5651eecf3760 [shape=record,label="{HTMLtree.c:651:|{<s0>T|<s1>F}}"];
+	Node0x5651eecf3760 -> Node0x5651eec90410;
+	Node0x5651eecf3760 -> Node0x5651eec904b0;
+	Node0x5651eec90410 [shape=record,label="{HTMLtree.c:654:|{<s0>T|<s1>F}}"];
+	Node0x5651eec90410 -> Node0x5651eec90eb0;
+	Node0x5651eec90410 -> Node0x5651eec90f00;
+	Node0x5651eec90eb0 [shape=record,label="{HTMLtree.c:657:}"];
+	Node0x5651eec90eb0 -> Node0x5651eec90f00;
+	Node0x5651eec90f00 [shape=record,label="{HTMLtree.c:660:}"];
+	Node0x5651eec90f00 -> Node0x5651eec90460;
+	Node0x5651eec904b0 [shape=record,label="{HTMLtree.c:660:|{<s0>T|<s1>F}}"];
+	Node0x5651eec904b0 -> Node0x5651eec91bc0;
+	Node0x5651eec904b0 -> Node0x5651eec91b70;
+	Node0x5651eec91bc0 [shape=record,label="{HTMLtree.c:661:|{<s0>T|<s1>F}}"];
+	Node0x5651eec91bc0 -> Node0x5651eec91b20;
+	Node0x5651eec91bc0 -> Node0x5651eec91b70;
+	Node0x5651eec91b20 [shape=record,label="{HTMLtree.c:662:}"];
+	Node0x5651eec91b20 -> Node0x5651eec91b70;
+	Node0x5651eec91b70 [shape=record,label="{%65}"];
+	Node0x5651eec91b70 -> Node0x5651eec90460;
+	Node0x5651eec90460 [shape=record,label="{HTMLtree.c:665:}"];
+	Node0x5651eec90460 -> Node0x5651eecf01f0;
+	Node0x5651eecf01f0 [shape=record,label="{HTMLtree.c:666:}"];
+}

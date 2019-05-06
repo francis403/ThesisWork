@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXIncludeProcessTreeFlags' function" {
+	label="CFG for 'libxml_xmlXIncludeProcessTreeFlags' function";
+
+	Node0x55f931794b50 [shape=record,label="{libxml2-py.c:12770:|{<s0>T|<s1>F}}"];
+	Node0x55f931794b50:s0 -> Node0x55f931798aa0;
+	Node0x55f931794b50:s1 -> Node0x55f931798a50;
+	Node0x55f931798a50 [shape=record,label="{libxml2-py.c:12778:}"];
+	Node0x55f931798a50 -> Node0x55f931794de0;
+	Node0x55f931798aa0 [shape=record,label="{libxml2-py.c:12779:|{<s0>T|<s1>F}}"];
+	Node0x55f931798aa0:s0 -> Node0x55f931799300;
+	Node0x55f931798aa0:s1 -> Node0x55f931799350;
+	Node0x55f931799300 [shape=record,label="{libxml2-py.c:12779:}"];
+	Node0x55f931799300 -> Node0x55f9317993a0;
+	Node0x55f931799350 [shape=record,label="{libxml2-py.c:12779:}"];
+	Node0x55f931799350 -> Node0x55f9317993a0;
+	Node0x55f9317993a0 [shape=record,label="{libxml2-py.c:12779:}"];
+	Node0x55f9317993a0 -> Node0x55f931794de0;
+	Node0x55f931794de0 [shape=record,label="{libxml2-py.c:12784:}"];
+}

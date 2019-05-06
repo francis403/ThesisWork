@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlSchemaSAXUnplug' function" {
+	label="CFG for 'xmlSchemaSAXUnplug' function";
+
+	Node0x55835331b1d0 [shape=record,label="{xmlschemas.c:28768:|{<s0>T|<s1>F}}"];
+	Node0x55835331b1d0 -> Node0x5583533339f0;
+	Node0x55835331b1d0 -> Node0x558353333a90;
+	Node0x558353333a90 [shape=record,label="{xmlschemas.c:28773:|{<s0>T|<s1>F}}"];
+	Node0x558353333a90 -> Node0x5583533339f0;
+	Node0x558353333a90 -> Node0x558353333a40;
+	Node0x5583533339f0 [shape=record,label="{xmlschemas.c:28774:}"];
+	Node0x5583533339f0 -> Node0x55835332bc60;
+	Node0x558353333a40 [shape=record,label="{xmlschemas.c:28775:|{<s0>T|<s1>F}}"];
+	Node0x558353333a40 -> Node0x558353335010;
+	Node0x558353333a40 -> Node0x558353335060;
+	Node0x558353335010 [shape=record,label="{xmlschemas.c:28782:}"];
+	Node0x558353335010 -> Node0x558353335060;
+	Node0x558353335060 [shape=record,label="{xmlschemas.c:28787:}"];
+	Node0x558353335060 -> Node0x55835332bc60;
+	Node0x55835332bc60 [shape=record,label="{xmlschemas.c:28789:}"];
+}

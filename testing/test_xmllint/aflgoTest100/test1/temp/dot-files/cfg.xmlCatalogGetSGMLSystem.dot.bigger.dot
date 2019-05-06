@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlCatalogGetSGMLSystem' function" {
+	label="CFG for 'xmlCatalogGetSGMLSystem' function";
+
+	Node0x5650cc96ce70 [shape=record,label="{catalog.c:2588:|{<s0>T|<s1>F}}"];
+	Node0x5650cc96ce70:s0 -> Node0x5650cc96dce0;
+	Node0x5650cc96ce70:s1 -> Node0x5650cc96dd30;
+	Node0x5650cc96dce0 [shape=record,label="{catalog.c:2592:}"];
+	Node0x5650cc96dce0 -> Node0x5650cc96cec0;
+	Node0x5650cc96dd30 [shape=record,label="{catalog.c:2594:|{<s0>T|<s1>F}}"];
+	Node0x5650cc96dd30:s0 -> Node0x5650cc96e3f0;
+	Node0x5650cc96dd30:s1 -> Node0x5650cc96e440;
+	Node0x5650cc96e3f0 [shape=record,label="{catalog.c:2596:}"];
+	Node0x5650cc96e3f0 -> Node0x5650cc96cec0;
+	Node0x5650cc96e440 [shape=record,label="{catalog.c:2597:|{<s0>T|<s1>F}}"];
+	Node0x5650cc96e440:s0 -> Node0x5650cc96e8a0;
+	Node0x5650cc96e440:s1 -> Node0x5650cc96e8f0;
+	Node0x5650cc96e8a0 [shape=record,label="{catalog.c:2598:}"];
+	Node0x5650cc96e8a0 -> Node0x5650cc96cec0;
+	Node0x5650cc96e8f0 [shape=record,label="{catalog.c:2599:}"];
+	Node0x5650cc96e8f0 -> Node0x5650cc96cec0;
+	Node0x5650cc96cec0 [shape=record,label="{catalog.c:2600:}"];
+}

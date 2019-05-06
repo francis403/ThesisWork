@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUpgradeOldNs' function" {
+	label="CFG for 'xmlUpgradeOldNs' function";
+
+	Node0x55f3b47ccc60 [shape=record,label="{legacy.c:701:|{<s0>T|<s1>F}}"];
+	Node0x55f3b47ccc60:s0 -> Node0x55f3b47ce510;
+	Node0x55f3b47ccc60:s1 -> Node0x55f3b47ce470;
+	Node0x55f3b47ce470 [shape=record,label="{legacy.c:706:}"];
+	Node0x55f3b47ce470 -> Node0x55f3b47ce510;
+	Node0x55f3b47ce510 [shape=record,label="{legacy.c:710:}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsBuhid' function" {
+	label="CFG for 'xmlUCSIsBuhid' function";
+
+	Node0x55ca9b1e3d20 [shape=record,label="{xmlunicode.c:1158:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b1e3d20:s0 -> Node0x55ca9b1de400;
+	Node0x55ca9b1e3d20:s1 -> Node0x55ca9b1de3b0;
+	Node0x55ca9b1de400 [shape=record,label="{xmlunicode.c:1159:}"];
+	Node0x55ca9b1de400 -> Node0x55ca9b1de3b0;
+	Node0x55ca9b1de3b0 [shape=record,label="{xmlunicode.c:1159:}"];
+}

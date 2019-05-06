@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlParseURIRaw' function" {
+	label="CFG for 'xmlParseURIRaw' function";
+
+	Node0x563ca5d2d060 [shape=record,label="{uri.c:978:|{<s0>T|<s1>F}}"];
+	Node0x563ca5d2d060 -> Node0x563ca5d2cfd0;
+	Node0x563ca5d2d060 -> Node0x563ca5d356f0;
+	Node0x563ca5d2cfd0 [shape=record,label="{uri.c:983:}"];
+	Node0x563ca5d2cfd0 -> Node0x563ca5d35760;
+	Node0x563ca5d356f0 [shape=record,label="{uri.c:984:|{<s0>T|<s1>F}}"];
+	Node0x563ca5d356f0 -> Node0x563ca5d37bd0;
+	Node0x563ca5d356f0 -> Node0x563ca5d37c20;
+	Node0x563ca5d37bd0 [shape=record,label="{uri.c:986:|{<s0>T|<s1>F}}"];
+	Node0x563ca5d37bd0 -> Node0x563ca5d37fe0;
+	Node0x563ca5d37bd0 -> Node0x563ca5d38030;
+	Node0x563ca5d37fe0 [shape=record,label="{uri.c:987:}"];
+	Node0x563ca5d37fe0 -> Node0x563ca5d38030;
+	Node0x563ca5d38030 [shape=record,label="{uri.c:989:|{<s0>T|<s1>F}}"];
+	Node0x563ca5d38030 -> Node0x563ca5d388c0;
+	Node0x563ca5d38030 -> Node0x563ca5d38910;
+	Node0x563ca5d388c0 [shape=record,label="{uri.c:991:}"];
+	Node0x563ca5d388c0 -> Node0x563ca5d35760;
+	Node0x563ca5d38910 [shape=record,label="{uri.c:994:}"];
+	Node0x563ca5d38910 -> Node0x563ca5d37c20;
+	Node0x563ca5d37c20 [shape=record,label="{uri.c:995:}"];
+	Node0x563ca5d37c20 -> Node0x563ca5d35760;
+	Node0x563ca5d35760 [shape=record,label="{uri.c:996:}"];
+}

@@ -1,0 +1,29 @@
+digraph "CFG for 'libxml_xmlDebugDumpString' function" {
+	label="CFG for 'libxml_xmlDebugDumpString' function";
+
+	Node0x55f930e1b7c0 [shape=record,label="{libxml2-py.c:2275:|{<s0>T|<s1>F}}"];
+	Node0x55f930e1b7c0:s0 -> Node0x55f930e20100;
+	Node0x55f930e1b7c0:s1 -> Node0x55f930e200b0;
+	Node0x55f930e200b0 [shape=record,label="{libxml2-py.c:2281:}"];
+	Node0x55f930e200b0 -> Node0x55f930e1b5f0;
+	Node0x55f930e20100 [shape=record,label="{libxml2-py.c:2282:|{<s0>T|<s1>F}}"];
+	Node0x55f930e20100:s0 -> Node0x55f930e20950;
+	Node0x55f930e20100:s1 -> Node0x55f930e209a0;
+	Node0x55f930e20950 [shape=record,label="{libxml2-py.c:2282:}"];
+	Node0x55f930e20950 -> Node0x55f930e209f0;
+	Node0x55f930e209a0 [shape=record,label="{libxml2-py.c:2282:|{<s0>T|<s1>F}}"];
+	Node0x55f930e209a0:s0 -> Node0x55f930e20c10;
+	Node0x55f930e209a0:s1 -> Node0x55f930e20d00;
+	Node0x55f930e20d00 [shape=record,label="{libxml2-py.c:2282:|{<s0>T|<s1>F}}"];
+	Node0x55f930e20d00:s0 -> Node0x55f930e20c10;
+	Node0x55f930e20d00:s1 -> Node0x55f930e20c60;
+	Node0x55f930e20c10 [shape=record,label="{libxml2-py.c:2282:}"];
+	Node0x55f930e20c10 -> Node0x55f930e20cb0;
+	Node0x55f930e20c60 [shape=record,label="{libxml2-py.c:2282:}"];
+	Node0x55f930e20c60 -> Node0x55f930e20cb0;
+	Node0x55f930e20cb0 [shape=record,label="{libxml2-py.c:2282:}"];
+	Node0x55f930e20cb0 -> Node0x55f930e209f0;
+	Node0x55f930e209f0 [shape=record,label="{libxml2-py.c:2282:}"];
+	Node0x55f930e209f0 -> Node0x55f930e1b5f0;
+	Node0x55f930e1b5f0 [shape=record,label="{libxml2-py.c:2288:}"];
+}

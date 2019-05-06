@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlRelaxNGValidateValueContent' function" {
+	label="CFG for 'xmlRelaxNGValidateValueContent' function";
+
+	Node0x555e9c690240 [shape=record,label="{relaxng.c:9026:}"];
+	Node0x555e9c690240 -> Node0x555e9c6a1fd0;
+	Node0x555e9c6a1fd0 [shape=record,label="{relaxng.c:9031:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6a1fd0 -> Node0x555e9c6a23d0;
+	Node0x555e9c6a1fd0 -> Node0x555e9c6a21f0;
+	Node0x555e9c6a23d0 [shape=record,label="{relaxng.c:9032:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6a23d0 -> Node0x555e9c6a2d80;
+	Node0x555e9c6a23d0 -> Node0x555e9c6a2dd0;
+	Node0x555e9c6a2d80 [shape=record,label="{relaxng.c:9034:}"];
+	Node0x555e9c6a2d80 -> Node0x555e9c6a21f0;
+	Node0x555e9c6a2dd0 [shape=record,label="{relaxng.c:9035:}"];
+	Node0x555e9c6a2dd0 -> Node0x555e9c6a1fd0;
+	Node0x555e9c6a21f0 [shape=record,label="{relaxng.c:9037:}"];
+}

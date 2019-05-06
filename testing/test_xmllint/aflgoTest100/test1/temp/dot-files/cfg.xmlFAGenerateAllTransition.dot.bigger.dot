@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlFAGenerateAllTransition' function" {
+	label="CFG for 'xmlFAGenerateAllTransition' function";
+
+	Node0x563d9d9b60b0 [shape=record,label="{xmlregexp.c:1464:|{<s0>T|<s1>F}}"];
+	Node0x563d9d9b60b0:s0 -> Node0x563d9d9b8bb0;
+	Node0x563d9d9b60b0:s1 -> Node0x563d9d9b8c00;
+	Node0x563d9d9b8bb0 [shape=record,label="{xmlregexp.c:1468:}"];
+	Node0x563d9d9b8bb0 -> Node0x563d9d9b8c00;
+	Node0x563d9d9b8c00 [shape=record,label="{xmlregexp.c:1472:|{<s0>T|<s1>F}}"];
+	Node0x563d9d9b8c00:s0 -> Node0x563d9d9b95d0;
+	Node0x563d9d9b8c00:s1 -> Node0x563d9d9b9670;
+	Node0x563d9d9b95d0 [shape=record,label="{xmlregexp.c:1473:}"];
+	Node0x563d9d9b95d0 -> Node0x563d9d9b9620;
+	Node0x563d9d9b9670 [shape=record,label="{xmlregexp.c:1475:}"];
+	Node0x563d9d9b9670 -> Node0x563d9d9b9620;
+	Node0x563d9d9b9620 [shape=record,label="{xmlregexp.c:1476:}"];
+}

@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlSchemaFreeIDCStateObjList' function" {
+	label="CFG for 'xmlSchemaFreeIDCStateObjList' function";
+
+	Node0x55d0266f10d0 [shape=record,label="{xmlschemas.c:3895:}"];
+	Node0x55d0266f10d0 -> Node0x55d0266f0660;
+	Node0x55d0266f0660 [shape=record,label="{xmlschemas.c:3898:|{<s0>T|<s1>F}}"];
+	Node0x55d0266f0660 -> Node0x55d0266f1d50;
+	Node0x55d0266f0660 -> Node0x55d0266f1b70;
+	Node0x55d0266f1d50 [shape=record,label="{xmlschemas.c:3899:|{<s0>T|<s1>F}}"];
+	Node0x55d0266f1d50 -> Node0x55d0266f2020;
+	Node0x55d0266f1d50 -> Node0x55d0266f2070;
+	Node0x55d0266f2020 [shape=record,label="{xmlschemas.c:3901:}"];
+	Node0x55d0266f2020 -> Node0x55d0266f2070;
+	Node0x55d0266f2070 [shape=record,label="{xmlschemas.c:3902:|{<s0>T|<s1>F}}"];
+	Node0x55d0266f2070 -> Node0x55d0266f2720;
+	Node0x55d0266f2070 -> Node0x55d0266f2770;
+	Node0x55d0266f2720 [shape=record,label="{xmlschemas.c:3903:}"];
+	Node0x55d0266f2720 -> Node0x55d0266f2770;
+	Node0x55d0266f2770 [shape=record,label="{xmlschemas.c:3904:}"];
+	Node0x55d0266f2770 -> Node0x55d0266f0660;
+	Node0x55d0266f1b70 [shape=record,label="{xmlschemas.c:3907:}"];
+}

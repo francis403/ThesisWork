@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlURIGetServer' function" {
+	label="CFG for 'libxml_xmlURIGetServer' function";
+
+	Node0x55d6cbc45550 [shape=record,label="{libxml2-py.c:11847:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbc45550:s0 -> Node0x55d6cbc46c40;
+	Node0x55d6cbc45550:s1 -> Node0x55d6cbc46bf0;
+	Node0x55d6cbc46bf0 [shape=record,label="{libxml2-py.c:11854:}"];
+	Node0x55d6cbc46bf0 -> Node0x55d6cbc458d0;
+	Node0x55d6cbc46c40 [shape=record,label="{libxml2-py.c:11855:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbc46c40:s0 -> Node0x55d6cc185940;
+	Node0x55d6cbc46c40:s1 -> Node0x55d6cc185990;
+	Node0x55d6cc185940 [shape=record,label="{libxml2-py.c:11855:}"];
+	Node0x55d6cc185940 -> Node0x55d6cc1859e0;
+	Node0x55d6cc185990 [shape=record,label="{libxml2-py.c:11855:}"];
+	Node0x55d6cc185990 -> Node0x55d6cc1859e0;
+	Node0x55d6cc1859e0 [shape=record,label="{libxml2-py.c:11855:}"];
+	Node0x55d6cc1859e0 -> Node0x55d6cbc458d0;
+	Node0x55d6cbc458d0 [shape=record,label="{libxml2-py.c:11860:}"];
+}

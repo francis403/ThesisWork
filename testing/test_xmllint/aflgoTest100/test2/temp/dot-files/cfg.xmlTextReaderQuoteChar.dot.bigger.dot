@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlTextReaderQuoteChar' function" {
+	label="CFG for 'xmlTextReaderQuoteChar' function";
+
+	Node0x5619bd631160 [shape=record,label="{xmlreader.c:3699:|{<s0>T|<s1>F}}"];
+	Node0x5619bd631160:s0 -> Node0x5619bd6320d0;
+	Node0x5619bd631160:s1 -> Node0x5619bd631660;
+	Node0x5619bd6320d0 [shape=record,label="{xmlreader.c:3701:}"];
+	Node0x5619bd6320d0 -> Node0x5619bd631350;
+	Node0x5619bd631660 [shape=record,label="{xmlreader.c:3703:}"];
+	Node0x5619bd631660 -> Node0x5619bd631350;
+	Node0x5619bd631350 [shape=record,label="{xmlreader.c:3704:}"];
+}

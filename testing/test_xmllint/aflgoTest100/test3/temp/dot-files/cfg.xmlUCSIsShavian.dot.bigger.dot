@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsShavian' function" {
+	label="CFG for 'xmlUCSIsShavian' function";
+
+	Node0x55ca9b212300 [shape=record,label="{xmlunicode.c:2265:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b212300:s0 -> Node0x55ca9b258cf0;
+	Node0x55ca9b212300:s1 -> Node0x55ca9b258ca0;
+	Node0x55ca9b258cf0 [shape=record,label="{xmlunicode.c:2266:}"];
+	Node0x55ca9b258cf0 -> Node0x55ca9b258ca0;
+	Node0x55ca9b258ca0 [shape=record,label="{xmlunicode.c:2266:}"];
+}

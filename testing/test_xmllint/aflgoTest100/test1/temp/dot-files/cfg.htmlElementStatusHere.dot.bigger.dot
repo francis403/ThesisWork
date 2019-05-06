@@ -1,0 +1,20 @@
+digraph "CFG for 'htmlElementStatusHere' function" {
+	label="CFG for 'htmlElementStatusHere' function";
+
+	Node0x5630c5dd9d80 [shape=record,label="{HTMLparser.c:6503:|{<s0>T|<s1>F}}"];
+	Node0x5630c5dd9d80:s0 -> Node0x5630c5ddcc50;
+	Node0x5630c5dd9d80:s1 -> Node0x5630c5ddcbb0;
+	Node0x5630c5ddcc50 [shape=record,label="{HTMLparser.c:6504:|{<s0>T|<s1>F}}"];
+	Node0x5630c5ddcc50:s0 -> Node0x5630c5ddcc00;
+	Node0x5630c5ddcc50:s1 -> Node0x5630c5ddcbb0;
+	Node0x5630c5ddcbb0 [shape=record,label="{HTMLparser.c:6505:}"];
+	Node0x5630c5ddcbb0 -> Node0x5630c5dd9b40;
+	Node0x5630c5ddcc00 [shape=record,label="{HTMLparser.c:6506:|{<s0>T|<s1>F}}"];
+	Node0x5630c5ddcc00:s0 -> Node0x5630c5ddd270;
+	Node0x5630c5ddcc00:s1 -> Node0x5630c5ddd220;
+	Node0x5630c5ddd220 [shape=record,label="{HTMLparser.c:6507:}"];
+	Node0x5630c5ddd220 -> Node0x5630c5dd9b40;
+	Node0x5630c5ddd270 [shape=record,label="{HTMLparser.c:6509:}"];
+	Node0x5630c5ddd270 -> Node0x5630c5dd9b40;
+	Node0x5630c5dd9b40 [shape=record,label="{HTMLparser.c:6510:}"];
+}

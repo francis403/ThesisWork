@@ -1,0 +1,17 @@
+digraph "CFG for 'myReallocFunc' function" {
+	label="CFG for 'myReallocFunc' function";
+
+	Node0x556d1b5bdd50 [shape=record,label="{xmllint.c:358:|{<s0>T|<s1>F}}"];
+	Node0x556d1b5bdd50:s0 -> Node0x556d1b5bf350;
+	Node0x556d1b5bdd50:s1 -> Node0x556d1b5bf3a0;
+	Node0x556d1b5bf350 [shape=record,label="{xmllint.c:364:|{<s0>T|<s1>F}}"];
+	Node0x556d1b5bf350:s0 -> Node0x556d1b5bf6a0;
+	Node0x556d1b5bf350:s1 -> Node0x556d1b5bf6f0;
+	Node0x556d1b5bf6a0 [shape=record,label="{xmllint.c:365:}"];
+	Node0x556d1b5bf6a0 -> Node0x556d1b5bdda0;
+	Node0x556d1b5bf6f0 [shape=record,label="{xmllint.c:369:}"];
+	Node0x556d1b5bf6f0 -> Node0x556d1b5bf3a0;
+	Node0x556d1b5bf3a0 [shape=record,label="{xmllint.c:370:}"];
+	Node0x556d1b5bf3a0 -> Node0x556d1b5bdda0;
+	Node0x556d1b5bdda0 [shape=record,label="{xmllint.c:371:}"];
+}

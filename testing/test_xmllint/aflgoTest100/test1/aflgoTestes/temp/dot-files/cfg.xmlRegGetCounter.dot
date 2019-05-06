@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlRegGetCounter' function" {
+	label="CFG for 'xmlRegGetCounter' function";
+
+	Node0x563d9d998ed0 [shape=record,label="{xmlregexp.c:1260:|{<s0>T|<s1>F}}"];
+	Node0x563d9d998ed0 -> Node0x563d9d992f80;
+	Node0x563d9d998ed0 -> Node0x563d9d993020;
+	Node0x563d9d992f80 [shape=record,label="{xmlregexp.c:1262:|{<s0>T|<s1>F}}"];
+	Node0x563d9d992f80 -> Node0x563d9d99a140;
+	Node0x563d9d992f80 -> Node0x563d9d99a190;
+	Node0x563d9d99a140 [shape=record,label="{xmlregexp.c:1266:}"];
+	Node0x563d9d99a140 -> Node0x563d9d998f20;
+	Node0x563d9d99a190 [shape=record,label="{xmlregexp.c:1270:}"];
+	Node0x563d9d99a190 -> Node0x563d9d992fd0;
+	Node0x563d9d993020 [shape=record,label="{xmlregexp.c:1270:|{<s0>T|<s1>F}}"];
+	Node0x563d9d993020 -> Node0x563d9d99ae80;
+	Node0x563d9d993020 -> Node0x563d9d99aed0;
+	Node0x563d9d99ae80 [shape=record,label="{xmlregexp.c:1271:|{<s0>T|<s1>F}}"];
+	Node0x563d9d99ae80 -> Node0x563d9d99c230;
+	Node0x563d9d99ae80 -> Node0x563d9d99c280;
+	Node0x563d9d99c230 [shape=record,label="{xmlregexp.c:1276:}"];
+	Node0x563d9d99c230 -> Node0x563d9d998f20;
+	Node0x563d9d99c280 [shape=record,label="{xmlregexp.c:1280:}"];
+	Node0x563d9d99c280 -> Node0x563d9d99aed0;
+	Node0x563d9d99aed0 [shape=record,label="{%60}"];
+	Node0x563d9d99aed0 -> Node0x563d9d992fd0;
+	Node0x563d9d992fd0 [shape=record,label="{xmlregexp.c:1282:}"];
+	Node0x563d9d992fd0 -> Node0x563d9d998f20;
+	Node0x563d9d998f20 [shape=record,label="{xmlregexp.c:1285:}"];
+}

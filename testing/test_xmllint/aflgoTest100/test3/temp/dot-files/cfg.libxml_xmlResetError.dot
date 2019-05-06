@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlResetError' function" {
+	label="CFG for 'libxml_xmlResetError' function";
+
+	Node0x55d6cbd46ae0 [shape=record,label="{libxml2-py.c:6641:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbd46ae0:s0 -> Node0x55d6cbd4ad50;
+	Node0x55d6cbd46ae0:s1 -> Node0x55d6cbd4ad00;
+	Node0x55d6cbd4ad00 [shape=record,label="{libxml2-py.c:6646:}"];
+	Node0x55d6cbd4ad00 -> Node0x55d6cbd46930;
+	Node0x55d6cbd4ad50 [shape=record,label="{libxml2-py.c:6647:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbd4ad50:s0 -> Node0x55d6cbd4b530;
+	Node0x55d6cbd4ad50:s1 -> Node0x55d6cbd4b580;
+	Node0x55d6cbd4b530 [shape=record,label="{libxml2-py.c:6647:}"];
+	Node0x55d6cbd4b530 -> Node0x55d6cbd4b5d0;
+	Node0x55d6cbd4b580 [shape=record,label="{libxml2-py.c:6647:}"];
+	Node0x55d6cbd4b580 -> Node0x55d6cbd4b5d0;
+	Node0x55d6cbd4b5d0 [shape=record,label="{libxml2-py.c:6647:}"];
+	Node0x55d6cbd4b5d0 -> Node0x55d6cbd46930;
+	Node0x55d6cbd46930 [shape=record,label="{libxml2-py.c:6652:}"];
+}

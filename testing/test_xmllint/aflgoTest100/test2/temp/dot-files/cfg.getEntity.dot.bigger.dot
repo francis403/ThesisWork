@@ -1,0 +1,10 @@
+digraph "CFG for 'getEntity' function" {
+	label="CFG for 'getEntity' function";
+
+	Node0x55adc8b9f050 [shape=record,label="{legacy.c:937:|{<s0>T|<s1>F}}"];
+	Node0x55adc8b9f050:s0 -> Node0x55adc8ba0c30;
+	Node0x55adc8b9f050:s1 -> Node0x55adc8ba0c80;
+	Node0x55adc8ba0c30 [shape=record,label="{legacy.c:939:}"];
+	Node0x55adc8ba0c30 -> Node0x55adc8ba0c80;
+	Node0x55adc8ba0c80 [shape=record,label="{legacy.c:939:}"];
+}

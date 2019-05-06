@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlNewMutex' function" {
+	label="CFG for 'xmlNewMutex' function";
+
+	Node0x55d75a6e75d0 [shape=record,label="{threads.c:179:|{<s0>T|<s1>F}}"];
+	Node0x55d75a6e75d0 -> Node0x55d75a867c70;
+	Node0x55d75a6e75d0 -> Node0x55d75a867cc0;
+	Node0x55d75a867c70 [shape=record,label="{threads.c:182:}"];
+	Node0x55d75a867c70 -> Node0x55d75a85d8b0;
+	Node0x55d75a867cc0 [shape=record,label="{threads.c:184:|{<s0>T|<s1>F}}"];
+	Node0x55d75a867cc0 -> Node0x55d75a867f90;
+	Node0x55d75a867cc0 -> Node0x55d75a868fb0;
+	Node0x55d75a867f90 [shape=record,label="{threads.c:185:}"];
+	Node0x55d75a867f90 -> Node0x55d75a868fb0;
+	Node0x55d75a868fb0 [shape=record,label="{threads.c:195:}"];
+	Node0x55d75a868fb0 -> Node0x55d75a85d8b0;
+	Node0x55d75a85d8b0 [shape=record,label="{threads.c:196:}"];
+}

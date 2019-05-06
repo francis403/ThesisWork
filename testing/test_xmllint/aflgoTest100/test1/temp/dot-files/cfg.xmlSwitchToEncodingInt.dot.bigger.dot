@@ -1,0 +1,21 @@
+digraph "CFG for 'xmlSwitchToEncodingInt' function" {
+	label="CFG for 'xmlSwitchToEncodingInt' function";
+
+	Node0x5585b3e23510 [shape=record,label="{parserInternals.c:1289:|{<s0>T|<s1>F}}"];
+	Node0x5585b3e23510:s0 -> Node0x5585b3e34ed0;
+	Node0x5585b3e23510:s1 -> Node0x5585b3e34f70;
+	Node0x5585b3e34ed0 [shape=record,label="{parserInternals.c:1294:|{<s0>T|<s1>F}}"];
+	Node0x5585b3e34ed0:s0 -> Node0x5585b3e35330;
+	Node0x5585b3e34ed0:s1 -> Node0x5585b3e353d0;
+	Node0x5585b3e35330 [shape=record,label="{parserInternals.c:1295:}"];
+	Node0x5585b3e35330 -> Node0x5585b3e35380;
+	Node0x5585b3e353d0 [shape=record,label="{parserInternals.c:1297:}"];
+	Node0x5585b3e353d0 -> Node0x5585b3e23560;
+	Node0x5585b3e35380 [shape=record,label="{parserInternals.c:1304:}"];
+	Node0x5585b3e35380 -> Node0x5585b3e34f20;
+	Node0x5585b3e34f70 [shape=record,label="{parserInternals.c:1306:}"];
+	Node0x5585b3e34f70 -> Node0x5585b3e23560;
+	Node0x5585b3e34f20 [shape=record,label="{parserInternals.c:1307:}"];
+	Node0x5585b3e34f20 -> Node0x5585b3e23560;
+	Node0x5585b3e23560 [shape=record,label="{parserInternals.c:1308:}"];
+}

@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlXPathSetContextNode' function" {
+	label="CFG for 'xmlXPathSetContextNode' function";
+
+	Node0x5621eeb96230 [shape=record,label="{xpath.c:14874:|{<s0>T|<s1>F}}"];
+	Node0x5621eeb96230:s0 -> Node0x5621eeb97170;
+	Node0x5621eeb96230:s1 -> Node0x5621eeb97210;
+	Node0x5621eeb97210 [shape=record,label="{xpath.c:14875:|{<s0>T|<s1>F}}"];
+	Node0x5621eeb97210:s0 -> Node0x5621eeb97170;
+	Node0x5621eeb97210:s1 -> Node0x5621eeb971c0;
+	Node0x5621eeb97170 [shape=record,label="{xpath.c:14876:}"];
+	Node0x5621eeb97170 -> Node0x5621eeb96860;
+	Node0x5621eeb971c0 [shape=record,label="{xpath.c:14878:|{<s0>T|<s1>F}}"];
+	Node0x5621eeb971c0:s0 -> Node0x5621eeb97900;
+	Node0x5621eeb971c0:s1 -> Node0x5621eeb97950;
+	Node0x5621eeb97900 [shape=record,label="{xpath.c:14879:}"];
+	Node0x5621eeb97900 -> Node0x5621eeb96860;
+	Node0x5621eeb97950 [shape=record,label="{xpath.c:14882:}"];
+	Node0x5621eeb97950 -> Node0x5621eeb96860;
+	Node0x5621eeb96860 [shape=record,label="{xpath.c:14883:}"];
+}

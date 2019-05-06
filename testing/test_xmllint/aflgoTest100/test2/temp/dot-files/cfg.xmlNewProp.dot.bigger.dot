@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlNewProp' function" {
+	label="CFG for 'xmlNewProp' function";
+
+	Node0x5627b435d590 [shape=record,label="{tree.c:1939:|{<s0>T|<s1>F}}"];
+	Node0x5627b435d590:s0 -> Node0x5627b436ecf0;
+	Node0x5627b435d590:s1 -> Node0x5627b436ed40;
+	Node0x5627b436ecf0 [shape=record,label="{tree.c:1946:}"];
+	Node0x5627b436ecf0 -> Node0x5627b436e0d0;
+	Node0x5627b436ed40 [shape=record,label="{tree.c:1949:}"];
+	Node0x5627b436ed40 -> Node0x5627b436e0d0;
+	Node0x5627b436e0d0 [shape=record,label="{tree.c:1950:}"];
+}

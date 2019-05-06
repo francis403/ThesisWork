@@ -1,0 +1,36 @@
+digraph "CFG for 'xmlValidityError' function" {
+	label="CFG for 'xmlValidityError' function";
+
+	Node0x55d73c039f30 [shape=record,label="{parser.c:632:|{<s0>T|<s1>F}}"];
+	Node0x55d73c039f30:s0 -> Node0x55d73c03b540;
+	Node0x55d73c039f30:s1 -> Node0x55d73c03b470;
+	Node0x55d73c03b540 [shape=record,label="{parser.c:637:|{<s0>T|<s1>F}}"];
+	Node0x55d73c03b540:s0 -> Node0x55d73c03b4c0;
+	Node0x55d73c03b540:s1 -> Node0x55d73c03b470;
+	Node0x55d73c03b4c0 [shape=record,label="{parser.c:638:|{<s0>T|<s1>F}}"];
+	Node0x55d73c03b4c0:s0 -> Node0x55d73c03b420;
+	Node0x55d73c03b4c0:s1 -> Node0x55d73c03b470;
+	Node0x55d73c03b420 [shape=record,label="{parser.c:639:}"];
+	Node0x55d73c03b420 -> Node0x55d73c03d340;
+	Node0x55d73c03b470 [shape=record,label="{parser.c:640:|{<s0>T|<s1>F}}"];
+	Node0x55d73c03b470:s0 -> Node0x55d73c03be70;
+	Node0x55d73c03b470:s1 -> Node0x55d73c03bec0;
+	Node0x55d73c03be70 [shape=record,label="{parser.c:641:|{<s0>T|<s1>F}}"];
+	Node0x55d73c03be70:s0 -> Node0x55d73c03c4c0;
+	Node0x55d73c03be70:s1 -> Node0x55d73c03c470;
+	Node0x55d73c03c4c0 [shape=record,label="{parser.c:642:|{<s0>T|<s1>F}}"];
+	Node0x55d73c03c4c0:s0 -> Node0x55d73c03c420;
+	Node0x55d73c03c4c0:s1 -> Node0x55d73c03c470;
+	Node0x55d73c03c420 [shape=record,label="{parser.c:643:}"];
+	Node0x55d73c03c420 -> Node0x55d73c03c470;
+	Node0x55d73c03c470 [shape=record,label="{parser.c:644:}"];
+	Node0x55d73c03c470 -> Node0x55d73c03bec0;
+	Node0x55d73c03bec0 [shape=record,label="{parser.c:645:|{<s0>T|<s1>F}}"];
+	Node0x55d73c03bec0:s0 -> Node0x55d73c03d2f0;
+	Node0x55d73c03bec0:s1 -> Node0x55d73c03d390;
+	Node0x55d73c03d2f0 [shape=record,label="{parser.c:646:}"];
+	Node0x55d73c03d2f0 -> Node0x55d73c03d340;
+	Node0x55d73c03d390 [shape=record,label="{parser.c:654:}"];
+	Node0x55d73c03d390 -> Node0x55d73c03d340;
+	Node0x55d73c03d340 [shape=record,label="{parser.c:660:}"];
+}

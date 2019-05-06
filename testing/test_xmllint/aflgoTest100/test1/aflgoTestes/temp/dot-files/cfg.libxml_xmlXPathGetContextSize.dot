@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathGetContextSize' function" {
+	label="CFG for 'libxml_xmlXPathGetContextSize' function";
+
+	Node0x55f931825ce0 [shape=record,label="{libxml2-py.c:13309:|{<s0>T|<s1>F}}"];
+	Node0x55f931825ce0:s0 -> Node0x55f931827320;
+	Node0x55f931825ce0:s1 -> Node0x55f9318272d0;
+	Node0x55f9318272d0 [shape=record,label="{libxml2-py.c:13316:}"];
+	Node0x55f9318272d0 -> Node0x55f9318238c0;
+	Node0x55f931827320 [shape=record,label="{libxml2-py.c:13317:|{<s0>T|<s1>F}}"];
+	Node0x55f931827320:s0 -> Node0x55f931827b10;
+	Node0x55f931827320:s1 -> Node0x55f931827b60;
+	Node0x55f931827b10 [shape=record,label="{libxml2-py.c:13317:}"];
+	Node0x55f931827b10 -> Node0x55f931827bb0;
+	Node0x55f931827b60 [shape=record,label="{libxml2-py.c:13317:}"];
+	Node0x55f931827b60 -> Node0x55f931827bb0;
+	Node0x55f931827bb0 [shape=record,label="{libxml2-py.c:13317:}"];
+	Node0x55f931827bb0 -> Node0x55f9318238c0;
+	Node0x55f9318238c0 [shape=record,label="{libxml2-py.c:13322:}"];
+}

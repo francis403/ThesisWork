@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlXIncludeProcessFlagsData' function" {
+	label="CFG for 'xmlXIncludeProcessFlagsData' function";
+
+	Node0x5629231b22b0 [shape=record,label="{xinclude.c:2514:|{<s0>T|<s1>F}}"];
+	Node0x5629231b22b0:s0 -> Node0x5629231b3e60;
+	Node0x5629231b22b0:s1 -> Node0x5629231b3eb0;
+	Node0x5629231b3e60 [shape=record,label="{xinclude.c:2518:}"];
+	Node0x5629231b3e60 -> Node0x562922fcb570;
+	Node0x5629231b3eb0 [shape=record,label="{xinclude.c:2519:|{<s0>T|<s1>F}}"];
+	Node0x5629231b3eb0:s0 -> Node0x5629231b4d10;
+	Node0x5629231b3eb0:s1 -> Node0x5629231b4d60;
+	Node0x5629231b4d10 [shape=record,label="{xinclude.c:2521:}"];
+	Node0x5629231b4d10 -> Node0x562922fcb570;
+	Node0x5629231b4d60 [shape=record,label="{xinclude.c:2522:}"];
+	Node0x5629231b4d60 -> Node0x562922fcb570;
+	Node0x562922fcb570 [shape=record,label="{xinclude.c:2523:}"];
+}

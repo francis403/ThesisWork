@@ -1,0 +1,13 @@
+digraph "CFG for 'xmlBufOverflowError' function" {
+	label="CFG for 'xmlBufOverflowError' function";
+
+	Node0x56072393e6c0 [shape=record,label="{buf.c:107:|{<s0>T|<s1>F}}"];
+	Node0x56072393e6c0:s0 -> Node0x56072393f350;
+	Node0x56072393e6c0:s1 -> Node0x56072393f300;
+	Node0x56072393f350 [shape=record,label="{buf.c:110:|{<s0>T|<s1>F}}"];
+	Node0x56072393f350:s0 -> Node0x56072393f2b0;
+	Node0x56072393f350:s1 -> Node0x56072393f300;
+	Node0x56072393f2b0 [shape=record,label="{buf.c:111:}"];
+	Node0x56072393f2b0 -> Node0x56072393f300;
+	Node0x56072393f300 [shape=record,label="{buf.c:112:}"];
+}

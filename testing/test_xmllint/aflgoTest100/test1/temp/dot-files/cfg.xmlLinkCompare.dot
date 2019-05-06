@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlLinkCompare' function" {
+	label="CFG for 'xmlLinkCompare' function";
+
+	Node0x56019dfb0e20 [shape=record,label="{list.c:79:|{<s0>T|<s1>F}}"];
+	Node0x56019dfb0e20 -> Node0x56019dfb1100;
+	Node0x56019dfb0e20 -> Node0x56019dfb4280;
+	Node0x56019dfb1100 [shape=record,label="{list.c:82:}"];
+	Node0x56019dfb1100 -> Node0x56019dfb0e70;
+	Node0x56019dfb4280 [shape=record,label="{list.c:83:|{<s0>T|<s1>F}}"];
+	Node0x56019dfb4280 -> Node0x56019dfb4770;
+	Node0x56019dfb4280 -> Node0x56019dfb47c0;
+	Node0x56019dfb4770 [shape=record,label="{list.c:84:}"];
+	Node0x56019dfb4770 -> Node0x56019dfb0e70;
+	Node0x56019dfb47c0 [shape=record,label="{%11}"];
+	Node0x56019dfb47c0 -> Node0x56019dfb4230;
+	Node0x56019dfb4230 [shape=record,label="{list.c:85:}"];
+	Node0x56019dfb4230 -> Node0x56019dfb0e70;
+	Node0x56019dfb0e70 [shape=record,label="{list.c:86:}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlSchemaPErrExt' function" {
+	label="CFG for 'xmlSchemaPErrExt' function";
+
+	Node0x55d025e06f80 [shape=record,label="{xmlschemas.c:1964:|{<s0>T|<s1>F}}"];
+	Node0x55d025e06f80:s0 -> Node0x55d025f548a0;
+	Node0x55d025e06f80:s1 -> Node0x55d025f548f0;
+	Node0x55d025f548a0 [shape=record,label="{xmlschemas.c:1976:}"];
+	Node0x55d025f548a0 -> Node0x55d025f548f0;
+	Node0x55d025f548f0 [shape=record,label="{xmlschemas.c:1982:}"];
+}

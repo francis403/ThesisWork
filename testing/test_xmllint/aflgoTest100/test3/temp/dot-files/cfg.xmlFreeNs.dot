@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlFreeNs' function" {
+	label="CFG for 'xmlFreeNs' function";
+
+	Node0x5627b427c1d0 [shape=record,label="{tree.c:827:|{<s0>T|<s1>F}}"];
+	Node0x5627b427c1d0 -> Node0x5627b426f460;
+	Node0x5627b427c1d0 -> Node0x5627b427dc10;
+	Node0x5627b426f460 [shape=record,label="{tree.c:833:}"];
+	Node0x5627b426f460 -> Node0x5627b427d9a0;
+	Node0x5627b427dc10 [shape=record,label="{tree.c:835:|{<s0>T|<s1>F}}"];
+	Node0x5627b427dc10 -> Node0x5627b427e840;
+	Node0x5627b427dc10 -> Node0x5627b427e890;
+	Node0x5627b427e840 [shape=record,label="{tree.c:835:}"];
+	Node0x5627b427e840 -> Node0x5627b427e890;
+	Node0x5627b427e890 [shape=record,label="{tree.c:836:|{<s0>T|<s1>F}}"];
+	Node0x5627b427e890 -> Node0x5627b427ef10;
+	Node0x5627b427e890 -> Node0x5627b427ef60;
+	Node0x5627b427ef10 [shape=record,label="{tree.c:836:}"];
+	Node0x5627b427ef10 -> Node0x5627b427ef60;
+	Node0x5627b427ef60 [shape=record,label="{tree.c:837:}"];
+	Node0x5627b427ef60 -> Node0x5627b427d9a0;
+	Node0x5627b427d9a0 [shape=record,label="{tree.c:838:}"];
+}

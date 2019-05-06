@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlFreePropList' function" {
+	label="CFG for 'libxml_xmlFreePropList' function";
+
+	Node0x55d6cb97a020 [shape=record,label="{libxml2-py.c:2798:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb97a020:s0 -> Node0x55d6cb97cfd0;
+	Node0x55d6cb97a020:s1 -> Node0x55d6cb97cf80;
+	Node0x55d6cb97cf80 [shape=record,label="{libxml2-py.c:2803:}"];
+	Node0x55d6cb97cf80 -> Node0x55d6cb97a320;
+	Node0x55d6cb97cfd0 [shape=record,label="{libxml2-py.c:2804:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb97cfd0:s0 -> Node0x55d6cb97d7b0;
+	Node0x55d6cb97cfd0:s1 -> Node0x55d6cb97d800;
+	Node0x55d6cb97d7b0 [shape=record,label="{libxml2-py.c:2804:}"];
+	Node0x55d6cb97d7b0 -> Node0x55d6cb97d850;
+	Node0x55d6cb97d800 [shape=record,label="{libxml2-py.c:2804:}"];
+	Node0x55d6cb97d800 -> Node0x55d6cb97d850;
+	Node0x55d6cb97d850 [shape=record,label="{libxml2-py.c:2804:}"];
+	Node0x55d6cb97d850 -> Node0x55d6cb97a320;
+	Node0x55d6cb97a320 [shape=record,label="{libxml2-py.c:2809:}"];
+}

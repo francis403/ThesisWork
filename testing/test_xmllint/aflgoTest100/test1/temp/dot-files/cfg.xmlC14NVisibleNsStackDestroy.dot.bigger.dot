@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlC14NVisibleNsStackDestroy' function" {
+	label="CFG for 'xmlC14NVisibleNsStackDestroy' function";
+
+	Node0x55fe83c9b360 [shape=record,label="{c14n.c:296:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c9b360:s0 -> Node0x55fe83c9b010;
+	Node0x55fe83c9b360:s1 -> Node0x55fe83c84a60;
+	Node0x55fe83c9b010 [shape=record,label="{c14n.c:298:}"];
+	Node0x55fe83c9b010 -> Node0x55fe83c9b3b0;
+	Node0x55fe83c84a60 [shape=record,label="{c14n.c:301:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c84a60:s0 -> Node0x55fe83c9d540;
+	Node0x55fe83c84a60:s1 -> Node0x55fe83c9d590;
+	Node0x55fe83c9d540 [shape=record,label="{c14n.c:302:}"];
+	Node0x55fe83c9d540 -> Node0x55fe83c9d590;
+	Node0x55fe83c9d590 [shape=record,label="{c14n.c:305:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c9d590:s0 -> Node0x55fe83c9e240;
+	Node0x55fe83c9d590:s1 -> Node0x55fe83c9e290;
+	Node0x55fe83c9e240 [shape=record,label="{c14n.c:306:}"];
+	Node0x55fe83c9e240 -> Node0x55fe83c9e290;
+	Node0x55fe83c9e290 [shape=record,label="{c14n.c:309:}"];
+	Node0x55fe83c9e290 -> Node0x55fe83c9b3b0;
+	Node0x55fe83c9b3b0 [shape=record,label="{c14n.c:312:}"];
+}

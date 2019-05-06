@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSetGenericErrorFunc' function" {
+	label="CFG for 'xmlSetGenericErrorFunc' function";
+
+	Node0x56306798e500 [shape=record,label="{error.c:113:|{<s0>T|<s1>F}}"];
+	Node0x56306798e500:s0 -> Node0x5630678a70b0;
+	Node0x56306798e500:s1 -> Node0x56306798f790;
+	Node0x5630678a70b0 [shape=record,label="{error.c:116:}"];
+	Node0x5630678a70b0 -> Node0x56306798f740;
+	Node0x56306798f790 [shape=record,label="{error.c:118:}"];
+	Node0x56306798f790 -> Node0x56306798f740;
+	Node0x56306798f740 [shape=record,label="{error.c:119:}"];
+}

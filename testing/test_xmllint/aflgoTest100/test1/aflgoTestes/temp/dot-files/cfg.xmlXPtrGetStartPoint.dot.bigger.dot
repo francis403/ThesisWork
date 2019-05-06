@@ -1,0 +1,42 @@
+digraph "CFG for 'xmlXPtrGetStartPoint' function" {
+	label="CFG for 'xmlXPtrGetStartPoint' function";
+
+	Node0x55f6905e3230 [shape=record,label="{xpointer.c:2598:|{<s0>T|<s1>F}}"];
+	Node0x55f6905e3230:s0 -> Node0x55f6905ec740;
+	Node0x55f6905e3230:s1 -> Node0x55f6905f7550;
+	Node0x55f6905f7550 [shape=record,label="{xpointer.c:2599:|{<s0>T|<s1>F}}"];
+	Node0x55f6905f7550:s0 -> Node0x55f6905ec740;
+	Node0x55f6905f7550:s1 -> Node0x55f6905eebd0;
+	Node0x55f6905eebd0 [shape=record,label="{xpointer.c:2599:|{<s0>T|<s1>F}}"];
+	Node0x55f6905eebd0:s0 -> Node0x55f6905ec740;
+	Node0x55f6905eebd0:s1 -> Node0x55f6905ef0f0;
+	Node0x55f6905ec740 [shape=record,label="{xpointer.c:2600:}"];
+	Node0x55f6905ec740 -> Node0x55f6905e3280;
+	Node0x55f6905ef0f0 [shape=record,label="{xpointer.c:2602:|{<s0>def|<s1>5|<s2>6}}"];
+	Node0x55f6905ef0f0:s0 -> Node0x55f6905f7fe0;
+	Node0x55f6905ef0f0:s1 -> Node0x55f6905f82e0;
+	Node0x55f6905ef0f0:s2 -> Node0x55f6905f9170;
+	Node0x55f6905f82e0 [shape=record,label="{xpointer.c:2604:|{<s0>T|<s1>F}}"];
+	Node0x55f6905f82e0:s0 -> Node0x55f6905f86c0;
+	Node0x55f6905f82e0:s1 -> Node0x55f6905f8760;
+	Node0x55f6905f86c0 [shape=record,label="{xpointer.c:2606:}"];
+	Node0x55f6905f86c0 -> Node0x55f6905f8710;
+	Node0x55f6905f8760 [shape=record,label="{xpointer.c:2608:}"];
+	Node0x55f6905f8760 -> Node0x55f6905f8710;
+	Node0x55f6905f8710 [shape=record,label="{xpointer.c:2609:}"];
+	Node0x55f6905f8710 -> Node0x55f6905e3280;
+	Node0x55f6905f9170 [shape=record,label="{xpointer.c:2611:|{<s0>T|<s1>F}}"];
+	Node0x55f6905f9170:s0 -> Node0x55f6905f95f0;
+	Node0x55f6905f9170:s1 -> Node0x55f6905f9690;
+	Node0x55f6905f95f0 [shape=record,label="{xpointer.c:2613:}"];
+	Node0x55f6905f95f0 -> Node0x55f6905f9640;
+	Node0x55f6905f9690 [shape=record,label="{xpointer.c:2615:}"];
+	Node0x55f6905f9690 -> Node0x55f6905f9640;
+	Node0x55f6905f9640 [shape=record,label="{xpointer.c:2616:}"];
+	Node0x55f6905f9640 -> Node0x55f6905e3280;
+	Node0x55f6905f7fe0 [shape=record,label="{xpointer.c:2618:}"];
+	Node0x55f6905f7fe0 -> Node0x55f6905f7e70;
+	Node0x55f6905f7e70 [shape=record,label="{xpointer.c:2620:}"];
+	Node0x55f6905f7e70 -> Node0x55f6905e3280;
+	Node0x55f6905e3280 [shape=record,label="{xpointer.c:2621:}"];
+}

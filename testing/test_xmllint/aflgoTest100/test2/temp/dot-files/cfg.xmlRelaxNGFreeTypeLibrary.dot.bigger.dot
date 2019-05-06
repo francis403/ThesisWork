@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlRelaxNGFreeTypeLibrary' function" {
+	label="CFG for 'xmlRelaxNGFreeTypeLibrary' function";
+
+	Node0x559d0bd6dd30 [shape=record,label="{relaxng.c:2746:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd6dd30:s0 -> Node0x559d0bd6eb80;
+	Node0x559d0bd6dd30:s1 -> Node0x559d0bd6ebd0;
+	Node0x559d0bd6eb80 [shape=record,label="{relaxng.c:2751:}"];
+	Node0x559d0bd6eb80 -> Node0x559d0bd6dd80;
+	Node0x559d0bd6ebd0 [shape=record,label="{relaxng.c:2752:|{<s0>T|<s1>F}}"];
+	Node0x559d0bd6ebd0:s0 -> Node0x559d0bd6ef80;
+	Node0x559d0bd6ebd0:s1 -> Node0x559d0bd6efd0;
+	Node0x559d0bd6ef80 [shape=record,label="{relaxng.c:2753:}"];
+	Node0x559d0bd6ef80 -> Node0x559d0bd6efd0;
+	Node0x559d0bd6efd0 [shape=record,label="{relaxng.c:2754:}"];
+	Node0x559d0bd6efd0 -> Node0x559d0bd6dd80;
+	Node0x559d0bd6dd80 [shape=record,label="{relaxng.c:2755:}"];
+}

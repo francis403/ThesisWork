@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_htmlIsAutoClosed' function" {
+	label="CFG for 'libxml_htmlIsAutoClosed' function";
+
+	Node0x55f930c0bba0 [shape=record,label="{libxml2-py.c:338:|{<s0>T|<s1>F}}"];
+	Node0x55f930c0bba0:s0 -> Node0x55f930c133a0;
+	Node0x55f930c0bba0:s1 -> Node0x55f930c13350;
+	Node0x55f930c13350 [shape=record,label="{libxml2-py.c:347:}"];
+	Node0x55f930c13350 -> Node0x55f930c10fe0;
+	Node0x55f930c133a0 [shape=record,label="{libxml2-py.c:348:|{<s0>T|<s1>F}}"];
+	Node0x55f930c133a0:s0 -> Node0x55f930be37c0;
+	Node0x55f930c133a0:s1 -> Node0x55f930be3810;
+	Node0x55f930be37c0 [shape=record,label="{libxml2-py.c:348:}"];
+	Node0x55f930be37c0 -> Node0x55f930be3860;
+	Node0x55f930be3810 [shape=record,label="{libxml2-py.c:348:}"];
+	Node0x55f930be3810 -> Node0x55f930be3860;
+	Node0x55f930be3860 [shape=record,label="{libxml2-py.c:348:|{<s0>T|<s1>F}}"];
+	Node0x55f930be3860:s0 -> Node0x55f930be3e50;
+	Node0x55f930be3860:s1 -> Node0x55f930be3ea0;
+	Node0x55f930be3e50 [shape=record,label="{libxml2-py.c:349:}"];
+	Node0x55f930be3e50 -> Node0x55f930be3ef0;
+	Node0x55f930be3ea0 [shape=record,label="{libxml2-py.c:349:}"];
+	Node0x55f930be3ea0 -> Node0x55f930be3ef0;
+	Node0x55f930be3ef0 [shape=record,label="{libxml2-py.c:349:}"];
+	Node0x55f930be3ef0 -> Node0x55f930c10fe0;
+	Node0x55f930c10fe0 [shape=record,label="{libxml2-py.c:354:}"];
+}

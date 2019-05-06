@@ -1,0 +1,32 @@
+digraph "CFG for 'htmlCreateMemoryParserCtxt' function" {
+	label="CFG for 'htmlCreateMemoryParserCtxt' function";
+
+	Node0x56074480a560 [shape=record,label="{HTMLparser.c:5013:|{<s0>T|<s1>F}}"];
+	Node0x56074480a560:s0 -> Node0x56074480e0d0;
+	Node0x56074480a560:s1 -> Node0x56074480e120;
+	Node0x56074480e0d0 [shape=record,label="{HTMLparser.c:5019:}"];
+	Node0x56074480e0d0 -> Node0x5607444c8720;
+	Node0x56074480e120 [shape=record,label="{HTMLparser.c:5020:|{<s0>T|<s1>F}}"];
+	Node0x56074480e120:s0 -> Node0x56074480e580;
+	Node0x56074480e120:s1 -> Node0x56074480e5d0;
+	Node0x56074480e580 [shape=record,label="{HTMLparser.c:5021:}"];
+	Node0x56074480e580 -> Node0x5607444c8720;
+	Node0x56074480e5d0 [shape=record,label="{HTMLparser.c:5023:|{<s0>T|<s1>F}}"];
+	Node0x56074480e5d0:s0 -> Node0x56074480eb40;
+	Node0x56074480e5d0:s1 -> Node0x56074480eb90;
+	Node0x56074480eb40 [shape=record,label="{HTMLparser.c:5025:}"];
+	Node0x56074480eb40 -> Node0x5607444c8720;
+	Node0x56074480eb90 [shape=record,label="{HTMLparser.c:5027:|{<s0>T|<s1>F}}"];
+	Node0x56074480eb90:s0 -> Node0x56074480f520;
+	Node0x56074480eb90:s1 -> Node0x5607448140b0;
+	Node0x56074480f520 [shape=record,label="{HTMLparser.c:5028:}"];
+	Node0x56074480f520 -> Node0x5607444c8720;
+	Node0x5607448140b0 [shape=record,label="{HTMLparser.c:5030:|{<s0>T|<s1>F}}"];
+	Node0x5607448140b0:s0 -> Node0x560744814870;
+	Node0x5607448140b0:s1 -> Node0x5607448148c0;
+	Node0x560744814870 [shape=record,label="{HTMLparser.c:5032:}"];
+	Node0x560744814870 -> Node0x5607444c8720;
+	Node0x5607448148c0 [shape=record,label="{HTMLparser.c:5036:}"];
+	Node0x5607448148c0 -> Node0x5607444c8720;
+	Node0x5607444c8720 [shape=record,label="{HTMLparser.c:5042:}"];
+}

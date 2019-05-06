@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlIsMixedElement' function" {
+	label="CFG for 'libxml_xmlIsMixedElement' function";
+
+	Node0x55d6cba173b0 [shape=record,label="{libxml2-py.c:3454:|{<s0>T|<s1>F}}"];
+	Node0x55d6cba173b0:s0 -> Node0x55d6cba1a860;
+	Node0x55d6cba173b0:s1 -> Node0x55d6cba1a810;
+	Node0x55d6cba1a810 [shape=record,label="{libxml2-py.c:3462:}"];
+	Node0x55d6cba1a810 -> Node0x55d6cba17640;
+	Node0x55d6cba1a860 [shape=record,label="{libxml2-py.c:3463:|{<s0>T|<s1>F}}"];
+	Node0x55d6cba1a860:s0 -> Node0x55d6cba1b0b0;
+	Node0x55d6cba1a860:s1 -> Node0x55d6cba1b100;
+	Node0x55d6cba1b0b0 [shape=record,label="{libxml2-py.c:3463:}"];
+	Node0x55d6cba1b0b0 -> Node0x55d6cba1b150;
+	Node0x55d6cba1b100 [shape=record,label="{libxml2-py.c:3463:}"];
+	Node0x55d6cba1b100 -> Node0x55d6cba1b150;
+	Node0x55d6cba1b150 [shape=record,label="{libxml2-py.c:3463:}"];
+	Node0x55d6cba1b150 -> Node0x55d6cba17640;
+	Node0x55d6cba17640 [shape=record,label="{libxml2-py.c:3468:}"];
+}

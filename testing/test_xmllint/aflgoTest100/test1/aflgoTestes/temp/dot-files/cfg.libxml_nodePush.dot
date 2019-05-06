@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_nodePush' function" {
+	label="CFG for 'libxml_nodePush' function";
+
+	Node0x55f930c8bd20 [shape=record,label="{libxml2-py.c:848:|{<s0>T|<s1>F}}"];
+	Node0x55f930c8bd20:s0 -> Node0x55f930c94020;
+	Node0x55f930c8bd20:s1 -> Node0x55f930c93fd0;
+	Node0x55f930c93fd0 [shape=record,label="{libxml2-py.c:857:}"];
+	Node0x55f930c93fd0 -> Node0x55f930c8bfe0;
+	Node0x55f930c94020 [shape=record,label="{libxml2-py.c:858:|{<s0>T|<s1>F}}"];
+	Node0x55f930c94020:s0 -> Node0x55f930c94840;
+	Node0x55f930c94020:s1 -> Node0x55f930c94890;
+	Node0x55f930c94840 [shape=record,label="{libxml2-py.c:858:}"];
+	Node0x55f930c94840 -> Node0x55f930c948e0;
+	Node0x55f930c94890 [shape=record,label="{libxml2-py.c:858:}"];
+	Node0x55f930c94890 -> Node0x55f930c948e0;
+	Node0x55f930c948e0 [shape=record,label="{libxml2-py.c:858:|{<s0>T|<s1>F}}"];
+	Node0x55f930c948e0:s0 -> Node0x55f930c94e70;
+	Node0x55f930c948e0:s1 -> Node0x55f930c94ec0;
+	Node0x55f930c94e70 [shape=record,label="{libxml2-py.c:859:}"];
+	Node0x55f930c94e70 -> Node0x55f930c94f10;
+	Node0x55f930c94ec0 [shape=record,label="{libxml2-py.c:859:}"];
+	Node0x55f930c94ec0 -> Node0x55f930c94f10;
+	Node0x55f930c94f10 [shape=record,label="{libxml2-py.c:859:}"];
+	Node0x55f930c94f10 -> Node0x55f930c8bfe0;
+	Node0x55f930c8bfe0 [shape=record,label="{libxml2-py.c:864:}"];
+}

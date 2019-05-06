@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPtrNewContext' function" {
+	label="CFG for 'xmlXPtrNewContext' function";
+
+	Node0x55f69044c660 [shape=record,label="{xpointer.c:1300:|{<s0>T|<s1>F}}"];
+	Node0x55f69044c660 -> Node0x55f690479c20;
+	Node0x55f69044c660 -> Node0x55f690479c70;
+	Node0x55f690479c20 [shape=record,label="{xpointer.c:1305:}"];
+	Node0x55f690479c20 -> Node0x55f690452d80;
+	Node0x55f690479c70 [shape=record,label="{xpointer.c:1306:}"];
+	Node0x55f690479c70 -> Node0x55f690452d80;
+	Node0x55f690452d80 [shape=record,label="{xpointer.c:1326:}"];
+}

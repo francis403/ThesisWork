@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlRelaxNGSkipIgnored' function" {
+	label="CFG for 'xmlRelaxNGSkipIgnored' function";
+
+	Node0x555e9c6e8470 [shape=record,label="{relaxng.c:8533:}"];
+	Node0x555e9c6e8470 -> Node0x555e9c6e98e0;
+	Node0x555e9c6e98e0 [shape=record,label="{relaxng.c:8539:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6e98e0:s0 -> Node0x555e9c6ee060;
+	Node0x555e9c6e98e0:s1 -> Node0x555e9c6ee010;
+	Node0x555e9c6ee060 [shape=record,label="{relaxng.c:8540:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6ee060:s0 -> Node0x555e9c6ee380;
+	Node0x555e9c6ee060:s1 -> Node0x555e9c6ee520;
+	Node0x555e9c6ee520 [shape=record,label="{relaxng.c:8541:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6ee520:s0 -> Node0x555e9c6ee380;
+	Node0x555e9c6ee520:s1 -> Node0x555e9c6ee4a0;
+	Node0x555e9c6ee4a0 [shape=record,label="{relaxng.c:8542:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6ee4a0:s0 -> Node0x555e9c6ee380;
+	Node0x555e9c6ee4a0:s1 -> Node0x555e9c6ee420;
+	Node0x555e9c6ee420 [shape=record,label="{relaxng.c:8543:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6ee420:s0 -> Node0x555e9c6ee380;
+	Node0x555e9c6ee420:s1 -> Node0x555e9c6ee3d0;
+	Node0x555e9c6ee3d0 [shape=record,label="{relaxng.c:8544:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6ee3d0:s0 -> Node0x555e9c6ef1a0;
+	Node0x555e9c6ee3d0:s1 -> Node0x555e9c6ef1f0;
+	Node0x555e9c6ef1f0 [shape=record,label="{relaxng.c:8545:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6ef1f0:s0 -> Node0x555e9c6ef1a0;
+	Node0x555e9c6ef1f0:s1 -> Node0x555e9c6ef060;
+	Node0x555e9c6ef1a0 [shape=record,label="{relaxng.c:8546:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6ef1a0:s0 -> Node0x555e9c6ef9e0;
+	Node0x555e9c6ef1a0:s1 -> Node0x555e9c6efa30;
+	Node0x555e9c6efa30 [shape=record,label="{relaxng.c:8547:}"];
+	Node0x555e9c6efa30 -> Node0x555e9c6ef9e0;
+	Node0x555e9c6ef9e0 [shape=record,label="{%40}"];
+	Node0x555e9c6ef9e0 -> Node0x555e9c6ef060;
+	Node0x555e9c6ef060 [shape=record,label="{relaxng.c:8543:}"];
+	Node0x555e9c6ef060 -> Node0x555e9c6ee380;
+	Node0x555e9c6ee380 [shape=record,label="{%43}"];
+	Node0x555e9c6ee380 -> Node0x555e9c6ee010;
+	Node0x555e9c6ee010 [shape=record,label="{relaxng.c:8539:|{<s0>T|<s1>F}}"];
+	Node0x555e9c6ee010:s0 -> Node0x555e9c6f0460;
+	Node0x555e9c6ee010:s1 -> Node0x555e9c6edf90;
+	Node0x555e9c6f0460 [shape=record,label="{relaxng.c:8548:}"];
+	Node0x555e9c6f0460 -> Node0x555e9c6e98e0;
+	Node0x555e9c6edf90 [shape=record,label="{relaxng.c:8550:}"];
+}

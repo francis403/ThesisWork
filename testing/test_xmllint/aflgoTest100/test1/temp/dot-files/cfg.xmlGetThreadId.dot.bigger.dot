@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlGetThreadId' function" {
+	label="CFG for 'xmlGetThreadId' function";
+
+	Node0x55d75a8c87e0 [shape=record,label="{threads.c:767:|{<s0>T|<s1>F}}"];
+	Node0x55d75a8c87e0:s0 -> Node0x55d75a8c9300;
+	Node0x55d75a8c87e0:s1 -> Node0x55d75a8c9350;
+	Node0x55d75a8c9300 [shape=record,label="{threads.c:771:}"];
+	Node0x55d75a8c9300 -> Node0x55d75a8c8830;
+	Node0x55d75a8c9350 [shape=record,label="{threads.c:772:}"];
+	Node0x55d75a8c9350 -> Node0x55d75a8c8830;
+	Node0x55d75a8c8830 [shape=record,label="{threads.c:783:}"];
+}

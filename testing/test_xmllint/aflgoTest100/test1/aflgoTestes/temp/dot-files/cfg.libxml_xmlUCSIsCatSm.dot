@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsCatSm' function" {
+	label="CFG for 'libxml_xmlUCSIsCatSm' function";
+
+	Node0x55f93159b9e0 [shape=record,label="{libxml2-py.c:9947:|{<s0>T|<s1>F}}"];
+	Node0x55f93159b9e0:s0 -> Node0x55f93159e930;
+	Node0x55f93159b9e0:s1 -> Node0x55f93159e8e0;
+	Node0x55f93159e8e0 [shape=record,label="{libxml2-py.c:9953:}"];
+	Node0x55f93159e8e0 -> Node0x55f93159bce0;
+	Node0x55f93159e930 [shape=record,label="{libxml2-py.c:9955:}"];
+	Node0x55f93159e930 -> Node0x55f93159bce0;
+	Node0x55f93159bce0 [shape=record,label="{libxml2-py.c:9958:}"];
+}

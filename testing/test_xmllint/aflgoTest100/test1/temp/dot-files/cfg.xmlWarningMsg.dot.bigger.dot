@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlWarningMsg' function" {
+	label="CFG for 'xmlWarningMsg' function";
+
+	Node0x55d73bfcf530 [shape=record,label="{parser.c:594:|{<s0>T|<s1>F}}"];
+	Node0x55d73bfcf530:s0 -> Node0x55d73bfd3910;
+	Node0x55d73bfcf530:s1 -> Node0x55d73bfd3840;
+	Node0x55d73bfd3910 [shape=record,label="{parser.c:599:|{<s0>T|<s1>F}}"];
+	Node0x55d73bfd3910:s0 -> Node0x55d73bfd3890;
+	Node0x55d73bfd3910:s1 -> Node0x55d73bfd3840;
+	Node0x55d73bfd3890 [shape=record,label="{parser.c:600:|{<s0>T|<s1>F}}"];
+	Node0x55d73bfd3890:s0 -> Node0x55d73bfd37f0;
+	Node0x55d73bfd3890:s1 -> Node0x55d73bfd3840;
+	Node0x55d73bfd37f0 [shape=record,label="{parser.c:601:}"];
+	Node0x55d73bfd37f0 -> Node0x55d73bfd5250;
+	Node0x55d73bfd3840 [shape=record,label="{parser.c:602:|{<s0>T|<s1>F}}"];
+	Node0x55d73bfd3840:s0 -> Node0x55d73bfd4360;
+	Node0x55d73bfd3840:s1 -> Node0x55d73bfd4290;
+	Node0x55d73bfd4360 [shape=record,label="{parser.c:602:|{<s0>T|<s1>F}}"];
+	Node0x55d73bfd4360:s0 -> Node0x55d73bfd42e0;
+	Node0x55d73bfd4360:s1 -> Node0x55d73bfd4290;
+	Node0x55d73bfd42e0 [shape=record,label="{parser.c:603:|{<s0>T|<s1>F}}"];
+	Node0x55d73bfd42e0:s0 -> Node0x55d73bfd4240;
+	Node0x55d73bfd42e0:s1 -> Node0x55d73bfd4290;
+	Node0x55d73bfd4240 [shape=record,label="{parser.c:604:}"];
+	Node0x55d73bfd4240 -> Node0x55d73bfd4290;
+	Node0x55d73bfd4290 [shape=record,label="{parser.c:605:|{<s0>T|<s1>F}}"];
+	Node0x55d73bfd4290:s0 -> Node0x55d73bfd5200;
+	Node0x55d73bfd4290:s1 -> Node0x55d73bfd52a0;
+	Node0x55d73bfd5200 [shape=record,label="{parser.c:606:|{<s0>T|<s1>F}}"];
+	Node0x55d73bfd5200:s0 -> Node0x55d73bfd56e0;
+	Node0x55d73bfd5200:s1 -> Node0x55d73bfd5730;
+	Node0x55d73bfd56e0 [shape=record,label="{parser.c:607:}"];
+	Node0x55d73bfd56e0 -> Node0x55d73bfd5780;
+	Node0x55d73bfd5730 [shape=record,label="{parser.c:607:}"];
+	Node0x55d73bfd5730 -> Node0x55d73bfd5780;
+	Node0x55d73bfd5780 [shape=record,label="{parser.c:607:}"];
+	Node0x55d73bfd5780 -> Node0x55d73bfd5250;
+	Node0x55d73bfd52a0 [shape=record,label="{parser.c:614:}"];
+	Node0x55d73bfd52a0 -> Node0x55d73bfd5250;
+	Node0x55d73bfd5250 [shape=record,label="{parser.c:620:}"];
+}

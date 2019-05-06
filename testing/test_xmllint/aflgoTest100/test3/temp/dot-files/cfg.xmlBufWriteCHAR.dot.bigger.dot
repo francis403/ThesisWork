@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlBufWriteCHAR' function" {
+	label="CFG for 'xmlBufWriteCHAR' function";
+
+	Node0x5607238eaa90 [shape=record,label="{buf.c:1067:|{<s0>T|<s1>F}}"];
+	Node0x5607238eaa90:s0 -> Node0x5607238eb8a0;
+	Node0x5607238eaa90:s1 -> Node0x5607238eb940;
+	Node0x5607238eb940 [shape=record,label="{buf.c:1068:|{<s0>T|<s1>F}}"];
+	Node0x5607238eb940:s0 -> Node0x5607238eb8a0;
+	Node0x5607238eb940:s1 -> Node0x5607238eb8f0;
+	Node0x5607238eb8a0 [shape=record,label="{buf.c:1069:}"];
+	Node0x5607238eb8a0 -> Node0x5607238eb030;
+	Node0x5607238eb8f0 [shape=record,label="{buf.c:1070:|{<s0>T|<s1>F}}"];
+	Node0x5607238eb8f0:s0 -> Node0x5607238ec060;
+	Node0x5607238eb8f0:s1 -> Node0x5607238ec0b0;
+	Node0x5607238ec060 [shape=record,label="{buf.c:1070:|{<s0>T|<s1>F}}"];
+	Node0x5607238ec060:s0 -> Node0x5607238ec4c0;
+	Node0x5607238ec060:s1 -> Node0x5607238ec510;
+	Node0x5607238ec4c0 [shape=record,label="{buf.c:1070:}"];
+	Node0x5607238ec4c0 -> Node0x5607238ec510;
+	Node0x5607238ec510 [shape=record,label="{buf.c:1070:}"];
+	Node0x5607238ec510 -> Node0x5607238ec0b0;
+	Node0x5607238ec0b0 [shape=record,label="{buf.c:1070:|{<s0>T|<s1>F}}"];
+	Node0x5607238ec0b0:s0 -> Node0x5607238ecb40;
+	Node0x5607238ec0b0:s1 -> Node0x5607238ecb90;
+	Node0x5607238ecb40 [shape=record,label="{buf.c:1070:|{<s0>T|<s1>F}}"];
+	Node0x5607238ecb40:s0 -> Node0x5607238ed0e0;
+	Node0x5607238ecb40:s1 -> Node0x5607238ed130;
+	Node0x5607238ed0e0 [shape=record,label="{buf.c:1070:}"];
+	Node0x5607238ed0e0 -> Node0x5607238ed130;
+	Node0x5607238ed130 [shape=record,label="{buf.c:1070:}"];
+	Node0x5607238ed130 -> Node0x5607238ecb90;
+	Node0x5607238ecb90 [shape=record,label="{buf.c:1071:|{<s0>T|<s1>F}}"];
+	Node0x5607238ecb90:s0 -> Node0x5607238ed860;
+	Node0x5607238ecb90:s1 -> Node0x5607238ed8b0;
+	Node0x5607238ed860 [shape=record,label="{buf.c:1072:}"];
+	Node0x5607238ed860 -> Node0x5607238eb030;
+	Node0x5607238ed8b0 [shape=record,label="{buf.c:1073:}"];
+	Node0x5607238ed8b0 -> Node0x5607238eb030;
+	Node0x5607238eb030 [shape=record,label="{buf.c:1074:}"];
+}

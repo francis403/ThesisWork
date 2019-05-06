@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlCatalogCleanup' function" {
+	label="CFG for 'xmlCatalogCleanup' function";
+
+	Node0x55f367771a90 [shape=record,label="{catalog.c:3282:|{<s0>T|<s1>F}}"];
+	Node0x55f367771a90:s0 -> Node0x55f367775eb0;
+	Node0x55f367771a90:s1 -> Node0x55f367775f00;
+	Node0x55f367775eb0 [shape=record,label="{catalog.c:3283:}"];
+	Node0x55f367775eb0 -> Node0x55f367775e60;
+	Node0x55f367775f00 [shape=record,label="{catalog.c:3285:|{<s0>T|<s1>F}}"];
+	Node0x55f367775f00:s0 -> Node0x55f367776320;
+	Node0x55f367775f00:s1 -> Node0x55f367776370;
+	Node0x55f367776320 [shape=record,label="{catalog.c:3287:}"];
+	Node0x55f367776320 -> Node0x55f367776370;
+	Node0x55f367776370 [shape=record,label="{catalog.c:3289:|{<s0>T|<s1>F}}"];
+	Node0x55f367776370:s0 -> Node0x55f367776920;
+	Node0x55f367776370:s1 -> Node0x55f367776970;
+	Node0x55f367776920 [shape=record,label="{catalog.c:3290:}"];
+	Node0x55f367776920 -> Node0x55f367776970;
+	Node0x55f367776970 [shape=record,label="{catalog.c:3291:|{<s0>T|<s1>F}}"];
+	Node0x55f367776970:s0 -> Node0x55f367777190;
+	Node0x55f367776970:s1 -> Node0x55f3677771e0;
+	Node0x55f367777190 [shape=record,label="{catalog.c:3293:}"];
+	Node0x55f367777190 -> Node0x55f3677771e0;
+	Node0x55f3677771e0 [shape=record,label="{catalog.c:3294:}"];
+	Node0x55f3677771e0 -> Node0x55f367775e60;
+	Node0x55f367775e60 [shape=record,label="{catalog.c:3299:}"];
+}

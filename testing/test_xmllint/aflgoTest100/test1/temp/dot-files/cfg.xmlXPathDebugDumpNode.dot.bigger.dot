@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlXPathDebugDumpNode' function" {
+	label="CFG for 'xmlXPathDebugDumpNode' function";
+
+	Node0x55e6b2a80450 [shape=record,label="{xpath.c:1237:}"];
+	Node0x55e6b2a80450 -> Node0x55e6b2a85930;
+	Node0x55e6b2a85930 [shape=record,label="{xpath.c:1241:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2a85930:s0 -> Node0x55e6b2a85d10;
+	Node0x55e6b2a85930:s1 -> Node0x55e6b2a85cc0;
+	Node0x55e6b2a85d10 [shape=record,label="{xpath.c:1241:}"];
+	Node0x55e6b2a85d10 -> Node0x55e6b2a85cc0;
+	Node0x55e6b2a85cc0 [shape=record,label="{xpath.c:1241:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2a85cc0:s0 -> Node0x55e6b2a85c10;
+	Node0x55e6b2a85cc0:s1 -> Node0x55e6b2a85790;
+	Node0x55e6b2a85c10 [shape=record,label="{xpath.c:1242:}"];
+	Node0x55e6b2a85c10 -> Node0x55e6b2a85b80;
+	Node0x55e6b2a85b80 [shape=record,label="{xpath.c:1241:}"];
+	Node0x55e6b2a85b80 -> Node0x55e6b2a85930;
+	Node0x55e6b2a85790 [shape=record,label="{xpath.c:1243:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2a85790:s0 -> Node0x55e6b2a872d0;
+	Node0x55e6b2a85790:s1 -> Node0x55e6b2a87320;
+	Node0x55e6b2a872d0 [shape=record,label="{xpath.c:1245:}"];
+	Node0x55e6b2a872d0 -> Node0x55e6b2a87c00;
+	Node0x55e6b2a87320 [shape=record,label="{xpath.c:1251:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2a87320:s0 -> Node0x55e6b2a87bb0;
+	Node0x55e6b2a87320:s1 -> Node0x55e6b2a87ca0;
+	Node0x55e6b2a87ca0 [shape=record,label="{xpath.c:1252:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2a87ca0:s0 -> Node0x55e6b2a87bb0;
+	Node0x55e6b2a87ca0:s1 -> Node0x55e6b2a87c50;
+	Node0x55e6b2a87bb0 [shape=record,label="{xpath.c:1253:}"];
+	Node0x55e6b2a87bb0 -> Node0x55e6b2a87c00;
+	Node0x55e6b2a87c50 [shape=record,label="{xpath.c:1255:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2a87c50:s0 -> Node0x55e6b2a88ad0;
+	Node0x55e6b2a87c50:s1 -> Node0x55e6b2a88b70;
+	Node0x55e6b2a88ad0 [shape=record,label="{xpath.c:1256:}"];
+	Node0x55e6b2a88ad0 -> Node0x55e6b2a88b20;
+	Node0x55e6b2a88b70 [shape=record,label="{xpath.c:1258:}"];
+	Node0x55e6b2a88b70 -> Node0x55e6b2a88b20;
+	Node0x55e6b2a88b20 [shape=record,label="{%65}"];
+	Node0x55e6b2a88b20 -> Node0x55e6b2a87c00;
+	Node0x55e6b2a87c00 [shape=record,label="{xpath.c:1259:}"];
+}

@@ -1,0 +1,33 @@
+digraph "CFG for 'libxml_xmlValidateDtd' function" {
+	label="CFG for 'libxml_xmlValidateDtd' function";
+
+	Node0x55f93172e6b0 [shape=record,label="{libxml2-py.c:12320:|{<s0>T|<s1>F}}"];
+	Node0x55f93172e6b0:s0 -> Node0x55f9317339d0;
+	Node0x55f93172e6b0:s1 -> Node0x55f931733980;
+	Node0x55f931733980 [shape=record,label="{libxml2-py.c:12331:}"];
+	Node0x55f931733980 -> Node0x55f93172e500;
+	Node0x55f9317339d0 [shape=record,label="{libxml2-py.c:12332:|{<s0>T|<s1>F}}"];
+	Node0x55f9317339d0:s0 -> Node0x55f9317342a0;
+	Node0x55f9317339d0:s1 -> Node0x55f9317342f0;
+	Node0x55f9317342a0 [shape=record,label="{libxml2-py.c:12332:}"];
+	Node0x55f9317342a0 -> Node0x55f931734340;
+	Node0x55f9317342f0 [shape=record,label="{libxml2-py.c:12332:}"];
+	Node0x55f9317342f0 -> Node0x55f931734340;
+	Node0x55f931734340 [shape=record,label="{libxml2-py.c:12332:|{<s0>T|<s1>F}}"];
+	Node0x55f931734340:s0 -> Node0x55f9317348d0;
+	Node0x55f931734340:s1 -> Node0x55f931734920;
+	Node0x55f9317348d0 [shape=record,label="{libxml2-py.c:12333:}"];
+	Node0x55f9317348d0 -> Node0x55f931734970;
+	Node0x55f931734920 [shape=record,label="{libxml2-py.c:12333:}"];
+	Node0x55f931734920 -> Node0x55f931734970;
+	Node0x55f931734970 [shape=record,label="{libxml2-py.c:12333:|{<s0>T|<s1>F}}"];
+	Node0x55f931734970:s0 -> Node0x55f931734f60;
+	Node0x55f931734970:s1 -> Node0x55f931734fb0;
+	Node0x55f931734f60 [shape=record,label="{libxml2-py.c:12334:}"];
+	Node0x55f931734f60 -> Node0x55f931735000;
+	Node0x55f931734fb0 [shape=record,label="{libxml2-py.c:12334:}"];
+	Node0x55f931734fb0 -> Node0x55f931735000;
+	Node0x55f931735000 [shape=record,label="{libxml2-py.c:12334:}"];
+	Node0x55f931735000 -> Node0x55f93172e500;
+	Node0x55f93172e500 [shape=record,label="{libxml2-py.c:12339:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsBlock' function" {
+	label="CFG for 'libxml_xmlUCSIsBlock' function";
+
+	Node0x55d6cbfcf2b0 [shape=record,label="{libxml2-py.c:9177:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbfcf2b0:s0 -> Node0x55d6cbfd2460;
+	Node0x55d6cbfcf2b0:s1 -> Node0x55d6cbfd2410;
+	Node0x55d6cbfd2410 [shape=record,label="{libxml2-py.c:9184:}"];
+	Node0x55d6cbfd2410 -> Node0x55d6cbfcf5b0;
+	Node0x55d6cbfd2460 [shape=record,label="{libxml2-py.c:9186:}"];
+	Node0x55d6cbfd2460 -> Node0x55d6cbfcf5b0;
+	Node0x55d6cbfcf5b0 [shape=record,label="{libxml2-py.c:9189:}"];
+}

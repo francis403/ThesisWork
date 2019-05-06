@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsHebrew' function" {
+	label="CFG for 'xmlUCSIsHebrew' function";
+
+	Node0x564952e824e0 [shape=record,label="{xmlunicode.c:1691:|{<s0>T|<s1>F}}"];
+	Node0x564952e824e0:s0 -> Node0x564952e5f000;
+	Node0x564952e824e0:s1 -> Node0x564952e5efb0;
+	Node0x564952e5f000 [shape=record,label="{xmlunicode.c:1692:}"];
+	Node0x564952e5f000 -> Node0x564952e5efb0;
+	Node0x564952e5efb0 [shape=record,label="{xmlunicode.c:1692:}"];
+}

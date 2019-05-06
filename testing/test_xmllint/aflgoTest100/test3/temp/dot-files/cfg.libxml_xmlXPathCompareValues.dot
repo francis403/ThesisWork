@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathCompareValues' function" {
+	label="CFG for 'libxml_xmlXPathCompareValues' function";
+
+	Node0x55d6cbd03ce0 [shape=record,label="{libxml2-py.c:12992:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbd03ce0:s0 -> Node0x55d6cbd08910;
+	Node0x55d6cbd03ce0:s1 -> Node0x55d6cbd088c0;
+	Node0x55d6cbd088c0 [shape=record,label="{libxml2-py.c:13001:}"];
+	Node0x55d6cbd088c0 -> Node0x55d6cbd03b00;
+	Node0x55d6cbd08910 [shape=record,label="{libxml2-py.c:13002:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbd08910:s0 -> Node0x55d6cbd091f0;
+	Node0x55d6cbd08910:s1 -> Node0x55d6cbd09240;
+	Node0x55d6cbd091f0 [shape=record,label="{libxml2-py.c:13002:}"];
+	Node0x55d6cbd091f0 -> Node0x55d6cbd09290;
+	Node0x55d6cbd09240 [shape=record,label="{libxml2-py.c:13002:}"];
+	Node0x55d6cbd09240 -> Node0x55d6cbd09290;
+	Node0x55d6cbd09290 [shape=record,label="{libxml2-py.c:13002:}"];
+	Node0x55d6cbd09290 -> Node0x55d6cbd03b00;
+	Node0x55d6cbd03b00 [shape=record,label="{libxml2-py.c:13007:}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlParseNamespace' function" {
+	label="CFG for 'xmlParseNamespace' function";
+
+	Node0x55adc8b7e5f0 [shape=record,label="{legacy.c:559:|{<s0>T|<s1>F}}"];
+	Node0x55adc8b7e5f0:s0 -> Node0x55adc8b7d850;
+	Node0x55adc8b7e5f0:s1 -> Node0x55adc8b7e7e0;
+	Node0x55adc8b7e7e0 [shape=record,label="{legacy.c:564:}"];
+	Node0x55adc8b7e7e0 -> Node0x55adc8b7d850;
+	Node0x55adc8b7d850 [shape=record,label="{legacy.c:568:}"];
+}

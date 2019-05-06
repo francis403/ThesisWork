@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlGetPredefinedEntity' function" {
+	label="CFG for 'libxml_xmlGetPredefinedEntity' function";
+
+	Node0x55f930efb610 [shape=record,label="{libxml2-py.c:3117:|{<s0>T|<s1>F}}"];
+	Node0x55f930efb610:s0 -> Node0x55f930eff150;
+	Node0x55f930efb610:s1 -> Node0x55f930eff100;
+	Node0x55f930eff100 [shape=record,label="{libxml2-py.c:3123:}"];
+	Node0x55f930eff100 -> Node0x55f930efda80;
+	Node0x55f930eff150 [shape=record,label="{libxml2-py.c:3125:}"];
+	Node0x55f930eff150 -> Node0x55f930efda80;
+	Node0x55f930efda80 [shape=record,label="{libxml2-py.c:3128:}"];
+}

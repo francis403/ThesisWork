@@ -1,0 +1,13 @@
+digraph "CFG for 'xmlBufMemoryError' function" {
+	label="CFG for 'xmlBufMemoryError' function";
+
+	Node0x55756c1445d0 [shape=record,label="{buf.c:92:|{<s0>T|<s1>F}}"];
+	Node0x55756c1445d0:s0 -> Node0x55756c0c5630;
+	Node0x55756c1445d0:s1 -> Node0x55756c0c55e0;
+	Node0x55756c0c5630 [shape=record,label="{buf.c:95:|{<s0>T|<s1>F}}"];
+	Node0x55756c0c5630:s0 -> Node0x55756c149350;
+	Node0x55756c0c5630:s1 -> Node0x55756c0c55e0;
+	Node0x55756c149350 [shape=record,label="{buf.c:96:}"];
+	Node0x55756c149350 -> Node0x55756c0c55e0;
+	Node0x55756c0c55e0 [shape=record,label="{buf.c:97:}"];
+}

@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlParse3986PathRootless' function" {
+	label="CFG for 'xmlParse3986PathRootless' function";
+
+	Node0x5561d68f5c80 [shape=record,label="{uri.c:665:|{<s0>T|<s1>F}}"];
+	Node0x5561d68f5c80:s0 -> Node0x5561d68f6f40;
+	Node0x5561d68f5c80:s1 -> Node0x5561d68f6f90;
+	Node0x5561d68f6f40 [shape=record,label="{uri.c:673:}"];
+	Node0x5561d68f6f40 -> Node0x5561d68f5cd0;
+	Node0x5561d68f6f90 [shape=record,label="{uri.c:674:}"];
+	Node0x5561d68f6f90 -> Node0x5561d68f7410;
+	Node0x5561d68f7410 [shape=record,label="{uri.c:674:|{<s0>T|<s1>F}}"];
+	Node0x5561d68f7410:s0 -> Node0x5561d68f78c0;
+	Node0x5561d68f7410:s1 -> Node0x5561d68f7630;
+	Node0x5561d68f78c0 [shape=record,label="{uri.c:675:|{<s0>T|<s1>F}}"];
+	Node0x5561d68f78c0:s0 -> Node0x5561d68f7e30;
+	Node0x5561d68f78c0:s1 -> Node0x5561d68f7e80;
+	Node0x5561d68f7e30 [shape=record,label="{uri.c:677:}"];
+	Node0x5561d68f7e30 -> Node0x5561d68f5cd0;
+	Node0x5561d68f7e80 [shape=record,label="{uri.c:674:}"];
+	Node0x5561d68f7e80 -> Node0x5561d68f7410;
+	Node0x5561d68f7630 [shape=record,label="{uri.c:679:|{<s0>T|<s1>F}}"];
+	Node0x5561d68f7630:s0 -> Node0x5561d68f8400;
+	Node0x5561d68f7630:s1 -> Node0x5561d68f8450;
+	Node0x5561d68f8400 [shape=record,label="{uri.c:680:|{<s0>T|<s1>F}}"];
+	Node0x5561d68f8400:s0 -> Node0x5561d68f8810;
+	Node0x5561d68f8400:s1 -> Node0x5561d68f8860;
+	Node0x5561d68f8810 [shape=record,label="{uri.c:680:}"];
+	Node0x5561d68f8810 -> Node0x5561d68f8860;
+	Node0x5561d68f8860 [shape=record,label="{uri.c:681:|{<s0>T|<s1>F}}"];
+	Node0x5561d68f8860:s0 -> Node0x5561d68f8e50;
+	Node0x5561d68f8860:s1 -> Node0x5561d68f8ef0;
+	Node0x5561d68f8e50 [shape=record,label="{uri.c:682:|{<s0>T|<s1>F}}"];
+	Node0x5561d68f8e50:s0 -> Node0x5561d68f93a0;
+	Node0x5561d68f8e50:s1 -> Node0x5561d68f9440;
+	Node0x5561d68f93a0 [shape=record,label="{uri.c:683:}"];
+	Node0x5561d68f93a0 -> Node0x5561d68f93f0;
+	Node0x5561d68f9440 [shape=record,label="{uri.c:685:}"];
+	Node0x5561d68f9440 -> Node0x5561d68f93f0;
+	Node0x5561d68f93f0 [shape=record,label="{uri.c:686:}"];
+	Node0x5561d68f93f0 -> Node0x5561d68f8ea0;
+	Node0x5561d68f8ef0 [shape=record,label="{uri.c:687:}"];
+	Node0x5561d68f8ef0 -> Node0x5561d68f8ea0;
+	Node0x5561d68f8ea0 [shape=record,label="{uri.c:689:}"];
+	Node0x5561d68f8ea0 -> Node0x5561d68f8450;
+	Node0x5561d68f8450 [shape=record,label="{uri.c:690:}"];
+	Node0x5561d68f8450 -> Node0x5561d68f5cd0;
+	Node0x5561d68f5cd0 [shape=record,label="{uri.c:692:}"];
+}

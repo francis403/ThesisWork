@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlIsPubidChar' function" {
+	label="CFG for 'xmlIsPubidChar' function";
+
+	Node0x5610db8902b0 [shape=record,label="{chvalid.c:331:|{<s0>T|<s1>F}}"];
+	Node0x5610db8902b0:s0 -> Node0x5610db88c740;
+	Node0x5610db8902b0:s1 -> Node0x5610db893770;
+	Node0x5610db88c740 [shape=record,label="{chvalid.c:332:}"];
+	Node0x5610db88c740 -> Node0x5610db8920a0;
+	Node0x5610db893770 [shape=record,label="{chvalid.c:332:}"];
+	Node0x5610db893770 -> Node0x5610db8920a0;
+	Node0x5610db8920a0 [shape=record,label="{chvalid.c:332:}"];
+}

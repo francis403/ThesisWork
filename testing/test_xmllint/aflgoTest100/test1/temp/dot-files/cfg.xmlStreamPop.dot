@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlStreamPop' function" {
+	label="CFG for 'xmlStreamPop' function";
+
+	Node0x55c8a1081cc0 [shape=record,label="{pattern.c:2281:|{<s0>T|<s1>F}}"];
+	Node0x55c8a1081cc0 -> Node0x55c8a1105530;
+	Node0x55c8a1081cc0 -> Node0x55c8a1105580;
+	Node0x55c8a1105530 [shape=record,label="{pattern.c:2285:}"];
+	Node0x55c8a1105530 -> Node0x55c8a11049b0;
+	Node0x55c8a1105580 [shape=record,label="{pattern.c:2286:}"];
+	Node0x55c8a1105580 -> Node0x55c8a11059d0;
+	Node0x55c8a11059d0 [shape=record,label="{pattern.c:2286:|{<s0>T|<s1>F}}"];
+	Node0x55c8a11059d0 -> Node0x55c8a1105d90;
+	Node0x55c8a11059d0 -> Node0x55c8a1105bb0;
+	Node0x55c8a1105d90 [shape=record,label="{pattern.c:2290:|{<s0>T|<s1>F}}"];
+	Node0x55c8a1105d90 -> Node0x55c8a1105f40;
+	Node0x55c8a1105d90 -> Node0x55c8a1105f90;
+	Node0x55c8a1105f40 [shape=record,label="{pattern.c:2291:}"];
+	Node0x55c8a1105f40 -> Node0x55c8a1105f90;
+	Node0x55c8a1105f90 [shape=record,label="{pattern.c:2298:|{<s0>T|<s1>F}}"];
+	Node0x55c8a1105f90 -> Node0x55c8a11065c0;
+	Node0x55c8a1105f90 -> Node0x55c8a1106610;
+	Node0x55c8a11065c0 [shape=record,label="{pattern.c:2299:}"];
+	Node0x55c8a11065c0 -> Node0x55c8a1106610;
+	Node0x55c8a1106610 [shape=record,label="{pattern.c:2303:}"];
+	Node0x55c8a1106610 -> Node0x55c8a11072c0;
+	Node0x55c8a11072c0 [shape=record,label="{pattern.c:2303:|{<s0>T|<s1>F}}"];
+	Node0x55c8a11072c0 -> Node0x55c8a11075a0;
+	Node0x55c8a11072c0 -> Node0x55c8a1106980;
+	Node0x55c8a11075a0 [shape=record,label="{pattern.c:2305:|{<s0>T|<s1>F}}"];
+	Node0x55c8a11075a0 -> Node0x55c8a1107dd0;
+	Node0x55c8a11075a0 -> Node0x55c8a1107e20;
+	Node0x55c8a1107dd0 [shape=record,label="{pattern.c:2307:}"];
+	Node0x55c8a1107dd0 -> Node0x55c8a1107e20;
+	Node0x55c8a1107e20 [shape=record,label="{pattern.c:2308:|{<s0>T|<s1>F}}"];
+	Node0x55c8a1107e20 -> Node0x55c8a1108620;
+	Node0x55c8a1107e20 -> Node0x55c8a1108670;
+	Node0x55c8a1108620 [shape=record,label="{pattern.c:2309:}"];
+	Node0x55c8a1108620 -> Node0x55c8a1106980;
+	Node0x55c8a1108670 [shape=record,label="{pattern.c:2310:}"];
+	Node0x55c8a1108670 -> Node0x55c8a1107510;
+	Node0x55c8a1107510 [shape=record,label="{pattern.c:2303:}"];
+	Node0x55c8a1107510 -> Node0x55c8a11072c0;
+	Node0x55c8a1106980 [shape=record,label="{pattern.c:2311:}"];
+	Node0x55c8a1106980 -> Node0x55c8a11059d0;
+	Node0x55c8a1105bb0 [shape=record,label="{pattern.c:2313:}"];
+	Node0x55c8a1105bb0 -> Node0x55c8a11049b0;
+	Node0x55c8a11049b0 [shape=record,label="{pattern.c:2314:}"];
+}

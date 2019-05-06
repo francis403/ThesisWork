@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaNormalizeValue' function" {
+	label="CFG for 'xmlSchemaNormalizeValue' function";
+
+	Node0x55d026658140 [shape=record,label="{xmlschemas.c:24429:|{<s0>def|<s1>3|<s2>2}}"];
+	Node0x55d026658140:s0 -> Node0x55d026679d00;
+	Node0x55d026658140:s1 -> Node0x55d026679fd0;
+	Node0x55d026658140:s2 -> Node0x55d02667a280;
+	Node0x55d026679fd0 [shape=record,label="{xmlschemas.c:24434:}"];
+	Node0x55d026679fd0 -> Node0x55d026658190;
+	Node0x55d02667a280 [shape=record,label="{xmlschemas.c:24436:}"];
+	Node0x55d02667a280 -> Node0x55d026658190;
+	Node0x55d026679d00 [shape=record,label="{xmlschemas.c:24438:}"];
+	Node0x55d026679d00 -> Node0x55d026658190;
+	Node0x55d026658190 [shape=record,label="{xmlschemas.c:24440:}"];
+}

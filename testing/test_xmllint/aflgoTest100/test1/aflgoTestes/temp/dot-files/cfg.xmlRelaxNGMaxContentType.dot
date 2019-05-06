@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlRelaxNGMaxContentType' function" {
+	label="CFG for 'xmlRelaxNGMaxContentType' function";
+
+	Node0x555e9c5eac40 [shape=record,label="{relaxng.c:6244:|{<s0>T|<s1>F}}"];
+	Node0x555e9c5eac40 -> Node0x555e9c5eb0b0;
+	Node0x555e9c5eac40 -> Node0x555e9c5eb150;
+	Node0x555e9c5eb150 [shape=record,label="{relaxng.c:6248:|{<s0>T|<s1>F}}"];
+	Node0x555e9c5eb150 -> Node0x555e9c5eb0b0;
+	Node0x555e9c5eb150 -> Node0x555e9c5eb100;
+	Node0x555e9c5eb0b0 [shape=record,label="{relaxng.c:6249:}"];
+	Node0x555e9c5eb0b0 -> Node0x555e9c5eac90;
+	Node0x555e9c5eb100 [shape=record,label="{relaxng.c:6250:|{<s0>T|<s1>F}}"];
+	Node0x555e9c5eb100 -> Node0x555e9c5eed80;
+	Node0x555e9c5eb100 -> Node0x555e9c5eee20;
+	Node0x555e9c5eee20 [shape=record,label="{relaxng.c:6251:|{<s0>T|<s1>F}}"];
+	Node0x555e9c5eee20 -> Node0x555e9c5eed80;
+	Node0x555e9c5eee20 -> Node0x555e9c5eedd0;
+	Node0x555e9c5eed80 [shape=record,label="{relaxng.c:6252:}"];
+	Node0x555e9c5eed80 -> Node0x555e9c5eac90;
+	Node0x555e9c5eedd0 [shape=record,label="{relaxng.c:6253:|{<s0>T|<s1>F}}"];
+	Node0x555e9c5eedd0 -> Node0x555e9c5ef510;
+	Node0x555e9c5eedd0 -> Node0x555e9c5ef5b0;
+	Node0x555e9c5ef5b0 [shape=record,label="{relaxng.c:6254:|{<s0>T|<s1>F}}"];
+	Node0x555e9c5ef5b0 -> Node0x555e9c5ef510;
+	Node0x555e9c5ef5b0 -> Node0x555e9c5ef560;
+	Node0x555e9c5ef510 [shape=record,label="{relaxng.c:6255:}"];
+	Node0x555e9c5ef510 -> Node0x555e9c5eac90;
+	Node0x555e9c5ef560 [shape=record,label="{relaxng.c:6256:}"];
+	Node0x555e9c5ef560 -> Node0x555e9c5eac90;
+	Node0x555e9c5eac90 [shape=record,label="{relaxng.c:6257:}"];
+}

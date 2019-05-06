@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlRelaxNGValidateDoc' function" {
+	label="CFG for 'xmlRelaxNGValidateDoc' function";
+
+	Node0x559d0baf3210 [shape=record,label="{relaxng.c:11060:|{<s0>T|<s1>F}}"];
+	Node0x559d0baf3210:s0 -> Node0x559d0baf6ab0;
+	Node0x559d0baf3210:s1 -> Node0x559d0baf6b50;
+	Node0x559d0baf6b50 [shape=record,label="{relaxng.c:11064:|{<s0>T|<s1>F}}"];
+	Node0x559d0baf6b50:s0 -> Node0x559d0baf6ab0;
+	Node0x559d0baf6b50:s1 -> Node0x559d0baf6b00;
+	Node0x559d0baf6ab0 [shape=record,label="{relaxng.c:11065:}"];
+	Node0x559d0baf6ab0 -> Node0x559d0baf3260;
+	Node0x559d0baf6b00 [shape=record,label="{relaxng.c:11067:|{<s0>T|<s1>F}}"];
+	Node0x559d0baf6b00:s0 -> Node0x559d0bcca8b0;
+	Node0x559d0baf6b00:s1 -> Node0x559d0bcca900;
+	Node0x559d0bcca8b0 [shape=record,label="{relaxng.c:11079:}"];
+	Node0x559d0bcca8b0 -> Node0x559d0baf3260;
+	Node0x559d0bcca900 [shape=record,label="{relaxng.c:11080:}"];
+	Node0x559d0bcca900 -> Node0x559d0baf3260;
+	Node0x559d0baf3260 [shape=record,label="{relaxng.c:11081:}"];
+}

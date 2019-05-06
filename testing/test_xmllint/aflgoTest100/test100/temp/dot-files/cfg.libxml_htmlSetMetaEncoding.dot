@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_htmlSetMetaEncoding' function" {
+	label="CFG for 'libxml_htmlSetMetaEncoding' function";
+
+	Node0x55d6cb743400 [shape=record,label="{libxml2-py.c:781:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb743400:s0 -> Node0x55d6cb74c480;
+	Node0x55d6cb743400:s1 -> Node0x55d6cb74c430;
+	Node0x55d6cb74c430 [shape=record,label="{libxml2-py.c:789:}"];
+	Node0x55d6cb74c430 -> Node0x55d6cb7431b0;
+	Node0x55d6cb74c480 [shape=record,label="{libxml2-py.c:790:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb74c480:s0 -> Node0x55d6cb74cd70;
+	Node0x55d6cb74c480:s1 -> Node0x55d6cb74cdc0;
+	Node0x55d6cb74cd70 [shape=record,label="{libxml2-py.c:790:}"];
+	Node0x55d6cb74cd70 -> Node0x55d6cb74ce10;
+	Node0x55d6cb74cdc0 [shape=record,label="{libxml2-py.c:790:}"];
+	Node0x55d6cb74cdc0 -> Node0x55d6cb74ce10;
+	Node0x55d6cb74ce10 [shape=record,label="{libxml2-py.c:790:}"];
+	Node0x55d6cb74ce10 -> Node0x55d6cb7431b0;
+	Node0x55d6cb7431b0 [shape=record,label="{libxml2-py.c:795:}"];
+}

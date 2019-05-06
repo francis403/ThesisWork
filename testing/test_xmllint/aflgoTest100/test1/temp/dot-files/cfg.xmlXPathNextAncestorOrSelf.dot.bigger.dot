@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlXPathNextAncestorOrSelf' function" {
+	label="CFG for 'xmlXPathNextAncestorOrSelf' function";
+
+	Node0x55e6b274e3f0 [shape=record,label="{xpath.c:8150:|{<s0>T|<s1>F}}"];
+	Node0x55e6b274e3f0:s0 -> Node0x55e6b2753660;
+	Node0x55e6b274e3f0:s1 -> Node0x55e6b2753700;
+	Node0x55e6b2753700 [shape=record,label="{xpath.c:8151:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2753700:s0 -> Node0x55e6b2753660;
+	Node0x55e6b2753700:s1 -> Node0x55e6b27536b0;
+	Node0x55e6b2753660 [shape=record,label="{xpath.c:8151:}"];
+	Node0x55e6b2753660 -> Node0x55e6b2752db0;
+	Node0x55e6b27536b0 [shape=record,label="{xpath.c:8152:|{<s0>T|<s1>F}}"];
+	Node0x55e6b27536b0:s0 -> Node0x55e6b2753e50;
+	Node0x55e6b27536b0:s1 -> Node0x55e6b2753ea0;
+	Node0x55e6b2753e50 [shape=record,label="{xpath.c:8153:}"];
+	Node0x55e6b2753e50 -> Node0x55e6b2752db0;
+	Node0x55e6b2753ea0 [shape=record,label="{xpath.c:8154:}"];
+	Node0x55e6b2753ea0 -> Node0x55e6b2752db0;
+	Node0x55e6b2752db0 [shape=record,label="{xpath.c:8155:}"];
+}

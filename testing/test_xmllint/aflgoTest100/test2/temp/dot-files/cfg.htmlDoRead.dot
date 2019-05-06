@@ -1,0 +1,47 @@
+digraph "CFG for 'htmlDoRead' function" {
+	label="CFG for 'htmlDoRead' function";
+
+	Node0x560744c669e0 [shape=record,label="{HTMLparser.c:6770:|{<s0>T|<s1>F}}"];
+	Node0x560744c669e0 -> Node0x56074493d040;
+	Node0x560744c669e0 -> Node0x56074493d090;
+	Node0x56074493d040 [shape=record,label="{HTMLparser.c:6778:|{<s0>T|<s1>F}}"];
+	Node0x56074493d040 -> Node0x56074493d8f0;
+	Node0x56074493d040 -> Node0x56074493d940;
+	Node0x56074493d8f0 [shape=record,label="{HTMLparser.c:6782:|{<s0>T|<s1>F}}"];
+	Node0x56074493d8f0 -> Node0x56074493ddf0;
+	Node0x56074493d8f0 -> Node0x56074493de40;
+	Node0x56074493ddf0 [shape=record,label="{HTMLparser.c:6784:}"];
+	Node0x56074493ddf0 -> Node0x56074493de40;
+	Node0x56074493de40 [shape=record,label="{HTMLparser.c:6785:}"];
+	Node0x56074493de40 -> Node0x56074493d940;
+	Node0x56074493d940 [shape=record,label="{HTMLparser.c:6787:}"];
+	Node0x56074493d940 -> Node0x56074493d090;
+	Node0x56074493d090 [shape=record,label="{HTMLparser.c:6788:|{<s0>T|<s1>F}}"];
+	Node0x56074493d090 -> Node0x560744c71970;
+	Node0x56074493d090 -> Node0x560744c718a0;
+	Node0x560744c71970 [shape=record,label="{HTMLparser.c:6788:|{<s0>T|<s1>F}}"];
+	Node0x560744c71970 -> Node0x560744c718f0;
+	Node0x560744c71970 -> Node0x560744c718a0;
+	Node0x560744c718f0 [shape=record,label="{HTMLparser.c:6789:|{<s0>T|<s1>F}}"];
+	Node0x560744c718f0 -> Node0x560744c71850;
+	Node0x560744c718f0 -> Node0x560744c718a0;
+	Node0x560744c71850 [shape=record,label="{HTMLparser.c:6790:}"];
+	Node0x560744c71850 -> Node0x560744c718a0;
+	Node0x560744c718a0 [shape=record,label="{HTMLparser.c:6791:|{<s0>T|<s1>F}}"];
+	Node0x560744c718a0 -> Node0x560744c73050;
+	Node0x560744c718a0 -> Node0x560744c73000;
+	Node0x560744c73000 [shape=record,label="{HTMLparser.c:6795:|{<s0>T|<s1>F}}"];
+	Node0x560744c73000 -> Node0x560744c73470;
+	Node0x560744c73000 -> Node0x560744c733a0;
+	Node0x560744c73470 [shape=record,label="{HTMLparser.c:6796:|{<s0>T|<s1>F}}"];
+	Node0x560744c73470 -> Node0x560744c733f0;
+	Node0x560744c73470 -> Node0x560744c733a0;
+	Node0x560744c733f0 [shape=record,label="{HTMLparser.c:6797:|{<s0>T|<s1>F}}"];
+	Node0x560744c733f0 -> Node0x560744c73350;
+	Node0x560744c733f0 -> Node0x560744c733a0;
+	Node0x560744c73350 [shape=record,label="{HTMLparser.c:6798:}"];
+	Node0x560744c73350 -> Node0x560744c733a0;
+	Node0x560744c733a0 [shape=record,label="{HTMLparser.c:6799:}"];
+	Node0x560744c733a0 -> Node0x560744c73050;
+	Node0x560744c73050 [shape=record,label="{HTMLparser.c:6801:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsGreekExtended' function" {
+	label="CFG for 'libxml_xmlUCSIsGreekExtended' function";
+
+	Node0x55f9315e67d0 [shape=record,label="{libxml2-py.c:10379:|{<s0>T|<s1>F}}"];
+	Node0x55f9315e67d0:s0 -> Node0x55f9315ea760;
+	Node0x55f9315e67d0:s1 -> Node0x55f9315ea710;
+	Node0x55f9315ea710 [shape=record,label="{libxml2-py.c:10385:}"];
+	Node0x55f9315ea710 -> Node0x55f9315e6a60;
+	Node0x55f9315ea760 [shape=record,label="{libxml2-py.c:10387:}"];
+	Node0x55f9315ea760 -> Node0x55f9315e6a60;
+	Node0x55f9315e6a60 [shape=record,label="{libxml2-py.c:10390:}"];
+}

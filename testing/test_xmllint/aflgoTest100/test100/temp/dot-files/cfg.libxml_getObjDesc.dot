@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_getObjDesc' function" {
+	label="CFG for 'libxml_getObjDesc' function";
+
+	Node0x55fa6c6f3ac0 [shape=record,label="{libxml.c:3772:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c6f3ac0:s0 -> Node0x55fa6c6f54a0;
+	Node0x55fa6c6f3ac0:s1 -> Node0x55fa6c6f5450;
+	Node0x55fa6c6f5450 [shape=record,label="{libxml.c:3778:}"];
+	Node0x55fa6c6f5450 -> Node0x55fa6c6e9ed0;
+	Node0x55fa6c6f54a0 [shape=record,label="{libxml.c:3779:}"];
+	Node0x55fa6c6f54a0 -> Node0x55fa6c6e9ed0;
+	Node0x55fa6c6e9ed0 [shape=record,label="{libxml.c:3781:}"];
+}

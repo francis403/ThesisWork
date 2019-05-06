@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlSchemaModelGroupToModelGroupDefFixup' function" {
+	label="CFG for 'xmlSchemaModelGroupToModelGroupDefFixup' function";
+
+	Node0x55d02636f710 [shape=record,label="{xmlschemas.c:19037:}"];
+	Node0x55d02636f710 -> Node0x55d0263705d0;
+	Node0x55d0263705d0 [shape=record,label="{xmlschemas.c:19042:|{<s0>T|<s1>F}}"];
+	Node0x55d0263705d0:s0 -> Node0x55d026370990;
+	Node0x55d0263705d0:s1 -> Node0x55d0263707b0;
+	Node0x55d026370990 [shape=record,label="{xmlschemas.c:19043:|{<s0>T|<s1>F}}"];
+	Node0x55d026370990:s0 -> Node0x55d026370b40;
+	Node0x55d026370990:s1 -> Node0x55d026370be0;
+	Node0x55d026370be0 [shape=record,label="{xmlschemas.c:19044:|{<s0>T|<s1>F}}"];
+	Node0x55d026370be0:s0 -> Node0x55d026370b40;
+	Node0x55d026370be0:s1 -> Node0x55d026370b90;
+	Node0x55d026370b40 [shape=record,label="{xmlschemas.c:19047:}"];
+	Node0x55d026370b40 -> Node0x55d0263705d0;
+	Node0x55d026370b90 [shape=record,label="{xmlschemas.c:19050:|{<s0>T|<s1>F}}"];
+	Node0x55d026370b90:s0 -> Node0x55d026371730;
+	Node0x55d026370b90:s1 -> Node0x55d026371780;
+	Node0x55d026371730 [shape=record,label="{xmlschemas.c:19054:}"];
+	Node0x55d026371730 -> Node0x55d0263705d0;
+	Node0x55d026371780 [shape=record,label="{xmlschemas.c:19062:}"];
+	Node0x55d026371780 -> Node0x55d0263705d0;
+	Node0x55d0263707b0 [shape=record,label="{xmlschemas.c:19066:}"];
+}

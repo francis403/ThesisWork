@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlCopyAttribute' function" {
+	label="CFG for 'xmlCopyAttribute' function";
+
+	Node0x55bbc3a2a7b0 [shape=record,label="{valid.c:2178:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3a2a7b0:s0 -> Node0x55bbc3a2c7f0;
+	Node0x55bbc3a2a7b0:s1 -> Node0x55bbc3a2c840;
+	Node0x55bbc3a2c7f0 [shape=record,label="{valid.c:2184:}"];
+	Node0x55bbc3a2c7f0 -> Node0x55bbc3a2a800;
+	Node0x55bbc3a2c840 [shape=record,label="{valid.c:2187:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3a2c840:s0 -> Node0x55bbc3a2db00;
+	Node0x55bbc3a2c840:s1 -> Node0x55bbc3a2db50;
+	Node0x55bbc3a2db00 [shape=record,label="{valid.c:2193:}"];
+	Node0x55bbc3a2db00 -> Node0x55bbc3a2db50;
+	Node0x55bbc3a2db50 [shape=record,label="{valid.c:2194:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3a2db50:s0 -> Node0x55bbc3a2e490;
+	Node0x55bbc3a2db50:s1 -> Node0x55bbc3a2e4e0;
+	Node0x55bbc3a2e490 [shape=record,label="{valid.c:2195:}"];
+	Node0x55bbc3a2e490 -> Node0x55bbc3a2e4e0;
+	Node0x55bbc3a2e4e0 [shape=record,label="{valid.c:2196:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3a2e4e0:s0 -> Node0x55bbc3a2ee20;
+	Node0x55bbc3a2e4e0:s1 -> Node0x55bbc3a2ee70;
+	Node0x55bbc3a2ee20 [shape=record,label="{valid.c:2197:}"];
+	Node0x55bbc3a2ee20 -> Node0x55bbc3a2ee70;
+	Node0x55bbc3a2ee70 [shape=record,label="{valid.c:2198:|{<s0>T|<s1>F}}"];
+	Node0x55bbc3a2ee70:s0 -> Node0x55bbc3a2f7b0;
+	Node0x55bbc3a2ee70:s1 -> Node0x55bbc3a2f800;
+	Node0x55bbc3a2f7b0 [shape=record,label="{valid.c:2199:}"];
+	Node0x55bbc3a2f7b0 -> Node0x55bbc3a2f800;
+	Node0x55bbc3a2f800 [shape=record,label="{valid.c:2200:}"];
+	Node0x55bbc3a2f800 -> Node0x55bbc3a2a800;
+	Node0x55bbc3a2a800 [shape=record,label="{valid.c:2201:}"];
+}

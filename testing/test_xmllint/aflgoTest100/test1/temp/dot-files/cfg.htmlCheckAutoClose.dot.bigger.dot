@@ -1,0 +1,43 @@
+digraph "CFG for 'htmlCheckAutoClose' function" {
+	label="CFG for 'htmlCheckAutoClose' function";
+
+	Node0x5630c5e44740 [shape=record,label="{HTMLparser.c:1296:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e44740:s0 -> Node0x5630c5e911d0;
+	Node0x5630c5e44740:s1 -> Node0x5630c5e91220;
+	Node0x5630c5e911d0 [shape=record,label="{HTMLparser.c:1302:}"];
+	Node0x5630c5e911d0 -> Node0x5630c5e91220;
+	Node0x5630c5e91220 [shape=record,label="{HTMLparser.c:1305:}"];
+	Node0x5630c5e91220 -> Node0x5630c5e91700;
+	Node0x5630c5e91700 [shape=record,label="{HTMLparser.c:1305:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e91700:s0 -> Node0x5630c5e919e0;
+	Node0x5630c5e91700:s1 -> Node0x5630c5e91560;
+	Node0x5630c5e919e0 [shape=record,label="{HTMLparser.c:1306:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e919e0:s0 -> Node0x5630c5e91ea0;
+	Node0x5630c5e919e0:s1 -> Node0x5630c5e91ef0;
+	Node0x5630c5e91ea0 [shape=record,label="{HTMLparser.c:1308:}"];
+	Node0x5630c5e91ea0 -> Node0x5630c5e65d80;
+	Node0x5630c5e91ef0 [shape=record,label="{HTMLparser.c:1309:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e91ef0:s0 -> Node0x5630c5e92380;
+	Node0x5630c5e91ef0:s1 -> Node0x5630c5e923d0;
+	Node0x5630c5e92380 [shape=record,label="{HTMLparser.c:1310:}"];
+	Node0x5630c5e92380 -> Node0x5630c5e91560;
+	Node0x5630c5e923d0 [shape=record,label="{HTMLparser.c:1311:}"];
+	Node0x5630c5e923d0 -> Node0x5630c5e91950;
+	Node0x5630c5e91950 [shape=record,label="{HTMLparser.c:1305:}"];
+	Node0x5630c5e91950 -> Node0x5630c5e91700;
+	Node0x5630c5e91560 [shape=record,label="{HTMLparser.c:1313:}"];
+	Node0x5630c5e91560 -> Node0x5630c5e93180;
+	Node0x5630c5e93180 [shape=record,label="{HTMLparser.c:1315:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e93180:s0 -> Node0x5630c5e93710;
+	Node0x5630c5e93180:s1 -> Node0x5630c5e933a0;
+	Node0x5630c5e93710 [shape=record,label="{HTMLparser.c:1316:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e93710:s0 -> Node0x5630c5e938c0;
+	Node0x5630c5e93710:s1 -> Node0x5630c5e93910;
+	Node0x5630c5e938c0 [shape=record,label="{HTMLparser.c:1317:}"];
+	Node0x5630c5e938c0 -> Node0x5630c5e65d80;
+	Node0x5630c5e93910 [shape=record,label="{HTMLparser.c:1319:}"];
+	Node0x5630c5e93910 -> Node0x5630c5e93180;
+	Node0x5630c5e933a0 [shape=record,label="{HTMLparser.c:1321:}"];
+	Node0x5630c5e933a0 -> Node0x5630c5e65d80;
+	Node0x5630c5e65d80 [shape=record,label="{HTMLparser.c:1322:}"];
+}

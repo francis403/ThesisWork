@@ -1,0 +1,45 @@
+digraph "CFG for 'htmlSkipBlankChars' function" {
+	label="CFG for 'htmlSkipBlankChars' function";
+
+	Node0x5630c607b1e0 [shape=record,label="{HTMLparser.c:575:}"];
+	Node0x5630c607b1e0 -> Node0x5630c609b790;
+	Node0x5630c609b790 [shape=record,label="{HTMLparser.c:578:|{<s0>T|<s1>F}}"];
+	Node0x5630c609b790:s0 -> Node0x5630c609ba30;
+	Node0x5630c609b790:s1 -> Node0x5630c609bad0;
+	Node0x5630c609bad0 [shape=record,label="{HTMLparser.c:578:|{<s0>T|<s1>F}}"];
+	Node0x5630c609bad0:s0 -> Node0x5630c609bdf0;
+	Node0x5630c609bad0:s1 -> Node0x5630c609ba80;
+	Node0x5630c609bdf0 [shape=record,label="{HTMLparser.c:578:|{<s0>T|<s1>F}}"];
+	Node0x5630c609bdf0:s0 -> Node0x5630c609ba30;
+	Node0x5630c609bdf0:s1 -> Node0x5630c609ba80;
+	Node0x5630c609ba80 [shape=record,label="{HTMLparser.c:578:}"];
+	Node0x5630c609ba80 -> Node0x5630c609ba30;
+	Node0x5630c609ba30 [shape=record,label="{HTMLparser.c:578:|{<s0>T|<s1>F}}"];
+	Node0x5630c609ba30:s0 -> Node0x5630c609c580;
+	Node0x5630c609ba30:s1 -> Node0x5630c609b9b0;
+	Node0x5630c609c580 [shape=record,label="{HTMLparser.c:579:|{<s0>T|<s1>F}}"];
+	Node0x5630c609c580:s0 -> Node0x5630c609ccc0;
+	Node0x5630c609c580:s1 -> Node0x5630c609cc70;
+	Node0x5630c609ccc0 [shape=record,label="{HTMLparser.c:580:|{<s0>T|<s1>F}}"];
+	Node0x5630c609ccc0:s0 -> Node0x5630c609cbd0;
+	Node0x5630c609ccc0:s1 -> Node0x5630c609cc70;
+	Node0x5630c609cbd0 [shape=record,label="{HTMLparser.c:581:}"];
+	Node0x5630c609cbd0 -> Node0x5630c609cc20;
+	Node0x5630c609cc70 [shape=record,label="{HTMLparser.c:583:|{<s0>T|<s1>F}}"];
+	Node0x5630c609cc70:s0 -> Node0x5630c609e120;
+	Node0x5630c609cc70:s1 -> Node0x5630c609e1c0;
+	Node0x5630c609e120 [shape=record,label="{HTMLparser.c:584:}"];
+	Node0x5630c609e120 -> Node0x5630c609e170;
+	Node0x5630c609e1c0 [shape=record,label="{HTMLparser.c:585:}"];
+	Node0x5630c609e1c0 -> Node0x5630c609e170;
+	Node0x5630c609e170 [shape=record,label="{HTMLparser.c:586:|{<s0>T|<s1>F}}"];
+	Node0x5630c609e170:s0 -> Node0x5630c609fc20;
+	Node0x5630c609e170:s1 -> Node0x5630c609fc70;
+	Node0x5630c609fc20 [shape=record,label="{HTMLparser.c:589:}"];
+	Node0x5630c609fc20 -> Node0x5630c609fc70;
+	Node0x5630c609fc70 [shape=record,label="{%97}"];
+	Node0x5630c609fc70 -> Node0x5630c609cc20;
+	Node0x5630c609cc20 [shape=record,label="{HTMLparser.c:591:}"];
+	Node0x5630c609cc20 -> Node0x5630c609b790;
+	Node0x5630c609b9b0 [shape=record,label="{HTMLparser.c:593:}"];
+}

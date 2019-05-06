@@ -1,0 +1,37 @@
+digraph "CFG for '__libxml2_xzclose' function" {
+	label="CFG for '__libxml2_xzclose' function";
+
+	Node0x56316f35f5a0 [shape=record,label="{xzlib.c:787:|{<s0>T|<s1>F}}"];
+	Node0x56316f35f5a0:s0 -> Node0x56316f362930;
+	Node0x56316f35f5a0:s1 -> Node0x56316f362980;
+	Node0x56316f362930 [shape=record,label="{xzlib.c:794:}"];
+	Node0x56316f362930 -> Node0x56316f35bbb0;
+	Node0x56316f362980 [shape=record,label="{xzlib.c:795:|{<s0>T|<s1>F}}"];
+	Node0x56316f362980:s0 -> Node0x56316f3549f0;
+	Node0x56316f362980:s1 -> Node0x56316f363070;
+	Node0x56316f3549f0 [shape=record,label="{xzlib.c:799:|{<s0>T|<s1>F}}"];
+	Node0x56316f3549f0:s0 -> Node0x56316f363ef0;
+	Node0x56316f3549f0:s1 -> Node0x56316f363f40;
+	Node0x56316f363ef0 [shape=record,label="{xzlib.c:802:}"];
+	Node0x56316f363ef0 -> Node0x56316f363f40;
+	Node0x56316f363f40 [shape=record,label="{xzlib.c:803:}"];
+	Node0x56316f363f40 -> Node0x56316f363070;
+	Node0x56316f363070 [shape=record,label="{xzlib.c:808:|{<s0>T|<s1>F}}"];
+	Node0x56316f363070:s0 -> Node0x56316f365330;
+	Node0x56316f363070:s1 -> Node0x56316f3652e0;
+	Node0x56316f365330 [shape=record,label="{xzlib.c:809:|{<s0>T|<s1>F}}"];
+	Node0x56316f365330:s0 -> Node0x56316f365290;
+	Node0x56316f365330:s1 -> Node0x56316f3652e0;
+	Node0x56316f365290 [shape=record,label="{xzlib.c:810:}"];
+	Node0x56316f365290 -> Node0x56316f3652e0;
+	Node0x56316f3652e0 [shape=record,label="{xzlib.c:811:|{<s0>T|<s1>F}}"];
+	Node0x56316f3652e0:s0 -> Node0x56316f35a130;
+	Node0x56316f3652e0:s1 -> Node0x56316f35a180;
+	Node0x56316f35a130 [shape=record,label="{xzlib.c:813:}"];
+	Node0x56316f35a130 -> Node0x56316f35a1d0;
+	Node0x56316f35a180 [shape=record,label="{xzlib.c:813:}"];
+	Node0x56316f35a180 -> Node0x56316f35a1d0;
+	Node0x56316f35a1d0 [shape=record,label="{xzlib.c:813:}"];
+	Node0x56316f35a1d0 -> Node0x56316f35bbb0;
+	Node0x56316f35bbb0 [shape=record,label="{xzlib.c:814:}"];
+}

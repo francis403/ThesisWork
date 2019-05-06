@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlReplaceNode' function" {
+	label="CFG for 'libxml_xmlReplaceNode' function";
+
+	Node0x55f931276360 [shape=record,label="{libxml2-py.c:6621:|{<s0>T|<s1>F}}"];
+	Node0x55f931276360:s0 -> Node0x55f93127bfc0;
+	Node0x55f931276360:s1 -> Node0x55f93127bf70;
+	Node0x55f93127bf70 [shape=record,label="{libxml2-py.c:6630:}"];
+	Node0x55f93127bf70 -> Node0x55f9312761b0;
+	Node0x55f93127bfc0 [shape=record,label="{libxml2-py.c:6631:|{<s0>T|<s1>F}}"];
+	Node0x55f93127bfc0:s0 -> Node0x55f93127c810;
+	Node0x55f93127bfc0:s1 -> Node0x55f93127c860;
+	Node0x55f93127c810 [shape=record,label="{libxml2-py.c:6631:}"];
+	Node0x55f93127c810 -> Node0x55f93127c8b0;
+	Node0x55f93127c860 [shape=record,label="{libxml2-py.c:6631:}"];
+	Node0x55f93127c860 -> Node0x55f93127c8b0;
+	Node0x55f93127c8b0 [shape=record,label="{libxml2-py.c:6631:|{<s0>T|<s1>F}}"];
+	Node0x55f93127c8b0:s0 -> Node0x55f93127ce40;
+	Node0x55f93127c8b0:s1 -> Node0x55f93127ce90;
+	Node0x55f93127ce40 [shape=record,label="{libxml2-py.c:6632:}"];
+	Node0x55f93127ce40 -> Node0x55f93127cee0;
+	Node0x55f93127ce90 [shape=record,label="{libxml2-py.c:6632:}"];
+	Node0x55f93127ce90 -> Node0x55f93127cee0;
+	Node0x55f93127cee0 [shape=record,label="{libxml2-py.c:6632:}"];
+	Node0x55f93127cee0 -> Node0x55f9312761b0;
+	Node0x55f9312761b0 [shape=record,label="{libxml2-py.c:6637:}"];
+}

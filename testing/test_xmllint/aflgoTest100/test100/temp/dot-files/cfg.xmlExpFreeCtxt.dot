@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlExpFreeCtxt' function" {
+	label="CFG for 'xmlExpFreeCtxt' function";
+
+	Node0x5580ae9d4ac0 [shape=record,label="{xmlregexp.c:6411:|{<s0>T|<s1>F}}"];
+	Node0x5580ae9d4ac0 -> Node0x5580ae9da2f0;
+	Node0x5580ae9d4ac0 -> Node0x5580ae9d8bd0;
+	Node0x5580ae9da2f0 [shape=record,label="{xmlregexp.c:6413:}"];
+	Node0x5580ae9da2f0 -> Node0x5580ae9dab80;
+	Node0x5580ae9d8bd0 [shape=record,label="{xmlregexp.c:6414:|{<s0>T|<s1>F}}"];
+	Node0x5580ae9d8bd0 -> Node0x5580ae9dbce0;
+	Node0x5580ae9d8bd0 -> Node0x5580ae9dbd30;
+	Node0x5580ae9dbce0 [shape=record,label="{xmlregexp.c:6416:}"];
+	Node0x5580ae9dbce0 -> Node0x5580ae9dbd30;
+	Node0x5580ae9dbd30 [shape=record,label="{xmlregexp.c:6417:}"];
+	Node0x5580ae9dbd30 -> Node0x5580ae9dab80;
+	Node0x5580ae9dab80 [shape=record,label="{xmlregexp.c:6418:}"];
+}

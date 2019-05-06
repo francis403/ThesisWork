@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathAddValues' function" {
+	label="CFG for 'libxml_xmlXPathAddValues' function";
+
+	Node0x55d6cc262700 [shape=record,label="{libxml2-py.c:12789:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc262700:s0 -> Node0x55d6cc265fc0;
+	Node0x55d6cc262700:s1 -> Node0x55d6cc265f70;
+	Node0x55d6cc265f70 [shape=record,label="{libxml2-py.c:12794:}"];
+	Node0x55d6cc265f70 -> Node0x55d6cc264b70;
+	Node0x55d6cc265fc0 [shape=record,label="{libxml2-py.c:12795:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc265fc0:s0 -> Node0x55d6cc2667a0;
+	Node0x55d6cc265fc0:s1 -> Node0x55d6cc2667f0;
+	Node0x55d6cc2667a0 [shape=record,label="{libxml2-py.c:12795:}"];
+	Node0x55d6cc2667a0 -> Node0x55d6cc266840;
+	Node0x55d6cc2667f0 [shape=record,label="{libxml2-py.c:12795:}"];
+	Node0x55d6cc2667f0 -> Node0x55d6cc266840;
+	Node0x55d6cc266840 [shape=record,label="{libxml2-py.c:12795:}"];
+	Node0x55d6cc266840 -> Node0x55d6cc264b70;
+	Node0x55d6cc264b70 [shape=record,label="{libxml2-py.c:12800:}"];
+}

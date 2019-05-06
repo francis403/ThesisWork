@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSaveSetAttrEscape' function" {
+	label="CFG for 'xmlSaveSetAttrEscape' function";
+
+	Node0x5645e3fb9390 [shape=record,label="{xmlsave.c:2023:|{<s0>T|<s1>F}}"];
+	Node0x5645e3fb9390:s0 -> Node0x5645e3fbf880;
+	Node0x5645e3fb9390:s1 -> Node0x5645e3fbf8d0;
+	Node0x5645e3fbf880 [shape=record,label="{xmlsave.c:2025:}"];
+	Node0x5645e3fbf880 -> Node0x5645e3fba980;
+	Node0x5645e3fbf8d0 [shape=record,label="{xmlsave.c:2026:}"];
+	Node0x5645e3fbf8d0 -> Node0x5645e3fba980;
+	Node0x5645e3fba980 [shape=record,label="{xmlsave.c:2028:}"];
+}

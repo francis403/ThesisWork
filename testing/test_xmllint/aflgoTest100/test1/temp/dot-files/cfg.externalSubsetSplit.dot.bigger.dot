@@ -1,0 +1,16 @@
+digraph "CFG for 'externalSubsetSplit' function" {
+	label="CFG for 'externalSubsetSplit' function";
+
+	Node0x55d0269767b0 [shape=record,label="{xmlschemas.c:28346:|{<s0>T|<s1>F}}"];
+	Node0x55d0269767b0:s0 -> Node0x55d026977d20;
+	Node0x55d0269767b0:s1 -> Node0x55d026977c50;
+	Node0x55d026977d20 [shape=record,label="{xmlschemas.c:28350:|{<s0>T|<s1>F}}"];
+	Node0x55d026977d20:s0 -> Node0x55d026977ca0;
+	Node0x55d026977d20:s1 -> Node0x55d026977c50;
+	Node0x55d026977ca0 [shape=record,label="{xmlschemas.c:28351:|{<s0>T|<s1>F}}"];
+	Node0x55d026977ca0:s0 -> Node0x55d026977c00;
+	Node0x55d026977ca0:s1 -> Node0x55d026977c50;
+	Node0x55d026977c00 [shape=record,label="{xmlschemas.c:28352:}"];
+	Node0x55d026977c00 -> Node0x55d026977c50;
+	Node0x55d026977c50 [shape=record,label="{xmlschemas.c:28354:}"];
+}

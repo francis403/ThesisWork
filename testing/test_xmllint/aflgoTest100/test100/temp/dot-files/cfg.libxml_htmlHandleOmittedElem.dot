@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_htmlHandleOmittedElem' function" {
+	label="CFG for 'libxml_htmlHandleOmittedElem' function";
+
+	Node0x55d6cb6d1c60 [shape=record,label="{libxml2-py.c:312:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb6d1c60:s0 -> Node0x55d6cb6d5790;
+	Node0x55d6cb6d1c60:s1 -> Node0x55d6cb6d5740;
+	Node0x55d6cb6d5740 [shape=record,label="{libxml2-py.c:318:}"];
+	Node0x55d6cb6d5740 -> Node0x55d6cb6d1ef0;
+	Node0x55d6cb6d5790 [shape=record,label="{libxml2-py.c:320:}"];
+	Node0x55d6cb6d5790 -> Node0x55d6cb6d1ef0;
+	Node0x55d6cb6d1ef0 [shape=record,label="{libxml2-py.c:323:}"];
+}

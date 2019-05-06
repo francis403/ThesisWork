@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlSaveFileEnc' function" {
+	label="CFG for 'libxml_xmlSaveFileEnc' function";
+
+	Node0x55d6cbd57ba0 [shape=record,label="{libxml2-py.c:6699:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbd57ba0:s0 -> Node0x55d6cbd5ce40;
+	Node0x55d6cbd57ba0:s1 -> Node0x55d6cbd5cdf0;
+	Node0x55d6cbd5cdf0 [shape=record,label="{libxml2-py.c:6708:}"];
+	Node0x55d6cbd5cdf0 -> Node0x55d6cbd59dd0;
+	Node0x55d6cbd5ce40 [shape=record,label="{libxml2-py.c:6709:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbd5ce40:s0 -> Node0x55d6cbd5d710;
+	Node0x55d6cbd5ce40:s1 -> Node0x55d6cbd5d760;
+	Node0x55d6cbd5d710 [shape=record,label="{libxml2-py.c:6709:}"];
+	Node0x55d6cbd5d710 -> Node0x55d6cbd5d7b0;
+	Node0x55d6cbd5d760 [shape=record,label="{libxml2-py.c:6709:}"];
+	Node0x55d6cbd5d760 -> Node0x55d6cbd5d7b0;
+	Node0x55d6cbd5d7b0 [shape=record,label="{libxml2-py.c:6709:}"];
+	Node0x55d6cbd5d7b0 -> Node0x55d6cbd59dd0;
+	Node0x55d6cbd59dd0 [shape=record,label="{libxml2-py.c:6714:}"];
+}

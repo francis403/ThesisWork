@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlCtxtResetLastError' function" {
+	label="CFG for 'xmlCtxtResetLastError' function";
+
+	Node0x5606485c8a50 [shape=record,label="{error.c:935:|{<s0>T|<s1>F}}"];
+	Node0x5606485c8a50 -> Node0x5606485c1590;
+	Node0x5606485c8a50 -> Node0x560648583230;
+	Node0x5606485c1590 [shape=record,label="{error.c:940:}"];
+	Node0x5606485c1590 -> Node0x560648583340;
+	Node0x560648583230 [shape=record,label="{error.c:941:|{<s0>T|<s1>F}}"];
+	Node0x560648583230 -> Node0x5606485d1ef0;
+	Node0x560648583230 -> Node0x5606485d1f40;
+	Node0x5606485d1ef0 [shape=record,label="{error.c:943:}"];
+	Node0x5606485d1ef0 -> Node0x560648583340;
+	Node0x5606485d1f40 [shape=record,label="{error.c:944:}"];
+	Node0x5606485d1f40 -> Node0x560648583340;
+	Node0x560648583340 [shape=record,label="{error.c:945:}"];
+}

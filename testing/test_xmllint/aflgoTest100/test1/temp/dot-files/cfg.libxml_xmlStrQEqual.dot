@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlStrQEqual' function" {
+	label="CFG for 'libxml_xmlStrQEqual' function";
+
+	Node0x55f931335060 [shape=record,label="{libxml2-py.c:7391:|{<s0>T|<s1>F}}"];
+	Node0x55f931335060:s0 -> Node0x55f931339560;
+	Node0x55f931335060:s1 -> Node0x55f931339510;
+	Node0x55f931339510 [shape=record,label="{libxml2-py.c:7399:}"];
+	Node0x55f931339510 -> Node0x55f931334d80;
+	Node0x55f931339560 [shape=record,label="{libxml2-py.c:7401:}"];
+	Node0x55f931339560 -> Node0x55f931334d80;
+	Node0x55f931334d80 [shape=record,label="{libxml2-py.c:7404:}"];
+}

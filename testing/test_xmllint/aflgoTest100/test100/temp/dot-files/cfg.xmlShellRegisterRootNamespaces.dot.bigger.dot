@@ -1,0 +1,38 @@
+digraph "CFG for 'xmlShellRegisterRootNamespaces' function" {
+	label="CFG for 'xmlShellRegisterRootNamespaces' function";
+
+	Node0x558980549c40 [shape=record,label="{debugXML.c:2165:|{<s0>T|<s1>F}}"];
+	Node0x558980549c40:s0 -> Node0x5589805506e0;
+	Node0x558980549c40:s1 -> Node0x558980550900;
+	Node0x558980550900 [shape=record,label="{debugXML.c:2170:|{<s0>T|<s1>F}}"];
+	Node0x558980550900:s0 -> Node0x5589805506e0;
+	Node0x558980550900:s1 -> Node0x558980550880;
+	Node0x558980550880 [shape=record,label="{debugXML.c:2171:|{<s0>T|<s1>F}}"];
+	Node0x558980550880:s0 -> Node0x5589805506e0;
+	Node0x558980550880:s1 -> Node0x558980550800;
+	Node0x558980550800 [shape=record,label="{debugXML.c:2171:|{<s0>T|<s1>F}}"];
+	Node0x558980550800:s0 -> Node0x5589805506e0;
+	Node0x558980550800:s1 -> Node0x558980550780;
+	Node0x558980550780 [shape=record,label="{debugXML.c:2171:|{<s0>T|<s1>F}}"];
+	Node0x558980550780:s0 -> Node0x5589805506e0;
+	Node0x558980550780:s1 -> Node0x558980550730;
+	Node0x5589805506e0 [shape=record,label="{debugXML.c:2172:}"];
+	Node0x5589805506e0 -> Node0x558980549c90;
+	Node0x558980550730 [shape=record,label="{debugXML.c:2173:}"];
+	Node0x558980550730 -> Node0x558980551a40;
+	Node0x558980551a40 [shape=record,label="{debugXML.c:2174:|{<s0>T|<s1>F}}"];
+	Node0x558980551a40:s0 -> Node0x558980551e00;
+	Node0x558980551a40:s1 -> Node0x558980551c20;
+	Node0x558980551e00 [shape=record,label="{debugXML.c:2175:|{<s0>T|<s1>F}}"];
+	Node0x558980551e00:s0 -> Node0x558980551fb0;
+	Node0x558980551e00:s1 -> Node0x558980552050;
+	Node0x558980551fb0 [shape=record,label="{debugXML.c:2176:}"];
+	Node0x558980551fb0 -> Node0x558980552000;
+	Node0x558980552050 [shape=record,label="{debugXML.c:2178:}"];
+	Node0x558980552050 -> Node0x558980552000;
+	Node0x558980552000 [shape=record,label="{debugXML.c:2179:}"];
+	Node0x558980552000 -> Node0x558980551a40;
+	Node0x558980551c20 [shape=record,label="{debugXML.c:2181:}"];
+	Node0x558980551c20 -> Node0x558980549c90;
+	Node0x558980549c90 [shape=record,label="{debugXML.c:2182:}"];
+}

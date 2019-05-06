@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlBufferWrite' function" {
+	label="CFG for 'xmlBufferWrite' function";
+
+	Node0x55ed348ca410 [shape=record,label="{xmlIO.c:1031:|{<s0>T|<s1>F}}"];
+	Node0x55ed348ca410:s0 -> Node0x55ed348cd0c0;
+	Node0x55ed348ca410:s1 -> Node0x55ed348cd110;
+	Node0x55ed348cd0c0 [shape=record,label="{xmlIO.c:1036:}"];
+	Node0x55ed348cd0c0 -> Node0x55ed348cb540;
+	Node0x55ed348cd110 [shape=record,label="{xmlIO.c:1037:}"];
+	Node0x55ed348cd110 -> Node0x55ed348cb540;
+	Node0x55ed348cb540 [shape=record,label="{xmlIO.c:1038:}"];
+}

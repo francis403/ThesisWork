@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUTF8Strndup' function" {
+	label="CFG for 'libxml_xmlUTF8Strndup' function";
+
+	Node0x55f9316f90f0 [shape=record,label="{libxml2-py.c:12112:|{<s0>T|<s1>F}}"];
+	Node0x55f9316f90f0:s0 -> Node0x55f9316fc3a0;
+	Node0x55f9316f90f0:s1 -> Node0x55f9316fc350;
+	Node0x55f9316fc350 [shape=record,label="{libxml2-py.c:12119:}"];
+	Node0x55f9316fc350 -> Node0x55f9316f8e10;
+	Node0x55f9316fc3a0 [shape=record,label="{libxml2-py.c:12121:}"];
+	Node0x55f9316fc3a0 -> Node0x55f9316f8e10;
+	Node0x55f9316f8e10 [shape=record,label="{libxml2-py.c:12124:}"];
+}

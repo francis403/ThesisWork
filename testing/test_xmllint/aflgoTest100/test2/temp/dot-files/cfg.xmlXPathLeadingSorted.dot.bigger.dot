@@ -1,0 +1,28 @@
+digraph "CFG for 'xmlXPathLeadingSorted' function" {
+	label="CFG for 'xmlXPathLeadingSorted' function";
+
+	Node0x5621ee759070 [shape=record,label="{xpath.c:4695:|{<s0>T|<s1>F}}"];
+	Node0x5621ee759070:s0 -> Node0x5621ee75dda0;
+	Node0x5621ee759070:s1 -> Node0x5621ee7649a0;
+	Node0x5621ee7649a0 [shape=record,label="{xpath.c:4696:|{<s0>T|<s1>F}}"];
+	Node0x5621ee7649a0:s0 -> Node0x5621ee75dda0;
+	Node0x5621ee7649a0:s1 -> Node0x5621ee6472d0;
+	Node0x5621ee6472d0 [shape=record,label="{xpath.c:4696:|{<s0>T|<s1>F}}"];
+	Node0x5621ee6472d0:s0 -> Node0x5621ee75dda0;
+	Node0x5621ee6472d0:s1 -> Node0x5621ee75e2d0;
+	Node0x5621ee75dda0 [shape=record,label="{xpath.c:4697:}"];
+	Node0x5621ee75dda0 -> Node0x5621ee647480;
+	Node0x5621ee75e2d0 [shape=record,label="{xpath.c:4698:|{<s0>T|<s1>F}}"];
+	Node0x5621ee75e2d0:s0 -> Node0x5621ee765350;
+	Node0x5621ee75e2d0:s1 -> Node0x5621ee7652b0;
+	Node0x5621ee765350 [shape=record,label="{xpath.c:4699:|{<s0>T|<s1>F}}"];
+	Node0x5621ee765350:s0 -> Node0x5621ee765260;
+	Node0x5621ee765350:s1 -> Node0x5621ee7652b0;
+	Node0x5621ee765260 [shape=record,label="{xpath.c:4699:}"];
+	Node0x5621ee765260 -> Node0x5621ee765300;
+	Node0x5621ee7652b0 [shape=record,label="{xpath.c:4699:}"];
+	Node0x5621ee7652b0 -> Node0x5621ee765300;
+	Node0x5621ee765300 [shape=record,label="{xpath.c:4699:}"];
+	Node0x5621ee765300 -> Node0x5621ee647480;
+	Node0x5621ee647480 [shape=record,label="{xpath.c:4700:}"];
+}

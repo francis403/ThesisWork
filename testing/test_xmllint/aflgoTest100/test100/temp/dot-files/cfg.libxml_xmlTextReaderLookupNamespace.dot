@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlTextReaderLookupNamespace' function" {
+	label="CFG for 'libxml_xmlTextReaderLookupNamespace' function";
+
+	Node0x55d6cbecf170 [shape=record,label="{libxml2-py.c:8332:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbecf170:s0 -> Node0x55d6cbed3050;
+	Node0x55d6cbecf170:s1 -> Node0x55d6cbed3000;
+	Node0x55d6cbed3000 [shape=record,label="{libxml2-py.c:8340:}"];
+	Node0x55d6cbed3000 -> Node0x55d6cbecf400;
+	Node0x55d6cbed3050 [shape=record,label="{libxml2-py.c:8341:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbed3050:s0 -> Node0x55d6cbed38b0;
+	Node0x55d6cbed3050:s1 -> Node0x55d6cbed3900;
+	Node0x55d6cbed38b0 [shape=record,label="{libxml2-py.c:8341:}"];
+	Node0x55d6cbed38b0 -> Node0x55d6cbed3950;
+	Node0x55d6cbed3900 [shape=record,label="{libxml2-py.c:8341:}"];
+	Node0x55d6cbed3900 -> Node0x55d6cbed3950;
+	Node0x55d6cbed3950 [shape=record,label="{libxml2-py.c:8341:}"];
+	Node0x55d6cbed3950 -> Node0x55d6cbecf400;
+	Node0x55d6cbecf400 [shape=record,label="{libxml2-py.c:8346:}"];
+}

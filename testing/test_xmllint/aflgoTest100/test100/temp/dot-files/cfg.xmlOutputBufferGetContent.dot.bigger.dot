@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlOutputBufferGetContent' function" {
+	label="CFG for 'xmlOutputBufferGetContent' function";
+
+	Node0x5635e01487f0 [shape=record,label="{xmlIO.c:2861:|{<s0>T|<s1>F}}"];
+	Node0x5635e01487f0:s0 -> Node0x5635e0149d30;
+	Node0x5635e01487f0:s1 -> Node0x5635e0149b40;
+	Node0x5635e0149b40 [shape=record,label="{xmlIO.c:2862:|{<s0>T|<s1>F}}"];
+	Node0x5635e0149b40:s0 -> Node0x5635e0149d30;
+	Node0x5635e0149b40:s1 -> Node0x5635e0149f80;
+	Node0x5635e0149d30 [shape=record,label="{xmlIO.c:2863:}"];
+	Node0x5635e0149d30 -> Node0x5635e0148a60;
+	Node0x5635e0149f80 [shape=record,label="{xmlIO.c:2865:}"];
+	Node0x5635e0149f80 -> Node0x5635e0148a60;
+	Node0x5635e0148a60 [shape=record,label="{xmlIO.c:2866:}"];
+}

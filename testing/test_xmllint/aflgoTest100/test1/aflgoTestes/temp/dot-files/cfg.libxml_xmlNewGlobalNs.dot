@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlNewGlobalNs' function" {
+	label="CFG for 'libxml_xmlNewGlobalNs' function";
+
+	Node0x55f930fd9780 [shape=record,label="{libxml2-py.c:4104:|{<s0>T|<s1>F}}"];
+	Node0x55f930fd9780:s0 -> Node0x55f930db2150;
+	Node0x55f930fd9780:s1 -> Node0x55f930db2100;
+	Node0x55f930db2100 [shape=record,label="{libxml2-py.c:4113:}"];
+	Node0x55f930db2100 -> Node0x55f930fd9a80;
+	Node0x55f930db2150 [shape=record,label="{libxml2-py.c:4114:|{<s0>T|<s1>F}}"];
+	Node0x55f930db2150:s0 -> Node0x55f930db2a20;
+	Node0x55f930db2150:s1 -> Node0x55f930db2a70;
+	Node0x55f930db2a20 [shape=record,label="{libxml2-py.c:4114:}"];
+	Node0x55f930db2a20 -> Node0x55f930db2ac0;
+	Node0x55f930db2a70 [shape=record,label="{libxml2-py.c:4114:}"];
+	Node0x55f930db2a70 -> Node0x55f930db2ac0;
+	Node0x55f930db2ac0 [shape=record,label="{libxml2-py.c:4114:}"];
+	Node0x55f930db2ac0 -> Node0x55f930fd9a80;
+	Node0x55f930fd9a80 [shape=record,label="{libxml2-py.c:4119:}"];
+}

@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlC14NCheckForRelativeNamespaces' function" {
+	label="CFG for 'xmlC14NCheckForRelativeNamespaces' function";
+
+	Node0x55fe83be8340 [shape=record,label="{c14n.c:1366:|{<s0>T|<s1>F}}"];
+	Node0x55fe83be8340:s0 -> Node0x55fe83be8f80;
+	Node0x55fe83be8340:s1 -> Node0x55fe83be90a0;
+	Node0x55fe83be90a0 [shape=record,label="{c14n.c:1370:|{<s0>T|<s1>F}}"];
+	Node0x55fe83be90a0:s0 -> Node0x55fe83be8f80;
+	Node0x55fe83be90a0:s1 -> Node0x55fe83be9020;
+	Node0x55fe83be9020 [shape=record,label="{c14n.c:1370:|{<s0>T|<s1>F}}"];
+	Node0x55fe83be9020:s0 -> Node0x55fe83be8f80;
+	Node0x55fe83be9020:s1 -> Node0x55fe83be8fd0;
+	Node0x55fe83be8f80 [shape=record,label="{c14n.c:1371:}"];
+	Node0x55fe83be8f80 -> Node0x55fe83be8390;
+	Node0x55fe83be8fd0 [shape=record,label="{c14n.c:1375:}"];
+	Node0x55fe83be8fd0 -> Node0x55fe83be9da0;
+	Node0x55fe83be9da0 [shape=record,label="{c14n.c:1376:|{<s0>T|<s1>F}}"];
+	Node0x55fe83be9da0:s0 -> Node0x55fe83bea1a0;
+	Node0x55fe83be9da0:s1 -> Node0x55fe83be9fc0;
+	Node0x55fe83bea1a0 [shape=record,label="{c14n.c:1377:|{<s0>T|<s1>F}}"];
+	Node0x55fe83bea1a0:s0 -> Node0x55fe83bea350;
+	Node0x55fe83bea1a0:s1 -> Node0x55fe83bea3a0;
+	Node0x55fe83bea350 [shape=record,label="{c14n.c:1378:|{<s0>T|<s1>F}}"];
+	Node0x55fe83bea350:s0 -> Node0x55fe83becbf0;
+	Node0x55fe83bea350:s1 -> Node0x55fe83becc40;
+	Node0x55fe83becbf0 [shape=record,label="{c14n.c:1382:}"];
+	Node0x55fe83becbf0 -> Node0x55fe83be8390;
+	Node0x55fe83becc40 [shape=record,label="{c14n.c:1385:|{<s0>T|<s1>F}}"];
+	Node0x55fe83becc40:s0 -> Node0x55fe83bed990;
+	Node0x55fe83becc40:s1 -> Node0x55fe83bed9e0;
+	Node0x55fe83bed990 [shape=record,label="{c14n.c:1386:}"];
+	Node0x55fe83bed990 -> Node0x55fe83be8390;
+	Node0x55fe83bed9e0 [shape=record,label="{c14n.c:1390:}"];
+	Node0x55fe83bed9e0 -> Node0x55fe83bea3a0;
+	Node0x55fe83bea3a0 [shape=record,label="{c14n.c:1392:}"];
+	Node0x55fe83bea3a0 -> Node0x55fe83be9da0;
+	Node0x55fe83be9fc0 [shape=record,label="{c14n.c:1394:}"];
+	Node0x55fe83be9fc0 -> Node0x55fe83be8390;
+	Node0x55fe83be8390 [shape=record,label="{c14n.c:1395:}"];
+}

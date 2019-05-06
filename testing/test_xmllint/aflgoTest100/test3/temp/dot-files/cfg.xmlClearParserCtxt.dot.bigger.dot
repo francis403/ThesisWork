@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlClearParserCtxt' function" {
+	label="CFG for 'xmlClearParserCtxt' function";
+
+	Node0x5581cbf6f9a0 [shape=record,label="{parserInternals.c:1892:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf6f9a0:s0 -> Node0x5581cbf6f7b0;
+	Node0x5581cbf6f9a0:s1 -> Node0x5581cbecfa10;
+	Node0x5581cbf6f7b0 [shape=record,label="{parserInternals.c:1895:}"];
+	Node0x5581cbf6f7b0 -> Node0x5581cbf71370;
+	Node0x5581cbecfa10 [shape=record,label="{parserInternals.c:1896:}"];
+	Node0x5581cbecfa10 -> Node0x5581cbf71370;
+	Node0x5581cbf71370 [shape=record,label="{parserInternals.c:1898:}"];
+}

@@ -1,0 +1,46 @@
+digraph "CFG for 'xmlUTF8Strsize' function" {
+	label="CFG for 'xmlUTF8Strsize' function";
+
+	Node0x55c23f84b290 [shape=record,label="{xmlstring.c:833:|{<s0>T|<s1>F}}"];
+	Node0x55c23f84b290:s0 -> Node0x55c23f84be80;
+	Node0x55c23f84b290:s1 -> Node0x55c23f84bed0;
+	Node0x55c23f84be80 [shape=record,label="{xmlstring.c:838:}"];
+	Node0x55c23f84be80 -> Node0x55c23f84b240;
+	Node0x55c23f84bed0 [shape=record,label="{xmlstring.c:840:|{<s0>T|<s1>F}}"];
+	Node0x55c23f84bed0:s0 -> Node0x55c23f84c360;
+	Node0x55c23f84bed0:s1 -> Node0x55c23f84c3b0;
+	Node0x55c23f84c360 [shape=record,label="{xmlstring.c:841:}"];
+	Node0x55c23f84c360 -> Node0x55c23f84b240;
+	Node0x55c23f84c3b0 [shape=record,label="{xmlstring.c:843:}"];
+	Node0x55c23f84c3b0 -> Node0x55c23f84c7d0;
+	Node0x55c23f84c7d0 [shape=record,label="{xmlstring.c:843:|{<s0>T|<s1>F}}"];
+	Node0x55c23f84c7d0:s0 -> Node0x55c23f84cc40;
+	Node0x55c23f84c7d0:s1 -> Node0x55c23f84c9f0;
+	Node0x55c23f84cc40 [shape=record,label="{xmlstring.c:844:|{<s0>T|<s1>F}}"];
+	Node0x55c23f84cc40:s0 -> Node0x55c23f84ce80;
+	Node0x55c23f84cc40:s1 -> Node0x55c23f84ce30;
+	Node0x55c23f84ce30 [shape=record,label="{xmlstring.c:845:}"];
+	Node0x55c23f84ce30 -> Node0x55c23f84c9f0;
+	Node0x55c23f84ce80 [shape=record,label="{xmlstring.c:846:|{<s0>T|<s1>F}}"];
+	Node0x55c23f84ce80:s0 -> Node0x55c23f84d200;
+	Node0x55c23f84ce80:s1 -> Node0x55c23f84d250;
+	Node0x55c23f84d200 [shape=record,label="{xmlstring.c:847:}"];
+	Node0x55c23f84d200 -> Node0x55c23f84d890;
+	Node0x55c23f84d890 [shape=record,label="{xmlstring.c:847:|{<s0>T|<s1>F}}"];
+	Node0x55c23f84d890:s0 -> Node0x55c23f84dea0;
+	Node0x55c23f84d890:s1 -> Node0x55c23f84dab0;
+	Node0x55c23f84dea0 [shape=record,label="{xmlstring.c:848:|{<s0>T|<s1>F}}"];
+	Node0x55c23f84dea0:s0 -> Node0x55c23f84e090;
+	Node0x55c23f84dea0:s1 -> Node0x55c23f84e0e0;
+	Node0x55c23f84e090 [shape=record,label="{xmlstring.c:848:}"];
+	Node0x55c23f84e090 -> Node0x55c23f84dab0;
+	Node0x55c23f84e0e0 [shape=record,label="{xmlstring.c:849:}"];
+	Node0x55c23f84e0e0 -> Node0x55c23f84d890;
+	Node0x55c23f84dab0 [shape=record,label="{xmlstring.c:847:}"];
+	Node0x55c23f84dab0 -> Node0x55c23f84d250;
+	Node0x55c23f84d250 [shape=record,label="{xmlstring.c:843:}"];
+	Node0x55c23f84d250 -> Node0x55c23f84c7d0;
+	Node0x55c23f84c9f0 [shape=record,label="{xmlstring.c:852:}"];
+	Node0x55c23f84c9f0 -> Node0x55c23f84b240;
+	Node0x55c23f84b240 [shape=record,label="{xmlstring.c:853:}"];
+}

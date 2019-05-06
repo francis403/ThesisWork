@@ -1,0 +1,26 @@
+digraph "CFG for 'xmlSchemaGetMetaAttrInfo' function" {
+	label="CFG for 'xmlSchemaGetMetaAttrInfo' function";
+
+	Node0x558353cfd350 [shape=record,label="{xmlschemas.c:21737:|{<s0>T|<s1>F}}"];
+	Node0x558353cfd350:s0 -> Node0x558353d1c810;
+	Node0x558353cfd350:s1 -> Node0x558353d1c860;
+	Node0x558353d1c810 [shape=record,label="{xmlschemas.c:21741:}"];
+	Node0x558353d1c810 -> Node0x558353cfd3a0;
+	Node0x558353d1c860 [shape=record,label="{xmlschemas.c:21743:}"];
+	Node0x558353d1c860 -> Node0x558353d1d3b0;
+	Node0x558353d1d3b0 [shape=record,label="{xmlschemas.c:21746:|{<s0>T|<s1>F}}"];
+	Node0x558353d1d3b0:s0 -> Node0x558353d1d690;
+	Node0x558353d1d3b0:s1 -> Node0x558353d1d210;
+	Node0x558353d1d690 [shape=record,label="{xmlschemas.c:21747:|{<s0>T|<s1>F}}"];
+	Node0x558353d1d690:s0 -> Node0x558353d1ddc0;
+	Node0x558353d1d690:s1 -> Node0x558353d1de10;
+	Node0x558353d1ddc0 [shape=record,label="{xmlschemas.c:21749:}"];
+	Node0x558353d1ddc0 -> Node0x558353cfd3a0;
+	Node0x558353d1de10 [shape=record,label="{xmlschemas.c:21750:}"];
+	Node0x558353d1de10 -> Node0x558353d1d600;
+	Node0x558353d1d600 [shape=record,label="{xmlschemas.c:21746:}"];
+	Node0x558353d1d600 -> Node0x558353d1d3b0;
+	Node0x558353d1d210 [shape=record,label="{xmlschemas.c:21753:}"];
+	Node0x558353d1d210 -> Node0x558353cfd3a0;
+	Node0x558353cfd3a0 [shape=record,label="{xmlschemas.c:21754:}"];
+}

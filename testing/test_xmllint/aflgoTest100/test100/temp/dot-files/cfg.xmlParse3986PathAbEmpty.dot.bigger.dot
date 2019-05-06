@@ -1,0 +1,43 @@
+digraph "CFG for 'xmlParse3986PathAbEmpty' function" {
+	label="CFG for 'xmlParse3986PathAbEmpty' function";
+
+	Node0x563ca5ed5200 [shape=record,label="{uri.c:579:}"];
+	Node0x563ca5ed5200 -> Node0x563ca5ed9a10;
+	Node0x563ca5ed9a10 [shape=record,label="{uri.c:586:|{<s0>T|<s1>F}}"];
+	Node0x563ca5ed9a10:s0 -> Node0x563ca5ed9ec0;
+	Node0x563ca5ed9a10:s1 -> Node0x563ca5ed9c30;
+	Node0x563ca5ed9ec0 [shape=record,label="{uri.c:587:|{<s0>T|<s1>F}}"];
+	Node0x563ca5ed9ec0:s0 -> Node0x563ca5edac10;
+	Node0x563ca5ed9ec0:s1 -> Node0x563ca5edac60;
+	Node0x563ca5edac10 [shape=record,label="{uri.c:589:}"];
+	Node0x563ca5edac10 -> Node0x563ca5ed5250;
+	Node0x563ca5edac60 [shape=record,label="{uri.c:586:}"];
+	Node0x563ca5edac60 -> Node0x563ca5ed9a10;
+	Node0x563ca5ed9c30 [shape=record,label="{uri.c:591:|{<s0>T|<s1>F}}"];
+	Node0x563ca5ed9c30:s0 -> Node0x563ca5edb150;
+	Node0x563ca5ed9c30:s1 -> Node0x563ca5edb1a0;
+	Node0x563ca5edb150 [shape=record,label="{uri.c:592:|{<s0>T|<s1>F}}"];
+	Node0x563ca5edb150:s0 -> Node0x563ca5edb560;
+	Node0x563ca5edb150:s1 -> Node0x563ca5edb5b0;
+	Node0x563ca5edb560 [shape=record,label="{uri.c:592:}"];
+	Node0x563ca5edb560 -> Node0x563ca5edb5b0;
+	Node0x563ca5edb5b0 [shape=record,label="{uri.c:593:|{<s0>T|<s1>F}}"];
+	Node0x563ca5edb5b0:s0 -> Node0x563ca5edbba0;
+	Node0x563ca5edb5b0:s1 -> Node0x563ca5edbc40;
+	Node0x563ca5edbba0 [shape=record,label="{uri.c:594:|{<s0>T|<s1>F}}"];
+	Node0x563ca5edbba0:s0 -> Node0x563ca5edc0f0;
+	Node0x563ca5edbba0:s1 -> Node0x563ca5edc190;
+	Node0x563ca5edc0f0 [shape=record,label="{uri.c:595:}"];
+	Node0x563ca5edc0f0 -> Node0x563ca5edc140;
+	Node0x563ca5edc190 [shape=record,label="{uri.c:597:}"];
+	Node0x563ca5edc190 -> Node0x563ca5edc140;
+	Node0x563ca5edc140 [shape=record,label="{uri.c:598:}"];
+	Node0x563ca5edc140 -> Node0x563ca5edbbf0;
+	Node0x563ca5edbc40 [shape=record,label="{uri.c:599:}"];
+	Node0x563ca5edbc40 -> Node0x563ca5edbbf0;
+	Node0x563ca5edbbf0 [shape=record,label="{uri.c:601:}"];
+	Node0x563ca5edbbf0 -> Node0x563ca5edb1a0;
+	Node0x563ca5edb1a0 [shape=record,label="{uri.c:602:}"];
+	Node0x563ca5edb1a0 -> Node0x563ca5ed5250;
+	Node0x563ca5ed5250 [shape=record,label="{uri.c:604:}"];
+}

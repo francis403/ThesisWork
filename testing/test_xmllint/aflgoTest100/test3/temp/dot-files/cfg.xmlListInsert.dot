@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlListInsert' function" {
+	label="CFG for 'xmlListInsert' function";
+
+	Node0x5577c16584d0 [shape=record,label="{list.c:273:|{<s0>T|<s1>F}}"];
+	Node0x5577c16584d0 -> Node0x5577c165c6b0;
+	Node0x5577c16584d0 -> Node0x5577c165c700;
+	Node0x5577c165c6b0 [shape=record,label="{list.c:278:}"];
+	Node0x5577c165c6b0 -> Node0x5577c1659110;
+	Node0x5577c165c700 [shape=record,label="{list.c:279:|{<s0>T|<s1>F}}"];
+	Node0x5577c165c700 -> Node0x5577c165d8e0;
+	Node0x5577c165c700 -> Node0x5577c165d930;
+	Node0x5577c165d8e0 [shape=record,label="{list.c:283:}"];
+	Node0x5577c165d8e0 -> Node0x5577c1659110;
+	Node0x5577c165d930 [shape=record,label="{list.c:287:}"];
+	Node0x5577c165d930 -> Node0x5577c1659110;
+	Node0x5577c1659110 [shape=record,label="{list.c:294:}"];
+}

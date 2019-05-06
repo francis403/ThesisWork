@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlUCSIsCatCo' function" {
+	label="CFG for 'xmlUCSIsCatCo' function";
+
+	Node0x564952ee8ed0 [shape=record,label="{xmlunicode.c:2701:|{<s0>T|<s1>F}}"];
+	Node0x564952ee8ed0:s0 -> Node0x564952ee5f60;
+	Node0x564952ee8ed0:s1 -> Node0x564952eeb3a0;
+	Node0x564952eeb3a0 [shape=record,label="{xmlunicode.c:2703:|{<s0>T|<s1>F}}"];
+	Node0x564952eeb3a0:s0 -> Node0x564952ee5f60;
+	Node0x564952eeb3a0:s1 -> Node0x564952eeb320;
+	Node0x564952eeb320 [shape=record,label="{xmlunicode.c:2704:|{<s0>T|<s1>F}}"];
+	Node0x564952eeb320:s0 -> Node0x564952ee5f60;
+	Node0x564952eeb320:s1 -> Node0x564952eeb2d0;
+	Node0x564952eeb2d0 [shape=record,label="{xmlunicode.c:2705:|{<s0>T|<s1>F}}"];
+	Node0x564952eeb2d0:s0 -> Node0x564952ee5f60;
+	Node0x564952eeb2d0:s1 -> Node0x564952ee53c0;
+	Node0x564952ee53c0 [shape=record,label="{xmlunicode.c:2706:|{<s0>T|<s1>F}}"];
+	Node0x564952ee53c0:s0 -> Node0x564952ee5f60;
+	Node0x564952ee53c0:s1 -> Node0x564952ee8800;
+	Node0x564952ee8800 [shape=record,label="{xmlunicode.c:2707:}"];
+	Node0x564952ee8800 -> Node0x564952ee5f60;
+	Node0x564952ee5f60 [shape=record,label="{xmlunicode.c:2706:}"];
+}

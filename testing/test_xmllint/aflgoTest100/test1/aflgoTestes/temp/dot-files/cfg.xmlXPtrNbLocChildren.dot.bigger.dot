@@ -1,0 +1,43 @@
+digraph "CFG for 'xmlXPtrNbLocChildren' function" {
+	label="CFG for 'xmlXPtrNbLocChildren' function";
+
+	Node0x55f6905ab020 [shape=record,label="{xpointer.c:1676:|{<s0>T|<s1>F}}"];
+	Node0x55f6905ab020:s0 -> Node0x55f6905b69a0;
+	Node0x55f6905ab020:s1 -> Node0x55f6905b69f0;
+	Node0x55f6905b69a0 [shape=record,label="{xpointer.c:1679:}"];
+	Node0x55f6905b69a0 -> Node0x55f6905ab070;
+	Node0x55f6905b69f0 [shape=record,label="{xpointer.c:1680:|{<s0>def|<s1>13|<s2>9|<s3>1|<s4>2|<s5>7|<s6>8|<s7>3|<s8>4|<s9>5}}"];
+	Node0x55f6905b69f0:s0 -> Node0x55f6905b6ff0;
+	Node0x55f6905b69f0:s1 -> Node0x55f6905b72f0;
+	Node0x55f6905b69f0:s2 -> Node0x55f6905b72f0;
+	Node0x55f6905b69f0:s3 -> Node0x55f6905b72f0;
+	Node0x55f6905b69f0:s4 -> Node0x55f6905b8380;
+	Node0x55f6905b69f0:s5 -> Node0x55f6905b8570;
+	Node0x55f6905b69f0:s6 -> Node0x55f6905b8570;
+	Node0x55f6905b69f0:s7 -> Node0x55f6905b8570;
+	Node0x55f6905b69f0:s8 -> Node0x55f6905b8570;
+	Node0x55f6905b69f0:s9 -> Node0x55f6905b8570;
+	Node0x55f6905b72f0 [shape=record,label="{xpointer.c:1684:}"];
+	Node0x55f6905b72f0 -> Node0x55f6905b7570;
+	Node0x55f6905b7570 [shape=record,label="{xpointer.c:1685:|{<s0>T|<s1>F}}"];
+	Node0x55f6905b7570:s0 -> Node0x55f6905b7970;
+	Node0x55f6905b7570:s1 -> Node0x55f6905b7790;
+	Node0x55f6905b7970 [shape=record,label="{xpointer.c:1686:|{<s0>T|<s1>F}}"];
+	Node0x55f6905b7970:s0 -> Node0x55f6905b7b20;
+	Node0x55f6905b7970:s1 -> Node0x55f6905b7b70;
+	Node0x55f6905b7b20 [shape=record,label="{xpointer.c:1687:}"];
+	Node0x55f6905b7b20 -> Node0x55f6905b7b70;
+	Node0x55f6905b7b70 [shape=record,label="{xpointer.c:1688:}"];
+	Node0x55f6905b7b70 -> Node0x55f6905b7570;
+	Node0x55f6905b7790 [shape=record,label="{xpointer.c:1690:}"];
+	Node0x55f6905b7790 -> Node0x55f6905b6e80;
+	Node0x55f6905b8380 [shape=record,label="{xpointer.c:1692:}"];
+	Node0x55f6905b8380 -> Node0x55f6905ab070;
+	Node0x55f6905b8570 [shape=record,label="{xpointer.c:1699:}"];
+	Node0x55f6905b8570 -> Node0x55f6905b6e80;
+	Node0x55f6905b6ff0 [shape=record,label="{xpointer.c:1702:}"];
+	Node0x55f6905b6ff0 -> Node0x55f6905ab070;
+	Node0x55f6905b6e80 [shape=record,label="{xpointer.c:1704:}"];
+	Node0x55f6905b6e80 -> Node0x55f6905ab070;
+	Node0x55f6905ab070 [shape=record,label="{xpointer.c:1705:}"];
+}

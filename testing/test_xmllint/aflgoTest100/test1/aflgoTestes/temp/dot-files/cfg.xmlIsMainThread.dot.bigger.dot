@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlIsMainThread' function" {
+	label="CFG for 'xmlIsMainThread' function";
+
+	Node0x55d75a88bdc0 [shape=record,label="{threads.c:796:|{<s0>T|<s1>F}}"];
+	Node0x55d75a88bdc0:s0 -> Node0x55d75a88c100;
+	Node0x55d75a88bdc0:s1 -> Node0x55d75a8c88e0;
+	Node0x55d75a88c100 [shape=record,label="{threads.c:797:}"];
+	Node0x55d75a88c100 -> Node0x55d75a8c88e0;
+	Node0x55d75a8c88e0 [shape=record,label="{threads.c:798:|{<s0>T|<s1>F}}"];
+	Node0x55d75a8c88e0:s0 -> Node0x55d75a8c8ca0;
+	Node0x55d75a8c88e0:s1 -> Node0x55d75a8cc7d0;
+	Node0x55d75a8c8ca0 [shape=record,label="{threads.c:799:}"];
+	Node0x55d75a8c8ca0 -> Node0x55d75a88bd70;
+	Node0x55d75a8cc7d0 [shape=record,label="{threads.c:800:}"];
+	Node0x55d75a8cc7d0 -> Node0x55d75a88bd70;
+	Node0x55d75a88bd70 [shape=record,label="{threads.c:819:}"];
+}

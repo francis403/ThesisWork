@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlUCSIsPrivateUse' function" {
+	label="CFG for 'xmlUCSIsPrivateUse' function";
+
+	Node0x55ca9b20d470 [shape=record,label="{xmlunicode.c:2224:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b20d470 -> Node0x55ca9b1cdd60;
+	Node0x55ca9b20d470 -> Node0x55ca9b24c110;
+	Node0x55ca9b1cdd60 [shape=record,label="{xmlunicode.c:2225:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b1cdd60 -> Node0x55ca9b24bf90;
+	Node0x55ca9b1cdd60 -> Node0x55ca9b24c110;
+	Node0x55ca9b24c110 [shape=record,label="{xmlunicode.c:2226:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b24c110 -> Node0x55ca9b212440;
+	Node0x55ca9b24c110 -> Node0x55ca9b211ba0;
+	Node0x55ca9b212440 [shape=record,label="{xmlunicode.c:2226:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b212440 -> Node0x55ca9b24bf90;
+	Node0x55ca9b212440 -> Node0x55ca9b211ba0;
+	Node0x55ca9b211ba0 [shape=record,label="{xmlunicode.c:2227:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b211ba0 -> Node0x55ca9b212a40;
+	Node0x55ca9b211ba0 -> Node0x55ca9b2129f0;
+	Node0x55ca9b212a40 [shape=record,label="{xmlunicode.c:2227:}"];
+	Node0x55ca9b212a40 -> Node0x55ca9b2129f0;
+	Node0x55ca9b2129f0 [shape=record,label="{xmlunicode.c:2226:}"];
+	Node0x55ca9b2129f0 -> Node0x55ca9b24bf90;
+	Node0x55ca9b24bf90 [shape=record,label="{xmlunicode.c:2226:}"];
+}

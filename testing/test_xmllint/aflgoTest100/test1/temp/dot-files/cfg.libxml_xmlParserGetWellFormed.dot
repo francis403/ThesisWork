@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParserGetWellFormed' function" {
+	label="CFG for 'libxml_xmlParserGetWellFormed' function";
+
+	Node0x55f93116f3e0 [shape=record,label="{libxml2-py.c:5538:|{<s0>T|<s1>F}}"];
+	Node0x55f93116f3e0:s0 -> Node0x55f931170a20;
+	Node0x55f93116f3e0:s1 -> Node0x55f9311709d0;
+	Node0x55f9311709d0 [shape=record,label="{libxml2-py.c:5545:}"];
+	Node0x55f9311709d0 -> Node0x55f93116cfd0;
+	Node0x55f931170a20 [shape=record,label="{libxml2-py.c:5546:|{<s0>T|<s1>F}}"];
+	Node0x55f931170a20:s0 -> Node0x55f931171210;
+	Node0x55f931170a20:s1 -> Node0x55f931171260;
+	Node0x55f931171210 [shape=record,label="{libxml2-py.c:5546:}"];
+	Node0x55f931171210 -> Node0x55f9311712b0;
+	Node0x55f931171260 [shape=record,label="{libxml2-py.c:5546:}"];
+	Node0x55f931171260 -> Node0x55f9311712b0;
+	Node0x55f9311712b0 [shape=record,label="{libxml2-py.c:5546:}"];
+	Node0x55f9311712b0 -> Node0x55f93116cfd0;
+	Node0x55f93116cfd0 [shape=record,label="{libxml2-py.c:5551:}"];
+}

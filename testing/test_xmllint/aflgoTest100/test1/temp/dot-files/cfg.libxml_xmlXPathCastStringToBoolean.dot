@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlXPathCastStringToBoolean' function" {
+	label="CFG for 'libxml_xmlXPathCastStringToBoolean' function";
+
+	Node0x55f931225990 [shape=record,label="{libxml2-py.c:12922:|{<s0>T|<s1>F}}"];
+	Node0x55f931225990:s0 -> Node0x55f930f21da0;
+	Node0x55f931225990:s1 -> Node0x55f930f21d50;
+	Node0x55f930f21d50 [shape=record,label="{libxml2-py.c:12928:}"];
+	Node0x55f930f21d50 -> Node0x55f931225c20;
+	Node0x55f930f21da0 [shape=record,label="{libxml2-py.c:12930:}"];
+	Node0x55f930f21da0 -> Node0x55f931225c20;
+	Node0x55f931225c20 [shape=record,label="{libxml2-py.c:12933:}"];
+}

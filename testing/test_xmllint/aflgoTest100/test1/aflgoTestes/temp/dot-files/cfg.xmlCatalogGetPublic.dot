@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlCatalogGetPublic' function" {
+	label="CFG for 'xmlCatalogGetPublic' function";
+
+	Node0x5650cc911cb0 [shape=record,label="{catalog.c:3792:|{<s0>T|<s1>F}}"];
+	Node0x5650cc911cb0 -> Node0x5650cc913fa0;
+	Node0x5650cc911cb0 -> Node0x5650cc913f50;
+	Node0x5650cc913f50 [shape=record,label="{catalog.c:3798:}"];
+	Node0x5650cc913f50 -> Node0x5650cc913fa0;
+	Node0x5650cc913fa0 [shape=record,label="{catalog.c:3800:|{<s0>T|<s1>F}}"];
+	Node0x5650cc913fa0 -> Node0x5650cc9142b0;
+	Node0x5650cc913fa0 -> Node0x5650cc914300;
+	Node0x5650cc9142b0 [shape=record,label="{catalog.c:3801:}"];
+	Node0x5650cc9142b0 -> Node0x5650cc914300;
+	Node0x5650cc914300 [shape=record,label="{catalog.c:3806:|{<s0>T|<s1>F}}"];
+	Node0x5650cc914300 -> Node0x5650cc914c60;
+	Node0x5650cc914300 -> Node0x5650cc914cb0;
+	Node0x5650cc914c60 [shape=record,label="{catalog.c:3807:}"];
+	Node0x5650cc914c60 -> Node0x5650cc90f3a0;
+	Node0x5650cc914cb0 [shape=record,label="{catalog.c:3812:|{<s0>T|<s1>F}}"];
+	Node0x5650cc914cb0 -> Node0x5650cc915110;
+	Node0x5650cc914cb0 -> Node0x5650cc915160;
+	Node0x5650cc915110 [shape=record,label="{catalog.c:3813:|{<s0>T|<s1>F}}"];
+	Node0x5650cc915110 -> Node0x5650cc915910;
+	Node0x5650cc915110 -> Node0x5650cc9158c0;
+	Node0x5650cc915910 [shape=record,label="{catalog.c:3814:|{<s0>T|<s1>F}}"];
+	Node0x5650cc915910 -> Node0x5650cc915870;
+	Node0x5650cc915910 -> Node0x5650cc9158c0;
+	Node0x5650cc915870 [shape=record,label="{catalog.c:3815:}"];
+	Node0x5650cc915870 -> Node0x5650cc90f3a0;
+	Node0x5650cc9158c0 [shape=record,label="{catalog.c:3819:}"];
+	Node0x5650cc9158c0 -> Node0x5650cc915160;
+	Node0x5650cc915160 [shape=record,label="{catalog.c:3821:|{<s0>T|<s1>F}}"];
+	Node0x5650cc915160 -> Node0x5650cc916740;
+	Node0x5650cc915160 -> Node0x5650cc916790;
+	Node0x5650cc916740 [shape=record,label="{catalog.c:3822:}"];
+	Node0x5650cc916740 -> Node0x5650cc90f3a0;
+	Node0x5650cc916790 [shape=record,label="{catalog.c:3823:}"];
+	Node0x5650cc916790 -> Node0x5650cc90f3a0;
+	Node0x5650cc90f3a0 [shape=record,label="{catalog.c:3824:}"];
+}

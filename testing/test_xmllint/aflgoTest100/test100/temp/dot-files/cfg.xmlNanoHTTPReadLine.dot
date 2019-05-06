@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlNanoHTTPReadLine' function" {
+	label="CFG for 'xmlNanoHTTPReadLine' function";
+
+	Node0x556520ad1d20 [shape=record,label="{nanohttp.c:660:}"];
+	Node0x556520ad1d20 -> Node0x556520a741d0;
+	Node0x556520a741d0 [shape=record,label="{nanohttp.c:665:|{<s0>T|<s1>F}}"];
+	Node0x556520a741d0 -> Node0x556520a746f0;
+	Node0x556520a741d0 -> Node0x556520a743b0;
+	Node0x556520a746f0 [shape=record,label="{nanohttp.c:666:|{<s0>T|<s1>F}}"];
+	Node0x556520a746f0 -> Node0x556520a748e0;
+	Node0x556520a746f0 -> Node0x556520a74930;
+	Node0x556520a748e0 [shape=record,label="{nanohttp.c:667:|{<s0>T|<s1>F}}"];
+	Node0x556520a748e0 -> Node0x556520a74e10;
+	Node0x556520a748e0 -> Node0x556520a74eb0;
+	Node0x556520a74e10 [shape=record,label="{nanohttp.c:668:|{<s0>T|<s1>F}}"];
+	Node0x556520a74e10 -> Node0x556520a753e0;
+	Node0x556520a74e10 -> Node0x556520a75480;
+	Node0x556520a753e0 [shape=record,label="{nanohttp.c:669:}"];
+	Node0x556520a753e0 -> Node0x556520ad4dd0;
+	Node0x556520a75480 [shape=record,label="{nanohttp.c:671:}"];
+	Node0x556520a75480 -> Node0x556520a75430;
+	Node0x556520a75430 [shape=record,label="{nanohttp.c:672:}"];
+	Node0x556520a75430 -> Node0x556520ad4dd0;
+	Node0x556520a74eb0 [shape=record,label="{nanohttp.c:674:|{<s0>T|<s1>F}}"];
+	Node0x556520a74eb0 -> Node0x556520a75e10;
+	Node0x556520a74eb0 -> Node0x556520a75e60;
+	Node0x556520a75e10 [shape=record,label="{nanohttp.c:675:}"];
+	Node0x556520a75e10 -> Node0x556520ad4dd0;
+	Node0x556520a75e60 [shape=record,label="{%32}"];
+	Node0x556520a75e60 -> Node0x556520a74e60;
+	Node0x556520a74e60 [shape=record,label="{nanohttp.c:677:}"];
+	Node0x556520a74e60 -> Node0x556520a74930;
+	Node0x556520a74930 [shape=record,label="{nanohttp.c:678:|{<s0>T|<s1>F}}"];
+	Node0x556520a74930 -> Node0x556520a76a40;
+	Node0x556520a74930 -> Node0x556520a76a90;
+	Node0x556520a76a40 [shape=record,label="{nanohttp.c:680:}"];
+	Node0x556520a76a40 -> Node0x556520ad4dd0;
+	Node0x556520a76a90 [shape=record,label="{nanohttp.c:683:|{<s0>T|<s1>F}}"];
+	Node0x556520a76a90 -> Node0x556520a77440;
+	Node0x556520a76a90 -> Node0x556520a77490;
+	Node0x556520a77440 [shape=record,label="{nanohttp.c:684:}"];
+	Node0x556520a77440 -> Node0x556520a77490;
+	Node0x556520a77490 [shape=record,label="{nanohttp.c:665:}"];
+	Node0x556520a77490 -> Node0x556520a741d0;
+	Node0x556520a743b0 [shape=record,label="{nanohttp.c:686:}"];
+	Node0x556520a743b0 -> Node0x556520ad4dd0;
+	Node0x556520ad4dd0 [shape=record,label="{nanohttp.c:688:}"];
+}

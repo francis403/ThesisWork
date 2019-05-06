@@ -1,0 +1,26 @@
+digraph "CFG for 'xmlXPtrFreeLocationSet' function" {
+	label="CFG for 'xmlXPtrFreeLocationSet' function";
+
+	Node0x55e3343485a0 [shape=record,label="{xpointer.c:739:|{<s0>T|<s1>F}}"];
+	Node0x55e3343485a0 -> Node0x55e33434c250;
+	Node0x55e3343485a0 -> Node0x55e33434c2a0;
+	Node0x55e33434c250 [shape=record,label="{xpointer.c:742:}"];
+	Node0x55e33434c250 -> Node0x55e334348790;
+	Node0x55e33434c2a0 [shape=record,label="{xpointer.c:743:|{<s0>T|<s1>F}}"];
+	Node0x55e33434c2a0 -> Node0x55e33432f5c0;
+	Node0x55e33434c2a0 -> Node0x55e33432f610;
+	Node0x55e33432f5c0 [shape=record,label="{xpointer.c:744:}"];
+	Node0x55e33432f5c0 -> Node0x55e33432fb90;
+	Node0x55e33432fb90 [shape=record,label="{xpointer.c:744:|{<s0>T|<s1>F}}"];
+	Node0x55e33432fb90 -> Node0x55e33432fe10;
+	Node0x55e33432fb90 -> Node0x55e33432f9f0;
+	Node0x55e33432fe10 [shape=record,label="{xpointer.c:745:}"];
+	Node0x55e33432fe10 -> Node0x55e33432fd80;
+	Node0x55e33432fd80 [shape=record,label="{xpointer.c:744:}"];
+	Node0x55e33432fd80 -> Node0x55e33432fb90;
+	Node0x55e33432f9f0 [shape=record,label="{xpointer.c:747:}"];
+	Node0x55e33432f9f0 -> Node0x55e33432f610;
+	Node0x55e33432f610 [shape=record,label="{xpointer.c:749:}"];
+	Node0x55e33432f610 -> Node0x55e334348790;
+	Node0x55e334348790 [shape=record,label="{xpointer.c:750:}"];
+}

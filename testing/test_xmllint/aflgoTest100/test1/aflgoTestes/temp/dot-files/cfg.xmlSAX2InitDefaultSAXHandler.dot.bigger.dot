@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlSAX2InitDefaultSAXHandler' function" {
+	label="CFG for 'xmlSAX2InitDefaultSAXHandler' function";
+
+	Node0x55f4ae7cc4c0 [shape=record,label="{SAX2.c:2923:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae7cc4c0:s0 -> Node0x55f4ae7c9c20;
+	Node0x55f4ae7cc4c0:s1 -> Node0x55f4ae7d5e80;
+	Node0x55f4ae7d5e80 [shape=record,label="{SAX2.c:2925:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae7d5e80:s0 -> Node0x55f4ae7c9c20;
+	Node0x55f4ae7d5e80:s1 -> Node0x55f4ae7d5e30;
+	Node0x55f4ae7c9c20 [shape=record,label="{SAX2.c:2926:}"];
+	Node0x55f4ae7c9c20 -> Node0x55f4ae7d6690;
+	Node0x55f4ae7d5e30 [shape=record,label="{SAX2.c:2928:|{<s0>T|<s1>F}}"];
+	Node0x55f4ae7d5e30:s0 -> Node0x55f4ae7d6640;
+	Node0x55f4ae7d5e30:s1 -> Node0x55f4ae7d66e0;
+	Node0x55f4ae7d6640 [shape=record,label="{SAX2.c:2930:}"];
+	Node0x55f4ae7d6640 -> Node0x55f4ae7d6690;
+	Node0x55f4ae7d66e0 [shape=record,label="{SAX2.c:2932:}"];
+	Node0x55f4ae7d66e0 -> Node0x55f4ae7d6690;
+	Node0x55f4ae7d6690 [shape=record,label="{SAX2.c:2933:}"];
+}

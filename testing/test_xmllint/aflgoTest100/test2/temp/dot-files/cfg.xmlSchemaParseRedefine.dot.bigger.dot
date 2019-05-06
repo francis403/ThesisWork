@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaParseRedefine' function" {
+	label="CFG for 'xmlSchemaParseRedefine' function";
+
+	Node0x5583535d34f0 [shape=record,label="{xmlschemas.c:11198:|{<s0>T|<s1>F}}"];
+	Node0x5583535d34f0:s0 -> Node0x5583535d57b0;
+	Node0x5583535d34f0:s1 -> Node0x5583535d5800;
+	Node0x5583535d57b0 [shape=record,label="{xmlschemas.c:11209:}"];
+	Node0x5583535d57b0 -> Node0x5583535d3540;
+	Node0x5583535d5800 [shape=record,label="{xmlschemas.c:11210:}"];
+	Node0x5583535d5800 -> Node0x5583535d3540;
+	Node0x5583535d3540 [shape=record,label="{xmlschemas.c:11211:}"];
+}

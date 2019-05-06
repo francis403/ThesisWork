@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlExpNewOr' function" {
+	label="CFG for 'xmlExpNewOr' function";
+
+	Node0x5580ae9fed70 [shape=record,label="{xmlregexp.c:6886:|{<s0>T|<s1>F}}"];
+	Node0x5580ae9fed70:s0 -> Node0x5580ae977500;
+	Node0x5580ae9fed70:s1 -> Node0x5580ae977550;
+	Node0x5580ae977500 [shape=record,label="{xmlregexp.c:6888:}"];
+	Node0x5580ae977500 -> Node0x5580ae9fef40;
+	Node0x5580ae977550 [shape=record,label="{xmlregexp.c:6889:|{<s0>T|<s1>F}}"];
+	Node0x5580ae977550:s0 -> Node0x5580ae9779b0;
+	Node0x5580ae977550:s1 -> Node0x5580ae977a50;
+	Node0x5580ae977a50 [shape=record,label="{xmlregexp.c:6889:|{<s0>T|<s1>F}}"];
+	Node0x5580ae977a50:s0 -> Node0x5580ae9779b0;
+	Node0x5580ae977a50:s1 -> Node0x5580ae977a00;
+	Node0x5580ae9779b0 [shape=record,label="{xmlregexp.c:6890:}"];
+	Node0x5580ae9779b0 -> Node0x5580ae9fef40;
+	Node0x5580ae977a00 [shape=record,label="{xmlregexp.c:6894:}"];
+	Node0x5580ae977a00 -> Node0x5580ae9fef40;
+	Node0x5580ae9fef40 [shape=record,label="{xmlregexp.c:6895:}"];
+}

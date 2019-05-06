@@ -1,0 +1,28 @@
+digraph "CFG for 'xmlSchemaGetSchemaBucket' function" {
+	label="CFG for 'xmlSchemaGetSchemaBucket' function";
+
+	Node0x558353455300 [shape=record,label="{xmlschemas.c:10060:|{<s0>T|<s1>F}}"];
+	Node0x558353455300:s0 -> Node0x558353477050;
+	Node0x558353455300:s1 -> Node0x5583534770f0;
+	Node0x558353477050 [shape=record,label="{xmlschemas.c:10068:}"];
+	Node0x558353477050 -> Node0x558353455350;
+	Node0x5583534770f0 [shape=record,label="{xmlschemas.c:10070:}"];
+	Node0x5583534770f0 -> Node0x5583534779b0;
+	Node0x5583534779b0 [shape=record,label="{xmlschemas.c:10071:|{<s0>T|<s1>F}}"];
+	Node0x5583534779b0:s0 -> Node0x558353477c90;
+	Node0x5583534779b0:s1 -> Node0x558353477810;
+	Node0x558353477c90 [shape=record,label="{xmlschemas.c:10072:|{<s0>T|<s1>F}}"];
+	Node0x558353477c90:s0 -> Node0x558353478590;
+	Node0x558353477c90:s1 -> Node0x5583534785e0;
+	Node0x558353478590 [shape=record,label="{xmlschemas.c:10075:}"];
+	Node0x558353478590 -> Node0x558353455350;
+	Node0x5583534785e0 [shape=record,label="{xmlschemas.c:10076:}"];
+	Node0x5583534785e0 -> Node0x558353477c00;
+	Node0x558353477c00 [shape=record,label="{xmlschemas.c:10071:}"];
+	Node0x558353477c00 -> Node0x5583534779b0;
+	Node0x558353477810 [shape=record,label="{%38}"];
+	Node0x558353477810 -> Node0x5583534770a0;
+	Node0x5583534770a0 [shape=record,label="{xmlschemas.c:10078:}"];
+	Node0x5583534770a0 -> Node0x558353455350;
+	Node0x558353455350 [shape=record,label="{xmlschemas.c:10079:}"];
+}

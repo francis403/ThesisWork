@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaSetValidErrors' function" {
+	label="CFG for 'xmlSchemaSetValidErrors' function";
+
+	Node0x5583532bda40 [shape=record,label="{xmlschemas.c:27824:|{<s0>T|<s1>F}}"];
+	Node0x5583532bda40:s0 -> Node0x5583532d8ad0;
+	Node0x5583532bda40:s1 -> Node0x5583532d8b20;
+	Node0x5583532d8ad0 [shape=record,label="{xmlschemas.c:27829:}"];
+	Node0x5583532d8ad0 -> Node0x5583532d9520;
+	Node0x5583532d8b20 [shape=record,label="{xmlschemas.c:27830:|{<s0>T|<s1>F}}"];
+	Node0x5583532d8b20:s0 -> Node0x5583532d94d0;
+	Node0x5583532d8b20:s1 -> Node0x5583532d9520;
+	Node0x5583532d94d0 [shape=record,label="{xmlschemas.c:27834:}"];
+	Node0x5583532d94d0 -> Node0x5583532d9520;
+	Node0x5583532d9520 [shape=record,label="{xmlschemas.c:27835:}"];
+}

@@ -1,0 +1,37 @@
+digraph "CFG for 'pythonInternalSubset' function" {
+	label="CFG for 'pythonInternalSubset' function";
+
+	Node0x55ea374e39a0 [shape=record,label="{libxml.c:1388:|{<s0>T|<s1>F}}"];
+	Node0x55ea374e39a0:s0 -> Node0x55ea374e7260;
+	Node0x55ea374e39a0:s1 -> Node0x55ea374e72b0;
+	Node0x55ea374e7260 [shape=record,label="{libxml.c:1400:|{<s0>T|<s1>F}}"];
+	Node0x55ea374e7260:s0 -> Node0x55ea374e85d0;
+	Node0x55ea374e7260:s1 -> Node0x55ea374e8620;
+	Node0x55ea374e85d0 [shape=record,label="{libxml.c:1404:}"];
+	Node0x55ea374e85d0 -> Node0x55ea374e8620;
+	Node0x55ea374e8620 [shape=record,label="{libxml.c:1405:}"];
+	Node0x55ea374e8620 -> Node0x55ea374e8c20;
+	Node0x55ea374e8c20 [shape=record,label="{libxml.c:1405:|{<s0>T|<s1>F}}"];
+	Node0x55ea374e8c20:s0 -> Node0x55ea374e8e50;
+	Node0x55ea374e8c20:s1 -> Node0x55ea374e8ef0;
+	Node0x55ea374e8e50 [shape=record,label="{libxml.c:1405:}"];
+	Node0x55ea374e8e50 -> Node0x55ea374e8ea0;
+	Node0x55ea374e8ef0 [shape=record,label="{libxml.c:1405:}"];
+	Node0x55ea374e8ef0 -> Node0x55ea374e90e0;
+	Node0x55ea374e90e0 [shape=record,label="{libxml.c:1405:|{<s0>T|<s1>F}}"];
+	Node0x55ea374e90e0:s0 -> Node0x55ea374e92c0;
+	Node0x55ea374e90e0:s1 -> Node0x55ea374e9360;
+	Node0x55ea374e92c0 [shape=record,label="{libxml.c:1405:}"];
+	Node0x55ea374e92c0 -> Node0x55ea374e9310;
+	Node0x55ea374e9360 [shape=record,label="{libxml.c:1405:}"];
+	Node0x55ea374e9360 -> Node0x55ea374e9310;
+	Node0x55ea374e9310 [shape=record,label="{libxml.c:1405:}"];
+	Node0x55ea374e9310 -> Node0x55ea374e9040;
+	Node0x55ea374e9040 [shape=record,label="{%35}"];
+	Node0x55ea374e9040 -> Node0x55ea374e8ea0;
+	Node0x55ea374e8ea0 [shape=record,label="{libxml.c:1405:}"];
+	Node0x55ea374e8ea0 -> Node0x55ea374e8b80;
+	Node0x55ea374e8b80 [shape=record,label="{libxml.c:1406:}"];
+	Node0x55ea374e8b80 -> Node0x55ea374e72b0;
+	Node0x55ea374e72b0 [shape=record,label="{libxml.c:1407:}"];
+}

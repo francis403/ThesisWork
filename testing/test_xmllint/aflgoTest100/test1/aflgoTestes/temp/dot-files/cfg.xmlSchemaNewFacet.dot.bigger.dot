@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaNewFacet' function" {
+	label="CFG for 'xmlSchemaNewFacet' function";
+
+	Node0x55d0257e4100 [shape=record,label="{xmlschemas.c:3301:|{<s0>T|<s1>F}}"];
+	Node0x55d0257e4100:s0 -> Node0x55d025846240;
+	Node0x55d0257e4100:s1 -> Node0x55d025846290;
+	Node0x55d025846240 [shape=record,label="{xmlschemas.c:3305:}"];
+	Node0x55d025846240 -> Node0x55d025833920;
+	Node0x55d025846290 [shape=record,label="{xmlschemas.c:3307:}"];
+	Node0x55d025846290 -> Node0x55d025833920;
+	Node0x55d025833920 [shape=record,label="{xmlschemas.c:3310:}"];
+}

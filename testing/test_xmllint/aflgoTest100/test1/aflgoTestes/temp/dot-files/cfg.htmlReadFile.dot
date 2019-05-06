@@ -1,0 +1,12 @@
+digraph "CFG for 'htmlReadFile' function" {
+	label="CFG for 'htmlReadFile' function";
+
+	Node0x5630c5e0e850 [shape=record,label="{HTMLparser.c:6841:|{<s0>T|<s1>F}}"];
+	Node0x5630c5e0e850 -> Node0x5630c5e11d40;
+	Node0x5630c5e0e850 -> Node0x5630c5e11d90;
+	Node0x5630c5e11d40 [shape=record,label="{HTMLparser.c:6848:}"];
+	Node0x5630c5e11d40 -> Node0x5630c5e0e720;
+	Node0x5630c5e11d90 [shape=record,label="{HTMLparser.c:6849:}"];
+	Node0x5630c5e11d90 -> Node0x5630c5e0e720;
+	Node0x5630c5e0e720 [shape=record,label="{HTMLparser.c:6850:}"];
+}

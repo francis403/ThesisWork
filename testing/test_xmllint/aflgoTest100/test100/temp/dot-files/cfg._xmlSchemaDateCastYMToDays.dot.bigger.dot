@@ -1,0 +1,43 @@
+digraph "CFG for '_xmlSchemaDateCastYMToDays' function" {
+	label="CFG for '_xmlSchemaDateCastYMToDays' function";
+
+	Node0x557b21a8f020 [shape=record,label="{xmlschemastypes.c:3961:|{<s0>T|<s1>F}}"];
+	Node0x557b21a8f020:s0 -> Node0x557b21a8ff50;
+	Node0x557b21a8f020:s1 -> Node0x557b21a8ffa0;
+	Node0x557b21a8ff50 [shape=record,label="{xmlschemastypes.c:3967:}"];
+	Node0x557b21a8ff50 -> Node0x557b21a8ffa0;
+	Node0x557b21a8ffa0 [shape=record,label="{xmlschemastypes.c:3969:|{<s0>T|<s1>F}}"];
+	Node0x557b21a8ffa0:s0 -> Node0x557b21a90430;
+	Node0x557b21a8ffa0:s1 -> Node0x557b21a904d0;
+	Node0x557b21a90430 [shape=record,label="{xmlschemastypes.c:3970:|{<s0>T|<s1>F}}"];
+	Node0x557b21a90430:s0 -> Node0x557b21a92140;
+	Node0x557b21a90430:s1 -> Node0x557b21a920f0;
+	Node0x557b21a92140 [shape=record,label="{xmlschemastypes.c:3973:|{<s0>T|<s1>F}}"];
+	Node0x557b21a92140:s0 -> Node0x557b21a92000;
+	Node0x557b21a92140:s1 -> Node0x557b21a920f0;
+	Node0x557b21a920f0 [shape=record,label="{xmlschemastypes.c:3973:|{<s0>T|<s1>F}}"];
+	Node0x557b21a920f0:s0 -> Node0x557b21a92000;
+	Node0x557b21a920f0:s1 -> Node0x557b21a92050;
+	Node0x557b21a92000 [shape=record,label="{xmlschemastypes.c:3973:}"];
+	Node0x557b21a92000 -> Node0x557b21a920a0;
+	Node0x557b21a92050 [shape=record,label="{xmlschemastypes.c:3973:}"];
+	Node0x557b21a92050 -> Node0x557b21a920a0;
+	Node0x557b21a920a0 [shape=record,label="{xmlschemastypes.c:3973:}"];
+	Node0x557b21a920a0 -> Node0x557b21a90480;
+	Node0x557b21a904d0 [shape=record,label="{xmlschemastypes.c:3975:|{<s0>T|<s1>F}}"];
+	Node0x557b21a904d0:s0 -> Node0x557b21a95020;
+	Node0x557b21a904d0:s1 -> Node0x557b21a94fd0;
+	Node0x557b21a95020 [shape=record,label="{xmlschemastypes.c:3978:|{<s0>T|<s1>F}}"];
+	Node0x557b21a95020:s0 -> Node0x557b21a94ee0;
+	Node0x557b21a95020:s1 -> Node0x557b21a94fd0;
+	Node0x557b21a94fd0 [shape=record,label="{xmlschemastypes.c:3978:|{<s0>T|<s1>F}}"];
+	Node0x557b21a94fd0:s0 -> Node0x557b21a94ee0;
+	Node0x557b21a94fd0:s1 -> Node0x557b21a94f30;
+	Node0x557b21a94ee0 [shape=record,label="{xmlschemastypes.c:3978:}"];
+	Node0x557b21a94ee0 -> Node0x557b21a94f80;
+	Node0x557b21a94f30 [shape=record,label="{xmlschemastypes.c:3978:}"];
+	Node0x557b21a94f30 -> Node0x557b21a94f80;
+	Node0x557b21a94f80 [shape=record,label="{xmlschemastypes.c:3978:}"];
+	Node0x557b21a94f80 -> Node0x557b21a90480;
+	Node0x557b21a90480 [shape=record,label="{xmlschemastypes.c:3980:}"];
+}

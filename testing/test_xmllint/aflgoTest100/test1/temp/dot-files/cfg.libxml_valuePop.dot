@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_valuePop' function" {
+	label="CFG for 'libxml_valuePop' function";
+
+	Node0x55f930c92e90 [shape=record,label="{libxml2-py.c:868:|{<s0>T|<s1>F}}"];
+	Node0x55f930c92e90:s0 -> Node0x55f930b852d0;
+	Node0x55f930c92e90:s1 -> Node0x55f930b9a390;
+	Node0x55f930b9a390 [shape=record,label="{libxml2-py.c:875:}"];
+	Node0x55f930b9a390 -> Node0x55f930c92d40;
+	Node0x55f930b852d0 [shape=record,label="{libxml2-py.c:876:|{<s0>T|<s1>F}}"];
+	Node0x55f930b852d0:s0 -> Node0x55f930bb1a90;
+	Node0x55f930b852d0:s1 -> Node0x55f930bb1ae0;
+	Node0x55f930bb1a90 [shape=record,label="{libxml2-py.c:876:}"];
+	Node0x55f930bb1a90 -> Node0x55f930bb1b30;
+	Node0x55f930bb1ae0 [shape=record,label="{libxml2-py.c:876:}"];
+	Node0x55f930bb1ae0 -> Node0x55f930bb1b30;
+	Node0x55f930bb1b30 [shape=record,label="{libxml2-py.c:876:}"];
+	Node0x55f930bb1b30 -> Node0x55f930c92d40;
+	Node0x55f930c92d40 [shape=record,label="{libxml2-py.c:881:}"];
+}

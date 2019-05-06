@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlAutomataGetInitState' function" {
+	label="CFG for 'xmlAutomataGetInitState' function";
+
+	Node0x563d9d5c0250 [shape=record,label="{xmlregexp.c:5678:|{<s0>T|<s1>F}}"];
+	Node0x563d9d5c0250:s0 -> Node0x563d9d1bc270;
+	Node0x563d9d5c0250:s1 -> Node0x563d9d1bc2c0;
+	Node0x563d9d1bc270 [shape=record,label="{xmlregexp.c:5680:}"];
+	Node0x563d9d1bc270 -> Node0x563d9d5c27a0;
+	Node0x563d9d1bc2c0 [shape=record,label="{xmlregexp.c:5681:}"];
+	Node0x563d9d1bc2c0 -> Node0x563d9d5c27a0;
+	Node0x563d9d5c27a0 [shape=record,label="{xmlregexp.c:5682:}"];
+}

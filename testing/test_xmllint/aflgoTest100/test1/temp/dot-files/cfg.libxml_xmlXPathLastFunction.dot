@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathLastFunction' function" {
+	label="CFG for 'libxml_xmlXPathLastFunction' function";
+
+	Node0x55f931840b10 [shape=record,label="{libxml2-py.c:13455:|{<s0>T|<s1>F}}"];
+	Node0x55f931840b10:s0 -> Node0x55f931843db0;
+	Node0x55f931840b10:s1 -> Node0x55f931843d60;
+	Node0x55f931843d60 [shape=record,label="{libxml2-py.c:13461:}"];
+	Node0x55f931843d60 -> Node0x55f931840830;
+	Node0x55f931843db0 [shape=record,label="{libxml2-py.c:13462:|{<s0>T|<s1>F}}"];
+	Node0x55f931843db0:s0 -> Node0x55f931844610;
+	Node0x55f931843db0:s1 -> Node0x55f931844660;
+	Node0x55f931844610 [shape=record,label="{libxml2-py.c:13462:}"];
+	Node0x55f931844610 -> Node0x55f9318446b0;
+	Node0x55f931844660 [shape=record,label="{libxml2-py.c:13462:}"];
+	Node0x55f931844660 -> Node0x55f9318446b0;
+	Node0x55f9318446b0 [shape=record,label="{libxml2-py.c:13462:}"];
+	Node0x55f9318446b0 -> Node0x55f931840830;
+	Node0x55f931840830 [shape=record,label="{libxml2-py.c:13467:}"];
+}

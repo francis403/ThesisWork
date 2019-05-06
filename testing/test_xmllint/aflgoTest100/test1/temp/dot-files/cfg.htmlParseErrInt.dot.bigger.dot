@@ -1,0 +1,26 @@
+digraph "CFG for 'htmlParseErrInt' function" {
+	label="CFG for 'htmlParseErrInt' function";
+
+	Node0x5630c5f37f20 [shape=record,label="{HTMLparser.c:136:|{<s0>T|<s1>F}}"];
+	Node0x5630c5f37f20:s0 -> Node0x5630c5f39000;
+	Node0x5630c5f37f20:s1 -> Node0x5630c5f38f30;
+	Node0x5630c5f39000 [shape=record,label="{HTMLparser.c:139:|{<s0>T|<s1>F}}"];
+	Node0x5630c5f39000:s0 -> Node0x5630c5f38f80;
+	Node0x5630c5f39000:s1 -> Node0x5630c5f38f30;
+	Node0x5630c5f38f80 [shape=record,label="{HTMLparser.c:140:|{<s0>T|<s1>F}}"];
+	Node0x5630c5f38f80:s0 -> Node0x5630c5f38ee0;
+	Node0x5630c5f38f80:s1 -> Node0x5630c5f38f30;
+	Node0x5630c5f38ee0 [shape=record,label="{HTMLparser.c:141:}"];
+	Node0x5630c5f38ee0 -> Node0x5630c5f3a580;
+	Node0x5630c5f38f30 [shape=record,label="{HTMLparser.c:142:|{<s0>T|<s1>F}}"];
+	Node0x5630c5f38f30:s0 -> Node0x5630c5f39930;
+	Node0x5630c5f38f30:s1 -> Node0x5630c5f39980;
+	Node0x5630c5f39930 [shape=record,label="{HTMLparser.c:143:}"];
+	Node0x5630c5f39930 -> Node0x5630c5f39980;
+	Node0x5630c5f39980 [shape=record,label="{HTMLparser.c:144:|{<s0>T|<s1>F}}"];
+	Node0x5630c5f39980:s0 -> Node0x5630c5f3a530;
+	Node0x5630c5f39980:s1 -> Node0x5630c5f3a580;
+	Node0x5630c5f3a530 [shape=record,label="{HTMLparser.c:148:}"];
+	Node0x5630c5f3a530 -> Node0x5630c5f3a580;
+	Node0x5630c5f3a580 [shape=record,label="{HTMLparser.c:149:}"];
+}

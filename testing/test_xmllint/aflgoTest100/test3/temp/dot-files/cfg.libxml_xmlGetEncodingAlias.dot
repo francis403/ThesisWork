@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlGetEncodingAlias' function" {
+	label="CFG for 'libxml_xmlGetEncodingAlias' function";
+
+	Node0x55d6cb9a3250 [shape=record,label="{libxml2-py.c:2958:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb9a3250:s0 -> Node0x55d6cb9a74a0;
+	Node0x55d6cb9a3250:s1 -> Node0x55d6cb9a7450;
+	Node0x55d6cb9a7450 [shape=record,label="{libxml2-py.c:2964:}"];
+	Node0x55d6cb9a7450 -> Node0x55d6cb9a34e0;
+	Node0x55d6cb9a74a0 [shape=record,label="{libxml2-py.c:2966:}"];
+	Node0x55d6cb9a74a0 -> Node0x55d6cb9a34e0;
+	Node0x55d6cb9a34e0 [shape=record,label="{libxml2-py.c:2969:}"];
+}

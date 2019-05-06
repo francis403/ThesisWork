@@ -1,0 +1,12 @@
+digraph "CFG for 'htmlNewInputStream' function" {
+	label="CFG for 'htmlNewInputStream' function";
+
+	Node0x560744c30480 [shape=record,label="{HTMLparser.c:2187:|{<s0>T|<s1>F}}"];
+	Node0x560744c30480 -> Node0x560744c5dbb0;
+	Node0x560744c30480 -> Node0x560744c5dc00;
+	Node0x560744c5dbb0 [shape=record,label="{HTMLparser.c:2192:}"];
+	Node0x560744c5dbb0 -> Node0x560744c5cdf0;
+	Node0x560744c5dc00 [shape=record,label="{HTMLparser.c:2195:}"];
+	Node0x560744c5dc00 -> Node0x560744c5cdf0;
+	Node0x560744c5cdf0 [shape=record,label="{HTMLparser.c:2209:}"];
+}

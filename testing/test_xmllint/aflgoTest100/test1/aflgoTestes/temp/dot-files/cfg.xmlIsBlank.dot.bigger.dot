@@ -1,0 +1,23 @@
+digraph "CFG for 'xmlIsBlank' function" {
+	label="CFG for 'xmlIsBlank' function";
+
+	Node0x5610db883b90 [shape=record,label="{chvalid.c:241:|{<s0>T|<s1>F}}"];
+	Node0x5610db883b90:s0 -> Node0x5610db885f30;
+	Node0x5610db883b90:s1 -> Node0x5610db886040;
+	Node0x5610db885f30 [shape=record,label="{chvalid.c:242:|{<s0>T|<s1>F}}"];
+	Node0x5610db885f30:s0 -> Node0x5610db889920;
+	Node0x5610db885f30:s1 -> Node0x5610db8899c0;
+	Node0x5610db8899c0 [shape=record,label="{chvalid.c:242:|{<s0>T|<s1>F}}"];
+	Node0x5610db8899c0:s0 -> Node0x5610db889bc0;
+	Node0x5610db8899c0:s1 -> Node0x5610db889970;
+	Node0x5610db889bc0 [shape=record,label="{chvalid.c:242:|{<s0>T|<s1>F}}"];
+	Node0x5610db889bc0:s0 -> Node0x5610db889920;
+	Node0x5610db889bc0:s1 -> Node0x5610db889970;
+	Node0x5610db889970 [shape=record,label="{chvalid.c:242:}"];
+	Node0x5610db889970 -> Node0x5610db889920;
+	Node0x5610db889920 [shape=record,label="{chvalid.c:242:}"];
+	Node0x5610db889920 -> Node0x5610db889700;
+	Node0x5610db886040 [shape=record,label="{chvalid.c:242:}"];
+	Node0x5610db886040 -> Node0x5610db889700;
+	Node0x5610db889700 [shape=record,label="{chvalid.c:242:}"];
+}

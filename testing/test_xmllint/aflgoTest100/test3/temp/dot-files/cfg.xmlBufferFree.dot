@@ -1,0 +1,30 @@
+digraph "CFG for 'xmlBufferFree' function" {
+	label="CFG for 'xmlBufferFree' function";
+
+	Node0x5627b46ac140 [shape=record,label="{tree.c:7166:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ac140 -> Node0x5627b46ac530;
+	Node0x5627b46ac140 -> Node0x5627b46ae6a0;
+	Node0x5627b46ac530 [shape=record,label="{tree.c:7172:}"];
+	Node0x5627b46ac530 -> Node0x5627b46ae5b0;
+	Node0x5627b46ae6a0 [shape=record,label="{tree.c:7175:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ae6a0 -> Node0x5627b46b3330;
+	Node0x5627b46ae6a0 -> Node0x5627b46b32e0;
+	Node0x5627b46b3330 [shape=record,label="{tree.c:7176:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b3330 -> Node0x5627b46b3240;
+	Node0x5627b46b3330 -> Node0x5627b46b32e0;
+	Node0x5627b46b3240 [shape=record,label="{tree.c:7177:}"];
+	Node0x5627b46b3240 -> Node0x5627b46b3290;
+	Node0x5627b46b32e0 [shape=record,label="{tree.c:7178:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b32e0 -> Node0x5627b46b3d80;
+	Node0x5627b46b32e0 -> Node0x5627b46b3d30;
+	Node0x5627b46b3d80 [shape=record,label="{tree.c:7179:|{<s0>T|<s1>F}}"];
+	Node0x5627b46b3d80 -> Node0x5627b46b3ce0;
+	Node0x5627b46b3d80 -> Node0x5627b46b3d30;
+	Node0x5627b46b3ce0 [shape=record,label="{tree.c:7180:}"];
+	Node0x5627b46b3ce0 -> Node0x5627b46b3d30;
+	Node0x5627b46b3d30 [shape=record,label="{%28}"];
+	Node0x5627b46b3d30 -> Node0x5627b46b3290;
+	Node0x5627b46b3290 [shape=record,label="{tree.c:7182:}"];
+	Node0x5627b46b3290 -> Node0x5627b46ae5b0;
+	Node0x5627b46ae5b0 [shape=record,label="{tree.c:7183:}"];
+}

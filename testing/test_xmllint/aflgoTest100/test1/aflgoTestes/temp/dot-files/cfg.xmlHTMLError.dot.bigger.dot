@@ -1,0 +1,16 @@
+digraph "CFG for 'xmlHTMLError' function" {
+	label="CFG for 'xmlHTMLError' function";
+
+	Node0x556d1b6ae700 [shape=record,label="{xmllint.c:622:|{<s0>T|<s1>F}}"];
+	Node0x556d1b6ae700:s0 -> Node0x556d1b6b1c80;
+	Node0x556d1b6ae700:s1 -> Node0x556d1b6b1bb0;
+	Node0x556d1b6b1c80 [shape=record,label="{xmllint.c:631:|{<s0>T|<s1>F}}"];
+	Node0x556d1b6b1c80:s0 -> Node0x556d1b6b1c00;
+	Node0x556d1b6b1c80:s1 -> Node0x556d1b6b1bb0;
+	Node0x556d1b6b1c00 [shape=record,label="{xmllint.c:631:|{<s0>T|<s1>F}}"];
+	Node0x556d1b6b1c00:s0 -> Node0x556d1b6b1b60;
+	Node0x556d1b6b1c00:s1 -> Node0x556d1b6b1bb0;
+	Node0x556d1b6b1b60 [shape=record,label="{xmllint.c:632:}"];
+	Node0x556d1b6b1b60 -> Node0x556d1b6b1bb0;
+	Node0x556d1b6b1bb0 [shape=record,label="{xmllint.c:635:}"];
+}

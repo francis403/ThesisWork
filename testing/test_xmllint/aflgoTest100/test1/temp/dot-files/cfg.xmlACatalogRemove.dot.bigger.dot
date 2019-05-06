@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlACatalogRemove' function" {
+	label="CFG for 'xmlACatalogRemove' function";
+
+	Node0x5650cc8a54c0 [shape=record,label="{catalog.c:3000:|{<s0>T|<s1>F}}"];
+	Node0x5650cc8a54c0:s0 -> Node0x5650cc8aecd0;
+	Node0x5650cc8a54c0:s1 -> Node0x5650cc8aed70;
+	Node0x5650cc8aed70 [shape=record,label="{catalog.c:3003:|{<s0>T|<s1>F}}"];
+	Node0x5650cc8aed70:s0 -> Node0x5650cc8aecd0;
+	Node0x5650cc8aed70:s1 -> Node0x5650cc8aed20;
+	Node0x5650cc8aecd0 [shape=record,label="{catalog.c:3004:}"];
+	Node0x5650cc8aecd0 -> Node0x5650cc8a6e60;
+	Node0x5650cc8aed20 [shape=record,label="{catalog.c:3006:|{<s0>T|<s1>F}}"];
+	Node0x5650cc8aed20:s0 -> Node0x5650cc8af720;
+	Node0x5650cc8aed20:s1 -> Node0x5650cc8af7c0;
+	Node0x5650cc8af720 [shape=record,label="{catalog.c:3007:}"];
+	Node0x5650cc8af720 -> Node0x5650cc8af770;
+	Node0x5650cc8af7c0 [shape=record,label="{catalog.c:3009:|{<s0>T|<s1>F}}"];
+	Node0x5650cc8af7c0:s0 -> Node0x5650cc8b0c00;
+	Node0x5650cc8af7c0:s1 -> Node0x5650cc8b0c50;
+	Node0x5650cc8b0c00 [shape=record,label="{catalog.c:3011:}"];
+	Node0x5650cc8b0c00 -> Node0x5650cc8b0c50;
+	Node0x5650cc8b0c50 [shape=record,label="{%26}"];
+	Node0x5650cc8b0c50 -> Node0x5650cc8af770;
+	Node0x5650cc8af770 [shape=record,label="{catalog.c:3013:}"];
+	Node0x5650cc8af770 -> Node0x5650cc8a6e60;
+	Node0x5650cc8a6e60 [shape=record,label="{catalog.c:3014:}"];
+}

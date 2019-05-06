@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCharStrndup' function" {
+	label="CFG for 'libxml_xmlCharStrndup' function";
+
+	Node0x55f930d46c70 [shape=record,label="{libxml2-py.c:1487:|{<s0>T|<s1>F}}"];
+	Node0x55f930d46c70:s0 -> Node0x55f930d49f10;
+	Node0x55f930d46c70:s1 -> Node0x55f930d49ec0;
+	Node0x55f930d49ec0 [shape=record,label="{libxml2-py.c:1494:}"];
+	Node0x55f930d49ec0 -> Node0x55f930d46f70;
+	Node0x55f930d49f10 [shape=record,label="{libxml2-py.c:1496:}"];
+	Node0x55f930d49f10 -> Node0x55f930d46f70;
+	Node0x55f930d46f70 [shape=record,label="{libxml2-py.c:1499:}"];
+}

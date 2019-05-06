@@ -1,0 +1,17 @@
+digraph "CFG for 'libxml_xmlCreatePushParser' function" {
+	label="CFG for 'libxml_xmlCreatePushParser' function";
+
+	Node0x55ea372cf620 [shape=record,label="{libxml.c:1451:|{<s0>T|<s1>F}}"];
+	Node0x55ea372cf620:s0 -> Node0x55ea372b02f0;
+	Node0x55ea372cf620:s1 -> Node0x55ea372b02a0;
+	Node0x55ea372b02a0 [shape=record,label="{libxml.c:1465:}"];
+	Node0x55ea372b02a0 -> Node0x55ea372fb4d0;
+	Node0x55ea372b02f0 [shape=record,label="{libxml.c:1471:|{<s0>T|<s1>F}}"];
+	Node0x55ea372b02f0:s0 -> Node0x55ea373213f0;
+	Node0x55ea372b02f0:s1 -> Node0x55ea37321440;
+	Node0x55ea373213f0 [shape=record,label="{libxml.c:1472:}"];
+	Node0x55ea373213f0 -> Node0x55ea37321440;
+	Node0x55ea37321440 [shape=record,label="{libxml.c:1476:}"];
+	Node0x55ea37321440 -> Node0x55ea372fb4d0;
+	Node0x55ea372fb4d0 [shape=record,label="{libxml.c:1479:}"];
+}

@@ -1,0 +1,25 @@
+digraph "CFG for 'xmlSchematronNewMemParserCtxt' function" {
+	label="CFG for 'xmlSchematronNewMemParserCtxt' function";
+
+	Node0x5600fc291f40 [shape=record,label="{schematron.c:632:|{<s0>T|<s1>F}}"];
+	Node0x5600fc291f40:s0 -> Node0x5600fc29ac20;
+	Node0x5600fc291f40:s1 -> Node0x5600fc29acc0;
+	Node0x5600fc29acc0 [shape=record,label="{schematron.c:636:|{<s0>T|<s1>F}}"];
+	Node0x5600fc29acc0:s0 -> Node0x5600fc29ac20;
+	Node0x5600fc29acc0:s1 -> Node0x5600fc29ac70;
+	Node0x5600fc29ac20 [shape=record,label="{schematron.c:637:}"];
+	Node0x5600fc29ac20 -> Node0x5600fc2926a0;
+	Node0x5600fc29ac70 [shape=record,label="{schematron.c:641:|{<s0>T|<s1>F}}"];
+	Node0x5600fc29ac70:s0 -> Node0x5600fc29b640;
+	Node0x5600fc29ac70:s1 -> Node0x5600fc29b690;
+	Node0x5600fc29b640 [shape=record,label="{schematron.c:643:}"];
+	Node0x5600fc29b640 -> Node0x5600fc2926a0;
+	Node0x5600fc29b690 [shape=record,label="{schematron.c:647:|{<s0>T|<s1>F}}"];
+	Node0x5600fc29b690:s0 -> Node0x5600fc295720;
+	Node0x5600fc29b690:s1 -> Node0x5600fc295770;
+	Node0x5600fc295720 [shape=record,label="{schematron.c:653:}"];
+	Node0x5600fc295720 -> Node0x5600fc2926a0;
+	Node0x5600fc295770 [shape=record,label="{schematron.c:658:}"];
+	Node0x5600fc295770 -> Node0x5600fc2926a0;
+	Node0x5600fc2926a0 [shape=record,label="{schematron.c:659:}"];
+}

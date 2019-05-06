@@ -1,0 +1,17 @@
+digraph "CFG for 'spacePush' function" {
+	label="CFG for 'spacePush' function";
+
+	Node0x55d73c135d90 [shape=record,label="{parser.c:1952:|{<s0>T|<s1>F}}"];
+	Node0x55d73c135d90 -> Node0x55d73c166c50;
+	Node0x55d73c135d90 -> Node0x55d73c166ca0;
+	Node0x55d73c166c50 [shape=record,label="{parser.c:1954:|{<s0>T|<s1>F}}"];
+	Node0x55d73c166c50 -> Node0x55d73c167e20;
+	Node0x55d73c166c50 -> Node0x55d73c167e70;
+	Node0x55d73c167e20 [shape=record,label="{parser.c:1960:}"];
+	Node0x55d73c167e20 -> Node0x55d73c135de0;
+	Node0x55d73c167e70 [shape=record,label="{parser.c:1964:}"];
+	Node0x55d73c167e70 -> Node0x55d73c166ca0;
+	Node0x55d73c166ca0 [shape=record,label="{parser.c:1966:}"];
+	Node0x55d73c166ca0 -> Node0x55d73c135de0;
+	Node0x55d73c135de0 [shape=record,label="{parser.c:1969:}"];
+}

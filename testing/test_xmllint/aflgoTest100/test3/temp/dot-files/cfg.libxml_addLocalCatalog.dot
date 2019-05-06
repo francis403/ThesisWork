@@ -1,0 +1,24 @@
+digraph "CFG for 'libxml_addLocalCatalog' function" {
+	label="CFG for 'libxml_addLocalCatalog' function";
+
+	Node0x55fa6c696bc0 [shape=record,label="{libxml.c:3119:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c696bc0:s0 -> Node0x55fa6c69ad70;
+	Node0x55fa6c696bc0:s1 -> Node0x55fa6c69ad20;
+	Node0x55fa6c69ad20 [shape=record,label="{libxml.c:3126:}"];
+	Node0x55fa6c69ad20 -> Node0x55fa6c698080;
+	Node0x55fa6c69ad70 [shape=record,label="{libxml.c:3128:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c69ad70:s0 -> Node0x55fa6c69b5c0;
+	Node0x55fa6c69ad70:s1 -> Node0x55fa6c69b610;
+	Node0x55fa6c69b5c0 [shape=record,label="{libxml.c:3128:}"];
+	Node0x55fa6c69b5c0 -> Node0x55fa6c69b660;
+	Node0x55fa6c69b610 [shape=record,label="{libxml.c:3128:}"];
+	Node0x55fa6c69b610 -> Node0x55fa6c69b660;
+	Node0x55fa6c69b660 [shape=record,label="{libxml.c:3128:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c69b660:s0 -> Node0x55fa6c69bb90;
+	Node0x55fa6c69b660:s1 -> Node0x55fa6c69bbe0;
+	Node0x55fa6c69bb90 [shape=record,label="{libxml.c:3131:}"];
+	Node0x55fa6c69bb90 -> Node0x55fa6c69bbe0;
+	Node0x55fa6c69bbe0 [shape=record,label="{libxml.c:3138:}"];
+	Node0x55fa6c69bbe0 -> Node0x55fa6c698080;
+	Node0x55fa6c698080 [shape=record,label="{libxml.c:3140:}"];
+}

@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlACatalogAdd' function" {
+	label="CFG for 'xmlACatalogAdd' function";
+
+	Node0x55f3677449b0 [shape=record,label="{catalog.c:2963:|{<s0>T|<s1>F}}"];
+	Node0x55f3677449b0:s0 -> Node0x55f3677487a0;
+	Node0x55f3677449b0:s1 -> Node0x55f3677487f0;
+	Node0x55f3677487a0 [shape=record,label="{catalog.c:2969:}"];
+	Node0x55f3677487a0 -> Node0x55f367746870;
+	Node0x55f3677487f0 [shape=record,label="{catalog.c:2971:|{<s0>T|<s1>F}}"];
+	Node0x55f3677487f0:s0 -> Node0x55f367748cb0;
+	Node0x55f3677487f0:s1 -> Node0x55f367748d50;
+	Node0x55f367748cb0 [shape=record,label="{catalog.c:2972:}"];
+	Node0x55f367748cb0 -> Node0x55f367748d00;
+	Node0x55f367748d50 [shape=record,label="{catalog.c:2974:|{<s0>T|<s1>F}}"];
+	Node0x55f367748d50:s0 -> Node0x55f36774a880;
+	Node0x55f367748d50:s1 -> Node0x55f36774a8d0;
+	Node0x55f36774a880 [shape=record,label="{catalog.c:2978:|{<s0>T|<s1>F}}"];
+	Node0x55f36774a880:s0 -> Node0x55f36774b180;
+	Node0x55f36774a880:s1 -> Node0x55f36774b1d0;
+	Node0x55f36774b180 [shape=record,label="{catalog.c:2983:}"];
+	Node0x55f36774b180 -> Node0x55f36774b1d0;
+	Node0x55f36774b1d0 [shape=record,label="{catalog.c:2984:}"];
+	Node0x55f36774b1d0 -> Node0x55f36774a8d0;
+	Node0x55f36774a8d0 [shape=record,label="{%47}"];
+	Node0x55f36774a8d0 -> Node0x55f367748d00;
+	Node0x55f367748d00 [shape=record,label="{catalog.c:2987:}"];
+	Node0x55f367748d00 -> Node0x55f367746870;
+	Node0x55f367746870 [shape=record,label="{catalog.c:2988:}"];
+}

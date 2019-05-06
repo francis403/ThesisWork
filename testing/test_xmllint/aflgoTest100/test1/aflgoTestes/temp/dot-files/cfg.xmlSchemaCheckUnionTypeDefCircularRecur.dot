@@ -1,0 +1,44 @@
+digraph "CFG for 'xmlSchemaCheckUnionTypeDefCircularRecur' function" {
+	label="CFG for 'xmlSchemaCheckUnionTypeDefCircularRecur' function";
+
+	Node0x55d0263bda60 [shape=record,label="{xmlschemas.c:15004:}"];
+	Node0x55d0263bda60 -> Node0x55d0263c02d0;
+	Node0x55d0263c02d0 [shape=record,label="{xmlschemas.c:15012:|{<s0>T|<s1>F}}"];
+	Node0x55d0263c02d0 -> Node0x55d0263c06d0;
+	Node0x55d0263c02d0 -> Node0x55d0263c04f0;
+	Node0x55d0263c06d0 [shape=record,label="{xmlschemas.c:15013:}"];
+	Node0x55d0263c06d0 -> Node0x55d0263c0930;
+	Node0x55d0263c0930 [shape=record,label="{xmlschemas.c:15014:|{<s0>T|<s1>F}}"];
+	Node0x55d0263c0930 -> Node0x55d0263c0c20;
+	Node0x55d0263c0930 -> Node0x55d0263c0bd0;
+	Node0x55d0263c0c20 [shape=record,label="{xmlschemas.c:15015:}"];
+	Node0x55d0263c0c20 -> Node0x55d0263c0bd0;
+	Node0x55d0263c0bd0 [shape=record,label="{xmlschemas.c:15014:|{<s0>T|<s1>F}}"];
+	Node0x55d0263c0bd0 -> Node0x55d0263c1150;
+	Node0x55d0263c0bd0 -> Node0x55d0263c0b50;
+	Node0x55d0263c1150 [shape=record,label="{xmlschemas.c:15016:|{<s0>T|<s1>F}}"];
+	Node0x55d0263c1150 -> Node0x55d0263c1300;
+	Node0x55d0263c1150 -> Node0x55d0263c1350;
+	Node0x55d0263c1300 [shape=record,label="{xmlschemas.c:15017:}"];
+	Node0x55d0263c1300 -> Node0x55d0263bdab0;
+	Node0x55d0263c1350 [shape=record,label="{xmlschemas.c:15023:|{<s0>T|<s1>F}}"];
+	Node0x55d0263c1350 -> Node0x55d0263c1ee0;
+	Node0x55d0263c1350 -> Node0x55d0263c1e90;
+	Node0x55d0263c1ee0 [shape=record,label="{xmlschemas.c:15024:|{<s0>T|<s1>F}}"];
+	Node0x55d0263c1ee0 -> Node0x55d0263c1e40;
+	Node0x55d0263c1ee0 -> Node0x55d0263c1e90;
+	Node0x55d0263c1e40 [shape=record,label="{xmlschemas.c:15026:|{<s0>T|<s1>F}}"];
+	Node0x55d0263c1e40 -> Node0x55d0263c3ac0;
+	Node0x55d0263c1e40 -> Node0x55d0263c3b10;
+	Node0x55d0263c3ac0 [shape=record,label="{xmlschemas.c:15033:}"];
+	Node0x55d0263c3ac0 -> Node0x55d0263bdab0;
+	Node0x55d0263c3b10 [shape=record,label="{xmlschemas.c:15034:}"];
+	Node0x55d0263c3b10 -> Node0x55d0263c1e90;
+	Node0x55d0263c1e90 [shape=record,label="{xmlschemas.c:15035:}"];
+	Node0x55d0263c1e90 -> Node0x55d0263c0930;
+	Node0x55d0263c0b50 [shape=record,label="{xmlschemas.c:15037:}"];
+	Node0x55d0263c0b50 -> Node0x55d0263c02d0;
+	Node0x55d0263c04f0 [shape=record,label="{xmlschemas.c:15039:}"];
+	Node0x55d0263c04f0 -> Node0x55d0263bdab0;
+	Node0x55d0263bdab0 [shape=record,label="{xmlschemas.c:15040:}"];
+}

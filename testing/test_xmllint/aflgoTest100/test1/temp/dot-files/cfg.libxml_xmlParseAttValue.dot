@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParseAttValue' function" {
+	label="CFG for 'libxml_xmlParseAttValue' function";
+
+	Node0x55f930e41920 [shape=record,label="{libxml2-py.c:4760:|{<s0>T|<s1>F}}"];
+	Node0x55f930e41920:s0 -> Node0x55f9310a4370;
+	Node0x55f930e41920:s1 -> Node0x55f9310a4320;
+	Node0x55f9310a4320 [shape=record,label="{libxml2-py.c:4767:}"];
+	Node0x55f9310a4320 -> Node0x55f930e41640;
+	Node0x55f9310a4370 [shape=record,label="{libxml2-py.c:4768:|{<s0>T|<s1>F}}"];
+	Node0x55f9310a4370:s0 -> Node0x55f9310a4b50;
+	Node0x55f9310a4370:s1 -> Node0x55f9310a4ba0;
+	Node0x55f9310a4b50 [shape=record,label="{libxml2-py.c:4768:}"];
+	Node0x55f9310a4b50 -> Node0x55f9310a4bf0;
+	Node0x55f9310a4ba0 [shape=record,label="{libxml2-py.c:4768:}"];
+	Node0x55f9310a4ba0 -> Node0x55f9310a4bf0;
+	Node0x55f9310a4bf0 [shape=record,label="{libxml2-py.c:4768:}"];
+	Node0x55f9310a4bf0 -> Node0x55f930e41640;
+	Node0x55f930e41640 [shape=record,label="{libxml2-py.c:4773:}"];
+}

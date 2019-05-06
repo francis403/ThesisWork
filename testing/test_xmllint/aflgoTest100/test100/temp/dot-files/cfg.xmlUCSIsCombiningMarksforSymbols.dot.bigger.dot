@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsCombiningMarksforSymbols' function" {
+	label="CFG for 'xmlUCSIsCombiningMarksforSymbols' function";
+
+	Node0x55ca9b1e57b0 [shape=record,label="{xmlunicode.c:1353:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b1e57b0:s0 -> Node0x55ca9b1f9da0;
+	Node0x55ca9b1e57b0:s1 -> Node0x55ca9b1fa030;
+	Node0x55ca9b1f9da0 [shape=record,label="{xmlunicode.c:1354:}"];
+	Node0x55ca9b1f9da0 -> Node0x55ca9b1fa030;
+	Node0x55ca9b1fa030 [shape=record,label="{xmlunicode.c:1354:}"];
+}

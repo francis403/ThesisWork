@@ -1,0 +1,12 @@
+digraph "CFG for 'elementDeclDebug' function" {
+	label="CFG for 'elementDeclDebug' function";
+
+	Node0x55c15e128d70 [shape=record,label="{xmllint.c:1116:|{<s0>T|<s1>F}}"];
+	Node0x55c15e128d70:s0 -> Node0x55c15e12d3f0;
+	Node0x55c15e128d70:s1 -> Node0x55c15e12d440;
+	Node0x55c15e12d3f0 [shape=record,label="{xmllint.c:1121:}"];
+	Node0x55c15e12d3f0 -> Node0x55c15e128dc0;
+	Node0x55c15e12d440 [shape=record,label="{xmllint.c:1122:}"];
+	Node0x55c15e12d440 -> Node0x55c15e128dc0;
+	Node0x55c15e128dc0 [shape=record,label="{xmllint.c:1124:}"];
+}

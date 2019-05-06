@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlAllocOutputBufferInternal' function" {
+	label="CFG for 'xmlAllocOutputBufferInternal' function";
+
+	Node0x55ed346d2ec0 [shape=record,label="{xmlIO.c:2413:|{<s0>T|<s1>F}}"];
+	Node0x55ed346d2ec0 -> Node0x55ed3474b270;
+	Node0x55ed346d2ec0 -> Node0x55ed3474b2c0;
+	Node0x55ed3474b270 [shape=record,label="{xmlIO.c:2418:}"];
+	Node0x55ed3474b270 -> Node0x55ed346d2b10;
+	Node0x55ed3474b2c0 [shape=record,label="{xmlIO.c:2421:|{<s0>T|<s1>F}}"];
+	Node0x55ed3474b2c0 -> Node0x55ed3474bd20;
+	Node0x55ed3474b2c0 -> Node0x55ed3474bd70;
+	Node0x55ed3474bd20 [shape=record,label="{xmlIO.c:2424:}"];
+	Node0x55ed3474bd20 -> Node0x55ed346d2b10;
+	Node0x55ed3474bd70 [shape=record,label="{xmlIO.c:2432:|{<s0>T|<s1>F}}"];
+	Node0x55ed3474bd70 -> Node0x55ed3474ca00;
+	Node0x55ed3474bd70 -> Node0x55ed3474caa0;
+	Node0x55ed3474ca00 [shape=record,label="{xmlIO.c:2436:|{<s0>T|<s1>F}}"];
+	Node0x55ed3474ca00 -> Node0x55ed3474d100;
+	Node0x55ed3474ca00 -> Node0x55ed3474d150;
+	Node0x55ed3474d100 [shape=record,label="{xmlIO.c:2438:}"];
+	Node0x55ed3474d100 -> Node0x55ed346d2b10;
+	Node0x55ed3474d150 [shape=record,label="{xmlIO.c:2445:}"];
+	Node0x55ed3474d150 -> Node0x55ed3474ca50;
+	Node0x55ed3474caa0 [shape=record,label="{xmlIO.c:2447:}"];
+	Node0x55ed3474caa0 -> Node0x55ed3474ca50;
+	Node0x55ed3474ca50 [shape=record,label="{xmlIO.c:2448:}"];
+	Node0x55ed3474ca50 -> Node0x55ed346d2b10;
+	Node0x55ed346d2b10 [shape=record,label="{xmlIO.c:2454:}"];
+}

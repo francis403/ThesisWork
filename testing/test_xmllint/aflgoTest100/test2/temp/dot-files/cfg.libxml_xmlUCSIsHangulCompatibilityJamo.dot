@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsHangulCompatibilityJamo' function" {
+	label="CFG for 'libxml_xmlUCSIsHangulCompatibilityJamo' function";
+
+	Node0x55d6cc0bd1e0 [shape=record,label="{libxml2-py.c:10459:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc0bd1e0:s0 -> Node0x55d6cc0c02c0;
+	Node0x55d6cc0bd1e0:s1 -> Node0x55d6cc0c0270;
+	Node0x55d6cc0c0270 [shape=record,label="{libxml2-py.c:10465:}"];
+	Node0x55d6cc0c0270 -> Node0x55d6cc0bd470;
+	Node0x55d6cc0c02c0 [shape=record,label="{libxml2-py.c:10467:}"];
+	Node0x55d6cc0c02c0 -> Node0x55d6cc0bd470;
+	Node0x55d6cc0bd470 [shape=record,label="{libxml2-py.c:10470:}"];
+}

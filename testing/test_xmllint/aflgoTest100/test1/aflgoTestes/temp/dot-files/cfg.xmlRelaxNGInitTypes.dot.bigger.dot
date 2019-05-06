@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlRelaxNGInitTypes' function" {
+	label="CFG for 'xmlRelaxNGInitTypes' function";
+
+	Node0x555e9bff23a0 [shape=record,label="{relaxng.c:2825:|{<s0>T|<s1>F}}"];
+	Node0x555e9bff23a0:s0 -> Node0x555e9c0334d0;
+	Node0x555e9bff23a0:s1 -> Node0x555e9c033520;
+	Node0x555e9c0334d0 [shape=record,label="{relaxng.c:2826:}"];
+	Node0x555e9c0334d0 -> Node0x555e9c033420;
+	Node0x555e9c033520 [shape=record,label="{relaxng.c:2827:|{<s0>T|<s1>F}}"];
+	Node0x555e9c033520:s0 -> Node0x555e9c033ec0;
+	Node0x555e9c033520:s1 -> Node0x555e9c033f10;
+	Node0x555e9c033ec0 [shape=record,label="{relaxng.c:2829:}"];
+	Node0x555e9c033ec0 -> Node0x555e9c033420;
+	Node0x555e9c033f10 [shape=record,label="{relaxng.c:2833:}"];
+	Node0x555e9c033f10 -> Node0x555e9c033420;
+	Node0x555e9c033420 [shape=record,label="{relaxng.c:2847:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathRegisterVariable' function" {
+	label="CFG for 'libxml_xmlXPathRegisterVariable' function";
+
+	Node0x55ea3738d090 [shape=record,label="{libxml.c:2391:|{<s0>T|<s1>F}}"];
+	Node0x55ea3738d090:s0 -> Node0x55ea373917a0;
+	Node0x55ea3738d090:s1 -> Node0x55ea37391750;
+	Node0x55ea37391750 [shape=record,label="{libxml.c:2406:}"];
+	Node0x55ea37391750 -> Node0x55ea3738ada0;
+	Node0x55ea373917a0 [shape=record,label="{libxml.c:2408:|{<s0>T|<s1>F}}"];
+	Node0x55ea373917a0:s0 -> Node0x55ea373920c0;
+	Node0x55ea373917a0:s1 -> Node0x55ea37392110;
+	Node0x55ea373920c0 [shape=record,label="{libxml.c:2408:}"];
+	Node0x55ea373920c0 -> Node0x55ea37392160;
+	Node0x55ea37392110 [shape=record,label="{libxml.c:2408:}"];
+	Node0x55ea37392110 -> Node0x55ea37392160;
+	Node0x55ea37392160 [shape=record,label="{libxml.c:2408:}"];
+	Node0x55ea37392160 -> Node0x55ea3738ada0;
+	Node0x55ea3738ada0 [shape=record,label="{libxml.c:2414:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlListRemoveAll' function" {
+	label="CFG for 'xmlListRemoveAll' function";
+
+	Node0x56019df7d960 [shape=record,label="{list.c:403:|{<s0>T|<s1>F}}"];
+	Node0x56019df7d960 -> Node0x56019df70300;
+	Node0x56019df7d960 -> Node0x56019df70350;
+	Node0x56019df70300 [shape=record,label="{list.c:408:}"];
+	Node0x56019df70300 -> Node0x56019df7abc0;
+	Node0x56019df70350 [shape=record,label="{list.c:410:}"];
+	Node0x56019df70350 -> Node0x56019df707b0;
+	Node0x56019df707b0 [shape=record,label="{list.c:410:|{<s0>T|<s1>F}}"];
+	Node0x56019df707b0 -> Node0x56019df70b30;
+	Node0x56019df707b0 -> Node0x56019df70990;
+	Node0x56019df70b30 [shape=record,label="{list.c:411:}"];
+	Node0x56019df70b30 -> Node0x56019df707b0;
+	Node0x56019df70990 [shape=record,label="{list.c:412:}"];
+	Node0x56019df70990 -> Node0x56019df7abc0;
+	Node0x56019df7abc0 [shape=record,label="{list.c:413:}"];
+}

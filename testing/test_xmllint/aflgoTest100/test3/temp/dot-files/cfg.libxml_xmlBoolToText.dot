@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlBoolToText' function" {
+	label="CFG for 'libxml_xmlBoolToText' function";
+
+	Node0x55d6cb7c8b90 [shape=record,label="{libxml2-py.c:1177:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb7c8b90:s0 -> Node0x55d6cb7cd030;
+	Node0x55d6cb7c8b90:s1 -> Node0x55d6cb7ccfe0;
+	Node0x55d6cb7ccfe0 [shape=record,label="{libxml2-py.c:1183:}"];
+	Node0x55d6cb7ccfe0 -> Node0x55d6cb7c89e0;
+	Node0x55d6cb7cd030 [shape=record,label="{libxml2-py.c:1185:}"];
+	Node0x55d6cb7cd030 -> Node0x55d6cb7c89e0;
+	Node0x55d6cb7c89e0 [shape=record,label="{libxml2-py.c:1188:}"];
+}

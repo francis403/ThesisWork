@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlEncodeEntitiesReentrant' function" {
+	label="CFG for 'libxml_xmlEncodeEntitiesReentrant' function";
+
+	Node0x55f930e58e80 [shape=record,label="{libxml2-py.c:2508:|{<s0>T|<s1>F}}"];
+	Node0x55f930e58e80:s0 -> Node0x55f930e5d020;
+	Node0x55f930e58e80:s1 -> Node0x55f930e5cfd0;
+	Node0x55f930e5cfd0 [shape=record,label="{libxml2-py.c:2516:}"];
+	Node0x55f930e5cfd0 -> Node0x55f930e5b480;
+	Node0x55f930e5d020 [shape=record,label="{libxml2-py.c:2517:|{<s0>T|<s1>F}}"];
+	Node0x55f930e5d020:s0 -> Node0x55f930e5d880;
+	Node0x55f930e5d020:s1 -> Node0x55f930e5d8d0;
+	Node0x55f930e5d880 [shape=record,label="{libxml2-py.c:2517:}"];
+	Node0x55f930e5d880 -> Node0x55f930e5d920;
+	Node0x55f930e5d8d0 [shape=record,label="{libxml2-py.c:2517:}"];
+	Node0x55f930e5d8d0 -> Node0x55f930e5d920;
+	Node0x55f930e5d920 [shape=record,label="{libxml2-py.c:2517:}"];
+	Node0x55f930e5d920 -> Node0x55f930e5b480;
+	Node0x55f930e5b480 [shape=record,label="{libxml2-py.c:2522:}"];
+}

@@ -1,0 +1,32 @@
+digraph "CFG for 'htmlSAXParseDoc' function" {
+	label="CFG for 'htmlSAXParseDoc' function";
+
+	Node0x56074485a360 [shape=record,label="{HTMLparser.c:6281:|{<s0>T|<s1>F}}"];
+	Node0x56074485a360 -> Node0x56074486c6f0;
+	Node0x56074485a360 -> Node0x56074486c740;
+	Node0x56074486c6f0 [shape=record,label="{HTMLparser.c:6288:}"];
+	Node0x56074486c6f0 -> Node0x56074486b220;
+	Node0x56074486c740 [shape=record,label="{HTMLparser.c:6291:|{<s0>T|<s1>F}}"];
+	Node0x56074486c740 -> Node0x56074486d6a0;
+	Node0x56074486c740 -> Node0x56074486d6f0;
+	Node0x56074486d6a0 [shape=record,label="{HTMLparser.c:6292:}"];
+	Node0x56074486d6a0 -> Node0x56074486b220;
+	Node0x56074486d6f0 [shape=record,label="{HTMLparser.c:6293:|{<s0>T|<s1>F}}"];
+	Node0x56074486d6f0 -> Node0x56074486da50;
+	Node0x56074486d6f0 -> Node0x56074486daa0;
+	Node0x56074486da50 [shape=record,label="{HTMLparser.c:6294:|{<s0>T|<s1>F}}"];
+	Node0x56074486da50 -> Node0x56074486de60;
+	Node0x56074486da50 -> Node0x56074486deb0;
+	Node0x56074486de60 [shape=record,label="{HTMLparser.c:6294:}"];
+	Node0x56074486de60 -> Node0x56074486deb0;
+	Node0x56074486deb0 [shape=record,label="{HTMLparser.c:6295:}"];
+	Node0x56074486deb0 -> Node0x56074486daa0;
+	Node0x56074486daa0 [shape=record,label="{HTMLparser.c:6299:|{<s0>T|<s1>F}}"];
+	Node0x56074486daa0 -> Node0x56074486ed40;
+	Node0x56074486daa0 -> Node0x56074486ed90;
+	Node0x56074486ed40 [shape=record,label="{HTMLparser.c:6302:}"];
+	Node0x56074486ed40 -> Node0x56074486ed90;
+	Node0x56074486ed90 [shape=record,label="{HTMLparser.c:6305:}"];
+	Node0x56074486ed90 -> Node0x56074486b220;
+	Node0x56074486b220 [shape=record,label="{HTMLparser.c:6308:}"];
+}

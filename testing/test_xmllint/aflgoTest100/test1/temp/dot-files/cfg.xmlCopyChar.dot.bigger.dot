@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlCopyChar' function" {
+	label="CFG for 'xmlCopyChar' function";
+
+	Node0x5585b3d54b60 [shape=record,label="{parserInternals.c:900:|{<s0>T|<s1>F}}"];
+	Node0x5585b3d54b60:s0 -> Node0x5585b3d562b0;
+	Node0x5585b3d54b60:s1 -> Node0x5585b3d56300;
+	Node0x5585b3d562b0 [shape=record,label="{parserInternals.c:901:}"];
+	Node0x5585b3d562b0 -> Node0x5585b3d54d50;
+	Node0x5585b3d56300 [shape=record,label="{parserInternals.c:903:|{<s0>T|<s1>F}}"];
+	Node0x5585b3d56300:s0 -> Node0x5585b3d56790;
+	Node0x5585b3d56300:s1 -> Node0x5585b3d567e0;
+	Node0x5585b3d56790 [shape=record,label="{parserInternals.c:904:}"];
+	Node0x5585b3d56790 -> Node0x5585b3d54d50;
+	Node0x5585b3d567e0 [shape=record,label="{parserInternals.c:906:}"];
+	Node0x5585b3d567e0 -> Node0x5585b3d54d50;
+	Node0x5585b3d54d50 [shape=record,label="{parserInternals.c:908:}"];
+}

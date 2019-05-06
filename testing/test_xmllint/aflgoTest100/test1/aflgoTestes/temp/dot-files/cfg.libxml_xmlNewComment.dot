@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlNewComment' function" {
+	label="CFG for 'libxml_xmlNewComment' function";
+
+	Node0x55f930f9c7a0 [shape=record,label="{libxml2-py.c:3864:|{<s0>T|<s1>F}}"];
+	Node0x55f930f9c7a0:s0 -> Node0x55f930fa14f0;
+	Node0x55f930f9c7a0:s1 -> Node0x55f930fa14a0;
+	Node0x55f930fa14a0 [shape=record,label="{libxml2-py.c:3870:}"];
+	Node0x55f930fa14a0 -> Node0x55f930fa0550;
+	Node0x55f930fa14f0 [shape=record,label="{libxml2-py.c:3872:}"];
+	Node0x55f930fa14f0 -> Node0x55f930fa0550;
+	Node0x55f930fa0550 [shape=record,label="{libxml2-py.c:3875:}"];
+}

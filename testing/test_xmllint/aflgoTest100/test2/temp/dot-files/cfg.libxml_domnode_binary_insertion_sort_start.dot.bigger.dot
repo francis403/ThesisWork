@@ -1,0 +1,33 @@
+digraph "CFG for 'libxml_domnode_binary_insertion_sort_start' function" {
+	label="CFG for 'libxml_domnode_binary_insertion_sort_start' function";
+
+	Node0x5621eeba3a30 [shape=record,label="{timsort.h:217:}"];
+	Node0x5621eeba3a30 -> Node0x5621eebab9e0;
+	Node0x5621eebab9e0 [shape=record,label="{timsort.h:220:|{<s0>T|<s1>F}}"];
+	Node0x5621eebab9e0:s0 -> Node0x5621eebabcc0;
+	Node0x5621eebab9e0:s1 -> Node0x5621eebab7e0;
+	Node0x5621eebabcc0 [shape=record,label="{timsort.h:221:|{<s0>T|<s1>F}}"];
+	Node0x5621eebabcc0:s0 -> Node0x5621eebac780;
+	Node0x5621eebabcc0:s1 -> Node0x5621eebac7d0;
+	Node0x5621eebac780 [shape=record,label="{timsort.h:227:}"];
+	Node0x5621eebac780 -> Node0x5621eebabc30;
+	Node0x5621eebac7d0 [shape=record,label="{timsort.h:231:}"];
+	Node0x5621eebac7d0 -> Node0x5621eebae140;
+	Node0x5621eebae140 [shape=record,label="{timsort.h:234:|{<s0>T|<s1>F}}"];
+	Node0x5621eebae140:s0 -> Node0x5621eebae420;
+	Node0x5621eebae140:s1 -> Node0x5621eebadf00;
+	Node0x5621eebae420 [shape=record,label="{timsort.h:235:|{<s0>T|<s1>F}}"];
+	Node0x5621eebae420:s0 -> Node0x5621eebaeba0;
+	Node0x5621eebae420:s1 -> Node0x5621eebaebf0;
+	Node0x5621eebaeba0 [shape=record,label="{timsort.h:238:}"];
+	Node0x5621eebaeba0 -> Node0x5621eebadf00;
+	Node0x5621eebaebf0 [shape=record,label="{timsort.h:240:}"];
+	Node0x5621eebaebf0 -> Node0x5621eebae390;
+	Node0x5621eebae390 [shape=record,label="{timsort.h:234:}"];
+	Node0x5621eebae390 -> Node0x5621eebae140;
+	Node0x5621eebadf00 [shape=record,label="{timsort.h:242:}"];
+	Node0x5621eebadf00 -> Node0x5621eebabc30;
+	Node0x5621eebabc30 [shape=record,label="{timsort.h:220:}"];
+	Node0x5621eebabc30 -> Node0x5621eebab9e0;
+	Node0x5621eebab7e0 [shape=record,label="{timsort.h:244:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathNormalizeFunction' function" {
+	label="CFG for 'libxml_xmlXPathNormalizeFunction' function";
+
+	Node0x55f9318c1b20 [shape=record,label="{libxml2-py.c:13986:|{<s0>T|<s1>F}}"];
+	Node0x55f9318c1b20:s0 -> Node0x55f9318c5db0;
+	Node0x55f9318c1b20:s1 -> Node0x55f9318c5d60;
+	Node0x55f9318c5d60 [shape=record,label="{libxml2-py.c:13992:}"];
+	Node0x55f9318c5d60 -> Node0x55f9318c37e0;
+	Node0x55f9318c5db0 [shape=record,label="{libxml2-py.c:13993:|{<s0>T|<s1>F}}"];
+	Node0x55f9318c5db0:s0 -> Node0x55f9318c6610;
+	Node0x55f9318c5db0:s1 -> Node0x55f9318c6660;
+	Node0x55f9318c6610 [shape=record,label="{libxml2-py.c:13993:}"];
+	Node0x55f9318c6610 -> Node0x55f9318c66b0;
+	Node0x55f9318c6660 [shape=record,label="{libxml2-py.c:13993:}"];
+	Node0x55f9318c6660 -> Node0x55f9318c66b0;
+	Node0x55f9318c66b0 [shape=record,label="{libxml2-py.c:13993:}"];
+	Node0x55f9318c66b0 -> Node0x55f9318c37e0;
+	Node0x55f9318c37e0 [shape=record,label="{libxml2-py.c:13998:}"];
+}

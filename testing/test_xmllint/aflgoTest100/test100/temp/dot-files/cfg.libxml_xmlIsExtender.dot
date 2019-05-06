@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlIsExtender' function" {
+	label="CFG for 'libxml_xmlIsExtender' function";
+
+	Node0x55d6cba043a0 [shape=record,label="{libxml2-py.c:3390:|{<s0>T|<s1>F}}"];
+	Node0x55d6cba043a0:s0 -> Node0x55d6cba0f240;
+	Node0x55d6cba043a0:s1 -> Node0x55d6cba0f1f0;
+	Node0x55d6cba0f1f0 [shape=record,label="{libxml2-py.c:3396:}"];
+	Node0x55d6cba0f1f0 -> Node0x55d6cba05a20;
+	Node0x55d6cba0f240 [shape=record,label="{libxml2-py.c:3398:}"];
+	Node0x55d6cba0f240 -> Node0x55d6cba05a20;
+	Node0x55d6cba05a20 [shape=record,label="{libxml2-py.c:3401:}"];
+}

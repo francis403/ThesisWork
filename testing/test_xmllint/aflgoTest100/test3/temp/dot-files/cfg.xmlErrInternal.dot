@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlErrInternal' function" {
+	label="CFG for 'xmlErrInternal' function";
+
+	Node0x5581cbf95c70 [shape=record,label="{parserInternals.c:173:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf95c70 -> Node0x5581cbf97cf0;
+	Node0x5581cbf95c70 -> Node0x5581cbf97c20;
+	Node0x5581cbf97cf0 [shape=record,label="{parserInternals.c:175:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf97cf0 -> Node0x5581cbf97c70;
+	Node0x5581cbf97cf0 -> Node0x5581cbf97c20;
+	Node0x5581cbf97c70 [shape=record,label="{parserInternals.c:176:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf97c70 -> Node0x5581cbf97bd0;
+	Node0x5581cbf97c70 -> Node0x5581cbf97c20;
+	Node0x5581cbf97bd0 [shape=record,label="{parserInternals.c:177:}"];
+	Node0x5581cbf97bd0 -> Node0x5581cbf991e0;
+	Node0x5581cbf97c20 [shape=record,label="{parserInternals.c:178:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf97c20 -> Node0x5581cbf98620;
+	Node0x5581cbf97c20 -> Node0x5581cbf98670;
+	Node0x5581cbf98620 [shape=record,label="{parserInternals.c:179:}"];
+	Node0x5581cbf98620 -> Node0x5581cbf98670;
+	Node0x5581cbf98670 [shape=record,label="{parserInternals.c:181:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf98670 -> Node0x5581cbf99190;
+	Node0x5581cbf98670 -> Node0x5581cbf991e0;
+	Node0x5581cbf99190 [shape=record,label="{parserInternals.c:185:|{<s0>T|<s1>F}}"];
+	Node0x5581cbf99190 -> Node0x5581cbf998c0;
+	Node0x5581cbf99190 -> Node0x5581cbf99910;
+	Node0x5581cbf998c0 [shape=record,label="{parserInternals.c:187:}"];
+	Node0x5581cbf998c0 -> Node0x5581cbf99910;
+	Node0x5581cbf99910 [shape=record,label="{parserInternals.c:188:}"];
+	Node0x5581cbf99910 -> Node0x5581cbf991e0;
+	Node0x5581cbf991e0 [shape=record,label="{parserInternals.c:189:}"];
+}

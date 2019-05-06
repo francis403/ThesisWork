@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlReversePattern' function" {
+	label="CFG for 'xmlReversePattern' function";
+
+	Node0x55c8a1233f50 [shape=record,label="{pattern.c:408:|{<s0>T|<s1>F}}"];
+	Node0x55c8a1233f50 -> Node0x55c8a1248130;
+	Node0x55c8a1233f50 -> Node0x55c8a12480e0;
+	Node0x55c8a1248130 [shape=record,label="{pattern.c:414:|{<s0>T|<s1>F}}"];
+	Node0x55c8a1248130 -> Node0x55c8a1248090;
+	Node0x55c8a1248130 -> Node0x55c8a12480e0;
+	Node0x55c8a1248090 [shape=record,label="{pattern.c:415:}"];
+	Node0x55c8a1248090 -> Node0x55c8a1248c00;
+	Node0x55c8a1248c00 [shape=record,label="{pattern.c:415:|{<s0>T|<s1>F}}"];
+	Node0x55c8a1248c00 -> Node0x55c8a1248e80;
+	Node0x55c8a1248c00 -> Node0x55c8a1248920;
+	Node0x55c8a1248e80 [shape=record,label="{pattern.c:416:}"];
+	Node0x55c8a1248e80 -> Node0x55c8a1248df0;
+	Node0x55c8a1248df0 [shape=record,label="{pattern.c:415:}"];
+	Node0x55c8a1248df0 -> Node0x55c8a1248c00;
+	Node0x55c8a1248920 [shape=record,label="{pattern.c:420:}"];
+	Node0x55c8a1248920 -> Node0x55c8a12480e0;
+	Node0x55c8a12480e0 [shape=record,label="{pattern.c:422:|{<s0>T|<s1>F}}"];
+	Node0x55c8a12480e0 -> Node0x55c8a124b710;
+	Node0x55c8a12480e0 -> Node0x55c8a124b760;
+	Node0x55c8a124b710 [shape=record,label="{pattern.c:423:|{<s0>T|<s1>F}}"];
+	Node0x55c8a124b710 -> Node0x55c8a124c880;
+	Node0x55c8a124b710 -> Node0x55c8a124c8d0;
+	Node0x55c8a124c880 [shape=record,label="{pattern.c:429:}"];
+	Node0x55c8a124c880 -> Node0x55c8a1247420;
+	Node0x55c8a124c8d0 [shape=record,label="{pattern.c:431:}"];
+	Node0x55c8a124c8d0 -> Node0x55c8a124b760;
+	Node0x55c8a124b760 [shape=record,label="{pattern.c:434:}"];
+	Node0x55c8a124b760 -> Node0x55c8a124d930;
+	Node0x55c8a124d930 [shape=record,label="{pattern.c:436:|{<s0>T|<s1>F}}"];
+	Node0x55c8a124d930 -> Node0x55c8a124dd50;
+	Node0x55c8a124d930 -> Node0x55c8a124db50;
+	Node0x55c8a124dd50 [shape=record,label="{pattern.c:437:}"];
+	Node0x55c8a124dd50 -> Node0x55c8a124d930;
+	Node0x55c8a124db50 [shape=record,label="{pattern.c:451:}"];
+	Node0x55c8a124db50 -> Node0x55c8a1247420;
+	Node0x55c8a1247420 [shape=record,label="{pattern.c:455:}"];
+}

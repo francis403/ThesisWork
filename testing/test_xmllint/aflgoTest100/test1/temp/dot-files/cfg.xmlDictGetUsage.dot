@@ -1,0 +1,19 @@
+digraph "CFG for 'xmlDictGetUsage' function" {
+	label="CFG for 'xmlDictGetUsage' function";
+
+	Node0x55a8bbb06320 [shape=record,label="{dict.c:1276:|{<s0>T|<s1>F}}"];
+	Node0x55a8bbb06320 -> Node0x55a8bbb091e0;
+	Node0x55a8bbb06320 -> Node0x55a8bbb09230;
+	Node0x55a8bbb091e0 [shape=record,label="{dict.c:1281:}"];
+	Node0x55a8bbb091e0 -> Node0x55a8bbb04980;
+	Node0x55a8bbb09230 [shape=record,label="{dict.c:1282:}"];
+	Node0x55a8bbb09230 -> Node0x55a8bbb09890;
+	Node0x55a8bbb09890 [shape=record,label="{dict.c:1283:|{<s0>T|<s1>F}}"];
+	Node0x55a8bbb09890 -> Node0x55a8bbb09c50;
+	Node0x55a8bbb09890 -> Node0x55a8bbb09a70;
+	Node0x55a8bbb09c50 [shape=record,label="{dict.c:1284:}"];
+	Node0x55a8bbb09c50 -> Node0x55a8bbb09890;
+	Node0x55a8bbb09a70 [shape=record,label="{dict.c:1287:}"];
+	Node0x55a8bbb09a70 -> Node0x55a8bbb04980;
+	Node0x55a8bbb04980 [shape=record,label="{dict.c:1288:}"];
+}

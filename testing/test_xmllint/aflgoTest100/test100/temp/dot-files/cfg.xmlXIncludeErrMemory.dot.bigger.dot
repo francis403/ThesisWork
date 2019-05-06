@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlXIncludeErrMemory' function" {
+	label="CFG for 'xmlXIncludeErrMemory' function";
+
+	Node0x5608329f65f0 [shape=record,label="{xinclude.c:108:|{<s0>T|<s1>F}}"];
+	Node0x5608329f65f0:s0 -> Node0x5608329f72f0;
+	Node0x5608329f65f0:s1 -> Node0x5608329f7340;
+	Node0x5608329f72f0 [shape=record,label="{xinclude.c:112:}"];
+	Node0x5608329f72f0 -> Node0x5608329f7340;
+	Node0x5608329f7340 [shape=record,label="{xinclude.c:113:}"];
+}

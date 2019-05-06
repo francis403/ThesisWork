@@ -1,0 +1,21 @@
+digraph "CFG for 'htmlTagLookup' function" {
+	label="CFG for 'htmlTagLookup' function";
+
+	Node0x5630c5b609e0 [shape=record,label="{HTMLparser.c:1255:}"];
+	Node0x5630c5b609e0 -> Node0x5630c5b71800;
+	Node0x5630c5b71800 [shape=record,label="{HTMLparser.c:1258:|{<s0>T|<s1>F}}"];
+	Node0x5630c5b71800 -> Node0x5630c5b71ae0;
+	Node0x5630c5b71800 -> Node0x5630c5b71660;
+	Node0x5630c5b71ae0 [shape=record,label="{HTMLparser.c:1260:|{<s0>T|<s1>F}}"];
+	Node0x5630c5b71ae0 -> Node0x5630c5b72070;
+	Node0x5630c5b71ae0 -> Node0x5630c5b72020;
+	Node0x5630c5b72020 [shape=record,label="{HTMLparser.c:1261:}"];
+	Node0x5630c5b72020 -> Node0x5630c5b672d0;
+	Node0x5630c5b72070 [shape=record,label="{HTMLparser.c:1262:}"];
+	Node0x5630c5b72070 -> Node0x5630c5b71a50;
+	Node0x5630c5b71a50 [shape=record,label="{HTMLparser.c:1259:}"];
+	Node0x5630c5b71a50 -> Node0x5630c5b71800;
+	Node0x5630c5b71660 [shape=record,label="{HTMLparser.c:1263:}"];
+	Node0x5630c5b71660 -> Node0x5630c5b672d0;
+	Node0x5630c5b672d0 [shape=record,label="{HTMLparser.c:1264:}"];
+}

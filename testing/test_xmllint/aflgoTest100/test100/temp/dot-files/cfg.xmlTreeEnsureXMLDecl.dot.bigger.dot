@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlTreeEnsureXMLDecl' function" {
+	label="CFG for 'xmlTreeEnsureXMLDecl' function";
+
+	Node0x5627b4861dc0 [shape=record,label="{tree.c:5969:|{<s0>T|<s1>F}}"];
+	Node0x5627b4861dc0:s0 -> Node0x5627b4858800;
+	Node0x5627b4861dc0:s1 -> Node0x5627b4858850;
+	Node0x5627b4858800 [shape=record,label="{tree.c:5972:}"];
+	Node0x5627b4858800 -> Node0x5627b4861e10;
+	Node0x5627b4858850 [shape=record,label="{tree.c:5973:|{<s0>T|<s1>F}}"];
+	Node0x5627b4858850:s0 -> Node0x5627b4862960;
+	Node0x5627b4858850:s1 -> Node0x5627b48629b0;
+	Node0x5627b4862960 [shape=record,label="{tree.c:5974:}"];
+	Node0x5627b4862960 -> Node0x5627b4861e10;
+	Node0x5627b48629b0 [shape=record,label="{tree.c:5976:|{<s0>T|<s1>F}}"];
+	Node0x5627b48629b0:s0 -> Node0x5627b4863550;
+	Node0x5627b48629b0:s1 -> Node0x5627b48635a0;
+	Node0x5627b4863550 [shape=record,label="{tree.c:5979:}"];
+	Node0x5627b4863550 -> Node0x5627b4861e10;
+	Node0x5627b48635a0 [shape=record,label="{tree.c:5983:}"];
+	Node0x5627b48635a0 -> Node0x5627b4861e10;
+	Node0x5627b4861e10 [shape=record,label="{tree.c:5990:}"];
+}

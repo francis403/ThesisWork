@@ -1,0 +1,30 @@
+digraph "CFG for 'xmlSchemaGetPropNode' function" {
+	label="CFG for 'xmlSchemaGetPropNode' function";
+
+	Node0x5583534d2b90 [shape=record,label="{xmlschemas.c:4660:|{<s0>T|<s1>F}}"];
+	Node0x5583534d2b90 -> Node0x5583533d2b50;
+	Node0x5583534d2b90 -> Node0x5583533d2bf0;
+	Node0x5583533d2bf0 [shape=record,label="{xmlschemas.c:4664:|{<s0>T|<s1>F}}"];
+	Node0x5583533d2bf0 -> Node0x5583533d2b50;
+	Node0x5583533d2bf0 -> Node0x5583533d2ba0;
+	Node0x5583533d2b50 [shape=record,label="{xmlschemas.c:4665:}"];
+	Node0x5583533d2b50 -> Node0x5583534dafb0;
+	Node0x5583533d2ba0 [shape=record,label="{xmlschemas.c:4666:}"];
+	Node0x5583533d2ba0 -> Node0x5583533d3480;
+	Node0x5583533d3480 [shape=record,label="{xmlschemas.c:4667:|{<s0>T|<s1>F}}"];
+	Node0x5583533d3480 -> Node0x5583533d3840;
+	Node0x5583533d3480 -> Node0x5583533d3660;
+	Node0x5583533d3840 [shape=record,label="{xmlschemas.c:4668:|{<s0>T|<s1>F}}"];
+	Node0x5583533d3840 -> Node0x5583533d3a90;
+	Node0x5583533d3840 -> Node0x5583533d3a40;
+	Node0x5583533d3a90 [shape=record,label="{xmlschemas.c:4668:|{<s0>T|<s1>F}}"];
+	Node0x5583533d3a90 -> Node0x5583533d39f0;
+	Node0x5583533d3a90 -> Node0x5583533d3a40;
+	Node0x5583533d39f0 [shape=record,label="{xmlschemas.c:4669:}"];
+	Node0x5583533d39f0 -> Node0x5583534dafb0;
+	Node0x5583533d3a40 [shape=record,label="{xmlschemas.c:4670:}"];
+	Node0x5583533d3a40 -> Node0x5583533d3480;
+	Node0x5583533d3660 [shape=record,label="{xmlschemas.c:4672:}"];
+	Node0x5583533d3660 -> Node0x5583534dafb0;
+	Node0x5583534dafb0 [shape=record,label="{xmlschemas.c:4673:}"];
+}

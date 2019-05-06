@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParserSetReplaceEntities' function" {
+	label="CFG for 'libxml_xmlParserSetReplaceEntities' function";
+
+	Node0x55d6cbc5e8a0 [shape=record,label="{libxml2-py.c:5681:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbc5e8a0:s0 -> Node0x55d6cbc5fc80;
+	Node0x55d6cbc5e8a0:s1 -> Node0x55d6cbc5fc30;
+	Node0x55d6cbc5fc30 [shape=record,label="{libxml2-py.c:5687:}"];
+	Node0x55d6cbc5fc30 -> Node0x55d6cbc5ea90;
+	Node0x55d6cbc5fc80 [shape=record,label="{libxml2-py.c:5688:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbc5fc80:s0 -> Node0x55d6cbc604e0;
+	Node0x55d6cbc5fc80:s1 -> Node0x55d6cbc60530;
+	Node0x55d6cbc604e0 [shape=record,label="{libxml2-py.c:5688:}"];
+	Node0x55d6cbc604e0 -> Node0x55d6cbc60580;
+	Node0x55d6cbc60530 [shape=record,label="{libxml2-py.c:5688:}"];
+	Node0x55d6cbc60530 -> Node0x55d6cbc60580;
+	Node0x55d6cbc60580 [shape=record,label="{libxml2-py.c:5688:}"];
+	Node0x55d6cbc60580 -> Node0x55d6cbc5ea90;
+	Node0x55d6cbc5ea90 [shape=record,label="{libxml2-py.c:5693:}"];
+}

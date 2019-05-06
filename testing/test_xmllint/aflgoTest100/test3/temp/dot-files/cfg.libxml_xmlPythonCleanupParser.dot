@@ -1,0 +1,44 @@
+digraph "CFG for 'libxml_xmlPythonCleanupParser' function" {
+	label="CFG for 'libxml_xmlPythonCleanupParser' function";
+
+	Node0x55fa6c1a21f0 [shape=record,label="{libxml.c:186:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1a21f0:s0 -> Node0x55fa6c1ae7a0;
+	Node0x55fa6c1a21f0:s1 -> Node0x55fa6c1ae7f0;
+	Node0x55fa6c1ae7a0 [shape=record,label="{libxml.c:193:}"];
+	Node0x55fa6c1ae7a0 -> Node0x55fa6c1ae7f0;
+	Node0x55fa6c1ae7f0 [shape=record,label="{libxml.c:196:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1ae7f0:s0 -> Node0x55fa6c1aa2c0;
+	Node0x55fa6c1ae7f0:s1 -> Node0x55fa6c1aa310;
+	Node0x55fa6c1aa2c0 [shape=record,label="{libxml.c:203:}"];
+	Node0x55fa6c1aa2c0 -> Node0x55fa6c1b6450;
+	Node0x55fa6c1b6450 [shape=record,label="{libxml.c:203:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1b6450:s0 -> Node0x55fa6c1baad0;
+	Node0x55fa6c1b6450:s1 -> Node0x55fa6c176520;
+	Node0x55fa6c1baad0 [shape=record,label="{libxml.c:204:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1baad0:s0 -> Node0x55fa6c1badd0;
+	Node0x55fa6c1baad0:s1 -> Node0x55fa6c1bae20;
+	Node0x55fa6c1badd0 [shape=record,label="{libxml.c:205:}"];
+	Node0x55fa6c1badd0 -> Node0x55fa6c1bae20;
+	Node0x55fa6c1bae20 [shape=record,label="{libxml.c:206:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1bae20:s0 -> Node0x55fa6c1bb730;
+	Node0x55fa6c1bae20:s1 -> Node0x55fa6c1bb780;
+	Node0x55fa6c1bb730 [shape=record,label="{libxml.c:207:}"];
+	Node0x55fa6c1bb730 -> Node0x55fa6c1bb780;
+	Node0x55fa6c1bb780 [shape=record,label="{libxml.c:208:}"];
+	Node0x55fa6c1bb780 -> Node0x55fa6c1baa40;
+	Node0x55fa6c1baa40 [shape=record,label="{libxml.c:203:}"];
+	Node0x55fa6c1baa40 -> Node0x55fa6c1b6450;
+	Node0x55fa6c176520 [shape=record,label="{libxml.c:209:}"];
+	Node0x55fa6c176520 -> Node0x55fa6c1aa310;
+	Node0x55fa6c1aa310 [shape=record,label="{libxml.c:214:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1aa310:s0 -> Node0x55fa6c1a3bd0;
+	Node0x55fa6c1aa310:s1 -> Node0x55fa6c1bda20;
+	Node0x55fa6c1a3bd0 [shape=record,label="{libxml.c:215:|{<s0>T|<s1>F}}"];
+	Node0x55fa6c1a3bd0:s0 -> Node0x55fa6c1be1c0;
+	Node0x55fa6c1a3bd0:s1 -> Node0x55fa6c1be210;
+	Node0x55fa6c1be1c0 [shape=record,label="{libxml.c:218:}"];
+	Node0x55fa6c1be1c0 -> Node0x55fa6c1be210;
+	Node0x55fa6c1be210 [shape=record,label="{libxml.c:219:}"];
+	Node0x55fa6c1be210 -> Node0x55fa6c1bda20;
+	Node0x55fa6c1bda20 [shape=record,label="{libxml.c:221:}"];
+}

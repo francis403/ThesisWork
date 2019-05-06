@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlTextReaderGetSuccessor' function" {
+	label="CFG for 'xmlTextReaderGetSuccessor' function";
+
+	Node0x5619bd7bcca0 [shape=record,label="{xmlreader.c:1190:|{<s0>T|<s1>F}}"];
+	Node0x5619bd7bcca0:s0 -> Node0x5619bd7be910;
+	Node0x5619bd7bcca0:s1 -> Node0x5619bd7bbeb0;
+	Node0x5619bd7be910 [shape=record,label="{xmlreader.c:1191:}"];
+	Node0x5619bd7be910 -> Node0x5619bd7bccf0;
+	Node0x5619bd7bbeb0 [shape=record,label="{xmlreader.c:1192:|{<s0>T|<s1>F}}"];
+	Node0x5619bd7bbeb0:s0 -> Node0x5619bd7c1b10;
+	Node0x5619bd7bbeb0:s1 -> Node0x5619bd7c1b60;
+	Node0x5619bd7c1b10 [shape=record,label="{xmlreader.c:1192:}"];
+	Node0x5619bd7c1b10 -> Node0x5619bd7bccf0;
+	Node0x5619bd7c1b60 [shape=record,label="{xmlreader.c:1193:}"];
+	Node0x5619bd7c1b60 -> Node0x5619bd7c21e0;
+	Node0x5619bd7c21e0 [shape=record,label="{xmlreader.c:1194:|{<s0>T|<s1>F}}"];
+	Node0x5619bd7c21e0:s0 -> Node0x5619bd7c2650;
+	Node0x5619bd7c21e0:s1 -> Node0x5619bd7c26a0;
+	Node0x5619bd7c2650 [shape=record,label="{xmlreader.c:1195:}"];
+	Node0x5619bd7c2650 -> Node0x5619bd7c2140;
+	Node0x5619bd7c26a0 [shape=record,label="{xmlreader.c:1196:|{<s0>T|<s1>F}}"];
+	Node0x5619bd7c26a0:s0 -> Node0x5619bd7c29d0;
+	Node0x5619bd7c26a0:s1 -> Node0x5619bd7c2a20;
+	Node0x5619bd7c29d0 [shape=record,label="{xmlreader.c:1196:}"];
+	Node0x5619bd7c29d0 -> Node0x5619bd7bccf0;
+	Node0x5619bd7c2a20 [shape=record,label="{xmlreader.c:1197:}"];
+	Node0x5619bd7c2a20 -> Node0x5619bd7c2190;
+	Node0x5619bd7c2190 [shape=record,label="{xmlreader.c:1197:|{<s0>T|<s1>F}}"];
+	Node0x5619bd7c2190:s0 -> Node0x5619bd7c21e0;
+	Node0x5619bd7c2190:s1 -> Node0x5619bd7c2140;
+	Node0x5619bd7c2140 [shape=record,label="{xmlreader.c:1198:}"];
+	Node0x5619bd7c2140 -> Node0x5619bd7bccf0;
+	Node0x5619bd7bccf0 [shape=record,label="{xmlreader.c:1199:}"];
+}

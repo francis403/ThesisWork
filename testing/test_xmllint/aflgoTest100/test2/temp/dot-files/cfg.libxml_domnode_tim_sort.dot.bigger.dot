@@ -1,0 +1,44 @@
+digraph "CFG for 'libxml_domnode_tim_sort' function" {
+	label="CFG for 'libxml_domnode_tim_sort' function";
+
+	Node0x5621ee567690 [shape=record,label="{timsort.h:530:|{<s0>T|<s1>F}}"];
+	Node0x5621ee567690:s0 -> Node0x5621ee57f830;
+	Node0x5621ee567690:s1 -> Node0x5621ee57f880;
+	Node0x5621ee57f830 [shape=record,label="{timsort.h:539:}"];
+	Node0x5621ee57f830 -> Node0x5621ee567d70;
+	Node0x5621ee57f880 [shape=record,label="{timsort.h:542:|{<s0>T|<s1>F}}"];
+	Node0x5621ee57f880:s0 -> Node0x5621ee57fd00;
+	Node0x5621ee57f880:s1 -> Node0x5621ee57fd50;
+	Node0x5621ee57fd00 [shape=record,label="{timsort.h:543:}"];
+	Node0x5621ee57fd00 -> Node0x5621ee567d70;
+	Node0x5621ee57fd50 [shape=record,label="{timsort.h:548:|{<s0>T|<s1>F}}"];
+	Node0x5621ee57fd50:s0 -> Node0x5621ee5813a0;
+	Node0x5621ee57fd50:s1 -> Node0x5621ee581350;
+	Node0x5621ee581350 [shape=record,label="{timsort.h:555:}"];
+	Node0x5621ee581350 -> Node0x5621ee567d70;
+	Node0x5621ee5813a0 [shape=record,label="{timsort.h:558:|{<s0>T|<s1>F}}"];
+	Node0x5621ee5813a0:s0 -> Node0x5621ee581d10;
+	Node0x5621ee5813a0:s1 -> Node0x5621ee580da0;
+	Node0x5621ee580da0 [shape=record,label="{timsort.h:559:}"];
+	Node0x5621ee580da0 -> Node0x5621ee567d70;
+	Node0x5621ee581d10 [shape=record,label="{timsort.h:562:|{<s0>T|<s1>F}}"];
+	Node0x5621ee581d10:s0 -> Node0x5621ee582b10;
+	Node0x5621ee581d10:s1 -> Node0x5621ee582ac0;
+	Node0x5621ee582ac0 [shape=record,label="{timsort.h:563:}"];
+	Node0x5621ee582ac0 -> Node0x5621ee567d70;
+	Node0x5621ee582b10 [shape=record,label="{timsort.h:566:}"];
+	Node0x5621ee582b10 -> Node0x5621ee5835c0;
+	Node0x5621ee5835c0 [shape=record,label="{timsort.h:567:|{<s0>T|<s1>F}}"];
+	Node0x5621ee5835c0:s0 -> Node0x5621ee5837d0;
+	Node0x5621ee5835c0:s1 -> Node0x5621ee583780;
+	Node0x5621ee583780 [shape=record,label="{timsort.h:568:}"];
+	Node0x5621ee583780 -> Node0x5621ee5835c0;
+	Node0x5621ee5837d0 [shape=record,label="{timsort.h:572:|{<s0>T|<s1>F}}"];
+	Node0x5621ee5837d0:s0 -> Node0x5621ee580650;
+	Node0x5621ee5837d0:s1 -> Node0x5621ee580600;
+	Node0x5621ee580600 [shape=record,label="{timsort.h:573:}"];
+	Node0x5621ee580600 -> Node0x5621ee567d70;
+	Node0x5621ee580650 [shape=record,label="{timsort.h:566:}"];
+	Node0x5621ee580650 -> Node0x5621ee5835c0;
+	Node0x5621ee567d70 [shape=record,label="{timsort.h:576:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_constcharPtrWrap' function" {
+	label="CFG for 'libxml_constcharPtrWrap' function";
+
+	Node0x55aa7ced13c0 [shape=record,label="{types.c:190:|{<s0>T|<s1>F}}"];
+	Node0x55aa7ced13c0:s0 -> Node0x55aa7ced1e70;
+	Node0x55aa7ced13c0:s1 -> Node0x55aa7ced1ec0;
+	Node0x55aa7ced1e70 [shape=record,label="{types.c:198:}"];
+	Node0x55aa7ced1e70 -> Node0x55aa7ced1640;
+	Node0x55aa7ced1ec0 [shape=record,label="{types.c:201:}"];
+	Node0x55aa7ced1ec0 -> Node0x55aa7ced1640;
+	Node0x55aa7ced1640 [shape=record,label="{types.c:203:}"];
+}

@@ -1,0 +1,37 @@
+digraph "CFG for 'xmlSaveFormatFileEnc' function" {
+	label="CFG for 'xmlSaveFormatFileEnc' function";
+
+	Node0x556f176099e0 [shape=record,label="{xmlsave.c:2684:|{<s0>T|<s1>F}}"];
+	Node0x556f176099e0 -> Node0x556f1760da50;
+	Node0x556f176099e0 -> Node0x556f1760daa0;
+	Node0x556f1760da50 [shape=record,label="{xmlsave.c:2692:}"];
+	Node0x556f1760da50 -> Node0x556f1760c110;
+	Node0x556f1760daa0 [shape=record,label="{xmlsave.c:2694:|{<s0>T|<s1>F}}"];
+	Node0x556f1760daa0 -> Node0x556f1760df60;
+	Node0x556f1760daa0 -> Node0x556f1760dfb0;
+	Node0x556f1760df60 [shape=record,label="{xmlsave.c:2695:}"];
+	Node0x556f1760df60 -> Node0x556f1760dfb0;
+	Node0x556f1760dfb0 [shape=record,label="{xmlsave.c:2697:|{<s0>T|<s1>F}}"];
+	Node0x556f1760dfb0 -> Node0x556f1760e560;
+	Node0x556f1760dfb0 -> Node0x556f1760e5b0;
+	Node0x556f1760e560 [shape=record,label="{xmlsave.c:2699:|{<s0>T|<s1>F}}"];
+	Node0x556f1760e560 -> Node0x556f1760eb40;
+	Node0x556f1760e560 -> Node0x556f1760eb90;
+	Node0x556f1760eb40 [shape=record,label="{xmlsave.c:2701:}"];
+	Node0x556f1760eb40 -> Node0x556f1760c110;
+	Node0x556f1760eb90 [shape=record,label="{xmlsave.c:2702:}"];
+	Node0x556f1760eb90 -> Node0x556f1760e5b0;
+	Node0x556f1760e5b0 [shape=record,label="{xmlsave.c:2705:|{<s0>T|<s1>F}}"];
+	Node0x556f1760e5b0 -> Node0x556f1760f140;
+	Node0x556f1760e5b0 -> Node0x556f1760f190;
+	Node0x556f1760f140 [shape=record,label="{xmlsave.c:2705:}"];
+	Node0x556f1760f140 -> Node0x556f1760f190;
+	Node0x556f1760f190 [shape=record,label="{xmlsave.c:2710:|{<s0>T|<s1>F}}"];
+	Node0x556f1760f190 -> Node0x556f176103b0;
+	Node0x556f1760f190 -> Node0x556f17610400;
+	Node0x556f176103b0 [shape=record,label="{xmlsave.c:2711:}"];
+	Node0x556f176103b0 -> Node0x556f1760c110;
+	Node0x556f17610400 [shape=record,label="{xmlsave.c:2712:}"];
+	Node0x556f17610400 -> Node0x556f1760c110;
+	Node0x556f1760c110 [shape=record,label="{xmlsave.c:2725:}"];
+}

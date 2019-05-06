@@ -1,0 +1,32 @@
+digraph "CFG for 'xz_error' function" {
+	label="CFG for 'xz_error' function";
+
+	Node0x559901d05210 [shape=record,label="{xzlib.c:89:|{<s0>T|<s1>F}}"];
+	Node0x559901d05210:s0 -> Node0x559901d06b20;
+	Node0x559901d05210:s1 -> Node0x559901d06b70;
+	Node0x559901d06b20 [shape=record,label="{xzlib.c:93:|{<s0>T|<s1>F}}"];
+	Node0x559901d06b20:s0 -> Node0x559901d06fc0;
+	Node0x559901d06b20:s1 -> Node0x559901d07010;
+	Node0x559901d06fc0 [shape=record,label="{xzlib.c:94:}"];
+	Node0x559901d06fc0 -> Node0x559901d07010;
+	Node0x559901d07010 [shape=record,label="{xzlib.c:95:}"];
+	Node0x559901d07010 -> Node0x559901d06b70;
+	Node0x559901d06b70 [shape=record,label="{xzlib.c:99:|{<s0>T|<s1>F}}"];
+	Node0x559901d06b70:s0 -> Node0x559901d07bd0;
+	Node0x559901d06b70:s1 -> Node0x559901d07c20;
+	Node0x559901d07bd0 [shape=record,label="{xzlib.c:101:}"];
+	Node0x559901d07bd0 -> Node0x559901d03670;
+	Node0x559901d07c20 [shape=record,label="{xzlib.c:104:|{<s0>T|<s1>F}}"];
+	Node0x559901d07c20:s0 -> Node0x559901d07fd0;
+	Node0x559901d07c20:s1 -> Node0x559901d08020;
+	Node0x559901d07fd0 [shape=record,label="{xzlib.c:105:}"];
+	Node0x559901d07fd0 -> Node0x559901d03670;
+	Node0x559901d08020 [shape=record,label="{xzlib.c:111:|{<s0>T|<s1>F}}"];
+	Node0x559901d08020:s0 -> Node0x559901d08770;
+	Node0x559901d08020:s1 -> Node0x559901d087c0;
+	Node0x559901d08770 [shape=record,label="{xzlib.c:112:}"];
+	Node0x559901d08770 -> Node0x559901d03670;
+	Node0x559901d087c0 [shape=record,label="{xzlib.c:116:}"];
+	Node0x559901d087c0 -> Node0x559901d03670;
+	Node0x559901d03670 [shape=record,label="{xzlib.c:120:}"];
+}

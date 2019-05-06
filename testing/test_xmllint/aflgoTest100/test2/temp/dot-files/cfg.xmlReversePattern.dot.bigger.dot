@@ -1,0 +1,41 @@
+digraph "CFG for 'xmlReversePattern' function" {
+	label="CFG for 'xmlReversePattern' function";
+
+	Node0x55aa3b131f30 [shape=record,label="{pattern.c:408:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b131f30:s0 -> Node0x55aa3b146110;
+	Node0x55aa3b131f30:s1 -> Node0x55aa3b1460c0;
+	Node0x55aa3b146110 [shape=record,label="{pattern.c:414:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b146110:s0 -> Node0x55aa3b146070;
+	Node0x55aa3b146110:s1 -> Node0x55aa3b1460c0;
+	Node0x55aa3b146070 [shape=record,label="{pattern.c:415:}"];
+	Node0x55aa3b146070 -> Node0x55aa3b146be0;
+	Node0x55aa3b146be0 [shape=record,label="{pattern.c:415:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b146be0:s0 -> Node0x55aa3b146e60;
+	Node0x55aa3b146be0:s1 -> Node0x55aa3b146900;
+	Node0x55aa3b146e60 [shape=record,label="{pattern.c:416:}"];
+	Node0x55aa3b146e60 -> Node0x55aa3b146dd0;
+	Node0x55aa3b146dd0 [shape=record,label="{pattern.c:415:}"];
+	Node0x55aa3b146dd0 -> Node0x55aa3b146be0;
+	Node0x55aa3b146900 [shape=record,label="{pattern.c:420:}"];
+	Node0x55aa3b146900 -> Node0x55aa3b1460c0;
+	Node0x55aa3b1460c0 [shape=record,label="{pattern.c:422:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b1460c0:s0 -> Node0x55aa3b1496f0;
+	Node0x55aa3b1460c0:s1 -> Node0x55aa3b149740;
+	Node0x55aa3b1496f0 [shape=record,label="{pattern.c:423:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b1496f0:s0 -> Node0x55aa3b14a860;
+	Node0x55aa3b1496f0:s1 -> Node0x55aa3b14a8b0;
+	Node0x55aa3b14a860 [shape=record,label="{pattern.c:429:}"];
+	Node0x55aa3b14a860 -> Node0x55aa3b145400;
+	Node0x55aa3b14a8b0 [shape=record,label="{pattern.c:431:}"];
+	Node0x55aa3b14a8b0 -> Node0x55aa3b149740;
+	Node0x55aa3b149740 [shape=record,label="{pattern.c:434:}"];
+	Node0x55aa3b149740 -> Node0x55aa3b14b910;
+	Node0x55aa3b14b910 [shape=record,label="{pattern.c:436:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b14b910:s0 -> Node0x55aa3b14bd30;
+	Node0x55aa3b14b910:s1 -> Node0x55aa3b14bb30;
+	Node0x55aa3b14bd30 [shape=record,label="{pattern.c:437:}"];
+	Node0x55aa3b14bd30 -> Node0x55aa3b14b910;
+	Node0x55aa3b14bb30 [shape=record,label="{pattern.c:451:}"];
+	Node0x55aa3b14bb30 -> Node0x55aa3b145400;
+	Node0x55aa3b145400 [shape=record,label="{pattern.c:455:}"];
+}

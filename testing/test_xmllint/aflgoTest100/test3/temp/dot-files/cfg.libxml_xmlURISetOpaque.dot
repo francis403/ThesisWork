@@ -1,0 +1,24 @@
+digraph "CFG for 'libxml_xmlURISetOpaque' function" {
+	label="CFG for 'libxml_xmlURISetOpaque' function";
+
+	Node0x55d6cc198560 [shape=record,label="{libxml2-py.c:11911:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc198560:s0 -> Node0x55d6cc1999d0;
+	Node0x55d6cc198560:s1 -> Node0x55d6cc199980;
+	Node0x55d6cc199980 [shape=record,label="{libxml2-py.c:11917:}"];
+	Node0x55d6cc199980 -> Node0x55d6cc198750;
+	Node0x55d6cc1999d0 [shape=record,label="{libxml2-py.c:11918:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc1999d0:s0 -> Node0x55d6cc19a220;
+	Node0x55d6cc1999d0:s1 -> Node0x55d6cc19a270;
+	Node0x55d6cc19a220 [shape=record,label="{libxml2-py.c:11918:}"];
+	Node0x55d6cc19a220 -> Node0x55d6cc19a2c0;
+	Node0x55d6cc19a270 [shape=record,label="{libxml2-py.c:11918:}"];
+	Node0x55d6cc19a270 -> Node0x55d6cc19a2c0;
+	Node0x55d6cc19a2c0 [shape=record,label="{libxml2-py.c:11918:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc19a2c0:s0 -> Node0x55d6cc19a7f0;
+	Node0x55d6cc19a2c0:s1 -> Node0x55d6cc19a840;
+	Node0x55d6cc19a7f0 [shape=record,label="{libxml2-py.c:11920:}"];
+	Node0x55d6cc19a7f0 -> Node0x55d6cc19a840;
+	Node0x55d6cc19a840 [shape=record,label="{libxml2-py.c:11921:}"];
+	Node0x55d6cc19a840 -> Node0x55d6cc198750;
+	Node0x55d6cc198750 [shape=record,label="{libxml2-py.c:11924:}"];
+}

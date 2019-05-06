@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlPathToURI' function" {
+	label="CFG for 'libxml_xmlPathToURI' function";
+
+	Node0x55f931197bc0 [shape=record,label="{libxml2-py.c:5711:|{<s0>T|<s1>F}}"];
+	Node0x55f931197bc0:s0 -> Node0x55f931198f90;
+	Node0x55f931197bc0:s1 -> Node0x55f931198f40;
+	Node0x55f931198f40 [shape=record,label="{libxml2-py.c:5717:}"];
+	Node0x55f931198f40 -> Node0x55f931197db0;
+	Node0x55f931198f90 [shape=record,label="{libxml2-py.c:5719:}"];
+	Node0x55f931198f90 -> Node0x55f931197db0;
+	Node0x55f931197db0 [shape=record,label="{libxml2-py.c:5722:}"];
+}

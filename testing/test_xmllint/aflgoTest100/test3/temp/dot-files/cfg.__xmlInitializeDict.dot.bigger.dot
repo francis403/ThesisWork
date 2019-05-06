@@ -1,0 +1,17 @@
+digraph "CFG for '__xmlInitializeDict' function" {
+	label="CFG for '__xmlInitializeDict' function";
+
+	Node0x55fed9089910 [shape=record,label="{dict.c:176:|{<s0>T|<s1>F}}"];
+	Node0x55fed9089910:s0 -> Node0x55fed92888c0;
+	Node0x55fed9089910:s1 -> Node0x55fed9288910;
+	Node0x55fed92888c0 [shape=record,label="{dict.c:177:}"];
+	Node0x55fed92888c0 -> Node0x55fed9288870;
+	Node0x55fed9288910 [shape=record,label="{dict.c:179:|{<s0>T|<s1>F}}"];
+	Node0x55fed9288910:s0 -> Node0x55fed9288da0;
+	Node0x55fed9288910:s1 -> Node0x55fed9288df0;
+	Node0x55fed9288da0 [shape=record,label="{dict.c:180:}"];
+	Node0x55fed9288da0 -> Node0x55fed9288870;
+	Node0x55fed9288df0 [shape=record,label="{dict.c:181:}"];
+	Node0x55fed9288df0 -> Node0x55fed9288870;
+	Node0x55fed9288870 [shape=record,label="{dict.c:194:}"];
+}

@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlXIncludeURLPop' function" {
+	label="CFG for 'xmlXIncludeURLPop' function";
+
+	Node0x5629231dd220 [shape=record,label="{xinclude.c:355:|{<s0>T|<s1>F}}"];
+	Node0x5629231dd220 -> Node0x5629231ddc70;
+	Node0x5629231dd220 -> Node0x5629231ddcc0;
+	Node0x5629231ddc70 [shape=record,label="{xinclude.c:360:}"];
+	Node0x5629231ddc70 -> Node0x5629231e9b10;
+	Node0x5629231ddcc0 [shape=record,label="{xinclude.c:361:|{<s0>T|<s1>F}}"];
+	Node0x5629231ddcc0 -> Node0x5629231de2c0;
+	Node0x5629231ddcc0 -> Node0x5629231de360;
+	Node0x5629231de2c0 [shape=record,label="{xinclude.c:363:}"];
+	Node0x5629231de2c0 -> Node0x5629231de310;
+	Node0x5629231de360 [shape=record,label="{xinclude.c:365:}"];
+	Node0x5629231de360 -> Node0x5629231de310;
+	Node0x5629231de310 [shape=record,label="{xinclude.c:366:|{<s0>T|<s1>F}}"];
+	Node0x5629231de310 -> Node0x5629231e9ac0;
+	Node0x5629231de310 -> Node0x5629231e9b10;
+	Node0x5629231e9ac0 [shape=record,label="{xinclude.c:369:}"];
+	Node0x5629231e9ac0 -> Node0x5629231e9b10;
+	Node0x5629231e9b10 [shape=record,label="{xinclude.c:370:}"];
+}

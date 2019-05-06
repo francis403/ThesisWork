@@ -1,0 +1,18 @@
+digraph "CFG for 'xmlSchemaCheckTypeDefCircular' function" {
+	label="CFG for 'xmlSchemaCheckTypeDefCircular' function";
+
+	Node0x558353911940 [shape=record,label="{xmlschemas.c:14979:|{<s0>T|<s1>F}}"];
+	Node0x558353911940:s0 -> Node0x558353911d90;
+	Node0x558353911940:s1 -> Node0x558353913f30;
+	Node0x558353913f30 [shape=record,label="{xmlschemas.c:14983:|{<s0>T|<s1>F}}"];
+	Node0x558353913f30:s0 -> Node0x558353911d90;
+	Node0x558353913f30:s1 -> Node0x558353911e30;
+	Node0x558353911e30 [shape=record,label="{xmlschemas.c:14984:|{<s0>T|<s1>F}}"];
+	Node0x558353911e30:s0 -> Node0x558353911d90;
+	Node0x558353911e30:s1 -> Node0x558353911de0;
+	Node0x558353911d90 [shape=record,label="{xmlschemas.c:14985:}"];
+	Node0x558353911d90 -> Node0x558353911990;
+	Node0x558353911de0 [shape=record,label="{xmlschemas.c:14986:}"];
+	Node0x558353911de0 -> Node0x558353911990;
+	Node0x558353911990 [shape=record,label="{xmlschemas.c:14988:}"];
+}

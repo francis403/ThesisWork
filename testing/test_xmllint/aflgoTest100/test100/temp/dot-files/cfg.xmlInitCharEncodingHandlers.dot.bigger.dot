@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlInitCharEncodingHandlers' function" {
+	label="CFG for 'xmlInitCharEncodingHandlers' function";
+
+	Node0x561e6bf829f0 [shape=record,label="{encoding.c:1398:|{<s0>T|<s1>F}}"];
+	Node0x561e6bf829f0:s0 -> Node0x561e6c040cb0;
+	Node0x561e6bf829f0:s1 -> Node0x561e6c040d00;
+	Node0x561e6c040cb0 [shape=record,label="{encoding.c:1401:}"];
+	Node0x561e6c040cb0 -> Node0x561e6c0a68c0;
+	Node0x561e6c040d00 [shape=record,label="{encoding.c:1404:|{<s0>T|<s1>F}}"];
+	Node0x561e6c040d00:s0 -> Node0x561e6c0a8ce0;
+	Node0x561e6c040d00:s1 -> Node0x561e6c0a8d80;
+	Node0x561e6c0a8ce0 [shape=record,label="{encoding.c:1406:}"];
+	Node0x561e6c0a8ce0 -> Node0x561e6c0a8d30;
+	Node0x561e6c0a8d80 [shape=record,label="{encoding.c:1407:|{<s0>T|<s1>F}}"];
+	Node0x561e6c0a8d80:s0 -> Node0x561e6c0a9340;
+	Node0x561e6c0a8d80:s1 -> Node0x561e6c0a93e0;
+	Node0x561e6c0a9340 [shape=record,label="{encoding.c:1407:}"];
+	Node0x561e6c0a9340 -> Node0x561e6c0a9390;
+	Node0x561e6c0a93e0 [shape=record,label="{encoding.c:1409:}"];
+	Node0x561e6c0a93e0 -> Node0x561e6c0a9390;
+	Node0x561e6c0a9390 [shape=record,label="{%16}"];
+	Node0x561e6c0a9390 -> Node0x561e6c0a8d30;
+	Node0x561e6c0a8d30 [shape=record,label="{encoding.c:1413:|{<s0>T|<s1>F}}"];
+	Node0x561e6c0a8d30:s0 -> Node0x561e6c0aa270;
+	Node0x561e6c0a8d30:s1 -> Node0x561e6c0aa2c0;
+	Node0x561e6c0aa270 [shape=record,label="{encoding.c:1414:}"];
+	Node0x561e6c0aa270 -> Node0x561e6c0a68c0;
+	Node0x561e6c0aa2c0 [shape=record,label="{encoding.c:1417:}"];
+	Node0x561e6c0aa2c0 -> Node0x561e6c0a68c0;
+	Node0x561e6c0a68c0 [shape=record,label="{encoding.c:1446:}"];
+}

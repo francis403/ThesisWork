@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlBufferSetAllocationScheme' function" {
+	label="CFG for 'xmlBufferSetAllocationScheme' function";
+
+	Node0x5627b46ab9e0 [shape=record,label="{tree.c:7140:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ab9e0:s0 -> Node0x5627b46a8ed0;
+	Node0x5627b46ab9e0:s1 -> Node0x5627b46abe90;
+	Node0x5627b46a8ed0 [shape=record,label="{tree.c:7147:}"];
+	Node0x5627b46a8ed0 -> Node0x5627b46ad5a0;
+	Node0x5627b46abe90 [shape=record,label="{tree.c:7149:|{<s0>T|<s1>F}}"];
+	Node0x5627b46abe90:s0 -> Node0x5627b46acd80;
+	Node0x5627b46abe90:s1 -> Node0x5627b46ace20;
+	Node0x5627b46ace20 [shape=record,label="{tree.c:7150:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ace20:s0 -> Node0x5627b46acd80;
+	Node0x5627b46ace20:s1 -> Node0x5627b46acdd0;
+	Node0x5627b46acd80 [shape=record,label="{tree.c:7150:}"];
+	Node0x5627b46acd80 -> Node0x5627b46ad5a0;
+	Node0x5627b46acdd0 [shape=record,label="{tree.c:7151:|{<s0>T|<s1>F}}"];
+	Node0x5627b46acdd0:s0 -> Node0x5627b46ad550;
+	Node0x5627b46acdd0:s1 -> Node0x5627b46ad6f0;
+	Node0x5627b46ad6f0 [shape=record,label="{tree.c:7152:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ad6f0:s0 -> Node0x5627b46ad550;
+	Node0x5627b46ad6f0:s1 -> Node0x5627b46ad670;
+	Node0x5627b46ad670 [shape=record,label="{tree.c:7153:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ad670:s0 -> Node0x5627b46ad550;
+	Node0x5627b46ad670:s1 -> Node0x5627b46ad5f0;
+	Node0x5627b46ad5f0 [shape=record,label="{tree.c:7154:|{<s0>T|<s1>F}}"];
+	Node0x5627b46ad5f0:s0 -> Node0x5627b46ad550;
+	Node0x5627b46ad5f0:s1 -> Node0x5627b46ad5a0;
+	Node0x5627b46ad550 [shape=record,label="{tree.c:7155:}"];
+	Node0x5627b46ad550 -> Node0x5627b46ad5a0;
+	Node0x5627b46ad5a0 [shape=record,label="{tree.c:7156:}"];
+}

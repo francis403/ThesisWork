@@ -1,0 +1,32 @@
+digraph "CFG for 'xmlXPathRegisterVariableNS' function" {
+	label="CFG for 'xmlXPathRegisterVariableNS' function";
+
+	Node0x55e6b24119f0 [shape=record,label="{xpath.c:5021:|{<s0>T|<s1>F}}"];
+	Node0x55e6b24119f0:s0 -> Node0x55e6b25f7250;
+	Node0x55e6b24119f0:s1 -> Node0x55e6b25f72a0;
+	Node0x55e6b25f7250 [shape=record,label="{xpath.c:5025:}"];
+	Node0x55e6b25f7250 -> Node0x55e6b25f56c0;
+	Node0x55e6b25f72a0 [shape=record,label="{xpath.c:5026:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25f72a0:s0 -> Node0x55e6b25f7760;
+	Node0x55e6b25f72a0:s1 -> Node0x55e6b25f77b0;
+	Node0x55e6b25f7760 [shape=record,label="{xpath.c:5027:}"];
+	Node0x55e6b25f7760 -> Node0x55e6b25f56c0;
+	Node0x55e6b25f77b0 [shape=record,label="{xpath.c:5029:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25f77b0:s0 -> Node0x55e6b25f7c70;
+	Node0x55e6b25f77b0:s1 -> Node0x55e6b25f7cc0;
+	Node0x55e6b25f7c70 [shape=record,label="{xpath.c:5030:}"];
+	Node0x55e6b25f7c70 -> Node0x55e6b25f7cc0;
+	Node0x55e6b25f7cc0 [shape=record,label="{xpath.c:5031:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25f7cc0:s0 -> Node0x55e6b25f8330;
+	Node0x55e6b25f7cc0:s1 -> Node0x55e6b25f8380;
+	Node0x55e6b25f8330 [shape=record,label="{xpath.c:5032:}"];
+	Node0x55e6b25f8330 -> Node0x55e6b25f56c0;
+	Node0x55e6b25f8380 [shape=record,label="{xpath.c:5033:|{<s0>T|<s1>F}}"];
+	Node0x55e6b25f8380:s0 -> Node0x55e6b25f88d0;
+	Node0x55e6b25f8380:s1 -> Node0x55e6b25f8920;
+	Node0x55e6b25f88d0 [shape=record,label="{xpath.c:5034:}"];
+	Node0x55e6b25f88d0 -> Node0x55e6b25f56c0;
+	Node0x55e6b25f8920 [shape=record,label="{xpath.c:5036:}"];
+	Node0x55e6b25f8920 -> Node0x55e6b25f56c0;
+	Node0x55e6b25f56c0 [shape=record,label="{xpath.c:5038:}"];
+}

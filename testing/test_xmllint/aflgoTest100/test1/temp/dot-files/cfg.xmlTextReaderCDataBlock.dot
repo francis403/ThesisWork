@@ -1,0 +1,13 @@
+digraph "CFG for 'xmlTextReaderCDataBlock' function" {
+	label="CFG for 'xmlTextReaderCDataBlock' function";
+
+	Node0x55e4494336c0 [shape=record,label="{xmlreader.c:809:|{<s0>T|<s1>F}}"];
+	Node0x55e4494336c0 -> Node0x55e449434d60;
+	Node0x55e4494336c0 -> Node0x55e449434d10;
+	Node0x55e449434d60 [shape=record,label="{xmlreader.c:817:|{<s0>T|<s1>F}}"];
+	Node0x55e449434d60 -> Node0x55e449434cc0;
+	Node0x55e449434d60 -> Node0x55e449434d10;
+	Node0x55e449434cc0 [shape=record,label="{xmlreader.c:818:}"];
+	Node0x55e449434cc0 -> Node0x55e449434d10;
+	Node0x55e449434d10 [shape=record,label="{xmlreader.c:820:}"];
+}

@@ -1,0 +1,43 @@
+digraph "CFG for 'xmlNsDumpOutput' function" {
+	label="CFG for 'xmlNsDumpOutput' function";
+
+	Node0x5645e405da70 [shape=record,label="{xmlsave.c:632:|{<s0>T|<s1>F}}"];
+	Node0x5645e405da70:s0 -> Node0x5645e4060110;
+	Node0x5645e405da70:s1 -> Node0x5645e40601b0;
+	Node0x5645e40601b0 [shape=record,label="{xmlsave.c:633:|{<s0>T|<s1>F}}"];
+	Node0x5645e40601b0:s0 -> Node0x5645e4060110;
+	Node0x5645e40601b0:s1 -> Node0x5645e4060160;
+	Node0x5645e4060110 [shape=record,label="{xmlsave.c:633:}"];
+	Node0x5645e4060110 -> Node0x5645e40607e0;
+	Node0x5645e4060160 [shape=record,label="{xmlsave.c:634:|{<s0>T|<s1>F}}"];
+	Node0x5645e4060160:s0 -> Node0x5645e4060830;
+	Node0x5645e4060160:s1 -> Node0x5645e40607e0;
+	Node0x5645e4060830 [shape=record,label="{xmlsave.c:634:|{<s0>T|<s1>F}}"];
+	Node0x5645e4060830:s0 -> Node0x5645e4060790;
+	Node0x5645e4060830:s1 -> Node0x5645e40607e0;
+	Node0x5645e4060790 [shape=record,label="{xmlsave.c:635:|{<s0>T|<s1>F}}"];
+	Node0x5645e4060790:s0 -> Node0x5645e4060f80;
+	Node0x5645e4060790:s1 -> Node0x5645e4060fd0;
+	Node0x5645e4060f80 [shape=record,label="{xmlsave.c:636:}"];
+	Node0x5645e4060f80 -> Node0x5645e40607e0;
+	Node0x5645e4060fd0 [shape=record,label="{xmlsave.c:638:|{<s0>T|<s1>F}}"];
+	Node0x5645e4060fd0:s0 -> Node0x5645e4061640;
+	Node0x5645e4060fd0:s1 -> Node0x5645e40615f0;
+	Node0x5645e4061640 [shape=record,label="{xmlsave.c:638:|{<s0>T|<s1>F}}"];
+	Node0x5645e4061640:s0 -> Node0x5645e4061550;
+	Node0x5645e4061640:s1 -> Node0x5645e40615f0;
+	Node0x5645e4061550 [shape=record,label="{xmlsave.c:639:}"];
+	Node0x5645e4061550 -> Node0x5645e40615a0;
+	Node0x5645e40615f0 [shape=record,label="{xmlsave.c:641:}"];
+	Node0x5645e40615f0 -> Node0x5645e40615a0;
+	Node0x5645e40615a0 [shape=record,label="{xmlsave.c:644:|{<s0>T|<s1>F}}"];
+	Node0x5645e40615a0:s0 -> Node0x5645e4062150;
+	Node0x5645e40615a0:s1 -> Node0x5645e4061f30;
+	Node0x5645e4062150 [shape=record,label="{xmlsave.c:645:}"];
+	Node0x5645e4062150 -> Node0x5645e4061d70;
+	Node0x5645e4061f30 [shape=record,label="{xmlsave.c:648:}"];
+	Node0x5645e4061f30 -> Node0x5645e4061d70;
+	Node0x5645e4061d70 [shape=record,label="{xmlsave.c:649:}"];
+	Node0x5645e4061d70 -> Node0x5645e40607e0;
+	Node0x5645e40607e0 [shape=record,label="{xmlsave.c:652:}"];
+}

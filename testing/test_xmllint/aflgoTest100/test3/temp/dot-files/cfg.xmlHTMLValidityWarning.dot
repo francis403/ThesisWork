@@ -1,0 +1,13 @@
+digraph "CFG for 'xmlHTMLValidityWarning' function" {
+	label="CFG for 'xmlHTMLValidityWarning' function";
+
+	Node0x55c15e29f3a0 [shape=record,label="{xmllint.c:734:|{<s0>T|<s1>F}}"];
+	Node0x55c15e29f3a0 -> Node0x55c15e2a0c50;
+	Node0x55c15e29f3a0 -> Node0x55c15e2a0c00;
+	Node0x55c15e2a0c50 [shape=record,label="{xmllint.c:743:|{<s0>T|<s1>F}}"];
+	Node0x55c15e2a0c50 -> Node0x55c15e2a0bb0;
+	Node0x55c15e2a0c50 -> Node0x55c15e2a0c00;
+	Node0x55c15e2a0bb0 [shape=record,label="{xmllint.c:744:}"];
+	Node0x55c15e2a0bb0 -> Node0x55c15e2a0c00;
+	Node0x55c15e2a0c00 [shape=record,label="{xmllint.c:746:}"];
+}

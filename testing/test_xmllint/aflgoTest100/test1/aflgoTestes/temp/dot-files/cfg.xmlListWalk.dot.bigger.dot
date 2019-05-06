@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlListWalk' function" {
+	label="CFG for 'xmlListWalk' function";
+
+	Node0x56019df80110 [shape=record,label="{list.c:676:|{<s0>T|<s1>F}}"];
+	Node0x56019df80110:s0 -> Node0x56019dfa70e0;
+	Node0x56019df80110:s1 -> Node0x56019dfa7180;
+	Node0x56019dfa7180 [shape=record,label="{list.c:679:|{<s0>T|<s1>F}}"];
+	Node0x56019dfa7180:s0 -> Node0x56019dfa70e0;
+	Node0x56019dfa7180:s1 -> Node0x56019dfa7130;
+	Node0x56019dfa70e0 [shape=record,label="{list.c:680:}"];
+	Node0x56019dfa70e0 -> Node0x56019dfa7760;
+	Node0x56019dfa7130 [shape=record,label="{list.c:681:}"];
+	Node0x56019dfa7130 -> Node0x56019dfa7a40;
+	Node0x56019dfa7a40 [shape=record,label="{list.c:681:|{<s0>T|<s1>F}}"];
+	Node0x56019dfa7a40:s0 -> Node0x56019dfa7d20;
+	Node0x56019dfa7a40:s1 -> Node0x56019dfa7760;
+	Node0x56019dfa7d20 [shape=record,label="{list.c:682:|{<s0>T|<s1>F}}"];
+	Node0x56019dfa7d20:s0 -> Node0x56019dfa81a0;
+	Node0x56019dfa7d20:s1 -> Node0x56019dfa81f0;
+	Node0x56019dfa81a0 [shape=record,label="{list.c:683:}"];
+	Node0x56019dfa81a0 -> Node0x56019dfa7760;
+	Node0x56019dfa81f0 [shape=record,label="{list.c:684:}"];
+	Node0x56019dfa81f0 -> Node0x56019dfa7c90;
+	Node0x56019dfa7c90 [shape=record,label="{list.c:681:}"];
+	Node0x56019dfa7c90 -> Node0x56019dfa7a40;
+	Node0x56019dfa7760 [shape=record,label="{list.c:685:}"];
+}

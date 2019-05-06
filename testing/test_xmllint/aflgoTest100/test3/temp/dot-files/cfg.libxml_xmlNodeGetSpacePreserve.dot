@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlNodeGetSpacePreserve' function" {
+	label="CFG for 'libxml_xmlNodeGetSpacePreserve' function";
+
+	Node0x55d6cbb2fc80 [shape=record,label="{libxml2-py.c:4500:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbb2fc80:s0 -> Node0x55d6cbb33800;
+	Node0x55d6cbb2fc80:s1 -> Node0x55d6cbb337b0;
+	Node0x55d6cbb337b0 [shape=record,label="{libxml2-py.c:4507:}"];
+	Node0x55d6cbb337b0 -> Node0x55d6cbb2ff10;
+	Node0x55d6cbb33800 [shape=record,label="{libxml2-py.c:4508:|{<s0>T|<s1>F}}"];
+	Node0x55d6cbb33800:s0 -> Node0x55d6cbb33ff0;
+	Node0x55d6cbb33800:s1 -> Node0x55d6cbb34040;
+	Node0x55d6cbb33ff0 [shape=record,label="{libxml2-py.c:4508:}"];
+	Node0x55d6cbb33ff0 -> Node0x55d6cbb34090;
+	Node0x55d6cbb34040 [shape=record,label="{libxml2-py.c:4508:}"];
+	Node0x55d6cbb34040 -> Node0x55d6cbb34090;
+	Node0x55d6cbb34090 [shape=record,label="{libxml2-py.c:4508:}"];
+	Node0x55d6cbb34090 -> Node0x55d6cbb2ff10;
+	Node0x55d6cbb2ff10 [shape=record,label="{libxml2-py.c:4513:}"];
+}

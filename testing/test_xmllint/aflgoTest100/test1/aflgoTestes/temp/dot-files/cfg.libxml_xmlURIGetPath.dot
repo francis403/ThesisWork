@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlURIGetPath' function" {
+	label="CFG for 'libxml_xmlURIGetPath' function";
+
+	Node0x55f9316a6300 [shape=record,label="{libxml2-py.c:11767:|{<s0>T|<s1>F}}"];
+	Node0x55f9316a6300:s0 -> Node0x55f9316a7930;
+	Node0x55f9316a6300:s1 -> Node0x55f9316a78e0;
+	Node0x55f9316a78e0 [shape=record,label="{libxml2-py.c:11774:}"];
+	Node0x55f9316a78e0 -> Node0x55f9316a6710;
+	Node0x55f9316a7930 [shape=record,label="{libxml2-py.c:11775:|{<s0>T|<s1>F}}"];
+	Node0x55f9316a7930:s0 -> Node0x55f9316a8110;
+	Node0x55f9316a7930:s1 -> Node0x55f9316a8160;
+	Node0x55f9316a8110 [shape=record,label="{libxml2-py.c:11775:}"];
+	Node0x55f9316a8110 -> Node0x55f9316a81b0;
+	Node0x55f9316a8160 [shape=record,label="{libxml2-py.c:11775:}"];
+	Node0x55f9316a8160 -> Node0x55f9316a81b0;
+	Node0x55f9316a81b0 [shape=record,label="{libxml2-py.c:11775:}"];
+	Node0x55f9316a81b0 -> Node0x55f9316a6710;
+	Node0x55f9316a6710 [shape=record,label="{libxml2-py.c:11780:}"];
+}

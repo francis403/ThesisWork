@@ -1,0 +1,35 @@
+digraph "CFG for 'xmlIOHTTPWrite' function" {
+	label="CFG for 'xmlIOHTTPWrite' function";
+
+	Node0x5635e00f1910 [shape=record,label="{xmlIO.c:1886:|{<s0>T|<s1>F}}"];
+	Node0x5635e00f1910 -> Node0x5635e02387d0;
+	Node0x5635e00f1910 -> Node0x5635e02388f0;
+	Node0x5635e02388f0 [shape=record,label="{xmlIO.c:1890:|{<s0>T|<s1>F}}"];
+	Node0x5635e02388f0 -> Node0x5635e02387d0;
+	Node0x5635e02388f0 -> Node0x5635e0238870;
+	Node0x5635e0238870 [shape=record,label="{xmlIO.c:1890:|{<s0>T|<s1>F}}"];
+	Node0x5635e0238870 -> Node0x5635e02387d0;
+	Node0x5635e0238870 -> Node0x5635e0238820;
+	Node0x5635e02387d0 [shape=record,label="{xmlIO.c:1891:}"];
+	Node0x5635e02387d0 -> Node0x5635e0237040;
+	Node0x5635e0238820 [shape=record,label="{xmlIO.c:1893:|{<s0>T|<s1>F}}"];
+	Node0x5635e0238820 -> Node0x5635e02392a0;
+	Node0x5635e0238820 -> Node0x5635e02392f0;
+	Node0x5635e02392a0 [shape=record,label="{xmlIO.c:1898:|{<s0>T|<s1>F}}"];
+	Node0x5635e02392a0 -> Node0x5635e02396b0;
+	Node0x5635e02392a0 -> Node0x5635e0239750;
+	Node0x5635e02396b0 [shape=record,label="{xmlIO.c:1899:}"];
+	Node0x5635e02396b0 -> Node0x5635e0239700;
+	Node0x5635e0239750 [shape=record,label="{xmlIO.c:1903:}"];
+	Node0x5635e0239750 -> Node0x5635e0239700;
+	Node0x5635e0239700 [shape=record,label="{xmlIO.c:1905:|{<s0>T|<s1>F}}"];
+	Node0x5635e0239700 -> Node0x5635e023b020;
+	Node0x5635e0239700 -> Node0x5635e023b070;
+	Node0x5635e023b020 [shape=record,label="{xmlIO.c:1906:}"];
+	Node0x5635e023b020 -> Node0x5635e023b070;
+	Node0x5635e023b070 [shape=record,label="{xmlIO.c:1914:}"];
+	Node0x5635e023b070 -> Node0x5635e02392f0;
+	Node0x5635e02392f0 [shape=record,label="{xmlIO.c:1916:}"];
+	Node0x5635e02392f0 -> Node0x5635e0237040;
+	Node0x5635e0237040 [shape=record,label="{xmlIO.c:1917:}"];
+}

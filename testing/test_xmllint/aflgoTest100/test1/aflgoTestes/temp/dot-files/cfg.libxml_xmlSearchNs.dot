@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlSearchNs' function" {
+	label="CFG for 'libxml_xmlSearchNs' function";
+
+	Node0x55f9312f9840 [shape=record,label="{libxml2-py.c:7136:|{<s0>T|<s1>F}}"];
+	Node0x55f9312f9840:s0 -> Node0x55f931303c20;
+	Node0x55f9312f9840:s1 -> Node0x55f931303bd0;
+	Node0x55f931303bd0 [shape=record,label="{libxml2-py.c:7146:}"];
+	Node0x55f931303bd0 -> Node0x55f9312f9a20;
+	Node0x55f931303c20 [shape=record,label="{libxml2-py.c:7147:|{<s0>T|<s1>F}}"];
+	Node0x55f931303c20:s0 -> Node0x55f9313045e0;
+	Node0x55f931303c20:s1 -> Node0x55f931304630;
+	Node0x55f9313045e0 [shape=record,label="{libxml2-py.c:7147:}"];
+	Node0x55f9313045e0 -> Node0x55f931304680;
+	Node0x55f931304630 [shape=record,label="{libxml2-py.c:7147:}"];
+	Node0x55f931304630 -> Node0x55f931304680;
+	Node0x55f931304680 [shape=record,label="{libxml2-py.c:7147:|{<s0>T|<s1>F}}"];
+	Node0x55f931304680:s0 -> Node0x55f931304c70;
+	Node0x55f931304680:s1 -> Node0x55f931304cc0;
+	Node0x55f931304c70 [shape=record,label="{libxml2-py.c:7148:}"];
+	Node0x55f931304c70 -> Node0x55f931304d10;
+	Node0x55f931304cc0 [shape=record,label="{libxml2-py.c:7148:}"];
+	Node0x55f931304cc0 -> Node0x55f931304d10;
+	Node0x55f931304d10 [shape=record,label="{libxml2-py.c:7148:}"];
+	Node0x55f931304d10 -> Node0x55f9312f9a20;
+	Node0x55f9312f9a20 [shape=record,label="{libxml2-py.c:7153:}"];
+}

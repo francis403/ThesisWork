@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlRegFreeState' function" {
+	label="CFG for 'xmlRegFreeState' function";
+
+	Node0x563d9d8f3ea0 [shape=record,label="{xmlregexp.c:897:|{<s0>T|<s1>F}}"];
+	Node0x563d9d8f3ea0:s0 -> Node0x563d9d8fb020;
+	Node0x563d9d8f3ea0:s1 -> Node0x563d9d8f97f0;
+	Node0x563d9d8fb020 [shape=record,label="{xmlregexp.c:899:}"];
+	Node0x563d9d8fb020 -> Node0x563d9d8f3ef0;
+	Node0x563d9d8f97f0 [shape=record,label="{xmlregexp.c:901:|{<s0>T|<s1>F}}"];
+	Node0x563d9d8f97f0:s0 -> Node0x563d9d90fa90;
+	Node0x563d9d8f97f0:s1 -> Node0x563d9d90fae0;
+	Node0x563d9d90fa90 [shape=record,label="{xmlregexp.c:902:}"];
+	Node0x563d9d90fa90 -> Node0x563d9d90fae0;
+	Node0x563d9d90fae0 [shape=record,label="{xmlregexp.c:903:|{<s0>T|<s1>F}}"];
+	Node0x563d9d90fae0:s0 -> Node0x563d9d910190;
+	Node0x563d9d90fae0:s1 -> Node0x563d9d9101e0;
+	Node0x563d9d910190 [shape=record,label="{xmlregexp.c:904:}"];
+	Node0x563d9d910190 -> Node0x563d9d9101e0;
+	Node0x563d9d9101e0 [shape=record,label="{xmlregexp.c:905:}"];
+	Node0x563d9d9101e0 -> Node0x563d9d8f3ef0;
+	Node0x563d9d8f3ef0 [shape=record,label="{xmlregexp.c:906:}"];
+}

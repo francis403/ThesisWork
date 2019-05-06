@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlCatalogAddLocal' function" {
+	label="CFG for 'xmlCatalogAddLocal' function";
+
+	Node0x55f367797ed0 [shape=record,label="{catalog.c:3624:|{<s0>T|<s1>F}}"];
+	Node0x55f367797ed0:s0 -> Node0x55f36779e700;
+	Node0x55f367797ed0:s1 -> Node0x55f36779e6b0;
+	Node0x55f36779e6b0 [shape=record,label="{catalog.c:3628:}"];
+	Node0x55f36779e6b0 -> Node0x55f36779e700;
+	Node0x55f36779e700 [shape=record,label="{catalog.c:3630:|{<s0>T|<s1>F}}"];
+	Node0x55f36779e700:s0 -> Node0x55f36779ea50;
+	Node0x55f36779e700:s1 -> Node0x55f36779eaa0;
+	Node0x55f36779ea50 [shape=record,label="{catalog.c:3631:}"];
+	Node0x55f36779ea50 -> Node0x55f36779d910;
+	Node0x55f36779eaa0 [shape=record,label="{catalog.c:3633:|{<s0>T|<s1>F}}"];
+	Node0x55f36779eaa0:s0 -> Node0x55f36779ef90;
+	Node0x55f36779eaa0:s1 -> Node0x55f36779efe0;
+	Node0x55f36779ef90 [shape=record,label="{catalog.c:3634:}"];
+	Node0x55f36779ef90 -> Node0x55f36779efe0;
+	Node0x55f36779efe0 [shape=record,label="{catalog.c:3637:|{<s0>T|<s1>F}}"];
+	Node0x55f36779efe0:s0 -> Node0x55f36779fb50;
+	Node0x55f36779efe0:s1 -> Node0x55f36779fba0;
+	Node0x55f36779fb50 [shape=record,label="{catalog.c:3640:}"];
+	Node0x55f36779fb50 -> Node0x55f36779d910;
+	Node0x55f36779fba0 [shape=record,label="{catalog.c:3642:|{<s0>T|<s1>F}}"];
+	Node0x55f36779fba0:s0 -> Node0x55f3677a0290;
+	Node0x55f36779fba0:s1 -> Node0x55f3677a02e0;
+	Node0x55f3677a0290 [shape=record,label="{catalog.c:3644:}"];
+	Node0x55f3677a0290 -> Node0x55f36779d910;
+	Node0x55f3677a02e0 [shape=record,label="{catalog.c:3646:}"];
+	Node0x55f3677a02e0 -> Node0x55f3677a0830;
+	Node0x55f3677a0830 [shape=record,label="{catalog.c:3646:|{<s0>T|<s1>F}}"];
+	Node0x55f3677a0830:s0 -> Node0x55f3677a0c80;
+	Node0x55f3677a0830:s1 -> Node0x55f3677a0a10;
+	Node0x55f3677a0c80 [shape=record,label="{catalog.c:3647:}"];
+	Node0x55f3677a0c80 -> Node0x55f3677a0830;
+	Node0x55f3677a0a10 [shape=record,label="{catalog.c:3648:}"];
+	Node0x55f3677a0a10 -> Node0x55f36779d910;
+	Node0x55f36779d910 [shape=record,label="{catalog.c:3650:}"];
+}

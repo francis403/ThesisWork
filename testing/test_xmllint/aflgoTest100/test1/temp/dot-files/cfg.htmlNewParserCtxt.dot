@@ -1,0 +1,17 @@
+digraph "CFG for 'htmlNewParserCtxt' function" {
+	label="CFG for 'htmlNewParserCtxt' function";
+
+	Node0x5630c5d54da0 [shape=record,label="{HTMLparser.c:4988:|{<s0>T|<s1>F}}"];
+	Node0x5630c5d54da0 -> Node0x5630c5d55ec0;
+	Node0x5630c5d54da0 -> Node0x5630c5d55f10;
+	Node0x5630c5d55ec0 [shape=record,label="{HTMLparser.c:4992:}"];
+	Node0x5630c5d55ec0 -> Node0x5630c5d54df0;
+	Node0x5630c5d55f10 [shape=record,label="{HTMLparser.c:4995:|{<s0>T|<s1>F}}"];
+	Node0x5630c5d55f10 -> Node0x5630c5d567d0;
+	Node0x5630c5d55f10 -> Node0x5630c5d56820;
+	Node0x5630c5d567d0 [shape=record,label="{HTMLparser.c:4997:}"];
+	Node0x5630c5d567d0 -> Node0x5630c5d54df0;
+	Node0x5630c5d56820 [shape=record,label="{HTMLparser.c:5000:}"];
+	Node0x5630c5d56820 -> Node0x5630c5d54df0;
+	Node0x5630c5d54df0 [shape=record,label="{HTMLparser.c:5001:}"];
+}

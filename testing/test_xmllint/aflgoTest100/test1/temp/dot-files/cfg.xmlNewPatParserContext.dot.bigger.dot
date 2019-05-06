@@ -1,0 +1,33 @@
+digraph "CFG for 'xmlNewPatParserContext' function" {
+	label="CFG for 'xmlNewPatParserContext' function";
+
+	Node0x55c8a117c6a0 [shape=record,label="{pattern.c:292:|{<s0>T|<s1>F}}"];
+	Node0x55c8a117c6a0:s0 -> Node0x55c8a117d710;
+	Node0x55c8a117c6a0:s1 -> Node0x55c8a117d760;
+	Node0x55c8a117d710 [shape=record,label="{pattern.c:297:}"];
+	Node0x55c8a117d710 -> Node0x55c8a117c6f0;
+	Node0x55c8a117d760 [shape=record,label="{pattern.c:299:|{<s0>T|<s1>F}}"];
+	Node0x55c8a117d760:s0 -> Node0x55c8a117df30;
+	Node0x55c8a117d760:s1 -> Node0x55c8a117df80;
+	Node0x55c8a117df30 [shape=record,label="{pattern.c:303:}"];
+	Node0x55c8a117df30 -> Node0x55c8a117c6f0;
+	Node0x55c8a117df80 [shape=record,label="{pattern.c:305:|{<s0>T|<s1>F}}"];
+	Node0x55c8a117df80:s0 -> Node0x55c8a117ed60;
+	Node0x55c8a117df80:s1 -> Node0x55c8a117ee00;
+	Node0x55c8a117ed60 [shape=record,label="{pattern.c:310:}"];
+	Node0x55c8a117ed60 -> Node0x55c8a117f580;
+	Node0x55c8a117f580 [shape=record,label="{pattern.c:311:|{<s0>T|<s1>F}}"];
+	Node0x55c8a117f580:s0 -> Node0x55c8a1140ee0;
+	Node0x55c8a117f580:s1 -> Node0x55c8a117f3e0;
+	Node0x55c8a1140ee0 [shape=record,label="{pattern.c:311:}"];
+	Node0x55c8a1140ee0 -> Node0x55c8a117f770;
+	Node0x55c8a117f770 [shape=record,label="{pattern.c:311:}"];
+	Node0x55c8a117f770 -> Node0x55c8a117f580;
+	Node0x55c8a117f3e0 [shape=record,label="{pattern.c:313:}"];
+	Node0x55c8a117f3e0 -> Node0x55c8a117edb0;
+	Node0x55c8a117ee00 [shape=record,label="{pattern.c:315:}"];
+	Node0x55c8a117ee00 -> Node0x55c8a117edb0;
+	Node0x55c8a117edb0 [shape=record,label="{pattern.c:317:}"];
+	Node0x55c8a117edb0 -> Node0x55c8a117c6f0;
+	Node0x55c8a117c6f0 [shape=record,label="{pattern.c:319:}"];
+}

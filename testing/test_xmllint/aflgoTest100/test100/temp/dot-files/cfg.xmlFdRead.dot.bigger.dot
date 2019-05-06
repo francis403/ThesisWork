@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlFdRead' function" {
+	label="CFG for 'xmlFdRead' function";
+
+	Node0x5635e0281900 [shape=record,label="{xmlIO.c:730:|{<s0>T|<s1>F}}"];
+	Node0x5635e0281900:s0 -> Node0x5635e0284ed0;
+	Node0x5635e0281900:s1 -> Node0x5635e0284f20;
+	Node0x5635e0284ed0 [shape=record,label="{xmlIO.c:734:}"];
+	Node0x5635e0284ed0 -> Node0x5635e0284f20;
+	Node0x5635e0284f20 [shape=record,label="{xmlIO.c:735:}"];
+}

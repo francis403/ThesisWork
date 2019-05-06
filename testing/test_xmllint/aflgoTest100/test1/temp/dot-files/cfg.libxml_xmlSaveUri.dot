@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlSaveUri' function" {
+	label="CFG for 'libxml_xmlSaveUri' function";
+
+	Node0x55f931296680 [shape=record,label="{libxml2-py.c:6759:|{<s0>T|<s1>F}}"];
+	Node0x55f931296680:s0 -> Node0x55f93129afb0;
+	Node0x55f931296680:s1 -> Node0x55f93129af60;
+	Node0x55f93129af60 [shape=record,label="{libxml2-py.c:6766:}"];
+	Node0x55f93129af60 -> Node0x55f931296980;
+	Node0x55f93129afb0 [shape=record,label="{libxml2-py.c:6767:|{<s0>T|<s1>F}}"];
+	Node0x55f93129afb0:s0 -> Node0x55f93129b790;
+	Node0x55f93129afb0:s1 -> Node0x55f93129b7e0;
+	Node0x55f93129b790 [shape=record,label="{libxml2-py.c:6767:}"];
+	Node0x55f93129b790 -> Node0x55f93129b830;
+	Node0x55f93129b7e0 [shape=record,label="{libxml2-py.c:6767:}"];
+	Node0x55f93129b7e0 -> Node0x55f93129b830;
+	Node0x55f93129b830 [shape=record,label="{libxml2-py.c:6767:}"];
+	Node0x55f93129b830 -> Node0x55f931296980;
+	Node0x55f931296980 [shape=record,label="{libxml2-py.c:6772:}"];
+}

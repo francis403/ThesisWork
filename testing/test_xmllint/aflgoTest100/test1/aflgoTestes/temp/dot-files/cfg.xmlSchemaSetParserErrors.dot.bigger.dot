@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlSchemaSetParserErrors' function" {
+	label="CFG for 'xmlSchemaSetParserErrors' function";
+
+	Node0x55d0257cf500 [shape=record,label="{xmlschemas.c:21456:|{<s0>T|<s1>F}}"];
+	Node0x55d0257cf500:s0 -> Node0x55d025c0dcf0;
+	Node0x55d0257cf500:s1 -> Node0x55d025c0dd40;
+	Node0x55d025c0dcf0 [shape=record,label="{xmlschemas.c:21461:}"];
+	Node0x55d025c0dcf0 -> Node0x55d025c0e740;
+	Node0x55d025c0dd40 [shape=record,label="{xmlschemas.c:21462:|{<s0>T|<s1>F}}"];
+	Node0x55d025c0dd40:s0 -> Node0x55d025c0e6f0;
+	Node0x55d025c0dd40:s1 -> Node0x55d025c0e740;
+	Node0x55d025c0e6f0 [shape=record,label="{xmlschemas.c:21466:}"];
+	Node0x55d025c0e6f0 -> Node0x55d025c0e740;
+	Node0x55d025c0e740 [shape=record,label="{xmlschemas.c:21467:}"];
+}

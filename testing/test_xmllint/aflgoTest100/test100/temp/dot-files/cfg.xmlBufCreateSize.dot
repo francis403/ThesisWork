@@ -1,0 +1,31 @@
+digraph "CFG for 'xmlBufCreateSize' function" {
+	label="CFG for 'xmlBufCreateSize' function";
+
+	Node0x560723801b20 [shape=record,label="{buf.c:156:|{<s0>T|<s1>F}}"];
+	Node0x560723801b20 -> Node0x560723805860;
+	Node0x560723801b20 -> Node0x5607238058b0;
+	Node0x560723805860 [shape=record,label="{buf.c:161:}"];
+	Node0x560723805860 -> Node0x560723804300;
+	Node0x5607238058b0 [shape=record,label="{buf.c:164:|{<s0>T|<s1>F}}"];
+	Node0x5607238058b0 -> Node0x560723807800;
+	Node0x5607238058b0 -> Node0x560723807850;
+	Node0x560723807800 [shape=record,label="{buf.c:169:}"];
+	Node0x560723807800 -> Node0x5607238078a0;
+	Node0x560723807850 [shape=record,label="{buf.c:169:}"];
+	Node0x560723807850 -> Node0x5607238078a0;
+	Node0x5607238078a0 [shape=record,label="{buf.c:169:|{<s0>T|<s1>F}}"];
+	Node0x5607238078a0 -> Node0x560723808460;
+	Node0x5607238078a0 -> Node0x560723808500;
+	Node0x560723808460 [shape=record,label="{buf.c:172:|{<s0>T|<s1>F}}"];
+	Node0x560723808460 -> Node0x560723808f30;
+	Node0x560723808460 -> Node0x560723808f80;
+	Node0x560723808f30 [shape=record,label="{buf.c:174:}"];
+	Node0x560723808f30 -> Node0x560723804300;
+	Node0x560723808f80 [shape=record,label="{buf.c:178:}"];
+	Node0x560723808f80 -> Node0x5607238084b0;
+	Node0x560723808500 [shape=record,label="{buf.c:180:}"];
+	Node0x560723808500 -> Node0x5607238084b0;
+	Node0x5607238084b0 [shape=record,label="{buf.c:181:}"];
+	Node0x5607238084b0 -> Node0x560723804300;
+	Node0x560723804300 [shape=record,label="{buf.c:183:}"];
+}

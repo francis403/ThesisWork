@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlStrncatNew' function" {
+	label="CFG for 'libxml_xmlStrncatNew' function";
+
+	Node0x55f93136e310 [shape=record,label="{libxml2-py.c:7620:|{<s0>T|<s1>F}}"];
+	Node0x55f93136e310:s0 -> Node0x55f931372030;
+	Node0x55f93136e310:s1 -> Node0x55f931371fe0;
+	Node0x55f931371fe0 [shape=record,label="{libxml2-py.c:7628:}"];
+	Node0x55f931371fe0 -> Node0x55f93136e610;
+	Node0x55f931372030 [shape=record,label="{libxml2-py.c:7630:}"];
+	Node0x55f931372030 -> Node0x55f93136e610;
+	Node0x55f93136e610 [shape=record,label="{libxml2-py.c:7633:}"];
+}

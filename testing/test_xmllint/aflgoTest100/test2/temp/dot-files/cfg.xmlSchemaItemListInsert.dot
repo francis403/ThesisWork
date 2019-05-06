@@ -1,0 +1,45 @@
+digraph "CFG for 'xmlSchemaItemListInsert' function" {
+	label="CFG for 'xmlSchemaItemListInsert' function";
+
+	Node0x55835396ab80 [shape=record,label="{xmlschemas.c:3417:|{<s0>T|<s1>F}}"];
+	Node0x55835396ab80 -> Node0x55835396ba00;
+	Node0x55835396ab80 -> Node0x55835396baa0;
+	Node0x55835396ba00 [shape=record,label="{xmlschemas.c:3420:|{<s0>T|<s1>F}}"];
+	Node0x55835396ba00 -> Node0x55835396c240;
+	Node0x55835396ba00 -> Node0x55835396c290;
+	Node0x55835396c240 [shape=record,label="{xmlschemas.c:3423:}"];
+	Node0x55835396c240 -> Node0x55835396abd0;
+	Node0x55835396c290 [shape=record,label="{xmlschemas.c:3426:}"];
+	Node0x55835396c290 -> Node0x55835396ba50;
+	Node0x55835396baa0 [shape=record,label="{xmlschemas.c:3427:|{<s0>T|<s1>F}}"];
+	Node0x55835396baa0 -> Node0x55835396cd30;
+	Node0x55835396baa0 -> Node0x55835396cd80;
+	Node0x55835396cd30 [shape=record,label="{xmlschemas.c:3428:|{<s0>T|<s1>F}}"];
+	Node0x55835396cd30 -> Node0x55835396dfb0;
+	Node0x55835396cd30 -> Node0x55835396e000;
+	Node0x55835396dfb0 [shape=record,label="{xmlschemas.c:3432:}"];
+	Node0x55835396dfb0 -> Node0x55835396abd0;
+	Node0x55835396e000 [shape=record,label="{xmlschemas.c:3436:}"];
+	Node0x55835396e000 -> Node0x55835396cd80;
+	Node0x55835396cd80 [shape=record,label="{%54}"];
+	Node0x55835396cd80 -> Node0x55835396ba50;
+	Node0x55835396ba50 [shape=record,label="{xmlschemas.c:3440:|{<s0>T|<s1>F}}"];
+	Node0x55835396ba50 -> Node0x55835396ec00;
+	Node0x55835396ba50 -> Node0x55835396eca0;
+	Node0x55835396ec00 [shape=record,label="{xmlschemas.c:3441:}"];
+	Node0x55835396ec00 -> Node0x55835396ec50;
+	Node0x55835396eca0 [shape=record,label="{xmlschemas.c:3443:}"];
+	Node0x55835396eca0 -> Node0x55835396fec0;
+	Node0x55835396fec0 [shape=record,label="{xmlschemas.c:3444:|{<s0>T|<s1>F}}"];
+	Node0x55835396fec0 -> Node0x5583539701a0;
+	Node0x55835396fec0 -> Node0x55835396fb90;
+	Node0x5583539701a0 [shape=record,label="{xmlschemas.c:3445:}"];
+	Node0x5583539701a0 -> Node0x558353970110;
+	Node0x558353970110 [shape=record,label="{xmlschemas.c:3444:}"];
+	Node0x558353970110 -> Node0x55835396fec0;
+	Node0x55835396fb90 [shape=record,label="{xmlschemas.c:3446:}"];
+	Node0x55835396fb90 -> Node0x55835396ec50;
+	Node0x55835396ec50 [shape=record,label="{xmlschemas.c:3449:}"];
+	Node0x55835396ec50 -> Node0x55835396abd0;
+	Node0x55835396abd0 [shape=record,label="{xmlschemas.c:3450:}"];
+}

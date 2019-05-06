@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlSHRINK' function" {
+	label="CFG for 'xmlSHRINK' function";
+
+	Node0x5557de348350 [shape=record,label="{parser.c:2067:|{<s0>T|<s1>F}}"];
+	Node0x5557de348350:s0 -> Node0x5557de3519f0;
+	Node0x5557de348350:s1 -> Node0x5557de351a40;
+	Node0x5557de3519f0 [shape=record,label="{parser.c:2070:}"];
+	Node0x5557de3519f0 -> Node0x5557de351a40;
+	Node0x5557de351a40 [shape=record,label="{parser.c:2071:}"];
+}

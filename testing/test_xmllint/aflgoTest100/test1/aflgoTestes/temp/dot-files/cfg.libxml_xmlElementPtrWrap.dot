@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlElementPtrWrap' function" {
+	label="CFG for 'libxml_xmlElementPtrWrap' function";
+
+	Node0x55aa7cebadf0 [shape=record,label="{types.c:319:|{<s0>T|<s1>F}}"];
+	Node0x55aa7cebadf0:s0 -> Node0x55aa7cef91b0;
+	Node0x55aa7cebadf0:s1 -> Node0x55aa7cef9200;
+	Node0x55aa7cef91b0 [shape=record,label="{types.c:327:}"];
+	Node0x55aa7cef91b0 -> Node0x55aa7cef5650;
+	Node0x55aa7cef9200 [shape=record,label="{types.c:330:}"];
+	Node0x55aa7cef9200 -> Node0x55aa7cef5650;
+	Node0x55aa7cef5650 [shape=record,label="{types.c:332:}"];
+}

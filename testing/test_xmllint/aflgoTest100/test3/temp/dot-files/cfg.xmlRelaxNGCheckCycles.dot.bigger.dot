@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlRelaxNGCheckCycles' function" {
+	label="CFG for 'xmlRelaxNGCheckCycles' function";
+
+	Node0x559d0be151f0 [shape=record,label="{relaxng.c:5980:}"];
+	Node0x559d0be151f0 -> Node0x559d0be163a0;
+	Node0x559d0be163a0 [shape=record,label="{relaxng.c:5985:|{<s0>T|<s1>F}}"];
+	Node0x559d0be163a0:s0 -> Node0x559d0be16630;
+	Node0x559d0be163a0:s1 -> Node0x559d0be165e0;
+	Node0x559d0be16630 [shape=record,label="{relaxng.c:5985:}"];
+	Node0x559d0be16630 -> Node0x559d0be165e0;
+	Node0x559d0be165e0 [shape=record,label="{relaxng.c:5985:|{<s0>T|<s1>F}}"];
+	Node0x559d0be165e0:s0 -> Node0x559d0be16ad0;
+	Node0x559d0be165e0:s1 -> Node0x559d0be16560;
+	Node0x559d0be16ad0 [shape=record,label="{relaxng.c:5986:|{<s0>T|<s1>F}}"];
+	Node0x559d0be16ad0:s0 -> Node0x559d0be16c80;
+	Node0x559d0be16ad0:s1 -> Node0x559d0be16d70;
+	Node0x559d0be16d70 [shape=record,label="{relaxng.c:5987:|{<s0>T|<s1>F}}"];
+	Node0x559d0be16d70:s0 -> Node0x559d0be16c80;
+	Node0x559d0be16d70:s1 -> Node0x559d0be16d20;
+	Node0x559d0be16c80 [shape=record,label="{relaxng.c:5988:|{<s0>T|<s1>F}}"];
+	Node0x559d0be16c80:s0 -> Node0x559d0be17420;
+	Node0x559d0be16c80:s1 -> Node0x559d0be174c0;
+	Node0x559d0be17420 [shape=record,label="{relaxng.c:5989:}"];
+	Node0x559d0be17420 -> Node0x559d0be17470;
+	Node0x559d0be174c0 [shape=record,label="{relaxng.c:5992:|{<s0>T|<s1>F}}"];
+	Node0x559d0be174c0:s0 -> Node0x559d0be18400;
+	Node0x559d0be174c0:s1 -> Node0x559d0be18450;
+	Node0x559d0be18400 [shape=record,label="{relaxng.c:5993:}"];
+	Node0x559d0be18400 -> Node0x559d0be15240;
+	Node0x559d0be18450 [shape=record,label="{%51}"];
+	Node0x559d0be18450 -> Node0x559d0be17470;
+	Node0x559d0be17470 [shape=record,label="{relaxng.c:5998:}"];
+	Node0x559d0be17470 -> Node0x559d0be16cd0;
+	Node0x559d0be16d20 [shape=record,label="{relaxng.c:5998:|{<s0>T|<s1>F}}"];
+	Node0x559d0be16d20:s0 -> Node0x559d0be194e0;
+	Node0x559d0be16d20:s1 -> Node0x559d0be19580;
+	Node0x559d0be194e0 [shape=record,label="{relaxng.c:5999:}"];
+	Node0x559d0be194e0 -> Node0x559d0be19530;
+	Node0x559d0be19580 [shape=record,label="{relaxng.c:6001:}"];
+	Node0x559d0be19580 -> Node0x559d0be19530;
+	Node0x559d0be19530 [shape=record,label="{%69}"];
+	Node0x559d0be19530 -> Node0x559d0be16cd0;
+	Node0x559d0be16cd0 [shape=record,label="{relaxng.c:6003:}"];
+	Node0x559d0be16cd0 -> Node0x559d0be163a0;
+	Node0x559d0be16560 [shape=record,label="{relaxng.c:6005:}"];
+	Node0x559d0be16560 -> Node0x559d0be15240;
+	Node0x559d0be15240 [shape=record,label="{relaxng.c:6006:}"];
+}

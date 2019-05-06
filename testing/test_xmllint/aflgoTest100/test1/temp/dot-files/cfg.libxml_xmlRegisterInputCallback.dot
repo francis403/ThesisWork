@@ -1,0 +1,27 @@
+digraph "CFG for 'libxml_xmlRegisterInputCallback' function" {
+	label="CFG for 'libxml_xmlRegisterInputCallback' function";
+
+	Node0x55ea372c4820 [shape=record,label="{libxml.c:823:|{<s0>T|<s1>F}}"];
+	Node0x55ea372c4820:s0 -> Node0x55ea372cc2a0;
+	Node0x55ea372c4820:s1 -> Node0x55ea37287460;
+	Node0x55ea37287460 [shape=record,label="{libxml.c:829:}"];
+	Node0x55ea37287460 -> Node0x55ea37287140;
+	Node0x55ea372cc2a0 [shape=record,label="{libxml.c:831:|{<s0>T|<s1>F}}"];
+	Node0x55ea372cc2a0:s0 -> Node0x55ea372cca50;
+	Node0x55ea372cc2a0:s1 -> Node0x55ea372cca00;
+	Node0x55ea372cca00 [shape=record,label="{libxml.c:832:}"];
+	Node0x55ea372cca00 -> Node0x55ea37287140;
+	Node0x55ea372cca50 [shape=record,label="{libxml.c:840:|{<s0>T|<s1>F}}"];
+	Node0x55ea372cca50:s0 -> Node0x55ea372cd280;
+	Node0x55ea372cca50:s1 -> Node0x55ea372cd2d0;
+	Node0x55ea372cd280 [shape=record,label="{libxml.c:841:|{<s0>T|<s1>F}}"];
+	Node0x55ea372cd280:s0 -> Node0x55ea372ce260;
+	Node0x55ea372cd280:s1 -> Node0x55ea372ce690;
+	Node0x55ea372ce260 [shape=record,label="{libxml.c:845:}"];
+	Node0x55ea372ce260 -> Node0x55ea37287140;
+	Node0x55ea372ce690 [shape=record,label="{libxml.c:846:}"];
+	Node0x55ea372ce690 -> Node0x55ea372cd2d0;
+	Node0x55ea372cd2d0 [shape=record,label="{libxml.c:850:}"];
+	Node0x55ea372cd2d0 -> Node0x55ea37287140;
+	Node0x55ea37287140 [shape=record,label="{libxml.c:852:}"];
+}

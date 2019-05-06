@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathSubValues' function" {
+	label="CFG for 'libxml_xmlXPathSubValues' function";
+
+	Node0x55f93191bad0 [shape=record,label="{libxml2-py.c:14441:|{<s0>T|<s1>F}}"];
+	Node0x55f93191bad0:s0 -> Node0x55f931925160;
+	Node0x55f93191bad0:s1 -> Node0x55f931925110;
+	Node0x55f931925110 [shape=record,label="{libxml2-py.c:14446:}"];
+	Node0x55f931925110 -> Node0x55f93191bdb0;
+	Node0x55f931925160 [shape=record,label="{libxml2-py.c:14447:|{<s0>T|<s1>F}}"];
+	Node0x55f931925160:s0 -> Node0x55f931925940;
+	Node0x55f931925160:s1 -> Node0x55f931925990;
+	Node0x55f931925940 [shape=record,label="{libxml2-py.c:14447:}"];
+	Node0x55f931925940 -> Node0x55f9319259e0;
+	Node0x55f931925990 [shape=record,label="{libxml2-py.c:14447:}"];
+	Node0x55f931925990 -> Node0x55f9319259e0;
+	Node0x55f9319259e0 [shape=record,label="{libxml2-py.c:14447:}"];
+	Node0x55f9319259e0 -> Node0x55f93191bdb0;
+	Node0x55f93191bdb0 [shape=record,label="{libxml2-py.c:14452:}"];
+}

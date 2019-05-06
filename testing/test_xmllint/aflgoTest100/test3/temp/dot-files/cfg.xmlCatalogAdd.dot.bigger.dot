@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlCatalogAdd' function" {
+	label="CFG for 'xmlCatalogAdd' function";
+
+	Node0x55f3677407c0 [shape=record,label="{catalog.c:3415:|{<s0>T|<s1>F}}"];
+	Node0x55f3677407c0:s0 -> Node0x55f367783ff0;
+	Node0x55f3677407c0:s1 -> Node0x55f367783fa0;
+	Node0x55f367783fa0 [shape=record,label="{catalog.c:3419:}"];
+	Node0x55f367783fa0 -> Node0x55f367783ff0;
+	Node0x55f367783ff0 [shape=record,label="{catalog.c:3421:|{<s0>T|<s1>F}}"];
+	Node0x55f367783ff0:s0 -> Node0x55f367784530;
+	Node0x55f367783ff0:s1 -> Node0x55f3677844e0;
+	Node0x55f367784530 [shape=record,label="{catalog.c:3427:|{<s0>T|<s1>F}}"];
+	Node0x55f367784530:s0 -> Node0x55f367784490;
+	Node0x55f367784530:s1 -> Node0x55f3677844e0;
+	Node0x55f367784490 [shape=record,label="{catalog.c:3429:}"];
+	Node0x55f367784490 -> Node0x55f36773f110;
+	Node0x55f3677844e0 [shape=record,label="{catalog.c:3437:}"];
+	Node0x55f3677844e0 -> Node0x55f36773f110;
+	Node0x55f36773f110 [shape=record,label="{catalog.c:3440:}"];
+}

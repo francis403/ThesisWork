@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlParserSetLoadSubset' function" {
+	label="CFG for 'libxml_xmlParserSetLoadSubset' function";
+
+	Node0x55f93118c910 [shape=record,label="{libxml2-py.c:5651:|{<s0>T|<s1>F}}"];
+	Node0x55f93118c910:s0 -> Node0x55f93118ece0;
+	Node0x55f93118c910:s1 -> Node0x55f93118ec90;
+	Node0x55f93118ec90 [shape=record,label="{libxml2-py.c:5657:}"];
+	Node0x55f93118ec90 -> Node0x55f93118cb00;
+	Node0x55f93118ece0 [shape=record,label="{libxml2-py.c:5658:|{<s0>T|<s1>F}}"];
+	Node0x55f93118ece0:s0 -> Node0x55f93118f540;
+	Node0x55f93118ece0:s1 -> Node0x55f93118f590;
+	Node0x55f93118f540 [shape=record,label="{libxml2-py.c:5658:}"];
+	Node0x55f93118f540 -> Node0x55f93118f5e0;
+	Node0x55f93118f590 [shape=record,label="{libxml2-py.c:5658:}"];
+	Node0x55f93118f590 -> Node0x55f93118f5e0;
+	Node0x55f93118f5e0 [shape=record,label="{libxml2-py.c:5658:}"];
+	Node0x55f93118f5e0 -> Node0x55f93118cb00;
+	Node0x55f93118cb00 [shape=record,label="{libxml2-py.c:5663:}"];
+}

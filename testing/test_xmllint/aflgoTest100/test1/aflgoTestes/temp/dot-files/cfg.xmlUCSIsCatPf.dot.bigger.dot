@@ -1,0 +1,16 @@
+digraph "CFG for 'xmlUCSIsCatPf' function" {
+	label="CFG for 'xmlUCSIsCatPf' function";
+
+	Node0x564952f02570 [shape=record,label="{xmlunicode.c:2984:|{<s0>T|<s1>F}}"];
+	Node0x564952f02570:s0 -> Node0x564952eff920;
+	Node0x564952f02570:s1 -> Node0x564952f01f00;
+	Node0x564952f01f00 [shape=record,label="{xmlunicode.c:2986:|{<s0>T|<s1>F}}"];
+	Node0x564952f01f00:s0 -> Node0x564952eff920;
+	Node0x564952f01f00:s1 -> Node0x564952f02420;
+	Node0x564952f02420 [shape=record,label="{xmlunicode.c:2987:|{<s0>T|<s1>F}}"];
+	Node0x564952f02420:s0 -> Node0x564952eff920;
+	Node0x564952f02420:s1 -> Node0x564952f02ad0;
+	Node0x564952f02ad0 [shape=record,label="{xmlunicode.c:2988:}"];
+	Node0x564952f02ad0 -> Node0x564952eff920;
+	Node0x564952eff920 [shape=record,label="{xmlunicode.c:2987:}"];
+}

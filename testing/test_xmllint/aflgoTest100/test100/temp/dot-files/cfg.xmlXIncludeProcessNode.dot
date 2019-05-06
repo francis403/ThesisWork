@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlXIncludeProcessNode' function" {
+	label="CFG for 'xmlXIncludeProcessNode' function";
+
+	Node0x5608329f0660 [shape=record,label="{xinclude.c:2611:|{<s0>T|<s1>F}}"];
+	Node0x5608329f0660 -> Node0x5608329f4620;
+	Node0x5608329f0660 -> Node0x5608329f47c0;
+	Node0x5608329f47c0 [shape=record,label="{xinclude.c:2614:|{<s0>T|<s1>F}}"];
+	Node0x5608329f47c0 -> Node0x5608329f4620;
+	Node0x5608329f47c0 -> Node0x5608329f4740;
+	Node0x5608329f4740 [shape=record,label="{xinclude.c:2615:|{<s0>T|<s1>F}}"];
+	Node0x5608329f4740 -> Node0x5608329f4620;
+	Node0x5608329f4740 -> Node0x5608329f46c0;
+	Node0x5608329f46c0 [shape=record,label="{xinclude.c:2615:|{<s0>T|<s1>F}}"];
+	Node0x5608329f46c0 -> Node0x5608329f4620;
+	Node0x5608329f46c0 -> Node0x5608329f4670;
+	Node0x5608329f4620 [shape=record,label="{xinclude.c:2616:}"];
+	Node0x5608329f4620 -> Node0x5608329eecf0;
+	Node0x5608329f4670 [shape=record,label="{xinclude.c:2617:|{<s0>T|<s1>F}}"];
+	Node0x5608329f4670 -> Node0x5608329f58b0;
+	Node0x5608329f4670 -> Node0x5608329f5860;
+	Node0x5608329f58b0 [shape=record,label="{xinclude.c:2618:|{<s0>T|<s1>F}}"];
+	Node0x5608329f58b0 -> Node0x5608329f5810;
+	Node0x5608329f58b0 -> Node0x5608329f5860;
+	Node0x5608329f5810 [shape=record,label="{xinclude.c:2619:}"];
+	Node0x5608329f5810 -> Node0x5608329f5860;
+	Node0x5608329f5860 [shape=record,label="{xinclude.c:2620:}"];
+	Node0x5608329f5860 -> Node0x5608329eecf0;
+	Node0x5608329eecf0 [shape=record,label="{xinclude.c:2621:}"];
+}

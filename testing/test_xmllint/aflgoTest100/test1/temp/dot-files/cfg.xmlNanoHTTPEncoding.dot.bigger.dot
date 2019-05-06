@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlNanoHTTPEncoding' function" {
+	label="CFG for 'xmlNanoHTTPEncoding' function";
+
+	Node0x564de244b010 [shape=record,label="{nanohttp.c:1788:|{<s0>T|<s1>F}}"];
+	Node0x564de244b010:s0 -> Node0x564de244bf00;
+	Node0x564de244b010:s1 -> Node0x564de244bf50;
+	Node0x564de244bf00 [shape=record,label="{nanohttp.c:1791:}"];
+	Node0x564de244bf00 -> Node0x564de244bfa0;
+	Node0x564de244bf50 [shape=record,label="{nanohttp.c:1791:}"];
+	Node0x564de244bf50 -> Node0x564de244bfa0;
+	Node0x564de244bfa0 [shape=record,label="{nanohttp.c:1791:}"];
+}

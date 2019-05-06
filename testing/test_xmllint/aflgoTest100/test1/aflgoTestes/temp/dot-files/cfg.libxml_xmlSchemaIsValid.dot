@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlSchemaIsValid' function" {
+	label="CFG for 'libxml_xmlSchemaIsValid' function";
+
+	Node0x55f9312b9ea0 [shape=record,label="{libxml2-py.c:6882:|{<s0>T|<s1>F}}"];
+	Node0x55f9312b9ea0:s0 -> Node0x55f9312c2a60;
+	Node0x55f9312b9ea0:s1 -> Node0x55f9312c2a10;
+	Node0x55f9312c2a10 [shape=record,label="{libxml2-py.c:6889:}"];
+	Node0x55f9312c2a10 -> Node0x55f9312c0d10;
+	Node0x55f9312c2a60 [shape=record,label="{libxml2-py.c:6890:|{<s0>T|<s1>F}}"];
+	Node0x55f9312c2a60:s0 -> Node0x55f9312c3850;
+	Node0x55f9312c2a60:s1 -> Node0x55f9312c38a0;
+	Node0x55f9312c3850 [shape=record,label="{libxml2-py.c:6890:}"];
+	Node0x55f9312c3850 -> Node0x55f9312c38f0;
+	Node0x55f9312c38a0 [shape=record,label="{libxml2-py.c:6890:}"];
+	Node0x55f9312c38a0 -> Node0x55f9312c38f0;
+	Node0x55f9312c38f0 [shape=record,label="{libxml2-py.c:6890:}"];
+	Node0x55f9312c38f0 -> Node0x55f9312c0d10;
+	Node0x55f9312c0d10 [shape=record,label="{libxml2-py.c:6895:}"];
+}

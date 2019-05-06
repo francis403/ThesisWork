@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlFreeStreamCtxt' function" {
+	label="CFG for 'xmlFreeStreamCtxt' function";
+
+	Node0x55c8a10acbc0 [shape=record,label="{pattern.c:1792:}"];
+	Node0x55c8a10acbc0 -> Node0x55c8a10097d0;
+	Node0x55c8a10097d0 [shape=record,label="{pattern.c:1795:|{<s0>T|<s1>F}}"];
+	Node0x55c8a10097d0 -> Node0x55c8a10ec280;
+	Node0x55c8a10097d0 -> Node0x55c8a10ec070;
+	Node0x55c8a10ec280 [shape=record,label="{pattern.c:1796:|{<s0>T|<s1>F}}"];
+	Node0x55c8a10ec280 -> Node0x55c8a10ec550;
+	Node0x55c8a10ec280 -> Node0x55c8a10ec5a0;
+	Node0x55c8a10ec550 [shape=record,label="{pattern.c:1798:}"];
+	Node0x55c8a10ec550 -> Node0x55c8a10ec5a0;
+	Node0x55c8a10ec5a0 [shape=record,label="{pattern.c:1799:}"];
+	Node0x55c8a10ec5a0 -> Node0x55c8a10097d0;
+	Node0x55c8a10ec070 [shape=record,label="{pattern.c:1802:}"];
+}

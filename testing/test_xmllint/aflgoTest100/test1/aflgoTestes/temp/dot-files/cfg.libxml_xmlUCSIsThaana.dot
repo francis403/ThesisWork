@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsThaana' function" {
+	label="CFG for 'libxml_xmlUCSIsThaana' function";
+
+	Node0x55f931671800 [shape=record,label="{libxml2-py.c:11531:|{<s0>T|<s1>F}}"];
+	Node0x55f931671800:s0 -> Node0x55f931674750;
+	Node0x55f931671800:s1 -> Node0x55f931674700;
+	Node0x55f931674700 [shape=record,label="{libxml2-py.c:11537:}"];
+	Node0x55f931674700 -> Node0x55f931671b00;
+	Node0x55f931674750 [shape=record,label="{libxml2-py.c:11539:}"];
+	Node0x55f931674750 -> Node0x55f931671b00;
+	Node0x55f931671b00 [shape=record,label="{libxml2-py.c:11542:}"];
+}

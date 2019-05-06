@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlNewNodeEatName' function" {
+	label="CFG for 'libxml_xmlNewNodeEatName' function";
+
+	Node0x55f930fde840 [shape=record,label="{libxml2-py.c:4123:|{<s0>T|<s1>F}}"];
+	Node0x55f930fde840:s0 -> Node0x55f930fe3f80;
+	Node0x55f930fde840:s1 -> Node0x55f930fe3f30;
+	Node0x55f930fe3f30 [shape=record,label="{libxml2-py.c:4131:}"];
+	Node0x55f930fe3f30 -> Node0x55f930fdead0;
+	Node0x55f930fe3f80 [shape=record,label="{libxml2-py.c:4132:|{<s0>T|<s1>F}}"];
+	Node0x55f930fe3f80:s0 -> Node0x55f930fe47d0;
+	Node0x55f930fe3f80:s1 -> Node0x55f930fe4820;
+	Node0x55f930fe47d0 [shape=record,label="{libxml2-py.c:4132:}"];
+	Node0x55f930fe47d0 -> Node0x55f930fe4870;
+	Node0x55f930fe4820 [shape=record,label="{libxml2-py.c:4132:}"];
+	Node0x55f930fe4820 -> Node0x55f930fe4870;
+	Node0x55f930fe4870 [shape=record,label="{libxml2-py.c:4132:}"];
+	Node0x55f930fe4870 -> Node0x55f930fdead0;
+	Node0x55f930fdead0 [shape=record,label="{libxml2-py.c:4137:}"];
+}

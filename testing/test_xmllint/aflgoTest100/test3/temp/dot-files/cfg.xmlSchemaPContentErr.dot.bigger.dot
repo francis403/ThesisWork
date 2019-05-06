@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlSchemaPContentErr' function" {
+	label="CFG for 'xmlSchemaPContentErr' function";
+
+	Node0x55835384f9b0 [shape=record,label="{xmlschemas.c:3215:|{<s0>T|<s1>F}}"];
+	Node0x55835384f9b0:s0 -> Node0x558353851a50;
+	Node0x55835384f9b0:s1 -> Node0x558353851af0;
+	Node0x558353851a50 [shape=record,label="{xmlschemas.c:3227:}"];
+	Node0x558353851a50 -> Node0x558353851aa0;
+	Node0x558353851af0 [shape=record,label="{xmlschemas.c:3231:|{<s0>T|<s1>F}}"];
+	Node0x558353851af0:s0 -> Node0x5583538522d0;
+	Node0x558353851af0:s1 -> Node0x558353852370;
+	Node0x5583538522d0 [shape=record,label="{xmlschemas.c:3232:}"];
+	Node0x5583538522d0 -> Node0x558353852320;
+	Node0x558353852370 [shape=record,label="{xmlschemas.c:3236:}"];
+	Node0x558353852370 -> Node0x558353852320;
+	Node0x558353852320 [shape=record,label="{%39}"];
+	Node0x558353852320 -> Node0x558353851aa0;
+	Node0x558353851aa0 [shape=record,label="{xmlschemas.c:3241:|{<s0>T|<s1>F}}"];
+	Node0x558353851aa0:s0 -> Node0x558353853710;
+	Node0x558353851aa0:s1 -> Node0x558353853760;
+	Node0x558353853710 [shape=record,label="{xmlschemas.c:3241:}"];
+	Node0x558353853710 -> Node0x558353853760;
+	Node0x558353853760 [shape=record,label="{xmlschemas.c:3242:}"];
+}

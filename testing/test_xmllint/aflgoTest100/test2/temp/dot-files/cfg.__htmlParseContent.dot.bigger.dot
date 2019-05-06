@@ -1,0 +1,10 @@
+digraph "CFG for '__htmlParseContent' function" {
+	label="CFG for '__htmlParseContent' function";
+
+	Node0x5607447a7960 [shape=record,label="{HTMLparser.c:4708:|{<s0>T|<s1>F}}"];
+	Node0x5607447a7960:s0 -> Node0x5607447da3f0;
+	Node0x5607447a7960:s1 -> Node0x5607447c0e90;
+	Node0x5607447da3f0 [shape=record,label="{HTMLparser.c:4710:}"];
+	Node0x5607447da3f0 -> Node0x5607447c0e90;
+	Node0x5607447c0e90 [shape=record,label="{HTMLparser.c:4711:}"];
+}

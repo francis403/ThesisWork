@@ -1,0 +1,15 @@
+digraph "CFG for 'xmlTextReaderGetErrorHandler' function" {
+	label="CFG for 'xmlTextReaderGetErrorHandler' function";
+
+	Node0x5619bd586df0 [shape=record,label="{xmlreader.c:5099:|{<s0>T|<s1>F}}"];
+	Node0x5619bd586df0:s0 -> Node0x5619bd6e74b0;
+	Node0x5619bd586df0:s1 -> Node0x5619bd6e7500;
+	Node0x5619bd6e74b0 [shape=record,label="{xmlreader.c:5103:}"];
+	Node0x5619bd6e74b0 -> Node0x5619bd6e7500;
+	Node0x5619bd6e7500 [shape=record,label="{xmlreader.c:5104:|{<s0>T|<s1>F}}"];
+	Node0x5619bd6e7500:s0 -> Node0x5619bd6e7b40;
+	Node0x5619bd6e7500:s1 -> Node0x5619bd6e7b90;
+	Node0x5619bd6e7b40 [shape=record,label="{xmlreader.c:5105:}"];
+	Node0x5619bd6e7b40 -> Node0x5619bd6e7b90;
+	Node0x5619bd6e7b90 [shape=record,label="{xmlreader.c:5106:}"];
+}

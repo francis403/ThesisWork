@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathEqualValues' function" {
+	label="CFG for 'libxml_xmlXPathEqualValues' function";
+
+	Node0x55f9317f9ee0 [shape=record,label="{libxml2-py.c:13100:|{<s0>T|<s1>F}}"];
+	Node0x55f9317f9ee0:s0 -> Node0x55f9317fe290;
+	Node0x55f9317f9ee0:s1 -> Node0x55f9317fe240;
+	Node0x55f9317fe240 [shape=record,label="{libxml2-py.c:13107:}"];
+	Node0x55f9317fe240 -> Node0x55f9317fa170;
+	Node0x55f9317fe290 [shape=record,label="{libxml2-py.c:13108:|{<s0>T|<s1>F}}"];
+	Node0x55f9317fe290:s0 -> Node0x55f9317fea70;
+	Node0x55f9317fe290:s1 -> Node0x55f9317feac0;
+	Node0x55f9317fea70 [shape=record,label="{libxml2-py.c:13108:}"];
+	Node0x55f9317fea70 -> Node0x55f9317feb10;
+	Node0x55f9317feac0 [shape=record,label="{libxml2-py.c:13108:}"];
+	Node0x55f9317feac0 -> Node0x55f9317feb10;
+	Node0x55f9317feb10 [shape=record,label="{libxml2-py.c:13108:}"];
+	Node0x55f9317feb10 -> Node0x55f9317fa170;
+	Node0x55f9317fa170 [shape=record,label="{libxml2-py.c:13113:}"];
+}

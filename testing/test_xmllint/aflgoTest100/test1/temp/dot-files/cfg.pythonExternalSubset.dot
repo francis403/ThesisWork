@@ -1,0 +1,32 @@
+digraph "CFG for 'pythonExternalSubset' function" {
+	label="CFG for 'pythonExternalSubset' function";
+
+	Node0x55ea375530a0 [shape=record,label="{libxml.c:1238:|{<s0>T|<s1>F}}"];
+	Node0x55ea375530a0:s0 -> Node0x55ea37555bc0;
+	Node0x55ea375530a0:s1 -> Node0x55ea37555c10;
+	Node0x55ea37555bc0 [shape=record,label="{libxml.c:1252:}"];
+	Node0x55ea37555bc0 -> Node0x55ea37556690;
+	Node0x55ea37556690 [shape=record,label="{libxml.c:1255:|{<s0>T|<s1>F}}"];
+	Node0x55ea37556690:s0 -> Node0x55ea375568f0;
+	Node0x55ea37556690:s1 -> Node0x55ea37556990;
+	Node0x55ea375568f0 [shape=record,label="{libxml.c:1255:}"];
+	Node0x55ea375568f0 -> Node0x55ea37556940;
+	Node0x55ea37556990 [shape=record,label="{libxml.c:1255:}"];
+	Node0x55ea37556990 -> Node0x55ea37556c40;
+	Node0x55ea37556c40 [shape=record,label="{libxml.c:1255:|{<s0>T|<s1>F}}"];
+	Node0x55ea37556c40:s0 -> Node0x55ea37556e20;
+	Node0x55ea37556c40:s1 -> Node0x55ea37556ec0;
+	Node0x55ea37556e20 [shape=record,label="{libxml.c:1255:}"];
+	Node0x55ea37556e20 -> Node0x55ea37556e70;
+	Node0x55ea37556ec0 [shape=record,label="{libxml.c:1255:}"];
+	Node0x55ea37556ec0 -> Node0x55ea37556e70;
+	Node0x55ea37556e70 [shape=record,label="{libxml.c:1255:}"];
+	Node0x55ea37556e70 -> Node0x55ea37556ba0;
+	Node0x55ea37556ba0 [shape=record,label="{%33}"];
+	Node0x55ea37556ba0 -> Node0x55ea37556940;
+	Node0x55ea37556940 [shape=record,label="{libxml.c:1255:}"];
+	Node0x55ea37556940 -> Node0x55ea375565f0;
+	Node0x55ea375565f0 [shape=record,label="{libxml.c:1256:}"];
+	Node0x55ea375565f0 -> Node0x55ea37555c10;
+	Node0x55ea37555c10 [shape=record,label="{libxml.c:1257:}"];
+}

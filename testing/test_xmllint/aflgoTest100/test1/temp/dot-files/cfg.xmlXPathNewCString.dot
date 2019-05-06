@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathNewCString' function" {
+	label="CFG for 'xmlXPathNewCString' function";
+
+	Node0x55e6b261efe0 [shape=record,label="{xpath.c:5337:|{<s0>T|<s1>F}}"];
+	Node0x55e6b261efe0 -> Node0x55e6b26253f0;
+	Node0x55e6b261efe0 -> Node0x55e6b2625440;
+	Node0x55e6b26253f0 [shape=record,label="{xpath.c:5342:}"];
+	Node0x55e6b26253f0 -> Node0x55e6b261ec20;
+	Node0x55e6b2625440 [shape=record,label="{xpath.c:5345:}"];
+	Node0x55e6b2625440 -> Node0x55e6b261ec20;
+	Node0x55e6b261ec20 [shape=record,label="{xpath.c:5352:}"];
+}

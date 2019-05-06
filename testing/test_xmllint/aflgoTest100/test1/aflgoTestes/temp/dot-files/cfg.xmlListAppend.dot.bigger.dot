@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlListAppend' function" {
+	label="CFG for 'xmlListAppend' function";
+
+	Node0x56019df6dfa0 [shape=record,label="{list.c:305:|{<s0>T|<s1>F}}"];
+	Node0x56019df6dfa0:s0 -> Node0x56019df72cd0;
+	Node0x56019df6dfa0:s1 -> Node0x56019df72d20;
+	Node0x56019df72cd0 [shape=record,label="{list.c:310:}"];
+	Node0x56019df72cd0 -> Node0x56019df71f70;
+	Node0x56019df72d20 [shape=record,label="{list.c:311:|{<s0>T|<s1>F}}"];
+	Node0x56019df72d20:s0 -> Node0x56019df73cb0;
+	Node0x56019df72d20:s1 -> Node0x56019df73d00;
+	Node0x56019df73cb0 [shape=record,label="{list.c:315:}"];
+	Node0x56019df73cb0 -> Node0x56019df71f70;
+	Node0x56019df73d00 [shape=record,label="{list.c:319:}"];
+	Node0x56019df73d00 -> Node0x56019df71f70;
+	Node0x56019df71f70 [shape=record,label="{list.c:325:}"];
+}

@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlCopyPropList' function" {
+	label="CFG for 'xmlCopyPropList' function";
+
+	Node0x5627b44b3d90 [shape=record,label="{tree.c:4127:|{<s0>T|<s1>F}}"];
+	Node0x5627b44b3d90:s0 -> Node0x5627b44c1390;
+	Node0x5627b44b3d90:s1 -> Node0x5627b44c1340;
+	Node0x5627b44c1390 [shape=record,label="{tree.c:4131:|{<s0>T|<s1>F}}"];
+	Node0x5627b44c1390:s0 -> Node0x5627b44c12f0;
+	Node0x5627b44c1390:s1 -> Node0x5627b44c1340;
+	Node0x5627b44c12f0 [shape=record,label="{tree.c:4132:}"];
+	Node0x5627b44c12f0 -> Node0x5627b44c0170;
+	Node0x5627b44c1340 [shape=record,label="{tree.c:4133:}"];
+	Node0x5627b44c1340 -> Node0x5627b44c1ab0;
+	Node0x5627b44c1ab0 [shape=record,label="{tree.c:4133:|{<s0>T|<s1>F}}"];
+	Node0x5627b44c1ab0:s0 -> Node0x5627b44c1e70;
+	Node0x5627b44c1ab0:s1 -> Node0x5627b44c1c90;
+	Node0x5627b44c1e70 [shape=record,label="{tree.c:4134:|{<s0>T|<s1>F}}"];
+	Node0x5627b44c1e70:s0 -> Node0x5627b44c2170;
+	Node0x5627b44c1e70:s1 -> Node0x5627b44c21c0;
+	Node0x5627b44c2170 [shape=record,label="{tree.c:4136:}"];
+	Node0x5627b44c2170 -> Node0x5627b44c0170;
+	Node0x5627b44c21c0 [shape=record,label="{tree.c:4137:|{<s0>T|<s1>F}}"];
+	Node0x5627b44c21c0:s0 -> Node0x5627b44c2620;
+	Node0x5627b44c21c0:s1 -> Node0x5627b44c26c0;
+	Node0x5627b44c2620 [shape=record,label="{tree.c:4138:}"];
+	Node0x5627b44c2620 -> Node0x5627b44c2670;
+	Node0x5627b44c26c0 [shape=record,label="{tree.c:4140:}"];
+	Node0x5627b44c26c0 -> Node0x5627b44c2670;
+	Node0x5627b44c2670 [shape=record,label="{tree.c:4144:}"];
+	Node0x5627b44c2670 -> Node0x5627b44c1ab0;
+	Node0x5627b44c1c90 [shape=record,label="{tree.c:4146:}"];
+	Node0x5627b44c1c90 -> Node0x5627b44c0170;
+	Node0x5627b44c0170 [shape=record,label="{tree.c:4147:}"];
+}

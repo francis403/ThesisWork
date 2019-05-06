@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlXPathFreeNodeSetList' function" {
+	label="CFG for 'xmlXPathFreeNodeSetList' function";
+
+	Node0x55e6b2595530 [shape=record,label="{xpath.c:4452:|{<s0>T|<s1>F}}"];
+	Node0x55e6b2595530 -> Node0x55e6b2595000;
+	Node0x55e6b2595530 -> Node0x55e6b25949f0;
+	Node0x55e6b2595000 [shape=record,label="{xpath.c:4453:}"];
+	Node0x55e6b2595000 -> Node0x55e6b2596d80;
+	Node0x55e6b25949f0 [shape=record,label="{xpath.c:4457:}"];
+	Node0x55e6b25949f0 -> Node0x55e6b2596d80;
+	Node0x55e6b2596d80 [shape=record,label="{xpath.c:4458:}"];
+}

@@ -1,0 +1,48 @@
+digraph "CFG for 'xmlStreamPop' function" {
+	label="CFG for 'xmlStreamPop' function";
+
+	Node0x55aa3af7fca0 [shape=record,label="{pattern.c:2281:|{<s0>T|<s1>F}}"];
+	Node0x55aa3af7fca0:s0 -> Node0x55aa3b003510;
+	Node0x55aa3af7fca0:s1 -> Node0x55aa3b003560;
+	Node0x55aa3b003510 [shape=record,label="{pattern.c:2285:}"];
+	Node0x55aa3b003510 -> Node0x55aa3b002990;
+	Node0x55aa3b003560 [shape=record,label="{pattern.c:2286:}"];
+	Node0x55aa3b003560 -> Node0x55aa3b0039b0;
+	Node0x55aa3b0039b0 [shape=record,label="{pattern.c:2286:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b0039b0:s0 -> Node0x55aa3b003d70;
+	Node0x55aa3b0039b0:s1 -> Node0x55aa3b003b90;
+	Node0x55aa3b003d70 [shape=record,label="{pattern.c:2290:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b003d70:s0 -> Node0x55aa3b003f20;
+	Node0x55aa3b003d70:s1 -> Node0x55aa3b003f70;
+	Node0x55aa3b003f20 [shape=record,label="{pattern.c:2291:}"];
+	Node0x55aa3b003f20 -> Node0x55aa3b003f70;
+	Node0x55aa3b003f70 [shape=record,label="{pattern.c:2298:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b003f70:s0 -> Node0x55aa3b0045a0;
+	Node0x55aa3b003f70:s1 -> Node0x55aa3b0045f0;
+	Node0x55aa3b0045a0 [shape=record,label="{pattern.c:2299:}"];
+	Node0x55aa3b0045a0 -> Node0x55aa3b0045f0;
+	Node0x55aa3b0045f0 [shape=record,label="{pattern.c:2303:}"];
+	Node0x55aa3b0045f0 -> Node0x55aa3b0052a0;
+	Node0x55aa3b0052a0 [shape=record,label="{pattern.c:2303:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b0052a0:s0 -> Node0x55aa3b005580;
+	Node0x55aa3b0052a0:s1 -> Node0x55aa3b004960;
+	Node0x55aa3b005580 [shape=record,label="{pattern.c:2305:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b005580:s0 -> Node0x55aa3b005db0;
+	Node0x55aa3b005580:s1 -> Node0x55aa3b005e00;
+	Node0x55aa3b005db0 [shape=record,label="{pattern.c:2307:}"];
+	Node0x55aa3b005db0 -> Node0x55aa3b005e00;
+	Node0x55aa3b005e00 [shape=record,label="{pattern.c:2308:|{<s0>T|<s1>F}}"];
+	Node0x55aa3b005e00:s0 -> Node0x55aa3b006600;
+	Node0x55aa3b005e00:s1 -> Node0x55aa3b006650;
+	Node0x55aa3b006600 [shape=record,label="{pattern.c:2309:}"];
+	Node0x55aa3b006600 -> Node0x55aa3b004960;
+	Node0x55aa3b006650 [shape=record,label="{pattern.c:2310:}"];
+	Node0x55aa3b006650 -> Node0x55aa3b0054f0;
+	Node0x55aa3b0054f0 [shape=record,label="{pattern.c:2303:}"];
+	Node0x55aa3b0054f0 -> Node0x55aa3b0052a0;
+	Node0x55aa3b004960 [shape=record,label="{pattern.c:2311:}"];
+	Node0x55aa3b004960 -> Node0x55aa3b0039b0;
+	Node0x55aa3b003b90 [shape=record,label="{pattern.c:2313:}"];
+	Node0x55aa3b003b90 -> Node0x55aa3b002990;
+	Node0x55aa3b002990 [shape=record,label="{pattern.c:2314:}"];
+}

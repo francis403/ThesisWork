@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathOrderDocElems' function" {
+	label="CFG for 'libxml_xmlXPathOrderDocElems' function";
+
+	Node0x55d6cc39b080 [shape=record,label="{libxml2-py.c:14074:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc39b080:s0 -> Node0x55d6cc39e640;
+	Node0x55d6cc39b080:s1 -> Node0x55d6cc39e5f0;
+	Node0x55d6cc39e5f0 [shape=record,label="{libxml2-py.c:14081:}"];
+	Node0x55d6cc39e5f0 -> Node0x55d6cc39ada0;
+	Node0x55d6cc39e640 [shape=record,label="{libxml2-py.c:14082:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc39e640:s0 -> Node0x55d6cc39ee30;
+	Node0x55d6cc39e640:s1 -> Node0x55d6cc39ee80;
+	Node0x55d6cc39ee30 [shape=record,label="{libxml2-py.c:14082:}"];
+	Node0x55d6cc39ee30 -> Node0x55d6cc39eed0;
+	Node0x55d6cc39ee80 [shape=record,label="{libxml2-py.c:14082:}"];
+	Node0x55d6cc39ee80 -> Node0x55d6cc39eed0;
+	Node0x55d6cc39eed0 [shape=record,label="{libxml2-py.c:14082:}"];
+	Node0x55d6cc39eed0 -> Node0x55d6cc39ada0;
+	Node0x55d6cc39ada0 [shape=record,label="{libxml2-py.c:14087:}"];
+}

@@ -1,0 +1,12 @@
+digraph "CFG for 'xmlSchemaIDCFreeIDCTable' function" {
+	label="CFG for 'xmlSchemaIDCFreeIDCTable' function";
+
+	Node0x558353cc4c90 [shape=record,label="{xmlschemas.c:22303:}"];
+	Node0x558353cc4c90 -> Node0x558353cc5510;
+	Node0x558353cc5510 [shape=record,label="{xmlschemas.c:22307:|{<s0>T|<s1>F}}"];
+	Node0x558353cc5510:s0 -> Node0x558353cc5910;
+	Node0x558353cc5510:s1 -> Node0x558353cc5730;
+	Node0x558353cc5910 [shape=record,label="{xmlschemas.c:22308:}"];
+	Node0x558353cc5910 -> Node0x558353cc5510;
+	Node0x558353cc5730 [shape=record,label="{xmlschemas.c:22312:}"];
+}

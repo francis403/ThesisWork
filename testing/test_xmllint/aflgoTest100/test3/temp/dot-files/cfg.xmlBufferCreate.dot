@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlBufferCreate' function" {
+	label="CFG for 'xmlBufferCreate' function";
+
+	Node0x5627b469a5f0 [shape=record,label="{tree.c:7020:|{<s0>T|<s1>F}}"];
+	Node0x5627b469a5f0 -> Node0x5627b469f660;
+	Node0x5627b469a5f0 -> Node0x5627b469f6b0;
+	Node0x5627b469f660 [shape=record,label="{tree.c:7024:}"];
+	Node0x5627b469f660 -> Node0x5627b469eb80;
+	Node0x5627b469f6b0 [shape=record,label="{tree.c:7027:|{<s0>T|<s1>F}}"];
+	Node0x5627b469f6b0 -> Node0x5627b46a1660;
+	Node0x5627b469f6b0 -> Node0x5627b46a16b0;
+	Node0x5627b46a1660 [shape=record,label="{tree.c:7032:}"];
+	Node0x5627b46a1660 -> Node0x5627b469eb80;
+	Node0x5627b46a16b0 [shape=record,label="{tree.c:7036:}"];
+	Node0x5627b46a16b0 -> Node0x5627b469eb80;
+	Node0x5627b469eb80 [shape=record,label="{tree.c:7039:}"];
+}

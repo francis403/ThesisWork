@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlSchematronPErr' function" {
+	label="CFG for 'xmlSchematronPErr' function";
+
+	Node0x5626a0bed7d0 [shape=record,label="{schematron.c:249:|{<s0>T|<s1>F}}"];
+	Node0x5626a0bed7d0:s0 -> Node0x5626a0cb0990;
+	Node0x5626a0bed7d0:s1 -> Node0x5626a0cb09e0;
+	Node0x5626a0cb0990 [shape=record,label="{schematron.c:257:}"];
+	Node0x5626a0cb0990 -> Node0x5626a0cb09e0;
+	Node0x5626a0cb09e0 [shape=record,label="{schematron.c:262:}"];
+}

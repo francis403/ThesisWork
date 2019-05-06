@@ -1,0 +1,12 @@
+digraph "CFG for 'hasExternalSubsetDebug' function" {
+	label="CFG for 'hasExternalSubsetDebug' function";
+
+	Node0x55c15e11c410 [shape=record,label="{xmllint.c:920:|{<s0>T|<s1>F}}"];
+	Node0x55c15e11c410:s0 -> Node0x55c15e11d9b0;
+	Node0x55c15e11c410:s1 -> Node0x55c15e11da00;
+	Node0x55c15e11d9b0 [shape=record,label="{xmllint.c:924:}"];
+	Node0x55c15e11d9b0 -> Node0x55c15e11d040;
+	Node0x55c15e11da00 [shape=record,label="{xmllint.c:925:}"];
+	Node0x55c15e11da00 -> Node0x55c15e11d040;
+	Node0x55c15e11d040 [shape=record,label="{xmllint.c:927:}"];
+}

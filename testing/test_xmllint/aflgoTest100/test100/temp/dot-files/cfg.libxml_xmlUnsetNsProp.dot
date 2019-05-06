@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_xmlUnsetNsProp' function" {
+	label="CFG for 'libxml_xmlUnsetNsProp' function";
+
+	Node0x55d6cc1d9000 [shape=record,label="{libxml2-py.c:12188:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc1d9000:s0 -> Node0x55d6cc1dcc10;
+	Node0x55d6cc1d9000:s1 -> Node0x55d6cc1dcbc0;
+	Node0x55d6cc1dcbc0 [shape=record,label="{libxml2-py.c:12198:}"];
+	Node0x55d6cc1dcbc0 -> Node0x55d6cc1d9300;
+	Node0x55d6cc1dcc10 [shape=record,label="{libxml2-py.c:12199:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc1dcc10:s0 -> Node0x55d6cc1dd4e0;
+	Node0x55d6cc1dcc10:s1 -> Node0x55d6cc1dd530;
+	Node0x55d6cc1dd4e0 [shape=record,label="{libxml2-py.c:12199:}"];
+	Node0x55d6cc1dd4e0 -> Node0x55d6cc1dd580;
+	Node0x55d6cc1dd530 [shape=record,label="{libxml2-py.c:12199:}"];
+	Node0x55d6cc1dd530 -> Node0x55d6cc1dd580;
+	Node0x55d6cc1dd580 [shape=record,label="{libxml2-py.c:12199:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc1dd580:s0 -> Node0x55d6cc1ddb10;
+	Node0x55d6cc1dd580:s1 -> Node0x55d6cc1ddb60;
+	Node0x55d6cc1ddb10 [shape=record,label="{libxml2-py.c:12200:}"];
+	Node0x55d6cc1ddb10 -> Node0x55d6cc1ddbb0;
+	Node0x55d6cc1ddb60 [shape=record,label="{libxml2-py.c:12200:}"];
+	Node0x55d6cc1ddb60 -> Node0x55d6cc1ddbb0;
+	Node0x55d6cc1ddbb0 [shape=record,label="{libxml2-py.c:12200:}"];
+	Node0x55d6cc1ddbb0 -> Node0x55d6cc1d9300;
+	Node0x55d6cc1d9300 [shape=record,label="{libxml2-py.c:12205:}"];
+}

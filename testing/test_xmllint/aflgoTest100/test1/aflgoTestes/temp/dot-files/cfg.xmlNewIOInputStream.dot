@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlNewIOInputStream' function" {
+	label="CFG for 'xmlNewIOInputStream' function";
+
+	Node0x5585b3d853f0 [shape=record,label="{parserInternals.c:1398:|{<s0>T|<s1>F}}"];
+	Node0x5585b3d853f0 -> Node0x5585b3d86870;
+	Node0x5585b3d853f0 -> Node0x5585b3d868c0;
+	Node0x5585b3d86870 [shape=record,label="{parserInternals.c:1402:}"];
+	Node0x5585b3d86870 -> Node0x5585b3d859f0;
+	Node0x5585b3d868c0 [shape=record,label="{parserInternals.c:1403:|{<s0>T|<s1>F}}"];
+	Node0x5585b3d868c0 -> Node0x5585b3d86d20;
+	Node0x5585b3d868c0 -> Node0x5585b3d86d70;
+	Node0x5585b3d86d20 [shape=record,label="{parserInternals.c:1404:}"];
+	Node0x5585b3d86d20 -> Node0x5585b3d86d70;
+	Node0x5585b3d86d70 [shape=record,label="{parserInternals.c:1405:|{<s0>T|<s1>F}}"];
+	Node0x5585b3d86d70 -> Node0x5585b3d87c50;
+	Node0x5585b3d86d70 -> Node0x5585b3d87ca0;
+	Node0x5585b3d87c50 [shape=record,label="{parserInternals.c:1407:}"];
+	Node0x5585b3d87c50 -> Node0x5585b3d859f0;
+	Node0x5585b3d87ca0 [shape=record,label="{parserInternals.c:1409:|{<s0>T|<s1>F}}"];
+	Node0x5585b3d87ca0 -> Node0x5585b3d893e0;
+	Node0x5585b3d87ca0 -> Node0x5585b3d89430;
+	Node0x5585b3d893e0 [shape=record,label="{parserInternals.c:1414:}"];
+	Node0x5585b3d893e0 -> Node0x5585b3d89430;
+	Node0x5585b3d89430 [shape=record,label="{parserInternals.c:1417:}"];
+	Node0x5585b3d89430 -> Node0x5585b3d859f0;
+	Node0x5585b3d859f0 [shape=record,label="{parserInternals.c:1418:}"];
+}

@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlXPathBooleanFunction' function" {
+	label="CFG for 'xmlXPathBooleanFunction' function";
+
+	Node0x5621ee9d9160 [shape=record,label="{xpath.c:9454:|{<s0>T|<s1>F}}"];
+	Node0x5621ee9d9160 -> Node0x5621ee9df330;
+	Node0x5621ee9d9160 -> Node0x5621ee9e59e0;
+	Node0x5621ee9df330 [shape=record,label="{xpath.c:9457:}"];
+	Node0x5621ee9df330 -> Node0x5621ee9e4ee0;
+	Node0x5621ee9e59e0 [shape=record,label="{xpath.c:9457:|{<s0>T|<s1>F}}"];
+	Node0x5621ee9e59e0 -> Node0x5621ee9e5c70;
+	Node0x5621ee9e59e0 -> Node0x5621ee9e5cc0;
+	Node0x5621ee9e5c70 [shape=record,label="{xpath.c:9457:}"];
+	Node0x5621ee9e5c70 -> Node0x5621ee9e4ee0;
+	Node0x5621ee9e5cc0 [shape=record,label="{xpath.c:9457:|{<s0>T|<s1>F}}"];
+	Node0x5621ee9e5cc0 -> Node0x5621ee9e6020;
+	Node0x5621ee9e5cc0 -> Node0x5621ee9e6070;
+	Node0x5621ee9e6020 [shape=record,label="{xpath.c:9457:}"];
+	Node0x5621ee9e6020 -> Node0x5621ee9e4ee0;
+	Node0x5621ee9e6070 [shape=record,label="{xpath.c:9458:|{<s0>T|<s1>F}}"];
+	Node0x5621ee9e6070 -> Node0x5621ee9e6800;
+	Node0x5621ee9e6070 -> Node0x5621ee9e6850;
+	Node0x5621ee9e6800 [shape=record,label="{xpath.c:9459:}"];
+	Node0x5621ee9e6800 -> Node0x5621ee9e4ee0;
+	Node0x5621ee9e6850 [shape=record,label="{xpath.c:9460:}"];
+	Node0x5621ee9e6850 -> Node0x5621ee9e4ee0;
+	Node0x5621ee9e4ee0 [shape=record,label="{xpath.c:9462:}"];
+}

@@ -1,0 +1,29 @@
+digraph "CFG for 'xmlAddDocEntity' function" {
+	label="CFG for 'xmlAddDocEntity' function";
+
+	Node0x55de64c95150 [shape=record,label="{entities.c:355:|{<s0>T|<s1>F}}"];
+	Node0x55de64c95150:s0 -> Node0x55de64c98ff0;
+	Node0x55de64c95150:s1 -> Node0x55de64c99040;
+	Node0x55de64c98ff0 [shape=record,label="{entities.c:362:}"];
+	Node0x55de64c98ff0 -> Node0x55de64c97600;
+	Node0x55de64c99040 [shape=record,label="{entities.c:366:|{<s0>T|<s1>F}}"];
+	Node0x55de64c99040:s0 -> Node0x55de64c99720;
+	Node0x55de64c99040:s1 -> Node0x55de64c99770;
+	Node0x55de64c99720 [shape=record,label="{entities.c:367:}"];
+	Node0x55de64c99720 -> Node0x55de64c97600;
+	Node0x55de64c99770 [shape=record,label="{entities.c:371:|{<s0>T|<s1>F}}"];
+	Node0x55de64c99770:s0 -> Node0x55de64c9a700;
+	Node0x55de64c99770:s1 -> Node0x55de64c9a750;
+	Node0x55de64c9a700 [shape=record,label="{entities.c:373:}"];
+	Node0x55de64c9a700 -> Node0x55de64c97600;
+	Node0x55de64c9a750 [shape=record,label="{entities.c:378:|{<s0>T|<s1>F}}"];
+	Node0x55de64c9a750:s0 -> Node0x55de64c9b180;
+	Node0x55de64c9a750:s1 -> Node0x55de64c9b220;
+	Node0x55de64c9b180 [shape=record,label="{entities.c:381:}"];
+	Node0x55de64c9b180 -> Node0x55de64c9b1d0;
+	Node0x55de64c9b220 [shape=record,label="{entities.c:383:}"];
+	Node0x55de64c9b220 -> Node0x55de64c9b1d0;
+	Node0x55de64c9b1d0 [shape=record,label="{entities.c:387:}"];
+	Node0x55de64c9b1d0 -> Node0x55de64c97600;
+	Node0x55de64c97600 [shape=record,label="{entities.c:388:}"];
+}

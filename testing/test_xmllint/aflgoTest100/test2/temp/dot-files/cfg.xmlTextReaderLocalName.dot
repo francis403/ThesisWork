@@ -1,0 +1,40 @@
+digraph "CFG for 'xmlTextReaderLocalName' function" {
+	label="CFG for 'xmlTextReaderLocalName' function";
+
+	Node0x5619bd5c75b0 [shape=record,label="{xmlreader.c:3118:|{<s0>T|<s1>F}}"];
+	Node0x5619bd5c75b0 -> Node0x5619bd1cd710;
+	Node0x5619bd5c75b0 -> Node0x5619bd1cd7b0;
+	Node0x5619bd1cd7b0 [shape=record,label="{xmlreader.c:3120:|{<s0>T|<s1>F}}"];
+	Node0x5619bd1cd7b0 -> Node0x5619bd1cd710;
+	Node0x5619bd1cd7b0 -> Node0x5619bd1cd760;
+	Node0x5619bd1cd710 [shape=record,label="{xmlreader.c:3121:}"];
+	Node0x5619bd1cd710 -> Node0x5619bd5d1750;
+	Node0x5619bd1cd760 [shape=record,label="{xmlreader.c:3122:|{<s0>T|<s1>F}}"];
+	Node0x5619bd1cd760 -> Node0x5619bd548760;
+	Node0x5619bd1cd760 -> Node0x5619bd548800;
+	Node0x5619bd548760 [shape=record,label="{xmlreader.c:3123:}"];
+	Node0x5619bd548760 -> Node0x5619bd5487b0;
+	Node0x5619bd548800 [shape=record,label="{xmlreader.c:3125:}"];
+	Node0x5619bd548800 -> Node0x5619bd5487b0;
+	Node0x5619bd5487b0 [shape=record,label="{xmlreader.c:3126:|{<s0>T|<s1>F}}"];
+	Node0x5619bd5487b0 -> Node0x5619bd549070;
+	Node0x5619bd5487b0 -> Node0x5619bd5490c0;
+	Node0x5619bd549070 [shape=record,label="{xmlreader.c:3127:|{<s0>T|<s1>F}}"];
+	Node0x5619bd549070 -> Node0x5619bd549950;
+	Node0x5619bd549070 -> Node0x5619bd5499f0;
+	Node0x5619bd549950 [shape=record,label="{xmlreader.c:3129:}"];
+	Node0x5619bd549950 -> Node0x5619bd5d1750;
+	Node0x5619bd5499f0 [shape=record,label="{xmlreader.c:3131:}"];
+	Node0x5619bd5499f0 -> Node0x5619bd5d1750;
+	Node0x5619bd5490c0 [shape=record,label="{xmlreader.c:3133:|{<s0>T|<s1>F}}"];
+	Node0x5619bd5490c0 -> Node0x5619bd5da6d0;
+	Node0x5619bd5490c0 -> Node0x5619bd5da680;
+	Node0x5619bd5da6d0 [shape=record,label="{xmlreader.c:3134:|{<s0>T|<s1>F}}"];
+	Node0x5619bd5da6d0 -> Node0x5619bd5499a0;
+	Node0x5619bd5da6d0 -> Node0x5619bd5da680;
+	Node0x5619bd5499a0 [shape=record,label="{xmlreader.c:3135:}"];
+	Node0x5619bd5499a0 -> Node0x5619bd5d1750;
+	Node0x5619bd5da680 [shape=record,label="{xmlreader.c:3136:}"];
+	Node0x5619bd5da680 -> Node0x5619bd5d1750;
+	Node0x5619bd5d1750 [shape=record,label="{xmlreader.c:3137:}"];
+}

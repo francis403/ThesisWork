@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlErrorGetCode' function" {
+	label="CFG for 'libxml_xmlErrorGetCode' function";
+
+	Node0x55f930e5f1d0 [shape=record,label="{libxml2-py.c:2542:|{<s0>T|<s1>F}}"];
+	Node0x55f930e5f1d0:s0 -> Node0x55f930e64080;
+	Node0x55f930e5f1d0:s1 -> Node0x55f930e64030;
+	Node0x55f930e64030 [shape=record,label="{libxml2-py.c:2549:}"];
+	Node0x55f930e64030 -> Node0x55f930e5f020;
+	Node0x55f930e64080 [shape=record,label="{libxml2-py.c:2550:|{<s0>T|<s1>F}}"];
+	Node0x55f930e64080:s0 -> Node0x55f930e64860;
+	Node0x55f930e64080:s1 -> Node0x55f930e648b0;
+	Node0x55f930e64860 [shape=record,label="{libxml2-py.c:2550:}"];
+	Node0x55f930e64860 -> Node0x55f930e64900;
+	Node0x55f930e648b0 [shape=record,label="{libxml2-py.c:2550:}"];
+	Node0x55f930e648b0 -> Node0x55f930e64900;
+	Node0x55f930e64900 [shape=record,label="{libxml2-py.c:2550:}"];
+	Node0x55f930e64900 -> Node0x55f930e5f020;
+	Node0x55f930e5f020 [shape=record,label="{libxml2-py.c:2555:}"];
+}

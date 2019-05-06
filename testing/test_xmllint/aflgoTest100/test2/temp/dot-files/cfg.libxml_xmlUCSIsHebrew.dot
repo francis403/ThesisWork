@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlUCSIsHebrew' function" {
+	label="CFG for 'libxml_xmlUCSIsHebrew' function";
+
+	Node0x55d6cc0cded0 [shape=record,label="{libxml2-py.c:10523:|{<s0>T|<s1>F}}"];
+	Node0x55d6cc0cded0:s0 -> Node0x55d6cc0d0e20;
+	Node0x55d6cc0cded0:s1 -> Node0x55d6cc0d0dd0;
+	Node0x55d6cc0d0dd0 [shape=record,label="{libxml2-py.c:10529:}"];
+	Node0x55d6cc0d0dd0 -> Node0x55d6cc0ce1d0;
+	Node0x55d6cc0d0e20 [shape=record,label="{libxml2-py.c:10531:}"];
+	Node0x55d6cc0d0e20 -> Node0x55d6cc0ce1d0;
+	Node0x55d6cc0ce1d0 [shape=record,label="{libxml2-py.c:10534:}"];
+}

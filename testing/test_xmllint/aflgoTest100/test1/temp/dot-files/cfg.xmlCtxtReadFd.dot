@@ -1,0 +1,27 @@
+digraph "CFG for 'xmlCtxtReadFd' function" {
+	label="CFG for 'xmlCtxtReadFd' function";
+
+	Node0x55d73b98da90 [shape=record,label="{parser.c:15506:|{<s0>T|<s1>F}}"];
+	Node0x55d73b98da90 -> Node0x55d73b98f700;
+	Node0x55d73b98da90 -> Node0x55d73b98f750;
+	Node0x55d73b98f700 [shape=record,label="{parser.c:15513:}"];
+	Node0x55d73b98f700 -> Node0x55d73b98dc80;
+	Node0x55d73b98f750 [shape=record,label="{parser.c:15514:|{<s0>T|<s1>F}}"];
+	Node0x55d73b98f750 -> Node0x55d73b98fbb0;
+	Node0x55d73b98f750 -> Node0x55d73b98fc00;
+	Node0x55d73b98fbb0 [shape=record,label="{parser.c:15515:}"];
+	Node0x55d73b98fbb0 -> Node0x55d73b98dc80;
+	Node0x55d73b98fc00 [shape=record,label="{parser.c:15516:|{<s0>T|<s1>F}}"];
+	Node0x55d73b98fc00 -> Node0x55d73b990420;
+	Node0x55d73b98fc00 -> Node0x55d73b990470;
+	Node0x55d73b990420 [shape=record,label="{parser.c:15523:}"];
+	Node0x55d73b990420 -> Node0x55d73b98dc80;
+	Node0x55d73b990470 [shape=record,label="{parser.c:15524:|{<s0>T|<s1>F}}"];
+	Node0x55d73b990470 -> Node0x55d73b990d90;
+	Node0x55d73b990470 -> Node0x55d73b990de0;
+	Node0x55d73b990d90 [shape=record,label="{parser.c:15527:}"];
+	Node0x55d73b990d90 -> Node0x55d73b98dc80;
+	Node0x55d73b990de0 [shape=record,label="{parser.c:15530:}"];
+	Node0x55d73b990de0 -> Node0x55d73b98dc80;
+	Node0x55d73b98dc80 [shape=record,label="{parser.c:15532:}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlPrintURI' function" {
+	label="CFG for 'xmlPrintURI' function";
+
+	Node0x5561d67bb020 [shape=record,label="{uri.c:1332:|{<s0>T|<s1>F}}"];
+	Node0x5561d67bb020:s0 -> Node0x5561d67bf6f0;
+	Node0x5561d67bb020:s1 -> Node0x5561d67bf740;
+	Node0x5561d67bf6f0 [shape=record,label="{uri.c:1337:}"];
+	Node0x5561d67bf6f0 -> Node0x5561d67bf740;
+	Node0x5561d67bf740 [shape=record,label="{uri.c:1340:}"];
+}

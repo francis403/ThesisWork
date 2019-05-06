@@ -1,0 +1,34 @@
+digraph "CFG for 'PUSH_NEXT' function" {
+	label="CFG for 'PUSH_NEXT' function";
+
+	Node0x5621eebd9100 [shape=record,label="{timsort.h:487:|{<s0>T|<s1>F}}"];
+	Node0x5621eebd9100:s0 -> Node0x5621eebde580;
+	Node0x5621eebd9100:s1 -> Node0x5621eebde5d0;
+	Node0x5621eebde580 [shape=record,label="{timsort.h:498:}"];
+	Node0x5621eebde580 -> Node0x5621eebde5d0;
+	Node0x5621eebde5d0 [shape=record,label="{timsort.h:501:|{<s0>T|<s1>F}}"];
+	Node0x5621eebde5d0:s0 -> Node0x5621eebdef90;
+	Node0x5621eebde5d0:s1 -> Node0x5621eebdefe0;
+	Node0x5621eebdef90 [shape=record,label="{timsort.h:502:}"];
+	Node0x5621eebdef90 -> Node0x5621eebdefe0;
+	Node0x5621eebdefe0 [shape=record,label="{timsort.h:506:|{<s0>T|<s1>F}}"];
+	Node0x5621eebdefe0:s0 -> Node0x5621eebe07d0;
+	Node0x5621eebdefe0:s1 -> Node0x5621eebe0820;
+	Node0x5621eebe07d0 [shape=record,label="{timsort.h:513:}"];
+	Node0x5621eebe07d0 -> Node0x5621eebe0c60;
+	Node0x5621eebe0c60 [shape=record,label="{timsort.h:513:|{<s0>T|<s1>F}}"];
+	Node0x5621eebe0c60:s0 -> Node0x5621eebe1050;
+	Node0x5621eebe0c60:s1 -> Node0x5621eebe0e20;
+	Node0x5621eebe1050 [shape=record,label="{timsort.h:514:}"];
+	Node0x5621eebe1050 -> Node0x5621eebe0c60;
+	Node0x5621eebe0e20 [shape=record,label="{timsort.h:519:|{<s0>T|<s1>F}}"];
+	Node0x5621eebe0e20:s0 -> Node0x5621eebe2400;
+	Node0x5621eebe0e20:s1 -> Node0x5621eebe2450;
+	Node0x5621eebe2400 [shape=record,label="{timsort.h:520:}"];
+	Node0x5621eebe2400 -> Node0x5621eebe2450;
+	Node0x5621eebe2450 [shape=record,label="{timsort.h:524:}"];
+	Node0x5621eebe2450 -> Node0x5621eebd9150;
+	Node0x5621eebe0820 [shape=record,label="{timsort.h:527:}"];
+	Node0x5621eebe0820 -> Node0x5621eebd9150;
+	Node0x5621eebd9150 [shape=record,label="{timsort.h:528:}"];
+}

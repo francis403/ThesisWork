@@ -1,0 +1,20 @@
+digraph "CFG for 'xmlNewCatalog' function" {
+	label="CFG for 'xmlNewCatalog' function";
+
+	Node0x55f367750ab0 [shape=record,label="{catalog.c:3025:|{<s0>T|<s1>F}}"];
+	Node0x55f367750ab0 -> Node0x55f36772c1e0;
+	Node0x55f367750ab0 -> Node0x55f36772c280;
+	Node0x55f36772c1e0 [shape=record,label="{catalog.c:3030:|{<s0>T|<s1>F}}"];
+	Node0x55f36772c1e0 -> Node0x55f367750860;
+	Node0x55f36772c1e0 -> Node0x55f367750790;
+	Node0x55f367750860 [shape=record,label="{catalog.c:3031:|{<s0>T|<s1>F}}"];
+	Node0x55f367750860 -> Node0x55f36772c750;
+	Node0x55f367750860 -> Node0x55f367750790;
+	Node0x55f36772c750 [shape=record,label="{catalog.c:3032:}"];
+	Node0x55f36772c750 -> Node0x55f367750790;
+	Node0x55f367750790 [shape=record,label="{catalog.c:3033:}"];
+	Node0x55f367750790 -> Node0x55f36772c230;
+	Node0x55f36772c280 [shape=record,label="{catalog.c:3035:}"];
+	Node0x55f36772c280 -> Node0x55f36772c230;
+	Node0x55f36772c230 [shape=record,label="{catalog.c:3036:}"];
+}

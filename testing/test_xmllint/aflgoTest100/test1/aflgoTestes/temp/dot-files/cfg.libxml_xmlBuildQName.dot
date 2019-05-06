@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlBuildQName' function" {
+	label="CFG for 'libxml_xmlBuildQName' function";
+
+	Node0x55f930bab200 [shape=record,label="{libxml2-py.c:1192:|{<s0>T|<s1>F}}"];
+	Node0x55f930bab200:s0 -> Node0x55f930d0a080;
+	Node0x55f930bab200:s1 -> Node0x55f930d0a030;
+	Node0x55f930d0a030 [shape=record,label="{libxml2-py.c:1201:}"];
+	Node0x55f930d0a030 -> Node0x55f930d00820;
+	Node0x55f930d0a080 [shape=record,label="{libxml2-py.c:1203:}"];
+	Node0x55f930d0a080 -> Node0x55f930d00820;
+	Node0x55f930d00820 [shape=record,label="{libxml2-py.c:1206:}"];
+}

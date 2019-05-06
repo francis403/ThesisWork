@@ -1,0 +1,24 @@
+digraph "CFG for 'xmlXPathIsInf' function" {
+	label="CFG for 'xmlXPathIsInf' function";
+
+	Node0x55e6b23e78c0 [shape=record,label="{xpath.c:526:|{<s0>T|<s1>F}}"];
+	Node0x55e6b23e78c0 -> Node0x55e6b23e87e0;
+	Node0x55e6b23e78c0 -> Node0x55e6b23e8830;
+	Node0x55e6b23e87e0 [shape=record,label="{xpath.c:528:|{<s0>T|<s1>F}}"];
+	Node0x55e6b23e87e0 -> Node0x55e6b23e0c20;
+	Node0x55e6b23e87e0 -> Node0x55e6b23e6350;
+	Node0x55e6b23e8830 [shape=record,label="{xpath.c:528:|{<s0>T|<s1>F}}"];
+	Node0x55e6b23e8830 -> Node0x55e6b23ea3b0;
+	Node0x55e6b23e8830 -> Node0x55e6b23ea400;
+	Node0x55e6b23ea3b0 [shape=record,label="{xpath.c:528:|{<s0>T|<s1>F}}"];
+	Node0x55e6b23ea3b0 -> Node0x55e6b23e0c20;
+	Node0x55e6b23ea3b0 -> Node0x55e6b23e6350;
+	Node0x55e6b23ea400 [shape=record,label="{xpath.c:528:|{<s0>T|<s1>F}}"];
+	Node0x55e6b23ea400 -> Node0x55e6b23e0c20;
+	Node0x55e6b23ea400 -> Node0x55e6b23e6350;
+	Node0x55e6b23e0c20 [shape=record,label="{xpath.c:528:}"];
+	Node0x55e6b23e0c20 -> Node0x55e6b23a7240;
+	Node0x55e6b23e6350 [shape=record,label="{xpath.c:528:}"];
+	Node0x55e6b23e6350 -> Node0x55e6b23a7240;
+	Node0x55e6b23a7240 [shape=record,label="{xpath.c:528:}"];
+}

@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlScanName' function" {
+	label="CFG for 'xmlScanName' function";
+
+	Node0x55f3b47c5f10 [shape=record,label="{legacy.c:591:|{<s0>T|<s1>F}}"];
+	Node0x55f3b47c5f10:s0 -> Node0x55f3b47c8990;
+	Node0x55f3b47c5f10:s1 -> Node0x55f3b47c8940;
+	Node0x55f3b47c8940 [shape=record,label="{legacy.c:596:}"];
+	Node0x55f3b47c8940 -> Node0x55f3b47c8990;
+	Node0x55f3b47c8990 [shape=record,label="{legacy.c:600:}"];
+}

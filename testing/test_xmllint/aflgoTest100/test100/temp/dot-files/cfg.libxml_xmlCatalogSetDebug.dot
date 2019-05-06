@@ -1,0 +1,12 @@
+digraph "CFG for 'libxml_xmlCatalogSetDebug' function" {
+	label="CFG for 'libxml_xmlCatalogSetDebug' function";
+
+	Node0x55d6cb80a310 [shape=record,label="{libxml2-py.c:1458:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb80a310:s0 -> Node0x55d6cb80d230;
+	Node0x55d6cb80a310:s1 -> Node0x55d6cb80d1e0;
+	Node0x55d6cb80d1e0 [shape=record,label="{libxml2-py.c:1464:}"];
+	Node0x55d6cb80d1e0 -> Node0x55d6cb80a5a0;
+	Node0x55d6cb80d230 [shape=record,label="{libxml2-py.c:1466:}"];
+	Node0x55d6cb80d230 -> Node0x55d6cb80a5a0;
+	Node0x55d6cb80a5a0 [shape=record,label="{libxml2-py.c:1469:}"];
+}

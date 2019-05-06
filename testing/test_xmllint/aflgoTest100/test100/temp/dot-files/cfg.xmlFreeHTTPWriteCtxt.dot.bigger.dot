@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlFreeHTTPWriteCtxt' function" {
+	label="CFG for 'xmlFreeHTTPWriteCtxt' function";
+
+	Node0x5635e0202f80 [shape=record,label="{xmlIO.c:1723:|{<s0>T|<s1>F}}"];
+	Node0x5635e0202f80:s0 -> Node0x5635e0202320;
+	Node0x5635e0202f80:s1 -> Node0x5635e0202c20;
+	Node0x5635e0202320 [shape=record,label="{xmlIO.c:1726:}"];
+	Node0x5635e0202320 -> Node0x5635e0202c20;
+	Node0x5635e0202c20 [shape=record,label="{xmlIO.c:1728:|{<s0>T|<s1>F}}"];
+	Node0x5635e0202c20:s0 -> Node0x5635e0203df0;
+	Node0x5635e0202c20:s1 -> Node0x5635e0203e40;
+	Node0x5635e0203df0 [shape=record,label="{xmlIO.c:1731:|{<s0>T|<s1>F}}"];
+	Node0x5635e0203df0:s0 -> Node0x5635e0204290;
+	Node0x5635e0203df0:s1 -> Node0x5635e0204330;
+	Node0x5635e0204290 [shape=record,label="{xmlIO.c:1732:}"];
+	Node0x5635e0204290 -> Node0x5635e02042e0;
+	Node0x5635e0204330 [shape=record,label="{xmlIO.c:1737:}"];
+	Node0x5635e0204330 -> Node0x5635e02042e0;
+	Node0x5635e02042e0 [shape=record,label="{xmlIO.c:1739:}"];
+	Node0x5635e02042e0 -> Node0x5635e0203e40;
+	Node0x5635e0203e40 [shape=record,label="{xmlIO.c:1741:}"];
+}

@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathBooleanFunction' function" {
+	label="CFG for 'libxml_xmlXPathBooleanFunction' function";
+
+	Node0x55f93179a910 [shape=record,label="{libxml2-py.c:12805:|{<s0>T|<s1>F}}"];
+	Node0x55f93179a910:s0 -> Node0x55f93179dbe0;
+	Node0x55f93179a910:s1 -> Node0x55f93179db90;
+	Node0x55f93179db90 [shape=record,label="{libxml2-py.c:12811:}"];
+	Node0x55f93179db90 -> Node0x55f93179aba0;
+	Node0x55f93179dbe0 [shape=record,label="{libxml2-py.c:12812:|{<s0>T|<s1>F}}"];
+	Node0x55f93179dbe0:s0 -> Node0x55f93179e440;
+	Node0x55f93179dbe0:s1 -> Node0x55f93179e490;
+	Node0x55f93179e440 [shape=record,label="{libxml2-py.c:12812:}"];
+	Node0x55f93179e440 -> Node0x55f93179e4e0;
+	Node0x55f93179e490 [shape=record,label="{libxml2-py.c:12812:}"];
+	Node0x55f93179e490 -> Node0x55f93179e4e0;
+	Node0x55f93179e4e0 [shape=record,label="{libxml2-py.c:12812:}"];
+	Node0x55f93179e4e0 -> Node0x55f93179aba0;
+	Node0x55f93179aba0 [shape=record,label="{libxml2-py.c:12817:}"];
+}

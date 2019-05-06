@@ -1,0 +1,39 @@
+digraph "CFG for 'xmlTextReaderGetRemainder' function" {
+	label="CFG for 'xmlTextReaderGetRemainder' function";
+
+	Node0x55e4490377b0 [shape=record,label="{xmlreader.c:2516:|{<s0>T|<s1>F}}"];
+	Node0x55e4490377b0:s0 -> Node0x55e4492c3e40;
+	Node0x55e4490377b0:s1 -> Node0x55e4490387c0;
+	Node0x55e4492c3e40 [shape=record,label="{xmlreader.c:2520:}"];
+	Node0x55e4492c3e40 -> Node0x55e4490379a0;
+	Node0x55e4490387c0 [shape=record,label="{xmlreader.c:2521:|{<s0>T|<s1>F}}"];
+	Node0x55e4490387c0:s0 -> Node0x55e449038c20;
+	Node0x55e4490387c0:s1 -> Node0x55e449038c70;
+	Node0x55e449038c20 [shape=record,label="{xmlreader.c:2522:}"];
+	Node0x55e449038c20 -> Node0x55e4490379a0;
+	Node0x55e449038c70 [shape=record,label="{xmlreader.c:2524:|{<s0>T|<s1>F}}"];
+	Node0x55e449038c70:s0 -> Node0x55e449039640;
+	Node0x55e449038c70:s1 -> Node0x55e449039690;
+	Node0x55e449039640 [shape=record,label="{xmlreader.c:2528:|{<s0>T|<s1>F}}"];
+	Node0x55e449039640:s0 -> Node0x55e449039da0;
+	Node0x55e449039640:s1 -> Node0x55e449039df0;
+	Node0x55e449039da0 [shape=record,label="{xmlreader.c:2530:|{<s0>T|<s1>F}}"];
+	Node0x55e449039da0:s0 -> Node0x55e44903a410;
+	Node0x55e449039da0:s1 -> Node0x55e44903a460;
+	Node0x55e44903a410 [shape=record,label="{xmlreader.c:2531:}"];
+	Node0x55e44903a410 -> Node0x55e44903a460;
+	Node0x55e44903a460 [shape=record,label="{xmlreader.c:2532:}"];
+	Node0x55e44903a460 -> Node0x55e449039df0;
+	Node0x55e449039df0 [shape=record,label="{xmlreader.c:2534:}"];
+	Node0x55e449039df0 -> Node0x55e449039690;
+	Node0x55e449039690 [shape=record,label="{xmlreader.c:2535:|{<s0>T|<s1>F}}"];
+	Node0x55e449039690:s0 -> Node0x55e44903b250;
+	Node0x55e449039690:s1 -> Node0x55e44903b2f0;
+	Node0x55e44903b250 [shape=record,label="{xmlreader.c:2536:}"];
+	Node0x55e44903b250 -> Node0x55e44903b2a0;
+	Node0x55e44903b2f0 [shape=record,label="{xmlreader.c:2546:}"];
+	Node0x55e44903b2f0 -> Node0x55e4490379a0;
+	Node0x55e44903b2a0 [shape=record,label="{xmlreader.c:2549:}"];
+	Node0x55e44903b2a0 -> Node0x55e4490379a0;
+	Node0x55e4490379a0 [shape=record,label="{xmlreader.c:2550:}"];
+}

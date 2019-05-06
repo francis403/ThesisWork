@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlListPushBack' function" {
+	label="CFG for 'xmlListPushBack' function";
+
+	Node0x56019df93d60 [shape=record,label="{list.c:574:|{<s0>T|<s1>F}}"];
+	Node0x56019df93d60:s0 -> Node0x56019df97010;
+	Node0x56019df93d60:s1 -> Node0x56019df97060;
+	Node0x56019df97010 [shape=record,label="{list.c:579:}"];
+	Node0x56019df97010 -> Node0x56019df96330;
+	Node0x56019df97060 [shape=record,label="{list.c:580:|{<s0>T|<s1>F}}"];
+	Node0x56019df97060:s0 -> Node0x56019df97780;
+	Node0x56019df97060:s1 -> Node0x56019df977d0;
+	Node0x56019df97780 [shape=record,label="{list.c:583:}"];
+	Node0x56019df97780 -> Node0x56019df96330;
+	Node0x56019df977d0 [shape=record,label="{list.c:587:}"];
+	Node0x56019df977d0 -> Node0x56019df96330;
+	Node0x56019df96330 [shape=record,label="{list.c:593:}"];
+}

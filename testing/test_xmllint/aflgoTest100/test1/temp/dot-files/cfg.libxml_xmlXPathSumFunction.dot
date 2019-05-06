@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathSumFunction' function" {
+	label="CFG for 'libxml_xmlXPathSumFunction' function";
+
+	Node0x55f93192d030 [shape=record,label="{libxml2-py.c:14508:|{<s0>T|<s1>F}}"];
+	Node0x55f93192d030:s0 -> Node0x55f9319302e0;
+	Node0x55f93192d030:s1 -> Node0x55f931930290;
+	Node0x55f931930290 [shape=record,label="{libxml2-py.c:14514:}"];
+	Node0x55f931930290 -> Node0x55f93192cd50;
+	Node0x55f9319302e0 [shape=record,label="{libxml2-py.c:14515:|{<s0>T|<s1>F}}"];
+	Node0x55f9319302e0:s0 -> Node0x55f931930b30;
+	Node0x55f9319302e0:s1 -> Node0x55f931930b80;
+	Node0x55f931930b30 [shape=record,label="{libxml2-py.c:14515:}"];
+	Node0x55f931930b30 -> Node0x55f931930bd0;
+	Node0x55f931930b80 [shape=record,label="{libxml2-py.c:14515:}"];
+	Node0x55f931930b80 -> Node0x55f931930bd0;
+	Node0x55f931930bd0 [shape=record,label="{libxml2-py.c:14515:}"];
+	Node0x55f931930bd0 -> Node0x55f93192cd50;
+	Node0x55f93192cd50 [shape=record,label="{libxml2-py.c:14520:}"];
+}

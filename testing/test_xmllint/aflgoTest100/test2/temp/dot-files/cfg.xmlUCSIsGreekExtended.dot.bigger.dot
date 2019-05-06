@@ -1,0 +1,10 @@
+digraph "CFG for 'xmlUCSIsGreekExtended' function" {
+	label="CFG for 'xmlUCSIsGreekExtended' function";
+
+	Node0x55ca9b20b900 [shape=record,label="{xmlunicode.c:1574:|{<s0>T|<s1>F}}"];
+	Node0x55ca9b20b900:s0 -> Node0x55ca9b20cf90;
+	Node0x55ca9b20b900:s1 -> Node0x55ca9b20cf40;
+	Node0x55ca9b20cf90 [shape=record,label="{xmlunicode.c:1575:}"];
+	Node0x55ca9b20cf90 -> Node0x55ca9b20cf40;
+	Node0x55ca9b20cf40 [shape=record,label="{xmlunicode.c:1575:}"];
+}

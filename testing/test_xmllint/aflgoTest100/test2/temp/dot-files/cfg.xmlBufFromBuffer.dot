@@ -1,0 +1,17 @@
+digraph "CFG for 'xmlBufFromBuffer' function" {
+	label="CFG for 'xmlBufFromBuffer' function";
+
+	Node0x5607238f9a40 [shape=record,label="{buf.c:1167:|{<s0>T|<s1>F}}"];
+	Node0x5607238f9a40 -> Node0x560723901af0;
+	Node0x5607238f9a40 -> Node0x5607238f9d10;
+	Node0x560723901af0 [shape=record,label="{buf.c:1171:}"];
+	Node0x560723901af0 -> Node0x5607238ff6a0;
+	Node0x5607238f9d10 [shape=record,label="{buf.c:1173:|{<s0>T|<s1>F}}"];
+	Node0x5607238f9d10 -> Node0x560723902bd0;
+	Node0x5607238f9d10 -> Node0x560723902c20;
+	Node0x560723902bd0 [shape=record,label="{buf.c:1175:}"];
+	Node0x560723902bd0 -> Node0x5607238ff6a0;
+	Node0x560723902c20 [shape=record,label="{buf.c:1178:}"];
+	Node0x560723902c20 -> Node0x5607238ff6a0;
+	Node0x5607238ff6a0 [shape=record,label="{buf.c:1189:}"];
+}

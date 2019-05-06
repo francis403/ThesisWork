@@ -1,0 +1,22 @@
+digraph "CFG for 'htmlNodeInfoPush' function" {
+	label="CFG for 'htmlNodeInfoPush' function";
+
+	Node0x560744b38b50 [shape=record,label="{HTMLparser.c:225:|{<s0>T|<s1>F}}"];
+	Node0x560744b38b50 -> Node0x560744b4c300;
+	Node0x560744b38b50 -> Node0x560744b4c350;
+	Node0x560744b4c300 [shape=record,label="{HTMLparser.c:228:|{<s0>T|<s1>F}}"];
+	Node0x560744b4c300 -> Node0x560744b4c8d0;
+	Node0x560744b4c300 -> Node0x560744b4c920;
+	Node0x560744b4c8d0 [shape=record,label="{HTMLparser.c:229:}"];
+	Node0x560744b4c8d0 -> Node0x560744b4c920;
+	Node0x560744b4c920 [shape=record,label="{HTMLparser.c:230:|{<s0>T|<s1>F}}"];
+	Node0x560744b4c920 -> Node0x560744b4db50;
+	Node0x560744b4c920 -> Node0x560744b4dba0;
+	Node0x560744b4db50 [shape=record,label="{HTMLparser.c:236:}"];
+	Node0x560744b4db50 -> Node0x560744b38ba0;
+	Node0x560744b4dba0 [shape=record,label="{HTMLparser.c:239:}"];
+	Node0x560744b4dba0 -> Node0x560744b4c350;
+	Node0x560744b4c350 [shape=record,label="{HTMLparser.c:240:}"];
+	Node0x560744b4c350 -> Node0x560744b38ba0;
+	Node0x560744b38ba0 [shape=record,label="{HTMLparser.c:243:}"];
+}

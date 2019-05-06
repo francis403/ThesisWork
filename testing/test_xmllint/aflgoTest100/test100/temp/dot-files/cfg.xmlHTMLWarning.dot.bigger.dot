@@ -1,0 +1,16 @@
+digraph "CFG for 'xmlHTMLWarning' function" {
+	label="CFG for 'xmlHTMLWarning' function";
+
+	Node0x55c15e296bd0 [shape=record,label="{xmllint.c:659:|{<s0>T|<s1>F}}"];
+	Node0x55c15e296bd0:s0 -> Node0x55c15e298500;
+	Node0x55c15e296bd0:s1 -> Node0x55c15e298430;
+	Node0x55c15e298500 [shape=record,label="{xmllint.c:668:|{<s0>T|<s1>F}}"];
+	Node0x55c15e298500:s0 -> Node0x55c15e298480;
+	Node0x55c15e298500:s1 -> Node0x55c15e298430;
+	Node0x55c15e298480 [shape=record,label="{xmllint.c:668:|{<s0>T|<s1>F}}"];
+	Node0x55c15e298480:s0 -> Node0x55c15e2983e0;
+	Node0x55c15e298480:s1 -> Node0x55c15e298430;
+	Node0x55c15e2983e0 [shape=record,label="{xmllint.c:669:}"];
+	Node0x55c15e2983e0 -> Node0x55c15e298430;
+	Node0x55c15e298430 [shape=record,label="{xmllint.c:673:}"];
+}

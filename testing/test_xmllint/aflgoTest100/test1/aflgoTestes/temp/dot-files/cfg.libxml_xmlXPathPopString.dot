@@ -1,0 +1,19 @@
+digraph "CFG for 'libxml_xmlXPathPopString' function" {
+	label="CFG for 'libxml_xmlXPathPopString' function";
+
+	Node0x55f9318e8c30 [shape=record,label="{libxml2-py.c:14182:|{<s0>T|<s1>F}}"];
+	Node0x55f9318e8c30:s0 -> Node0x55f9318ec850;
+	Node0x55f9318e8c30:s1 -> Node0x55f9318ec800;
+	Node0x55f9318ec800 [shape=record,label="{libxml2-py.c:14189:}"];
+	Node0x55f9318ec800 -> Node0x55f9318e8ec0;
+	Node0x55f9318ec850 [shape=record,label="{libxml2-py.c:14190:|{<s0>T|<s1>F}}"];
+	Node0x55f9318ec850:s0 -> Node0x55f9318ed030;
+	Node0x55f9318ec850:s1 -> Node0x55f9318ed080;
+	Node0x55f9318ed030 [shape=record,label="{libxml2-py.c:14190:}"];
+	Node0x55f9318ed030 -> Node0x55f9318ed0d0;
+	Node0x55f9318ed080 [shape=record,label="{libxml2-py.c:14190:}"];
+	Node0x55f9318ed080 -> Node0x55f9318ed0d0;
+	Node0x55f9318ed0d0 [shape=record,label="{libxml2-py.c:14190:}"];
+	Node0x55f9318ed0d0 -> Node0x55f9318e8ec0;
+	Node0x55f9318e8ec0 [shape=record,label="{libxml2-py.c:14195:}"];
+}

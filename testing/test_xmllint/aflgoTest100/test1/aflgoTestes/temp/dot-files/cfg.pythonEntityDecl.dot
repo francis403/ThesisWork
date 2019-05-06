@@ -1,0 +1,37 @@
+digraph "CFG for 'pythonEntityDecl' function" {
+	label="CFG for 'pythonEntityDecl' function";
+
+	Node0x55ea374e8bd0 [shape=record,label="{libxml.c:1260:|{<s0>T|<s1>F}}"];
+	Node0x55ea374e8bd0:s0 -> Node0x55ea374eb580;
+	Node0x55ea374e8bd0:s1 -> Node0x55ea374eb5d0;
+	Node0x55ea374eb580 [shape=record,label="{libxml.c:1271:|{<s0>T|<s1>F}}"];
+	Node0x55ea374eb580:s0 -> Node0x55ea374ec270;
+	Node0x55ea374eb580:s1 -> Node0x55ea374ec2c0;
+	Node0x55ea374ec270 [shape=record,label="{libxml.c:1275:}"];
+	Node0x55ea374ec270 -> Node0x55ea374ec2c0;
+	Node0x55ea374ec2c0 [shape=record,label="{libxml.c:1276:}"];
+	Node0x55ea374ec2c0 -> Node0x55ea374ec6f0;
+	Node0x55ea374ec6f0 [shape=record,label="{libxml.c:1276:|{<s0>T|<s1>F}}"];
+	Node0x55ea374ec6f0:s0 -> Node0x55ea374ec990;
+	Node0x55ea374ec6f0:s1 -> Node0x55ea374eca30;
+	Node0x55ea374ec990 [shape=record,label="{libxml.c:1276:}"];
+	Node0x55ea374ec990 -> Node0x55ea374ec9e0;
+	Node0x55ea374eca30 [shape=record,label="{libxml.c:1276:}"];
+	Node0x55ea374eca30 -> Node0x55ea374ecce0;
+	Node0x55ea374ecce0 [shape=record,label="{libxml.c:1276:|{<s0>T|<s1>F}}"];
+	Node0x55ea374ecce0:s0 -> Node0x55ea374ecec0;
+	Node0x55ea374ecce0:s1 -> Node0x55ea374ecf60;
+	Node0x55ea374ecec0 [shape=record,label="{libxml.c:1276:}"];
+	Node0x55ea374ecec0 -> Node0x55ea374ecf10;
+	Node0x55ea374ecf60 [shape=record,label="{libxml.c:1276:}"];
+	Node0x55ea374ecf60 -> Node0x55ea374ecf10;
+	Node0x55ea374ecf10 [shape=record,label="{libxml.c:1276:}"];
+	Node0x55ea374ecf10 -> Node0x55ea374ecc40;
+	Node0x55ea374ecc40 [shape=record,label="{%41}"];
+	Node0x55ea374ecc40 -> Node0x55ea374ec9e0;
+	Node0x55ea374ec9e0 [shape=record,label="{libxml.c:1276:}"];
+	Node0x55ea374ec9e0 -> Node0x55ea374ec650;
+	Node0x55ea374ec650 [shape=record,label="{libxml.c:1277:}"];
+	Node0x55ea374ec650 -> Node0x55ea374eb5d0;
+	Node0x55ea374eb5d0 [shape=record,label="{libxml.c:1278:}"];
+}

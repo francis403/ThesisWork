@@ -1,0 +1,26 @@
+digraph "CFG for 'libxml_htmlAutoCloseTag' function" {
+	label="CFG for 'libxml_htmlAutoCloseTag' function";
+
+	Node0x55d6cb370930 [shape=record,label="{libxml2-py.c:22:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb370930:s0 -> Node0x55d6cb63d590;
+	Node0x55d6cb370930:s1 -> Node0x55d6cb63d540;
+	Node0x55d6cb63d540 [shape=record,label="{libxml2-py.c:32:}"];
+	Node0x55d6cb63d540 -> Node0x55d6cb659550;
+	Node0x55d6cb63d590 [shape=record,label="{libxml2-py.c:33:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb63d590:s0 -> Node0x55d6cb6665f0;
+	Node0x55d6cb63d590:s1 -> Node0x55d6cb666640;
+	Node0x55d6cb6665f0 [shape=record,label="{libxml2-py.c:33:}"];
+	Node0x55d6cb6665f0 -> Node0x55d6cb666690;
+	Node0x55d6cb666640 [shape=record,label="{libxml2-py.c:33:}"];
+	Node0x55d6cb666640 -> Node0x55d6cb666690;
+	Node0x55d6cb666690 [shape=record,label="{libxml2-py.c:33:|{<s0>T|<s1>F}}"];
+	Node0x55d6cb666690:s0 -> Node0x55d6cb6677a0;
+	Node0x55d6cb666690:s1 -> Node0x55d6cb6677f0;
+	Node0x55d6cb6677a0 [shape=record,label="{libxml2-py.c:34:}"];
+	Node0x55d6cb6677a0 -> Node0x55d6cb667840;
+	Node0x55d6cb6677f0 [shape=record,label="{libxml2-py.c:34:}"];
+	Node0x55d6cb6677f0 -> Node0x55d6cb667840;
+	Node0x55d6cb667840 [shape=record,label="{libxml2-py.c:34:}"];
+	Node0x55d6cb667840 -> Node0x55d6cb659550;
+	Node0x55d6cb659550 [shape=record,label="{libxml2-py.c:39:}"];
+}

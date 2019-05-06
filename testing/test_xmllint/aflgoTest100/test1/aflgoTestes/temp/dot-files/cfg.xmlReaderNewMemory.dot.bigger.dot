@@ -1,0 +1,22 @@
+digraph "CFG for 'xmlReaderNewMemory' function" {
+	label="CFG for 'xmlReaderNewMemory' function";
+
+	Node0x55e449525460 [shape=record,label="{xmlreader.c:5664:|{<s0>T|<s1>F}}"];
+	Node0x55e449525460:s0 -> Node0x55e449526ec0;
+	Node0x55e449525460:s1 -> Node0x55e449526f10;
+	Node0x55e449526ec0 [shape=record,label="{xmlreader.c:5670:}"];
+	Node0x55e449526ec0 -> Node0x55e449522e70;
+	Node0x55e449526f10 [shape=record,label="{xmlreader.c:5671:|{<s0>T|<s1>F}}"];
+	Node0x55e449526f10:s0 -> Node0x55e4495273d0;
+	Node0x55e449526f10:s1 -> Node0x55e449527420;
+	Node0x55e4495273d0 [shape=record,label="{xmlreader.c:5672:}"];
+	Node0x55e4495273d0 -> Node0x55e449522e70;
+	Node0x55e449527420 [shape=record,label="{xmlreader.c:5674:|{<s0>T|<s1>F}}"];
+	Node0x55e449527420:s0 -> Node0x55e449527c00;
+	Node0x55e449527420:s1 -> Node0x55e449527c50;
+	Node0x55e449527c00 [shape=record,label="{xmlreader.c:5677:}"];
+	Node0x55e449527c00 -> Node0x55e449522e70;
+	Node0x55e449527c50 [shape=record,label="{xmlreader.c:5679:}"];
+	Node0x55e449527c50 -> Node0x55e449522e70;
+	Node0x55e449522e70 [shape=record,label="{xmlreader.c:5680:}"];
+}

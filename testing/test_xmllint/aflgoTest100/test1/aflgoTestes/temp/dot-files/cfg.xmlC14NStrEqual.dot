@@ -1,0 +1,34 @@
+digraph "CFG for 'xmlC14NStrEqual' function" {
+	label="CFG for 'xmlC14NStrEqual' function";
+
+	Node0x55fe83c097b0 [shape=record,label="{c14n.c:394:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c097b0 -> Node0x55fe83c11340;
+	Node0x55fe83c097b0 -> Node0x55fe83c11390;
+	Node0x55fe83c11340 [shape=record,label="{c14n.c:395:}"];
+	Node0x55fe83c11340 -> Node0x55fe83c09800;
+	Node0x55fe83c11390 [shape=record,label="{c14n.c:396:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c11390 -> Node0x55fe83c11880;
+	Node0x55fe83c11390 -> Node0x55fe83c118d0;
+	Node0x55fe83c11880 [shape=record,label="{c14n.c:396:}"];
+	Node0x55fe83c11880 -> Node0x55fe83c09800;
+	Node0x55fe83c118d0 [shape=record,label="{c14n.c:397:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c118d0 -> Node0x55fe83c12020;
+	Node0x55fe83c118d0 -> Node0x55fe83c12070;
+	Node0x55fe83c12020 [shape=record,label="{c14n.c:397:}"];
+	Node0x55fe83c12020 -> Node0x55fe83c09800;
+	Node0x55fe83c12070 [shape=record,label="{c14n.c:398:}"];
+	Node0x55fe83c12070 -> Node0x55fe83c12830;
+	Node0x55fe83c12830 [shape=record,label="{c14n.c:399:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c12830 -> Node0x55fe83c12b20;
+	Node0x55fe83c12830 -> Node0x55fe83c12b70;
+	Node0x55fe83c12b20 [shape=record,label="{c14n.c:399:}"];
+	Node0x55fe83c12b20 -> Node0x55fe83c09800;
+	Node0x55fe83c12b70 [shape=record,label="{c14n.c:400:}"];
+	Node0x55fe83c12b70 -> Node0x55fe83c127e0;
+	Node0x55fe83c127e0 [shape=record,label="{c14n.c:400:|{<s0>T|<s1>F}}"];
+	Node0x55fe83c127e0 -> Node0x55fe83c12830;
+	Node0x55fe83c127e0 -> Node0x55fe83c12790;
+	Node0x55fe83c12790 [shape=record,label="{c14n.c:401:}"];
+	Node0x55fe83c12790 -> Node0x55fe83c09800;
+	Node0x55fe83c09800 [shape=record,label="{c14n.c:402:}"];
+}
