@@ -1269,11 +1269,9 @@ EXP_ST void init_count_class16(void) {
       if(trace_bits[i]){
         //printf("trace_bits[0x%08x] = %d\n", i, trace_bits[i]);
        // BLOCKS_FOUND[i] += trace_bits[i];
-        if( BLOCK_TO_HIT[i] != 0 ){
-              
-              queue_cur[CUR_PROG]->hit_target =
-                queue_cur[CUR_PROG]->hit_target + 1; // add the number of targets hit
-            }
+            queue_cur[CUR_PROG]->hit_target =
+            queue_cur[CUR_PROG]->hit_target + BLOCK_TO_HIT[i]; // add the number of targets hit
+            
             //queue_cur[CUR_PROG]->blocks_hit[i] = 1; // mark the block as hit
       } 
 
