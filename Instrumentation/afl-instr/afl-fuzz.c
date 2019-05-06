@@ -769,11 +769,11 @@ static void mark_as_det_done(struct queue_entry* q) {
 
 
   //u8* fn = strrchr(q->fname, '/');
-    u8* fn_delta = strrchr(q->fname, '/');
+  u8* fn_delta = strrchr(q->fname, '/');
   s32 fd_delta;
 
     //fn = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir, fn + 1);
-    fn_delta = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
+  fn_delta = alloc_printf("%s/queue/.state/deterministic_done/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
   fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
   if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
@@ -799,15 +799,6 @@ static void mark_as_variable(struct queue_entry* q) {
   //fn = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir, fn);
   fn_delta = alloc_printf("%s/queue/.state/variable_behavior/%s", out_dir_delta[CUR_PROG], fn_delta);
 
-  /*
-  if (symlink(ldest, fn)) {
-
-    s32 fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    if (fd < 0) PFATAL("Unable to create '%s'", fn);
-    close(fd);
-
-  }
-  */
 
   if (symlink(ldest_delta, fn_delta)) {
 
@@ -816,10 +807,6 @@ static void mark_as_variable(struct queue_entry* q) {
     close(fd_delta);
 
   }
-
-
-  //ck_free(ldest);
-  //ck_free(fn);
 
   ck_free(ldest_delta);
   ck_free(fn_delta);
@@ -843,17 +830,9 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
   //fn = strrchr(q->fname, '/');
   fn_delta = strrchr(q->fname, '/');
-
- 
-
-  //fn = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir, fn + 1);
   fn_delta = alloc_printf("%s/queue/.state/redundant_edges/%s", out_dir_delta[CUR_PROG], fn_delta + 1);
 
   if (state) {
-    
-    //fd = open(fn, O_WRONLY | O_CREAT | O_EXCL, 0600);
-    //if (fd < 0) PFATAL("Unable to create '%s'", fn);
-    //close(fd);
 
     fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_EXCL, 0600);
     if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
@@ -862,12 +841,10 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
   } else {
     
-    //if (unlink(fn)) PFATAL("Unable to remove '%s'", fn);
     if (unlink(fn_delta)) PFATAL("Unable to remove '%s'", fn_delta);
 
   }
 
-  //ck_free(fn);
   ck_free(fn_delta);
 
 }
@@ -1106,8 +1083,6 @@ static u32 count_bytes(u8* mem) {
   while (i--) {
 
     u32 v = *(ptr++);
-
-    //if(trace_bits[i]) printf("trace_bits[%d] = %d\n", i, trace_bits[i]);
 
     if (!v) continue;
     if (v & FF(0)) ret++;
@@ -2154,14 +2129,6 @@ static void destroy_extras(void) {
 EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid, 
                 int prog_index, int fork_srv) {
 
-  //printf("\t-> init_forkserver\n");
-  /*
-  int k = 0;
-  while(*(path + k)){
-    printf("path = %s\n",  *(path + k) );
-    k ++;
-  }
-  */
   static struct itimerval it;
   //int st_pipe[2], ctl_pipe[2];
   int st_pipe[4], ctl_pipe[4];
@@ -2171,9 +2138,6 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
   ACTF("Spinning up the fork server...");
 
   if (pipe(st_pipe) || pipe(ctl_pipe)) PFATAL("pipe() failed");
-  //printf("\t----------is gonna stop me = %d\n",fcntl(st_pipe[1], F_SETFL, O_NONBLOCK));
-  //fcntl(*fsrv_st_fd, F_SETFL, O_NONBLOCK);
-
 
   *forksrv_pid = fork();
 
@@ -2228,14 +2192,9 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
        specified, stdin is /dev/null; otherwise, out_fd is cloned instead. */
 
     setsid();
-
-    //printf("before redirecting standard output\n");
-
     
     dup2(dev_null_fd, 1); // redirect standard output to dev_null_fd
     dup2(dev_null_fd, 2); // redirect the standard error to the dev_null_fd
-
-    //SAYF("after redirecting standard output\n");
 
     if (out_file) {
       dup2(dev_null_fd, 0);
@@ -2253,10 +2212,6 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
     if (dup2(ctl_pipe[0], fork_srv) < 0) PFATAL("dup2() failed"); //need to change here
     if (dup2(st_pipe[1], fork_srv + 1) < 0) PFATAL("dup2() failed"); //need to change here
-
-    // set the id for the pipe that reads/writes the blocks
-    //if (dup2(ctl_pipe[2], fork_srv + 2) < 0) PFATAL("dup2() failed"); //need to change here
-    //if (dup2(st_pipe[3], fork_srv + 3) < 0) PFATAL("dup2() failed"); //need to change here
 
     close(ctl_pipe[0]);
     close(ctl_pipe[1]);
@@ -2309,12 +2264,6 @@ EXP_ST void init_forkserver_special(char** argv, u8 **path, s32 *forksrv_pid,
 
 close(ctl_pipe[0]);
 close(st_pipe[1]);
-
-//close(ctl_pipe[2]);
-//close(st_pipe[3]);
-
-//close(ctl_pipe[2]);
-//close(st_pipe[3]);
 
 fsrv_ctl_fd[prog_index] = ctl_pipe[1];
 fsrv_st_fd[prog_index]  = st_pipe[0];
@@ -2471,8 +2420,8 @@ FATAL("Fork server handshake failed");
 * Stores the amount of blocks found in hit
 **/ 
 
-int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
-  //printf("run_forkserver_on_target\n");
+int run_forkserver_on_target(u32 timeout, int *hit, int prog_index){
+
   static struct itimerval it;
   static u32 prev_timed_out = 0;
   // TODO -> tblocks will be used to try and get the edges as well
@@ -2539,35 +2488,15 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
     RPFATAL(res, "Unable to communicate with fork server (OOM?)");
 
   }
-    
-    if( WEXITSTATUS(status) ){
-      //printf("exit succ status = %d\n", status);
-    }
-    //else printf("didnt exit successfully status = %d\n", status);
-
-  //printf("status = %d\n", status);
-
-
-  //printf("status = %d\n", status);
-  // try to understand what's going on
   
   if (!WIFSTOPPED(status)) child_pid = 0;
-    /*
-    it.it_value.tv_sec = 0;
-    it.it_value.tv_usec = 0;
-    setitimer(ITIMER_REAL, &it, NULL);
-    total_execs++;
-  */
-
-  
-  //if (!WIFSTOPPED(status)) child_pid = 0;
-
+    
   it.it_value.tv_sec = 0;
   it.it_value.tv_usec = 0;
 
   setitimer(ITIMER_REAL, &it, NULL);
+
   total_execs++;
-  
 
   /* Any subsequent operations on trace_bits/trace_blocks must not be moved by the
      compiler below this point. Past this location, trace_bits[]/trace_blocks[] behave
@@ -2586,7 +2515,7 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
   //classify_counts((u32*)trace_blocks);
 #endif /* ^__x86_64__ */
 
-  //printf("after classify counts\n");
+  prev_timed_out = child_timed_out;
 
   /* Report outcome to caller. */
 
@@ -2594,9 +2523,9 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
     kill_signal = WTERMSIG(status);
 
-    if (child_timed_out && kill_signal == SIGKILL) *fault = FAULT_TMOUT;
+    if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
 
-    else{ *fault = FAULT_CRASH; }
+    return FAULT_CRASH;
   }
 
   /* A somewhat nasty hack for MSAN, which doesn't support abort_on_error and
@@ -2604,24 +2533,129 @@ int *run_forkserver_on_target(u32 timeout, int *hit, int prog_index, u8 *fault){
 
   else if (uses_asan && WEXITSTATUS(status) == MSAN_ERROR) {
     kill_signal = 0;
-    *fault = FAULT_CRASH;
+    return FAULT_CRASH;
   }
 
-  else *fault = FAULT_NONE;
-
-  //printf("\tfault = %d\n", *fault);
-
-  return NULL;
+  return FAULT_NONE;
 }
 
 /*Runs the current target and returns its fault*/
 static u8 run_target(u32 timeout) {
 
-  u8 fault;
-  int hit;
-  run_forkserver_on_target(timeout, &hit, CUR_PROG, &fault);
+  static struct itimerval it;
+  static u32 prev_timed_out = 0;
+  // TODO -> tblocks will be used to try and get the edges as well
+  // u32 tblocks4;
+  u32 tb4;
 
-  return fault;
+  unsigned int status = 0;
+  //u32 tb4;
+
+  child_timed_out = 0;
+
+    /* After this memset, trace_bits[] are effectively volatile, so we
+       must prevent any earlier operations from venturing into that
+       territory. */
+
+  memset(trace_bits, 0, MAP_SIZE);
+  //memset(trace_blocks, 0, MAP_SIZE);
+
+  MEM_BARRIER();
+
+  s32 res;
+
+  //start of the forkserver
+
+  if ((res = write(fsrv_ctl_fd[CUR_PROG], &prev_timed_out, 4)) != 4) { //-WRITE
+
+    if (stop_soon) return 0;
+    RPFATAL(res, "Unable to request new process from fork server (OOM?)");
+
+  }
+
+    if ((res = read(fsrv_st_fd[CUR_PROG], &child_pid, 4)) != 4) { //-READ
+
+        //printf("res = %d\n", res);
+
+      if (stop_soon) return 0;
+      RPFATAL(res, "Unable to request new process from fork server (OOM?)");
+
+    }
+
+    //printf("child pid = 0x%08x\n", child_pid);
+
+    if (child_pid <= 0){
+      //printf("child pid = %d\n", child_pid);
+      FATAL("Fork server is misbehaving (OOM?)");
+    }
+
+   /* Configure timeout, as requested by user, then wait for child to terminate. */
+
+  it.it_value.tv_sec = (timeout / 1000);
+  it.it_value.tv_usec = (timeout % 1000) * 1000;
+
+  setitimer(ITIMER_REAL, &it, NULL); //check out
+
+  // relays the wait status and then should leave
+
+  /* The SIGALRM handler simply kills the child_pid and sets child_timed_out. */
+  
+  if ((res = read(fsrv_st_fd[CUR_PROG], &status, 4)) != 4) {
+
+    if (stop_soon) return 0;
+    RPFATAL(res, "Unable to communicate with fork server (OOM?)");
+
+  }
+  
+  if (!WIFSTOPPED(status)) child_pid = 0;
+    
+  it.it_value.tv_sec = 0;
+  it.it_value.tv_usec = 0;
+
+  setitimer(ITIMER_REAL, &it, NULL);
+
+  total_execs++;
+
+  /* Any subsequent operations on trace_bits/trace_blocks must not be moved by the
+     compiler below this point. Past this location, trace_bits[]/trace_blocks[] behave
+     very normally and do not have to be treated as volatile. */
+
+  MEM_BARRIER();
+
+  tb4 = *(u32*)trace_bits;
+  //tblocks4 = *(u32*)trace_blocks;
+
+#ifdef __x86_64__
+  classify_counts((u64*)trace_bits);
+  //classify_counts((u64*)trace_blocks);
+#else
+  classify_counts((u32*)trace_bits);
+  //classify_counts((u32*)trace_blocks);
+#endif /* ^__x86_64__ */
+
+  prev_timed_out = child_timed_out;
+
+  /* Report outcome to caller. */
+
+  if (WIFSIGNALED(status) && !stop_soon) {
+
+    kill_signal = WTERMSIG(status);
+
+    if (child_timed_out && kill_signal == SIGKILL) return FAULT_TMOUT;
+
+    return FAULT_CRASH;
+  }
+
+  /* A somewhat nasty hack for MSAN, which doesn't support abort_on_error and
+     must use a special exit code. */
+
+  else if (uses_asan && WEXITSTATUS(status) == MSAN_ERROR) {
+    kill_signal = 0;
+    return FAULT_CRASH;
+  }
+
+  return FAULT_NONE;
+
 
 }
 
@@ -2697,10 +2731,6 @@ static void write_with_gap(void* mem, u32 len, u32 skip_at, u32 skip_len) {
 static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
                          u32 handicap, u8 from_queue) {
 
-  //printf("in calibrate case\n");
-
-  if(!q) FATAL("Queue entry is null!");
-
   static u8 first_trace[MAP_SIZE];
 
   u8  fault = 0, new_bits = 0, var_detected = 0,
@@ -2725,16 +2755,6 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
   stage_name = "calibration";
   stage_max  = fast_cal ? 3 : CAL_CYCLES;
 
-  /* Make sure the forkserver is up before we do anything, and let's not
-     count its spin-up time toward binary calibration. */
-  // TODO -> Need to check all of them
-  if( !forksrv_pid[CUR_PROG] ){
-    //init_forkserver(argv);
-    FATAL("Forkservers aren't up!");
-    //init_all_forkservers(argv);
-  }
-
-
   if (q->exec_cksum) memcpy(first_trace, trace_bits, MAP_SIZE);
 
   start_us = get_cur_time_us();
@@ -2749,15 +2769,10 @@ static u8 calibrate_case(char** argv, struct queue_entry* q, u8* use_mem,
 
     fault = run_target(use_tmout);
 
-
-    //printf("\tfault = %d\n", fault);
-
     /* stop_soon is set by the handler for Ctrl+C. When it's pressed,
        we want to bail out quickly. */
 
     if (stop_soon || fault != crash_mode) goto abort_calibration;
-
-    //printf("\tdid not go to abort_calibration\n");
 
     if (!dumb_mode && !stage_cur && !count_bytes(trace_bits)) {
       fault = FAULT_NOINST;
@@ -2862,10 +2877,8 @@ abort_calibration:
 
     if (count_bytes(trace_bits) < 100) return;
 
-    for (i = (1 << (MAP_SIZE_POW2 - 1)); i < MAP_SIZE; i++){
-      //if (trace_bits[i]) printf("set one\n");
+    for (i = (1 << (MAP_SIZE_POW2 - 1)); i < MAP_SIZE; i++)
       if (trace_bits[i]) return;
-    }
 
     WARNF("Recompile binary with newer version of afl to improve coverage!");
 
@@ -3017,11 +3030,6 @@ abort_calibration:
     /* Pivot to the new queue entry. */
 
     link_or_copy(q->fname, nfn); // talvez tenha que fazer isto para cada um das queues, mas só a parte do copy
-
-    for(int i = 0; i < numbr_of_progs_under_test; i++){
-      //copy_file(q->fname, nfn_delta[i]);
-      //link_or_copy(q->fname, nfn_delta[i]); // works
-    }
 
     ck_free(q->fname);
     q->fname = nfn;
@@ -8734,9 +8742,9 @@ int main(int argc, char** argv) {
           prog_names[numbr_of_progs_under_test] = *(argv + index + 1);
 
           prog_args[numbr_of_progs_under_test] = malloc( sizeof(char*) * 100 );
-          prog_args[numbr_of_progs_under_test][0] = *(argv + index + 1);
+          //prog_args[numbr_of_progs_under_test][0] = *(argv + index + 1);
           numbr_of_progs_under_test ++;
-          arg_index = 1;
+          arg_index = 0;
         }
         else if(numbr_of_progs_under_test > 0){
           //p_args[numbr_of_progs_under_test - 1][arg_index] = *(argv + index);
@@ -8880,8 +8888,14 @@ int main(int argc, char** argv) {
   else
     use_argv = argv + optind;
 
-
-  perform_dry_run( prog_args[0]) ; //this will be where most of the work will be done for this iteration
+  /*
+  for( int i = 0; i < numbr_of_progs_under_test; i++ ){
+  	printf("\nArgs %d: \n", i );
+  	for(int j = 0; prog_args[i][j]; j++ )
+  		printf("%s ", prog_args[i][j]);
+  }
+  */
+  perform_dry_run( prog_args[0] ) ; //this will be where most of the work will be done for this iteration
 
   cull_queue();
 
@@ -8949,7 +8963,7 @@ while (1) { //main fuzzing loop //FUZZ LOP
       }
 
      
-      if (queued_paths[CUR_PROG] == prev_queued) {
+      if ( queued_paths[CUR_PROG] == prev_queued ) {
 
         if (use_splicing) cycles_wo_finds++; else use_splicing = 1;
 
