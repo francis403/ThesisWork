@@ -3454,12 +3454,12 @@ static void find_timeout(void) {
 
 /* Update stats file for unattended monitoring. */
 
-static void write_stats_file(double bitmap_cvg, double stability, double eps) {
+static void write_stats_file(double bitmap_cvg, double stability, double eps, int prog_index) {
 
   static double last_bcvg, last_stab, last_eps;
 
   u8* fn = alloc_printf("%s/fuzzer_stats", out_dir);
-  u8* fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[CUR_PROG]);
+  u8* fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[prog_index]);
   s32 fd, fd_delta;
   FILE *f, *f_delta;
 
@@ -3523,9 +3523,9 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
     "command_line      : %s\n",
     start_time / 1000, get_cur_time() / 1000, getpid(),
     queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
-    queued_paths[CUR_PROG], queued_favored[CUR_PROG], queued_discovered, queued_imported,
+    queued_paths[0], queued_favored[0], queued_discovered, queued_imported,
     max_depth, current_entry, pending_favored, pending_not_fuzzed,
-    queued_variable[CUR_PROG], stability, bitmap_cvg, unique_crashes,
+    queued_variable[0], stability, bitmap_cvg, unique_crashes,
     unique_hangs, last_path_time / 1000, last_crash_time / 1000,
     last_hang_time / 1000, total_execs - last_crash_execs,
     exec_tmout, use_banner,
@@ -3566,9 +3566,9 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
     "command_line      : %s\n",
     start_time / 1000, get_cur_time() / 1000, getpid(),
     queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
-    queued_paths[CUR_PROG], queued_favored[CUR_PROG], queued_discovered, queued_imported,
+    queued_paths[prog_index], queued_favored[prog_index], queued_discovered, queued_imported,
     max_depth, current_entry, pending_favored, pending_not_fuzzed,
-    queued_variable[CUR_PROG], stability, bitmap_cvg, unique_crashes,
+    queued_variable[prog_index], stability, bitmap_cvg, unique_crashes,
     unique_hangs, last_path_time / 1000, last_crash_time / 1000,
     last_hang_time / 1000, total_execs - last_crash_execs,
     exec_tmout, use_banner,
@@ -3584,7 +3584,6 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps) {
   fclose(f_delta);
 
 }
-
 
 /* Update the plot file if there is a reason to. */
 
@@ -4637,7 +4636,7 @@ static void show_stats(void) {
   if (cur_ms - last_stats_ms > STATS_UPDATE_SEC * 1000) {
 
     last_stats_ms = cur_ms;
-    write_stats_file(t_byte_ratio, stab_ratio, avg_exec);
+    write_stats_file(t_byte_ratio, stab_ratio, avg_exec, CUR_PROG);
     save_auto();
     write_bitmap();
 
@@ -4746,13 +4745,13 @@ static void show_stats(void) {
        DTD(cur_ms, start_time), tmp, DI(queue_cycle - 1));
 
 
-  /*
+  
    SAYF(bV bSTOP "    cur run time : " cRST "%-34s " bSTG bV bSTOP
        "  cur prog : %d  " bSTG bV "\n",
        DTD(cur_ms, prog_start_time), CUR_PROG );
 
   //SAYF(bV bSTOP "   current program : " cRST  "%-34s\n" bSTG bV bSTOP, cur_prog_title);
-	*/
+	
   /* We want to warn people about not seeing new paths after a full cycle,
      except when resuming fuzzing or running in non-instrumented mode. */
 
@@ -7977,7 +7976,7 @@ EXP_ST void setup_all_dirs_fds(void) {
 
   for(int i = 0; i < numbr_of_progs_under_test; i++){
 
-    if (mkdir(out_dir_delta[i], 0700)) {
+    if ( mkdir(out_dir_delta[i], 0700) ) {
 
       if (errno != EEXIST) PFATAL("Unable to create '%s'", out_dir_delta[i]);
 
@@ -8893,7 +8892,7 @@ int main(int argc, char** argv) {
   		printf("%s ", prog_args[i][j]);
   }
   */
-  perform_dry_run( prog_args[0] ) ; //this will be where most of the work will be done for this iteration
+  perform_dry_run( prog_args[0] ) ;
 
   cull_queue();
 
@@ -8901,7 +8900,7 @@ int main(int argc, char** argv) {
 
   seek_to = find_start_position();
 
-  write_stats_file(0, 0, 0);
+  write_stats_file(0, 0, 0, CUR_PROG);
   save_auto();
 
   if (stop_soon) goto stop_fuzzing;
@@ -8997,7 +8996,10 @@ while (1) { //main fuzzing loop //FUZZ LOP
 
 
   write_bitmap();
-  write_stats_file(0, 0, 0);
+  //write_stats_file(0, 0, 0);
+  for(int i = 0; i < numbr_of_progs_under_test; i++){
+    write_stats_file(0, 0, 0, i);
+  }
   save_auto();
 
   stop_fuzzing:
