@@ -923,28 +923,30 @@ EXP_ST void destroy_queue(void) {
 
 EXP_ST void write_bitmap(void) {
 
-  u8* fname, *fname_delta;
-  s32 fd, fd_delta;
+  //u8* fname;
+  u8 *fname_delta;
+  //s32 fd;
+  s32 fd_delta;
 
   if (!bitmap_changed) return;
   bitmap_changed = 0;
 
-  fname = alloc_printf("%s/fuzz_bitmap", out_dir);
-    fname_delta = alloc_printf("%s/fuzz_bitmap", out_dir_delta[CUR_PROG]);
+  //fname = alloc_printf("%s/fuzz_bitmap", out_dir);
+  fname_delta = alloc_printf("%s/fuzz_bitmap", out_dir_delta[CUR_PROG]);
 
-  fd = open(fname, O_WRONLY | O_CREAT | O_TRUNC, 0600);
-    fd_delta = open(fname_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+  //fd = open(fname, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+  fd_delta = open(fname_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
-  if (fd < 0) PFATAL("Unable to open '%s'", fname);
-    if (fd_delta < 0) PFATAL("Unable to open '%s'", fname_delta);
+  //if (fd < 0) PFATAL("Unable to open '%s'", fname);
+  if (fd_delta < 0) PFATAL("Unable to open '%s'", fname_delta);
 
-  ck_write(fd, virgin_bits[CUR_PROG], MAP_SIZE, fname);
-    ck_write(fd_delta, virgin_bits[CUR_PROG], MAP_SIZE, fname_delta);
+  //ck_write(fd, virgin_bits[CUR_PROG], MAP_SIZE, fname);
+  ck_write(fd_delta, virgin_bits[CUR_PROG], MAP_SIZE, fname_delta);
 
-  close(fd);
+  //close(fd);
   close(fd_delta);
 
-  ck_free(fname);
+  //ck_free(fname);
   ck_free(fname_delta);
 
 }
@@ -1264,9 +1266,7 @@ EXP_ST void init_count_class16(void) {
 
       mem++;
 
-      if(queue_cur[CUR_PROG] == NULL) continue;
-
-      if(trace_bits[i]){
+      if( trace_bits[i] && queue_cur[CUR_PROG] ){
         //printf("trace_bits[0x%08x] = %d\n", i, trace_bits[i]);
        // BLOCKS_FOUND[i] += trace_bits[i];
             queue_cur[CUR_PROG]->hit_target =
@@ -3458,26 +3458,26 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps, in
 
   static double last_bcvg, last_stab, last_eps;
 
-  u8* fn = alloc_printf("%s/fuzzer_stats", out_dir);
+  //u8* fn = alloc_printf("%s/fuzzer_stats", out_dir);
   u8* fn_delta = alloc_printf("%s/fuzzer_stats", out_dir_delta[prog_index]);
-  s32 fd, fd_delta;
-  FILE *f, *f_delta;
+  s32 fd_delta;
+  FILE *f_delta;
 
-  fd = open(fn, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+  //fd = open(fn, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
-  if (fd < 0) PFATAL("Unable to create '%s'", fn);
+  //if (fd < 0) PFATAL("Unable to create '%s'", fn);
 
   fd_delta = open(fn_delta, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
   if (fd_delta < 0) PFATAL("Unable to create '%s'", fn_delta);
 
-  ck_free(fn);
+  //ck_free(fn);
   ck_free(fn_delta);
 
-  f = fdopen(fd, "w");
+  //f = fdopen(fd, "w");
   f_delta = fdopen(fd_delta, "w");
 
-  if (!f) PFATAL("fdopen() failed");
+  //if (!f) PFATAL("fdopen() failed");
   if (!f_delta) PFATAL("fdopen() failed");
 
   /* Keep last values in case we're called from another context
@@ -3492,50 +3492,7 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps, in
     last_stab = stability;
     last_eps  = eps;
   }
-
-  fprintf(f, "start_time        : %llu\n"
-    "last_update       : %llu\n"
-    "fuzzer_pid        : %u\n"
-    "cycles_done       : %llu\n"
-    "execs_done        : %llu\n"
-    "execs_per_sec     : %0.02f\n"
-    "paths_total       : %u\n"
-    "paths_favored     : %u\n"
-    "paths_found       : %u\n"
-    "paths_imported    : %u\n"
-    "max_depth         : %u\n"
-             "cur_path          : %u\n" /* Must match find_start_position() */
-    "pending_favs      : %u\n"
-    "pending_total     : %u\n"
-    "variable_paths    : %u\n"
-    "stability         : %0.02f%%\n"
-    "bitmap_cvg        : %0.02f%%\n"
-    "unique_crashes    : %llu\n"
-    "unique_hangs      : %llu\n"
-    "last_path         : %llu\n"
-    "last_crash        : %llu\n"
-    "last_hang         : %llu\n"
-    "execs_since_crash : %llu\n"
-    "exec_timeout      : %u\n"
-    "afl_banner        : %s\n"
-    "afl_version       : " VERSION "\n"
-    "target_mode       : %s%s%s%s%s%s%s\n"
-    "command_line      : %s\n",
-    start_time / 1000, get_cur_time() / 1000, getpid(),
-    queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
-    queued_paths[0], queued_favored[0], queued_discovered, queued_imported,
-    max_depth, current_entry, pending_favored, pending_not_fuzzed,
-    queued_variable[0], stability, bitmap_cvg, unique_crashes,
-    unique_hangs, last_path_time / 1000, last_crash_time / 1000,
-    last_hang_time / 1000, total_execs - last_crash_execs,
-    exec_tmout, use_banner,
-    qemu_mode ? "qemu " : "", dumb_mode ? " dumb " : "",
-    no_forkserver ? "no_forksrv " : "", crash_mode ? "crash " : "",
-    persistent_mode ? "persistent " : "", deferred_mode ? "deferred " : "",
-    (qemu_mode || dumb_mode || no_forkserver || crash_mode ||
-      persistent_mode || deferred_mode) ? "" : "default",
-    orig_cmdline);
-             /* ignore errors */
+       
     fprintf(f_delta, "start_time        : %llu\n"
     "last_update       : %llu\n"
     "fuzzer_pid        : %u\n"
@@ -3580,7 +3537,6 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps, in
     orig_cmdline);
              /* ignore errors */
 
-  fclose(f);
   fclose(f_delta);
 
 }
