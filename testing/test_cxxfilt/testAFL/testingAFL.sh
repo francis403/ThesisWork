@@ -48,6 +48,7 @@ TEST_NUMBR=1
 while [ $TEST_NUMBR -le $NUMBR_OF_TESTS ]
 do
 	afl-plot "$TEST_DIR/test$TEST_NUMBR/out0/" "$TEST_DIR/test$TEST_NUMBR/out0"
+	afl-plot "$TEST_DIR/test$TEST_NUMBR/out1/" "$TEST_DIR/test$TEST_NUMBR/out1"
 	((TEST_NUMBR++))
 done
 
@@ -62,17 +63,17 @@ FUZZER_EXE="$FUZZER_DIR/afl-fuzz"
 #(timeout "$TIME_PER_TEST"h $FUZZER_EXE -S test -z exp -i test$TEST_NUMBR/in -o test$TEST_NUMBR/out $PROG_RUN)
 
 
-EXE="binutils/readelf"
+EXE="binutils/cxxfilt"
 EXE_DIR="/home/deploy/Documents/utils/datasets/binutils/binutils-2.25-delta1"
 EXE_PATH="$EXE_DIR/$EXE"
 
-PROG_RUN="$EXE_PATH -a @@"
+PROG_RUN="$EXE_PATH"
 
-OLD_EXE="binutils/readelf"
+OLD_EXE="binutils/cxxfilt"
 OLD_EXE_DIR="/home/deploy/Documents/utils/datasets/binutils/binutils-2.26"
 OLD_EXE_PATH="$OLD_EXE_DIR/$OLD_EXE"
 
-OLD_PROG_RUN="$OLD_EXE_PATH -a @@"
+OLD_PROG_RUN="$OLD_EXE_PATH"
 
 
 #path to the dir we want the tests to be in
