@@ -259,14 +259,27 @@ void concatInto( char **dest, char *line ){
 * Multiplies the position (i + 1) by the ASCII of 
 * the character found in that position
 */
-unsigned int hash_string(char *input){
-  unsigned int hash = 0;
+unsigned long hash_string(char *input){
+  unsigned long hash = 0;
   //printf("gonna hash = %s\n", input);
   for( int i = 0; i < strlen(input); i++ ){
-    hash += (i +1) * (input[i] - 1);
+    hash += ( i + 1 ) * (input[i] - 64);
   }
 
   return hash == 0 ? 1 : hash;
+}
+
+int hash_test( char *input ){
+
+	int hash = 0;
+	int len = strlen(input);
+
+	for( int i = 0; i < len; i++ ){
+		hash = hash + ((hash) << 5) + *(input + i) + (( *(input + i)) << 7);
+	}
+
+	return ((hash) ^ (hash >> 16)) & 0xffff;
+
 }
 
 
@@ -335,11 +348,12 @@ unsigned int blockIDGenerator(char *block){
   }
 
   //printf("\n RESULT = %s\n", string_to_hash);
-  int val = hash_string(string_to_hash) % MAP_SIZE;
+  unsigned long val = hash_test(string_to_hash) % MAP_SIZE;
   //printf("result = %d\n", val);
   free(line);
   free(copy);
   free(string_to_hash);
+
   val = val % MAP_SIZE;
   return val == 0 ? 1 : (val < 0 ? val + MAP_SIZE : val);
 }
