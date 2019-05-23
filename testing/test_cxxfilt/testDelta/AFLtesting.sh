@@ -47,8 +47,9 @@ wait $pid
 TEST_NUMBR=1
 while [ $TEST_NUMBR -le $NUMBR_OF_TESTS ]
 do
-	afl-plot "$TEST_DIR/test$TEST_NUMBR/out0/" "$TEST_DIR/test$TEST_NUMBR/out0"
-	afl-plot "$TEST_DIR/test$TEST_NUMBR/out1/" "$TEST_DIR/test$TEST_NUMBR/out1"
+	afl-plot "$TEST_DIR/test$TEST_NUMBR/out" "$TEST_DIR/test$TEST_NUMBR/out"
+	afl-plot "$TEST_DIR/test$TEST_NUMBR/out0" "$TEST_DIR/test$TEST_NUMBR/out0"
+	afl-plot "$TEST_DIR/test$TEST_NUMBR/out1" "$TEST_DIR/test$TEST_NUMBR/out1"
 	((TEST_NUMBR++))
 done
 
@@ -56,7 +57,7 @@ done
 
 
 #DEFAULT VALUES SO TESTING IS FASTER
-FUZZER_DIR="/home/deploy/Documents/utils/fuzzers/ThesisWork/Instrumentation/afl-instr"
+FUZZER_DIR="/home/deploy/Documents/utils/fuzzers/ThesisWork/Instrumentation/afl-instr/"
 FUZZER_EXE="$FUZZER_DIR/afl-fuzz"
 
 #libtex2
@@ -66,73 +67,81 @@ FUZZER_EXE="$FUZZER_DIR/afl-fuzz"
 EXE="binutils/cxxfilt"
 EXE_DIR="/home/deploy/Documents/utils/datasets/binutils/binutils-2.25-delta1"
 EXE_PATH="$EXE_DIR/$EXE"
-
 PROG_RUN="$EXE_PATH"
 
 OLD_EXE="binutils/cxxfilt"
 OLD_EXE_DIR="/home/deploy/Documents/utils/datasets/binutils/binutils-2.26"
 OLD_EXE_PATH="$OLD_EXE_DIR/$OLD_EXE"
-
 OLD_PROG_RUN="$OLD_EXE_PATH"
 
 
 #path to the dir we want the tests to be in
 OUTDIR="."
 
+#1 hour tests
+
 NUMBR_OF_TESTS=10
 TIME_PER_TEST=1
 TEST_NUMBR=1
 TIME="$TIME_PER_TEST"h
-TEST_DIR="$OUTDIR/test1h"
+TEST_DIR="$OUTDIR/test1h_1"
 PROGS="-p $PROG_RUN"
-COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
-run_prog
+COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
+#run_prog
 
 NUMBR_OF_TESTS=10
 TIME_PER_TEST=1
+TEST_NUMBR=1
+TIME="$TIME_PER_TEST"h
+TEST_DIR="$OUTDIR/test1h_2"
+PROGS="-p $OLD_PROG_RUN"
+COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
+#run_prog
+
+NUMBR_OF_TESTS=10
+TIME_PER_TEST=1
+TEST_NUMBR=1
+TIME="$TIME_PER_TEST"h
+TEST_DIR="$OUTDIR/double_test30m"
+PROGS="-p $PROG_RUN -p $OLD_PROG_RUN"
+COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
+#run_prog
+
+
+NUMBR_OF_TESTS=10
+TIME_PER_TEST=2
 TEST_NUMBR=1
 TIME="$TIME_PER_TEST"h
 TEST_DIR="$OUTDIR/double_test1h"
 PROGS="-p $PROG_RUN -p $OLD_PROG_RUN"
 COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
-run_prog
+#run_prog
 
-NUMBR_OF_TESTS=10
-TIME_PER_TEST=4
+# 8 hour tests for cxxfilt #
+
+UMBR_OF_TESTS=10
+TIME_PER_TEST=8
 TEST_NUMBR=1
 TIME="$TIME_PER_TEST"h
-TEST_DIR="$OUTDIR/test4h"
+TEST_DIR="$OUTDIR/test8h_1"
 PROGS="-p $PROG_RUN"
-COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
-run_prog
-
-
-NUMBR_OF_TESTS=10
-TIME_PER_TEST=4
-TEST_NUMBR=1
-TIME="$TIME_PER_TEST"h
-TEST_DIR="$OUTDIR/double_test4h"
-PROGS="-p $PROG_RUN -p $OLD_PROG_RUN"
 COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
 run_prog
 
-
-<<'END'
 NUMBR_OF_TESTS=10
-COUNTER=0
-UP_TO=4
-TIME_PER_TEST=1
-while [ $COUNTER -lt $UP_TO ]
-do
-	TEST_NUMBR=1
-	if [ $COUNTER -lt 2 ]; then
-		TIME_PER_TEST=1
-	elif [  $COUNTER -lt 4 ]; then
-		TIME_PER_TEST=4
-	else 
-		TIME_PER_TEST=8
-	fi
-	TIME="$TIME_PER_TEST"h
-	TEST_DIR="$OUTDIR/test$COUNTER"
-done
-END
+TIME_PER_TEST=8
+TEST_NUMBR=1
+TIME="$TIME_PER_TEST"h
+TEST_DIR="$OUTDIR/test8h_2"
+PROGS="-p $OLD_PROG_RUN"
+COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
+run_prog
+
+NUMBR_OF_TESTS=10
+TIME_PER_TEST=16
+TEST_NUMBR=1
+TIME="$TIME_PER_TEST"h
+TEST_DIR="$OUTDIR/double_test8h"
+PROGS="-p $PROG_RUN -p $OLD_PROG_RUN"
+COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
+run_prog
