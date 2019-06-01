@@ -34,9 +34,9 @@ do
 		#(command)&>/dev/null &
 	fi
 	((TEST_NUMBR++))
-	COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
+	COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
 done
-(eval $COMMAND)
+(eval $COMMAND)&>/dev/null
 #command
 #(timeout "$TIME_PER_TEST"h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out -p $PROG_RUN)
 pid=$!
@@ -86,7 +86,7 @@ TIME="$TIME_PER_TEST"h
 TEST_DIR="$OUTDIR/test1h"
 PROGS="-p $PROG_RUN"
 COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
-run_prog
+#run_prog
 
 NUMBR_OF_TESTS=10
 TIME_PER_TEST=1
@@ -104,7 +104,7 @@ TIME="$TIME_PER_TEST"h
 TEST_DIR="$OUTDIR/test4h"
 PROGS="-p $PROG_RUN"
 COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
-run_prog
+#run_prog
 
 
 NUMBR_OF_TESTS=10
@@ -114,7 +114,7 @@ TIME="$TIME_PER_TEST"h
 TEST_DIR="$OUTDIR/double_test4h"
 PROGS="-p $PROG_RUN -p $OLD_PROG_RUN"
 COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -q 15 -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
-run_prog
+#run_prog
 
 
 <<'END'

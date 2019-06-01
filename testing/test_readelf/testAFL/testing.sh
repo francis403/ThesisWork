@@ -17,7 +17,7 @@ do
 	echo "Starting fuzzing process number $TEST_NUMBR"
 	mkdir "$TEST_DIR/test$TEST_NUMBR"
 	mkdir "$TEST_DIR/test$TEST_NUMBR/in"
-	echo "" > "$TEST_DIR/test$TEST_NUMBR/in/test"
+	cp /bin/ps "$TEST_DIR/test$TEST_NUMBR/in/"
 	if [ $TEST_NUMBR -eq 1 ]; then
 		#(timeout "$TIME_PER_TEST"h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out -p $PROG_RUN)&
 		#(command)&
@@ -36,7 +36,7 @@ do
 	((TEST_NUMBR++))
 	COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
 done
-(eval $COMMAND)
+(eval $COMMAND)&>/dev/null
 #command
 #(timeout "$TIME_PER_TEST"h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out -p $PROG_RUN)
 pid=$!
@@ -90,7 +90,7 @@ TEST_DIR="$OUTDIR/test4h"
 PROGS="$PROG_RUN"
 COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
 
-run_prog
+#run_prog
 
 NUMBR_OF_TESTS=10
 TIME_PER_TEST=8
@@ -100,4 +100,4 @@ TEST_DIR="$OUTDIR/test8h"
 PROGS="$PROG_RUN"
 COMMAND="timeout '$TIME_PER_TEST'h $FUZZER_EXE -i $TEST_DIR/test$TEST_NUMBR/in -o $TEST_DIR/test$TEST_NUMBR/out $PROGS"
 
-run_prog
+#run_prog
