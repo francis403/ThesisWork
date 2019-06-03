@@ -203,7 +203,7 @@ EXP_ST u32 queued_paths[MAX_AMOUNT_OF_PROGS],              /* Total number of qu
            havoc_div = 1;             /* Cycle count divisor for havoc    */
 
 EXP_ST u64 total_crashes,             /* Total number of crashes          */
-           unique_crashes,            /* Crashes with unique signatures   */
+           unique_crashes[MAX_AMOUNT_OF_PROGS],  /* Crashes with unique signatures   */
            total_tmouts,              /* Total number of timeouts         */
            unique_tmouts,             /* Timeouts with unique signatures  */
            unique_hangs,              /* Hangs with unique signatures     */
@@ -3312,7 +3312,7 @@ keep_as_crash:
 
       total_crashes++;
 
-      if (unique_crashes >= KEEP_UNIQUE_CRASH) return keeping;
+      if (unique_crashes[CUR_PROG] >= KEEP_UNIQUE_CRASH) return keeping;
 
       if (!dumb_mode) {
 
@@ -3326,25 +3326,25 @@ keep_as_crash:
 
       }
 
-      if (!unique_crashes) write_crash_readme();
+      if (!unique_crashes[CUR_PROG]) write_crash_readme();
 
 #ifndef SIMPLE_FILES
 
       //fn = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir,
       //                  unique_crashes, kill_signal, describe_op(0));
       fn_delta = alloc_printf("%s/crashes/id:%06llu,sig:%02u,%s", out_dir_delta[CUR_PROG],
-                        unique_crashes, kill_signal, describe_op(0));
+                        unique_crashes[CUR_PROG], kill_signal, describe_op(0));
 
 #else
 
       //fn = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir, unique_crashes,
       //                  kill_signal);
-      fn_delta = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir_delta[CUR_PROG], unique_crashes,
+      fn_delta = alloc_printf("%s/crashes/id_%06llu_%02u", out_dir_delta[CUR_PROG], unique_crashes[CUR_PROG],
                         kill_signal);
 
 #endif /* ^!SIMPLE_FILES */
 
-      unique_crashes++;
+      unique_crashes[CUR_PROG]++;
 
       last_crash_time = get_cur_time();
       last_crash_execs = total_execs;
@@ -3525,7 +3525,7 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps, in
     queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
     queued_paths[prog_index], queued_favored[prog_index], queued_discovered, queued_imported,
     max_depth, current_entry, pending_favored, pending_not_fuzzed,
-    queued_variable[prog_index], stability, bitmap_cvg, unique_crashes,
+    queued_variable[prog_index], stability, bitmap_cvg, unique_crashes[prog_index],
     unique_hangs, last_path_time / 1000, last_crash_time / 1000,
     last_hang_time / 1000, total_execs - last_crash_execs,
     exec_tmout, use_banner,
@@ -3550,7 +3550,7 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
 
   if (prev_qp == queued_paths[CUR_PROG] && prev_pf == pending_favored && 
     prev_pnf == pending_not_fuzzed && prev_ce == current_entry &&
-    prev_qc == queue_cycle && prev_uc == unique_crashes &&
+    prev_qc == queue_cycle && prev_uc == unique_crashes[CUR_PROG] &&
     prev_uh == unique_hangs && prev_md == max_depth) return;
 
     prev_qp  = queued_paths[CUR_PROG];
@@ -3558,7 +3558,7 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
   prev_pnf = pending_not_fuzzed;
   prev_ce  = current_entry;
   prev_qc  = queue_cycle;
-  prev_uc  = unique_crashes;
+  prev_uc  = unique_crashes[CUR_PROG];
   prev_uh  = unique_hangs;
   prev_md  = max_depth;
 
@@ -3571,7 +3571,7 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
   fprintf(plot_file[CUR_PROG], 
     "%llu, %llu, %u, %u, %u, %u, %0.02f%%, %llu, %llu, %u, %0.02f\n",
     get_cur_time() / 1000, queue_cycle - 1, current_entry, queued_paths[CUR_PROG],
-    pending_not_fuzzed, pending_favored, bitmap_cvg, unique_crashes,
+    pending_not_fuzzed, pending_favored, bitmap_cvg, unique_crashes[CUR_PROG],
           unique_hangs, max_depth, eps); /* ignore errors */
 
     fflush(plot_file[CUR_PROG]);
@@ -4737,12 +4737,12 @@ static void show_stats(void) {
   /* Highlight crashes in red if found, denote going over the KEEP_UNIQUE_CRASH
      limit with a '+' appended to the count. */
 
-  sprintf(tmp, "%s%s", DI(unique_crashes),
-          (unique_crashes >= KEEP_UNIQUE_CRASH) ? "+" : "");
+  sprintf(tmp, "%s%s", DI(unique_crashes[CUR_PROG]),
+          (unique_crashes[CUR_PROG] >= KEEP_UNIQUE_CRASH) ? "+" : "");
 
   SAYF(bV bSTOP " last uniq crash : " cRST "%-34s " bSTG bV bSTOP
        " uniq crashes : %s%-6s " bSTG bV "\n",
-       DTD(cur_ms, last_crash_time), unique_crashes ? cLRD : cRST,
+       DTD(cur_ms, last_crash_time), unique_crashes[CUR_PROG] ? cLRD : cRST,
        tmp);
 
   sprintf(tmp, "%s%s", DI(unique_hangs),
@@ -4813,20 +4813,20 @@ static void show_stats(void) {
 
   SAYF("  new edges on : " cRST "%-22s " bSTG bV "\n", tmp);
 
-  sprintf(tmp, "%s (%s%s unique)", DI(total_crashes), DI(unique_crashes),
-          (unique_crashes >= KEEP_UNIQUE_CRASH) ? "+" : "");
+  sprintf(tmp, "%s (%s%s unique)", DI(total_crashes), DI(unique_crashes[CUR_PROG]),
+          (unique_crashes[CUR_PROG] >= KEEP_UNIQUE_CRASH) ? "+" : "");
 
   if (crash_mode) {
 
     SAYF(bV bSTOP " total execs : " cRST "%-21s " bSTG bV bSTOP
          "   new crashes : %s%-22s " bSTG bV "\n", DI(total_execs),
-         unique_crashes ? cLRD : cRST, tmp);
+         unique_crashes[CUR_PROG] ? cLRD : cRST, tmp);
 
   } else {
 
     SAYF(bV bSTOP " total execs : " cRST "%-21s " bSTG bV bSTOP
          " total crashes : %s%-22s " bSTG bV "\n", DI(total_execs),
-         unique_crashes ? cLRD : cRST, tmp);
+         unique_crashes[CUR_PROG] ? cLRD : cRST, tmp);
 
   }
 
@@ -5689,7 +5689,7 @@ static u8 fuzz_one(char** argv) {
 
   if (not_on_tty) {
     ACTF("Fuzzing test case #%u (%u total, %llu uniq crashes found)...",
-         current_entry, queued_paths[CUR_PROG], unique_crashes);
+         current_entry, queued_paths[CUR_PROG], unique_crashes[CUR_PROG]);
     fflush(stdout);
   }
 
@@ -5811,7 +5811,7 @@ static u8 fuzz_one(char** argv) {
 
   stage_val_type = STAGE_VAL_NONE;
 
-  orig_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  orig_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   prev_cksum = queue_cur[CUR_PROG]->exec_cksum;
 
@@ -5895,7 +5895,7 @@ static u8 fuzz_one(char** argv) {
 
   } // end of single bit bit_flip
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_FLIP1]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP1] += stage_max;
@@ -5922,7 +5922,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_FLIP2]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP2] += stage_max;
@@ -5953,7 +5953,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_FLIP4]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP4] += stage_max;
@@ -6045,7 +6045,7 @@ static u8 fuzz_one(char** argv) {
 
   blocks_eff_total += EFF_ALEN(len);
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_FLIP8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP8] += stage_max;
@@ -6082,7 +6082,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_FLIP16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP16] += stage_max;
@@ -6118,7 +6118,7 @@ static u8 fuzz_one(char** argv) {
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_FLIP32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_FLIP32] += stage_max;
@@ -6190,7 +6190,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_ARITH8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH8] += stage_max;
@@ -6284,7 +6284,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_ARITH16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH16] += stage_max;
@@ -6376,7 +6376,7 @@ skip_bitflip:
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_ARITH32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_ARITH32] += stage_max;
@@ -6433,7 +6433,7 @@ skip_arith:
 
   } // end of for len
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_INTEREST8]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST8] += stage_max;
@@ -6501,7 +6501,7 @@ skip_arith:
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_INTEREST16]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST16] += stage_max;
@@ -6570,7 +6570,7 @@ skip_arith:
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_INTEREST32]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_INTEREST32] += stage_max;
@@ -6636,7 +6636,7 @@ skip_interest:
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_EXTRAS_UO]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_UO] += stage_max;
@@ -6685,7 +6685,7 @@ skip_interest:
 
   ck_free(ex_tmp);
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_EXTRAS_UI]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_UI] += stage_max;
@@ -6736,7 +6736,7 @@ skip_user_extras:
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   stage_finds[STAGE_EXTRAS_AO]  += new_hit_cnt - orig_hit_cnt;
   stage_cycles[STAGE_EXTRAS_AO] += stage_max;
@@ -6784,7 +6784,7 @@ havoc_stage:
 
   temp_len = len;
 
-  orig_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  orig_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   havoc_queued = queued_paths[CUR_PROG];
 
@@ -7197,7 +7197,7 @@ havoc_stage:
 
   }
 
-  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes;
+  new_hit_cnt = queued_paths[CUR_PROG] + unique_crashes[CUR_PROG];
 
   if (!splice_cycle) {
     stage_finds[STAGE_HAVOC]  += new_hit_cnt - orig_hit_cnt;
