@@ -188,12 +188,12 @@ EXP_ST u32 queued_paths[MAX_AMOUNT_OF_PROGS],              /* Total number of qu
        total_nmbr_queued_paths,
            queued_variable[MAX_AMOUNT_OF_PROGS],           /* Testcases with variable behavior */
            queued_at_start,           /* Total number of initial inputs   */
-           queued_discovered,         /* Items discovered during this run */
+           queued_discovered[MAX_AMOUNT_OF_PROGS],         /* Items discovered during this run */
            queued_imported,           /* Items imported via -S            */
            queued_favored[MAX_AMOUNT_OF_PROGS],            /* Paths deemed favorable           */
            queued_with_cov,           /* Paths with new coverage bytes    */
-           pending_not_fuzzed,        /* Queued but not done yet          */
-           pending_favored,           /* Pending favored paths            */
+           pending_not_fuzzed[MAX_AMOUNT_OF_PROGS],        /* Queued but not done yet          */
+           pending_favored[MAX_AMOUNT_OF_PROGS],           /* Pending favored paths            */
            cur_skipped_paths,         /* Abandoned inputs in cur cycle    */
            cur_depth,                 /* Current path depth               */
            max_depth,                 /* Max path depth                   */
@@ -872,8 +872,8 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det, u8 added_from_queue)
   } else q_prev100[CUR_PROG] = queue[CUR_PROG] = queue_top[CUR_PROG] = q;
 
   queued_paths[CUR_PROG]++;
-  total_nmbr_queued_paths ++;
-  pending_not_fuzzed++;
+  //total_nmbr_queued_paths ++;
+  pending_not_fuzzed[CUR_PROG]++;
 
   cycles_wo_finds = 0;
 
@@ -1419,7 +1419,7 @@ static void cull_queue(void) {
   memset(temp_v, 255, MAP_SIZE >> 3);
 
   queued_favored[CUR_PROG]  = 0;
-  pending_favored = 0;
+  pending_favored[CUR_PROG] = 0;
 
   q = queue[CUR_PROG];
 
@@ -1446,7 +1446,7 @@ static void cull_queue(void) {
       top_rated[CUR_PROG][i]->favored = 1;
       queued_favored[CUR_PROG]++;
 
-      if (!top_rated[CUR_PROG][i]->was_fuzzed) pending_favored++;
+      if (!top_rated[CUR_PROG][i]->was_fuzzed) pending_favored[CUR_PROG]++;
 
     } // end of if and for
 
@@ -3192,14 +3192,17 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 #ifndef SIMPLE_FILES
 
     //fn = alloc_printf("%s/queue/id:%06u,%s", out_dir, queued_paths[CUR_PROG],
+    //                  describe_op(hnb)); //queued_paths
+    //fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], total_nmbr_queued_paths,
     //                  describe_op(hnb));
-    fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], total_nmbr_queued_paths,
+    fn_delta = alloc_printf("%s/queue/id:%06u,%s", out_dir_delta[CUR_PROG], queued_paths[CUR_PROG],
                       describe_op(hnb));
 
 #else
 
     //fn = alloc_printf("%s/queue/id_%06u", out_dir, queued_paths[CUR_PROG]);
-    fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], total_nmbr_queued_paths);
+    //fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG], total_nmbr_queued_paths);
+    fn_delta = alloc_printf("%s/queue/id_%06u", out_dir_delta[CUR_PROG],  queued_paths[CUR_PROG] );
 
 #endif /* ^!SIMPLE_FILES */
 
@@ -3523,8 +3526,8 @@ static void write_stats_file(double bitmap_cvg, double stability, double eps, in
     "command_line      : %s\n",
     start_time / 1000, get_cur_time() / 1000, getpid(),
     queue_cycle ? (queue_cycle - 1) : 0, total_execs, eps,
-    queued_paths[prog_index], queued_favored[prog_index], queued_discovered, queued_imported,
-    max_depth, current_entry, pending_favored, pending_not_fuzzed,
+    queued_paths[prog_index], queued_favored[prog_index], queued_discovered[prog_index], queued_imported,
+    max_depth, current_entry, pending_favored[prog_index], pending_not_fuzzed[prog_index],
     queued_variable[prog_index], stability, bitmap_cvg, unique_crashes[prog_index],
     unique_hangs, last_path_time / 1000, last_crash_time / 1000,
     last_hang_time / 1000, total_execs - last_crash_execs,
@@ -3548,14 +3551,14 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
   static u32 prev_qp, prev_pf, prev_pnf, prev_ce, prev_md;
   static u64 prev_qc, prev_uc, prev_uh;
 
-  if (prev_qp == queued_paths[CUR_PROG] && prev_pf == pending_favored && 
-    prev_pnf == pending_not_fuzzed && prev_ce == current_entry &&
+  if (prev_qp == queued_paths[CUR_PROG] && prev_pf == pending_favored[CUR_PROG] && 
+    prev_pnf == pending_not_fuzzed[CUR_PROG] && prev_ce == current_entry &&
     prev_qc == queue_cycle && prev_uc == unique_crashes[CUR_PROG] &&
     prev_uh == unique_hangs && prev_md == max_depth) return;
 
     prev_qp  = queued_paths[CUR_PROG];
-  prev_pf  = pending_favored;
-  prev_pnf = pending_not_fuzzed;
+  prev_pf  = pending_favored[CUR_PROG];
+  prev_pnf = pending_not_fuzzed[CUR_PROG];
   prev_ce  = current_entry;
   prev_qc  = queue_cycle;
   prev_uc  = unique_crashes[CUR_PROG];
@@ -3571,7 +3574,7 @@ static void maybe_update_plot_file(double bitmap_cvg, double eps) {
   fprintf(plot_file[CUR_PROG], 
     "%llu, %llu, %u, %u, %u, %u, %0.02f%%, %llu, %llu, %u, %0.02f\n",
     get_cur_time() / 1000, queue_cycle - 1, current_entry, queued_paths[CUR_PROG],
-    pending_not_fuzzed, pending_favored, bitmap_cvg, unique_crashes[CUR_PROG],
+    pending_not_fuzzed[CUR_PROG], pending_favored[CUR_PROG], bitmap_cvg, unique_crashes[CUR_PROG],
           unique_hangs, max_depth, eps); /* ignore errors */
 
     fflush(plot_file[CUR_PROG]);
@@ -4609,7 +4612,7 @@ static void show_stats(void) {
 
   /* Honor AFL_EXIT_WHEN_DONE and AFL_BENCH_UNTIL_CRASH. */
 
-  if (!dumb_mode && cycles_wo_finds > 100 && !pending_not_fuzzed &&
+  if (!dumb_mode && cycles_wo_finds > 100 && !pending_not_fuzzed[CUR_PROG] &&
       getenv("AFL_EXIT_WHEN_DONE")) stop_soon = 2;
 
   if (total_crashes && getenv("AFL_BENCH_UNTIL_CRASH")) stop_soon = 2;
@@ -4688,7 +4691,7 @@ static void show_stats(void) {
     if (cycles_wo_finds < 25 || min_wo_finds < 30) strcpy(tmp, cYEL); else
 
     /* No finds for a long time and no test cases to try. */
-    if (cycles_wo_finds > 100 && !pending_not_fuzzed && min_wo_finds > 120)
+    if (cycles_wo_finds > 100 && !pending_not_fuzzed[CUR_PROG] && min_wo_finds > 120)
       strcpy(tmp, cLGN);
 
     /* Default: cautiously OK to stop? */
@@ -4879,7 +4882,7 @@ static void show_stats(void) {
             DI(stage_finds[STAGE_FLIP32]), DI(stage_cycles[STAGE_FLIP32]));
 
   SAYF(bV bSTOP "  byte flips : " cRST "%-37s " bSTG bV bSTOP "   pending : "
-       cRST "%-10s " bSTG bV "\n", tmp, DI(pending_not_fuzzed));
+       cRST "%-10s " bSTG bV "\n", tmp, DI(pending_not_fuzzed[CUR_PROG]));
 
   if (!skip_deterministic)
     sprintf(tmp, "%s/%s, %s/%s, %s/%s",
@@ -4888,7 +4891,7 @@ static void show_stats(void) {
             DI(stage_finds[STAGE_ARITH32]), DI(stage_cycles[STAGE_ARITH32]));
 
   SAYF(bV bSTOP " arithmetics : " cRST "%-37s " bSTG bV bSTOP "  pend fav : "
-       cRST "%-10s " bSTG bV "\n", tmp, DI(pending_favored));
+       cRST "%-10s " bSTG bV "\n", tmp, DI(pending_favored[CUR_PROG]));
 
   if (!skip_deterministic)
     sprintf(tmp, "%s/%s, %s/%s, %s/%s",
@@ -4897,7 +4900,7 @@ static void show_stats(void) {
             DI(stage_finds[STAGE_INTEREST32]), DI(stage_cycles[STAGE_INTEREST32]));
 
   SAYF(bV bSTOP "  known ints : " cRST "%-37s " bSTG bV bSTOP " own finds : "
-       cRST "%-10s " bSTG bV "\n", tmp, DI(queued_discovered));
+       cRST "%-10s " bSTG bV "\n", tmp, DI(queued_discovered[CUR_PROG]));
 
   if (!skip_deterministic)
     sprintf(tmp, "%s/%s, %s/%s, %s/%s",
@@ -5288,7 +5291,7 @@ EXP_ST u8 common_fuzz_stuff(char** argv, u8* out_buf, u32 len) {
   }
 
   /* This handles FAULT_ERROR for us: */
-  queued_discovered += save_if_interesting(argv, out_buf, len, fault);
+  queued_discovered[CUR_PROG] += save_if_interesting(argv, out_buf, len, fault);
   //printf("after save_if_interesting in common_stuff\n");
   if (!(stage_cur % stats_update_freq) || stage_cur + 1 == stage_max)
     show_stats();
@@ -5641,7 +5644,7 @@ static u8 fuzz_one(char** argv) {
   // isWorthFuzzing function can be summed up to this if
 
   // if there are interesting seeds waiting to be fuzzed
-  if (pending_favored) {
+  if (pending_favored[CUR_PROG]) {
 
      // idea: se um programa já foi fuzzed no programa e não devolveu nada de interessante podemos marcar como não interessante para o programa em si,
      // usado apenas para havoc
@@ -7311,14 +7314,14 @@ abandon_entry:
 
   splicing_with = -1;
 
-  /* Update pending_not_fuzzed count if we made it through the calibration
+  /* Update pending_not_fuzzed[CUR_PROG] count if we made it through the calibration
      cycle and have not seen this entry before. */
 
   if (!stop_soon && !queue_cur[CUR_PROG]->cal_failed && !queue_cur[CUR_PROG]->was_fuzzed) {
     queue_cur[CUR_PROG]->was_fuzzed = 1;
     queue_cur[CUR_PROG]->been_fuzzed = 1;
-    pending_not_fuzzed--;
-    if (queue_cur[CUR_PROG]->favored) pending_favored--;
+    pending_not_fuzzed[CUR_PROG]--;
+    if (queue_cur[CUR_PROG]->favored) pending_favored[CUR_PROG]--;
   }
 
   munmap(orig_in, queue_cur[CUR_PROG]->len);
